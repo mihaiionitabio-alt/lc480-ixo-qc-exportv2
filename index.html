@@ -115,6 +115,7 @@ header{background:var(--card);border-bottom:1px solid var(--line);padding:18px 2
 header h1{margin:0;font-size:19px;font-weight:650}
 header p{margin:5px 0 0;color:var(--muted);font-size:13.5px;max-width:74ch}
 .console-identity{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:12px;padding:8px 11px;border:1px solid var(--line);border-radius:7px;background:var(--soft);font-size:12.5px;font-variant-numeric:tabular-nums}
+.console-page-name{font-weight:650;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .console-mode{display:flex;align-items:center;gap:8px;min-width:0}.console-mode b{white-space:nowrap}.console-mode span:last-child{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.console-profile{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.state-glyph{font-size:16px;line-height:1;color:var(--accent)}.state-ok{color:var(--ok)}.state-watch{color:var(--warn)}.state-alarm{color:var(--bad)}.state-unknown{color:var(--muted)}
 .page-tools{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;justify-content:flex-end;max-width:620px}
 .page-tools label{margin:0;min-width:125px}
@@ -478,6 +479,7 @@ body.lang-zh .cute-toast.show{opacity:1;transform:translateY(0) scale(1)}
     </div>
   </div>
   <div class="console-identity" id="console-identity" aria-live="polite">
+    <div class="console-page-name">Missy, RUO - A single-file local HTML page for .ixo, .eds/.edt and .rdml experiment runs</div>
     <div class="console-mode"><span class="state-glyph" id="console-mode-glyph">○</span><b id="console-mode-text">No data</b><span id="console-data-summary">Load experiment files to begin.</span></div>
     <div class="console-profile" id="console-profile">SOP: no profile applied</div>
   </div>

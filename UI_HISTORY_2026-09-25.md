@@ -5,8 +5,8 @@ This record covers the GitHub website update made after the technical documentat
 ## Source
 
 - File: `index.html`
-- SHA-256: `067910E85FA92566AE871B5BC5D1FB4BEE9FE88DB13972CE16D3E1D7E6716C75`
-- Size: 925,836 bytes
+- SHA-256: `61D3AAA5C1DEACD18ED9246E6F118CAE3FBE86DD93FCB1070DF369C6F74A8C65`
+- Size: 926,089 bytes
 
 ## Changes
 
@@ -32,3 +32,10 @@ This record covers the GitHub website update made after the technical documentat
 - The single button exports the website in the language currently selected in the language selector.
 - Updated the localized button label and preserved the existing archive generator.
 - Updated SHA-256: `067910E85FA92566AE871B5BC5D1FB4BEE9FE88DB13972CE16D3E1D7E6716C75`.
+
+## Follow-up UI change — blue status bar — 2026-09-25
+
+- Added the exact Missy page identity to the blue console/status bar below the heading.
+- The text is visible alongside the current data state and remains ellipsis-safe on narrow layouts.
+- Documentation was not modified.
+- Updated SHA-256: `61D3AAA5C1DEACD18ED9246E6F118CAE3FBE86DD93FCB1070DF369C6F74A8C65`.
