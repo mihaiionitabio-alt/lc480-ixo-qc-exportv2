@@ -39,3 +39,12 @@ This record covers the GitHub website update made after the technical documentat
 - The text is visible alongside the current data state and remains ellipsis-safe on narrow layouts.
 - Documentation was not modified.
 - Updated SHA-256: `61D3AAA5C1DEACD18ED9246E6F118CAE3FBE86DD93FCB1070DF369C6F74A8C65`.
+
+## Follow-up — Command mode documentation — 2026-09-25
+
+- Added [`documentation/COMMAND_MODE.md`](documentation/COMMAND_MODE.md): line syntax, every command, patterns, the accepted shape of every option value, which figures actually use `target` / `control`, all 58 control charts with their own type and the `type` values that suit them, a complete commented hand-over script, and the error messages.
+- The Script-box template now has a `#   full example:` line under every `# … options:` line, with every option filled in, and two header notes on `target` and `control`.
+- `target=all` (any case) now means every target. Before, it was compared as a target literally named “all”, so the shipped template drew empty curves, plate, standard-curve, end-point and control figures. `img:curves` with `target=all` now draws every target instead of only the first.
+- Verified in Chromium: page loads without errors; the whole template and all 84 full-example lines parse without errors.
+- The LaTeX documentation and PDF were not modified.
+- Updated SHA-256: `CFBAC45B429D66022339E082AEFD4BB4CCD1C0D6A195F12E6F89E008D9D4C4DF`; size 939,974 bytes.

@@ -917,58 +917,86 @@ analyst A. Analyst
 run all
 
 # Graph options are documented immediately above each graph command.
+# target=all (or target= left empty) means every target; target=&lt;name&gt; must match a target name exactly.
+# control=&lt;number&gt; is the position of the control in SOP section 3, counted from 0.
 # img:timeline options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:timeline target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 only img:timeline target=all
 # img:curves options: target=&lt;text&gt;; signal=stored|drn; log=yes|no
+#   full example: select img:curves target=HPV16 signal=drn log=yes   (used by this figure: target, signal, log)
 select img:curves target=all signal=stored log=yes
 # img:plate options: metric=outcome|status|cq|end_fluorescence|background|amplitude; target=&lt;text&gt;
+#   full example: select img:plate metric=cq target=HPV16   (used by this figure: metric, target)
 select img:plate metric=outcome target=all
 # img:unanalysed options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:unanalysed target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:unanalysed target=all
 # img:cqstrip options: colourby=outcome|role; target=&lt;text&gt;
+#   full example: select img:cqstrip colourby=role target=HPV16   (used by this figure: colourby)
 select img:cqstrip colourby=outcome target=all
 # img:repsd options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:repsd target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:repsd target=all
 # img:stdcurve options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:stdcurve target=HPV16 control=0   (used by this figure: target)
 select img:stdcurve target=all
 # img:ic options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:ic target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:ic target=all
 # img:endpoint options: level=end|amplitude; target=&lt;text&gt;
+#   full example: select img:endpoint level=amplitude target=HPV16   (used by this figure: level, target)
 select img:endpoint level=end target=all
 # img:levels options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:levels target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:levels target=all
 # img:outcomes options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:outcomes target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:outcomes target=all
 # img:temperature options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:temperature target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:temperature target=all
 # img:recalc options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:recalc target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:recalc target=all
 # img:lc_thermal options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:lc_thermal target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:lc_thermal target=all
 # img:x_timeline options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_timeline target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_timeline target=all
 # img:x_delay options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_delay target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_delay target=all
 # img:x_accept options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_accept target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_accept target=all
 # img:x_outcomes options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_outcomes target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_outcomes target=all
 # img:x_control options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_control target=HPV16 control=1   (used by this figure: target, control)
 select img:x_control target=all
 # img:x_signal options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_signal target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_signal target=all
 # img:x_duration options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_duration target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_duration target=all
 # img:x_findings options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_findings target=HPV16 control=0   (used by this figure: none — it always draws the whole run or all runs)
 select img:x_findings target=all
 # img:x_control_batches options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_control_batches target=HPV16 control=1   (used by this figure: target, control)
 select img:x_control_batches target=all
 # img:x_control_age options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_control_age target=HPV16 control=1   (used by this figure: target, control)
 select img:x_control_age target=all
 # img:x_control_thermal options: target=&lt;text&gt;; control=&lt;text&gt;
+#   full example: select img:x_control_thermal target=HPV16 control=1   (used by this figure: target, control)
 select img:x_control_thermal target=all
 
 # Table options: run=all|&lt;number|name&gt;; rows=&lt;integer&gt;; pseudo=yes|no.
+#   full example: select data:cq_values run=all rows=200 pseudo=yes   (run=0, run=1 or run=&lt;loaded run name&gt; also accepted)
 select data:cq_values run=all rows=200 pseudo=yes
 select data:melting_peaks run=all rows=200 pseudo=yes
 select data:experiment_settings run=all rows=200 pseudo=yes
@@ -990,120 +1018,178 @@ select rec:instrument_records run=all rows=200 pseudo=yes
 
 # Control-chart options are documented for every chart below.
 # cc:heat_rate options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:heat_rate type=trend x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=heat_rate   (type for this chart: i|ewma|cusum|trend)
 select cc:heat_rate type=i x=order
 # cc:cool_rate options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cool_rate type=trend x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cool_rate   (type for this chart: i|ewma|cusum|trend)
 select cc:cool_rate type=i x=order
 # cc:overshoot options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:overshoot type=cusum x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=overshoot   (type for this chart: i|ewma|cusum|trend)
 select cc:overshoot type=i x=order
 # cc:settling options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:settling type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=settling   (type for this chart: i|ewma|cusum|trend)
 select cc:settling type=i x=order
 # cc:transition options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:transition type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=transition   (type for this chart: i|ewma|cusum|trend)
 select cc:transition type=i x=order
 # cc:hold_temp options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:hold_temp type=xbars x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=hold_temp   (type for this chart: xbars|i|ewma|cusum|trend)
 select cc:hold_temp type=i x=order
 # cc:zone_spread options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:zone_spread type=ewma x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=zone_spread   (type for this chart: i|ewma|cusum|trend)
 select cc:zone_spread type=i x=order
 # cc:heatsink_max options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:heatsink_max type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=heatsink_max   (type for this chart: i|ewma|cusum|trend)
 select cc:heatsink_max type=i x=order
 # cc:cover_temp options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cover_temp type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cover_temp   (type for this chart: i|ewma|cusum|trend)
 select cc:cover_temp type=i x=order
 # cc:lamp_ref options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:lamp_ref type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=lamp_ref   (type for this chart: i|ewma|cusum|trend)
 select cc:lamp_ref type=i x=order
 # cc:lamp_drift options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:lamp_drift type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=lamp_drift   (type for this chart: i|ewma|cusum|trend)
 select cc:lamp_drift type=i x=order
 # cc:led_current options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:led_current type=trend x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=led_current   (type for this chart: i|ewma|cusum|trend)
 select cc:led_current type=i x=order
 # cc:led_junction options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:led_junction type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=led_junction   (type for this chart: i|ewma|cusum|trend)
 select cc:led_junction type=i x=order
 # cc:exposure options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:exposure type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=exposure   (type for this chart: i|ewma|cusum|trend)
 select cc:exposure type=i x=order
 # cc:saturation options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:saturation type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=saturation   (type for this chart: p)
 select cc:saturation type=i x=order
 # cc:calib_uniformity options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:calib_uniformity type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=calib_uniformity   (type for this chart: i|ewma|cusum|trend)
 select cc:calib_uniformity type=i x=order
 # cc:calib_background options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:calib_background type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=calib_background   (type for this chart: i|ewma|cusum|trend)
 select cc:calib_background type=i x=order
 # cc:calib_roi options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:calib_roi type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=calib_roi   (type for this chart: i|ewma|cusum|trend)
 select cc:calib_roi type=i x=order
 # cc:wheel_ms options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:wheel_ms type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=wheel_ms   (type for this chart: i|ewma|cusum|trend)
 select cc:wheel_ms type=i x=order
 # cc:wheel_slow options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:wheel_slow type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=wheel_slow   (type for this chart: p)
 select cc:wheel_slow type=i x=order
 # cc:encoder options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:encoder type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=encoder   (type for this chart: i|ewma|cusum|trend)
 select cc:encoder type=i x=order
 # cc:cam_overhead options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cam_overhead type=xbars x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cam_overhead   (type for this chart: xbars|i|ewma|cusum|trend)
 select cc:cam_overhead type=i x=order
 # cc:chan_switch options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:chan_switch type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=chan_switch   (type for this chart: i|ewma|cusum|trend)
 select cc:chan_switch type=i x=order
 # cc:cover_down options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cover_down type=trend x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cover_down   (type for this chart: i|ewma|cusum|trend)
 select cc:cover_down type=i x=order
 # cc:cover_up options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cover_up type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cover_up   (type for this chart: i|ewma|cusum|trend)
 select cc:cover_up type=i x=order
 # cc:bg_median options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:bg_median type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=bg_median   (type for this chart: i|ewma|cusum|trend)
 select cc:bg_median type=i x=order
 # cc:plateau_median options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:plateau_median type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=plateau_median   (type for this chart: i|ewma|cusum|trend)
 select cc:plateau_median type=i x=order
 # cc:run_minutes options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:run_minutes type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=run_minutes   (type for this chart: i|ewma|cusum|trend)
 select cc:run_minutes type=i x=order
 # cc:cmd_rt options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cmd_rt type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cmd_rt   (type for this chart: i|ewma|cusum|trend)
 select cc:cmd_rt type=i x=order
 # cc:tick_late options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:tick_late type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=tick_late   (type for this chart: i|ewma|cusum|trend)
 select cc:tick_late type=i x=order
 # cc:catch_up options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:catch_up type=u x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=catch_up   (type for this chart: u)
 select cc:catch_up type=i x=order
 # cc:img_proc options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:img_proc type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=img_proc   (type for this chart: i|ewma|cusum|trend)
 select cc:img_proc type=i x=order
 # cc:roi_ms options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:roi_ms type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=roi_ms   (type for this chart: i|ewma|cusum|trend)
 select cc:roi_ms type=i x=order
 # cc:runtime_err options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:runtime_err type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=runtime_err   (type for this chart: i|ewma|cusum|trend)
 select cc:runtime_err type=i x=order
 # cc:handoff_min options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:handoff_min type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=handoff_min   (type for this chart: i|ewma|cusum|trend)
 select cc:handoff_min type=i x=order
 # cc:log_errors options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:log_errors type=c x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=log_errors   (type for this chart: c)
 select cc:log_errors type=i x=order
 # cc:cycle_sd options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:cycle_sd type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=cycle_sd   (type for this chart: i|ewma|cusum|trend)
 select cc:cycle_sd type=i x=order
 # cc:templog_late options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:templog_late type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=templog_late   (type for this chart: p)
 select cc:templog_late type=i x=order
 # cc:invalid_acq options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:invalid_acq type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=invalid_acq   (type for this chart: p)
 select cc:invalid_acq type=i x=order
 # cc:ct_mismatch options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:ct_mismatch type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=ct_mismatch   (type for this chart: p)
 select cc:ct_mismatch type=i x=order
 # cc:edit_delay options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:edit_delay type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=edit_delay   (type for this chart: i|ewma|cusum|trend)
 select cc:edit_delay type=i x=order
 # cc:findings options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:findings type=c x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=findings   (type for this chart: c)
 select cc:findings type=i x=order
 # cc:pc_cq options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:pc_cq type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=pc_cq   (type for this chart: i|ewma|cusum|trend)
 select cc:pc_cq type=i x=order
 # cc:pc_amplitude options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:pc_amplitude type=ewma x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=pc_amplitude   (type for this chart: i|ewma|cusum|trend)
 select cc:pc_amplitude type=i x=order
 # cc:rox_level options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:rox_level type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=rox_level   (type for this chart: i|ewma|cusum|trend)
 select cc:rox_level type=i x=order
 # cc:efficiency options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:efficiency type=trend x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=efficiency   (type for this chart: i|ewma|cusum|trend)
 select cc:efficiency type=i x=order
 # cc:ntc_rate options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:ntc_rate type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=ntc_rate   (type for this chart: p)
 select cc:ntc_rate type=i x=order
 # cc:ic_shift options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:ic_shift type=ewma x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=ic_shift   (type for this chart: i|ewma|cusum|trend)
 select cc:ic_shift type=i x=order
 # cc:low_conf options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:low_conf type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=low_conf   (type for this chart: p)
 select cc:low_conf type=i x=order
 # cc:late_rate options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:late_rate type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=late_rate   (type for this chart: p)
 select cc:late_rate type=i x=order
 # cc:rep_sd options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:rep_sd type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=rep_sd   (type for this chart: i|ewma|cusum|trend)
 select cc:rep_sd type=i x=order
 # cc:rox_cv options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:rox_cv type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=rox_cv   (type for this chart: i|ewma|cusum|trend)
 select cc:rox_cv type=i x=order
 # cc:rowcol options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:rowcol type=i x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=rowcol   (type for this chart: i|ewma|cusum|trend)
 select cc:rowcol type=i x=order
 # cc:ntc_op options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:ntc_op type=funnel x=order phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=ntc_op   (type for this chart: funnel)
 select cc:ntc_op type=i x=order
 # cc:action_op options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:action_op type=funnel x=order phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=action_op   (type for this chart: funnel)
 select cc:action_op type=i x=order
 # cc:manual_rate options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:manual_rate type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=manual_rate   (type for this chart: p)
 select cc:manual_rate type=i x=order
 # cc:call_disagree options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:call_disagree type=p x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=call_disagree   (type for this chart: p)
 select cc:call_disagree type=i x=order
 # cc:copied options: type=i|ewma|cusum|trend|xbars|p|u|c|funnel; x=order|date|hours|cycles; phase1=&lt;number&gt;; lambda=&lt;number&gt;; L=&lt;number&gt;; k=&lt;number&gt;; h=&lt;number&gt;; specLo=&lt;number|empty&gt;; specHi=&lt;number|empty&gt;; warnAhead=&lt;integer&gt;; charts=&lt;chart/group list&gt;
+#   full example: select cc:copied type=c x=date phase1=20 lambda=0.2 L=2.7 k=0.5 h=4 specLo= specHi= warnAhead=10 charts=copied   (type for this chart: c)
 select cc:copied type=i x=order
 
 zip handover_2026_09</textarea>
@@ -11326,7 +11412,9 @@ function selRunIndex(){
 function selGraphContext(g){
   const ri=selRunIndex();
   const o=SEL_STATE.options["img:"+g.id]||{};
-  return {g,ri,run:RUNS[ri],target:o.target||(g.id==="curves"?((typeof gTargets==="function"&&RUNS[ri]?gTargets(RUNS[ri])[0]:"")||""):""),
+  /* target=all (any case) is the documented way to ask for every target; it must not be read as a target called "all" */
+  const allTargets=/^all$/i.test(o.target||"");
+  return {g,ri,run:RUNS[ri],target:allTargets?"":o.target||(g.id==="curves"?((typeof gTargets==="function"&&RUNS[ri]?gTargets(RUNS[ri])[0]:"")||""):""),
     metric:o.metric||"outcome",signal:o.signal||"stored",log:o.log==="yes",colourby:o.colourby||"outcome",level:o.level||"end",control:o.control||"0"};
 }
 function selImageItems(){
