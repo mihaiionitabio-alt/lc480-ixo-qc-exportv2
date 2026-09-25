@@ -5,8 +5,8 @@ This record covers the GitHub website update made after the technical documentat
 ## Source
 
 - File: `index.html`
-- SHA-256: `054807A4F175B4B5AF1D4A4C7497BCA133B61DFEA74EE96A761C234C4D6CA1F1`
-- Size: 926,066 bytes
+- SHA-256: `C60042983E0BC892ED7442F684060E7682D2861198076F35179221C2814400CC`
+- Size: 926,098 bytes
 
 ## Changes
 
@@ -23,4 +23,5 @@ This record covers the GitHub website update made after the technical documentat
 - Confirmed the new heading and document title.
 - Confirmed the header logo is absent.
 - Confirmed all three language/download controls are descendants of `#statusbar` and render at the bottom-left.
+- Added an inline empty favicon so static hosting does not emit a missing `/favicon.ico` warning.
 - Documentation was not modified by this change.
