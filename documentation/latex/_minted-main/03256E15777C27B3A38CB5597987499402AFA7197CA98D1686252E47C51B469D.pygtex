@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{ccC}\PYG{p}{(}\PYG{n+nx}{count}\PYG{p}{,}\PYG{n+nx}{cfg}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{o}{=}\PYG{n+nx}{mean}\PYG{p}{(}\PYG{n+nx}{ccPhase}\PYG{p}{(}\PYG{n+nx}{count}\PYG{p}{,}\PYG{n+nx}{cfg}\PYG{p}{.}\PYG{n+nx}{phase1}\PYG{p}{)),}\PYG{n+nx}{e}\PYG{o}{=}\PYG{l+m+mf}{3}\PYG{o}{*}\PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{sqrt}\PYG{p}{(}\PYG{n+nx}{c}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{cl}\PYG{o}{:}\PYG{n+nx}{c}\PYG{p}{,}\PYG{n+nx}{pts}\PYG{o}{:}\PYG{n+nx}{count}\PYG{p}{.}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{=\PYGZgt{}(\PYGZob{}}\PYG{n+nx}{y}\PYG{o}{:}\PYG{n+nx}{v}\PYG{p}{,}\PYG{n+nx}{cl}\PYG{o}{:}\PYG{n+nx}{c}\PYG{p}{,}\PYG{n+nx}{ucl}\PYG{o}{:}\PYG{n+nx}{c}\PYG{o}{+}\PYG{n+nx}{e}\PYG{p}{,}\PYG{n+nx}{lcl}\PYG{o}{:}\PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{max}\PYG{p}{(}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{c}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{e}\PYG{p}{),}\PYG{n+nx}{flags}\PYG{o}{:}\PYG{n+nx}{v}\PYG{o}{\PYGZgt{}}\PYG{n+nx}{c}\PYG{o}{+}\PYG{n+nx}{e}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{n+nx}{v}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0}\PYG{o}{?}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}above c limit\PYGZdq{}}\PYG{p}{]}\PYG{o}{:}\PYG{p}{[]\PYGZcb{}))\PYGZcb{};}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

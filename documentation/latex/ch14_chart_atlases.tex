@@ -1,0 +1,46 @@
+\chapter{Landscape chart atlases for printing and presentations}\label{ch:atlases}
+
+The companion files \path{qPCR_control_charts_realscale_A4_landscape.pdf} and
+\path{qPCR_control_charts_realscale_A3_landscape.pdf} contain the complete application-exported chart set,
+one graph per page. The A4 atlas is sized for landscape printing; the A3 atlas uses the same page layout at a larger
+physical size for presentation and poster use. Both include every exported instrument and chart variant, including
+companion subgroup-spread charts. The figures and their data are synthetic.
+
+\section{How to read a point against the limits}
+Each chart labels its measurement and unit, instrument, series, centre line and any displayed lower and upper control
+limits. The short interpretation below the graph describes what the metric represents. Red points indicate values
+outside a displayed limit. Amber points indicate a pattern rule inside the limits where that rule is enabled. These
+are prompts for review, not automatic diagnoses.
+
+\begin{infobox}[title={Below minimum or above maximum}]
+\textbf{Below the lower limit:} the value is unusually low relative to the historical series. For a low-is-better measure,
+this may be a favourable shift, but an unexpected change still needs context. For a high-is-better measure, a low value
+is in the adverse direction. For a target-centred measure, either direction may be meaningful.
+
+\textbf{Above the upper limit:} the value is unusually high relative to the historical series. For a high-is-better
+measure, it may be favourable if the change is expected; for a low-is-better measure, it is in the adverse direction.
+Target-centred measures can warrant review on either side.
+
+\textbf{A control limit is not automatically a minimum or maximum allowed by the method.} It estimates variation in a
+particular historical series. Where the approved SOP or vendor specification supplies acceptance limits, apply those
+separately. Check the instrument, program, reagent lot, extraction batch, operator and maintenance record before drawing
+a conclusion. A chart without enough comparable history may have no reliable limits yet.
+\end{infobox}
+
+The atlas footer reports whether values cross the displayed statistical limits and adds the catalogue's metric-specific
+interpretation. A configured minimum or maximum from the chart catalogue is shown separately when one exists. Limits are
+instrument-specific; do not compare one instrument's centre line with another's or combine different programs without
+documented comparability.
+
+\section{Selecting graphs for a presentation}
+The A3 PDF is already in landscape and keeps each chart's title, unit, interpretation and limit explanation on the same
+page. Use one chart per slide when the points, series and annotations need to remain readable. For an overview slide,
+choose a small set that answers one question: thermal performance (heating, cooling, settling and transition time),
+optics (reference, signal and exposure), process integrity (control and edit findings), or operator/method behaviour
+(replicate precision and negative-control rate). State that the data are synthetic and that control limits are
+historical process limits, not validated acceptance criteria.
+
+The source chart bundle is \path{generator/out/DEMO_control_charts_realscale.zip}; the offline script
+\path{generator/make_chart_atlases.py} rebuilds both page sizes from the application's SVG/CSV export.
+
+

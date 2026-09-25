@@ -1,0 +1,82 @@
+% ---- validation part: listings, colours and macros -------------------------
+\usepackage{listings}
+\tcbuselibrary{listings}
+\definecolor{vkw}{HTML}{0550AE}
+\definecolor{vcm}{HTML}{6A737D}
+\definecolor{vst}{HTML}{0A7B34}
+\definecolor{vfr}{HTML}{C9D1D9}
+\definecolor{vok}{HTML}{15803D}
+\definecolor{vbad}{HTML}{B91C1C}
+\definecolor{vwarn}{HTML}{B45309}
+\definecolor{codebg}{RGB}{236,244,250}
+\definecolor{codetext}{RGB}{16,110,190}
+\definecolor{codenum}{RGB}{120,120,120}
+\definecolor{codeborder}{RGB}{180,195,205}
+\definecolor{Red3}{HTML}{C62828}
+\definecolor{Blue3}{HTML}{1565C0}
+\lstdefinelanguage{JavaScript}{
+  keywords={await,async,break,case,catch,class,const,continue,debugger,default,delete,do,else,
+            export,extends,finally,for,function,if,import,in,instanceof,let,new,of,return,
+            static,super,switch,this,throw,try,typeof,var,void,while,with,yield,true,false,
+            null,undefined,NaN,Infinity},
+  keywordstyle=\color{vkw}\bfseries,
+  ndkeywords={Array,Boolean,Date,Error,JSON,Map,Math,Number,Object,Promise,RegExp,Set,String,
+              Symbol,Uint8Array,Float64Array,ArrayBuffer,DataView,TextDecoder,TextEncoder,
+              document,window,console,globalThis},
+  ndkeywordstyle=\color{vkw},
+  sensitive=true,
+  comment=[l]{//}, morecomment=[s]{/*}{*/},
+  morestring=[b]', morestring=[b]", morestring=[b]`
+}
+
+% Web source languages used by the HTML snapshot and mode examples.
+\lstdefinelanguage{CSS}{
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  keywordstyle=\color{cyan}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{lime},
+  morekeywords={color,background,background-color,margin,padding,font-size,font-family,display,flex,width,height,position,top,left,right,border,grid,grid-template-columns}
+}
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,
+  morekeywords={DOCTYPE,html,head,title,meta,link,style,script,body,header,nav,main,section,article,footer,div,p,span,h1,h2,h3,button,form,input,select,option,table,thead,tbody,tr,th,td,canvas,svg},
+  keywordstyle=\color{cyan}\bfseries,
+  tagstyle=\color{cyan}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{lime},
+  morecomment=[s]{<!--}{-->}
+}
+\lstdefinelanguage{json}{
+  morestring=[b]",morecomment=[l]{//},stringstyle=\color{lime},commentstyle=\color{gray}\itshape,
+  basicstyle=\ttfamily\scriptsize\color{black},breaklines=true,breakatwhitespace=false
+}
+\lstdefinelanguage{text}{basicstyle=\ttfamily\scriptsize\color{black},breaklines=true,breakatwhitespace=false}
+\lstdefinestyle{vstyle}{
+  basicstyle=\ttfamily\scriptsize\color{codetext}, keywordstyle=\color{Blue3}\bfseries, commentstyle=\color{Red3}\itshape,
+  stringstyle=\color{Blue3}, showstringspaces=false, breaklines=true, breakatwhitespace=false,
+  columns=fullflexible, keepspaces=true, tabsize=2, numbersep=4pt,
+  numbers=left, firstnumber=1, numberstyle=\itshape\ttfamily\scriptsize\color{codenum}, frame=single, framesep=3pt, rulecolor=\color{codeborder},
+  backgroundcolor=\color{codebg}, xleftmargin=0pt, aboveskip=4pt, belowskip=4pt, upquote=true,
+  extendedchars=true, inputencoding=utf8, breakautoindent=false,
+}
+\lstset{style=vstyle}
+% Draw a rule below every table row.  Long cells wrap rather than being clipped.
+\AtBeginEnvironment{tabular}{\small\sloppy\everycr{\noalign{\hrule height .25pt}}}
+\AtBeginEnvironment{tabularx}{\small\sloppy\everycr{\noalign{\hrule height .25pt}}}
+\AtBeginEnvironment{longtable}{\small\sloppy\everycr{\noalign{\hrule height .25pt}}}
+\newcommand{\vPASS}{\textcolor{vok}{\textbf{pass}}}
+\newcommand{\vFAIL}{\textcolor{vbad}{\textbf{fail}}}
+\newcommand{\vWARN}[1]{\textcolor{vwarn}{\textbf{#1}}}
+\newcommand{\vfn}[1]{\texttt{#1}}
+\newcommand{\vcls}[1]{\textbf{#1}}
+\newcommand{\vhead}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak\vspace{-2pt}}
+% the contents lines reserve room for a two-digit page number; this document has four digits
+\makeatletter
+\renewcommand{\@pnumwidth}{2.6em}
+\renewcommand{\@tocrmarg}{3.6em}
+\makeatother
+
+

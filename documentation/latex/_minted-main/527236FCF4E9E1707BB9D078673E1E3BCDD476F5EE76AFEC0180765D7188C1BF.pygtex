@@ -1,0 +1,178 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/env python3}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Build landscape A4 and A3 print atlases from the app\PYGZsq{}s SVG chart export.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{\PYGZus{}\PYGZus{}future\PYGZus{}\PYGZus{}}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{annotations}
+
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{csv}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{io}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{json}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{math}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{re}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{zipfile}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{pathlib}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{Path}
+
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{cairosvg}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{fitz}
+
+\PYG{n}{HERE} \PYG{o}{=} \PYG{n}{Path}\PYG{p}{(}\PYG{n+nv+vm}{\PYGZus{}\PYGZus{}file\PYGZus{}\PYGZus{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{resolve}\PYG{p}{()}\PYG{o}{.}\PYG{n}{parent}
+\PYG{n}{ZIP\PYGZus{}PATH} \PYG{o}{=} \PYG{n}{HERE} \PYG{o}{/} \PYG{l+s+s2}{\PYGZdq{}out\PYGZdq{}} \PYG{o}{/} \PYG{l+s+s2}{\PYGZdq{}DEMO\PYGZus{}control\PYGZus{}charts\PYGZus{}realscale.zip\PYGZdq{}}
+\PYG{n}{CATALOGUE\PYGZus{}PATH} \PYG{o}{=} \PYG{n}{HERE} \PYG{o}{/} \PYG{l+s+s2}{\PYGZdq{}catalogue.json\PYGZdq{}}
+\PYG{n}{OUT\PYGZus{}DIR} \PYG{o}{=} \PYG{n}{HERE}\PYG{o}{.}\PYG{n}{parent}
+\PYG{n}{FONT} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}helv\PYGZdq{}}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{clean}\PYG{p}{(}\PYG{n}{s}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+    \PYG{n}{s} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{s} \PYG{o+ow}{or} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}→\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{} to \PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}–\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}—\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{re}\PYG{o}{.}\PYG{n}{sub}\PYG{p}{(}\PYG{l+s+sa}{r}\PYG{l+s+s2}{\PYGZdq{}\PYGZbs{}s+\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{,} \PYG{n}{s}\PYG{p}{)}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{()}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{chart\PYGZus{}catalogue}\PYG{p}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{dict}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n+nb}{dict}\PYG{p}{]:}
+    \PYG{n}{data} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{loads}\PYG{p}{(}\PYG{n}{CATALOGUE\PYGZus{}PATH}\PYG{o}{.}\PYG{n}{read\PYGZus{}text}\PYG{p}{(}\PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}utf\PYGZhy{}8\PYGZdq{}}\PYG{p}{))}
+    \PYG{k}{return} \PYG{p}{\PYGZob{}}\PYG{n}{c}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}code\PYGZdq{}}\PYG{p}{]:} \PYG{n}{c} \PYG{k}{for} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}CC\PYGZus{}CHARTS\PYGZdq{}}\PYG{p}{]\PYGZcb{}}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{fmt}\PYG{p}{(}\PYG{n}{x}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{|} \PYG{n+nb}{float} \PYG{o}{|} \PYG{k+kc}{None}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+    \PYG{k}{try}\PYG{p}{:}
+        \PYG{n}{n} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{n}\PYG{l+s+si}{:}\PYG{l+s+s2}{.4g}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{k}{except} \PYG{p}{(}\PYG{n+ne}{TypeError}\PYG{p}{,} \PYG{n+ne}{ValueError}\PYG{p}{):}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{spec\PYGZus{}text}\PYG{p}{(}\PYG{n}{spec}\PYG{p}{:} \PYG{n+nb}{dict}\PYG{p}{,} \PYG{n}{instrument}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{unit}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+    \PYG{n}{ins} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}QS\PYGZdq{}} \PYG{k}{if} \PYG{n}{instrument}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}QS\PYGZdq{}}\PYG{p}{)} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}LC\PYGZdq{}}
+    \PYG{n}{bounds} \PYG{o}{=} \PYG{n}{spec}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{ins}\PYG{p}{,} \PYG{p}{\PYGZob{}\PYGZcb{})} \PYG{k}{if} \PYG{n+nb}{isinstance}\PYG{p}{(}\PYG{n}{spec}\PYG{p}{,} \PYG{n+nb}{dict}\PYG{p}{)} \PYG{k}{else} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{bounds}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{lo}\PYG{p}{,} \PYG{n}{hi} \PYG{o}{=} \PYG{n}{bounds}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}lo\PYGZdq{}}\PYG{p}{),} \PYG{n}{bounds}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}hi\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{lo} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None} \PYG{o+ow}{and} \PYG{n}{hi} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Configured reference range: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{fmt}\PYG{p}{(}\PYG{n}{lo}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{–}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{fmt}\PYG{p}{(}\PYG{n}{hi}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{unit}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{.\PYGZdq{}}
+    \PYG{k}{if} \PYG{n}{lo} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Configured minimum: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{fmt}\PYG{p}{(}\PYG{n}{lo}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{unit}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{.\PYGZdq{}}
+    \PYG{k}{if} \PYG{n}{hi} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Configured maximum: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{fmt}\PYG{p}{(}\PYG{n}{hi}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{unit}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{.\PYGZdq{}}
+    \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{limit\PYGZus{}summary}\PYG{p}{(}\PYG{n}{csv\PYGZus{}bytes}\PYG{p}{:} \PYG{n+nb}{bytes}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+    \PYG{n}{rows} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{csv}\PYG{o}{.}\PYG{n}{DictReader}\PYG{p}{(}\PYG{n}{io}\PYG{o}{.}\PYG{n}{StringIO}\PYG{p}{(}\PYG{n}{csv\PYGZus{}bytes}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}utf\PYGZhy{}8\PYGZhy{}sig\PYGZdq{}}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}replace\PYGZdq{}}\PYG{p}{))))}
+    \PYG{n}{lows}\PYG{p}{,} \PYG{n}{highs} \PYG{o}{=} \PYG{p}{[],} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{r} \PYG{o+ow}{in} \PYG{n}{rows}\PYG{p}{:}
+        \PYG{k}{try}\PYG{p}{:}
+            \PYG{n}{v} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{r}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{))}
+            \PYG{n}{lo}\PYG{p}{,} \PYG{n}{hi} \PYG{o}{=} \PYG{n}{r}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}lcl\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{),} \PYG{n}{r}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}ucl\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{if} \PYG{n}{lo} \PYG{o+ow}{and} \PYG{n}{v} \PYG{o}{\PYGZlt{}} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{lo}\PYG{p}{):}
+                \PYG{n}{lows}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{v}\PYG{p}{)}
+            \PYG{k}{if} \PYG{n}{hi} \PYG{o+ow}{and} \PYG{n}{v} \PYG{o}{\PYGZgt{}} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{hi}\PYG{p}{):}
+                \PYG{n}{highs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{v}\PYG{p}{)}
+        \PYG{k}{except} \PYG{p}{(}\PYG{n+ne}{ValueError}\PYG{p}{,} \PYG{n+ne}{TypeError}\PYG{p}{):}
+            \PYG{k}{pass}
+    \PYG{n}{out} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{if} \PYG{n}{lows}\PYG{p}{:}
+        \PYG{n}{out}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{lows}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ point(s) below the lower control limit\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{highs}\PYG{p}{:}
+        \PYG{n}{out}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{highs}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ point(s) above the upper control limit\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}; \PYGZdq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{out}\PYG{p}{)} \PYG{k}{if} \PYG{n}{out} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}No value is outside the displayed control limits.\PYGZdq{}}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{below\PYGZus{}above}\PYG{p}{(}\PYG{n}{cat}\PYG{p}{:} \PYG{n+nb}{dict}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{str}\PYG{p}{:}
+    \PYG{n}{direction} \PYG{o}{=} \PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}better\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}target\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{direction} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}low\PYGZdq{}}\PYG{p}{:}
+        \PYG{k}{return} \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Below minimum/LCL: lower than this instrument or series\PYGZsq{} established history; it may be a favorable shift, \PYGZdq{}}
+                \PYG{l+s+s2}{\PYGZdq{}but still check whether the change is expected. Above maximum/UCL: unusually high and in the adverse direction; \PYGZdq{}}
+                \PYG{l+s+s2}{\PYGZdq{}review run conditions, operator, reagent lot and maintenance records.\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{direction} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}high\PYGZdq{}}\PYG{p}{:}
+        \PYG{k}{return} \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Below minimum/LCL: unusually low and in the adverse direction; review run conditions, operator, reagent lot \PYGZdq{}}
+                \PYG{l+s+s2}{\PYGZdq{}and maintenance records. Above maximum/UCL: higher than established history; it may be favorable, but verify \PYGZdq{}}
+                \PYG{l+s+s2}{\PYGZdq{}that the change is expected.\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Below minimum/LCL or above maximum/UCL: an unusual shift from this series\PYGZsq{} historical behaviour. For target\PYGZhy{}centred \PYGZdq{}}
+            \PYG{l+s+s2}{\PYGZdq{}measures, either direction can matter; compare with the SOP/vendor acceptance range and investigate context.\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{page\PYGZus{}text}\PYG{p}{(}\PYG{n}{page}\PYG{p}{:} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Page}\PYG{p}{,} \PYG{n}{rect}\PYG{p}{:} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{,} \PYG{n}{text}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{size}\PYG{p}{:} \PYG{n+nb}{float}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{0.17}\PYG{p}{,} \PYG{l+m+mf}{0.20}\PYG{p}{,} \PYG{l+m+mf}{0.25}\PYG{p}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{float}\PYG{p}{:}
+    \PYG{k}{return} \PYG{n}{page}\PYG{o}{.}\PYG{n}{insert\PYGZus{}textbox}\PYG{p}{(}\PYG{n}{rect}\PYG{p}{,} \PYG{n}{text}\PYG{p}{,} \PYG{n}{fontname}\PYG{o}{=}\PYG{n}{FONT}\PYG{p}{,} \PYG{n}{fontsize}\PYG{o}{=}\PYG{n}{size}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{n}{color}\PYG{p}{,} \PYG{n}{lineheight}\PYG{o}{=}\PYG{l+m+mf}{1.16}\PYG{p}{,} \PYG{n}{align}\PYG{o}{=}\PYG{n}{fitz}\PYG{o}{.}\PYG{n}{TEXT\PYGZus{}ALIGN\PYGZus{}LEFT}\PYG{p}{)}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{make\PYGZus{}pdf}\PYG{p}{(}\PYG{n}{entries}\PYG{p}{:} \PYG{n+nb}{list}\PYG{p}{[}\PYG{n+nb}{tuple}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n+nb}{bytes}\PYG{p}{,} \PYG{n+nb}{bytes}\PYG{p}{]],} \PYG{n}{catmap}\PYG{p}{:} \PYG{n+nb}{dict}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n+nb}{dict}\PYG{p}{],} \PYG{n}{out\PYGZus{}path}\PYG{p}{:} \PYG{n}{Path}\PYG{p}{,} \PYG{n}{a3}\PYG{p}{:} \PYG{n+nb}{bool}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k+kc}{None}\PYG{p}{:}
+    \PYG{n}{width}\PYG{p}{,} \PYG{n}{height} \PYG{o}{=} \PYG{p}{((}\PYG{l+m+mf}{1190.55}\PYG{p}{,} \PYG{l+m+mf}{841.89}\PYG{p}{)} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{p}{(}\PYG{l+m+mf}{841.89}\PYG{p}{,} \PYG{l+m+mf}{595.28}\PYG{p}{))}  \PYG{c+c1}{\PYGZsh{} landscape, points}
+    \PYG{n}{margin} \PYG{o}{=} \PYG{l+m+mi}{34} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{27}
+    \PYG{n}{title\PYGZus{}size} \PYG{o}{=} \PYG{l+m+mi}{18} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{14}
+    \PYG{n}{body\PYGZus{}size} \PYG{o}{=} \PYG{l+m+mi}{11} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mf}{8.6}
+    \PYG{n}{top\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{27} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{22}
+    \PYG{n}{doc} \PYG{o}{=} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{open}\PYG{p}{()}
+    \PYG{n}{cache} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{for} \PYG{n}{name}\PYG{p}{,} \PYG{n}{svg}\PYG{p}{,} \PYG{n}{csv\PYGZus{}bytes} \PYG{o+ow}{in} \PYG{n}{entries}\PYG{p}{:}
+        \PYG{n}{parts} \PYG{o}{=} \PYG{n}{name}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}/\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{folder} \PYG{o}{=} \PYG{n}{parts}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+        \PYG{n}{fname} \PYG{o}{=} \PYG{n}{parts}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{match} \PYG{o}{=} \PYG{n}{re}\PYG{o}{.}\PYG{n}{match}\PYG{p}{(}\PYG{l+s+sa}{r}\PYG{l+s+s2}{\PYGZdq{}(?P\PYGZlt{}code\PYGZgt{}[A\PYGZhy{}Z]\PYGZhy{}[A\PYGZhy{}Z]\PYGZbs{}d+[a\PYGZhy{}z]?)\PYGZus{}(?P\PYGZlt{}slug\PYGZgt{}.+)\PYGZbs{}.svg\PYGZdl{}\PYGZdq{}}\PYG{p}{,} \PYG{n}{fname}\PYG{p}{)}
+        \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{match}\PYG{p}{:}
+            \PYG{k}{continue}
+        \PYG{n}{code} \PYG{o}{=} \PYG{n}{match}\PYG{o}{.}\PYG{n}{group}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}code\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{cat} \PYG{o}{=} \PYG{n}{catmap}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{code}\PYG{p}{,} \PYG{p}{\PYGZob{}\PYGZcb{})}
+        \PYG{n}{instrument} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}QuantStudio\PYGZdq{}} \PYG{k}{if} \PYG{n}{folder}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}QS\PYGZus{}\PYGZdq{}}\PYG{p}{)} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}LightCycler\PYGZdq{}}
+        \PYG{n}{instrument\PYGZus{}id} \PYG{o}{=} \PYG{n}{folder}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{variant} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+        \PYG{k}{if} \PYG{n}{csv\PYGZus{}bytes}\PYG{p}{:}
+            \PYG{k}{try}\PYG{p}{:}
+                \PYG{n}{variant} \PYG{o}{=} \PYG{n}{clean}\PYG{p}{(}\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{csv}\PYG{o}{.}\PYG{n}{DictReader}\PYG{p}{(}\PYG{n}{io}\PYG{o}{.}\PYG{n}{StringIO}\PYG{p}{(}\PYG{n}{csv\PYGZus{}bytes}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}utf\PYGZhy{}8\PYGZhy{}sig\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}replace\PYGZdq{}}\PYG{p}{))),} \PYG{p}{\PYGZob{}\PYGZcb{})}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}variant\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{))}
+            \PYG{k}{except} \PYG{n+ne}{Exception}\PYG{p}{:}
+                \PYG{k}{pass}
+        \PYG{n}{title} \PYG{o}{=} \PYG{n}{clean}\PYG{p}{(}\PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{p}{)} \PYG{o+ow}{or} \PYG{n}{match}\PYG{o}{.}\PYG{n}{group}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}slug\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{))}
+        \PYG{k}{if} \PYG{n}{variant}\PYG{p}{:}
+            \PYG{n}{title} \PYG{o}{=} \PYG{n}{clean}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{title}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ \PYGZhy{} }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{variant}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{page} \PYG{o}{=} \PYG{n}{doc}\PYG{o}{.}\PYG{n}{new\PYGZus{}page}\PYG{p}{(}\PYG{n}{width}\PYG{o}{=}\PYG{n}{width}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{n}{height}\PYG{p}{)}
+        \PYG{n}{page}\PYG{o}{.}\PYG{n}{draw\PYGZus{}rect}\PYG{p}{(}\PYG{n}{page}\PYG{o}{.}\PYG{n}{rect}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{0.84}\PYG{p}{,} \PYG{l+m+mf}{0.87}\PYG{p}{,} \PYG{l+m+mf}{0.90}\PYG{p}{),} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{)}
+        \PYG{n}{page\PYGZus{}text}\PYG{p}{(}\PYG{n}{page}\PYG{p}{,} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{top\PYGZus{}y}\PYG{p}{,} \PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{top\PYGZus{}y}\PYG{o}{+}\PYG{l+m+mi}{25}\PYG{p}{),} \PYG{n}{title}\PYG{p}{,} \PYG{n}{title\PYGZus{}size}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mf}{0.07}\PYG{p}{,}\PYG{l+m+mf}{0.18}\PYG{p}{,}\PYG{l+m+mf}{0.32}\PYG{p}{))}
+        \PYG{n}{subtitle} \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{instrument}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ · }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{instrument\PYGZus{}id}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ · }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{code}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ · }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}unit\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ · SYNTHETIC DEMONSTRATION DATA\PYGZdq{}}
+        \PYG{n}{page\PYGZus{}text}\PYG{p}{(}\PYG{n}{page}\PYG{p}{,} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{top\PYGZus{}y}\PYG{o}{+}\PYG{l+m+mi}{27}\PYG{p}{,} \PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{top\PYGZus{}y}\PYG{o}{+}\PYG{l+m+mi}{44}\PYG{p}{),} \PYG{n}{subtitle}\PYG{p}{,} \PYG{n}{body\PYGZus{}size}\PYG{o}{*}\PYG{l+m+mf}{0.90}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mf}{0.32}\PYG{p}{,}\PYG{l+m+mf}{0.36}\PYG{p}{,}\PYG{l+m+mf}{0.40}\PYG{p}{))}
+
+        \PYG{n}{img\PYGZus{}key} \PYG{o}{=} \PYG{p}{(}\PYG{n}{name}\PYG{p}{,} \PYG{l+m+mi}{3} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{2}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{img\PYGZus{}key} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{cache}\PYG{p}{:}
+            \PYG{n}{cache}\PYG{p}{[}\PYG{n}{img\PYGZus{}key}\PYG{p}{]} \PYG{o}{=} \PYG{n}{cairosvg}\PYG{o}{.}\PYG{n}{svg2png}\PYG{p}{(}\PYG{n}{bytestring}\PYG{o}{=}\PYG{n}{svg}\PYG{p}{,} \PYG{n}{output\PYGZus{}width}\PYG{o}{=}\PYG{l+m+mi}{2640} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{1760}\PYG{p}{)}
+        \PYG{n}{img} \PYG{o}{=} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{open}\PYG{p}{(}\PYG{n}{stream}\PYG{o}{=}\PYG{n}{cache}\PYG{p}{[}\PYG{n}{img\PYGZus{}key}\PYG{p}{],} \PYG{n}{filetype}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}png\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{pix} \PYG{o}{=} \PYG{n}{img}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}pixmap}\PYG{p}{()}
+        \PYG{n}{image\PYGZus{}rect} \PYG{o}{=} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{top\PYGZus{}y}\PYG{o}{+}\PYG{l+m+mi}{52}\PYG{p}{,} \PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{l+m+mi}{155} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{143}\PYG{p}{))}
+        \PYG{n}{scale} \PYG{o}{=} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{image\PYGZus{}rect}\PYG{o}{.}\PYG{n}{width}\PYG{o}{/}\PYG{n}{pix}\PYG{o}{.}\PYG{n}{width}\PYG{p}{,} \PYG{n}{image\PYGZus{}rect}\PYG{o}{.}\PYG{n}{height}\PYG{o}{/}\PYG{n}{pix}\PYG{o}{.}\PYG{n}{height}\PYG{p}{)}
+        \PYG{n}{iw}\PYG{p}{,} \PYG{n}{ih} \PYG{o}{=} \PYG{n}{pix}\PYG{o}{.}\PYG{n}{width}\PYG{o}{*}\PYG{n}{scale}\PYG{p}{,} \PYG{n}{pix}\PYG{o}{.}\PYG{n}{height}\PYG{o}{*}\PYG{n}{scale}
+        \PYG{n}{box} \PYG{o}{=} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{((}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{iw}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{image\PYGZus{}rect}\PYG{o}{.}\PYG{n}{y0}\PYG{o}{+}\PYG{p}{(}\PYG{n}{image\PYGZus{}rect}\PYG{o}{.}\PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{n}{ih}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{p}{(}\PYG{n}{width}\PYG{o}{+}\PYG{n}{iw}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{image\PYGZus{}rect}\PYG{o}{.}\PYG{n}{y0}\PYG{o}{+}\PYG{p}{(}\PYG{n}{image\PYGZus{}rect}\PYG{o}{.}\PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{n}{ih}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{o}{+}\PYG{n}{ih}\PYG{p}{)}
+        \PYG{n}{page}\PYG{o}{.}\PYG{n}{insert\PYGZus{}image}\PYG{p}{(}\PYG{n}{box}\PYG{p}{,} \PYG{n}{pixmap}\PYG{o}{=}\PYG{n}{pix}\PYG{p}{,} \PYG{n}{keep\PYGZus{}proportion}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+        \PYG{n}{reading} \PYG{o}{=} \PYG{n}{clean}\PYG{p}{(}\PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}reading\PYGZdq{}}\PYG{p}{)} \PYG{o+ow}{or} \PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}idea\PYGZdq{}}\PYG{p}{)} \PYG{o+ow}{or} \PYG{l+s+s2}{\PYGZdq{}Interpret this metric against its historical control limits and instrument records.\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{summary} \PYG{o}{=} \PYG{n}{limit\PYGZus{}summary}\PYG{p}{(}\PYG{n}{csv\PYGZus{}bytes}\PYG{p}{)} \PYG{k}{if} \PYG{n}{csv\PYGZus{}bytes} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}Control\PYGZhy{}chart companion view (subgroup spread).\PYGZdq{}}
+        \PYG{n}{spec} \PYG{o}{=} \PYG{n}{spec\PYGZus{}text}\PYG{p}{(}\PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}spec\PYGZdq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}\PYGZcb{}),} \PYG{n}{instrument\PYGZus{}id}\PYG{p}{,} \PYG{n}{cat}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{))}
+        \PYG{n}{footer\PYGZus{}top} \PYG{o}{=} \PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{l+m+mi}{137} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{126}\PYG{p}{)}
+        \PYG{n}{footer} \PYG{o}{=} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{footer\PYGZus{}top}\PYG{p}{,} \PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{p}{,} \PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{31}\PYG{p}{)}
+        \PYG{n}{page}\PYG{o}{.}\PYG{n}{draw\PYGZus{}rect}\PYG{p}{(}\PYG{n}{footer}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{0.80}\PYG{p}{,}\PYG{l+m+mf}{0.84}\PYG{p}{,}\PYG{l+m+mf}{0.88}\PYG{p}{),} \PYG{n}{fill}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{0.96}\PYG{p}{,}\PYG{l+m+mf}{0.97}\PYG{p}{,}\PYG{l+m+mf}{0.98}\PYG{p}{),} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{)}
+        \PYG{n}{pad} \PYG{o}{=} \PYG{l+m+mi}{9} \PYG{k}{if} \PYG{n}{a3} \PYG{k}{else} \PYG{l+m+mi}{7}
+        \PYG{n}{page\PYGZus{}text}\PYG{p}{(}\PYG{n}{page}\PYG{p}{,} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{o}{+}\PYG{n}{pad}\PYG{p}{,}\PYG{n}{footer\PYGZus{}top}\PYG{o}{+}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{o}{\PYGZhy{}}\PYG{n}{pad}\PYG{p}{,}\PYG{n}{footer\PYGZus{}top}\PYG{o}{+}\PYG{l+m+mi}{25}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}Interpretation: \PYGZdq{}}\PYG{o}{+}\PYG{n}{reading}\PYG{p}{,} \PYG{n}{body\PYGZus{}size}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mf}{0.10}\PYG{p}{,}\PYG{l+m+mf}{0.16}\PYG{p}{,}\PYG{l+m+mf}{0.22}\PYG{p}{))}
+        \PYG{n}{page\PYGZus{}text}\PYG{p}{(}\PYG{n}{page}\PYG{p}{,} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{o}{+}\PYG{n}{pad}\PYG{p}{,}\PYG{n}{footer\PYGZus{}top}\PYG{o}{+}\PYG{l+m+mi}{27}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{o}{\PYGZhy{}}\PYG{n}{pad}\PYG{p}{,}\PYG{n}{footer\PYGZus{}top}\PYG{o}{+}\PYG{l+m+mi}{43}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}Observed: \PYGZdq{}}\PYG{o}{+}\PYG{n}{summary}\PYG{o}{+}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}  \PYGZdq{}}\PYG{o}{+}\PYG{n}{spec} \PYG{k}{if} \PYG{n}{spec} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{),} \PYG{n}{body\PYGZus{}size}\PYG{o}{*}\PYG{l+m+mf}{0.92}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mf}{0.24}\PYG{p}{,}\PYG{l+m+mf}{0.29}\PYG{p}{,}\PYG{l+m+mf}{0.34}\PYG{p}{))}
+        \PYG{n}{page\PYGZus{}text}\PYG{p}{(}\PYG{n}{page}\PYG{p}{,} \PYG{n}{fitz}\PYG{o}{.}\PYG{n}{Rect}\PYG{p}{(}\PYG{n}{margin}\PYG{o}{+}\PYG{n}{pad}\PYG{p}{,}\PYG{n}{footer\PYGZus{}top}\PYG{o}{+}\PYG{l+m+mi}{45}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{o}{\PYGZhy{}}\PYG{n}{pad}\PYG{p}{,}\PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{37}\PYG{p}{),} \PYG{n}{below\PYGZus{}above}\PYG{p}{(}\PYG{n}{cat}\PYG{p}{)}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{} Control limits describe historical process variation; they are not automatically SOP acceptance limits. Confirm any decision against the approved method and instrument records.\PYGZdq{}}\PYG{p}{,} \PYG{n}{body\PYGZus{}size}\PYG{o}{*}\PYG{l+m+mf}{0.86}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mf}{0.24}\PYG{p}{,}\PYG{l+m+mf}{0.29}\PYG{p}{,}\PYG{l+m+mf}{0.34}\PYG{p}{))}
+        \PYG{n}{page}\PYG{o}{.}\PYG{n}{insert\PYGZus{}text}\PYG{p}{((}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{n}{margin}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{n}{height}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{13}\PYG{p}{),} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{doc}\PYG{o}{.}\PYG{n}{page\PYGZus{}count}\PYG{p}{),} \PYG{n}{fontsize}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,} \PYG{n}{fontname}\PYG{o}{=}\PYG{n}{FONT}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{0.4}\PYG{p}{,}\PYG{l+m+mf}{0.4}\PYG{p}{,}\PYG{l+m+mf}{0.4}\PYG{p}{))}
+    \PYG{n}{doc}\PYG{o}{.}\PYG{n}{set\PYGZus{}metadata}\PYG{p}{(\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}qPCR equipment and forensic control\PYGZhy{}chart atlas\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}author\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Synthetic demonstration documentation\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}subject\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Landscape chart atlas; control limits and interpretation\PYGZdq{}}\PYG{p}{\PYGZcb{})}
+    \PYG{n}{out\PYGZus{}path}\PYG{o}{.}\PYG{n}{parent}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{n}{parents}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{exist\PYGZus{}ok}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n}{doc}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{n}{out\PYGZus{}path}\PYG{p}{,} \PYG{n}{deflate}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{garbage}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{out\PYGZus{}path}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{doc}\PYG{o}{.}\PYG{n}{page\PYGZus{}count}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ pages, }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{out\PYGZus{}path}\PYG{o}{.}\PYG{n}{stat}\PYG{p}{()}\PYG{o}{.}\PYG{n}{st\PYGZus{}size}\PYG{l+s+si}{:}\PYG{l+s+s2}{,}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{ bytes\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k+kc}{None}\PYG{p}{:}
+    \PYG{n}{catmap} \PYG{o}{=} \PYG{n}{chart\PYGZus{}catalogue}\PYG{p}{()}
+    \PYG{k}{with} \PYG{n}{zipfile}\PYG{o}{.}\PYG{n}{ZipFile}\PYG{p}{(}\PYG{n}{ZIP\PYGZus{}PATH}\PYG{p}{)} \PYG{k}{as} \PYG{n}{z}\PYG{p}{:}
+        \PYG{n}{names} \PYG{o}{=} \PYG{n}{z}\PYG{o}{.}\PYG{n}{namelist}\PYG{p}{()}
+        \PYG{n}{entries}\PYG{o}{=}\PYG{p}{[]}
+        \PYG{k}{for} \PYG{n}{n} \PYG{o+ow}{in} \PYG{n}{names}\PYG{p}{:}
+            \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{n}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{()}\PYG{o}{.}\PYG{n}{endswith}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}.svg\PYGZdq{}}\PYG{p}{):}
+                \PYG{k}{continue}
+            \PYG{n}{csv\PYGZus{}name}\PYG{o}{=}\PYG{n}{n}\PYG{p}{[:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{}.csv\PYGZdq{}}
+            \PYG{n}{entries}\PYG{o}{.}\PYG{n}{append}\PYG{p}{((}\PYG{n}{n}\PYG{p}{,}\PYG{n}{z}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{n}{n}\PYG{p}{),}\PYG{n}{z}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{n}{csv\PYGZus{}name}\PYG{p}{)} \PYG{k}{if} \PYG{n}{csv\PYGZus{}name} \PYG{o+ow}{in} \PYG{n}{names} \PYG{k}{else} \PYG{l+s+sa}{b}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{))}
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{entries}\PYG{p}{:}
+        \PYG{k}{raise} \PYG{n+ne}{SystemExit}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}No SVG charts were found in the app export.\PYGZdq{}}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} Keep page order stable and group instruments, then chart codes.}
+    \PYG{n}{entries}\PYG{o}{.}\PYG{n}{sort}\PYG{p}{(}\PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{e}\PYG{p}{:(}\PYG{n}{e}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}/\PYGZdq{}}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{re}\PYG{o}{.}\PYG{n}{search}\PYG{p}{(}\PYG{l+s+sa}{r}\PYG{l+s+s2}{\PYGZdq{}/([A\PYGZhy{}Z]\PYGZhy{}[A\PYGZhy{}Z]\PYGZbs{}d+[a\PYGZhy{}z]?)\PYGZus{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{e}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}\PYG{o}{.}\PYG{n}{group}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{k}{if} \PYG{n}{re}\PYG{o}{.}\PYG{n}{search}\PYG{p}{(}\PYG{l+s+sa}{r}\PYG{l+s+s2}{\PYGZdq{}/([A\PYGZhy{}Z]\PYGZhy{}[A\PYGZhy{}Z]\PYGZbs{}d+[a\PYGZhy{}z]?)\PYGZus{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{e}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])} \PYG{k}{else} \PYG{n}{e}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]))}
+    \PYG{n}{make\PYGZus{}pdf}\PYG{p}{(}\PYG{n}{entries}\PYG{p}{,}\PYG{n}{catmap}\PYG{p}{,}\PYG{n}{OUT\PYGZus{}DIR}\PYG{o}{/}\PYG{l+s+s2}{\PYGZdq{}qPCR\PYGZus{}control\PYGZus{}charts\PYGZus{}realscale\PYGZus{}A4\PYGZus{}landscape.pdf\PYGZdq{}}\PYG{p}{,}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{make\PYGZus{}pdf}\PYG{p}{(}\PYG{n}{entries}\PYG{p}{,}\PYG{n}{catmap}\PYG{p}{,}\PYG{n}{OUT\PYGZus{}DIR}\PYG{o}{/}\PYG{l+s+s2}{\PYGZdq{}qPCR\PYGZus{}control\PYGZus{}charts\PYGZus{}realscale\PYGZus{}A3\PYGZus{}landscape.pdf\PYGZdq{}}\PYG{p}{,}\PYG{k+kc}{True}\PYG{p}{)}
+
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{n}{main}\PYG{p}{()}
+\end{Verbatim}

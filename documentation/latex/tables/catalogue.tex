@@ -1,0 +1,65 @@
+{\footnotesize
+\begin{longtable}{@{}lllll@{}}
+\toprule \textbf{Code} & \textbf{Chart} & \textbf{Instr.} & \textbf{Default} & \textbf{Unit} \\\midrule\endfirsthead
+\toprule \textbf{Code} & \textbf{Chart} & \textbf{Instr.} & \textbf{Default} & \textbf{Unit} \\\midrule\endhead
+\texttt{B-H1} & Peak heating rate (2-s window) & LC QS & Trend & °C/s \\\hline
+\texttt{B-H2} & Peak cooling rate (2-s window) & LC QS & Trend & °C/s \\\hline
+\texttt{B-H3} & Overshoot at the denaturation step & LC QS & CUSUM & °C \\\hline
+\texttt{B-H3b} & Settling time at the denaturation step & LC QS & I-MR & s \\\hline
+\texttt{B-H3c} & Transition time A → B °C & LC QS & I-MR & s \\\hline
+\texttt{B-H4} & Temperature at the moment of reading & LC QS & X̄–S & °C from setpoint \\\hline
+\texttt{B-H5} & Block zone uniformity (95th percentile) & QS & EWMA & °C \\\hline
+\texttt{B-H6} & Heat-sink maximum & QS & I-MR & °C \\\hline
+\texttt{B-H6b} & Heated cover temperature & QS & I-MR & °C \\\hline
+\texttt{B-H8} & Lamp reference channel (stability) & LC & I-MR & reference counts \\\hline
+\texttt{B-H9} & Lamp drift within a run & LC & I-MR & \% change in the run \\\hline
+\texttt{B-H10} & LED drive current & QS & Trend & current (as logged) \\\hline
+\texttt{B-H10b} & LED junction temperature (maximum) & QS & I-MR & °C \\\hline
+\texttt{B-H11} & Automatic integration time / exposure & LC QS & I-MR & ms \\\hline
+\texttt{B-H12} & Saturated well images & QS & p & share of well images \\\hline
+\texttt{B-H13} & Uniformity calibration: edge-to-centre ratio & QS & I-MR & edge / centre \\\hline
+\texttt{B-H13b} & Background calibration: mean offset & QS & I-MR & counts \\\hline
+\texttt{B-H13c} & Well-position (ROI) calibration: spot diameter & QS & I-MR & pixels \\\hline
+\texttt{B-H14} & Filter-wheel move time & QS & I-MR & ms \\\hline
+\texttt{B-H14b} & Filter-wheel moves slower than 500 ms & QS & p & share of moves \\\hline
+\texttt{B-H15} & Filter-wheel position offset & QS & I-MR & encoder counts \\\hline
+\texttt{B-H16} & Camera readout time beyond the exposure & QS & X̄–S & ms \\\hline
+\texttt{B-H17} & Channel switch time & LC & I-MR & ms \\\hline
+\texttt{B-H18} & Heated cover lowering time & QS & Trend & s \\\hline
+\texttt{B-H18b} & Heated cover raising time & QS & I-MR & s \\\hline
+\texttt{A-H3} & Background fluorescence per channel & LC QS & I-MR & fluorescence \\\hline
+\texttt{A-H3b} & End-point fluorescence per channel & LC QS & I-MR & fluorescence \\\hline
+\texttt{A-H4} & Run duration & LC QS & I-MR & minutes \\\hline
+\texttt{B-S1} & Reply time to the PC software & QS & I-MR & ms (95th pct) \\\hline
+\texttt{B-S2} & Once-per-second timer lateness & QS & I-MR & ms (95th pct) \\\hline
+\texttt{B-S2b} & Scheduler falling behind & QS & u & events per run hour \\\hline
+\texttt{B-S3} & Image → processing delay & QS & I-MR & ms (95th pct) \\\hline
+\texttt{B-S4} & Image analysis time & QS & I-MR & ms \\\hline
+\texttt{B-S5} & Run-time prediction error & QS & I-MR & \% \\\hline
+\texttt{B-S6} & Data hand-off time & QS & I-MR & minutes \\\hline
+\texttt{B-S8} & Command errors in the instrument log & QS & c & errors \\\hline
+\texttt{B-S9} & Cycle-timing regularity & LC QS & I-MR & ms \\\hline
+\texttt{B-S10} & Temperature-log intervals over 500 ms & LC & p & share of intervals \\\hline
+\texttt{B-S11} & Invalid fluorescence readings & LC & p & share of readings \\\hline
+\texttt{B-S12} & Stored Ct not reproducible (> 0.2) & QS & p & share of wells \\\hline
+\texttt{A-S4} & Run end → last change & LC QS & I-MR & log10 hours \\\hline
+\texttt{A-S6} & Forensic findings per run & LC QS & c & findings \\\hline
+\texttt{A-M1} & Positive control Cq (Levey-Jennings) & LC QS & I-MR & Cq \\\hline
+\texttt{B-M1} & Probe signal strength (positive control) & LC QS & EWMA & fluorescence \\\hline
+\texttt{B-M2} & Passive reference (ROX) level & QS & I-MR & passive reference \\\hline
+\texttt{B-M3} & PCR efficiency from the standards & LC QS & Trend & \% efficiency \\\hline
+\texttt{B-M5} & Negative controls by process stage & LC QS & p & share of NTC wells \\\hline
+\texttt{B-M6} & IC shift from fixed reference & LC QS & EWMA & cycles \\\hline
+\texttt{B-M9} & Low Cq confidence & QS & p & share of wells \\\hline
+\texttt{B-M10} & Late signal / stochastic-zone results & LC QS & p & share of results \\\hline
+\texttt{B-O1} & Replicate precision (pooled SD, Cq < 30) & LC QS & I-MR & Cq SD \\\hline
+\texttt{B-O2} & Dispensed-volume spread (ROX CV) & QS & I-MR & \% CV \\\hline
+\texttt{B-O3} & Row / column pattern & LC QS & I-MR & Cq \\\hline
+\texttt{B-O5} & Contamination rate by operator (funnel) & LC QS & Funnel & share of NTC wells \\\hline
+\texttt{B-O6} & Repeat / inconclusive / invalid rate by operator … & LC QS & Funnel & share of results \\\hline
+\texttt{B-O7} & Manual interventions & LC QS & p & share of settings \\\hline
+\texttt{B-O9} & Stored calls that disagree with the SOP & LC QS & p & share of wells \\\hline
+\texttt{B-O11} & Copied-data events & LC QS & c & events \\\hline
+\bottomrule
+\end{longtable}}
+

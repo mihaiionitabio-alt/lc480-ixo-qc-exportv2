@@ -1,0 +1,34 @@
+\chapter{Compiling this document and regenerating the figures}\label{app:build}
+
+\section{Compiling the PDF}
+The report uses XeLaTeX-compatible Unicode fonts and the \texttt{listings} package. Code is rendered in a continuous light-blue panel with line numbers; the number column is italic and grey. No shell escape or network access is required.
+
+\begin{lstlisting}[style=vstyle,language=text,numbers=left,firstnumber=1]
+cd documentation/documentation_sources/latex
+tectonic main.tex
+# or, with TeX Live:
+latexmk -xelatex main.tex
+\end{lstlisting}
+
+Run the compiler until the table of contents, list of figures and cross-references stabilise. The source tree is:
+
+\begin{lstlisting}[style=vstyle,language=text,numbers=left,firstnumber=1]
+main.tex  ch01_intro.tex ... ch19_missy.tex  chV1_method.tex ... chV5_findings.tex
+appA_build.tex ... appI_atlas_data.tex
+fig/  screenshots and generated figures
+code/ complete HTML and verification extracts
+tables/ generated tables
+data/atlas/ CSV values behind the control-chart atlas
+\end{lstlisting}
+
+\section{Regenerating figures and tables}
+The generator uses Node.js, Python and Playwright. The supplied verification script loads the production HTML in a real browser, captures the three modes and checks the report exports.
+
+\begin{lstlisting}[style=vstyle,language=text,numbers=left,firstnumber=1]
+node documentation/verification/missy_smoke_2026-09-25.cjs
+\end{lstlisting}
+
+The atlas source is \path{DEMO_control_charts_realscale.zip}. Appendix~\ref{app:atlas-data} lists every CSV and records the manifest without reproducing CSV listings. The companion A4 PDF contains one chart per page.
+
+
+

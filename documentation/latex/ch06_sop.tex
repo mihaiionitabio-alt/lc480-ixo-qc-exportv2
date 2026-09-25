@@ -1,0 +1,86 @@
+\chapter{Tab 2 · SOP: the laboratory's rules as a profile}\label{ch:sop}
+
+The separate Tab~3 (Results) uses the same active profile. It is opened automatically after files are read, so the
+interpretation table follows the loading step while the editable profile remains in this tab.
+
+\section{The SOP profile}
+Interpretation rules differ between laboratories and methods. The page keeps them in one \textbf{SOP profile}, a JSON document
+(schema \texttt{qpcr-sop-profile/1}) that can be edited on the page, saved, locked and reopened. The stored Cq values and calls
+are never changed; every outcome says which rule produced it, and every export carries the profile's name, version and SHA-256.
+
+\begin{center}\small
+\begin{tabular}{@{}lp{11.6cm}@{}}\toprule
+Section & Content\\\midrule
+1 · Identity & name, version, author or approver, assay, effective date, notes\\
+2 · Targets & target patterns (exact, wildcard or regular expression), kind (target, reference, internal control), Cq cut-off, late-signal limit, minimum quantity, outcome in the late zone\\
+3 · Controls & how controls are recognised (by role or by sample name), expected result (negative, positive with a Cq range, standard), purpose, material, minimum replicate wells per group, minimum groups per run, action on failure\\
+4 · Replicates \& IC & minimum replicates, replicates needed for a positive, maximum SD, internal-control shift and fixed reference Cq\\
+5 · Run acceptance & integrity, missing or failed controls, standard-curve R$^2$ and efficiency, NTC gap, edit delay, calibration, zone spread, run state\\
+6 · Outcomes & labels, colours and the report sentence of each outcome\\
+7 · Graph settings & which SOP lines are drawn\\
+8 · Control charts & per-chart settings of the Control panel (\texttt{controlCharts})\\\bottomrule
+\end{tabular}
+\end{center}
+
+The SC figures use the generated review profile \emph{SC screening -- SOP-06 laboratory default}, version 1.0. It is review-only until the laboratory approves the mapping and the unresolved comparison direction in SOP-06 section 6.2(c5). The profile recognises 35S and T-NOS targets, HMG or LEC reference targets, 415B and 410CP LOD controls, NTC, process blanks and negative maize or soy controls. This abbreviated JSON shows the profile shape; values are synthetic configuration examples:
+
+\begin{lstlisting}[style=vstyle,language=json, numbers=left,firstnumber=1]
+{ "schema": "qpcr-sop-profile/1", "name": "SC screening -- SOP-06 laboratory default", "version": "1.0",
+  "author": "Demo QA manager",
+  "targets": [ {"match": "HMG|hmg|lec|Le1|ADH|adh1|SSIIb|zSSIIb|Cru|cruA|GLP", "kind": "reference",
+                "cqMax": 40, "cqLate": 36, "lateOutcome": "Inconclusive"},
+               {"match": "*", "kind": "target", "cqMax": 40, "cqLate": 38, "lateOutcome": "Repeat"} ],
+  "controls": [ {"name": "415B LOD control", "matchBy": "name", "match": "/^415B(?=\\b|\\d)/i",
+                 "targets": "35S|TNOS|T-NOS", "expect": "positive", "purpose": "LOD control",
+                 "cqLo": 29, "cqHi": 36, "minReplicates": 2, "minPerRun": 0, "onFail": "review"},
+                {"name": "Extraction blank", "matchBy": "name", "match": "/^(BLANK|BLK)\\s*EX/i",
+                 "expect": "negative", "purpose": "extraction blank", "minReplicates": 1,
+                 "minPerRun": 0, "onFail": "review"} ],
+  "replicates": {"min": 2, "positiveMin": 2, "partialOutcome": "Repeat", "maxSd": 0.5, "sdOutcome": "Repeat"},
+  "run": {"integrity": "reject", "controlsFail": "reject", "editDelayHours": 72, "editAction": "review", "…": "…"},
+  "controlCharts": {"cool_rate": {"x": "date", "baseFrom": "2025-05-12"}, "transition": {"x": "date"}},
+  "sha256": "…" }
+\end{lstlisting}
+
+\input{code/sopBase}
+\input{code/SOP_PRESETS}
+
+\textbf{Which starting point the page offers.} \texttt{Start from} now lists only \emph{SC screening — SOP-06 laboratory
+default} (\texttt{SOP\_PRESETS.sc}), and a session with no stored profile starts from it. The earlier generic, GMO and
+forensic templates remain in the source as scaffolds used by the review mapping (\texttt{sopLabScreening}), but they are not
+offered in the selector and a stored profile recognised as one of those templates is replaced by the SC default when only
+\texttt{SC\_} experiments are loaded. Opening a file with the review schema
+\texttt{qpcr-control-mapping-proposal/v1} converts it to the SC profile shape; the raw names, stored Cq values, calls and
+dates are untouched.
+
+\section{Integrity of the profile}
+The SHA-256 is computed over a canonical form of the profile (keys sorted, the fields \texttt{sha256} and \texttt{locked} left
+out). Any change of any rule, including a control-chart setting, changes the hash, which is printed on every graph and export.
+
+\input{code/sopCanonical}
+\input{code/sopHash}
+
+\figui[0.8]{ui_sop.png}{SOP \& results tab: profile header with version and SHA-256, sections 1--2 of the editor; sections 3--8 are folded.}{ui_sop}
+
+\section{Evaluating a run}
+\texttt{sopEvaluateRun()} groups the wells by sample and target, recognises controls, applies cut-offs, late-signal limits,
+replicate rules and the internal control, and then the run-acceptance criteria. A run that fails a criterion set to
+\emph{reject} turns all its sample results into \emph{Invalid run}. In the synthetic data set the planted contaminated extraction
+blank of run 022 does exactly this (Figure~\ref{fig:g_LCX_curves}).
+
+\input{code/sopMatcher}
+\input{code/sopEvaluateRun}
+
+\section{Dates and the run timeline}
+Every dated event in a file (experiment created, run started and ended, analyses created and modified, last change; for
+.eds instrument also the ZIP entry dates, instrument log and calibrations) becomes a timeline. The edit delay and the run duration
+used by the SOP and the control panel come from it.
+
+\input{code/sopTime}
+\input{code/runTimeline}
+\input{code/runTimes}
+
+\section{SOP findings in the forensic log}
+\input{code/sopEvents}
+
+

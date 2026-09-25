@@ -1,0 +1,269 @@
+\chapter{The console}\label{ch:console}
+
+The page has a second face. The tabs are made for a desk: a mouse, a large
+window, time to read. The console is made for the other case --- a small screen,
+gloves, noise, a person who has to decide now. It is opened from the status bar
+and it covers the page completely, because a half-covered page is a page that can
+be misread.
+
+Two rules shaped it. The first is that the console must never be a dead end: a
+view that has nothing to report still says what it has, because an operator under
+pressure reads ``nothing outstanding'' as ``the tool has stopped working''. The
+second is that the console carries the same data as the page, not a summary of it:
+every figure in it comes from the same function the tab calls.
+
+\section{What the console shows}
+Eight views, one per area of the page. Each view builds its own items from the
+loaded data; none of them filters a shared list, which is why two views never show
+the same thing twice. The counts below are from the corpus used throughout this
+part.
+
+{\small
+\begin{longtable}{@{}p{3.0cm}p{2.1cm}p{6.8cm}p{3.8cm}@{}}
+\caption{The eight console views and what each built from the corpus.}\label{tab:console-views} \\
+\toprule \textbf{View} & \textbf{Items} & \textbf{Kinds of item} & \textbf{Severity} \\\midrule\endfirsthead
+\toprule \textbf{View} & \textbf{Items} & \textbf{Kinds of item} & \textbf{Severity} \\\midrule\endhead
+\texttt{load} & 4 & file 3, summary 1 & ok 4 \\
+\texttt{sop} & 20 & rule 19, summary 1 & none 19, ok 1 \\
+\texttt{results} & 4 & results 3, summary 1 & ok 4 \\
+\texttt{panel} & 54 & chart 53, summary 1 & none 53, ok 1 \\
+\texttt{graphs} & 26 & graph 25, summary 1 & none 25, ok 1 \\
+\texttt{review} & 13 & finding 12, summary 1 & watch 10, alarm 3 \\
+\texttt{export} & 12 & export 12 & ok 12 \\
+\texttt{integrity} & 1 & integrity 1 & ok 1 \\
+\bottomrule
+\end{longtable}}
+
+
+\section{An item}
+An item is one fact with everything needed to act on it: a code, a title, a value
+with its unit, the limits it was judged against, a sentence of state, the evidence
+behind it, a small table of detail and the actions that can follow. The item below
+is the first one the load view builds.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Field} & \textbf{Content} \\\midrule\endfirsthead
+\toprule \textbf{Field} & \textbf{Content} \\\midrule\endhead
+\texttt{code} & LOAD \\
+\texttt{title} & Files read into this session \\
+\texttt{value} & 3 files \\
+\texttt{kind} & files read \\
+\texttt{state} & Decoded file metadata and stored results are ready. Open File integrity for any … \\
+\bottomrule
+\end{longtable}}
+
+\vhead{The detail rows of that item}
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Row} & \textbf{Value} \\\midrule\endfirsthead
+\toprule \textbf{Row} & \textbf{Value} \\\midrule\endhead
+Stored results & 830 \\
+Curves decoded & 751 \\
+Melting results & 79 \\
+Instruments & SVT001, Pilot-510, DVT07 \\
+Operators & Demo \\
+Active profile & SC screening — SOP-06 laboratory default v1.0 \\
+\bottomrule
+\end{longtable}}
+
+
+\section{Pictograms}
+A console is read at a glance, so every item carries a mark for its kind. The
+marks are drawn from the characters the font already has, which keeps the page a
+single file with no image to load.
+
+{\small\noindent\makebox[\textwidth][l]{\begin{tabular}{@{}ll@{}}
+\toprule \textbf{Kind} & \textbf{Mark} \\\midrule
+\texttt{file} & ▤ \\
+\texttt{summary} & ▣ \\
+\texttt{rule} & § \\
+\texttt{sample} & ◉ \\
+\texttt{run} & ▥ \\
+\texttt{chart} & ◪ \\
+\texttt{graph} & ◩ \\
+\texttt{finding} & ⚠ \\
+\texttt{export} & ↓ \\
+\texttt{baseline} & ◐ \\
+\texttt{instrument} & ⚙ \\
+\texttt{control} & ◈ \\
+\bottomrule
+\end{tabular}}}
+
+
+\section{Working without a mouse}
+Everything in the console can be reached by typing. The recogniser list below is
+the one the code carries; a button in the interface sends exactly the same text,
+so the two paths cannot drift apart.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\caption{Every command the console recognises.}\label{tab:console-commands} \\
+\toprule \textbf{Command} & \textbf{Pattern} \\\midrule\endfirsthead
+\toprule \textbf{Command} & \textbf{Pattern} \\\midrule\endhead
+next & \texttt{\textasciicircum{}next\$} \\
+previous & \texttt{\textasciicircum{}previous\$} \\
+chart previous & \texttt{\textasciicircum{}chart previous\$} \\
+chart next & \texttt{\textasciicircum{}chart next\$} \\
+chart close & \texttt{\textasciicircum{}chart close\$} \\
+zoom & \texttt{\textasciicircum{}zoom (in|out|reset)\$} \\
+pan & \texttt{\textasciicircum{}pan (left|right|up|down)\$} \\
+chart type menu & \texttt{\textasciicircum{}(chart type|type menu|change chart type)\$} \\
+x axis menu & \texttt{\textasciicircum{}(x axis|axis menu|change x axis)\$} \\
+close menu & \texttt{\textasciicircum{}(close|close menu|dismiss)\$} \\
+read staged files & \texttt{\textasciicircum{}read files\$} \\
+choose experiment files & \texttt{\textasciicircum{}choose files\$} \\
+leave for a page & \texttt{\textasciicircum{}open page (load|sop|results|panel|graphs|review|export…} \\
+console view & \texttt{\textasciicircum{}(view )?(load files|load view|sop view|results view|pa…} \\
+chart type & \texttt{\textasciicircum{}type (i|ewma|cusum|trend|xbars|p|u|c|funnel)\$} \\
+x axis & \texttt{\textasciicircum{}x (order|date|hours|cycles)\$} \\
+theme light & \texttt{\textasciicircum{}theme light\$} \\
+theme dark & \texttt{\textasciicircum{}theme dark\$} \\
+chart & \texttt{\textasciicircum{}chart\$} \\
+panel & \texttt{\textasciicircum{}panel\$} \\
+results & \texttt{\textasciicircum{}results\$} \\
+review & \texttt{\textasciicircum{}review\$} \\
+load & \texttt{\textasciicircum{}load\$} \\
+sop & \texttt{\textasciicircum{}sop\$} \\
+next run & \texttt{\textasciicircum{}next run\$} \\
+download a file & \texttt{\textasciicircum{}export (\textbackslash\{\}d+)\$} \\
+exit & \texttt{\textasciicircum{}exit\$} \\
+\bottomrule
+\end{longtable}}
+
+
+\section{The actions offered on the items}
+An item that can be acted on carries its action with it, so the operator never has
+to remember where to go next.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Offered as} & \textbf{Sends} \\\midrule\endfirsthead
+\toprule \textbf{Offered as} & \textbf{Sends} \\\midrule\endhead
+Choose experiment files & \texttt{choose files} \\
+Open the SOP view on the page & \texttt{open page sop} \\
+Open the results view on the page & \texttt{open page results} \\
+Open the control panel on the page & \texttt{open page panel} \\
+Show the chart & \texttt{chart} \\
+Next run & \texttt{next run} \\
+Open the graphs view on the page & \texttt{open page graphs} \\
+Draw the graph & \texttt{chart} \\
+Open the review view on the page & \texttt{open page review} \\
+Download Cq values (CSV) & \texttt{export 0} \\
+Open the formats view on the page & \texttt{open page export} \\
+Download this file & \texttt{export 0} \\
+Download this file & \texttt{export 1} \\
+Download this file & \texttt{export 2} \\
+Download this file & \texttt{export 3} \\
+Download this file & \texttt{export 4} \\
+Download this file & \texttt{export 5} \\
+Download this file & \texttt{export 6} \\
+Download this file & \texttt{export 7} \\
+Download this file & \texttt{export 8} \\
+Download this file & \texttt{export 9} \\
+Download this file & \texttt{export 10} \\
+Open File integrity on the page & \texttt{open page integrity} \\
+\bottomrule
+\end{longtable}}
+
+
+\section{The view builders}
+Each view is a function of the loaded data and nothing else. Two are printed here;
+the rest are in Chapter~\ref{ch:val-functions} with the record of what they
+returned when they were called.
+
+\vhead{\vfn{mgViewLoad}}
+\begin{lstlisting}[language=JavaScript,basicstyle=\ttfamily\scriptsize\color{white},numbers=left,firstnumber=7449]
+function mgViewLoad(){
+  const out=[];
+  if(!RUNS.length&&!PASTED){
+    const staged=Array.isArray(STAGED)&&STAGED.length;
+    return [mgIt({kind:"intake",sev:"none",pict:MG_PICT.file,kindWord:"intake",code:"LOAD",
+      title:staged?"Files staged, ready to read":"No experiment files are loaded",
+      value:staged?String(STAGED.length):"0",unit:staged?"files staged":"files",
+      state:staged?"The files passed intake. Read them to decode runs and build the views.":"Drop .ixo, .eds, .edt or .zip files on the load view to begin.",
+      actions:staged
+        ?[{key:"3",label:"Read staged files",cmd:"read files"},{key:"4",label:"Choose another selection",cmd:"choose files"}]
+        :[{key:"3",label:"Choose experiment files",cmd:"choose files"}]})];
+  }
+  const meta=mgSafe(()=>metaRows(),[]);
+  if(RUNS.length){
+    const results=RUNS.reduce((a,r)=>a+((r.wells||[]).length),0);
+    const curves=RUNS.reduce((a,r)=>a+mgSafe(()=>uniqueCurveCount(r),0),0);
+    const tm=RUNS.reduce((a,r)=>a+((r.tmWells||[]).length),0);
+    /* A file that could not be read, or whose container checksum does not match, is what
+       raises this view. Without the test the view threw and the operator saw nothing. */
+    const bad=RUNS.some(r=>r.acqError||(r.integrity&&r.integrity.ok===false));
+    out.push(mgIt({kind:"summary",sev:bad?"alarm":"ok",pict:MG_PICT.summary,kindWord:"files read",code:"LOAD",
+      title:"Files read into this session",value:String(RUNS.length),unit:RUNS.length===1?"file":"files",
+      limits:`${results.toLocaleString()} stored results · ${curves.toLocaleString()} curves decoded`,
+      state:"Decoded file metadata and stored results are ready. Open File integrity for any file-integrity mismatch.",
+      evidence:uniq(RUNS.map(r=>r.platform||"LightCycler 480")).join(" · "),
+      rows:[["Stored results",results.toLocaleString()],["Curves decoded",curves.toLocaleString()],
+            ["Melting results",tm.toLocaleString()],
+            ["Instruments",uniq(RUNS.map(r=>(r.meta&&r.meta.InstrumentName)||"not named")).join(", ")],
+            ["Operators",uniq(meta.map(m=>m.operator).filter(Boolean)).join(", ")||"—"],
+            ["Active profile",`${SOP.name} v${SOP.version}`]],
+      actions:[{key:"3",label:"Choose experiment files",cmd:"choose files"}]}));
+    RUNS.forEach((r,i)=>{
+      const m=meta[i]||{},ok=true;
+      out.push(mgIt({kind:"file",sev:r.acqError?"watch":"ok",pict:MG_PICT.file,kindWord:"file",
+        code:"F"+(i+1),title:m.experiment||r.file||("Experiment "+(i+1)),
+        value:String(m.quantification_results||0),unit:"stored results",
+        limits:`${mgTxt(m.plate)} plate · ${mgTxt(m.cycles)} cycles · ${m.curves_decoded||0} curves`,
+        state:r.acqError?("Fluorescence could not be read: "+r.acqError)
+              :r.isTemplate?"Template or unrun experiment — plate setup, protocol and analysis settings only."
+              :"File decoded; stored values are ready for review.",
+        evidence:`${mgTxt(m.platform)} · ${m.instrument||"instrument not named"} · ${m.run_started||m.experiment_created||"no date"}`,
+        rows:[["File",mgTxt(r.file)],["Instrument",mgTxt(m.instrument)],["Software",mgTxt(m.software_version)],
+              ["Operator",mgTxt(m.operator)],["Run started",mgTxt(m.run_started)],["Run ended",mgTxt(m.run_ended)],
+              ["Run minutes",mgTxt(m.run_duration_minutes)],["Channels",mgTxt(m.channels)],
+              ["Analyses",String(m.analyses||0)],["Melting results",String(m.melting_results||0)],
+              ["Bytes",m.source_bytes?Number(m.source_bytes).toLocaleString():"—"]],
+        actions:[{key:"3",label:"Choose experiment files",cmd:"choose files"}]}));
+    });
+  }
+  if(PASTED)out.push(mgIt({kind:"file",sev:"ok",pict:MG_PICT.file,kindWord:"pasted table",code:"CSV",
+    title:"Pasted Cq table",value:String((PASTED.rows||[]).length),unit:"Cq values",
+    limits:"no fluorescence curves in a pasted table",
+    state:"Replicate checks and the inhibition test use these values; curve-based exports need an .ixo or .eds file.",
+    evidence:PASTED.source||"pasted data"}));
+  return out;
+}
+\end{lstlisting}
+
+\vhead{\vfn{mgViewReview}}
+\begin{lstlisting}[language=JavaScript,basicstyle=\ttfamily\scriptsize\color{white},numbers=left,firstnumber=7756]
+function mgViewReview(){
+  const events=mgSafe(()=>reviewEventsWithoutIntegrity()||[],[]);
+  if(!events.length)return [mgIt({kind:"finding",sev:"ok",pict:MG_PICT.finding,kindWord:"review",code:"QC",
+    title:"No finding was raised",value:"0",unit:"findings",
+    limits:`${RUNS.length} run(s) examined`,
+    state:"The file, result, timeline and interpretation checks all passed on the loaded runs.",
+    actions:[{key:"3",label:"Open the review view on the page",cmd:"open page review"}]})];
+  const err=events.filter(e=>e.severity==="error").length,rev=events.filter(e=>e.severity==="review").length;
+  const by=new Map();events.forEach(e=>{const k=e.area||"other";const l=by.get(k)||[];l.push(e);by.set(k,l);});
+  const out=[mgIt({kind:"summary",sev:err?"alarm":rev?"watch":"ok",pict:MG_PICT.summary,kindWord:"review",code:"QC",
+    title:"Quality and forensic review",value:String(events.length),unit:"findings",
+    limits:`${err} error · ${rev} review · ${by.size} area(s)`,
+    state:err?`${err} finding(s) are error level: the evidence contradicts what the file claims about itself.`
+      :rev?`${rev} finding(s) are for review; none is error level.`:"Every check passed.",
+    evidence:[...by.keys()].slice(0,5).join(" · "),
+    rows:[...by].map(([a,l])=>[a,`${l.filter(e=>e.severity==="error").length} error · ${l.filter(e=>e.severity==="review").length} review`]),
+    actions:[{key:"3",label:"Open the review view on the page",cmd:"open page review"}]})];
+  const rank=l=>l.some(e=>e.severity==="error")?0:1;
+  [...by].sort((a,b)=>rank(a[1])-rank(b[1])).forEach(([area,list])=>{
+    const e0=list.find(e=>e.severity==="error")||list[0];
+    const errs=list.filter(e=>e.severity==="error").length;
+    out.push(mgIt({kind:"finding",sev:errs?"alarm":"watch",pict:MG_PICT.finding,kindWord:"finding",
+      code:errs?"ERR":"REV",title:area,value:String(list.length),unit:list.length===1?"finding":"findings",
+      limits:`${errs} error · ${list.length-errs} review · expected: none`,
+      state:e0.finding||"",evidence:e0.experiment||"",
+      rows:list.slice(0,14).map(e=>[String(e.experiment||e.finding||"").slice(0,44),
+        String(e.evidence||e.finding||"").slice(0,80)]),
+      actions:[{key:"3",label:"Open the review view on the page",cmd:"open page review"}]}));
+  });
+  return out;
+}
+\end{lstlisting}
+

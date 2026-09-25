@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{ccRowsFor}\PYG{p}{(}\PYG{n+nx}{inst}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{all}\PYG{o}{=}\PYG{n+nx}{ccAllRows}\PYG{p}{().}\PYG{n+nx}{filter}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{instrument}\PYG{o}{===}\PYG{n+nx}{inst}\PYG{p}{).}\PYG{n+nx}{sort}\PYG{p}{((}\PYG{n+nx}{a}\PYG{p}{,}\PYG{n+nx}{b}\PYG{p}{)=\PYGZgt{}(}\PYG{n+nx}{a}\PYG{p}{.}\PYG{n+nx}{date}\PYG{o}{||}\PYG{l+m+mf}{0}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n+nx}{b}\PYG{p}{.}\PYG{n+nx}{date}\PYG{o}{||}\PYG{l+m+mf}{0}\PYG{p}{));}
+\PYG{+w}{  }\PYG{k+kd}{let}\PYG{+w}{ }\PYG{n+nx}{h0}\PYG{o}{=}\PYG{l+m+mf}{0}\PYG{p}{;}\PYG{n+nx}{all}\PYG{p}{.}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}\PYGZob{}}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{hours}\PYG{o}{=}\PYG{n+nx}{h0}\PYG{p}{;}\PYG{n+nx}{h0}\PYG{o}{+=}\PYG{p}{(}\PYG{n+nb}{Number}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{.}\PYG{n+nx}{run\PYGZus{}minutes}\PYG{p}{)}\PYG{o}{||}\PYG{l+m+mf}{0}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mf}{60}\PYG{p}{;\PYGZcb{});}\PYG{+w}{   }\PYG{c+c1}{// run hours count every run on the instrument}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{rows}\PYG{o}{=}\PYG{n+nx}{CC\PYGZus{}STATE}\PYG{p}{.}\PYG{n+nx}{protocol}\PYG{o}{?}\PYG{n+nx}{all}\PYG{p}{.}\PYG{n+nx}{filter}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}(}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{protocol}\PYG{o}{||}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}\PYG{o}{===}\PYG{n+nx}{CC\PYGZus{}STATE}\PYG{p}{.}\PYG{n+nx}{protocol}\PYG{p}{)}\PYG{o}{:}\PYG{n+nx}{all}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{rows}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

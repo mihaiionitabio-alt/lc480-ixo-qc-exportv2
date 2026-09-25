@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function} \PYG{n+nx}{recalcCt}\PYG{p}{(}\PYG{n+nx}{drn}\PYG{p}{,}\PYG{n+nx}{thr}\PYG{p}{)\PYGZob{}}
+  \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n+nx}{drn}\PYG{o}{||!}\PYG{n+nx}{drn}\PYG{p}{.}\PYG{n+nx}{length}\PYG{o}{||}\PYG{n+nx}{thr}\PYG{o}{==}\PYG{k+kc}{null}\PYG{p}{)}\PYG{k}{return} \PYG{k+kc}{null}\PYG{p}{;}\PYG{k+kd}{let} \PYG{n+nx}{ct}\PYG{o}{=}\PYG{k+kc}{null}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kd}{let} \PYG{n+nx}{i}\PYG{o}{=}\PYG{l+m+mf}{1}\PYG{p}{;}\PYG{n+nx}{i}\PYG{o}{\PYGZlt{}}\PYG{n+nx}{drn}\PYG{p}{.}\PYG{n+nx}{length}\PYG{p}{;}\PYG{n+nx}{i}\PYG{o}{++}\PYG{p}{)}\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{drn}\PYG{p}{[}\PYG{n+nx}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1}\PYG{p}{]}\PYG{o}{\PYGZlt{}}\PYG{n+nx}{thr}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{n+nx}{drn}\PYG{p}{[}\PYG{n+nx}{i}\PYG{p}{]}\PYG{o}{\PYGZgt{}=}\PYG{n+nx}{thr}\PYG{p}{)}\PYG{n+nx}{ct}\PYG{o}{=}\PYG{n+nx}{i}\PYG{o}{+}\PYG{p}{(}\PYG{n+nx}{thr}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{drn}\PYG{p}{[}\PYG{n+nx}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1}\PYG{p}{])}\PYG{o}{/}\PYG{p}{(}\PYG{n+nx}{drn}\PYG{p}{[}\PYG{n+nx}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{drn}\PYG{p}{[}\PYG{n+nx}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1}\PYG{p}{]);}
+  \PYG{k}{return} \PYG{n+nx}{ct}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

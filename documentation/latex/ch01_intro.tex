@@ -1,0 +1,21 @@
+\chapter{What the page does}\label{ch:intro}
+
+\page is a single offline HTML file for finished \texttt{.ixo}, \texttt{.eds/.edt} and \texttt{.rdml} runs. It reads stored values, curves, protocol metadata and instrument records, computes descriptive review values in the browser, draws the figures and writes open-format exports; nothing is uploaded and stored Cq, calls and fluorescence are not replaced.
+
+\begin{itemize}
+\item \texttt{.ixo}: XML with encoded acquisitions and thermal logs.
+\item \texttt{.eds/.edt}: ZIP containers with XML/JSON, analysis results, calibration records and logs.
+\item \texttt{.rdml}: exchange XML or a ZIP containing \texttt{rdml\_data.xml}; a vendor export is evaluated when it is the only file for an experiment.
+\item Mixed ZIP files and pasted Cq values are accepted; every staged file remains traceable.
+\end{itemize}
+
+The seven operating tabs and the separate File integrity view are documented by their page captures in Appendix~\ref{app:atlas-pages}; each tab has one responsibility: loading, SOP interpretation, results, control charts, graphs, quality review, exports and integrity.
+
+\section*{Document map}
+\begin{itemize}
+\item Chapters 2--15 describe the data model, decoding, SOP evaluation, charts, exports and RDML exchange.
+\item Chapters 16--19 describe Console, Command and Assisted modes, source structure and the MISSY mark.
+\item Appendix~\ref{app:index} indexes the current HTML symbols; Appendix~\ref{app:generator} contains the deterministic demonstration generator.
+\item Appendix~\ref{app:atlas-pages} contains the visual A4 chart atlas; Appendix~\ref{app:atlas-data} contains its CSV values and capture register.
+\end{itemize}
+

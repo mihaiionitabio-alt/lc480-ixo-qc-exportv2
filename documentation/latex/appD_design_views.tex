@@ -1,0 +1,60 @@
+\chapter{Software design views and function data flow}\label{app:design-views}
+This appendix translates the parser-generated function index into software design views. The delivered application is a single offline HTML file, so ``client'', ``controller/service'' and ``repository'' are responsibility boundaries inside one script, not separate deployed processes. The optional Java boundary is shown only as an integration point for a future host; no Java call is made by the current page.
+
+\begin{infobox}
+The diagrams use UML-style sequence and activity conventions for readable design views. Each function in Appendix~\ref{app:index} receives a flow record in Table~\ref{tab:function-flow-map}: its exact HTML lines, responsibility boundary, inputs, outputs and next flow. This keeps the schematic complete without drawing one box per symbol.
+\end{infobox}
+
+\section{Composition and data-flow view}
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[font=\footnotesize,box/.style={draw,rounded corners,align=center,minimum height=12mm,text width=3.3cm,inner sep=4pt,fill=#1!8,draw=#1!60!black},box/.default=blue,arr/.style={-{Stealth[length=2mm]},thick,gray!70!black}]
+\node[box=gray] (client) at (0,0) {Browser client / DOM, buttons, tabs, SVG/canvas};
+\node[box=blue] (svc) at (5,0) {Controller / service-style functions / decode, SOP, charts, review};
+\node[box=orange] (repo) at (10,0) {Repository / data access / File bytes, ZIP, hashes, exports};
+\node[box=green] (model) at (5,-2.7) {RUNS[] + history + profile / common in-memory model};
+\node[box=red] (events) at (10,-2.7) {Findings and status / structured events, notices, limits};
+\draw[arr] (client)--node[above]{commands / selections}(svc);
+\draw[arr] (svc)--node[above]{read / write}(repo);
+\draw[arr] (repo)--node[right]{decoded values}(model);
+\draw[arr] (model)--(svc);
+\draw[arr] (svc)--node[above]{render data}(client);
+\draw[arr] (svc)--(events); \draw[arr] (events)--(client);
+\end{tikzpicture}
+\caption{Responsibility view of the current single-file page.}\label{fig:design-composition}
+\end{figure}
+
+\section{Intake and analysis activity}
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[font=\footnotesize,box/.style={draw,rounded corners,align=center,minimum height=10mm,text width=3.0cm,inner sep=3pt,fill=#1!8,draw=#1!60!black},box/.default=blue,arr/.style={-{Stealth[length=2mm]},thick,gray!70!black}]
+\node[box=gray](f) at (0,0){.ixo / .eds / pasted table};
+\node[box=blue](i) at (4,0){intake() / readStaged()};
+\node[box=orange](d) at (8,0){decodeIxo() / decodeEds()};
+\node[box=green](m) at (12,0){common RUNS[] / protocol, wells, curves};
+\node[box=violet](s) at (4,-2.4){sopEvaluateRun()/procedure + interpretation};
+\node[box=red](q) at (8,-2.4){reviewForensicEvents() / rising curves, integrity, findings};
+\node[box=orange](c) at (12,-2.4){ccCompute() / control limits and signals};
+\draw[arr](f)--(i)--(d)--(m);\draw[arr](m)--(s);\draw[arr](m)--(q);\draw[arr](m)--(c); \draw[arr](s)--(q);\draw[arr](q)--(c);
+\end{tikzpicture}
+\caption{Activity view from staged files to method interpretation, forensic review and control charts.}\label{fig:design-activity}
+\end{figure}
+
+\section{Client-to-service sequence}
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[font=\scriptsize,box/.style={draw,rounded corners,align=center,minimum height=8mm,text width=2.5cm,inner sep=3pt,fill=#1!8,draw=#1!60!black},box/.default=blue,arr/.style={-{Stealth[length=2mm]},thick,gray!70!black}]
+\node[box=gray](u) at (0,0){Operator / button};\node[box=blue](v) at (3.6,0){DOM + view state};\node[box=orange](x) at (7.2,0){service function};\node[box=green](r) at (10.8,0){RUNS / history};\node[box=red](e) at (14.4,0){finding / export};
+\draw[arr](u)--node[above]{select / click}(v);\draw[arr](v)--node[above]{call}(x);\draw[arr](x)--node[above]{read / derive}(r);\draw[arr](r)--node[above]{rows}(x);\draw[arr](x)--node[above]{render / download}(e);\draw[arr](e)--node[below]{status}(v);
+\end{tikzpicture}
+\caption{Synchronous local sequence for a button action. No network or Java endpoint participates in the current implementation.}\label{fig:design-sequence}
+\end{figure}
+
+\section{Optional host integration boundary}
+If a future Java host embeds the page, the boundary is an adapter around file selection and export delivery. The host may provide a file stream and receive a generated artifact, while the decoder, SOP engine, chart engine and evidence model remain deterministic page services. The contract should preserve the common run model and the profile hash; it must not rewrite stored Cq values or calls.
+
+\section{Function-level flow records}
+Table~\ref{tab:function-flow-map} is generated from the same current HTML snapshot as Appendix~\ref{app:index}; a changed function name or line range therefore appears in both places on the next build.
+\input{tables/function_flow_map}
+
+\section{A3 architecture plates}
+The following landscape plates provide larger versions of the composition, intake, review and export views for presentations. They are generated separately so the A3 geometry is preserved.
+The A3 landscape design plates are delivered separately at \texttt{software\_design\_views\_A3\_landscape.pdf}; the preceding figures are the embedded schematic views.
+

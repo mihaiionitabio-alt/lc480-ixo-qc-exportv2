@@ -1,0 +1,80 @@
+\chapter{How the code is structured, and why}\label{ch:structure}
+
+The page is one file, and a single file is the easiest place in the world to write
+something no one can maintain. Two published engineering methods were used to keep
+that from happening: a component-design method written for flight software, and an
+agency standard for the architecture of onboard software. Neither is named here,
+because the page is not certified against either and a name on a document is a
+claim. What follows is what was taken from them and where it shows in the code.
+
+\section{What the component method contributed}
+The first method describes software as a set of components that each do one thing,
+declare what they take and what they give, and talk to each other only through
+those declarations. Five of its rules were applied literally.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\caption{What the component-design method contributed.}\label{tab:struct-component} \\
+\toprule \textbf{Rule taken} & \textbf{Where it shows in the page} \\\midrule\endfirsthead
+\toprule \textbf{Rule taken} & \textbf{Where it shows in the page} \\\midrule\endhead
+one responsibility per component & a decoder decodes, a profile decides, a chart draw… \\
+declared inputs and outputs & every function in Chapter\textasciitilde{}\textbackslash\{\}ref\{ch:val-functions\} i… \\
+commands separated from measurements & a command changes state and says so; a measurement… \\
+no hidden state & the seven functions that change state are named, a… \\
+deterministic behaviour & the same file gives the same values; the property … \\
+\bottomrule
+\end{longtable}}
+
+
+The strongest of these is the third. A component that both measures and acts can
+be tested only by acting, which is why the page keeps the two apart: the whole
+validation of Chapter~\ref{ch:val-functions} rests on being able to call a function
+and know that calling it changed nothing.
+
+\section{What the architectural standard contributed}
+The second is a standard for the architecture of onboard software: how the layers
+are separated, how data flows between them, what happens when something fails, and
+what the crew sees while it is happening. Six of its requirements shaped the page.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\caption{What the architectural standard contributed.}\label{tab:struct-arch} \\
+\toprule \textbf{Requirement} & \textbf{How the page meets it} \\\midrule\endfirsthead
+\toprule \textbf{Requirement} & \textbf{How the page meets it} \\\midrule\endhead
+layers with one direction of flow & files to model, model to decision, decision to v… \\
+one model, many readers & the run model is built once and read by the prof… \\
+a declared failure policy & a file that cannot be read becomes a stated faul… \\
+bounded resources & a large selection is decoded one file at a time … \\
+the operator is told what is happening & every long operation is a named task with progre… \\
+an interface that works under stress & the console: large type, one fact per item, ever… \\
+\bottomrule
+\end{longtable}}
+
+
+\section{The shape that came out of it}
+The result is a file with five bands, in this order: the shared utilities, the
+decoders, the model, the deciders, and the views. A function is in exactly one
+band, and the bands are in the file in the order the data moves through them, so
+the line number of a function says which band it belongs to.
+
+{\small
+\begin{longtable}{@{}lll@{}}
+\toprule \textbf{Band} & \textbf{What lives there} & \textbf{What it may call} \\\midrule\endfirsthead
+\toprule \textbf{Band} & \textbf{What lives there} & \textbf{What it may call} \\\midrule\endhead
+utilities & formatting, hashing, archives, small mathematics & nothing above it \\
+decoders & the container readers and the exchange reader & utilities \\
+model & the run model, the plate, the curves, the history & utilities \\
+deciders & the profile, the control charts, the forensic review & model, utilities \\
+views & tabs, graphs, the console, the two modes, the exports & everything below \\
+\bottomrule
+\end{longtable}}
+
+
+\section{What neither method excuses}
+Neither method makes a value right. They make a wrong value findable: a decoder
+that reports nothing when it should report something is visible because the layer
+above it has a declared input; a rule that fires when it should not is visible
+because the decision is separate from the drawing. The defects listed in
+Chapter~\ref{ch:val-findings} were all found that way, and none of them would have
+been found by reading the file from top to bottom.
+

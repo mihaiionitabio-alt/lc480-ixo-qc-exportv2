@@ -1,0 +1,1187 @@
+\chapter{Validation evidence and the harness that produced it}\label{app:val-trace}
+
+\section{Every symbol, with its verdict}
+One row per symbol: the line where it is declared, the verdict, and the provenance
+classes of the arguments it was called with. A symbol with no class took no
+argument or was not called.
+
+{\footnotesize
+\begin{longtable}{@{}lrll@{}}
+
+\toprule \textbf{Symbol} & \textbf{Line} & \textbf{Result} & \textbf{Cls} \\ \midrule\endhead
+\texttt{\$} & 3161 & pass & \texttt{S} \\
+\texttt{heatColour} & 8949 & pass & \texttt{S} \\
+\texttt{\$\$} & 6999 & pass & \texttt{S} \\
+\texttt{hex} & 3167 & priv & \texttt{--} \\
+\texttt{ANALYSIS\_CLASS\_RE} & 2549 & const & \texttt{--} \\
+\texttt{hexBEToDouble} & 2325 & pass & \texttt{S} \\
+\texttt{ANALYSIS\_KINDS} & 2550 & const & \texttt{--} \\
+\texttt{inflate} & 2244 & pass & \texttt{S} \\
+\texttt{APP\_LIMITS} & 7004 & const & \texttt{--} \\
+\texttt{inflateRaw} & 3214 & priv & \texttt{--} \\
+\texttt{APP\_PHASE\_TEXT} & 7942 & const & \texttt{--} \\
+\texttt{ini} & 3275 & priv & \texttt{--} \\
+\texttt{APP\_PHASE\_TRANSITIONS} & 7014 & const & \texttt{--} \\
+\texttt{instrumentRecordTables} & 9419 & pass & \texttt{R} \\
+\texttt{APP\_SB\_LAST} & 7972 & const & \texttt{--} \\
+\texttt{instrumentZip} & 10054 & pass & \texttt{--} \\
+\texttt{APP\_STATE} & 7005 & const & \texttt{--} \\
+\texttt{intake} & 10125 & state & \texttt{D} \\
+\texttt{APP\_STATS} & 7902 & const & \texttt{--} \\
+\texttt{integrityEvents} & 3886 & pass & \texttt{RS} \\
+\texttt{APP\_TASK\_LABEL} & 7918 & const & \texttt{--} \\
+\texttt{integrityLabel} & 3881 & pass & \texttt{R} \\
+\texttt{APP\_VERSION} & 7000 & const & \texttt{--} \\
+\texttt{integrityMismatches} & 9548 & pass & \texttt{--} \\
+\texttt{AST} & 11551 & const & \texttt{--} \\
+\texttt{invalidateAnalysisCaches} & 4765 & excl & \texttt{--} \\
+\texttt{BASE\_MACHINE\_METADATA} & 8471 & const & \texttt{--} \\
+\texttt{isEdsName} & 3734 & pass & \texttt{R} \\
+\texttt{BLANK\_ROLES} & 9038 & const & \texttt{--} \\
+\texttt{isoLocal} & 3728 & pass & \texttt{S} \\
+\texttt{CALL} & 2050 & const & \texttt{--} \\
+\texttt{ixoIntegrity} & 3866 & pass & \texttt{S} \\
+\texttt{CALL\_LINE} & 9863 & const & \texttt{--} \\
+\texttt{javaHashOrder} & 3587 & priv & \texttt{--} \\
+\texttt{CC\_BY\_ID} & 6259 & const & \texttt{--} \\
+\texttt{kid} & 3270 & priv & \texttt{--} \\
+\texttt{CC\_C4} & 6271 & pass & \texttt{S} \\
+\texttt{kids} & 3271 & priv & \texttt{--} \\
+\texttt{CC\_CHARTS} & 6074 & const & \texttt{--} \\
+\texttt{languageStorageKey} & 2029 & pass & \texttt{--} \\
+\texttt{CC\_COL} & 6450 & const & \texttt{--} \\
+\texttt{legendFromMap} & 5164 & pass & \texttt{S} \\
+\texttt{CC\_DEFAULT\_CFG} & 6260 & const & \texttt{--} \\
+\texttt{lgamma} & 2105 & pass & \texttt{S} \\
+\texttt{CC\_GROUPS} & 6069 & const & \texttt{--} \\
+\texttt{localizeDOM} & 2002 & pass & \texttt{ES} \\
+\texttt{CC\_HIST\_KEY} & 6449 & const & \texttt{--} \\
+\texttt{machineMetadataDocument} & 8584 & pass & \texttt{--} \\
+\texttt{CC\_LIMIT\_FLAG} & 6455 & const & \texttt{--} \\
+\texttt{machineMetadataJSON} & 8597 & pass & \texttt{--} \\
+\texttt{CC\_LIMIT\_TEXT} & 6373 & const & \texttt{--} \\
+\texttt{makeBaselineCSV} & 8353 & pass & \texttt{R} \\
+\texttt{CC\_RULES\_OFF} & 6264 & const & \texttt{--} \\
+\texttt{makeQpcrWide} & 8329 & pass & \texttt{DR} \\
+\texttt{CC\_SEG\_PALETTE} & 6454 & const & \texttt{--} \\
+\texttt{makeQpcrWideTables} & 8342 & pass & \texttt{R} \\
+\texttt{CC\_STATE} & 6448 & const & \texttt{--} \\
+\texttt{makeRDES} & 8366 & pass & \texttt{DR} \\
+\texttt{CC\_TARGET\_ALIAS} & 4408 & const & \texttt{--} \\
+\texttt{makeRDESTables} & 8379 & pass & \texttt{R} \\
+\texttt{CC\_TZ} & 5901 & const & \texttt{--} \\
+\texttt{makeRDML} & 8324 & pass & \texttt{R} \\
+\texttt{CMD} & 11395 & const & \texttt{--} \\
+\texttt{makeRDMLXML} & 8280 & pass & \texttt{R} \\
+\texttt{CMD\_HELP} & 11396 & const & \texttt{--} \\
+\texttt{makeStoredZip} & 2282 & pass & \texttt{S} \\
+\texttt{CONSOLE\_DICT} & 6432 & const & \texttt{--} \\
+\texttt{makeWebsiteArchive} & 8064 & pass & \texttt{S} \\
+\texttt{CONTROL\_CATEGORY\_OPTIONS} & 8888 & const & \texttt{--} \\
+\texttt{makeXlsx} & 4164 & pass & \texttt{S} \\
+\texttt{CQ\_ANALYSIS\_KINDS} & 9089 & const & \texttt{--} \\
+\texttt{makeZip} & 3250 & priv & \texttt{--} \\
+\texttt{CQ\_HEADERS} & 10252 & const & \texttt{--} \\
+\texttt{markDirty} & 5627 & pass & \texttt{--} \\
+\texttt{CQ\_NEGATIVE\_STATUS} & 9066 & const & \texttt{--} \\
+\texttt{mean} & 2090 & pass & \texttt{S} \\
+\texttt{CRC\_T} & 3180 & priv & \texttt{--} \\
+\texttt{median} & 2093 & pass & \texttt{S} \\
+\texttt{CRC\_TABLE} & 2198 & const & \texttt{--} \\
+\texttt{metaRows} & 8213 & pass & \texttt{--} \\
+\texttt{CSV\_EXAMPLE} & 10301 & const & \texttt{--} \\
+\texttt{metadataId} & 8479 & pass & \texttt{RS} \\
+\texttt{CURVE\_KEY\_COLOURS} & 9862 & const & \texttt{--} \\
+\texttt{metricCard} & 9457 & pass & \texttt{DS} \\
+\texttt{DEFAULT\_LANG} & 993 & const & \texttt{--} \\
+\texttt{mgApplyChartView} & 7326 & pass & \texttt{--} \\
+\texttt{DIRTY} & 5626 & const & \texttt{--} \\
+\texttt{mgBuildQueue} & 7058 & pass & \texttt{--} \\
+\texttt{EDS} & 3158 & const & \texttt{--} \\
+\texttt{mgChartAxisOptions} & 7185 & pass & \texttt{S} \\
+\texttt{FINDING\_SEVERITY\_RANK} & 9495 & const & \texttt{--} \\
+\texttt{mgChartTypeOptions} & 7180 & pass & \texttt{S} \\
+\texttt{FLAGS} & 3282 & const & \texttt{--} \\
+\texttt{mgChooseFiles} & 7423 & pass & \texttt{--} \\
+\texttt{FORENSIC\_CACHE} & 4764 & const & \texttt{--} \\
+\texttt{mgClose} & 7881 & pass & \texttt{--} \\
+\texttt{GRAPHS} & 5189 & const & \texttt{--} \\
+\texttt{mgCommand} & 7375 & pass & \texttt{S} \\
+\texttt{GRAPH\_METRICS} & 5541 & const & \texttt{--} \\
+\texttt{mgGo} & 7393 & pass & \texttt{S} \\
+\texttt{GRAPH\_STATE} & 5542 & const & \texttt{--} \\
+\texttt{mgGoChart} & 7399 & pass & \texttt{S} \\
+\texttt{I18N\_ORIGINAL\_TEXT} & 1920 & const & \texttt{--} \\
+\texttt{mgGraphCtx} & 7720 & pass & \texttt{S} \\
+\texttt{INHIB} & 8041 & const & \texttt{--} \\
+\texttt{mgInit} & 7885 & pass & \texttt{--} \\
+\texttt{JSONLD\_STANDARDS} & 8472 & const & \texttt{--} \\
+\texttt{mgIt} & 7443 & pass & \texttt{S} \\
+\texttt{LC\_CALC\_STATE\_LABELS} & 2568 & const & \texttt{--} \\
+\texttt{mgItem} & 7178 & pass & \texttt{--} \\
+\texttt{LOADED\_LIMIT} & 8783 & const & \texttt{--} \\
+\texttt{mgItemKey} & 7849 & pass & \texttt{S} \\
+\texttt{MD5} & 3184 & pass & \texttt{--} \\
+\texttt{mgItemSentence} & 7307 & pass & \texttt{S} \\
+\texttt{MG} & 7053 & const & \texttt{--} \\
+\texttt{mgLeaveTo} & 7428 & pass & \texttt{S} \\
+\texttt{MG\_COMMANDS} & 7343 & const & \texttt{--} \\
+\texttt{mgOpen} & 7876 & pass & \texttt{--} \\
+\texttt{MG\_GLYPH} & 7054 & const & \texttt{--} \\
+\texttt{mgPan} & 7341 & pass & \texttt{S} \\
+\texttt{MG\_PICT} & 7441 & const & \texttt{--} \\
+\texttt{mgPanelItems} & 7657 & pass & \texttt{D} \\
+\texttt{MG\_TYPE\_LABEL} & 7179 & const & \texttt{--} \\
+\texttt{mgReadFiles} & 7416 & state & \texttt{--} \\
+\texttt{MG\_VIEWS} & 7831 & const & \texttt{--} \\
+\texttt{mgRefresh} & 7858 & pass & \texttt{--} \\
+\texttt{MG\_WORD} & 7055 & const & \texttt{--} \\
+\texttt{mgRender} & 7204 & pass & \texttt{--} \\
+\texttt{NAME\_ROLE\_RULES} & 8101 & const & \texttt{--} \\
+\texttt{mgSafe} & 7445 & pass & \texttt{S} \\
+\texttt{NEGATIVE\_FAMILY} & 2061 & const & \texttt{--} \\
+\texttt{mgScope} & 7841 & pass & \texttt{S} \\
+\texttt{NON\_RESULT\_CLASSES} & 2777 & const & \texttt{--} \\
+\texttt{mgScopeFilter} & 7852 & pass & \texttt{D} \\
+\texttt{ORPHAN\_CURVE\_KEY} & 8915 & const & \texttt{--} \\
+\texttt{mgScopeMark} & 7845 & pass & \texttt{--} \\
+\texttt{P} & 3304 & priv & \texttt{--} \\
+\texttt{mgSetChartAxis} & 7412 & pass & \texttt{S} \\
+\texttt{PAIRING\_RULES} & 2606 & const & \texttt{--} \\
+\texttt{mgSetChartType} & 7408 & pass & \texttt{S} \\
+\texttt{PALETTE} & 2066 & const & \texttt{--} \\
+\texttt{mgSheet} & 7285 & pass & \texttt{S} \\
+\texttt{PASTED} & 8040 & const & \texttt{--} \\
+\texttt{mgSheetClose} & 7306 & pass & \texttt{--} \\
+\texttt{PDF\_PAGE} & 10939 & const & \texttt{--} \\
+\texttt{mgSheetPick} & 7300 & pass & \texttt{S} \\
+\texttt{PDF\_SPELL} & 10946 & const & \texttt{--} \\
+\texttt{mgStage} & 7319 & pass & \texttt{--} \\
+\texttt{PDF\_WINANSI} & 10942 & const & \texttt{--} \\
+\texttt{mgStageSet} & 7325 & pass & \texttt{S} \\
+\texttt{PLATE\_PASTELS} & 8887 & const & \texttt{--} \\
+\texttt{mgStatusPaint} & 7193 & pass & \texttt{--} \\
+\texttt{PSEUDO\_MAP} & 4103 & const & \texttt{--} \\
+\texttt{mgToggle} & 7884 & pass & \texttt{--} \\
+\texttt{QS\_AMP} & 3724 & const & \texttt{--} \\
+\texttt{mgTxt} & 7446 & pass & \texttt{S} \\
+\texttt{QS\_DEFAULT\_COLS} & 3551 & priv & \texttt{--} \\
+\texttt{mgViewExport} & 7804 & pass & \texttt{--} \\
+\texttt{QS\_DYE\_FILTER} & 3719 & const & \texttt{--} \\
+\texttt{mgViewGraphs} & 7725 & pass & \texttt{--} \\
+\texttt{QS\_KIND} & 3726 & const & \texttt{--} \\
+\texttt{mgViewIntegrity} & 7789 & pass & \texttt{--} \\
+\texttt{QS\_TASK\_ROLE} & 3722 & const & \texttt{--} \\
+\texttt{mgViewLoad} & 7449 & pass & \texttt{--} \\
+\texttt{RDML\_REANALYSIS\_TOOLS} & 10846 & const & \texttt{--} \\
+\texttt{mgViewPanel} & 7695 & pass & \texttt{--} \\
+\texttt{RDML\_SAMPLE\_ROLE} & 10666 & const & \texttt{--} \\
+\texttt{mgViewResults} & 7576 & pass & \texttt{--} \\
+\texttt{REP\_REGEX} & 2044 & const & \texttt{--} \\
+\texttt{mgViewReview} & 7756 & pass & \texttt{--} \\
+\texttt{RESULT\_PROPS} & 2578 & const & \texttt{--} \\
+\texttt{mgViewSop} & 7507 & pass & \texttt{--} \\
+\texttt{REVIEW\_COLOURS} & 8880 & const & \texttt{--} \\
+\texttt{mgZoom} & 7334 & pass & \texttt{S} \\
+\texttt{REVIEW\_RENDERERS} & 5630 & const & \texttt{--} \\
+\texttt{modesInit} & 11634 & pass & \texttt{--} \\
+\texttt{REVIEW\_STATE} & 8891 & const & \texttt{--} \\
+\texttt{niceTicks} & 5107 & pass & \texttt{S} \\
+\texttt{ROLES} & 2043 & const & \texttt{--} \\
+\texttt{num} & 2082 & pass & \texttt{S} \\
+\texttt{ROLE\_COLOURS} & 2062 & const & \texttt{--} \\
+\texttt{operatorOf} & 8146 & pass & \texttt{R} \\
+\texttt{ROLE\_LINE} & 2064 & const & \texttt{--} \\
+\texttt{option} & 2081 & pass & \texttt{S} \\
+\texttt{ROWS} & 3170 & priv & \texttt{--} \\
+\texttt{orphanBlankRole} & 9039 & pass & \texttt{R} \\
+\texttt{RUNS} & 8039 & const & \texttt{--} \\
+\texttt{orphanCurveCandidates} & 9098 & pass & \texttt{R} \\
+\texttt{SAMPLE\_HEADERS} & 10253 & const & \texttt{--} \\
+\texttt{orphanOtherChannels} & 9049 & pass & \texttt{R} \\
+\texttt{SAMPLE\_TYPE} & 2051 & const & \texttt{--} \\
+\texttt{outputDistribution} & 8483 & pass & \texttt{DRS} \\
+\texttt{SAMPLE\_TYPE\_LABEL} & 10407 & const & \texttt{--} \\
+\texttt{ownQuery} & 2685 & pass & \texttt{ES} \\
+\texttt{SEL\_STATE} & 11094 & const & \texttt{--} \\
+\texttt{ownQueryAll} & 2684 & pass & \texttt{ES} \\
+\texttt{SEL\_TABLE\_ROWS} & 11277 & const & \texttt{--} \\
+\texttt{ownedBy} & 2675 & pass & \texttt{E} \\
+\texttt{SERIES\_PALETTE} & 9861 & const & \texttt{--} \\
+\texttt{ownsResult} & 2781 & pass & \texttt{ES} \\
+\texttt{SOP} & 4335 & const & \texttt{--} \\
+\texttt{pad2} & 3564 & priv & \texttt{--} \\
+\texttt{SOP\_ACTION\_LABEL} & 4846 & const & \texttt{--} \\
+\texttt{parseCqTable} & 10255 & pass & \texttt{S} \\
+\texttt{SOP\_AUTO\_DEFAULT} & 4336 & const & \texttt{--} \\
+\texttt{parseEds} & 3305 & pass & \texttt{RS} \\
+\texttt{SOP\_CACHE} & 4337 & const & \texttt{--} \\
+\texttt{parseLog} & 3521 & priv & \texttt{--} \\
+\texttt{SOP\_OUTCOMES} & 4206 & const & \texttt{--} \\
+\texttt{pastedDatasetMetadata} & 8572 & pass & \texttt{--} \\
+\texttt{SOP\_OUTCOME\_DEFAULTS} & 4207 & const & \texttt{--} \\
+\texttt{pdfDoc} & 11000 & pass & \texttt{--} \\
+\texttt{SOP\_OUTCOME\_OPTIONS} & 4835 & const & \texttt{--} \\
+\texttt{pdfFit} & 10984 & pass & \texttt{DRS} \\
+\texttt{SOP\_PRESETS} & 4236 & const & \texttt{--} \\
+\texttt{pdfStr} & 10950 & pass & \texttt{S} \\
+\texttt{SOP\_SCHEMA} & 4205 & const & \texttt{--} \\
+\texttt{pdfWidth} & 10966 & pass & \texttt{DS} \\
+\texttt{SOP\_VIEW} & 4998 & const & \texttt{--} \\
+\texttt{pdfWrap} & 10990 & pass & \texttt{DRS} \\
+\texttt{STAGED} & 10124 & const & \texttt{--} \\
+\texttt{percentile} & 2095 & pass & \texttt{S} \\
+\texttt{STORED\_SOP} & 4333 & const & \texttt{--} \\
+\texttt{physicalCurveRows} & 8932 & pass & \texttt{D} \\
+\texttt{STORED\_SOP\_IS\_TEMPLATE} & 4334 & const & \texttt{--} \\
+\texttt{pill} & 3165 & priv & \texttt{--} \\
+\texttt{SVG\_CLIP\_N} & 5116 & const & \texttt{--} \\
+\texttt{plateColour} & 9617 & pass & \texttt{RS} \\
+\texttt{TYPE\_TO\_ROLE} & 2056 & const & \texttt{--} \\
+\texttt{plateMapRows} & 8955 & pass & \texttt{DR} \\
+\texttt{UI\_LANG} & 1919 & const & \texttt{--} \\
+\texttt{posToLimsWell} & 2320 & pass & \texttt{R} \\
+\texttt{UNKNOWN\_ROLE} & 2042 & const & \texttt{--} \\
+\texttt{posToWell} & 2319 & pass & \texttt{R} \\
+\texttt{WELL\_HEADERS} & 10254 & const & \texttt{--} \\
+\texttt{propText} & 2315 & pass & \texttt{ER} \\
+\texttt{ZH\_TERMS} & 994 & const & \texttt{--} \\
+\texttt{propValues} & 2317 & pass & \texttt{ER} \\
+\texttt{acceptPasted} & 10313 & pass & \texttt{S} \\
+\texttt{pseudoOn} & 4114 & pass & \texttt{--} \\
+\texttt{acquiredCurveCount} & 8157 & pass & \texttt{R} \\
+\texttt{pseudoRun} & 4116 & pass & \texttt{R} \\
+\texttt{acquisitionStats} & 2422 & pass & \texttt{R} \\
+\texttt{pseudonymMap} & 4104 & pass & \texttt{--} \\
+\texttt{allWellRows} & 8189 & pass & \texttt{--} \\
+\texttt{pv} & 2316 & pass & \texttt{ER} \\
+\texttt{analysisChoices} & 8916 & pass & \texttt{R} \\
+\texttt{pyScript} & 8428 & pass & \texttt{--} \\
+\texttt{analysisGroups} & 8269 & pass & \texttt{D} \\
+\texttt{qsCalDate} & 3565 & priv & \texttt{--} \\
+\texttt{analysisKind} & 2559 & pass & \texttt{DR} \\
+\texttt{qsCols} & 3558 & priv & \texttt{--} \\
+\texttt{analysisResults} & 2790 & pass & \texttt{S} \\
+\texttt{qsExport} & 3691 & pass & \texttt{RS} \\
+\texttt{appCancel} & 7929 & pass & \texttt{--} \\
+\texttt{qsHeader} & 3592 & priv & \texttt{--} \\
+\texttt{appDiagnostics} & 7025 & pass & \texttt{--} \\
+\texttt{qsInstrument} & 3574 & pass & \texttt{R} \\
+\texttt{appError} & 7006 & pass & \texttt{RS} \\
+\texttt{qsRGB} & 3571 & priv & \texttt{--} \\
+\texttt{appFmtMB} & 7945 & pass & \texttt{S} \\
+\texttt{qsStamp} & 3566 & priv & \texttt{--} \\
+\texttt{appFmtMs} & 7944 & pass & \texttt{S} \\
+\texttt{qsTables} & 3612 & pass & \texttt{RS} \\
+\texttt{appHeapMB} & 7921 & pass & \texttt{--} \\
+\texttt{qsWorkbook} & 4179 & pass & \texttt{RS} \\
+\texttt{appNotice} & 7923 & pass & \texttt{DS} \\
+\texttt{quantChannels} & 9090 & pass & \texttt{R} \\
+\texttt{appReadSuperseded} & 7934 & state & \texttt{S} \\
+\texttt{rScript} & 8389 & pass & \texttt{--} \\
+\texttt{appStagedBytes} & 7922 & pass & \texttt{--} \\
+\texttt{range} & 2101 & pass & \texttt{S} \\
+\texttt{appStatusInit} & 8027 & pass & \texttt{--} \\
+\texttt{rdmlAttrId} & 10663 & pass & \texttt{ER} \\
+\texttt{appStatusPaint} & 7973 & pass & \texttt{--} \\
+\texttt{rdmlEntries} & 10641 & pass & \texttt{S} \\
+\texttt{appStatusReport} & 8021 & pass & \texttt{--} \\
+\texttt{rdmlId} & 8268 & pass & \texttt{S} \\
+\texttt{appStatusSnapshot} & 7946 & pass & \texttt{--} \\
+\texttt{rdmlIsContainer} & 10645 & pass & \texttt{S} \\
+\texttt{appTaskEnd} & 7909 & pass & \texttt{S} \\
+\texttt{rdmlKeyOf} & 10895 & pass & \texttt{S} \\
+\texttt{appTaskStart} & 7903 & pass & \texttt{DS} \\
+\texttt{rdmlKid} & 10657 & pass & \texttt{ER} \\
+\texttt{appTaskStep} & 7908 & pass & \texttt{S} \\
+\texttt{rdmlKids} & 10652 & pass & \texttt{ER} \\
+\texttt{appTaskWrap} & 7914 & pass & \texttt{S} \\
+\texttt{rdmlNum} & 10659 & pass & \texttt{ER} \\
+\texttt{applyRawFilePriority} & 10898 & pass & \texttt{R} \\
+\texttt{rdmlParse} & 10667 & pass & \texttt{R} \\
+\texttt{argb} & 3273 & priv & \texttt{--} \\
+\texttt{rdmlSampleType} & 8262 & pass & \texttt{R} \\
+\texttt{assignRoles} & 8114 & pass & \texttt{R} \\
+\texttt{rdmlStem} & 10892 & pass & \texttt{R} \\
+\texttt{astBuild} & 11595 & pass & \texttt{--} \\
+\texttt{rdmlText} & 10658 & pass & \texttt{ER} \\
+\texttt{astClose} & 11607 & pass & \texttt{--} \\
+\texttt{readLists} & 2580 & pass & \texttt{E} \\
+\texttt{astCount} & 11586 & pass & \texttt{--} \\
+\texttt{readStaged} & 10195 & state & \texttt{--} \\
+\texttt{astEl} & 11552 & pass & \texttt{S} \\
+\texttt{readStagedCore} & 10206 & state & \texttt{S} \\
+\texttt{astInit} & 11609 & pass & \texttt{--} \\
+\texttt{readZip} & 2251 & pass & \texttt{S} \\
+\texttt{astOpen} & 11606 & pass & \texttt{--} \\
+\texttt{recalcCt} & 3515 & pass & \texttt{RS} \\
+\texttt{astOutput} & 11591 & pass & \texttt{--} \\
+\texttt{refreshAll} & 10327 & pass & \texttt{--} \\
+\texttt{astRender} & 11553 & pass & \texttt{--} \\
+\texttt{rememberedLanguage} & 2030 & pass & \texttt{--} \\
+\texttt{astToggle} & 11608 & pass & \texttt{--} \\
+\texttt{renderCcDetail} & 6725 & pass & \texttt{--} \\
+\texttt{avg} & 2091 & pass & \texttt{S} \\
+\texttt{renderConsoleIdentity} & 7960 & pass & \texttt{S} \\
+\texttt{base64ToBytes} & 2318 & pass & \texttt{S} \\
+\texttt{renderControlCategoryEd…} & 9339 & pass & \texttt{--} \\
+\texttt{baseName} & 8084 & pass & \texttt{--} \\
+\texttt{renderDerived} & 10574 & pass & \texttt{--} \\
+\texttt{betacf} & 2112 & pass & \texttt{S} \\
+\texttt{renderDiagnostics} & 8815 & pass & \texttt{--} \\
+\texttt{betai} & 2132 & pass & \texttt{S} \\
+\texttt{renderExports} & 8832 & pass & \texttt{--} \\
+\texttt{bindCurveTip} & 9938 & pass & \texttt{S} \\
+\texttt{renderGraphs} & 5549 & pass & \texttt{--} \\
+\texttt{boot} & 10342 & excl & \texttt{--} \\
+\texttt{renderIntegrity} & 9563 & pass & \texttt{--} \\
+\texttt{bracketList} & 3274 & priv & \texttt{--} \\
+\texttt{renderLoaded} & 8784 & pass & \texttt{--} \\
+\texttt{bundleReadme} & 8736 & pass & \texttt{--} \\
+\texttt{renderMachineMetadata} & 8598 & pass & \texttt{--} \\
+\texttt{bundleZip} & 8692 & pass & \texttt{--} \\
+\texttt{renderPanel} & 6684 & pass & \texttt{--} \\
+\texttt{byKey} & 2085 & pass & \texttt{S} \\
+\texttt{renderQualityReview} & 10078 & pass & \texttt{--} \\
+\texttt{bytesFrom} & 2079 & pass & \texttt{S} \\
+\texttt{renderQualityReviewLazy} & 10082 & pass & \texttt{--} \\
+\texttt{calcStateLabel} & 2569 & pass & \texttt{S} \\
+\texttt{renderResults} & 5103 & pass & \texttt{--} \\
+\texttt{catColour} & 5165 & pass & \texttt{DS} \\
+\texttt{renderReviewComparison} & 9683 & pass & \texttt{--} \\
+\texttt{ccAlarmDir} & 6437 & pass & \texttt{DS} \\
+\texttt{renderReviewControls} & 9741 & pass & \texttt{--} \\
+\texttt{ccAllRows} & 6476 & pass & \texttt{--} \\
+\texttt{renderReviewCurves} & 9879 & pass & \texttt{--} \\
+\texttt{ccBaselineNeed} & 4452 & pass & \texttt{D} \\
+\texttt{renderReviewInstrument} & 10016 & pass & \texttt{--} \\
+\texttt{ccC} & 6348 & pass & \texttt{DS} \\
+\texttt{renderReviewOverview} & 9587 & pass & \texttt{--} \\
+\texttt{ccCUSUM} & 6305 & pass & \texttt{DS} \\
+\texttt{renderReviewPlate} & 9624 & pass & \texttt{--} \\
+\texttt{ccCalibSummary} & 5883 & pass & \texttt{RS} \\
+\texttt{renderReviewRising} & 9992 & pass & \texttt{--} \\
+\texttt{ccCanonTarget} & 4409 & pass & \texttt{S} \\
+\texttt{renderReviewRuns} & 9801 & pass & \texttt{--} \\
+\texttt{ccCfg} & 6265 & pass & \texttt{S} \\
+\texttt{renderReviewSheetLazy} & 5655 & pass & \texttt{R} \\
+\texttt{ccChartRows} & 6801 & pass & \texttt{DS} \\
+\texttt{renderReviewStatistics} & 9704 & pass & \texttt{--} \\
+\texttt{ccChartSvg} & 6616 & pass & \texttt{DS} \\
+\texttt{renderSop} & 5102 & pass & \texttt{--} \\
+\texttt{ccCompute} & 6507 & pass & \texttt{DS} \\
+\texttt{renderSopEditor} & 4907 & pass & \texttt{--} \\
+\texttt{ccDecodeArz} & 5689 & pass & \texttt{S} \\
+\texttt{renderSopHeader} & 4878 & pass & \texttt{--} \\
+\texttt{ccDynamic} & 5979 & pass & \texttt{DR} \\
+\texttt{renderSopResults} & 4999 & pass & \texttt{--} \\
+\texttt{ccEWMA} & 6299 & pass & \texttt{DS} \\
+\texttt{renderTab} & 5633 & pass & \texttt{R} \\
+\texttt{ccEvents} & 6906 & pass & \texttt{D} \\
+\texttt{replicateReviewRows} & 9017 & pass & \texttt{S} \\
+\texttt{ccExtractOnLoad} & 6030 & pass & \texttt{RS} \\
+\texttt{resultAnswers} & 9076 & pass & \texttt{R} \\
+\texttt{ccFunnel} & 6364 & pass & \texttt{D} \\
+\texttt{resultCq} & 9070 & pass & \texttt{R} \\
+\texttt{ccHistoryCSV} & 6873 & pass & \texttt{--} \\
+\texttt{resultKindOf} & 2589 & pass & \texttt{DS} \\
+\texttt{ccHistoryJSON} & 6868 & pass & \texttt{D} \\
+\texttt{reviewBundleEntries} & 9469 & pass & \texttt{--} \\
+\texttt{ccI} & 6274 & pass & \texttt{DS} \\
+\texttt{reviewControlSeries} & 9382 & pass & \texttt{S} \\
+\texttt{ccImport} & 6894 & excl & \texttt{--} \\
+\texttt{reviewDisplayCounts} & 9536 & pass & \texttt{D} \\
+\texttt{ccInstrumentKey} & 6458 & pass & \texttt{R} \\
+\texttt{reviewDisplayFindings} & 9517 & pass & \texttt{D} \\
+\texttt{ccInstruments} & 6480 & pass & \texttt{--} \\
+\texttt{reviewEventsWithoutInte…} & 9545 & pass & \texttt{--} \\
+\texttt{ccIxoAcquisitions} & 5714 & pass & \texttt{S} \\
+\texttt{reviewForensicEvents} & 4188 & pass & \texttt{--} \\
+\texttt{ccIxoTemperatureLog} & 5703 & pass & \texttt{S} \\
+\texttt{reviewForensicEventsCore} & 4775 & pass & \texttt{--} \\
+\texttt{ccLzss} & 5674 & pass & \texttt{DS} \\
+\texttt{reviewForensicEventsCor…} & 9200 & pass & \texttt{--} \\
+\texttt{ccMedian} & 5910 & pass & \texttt{S} \\
+\texttt{reviewOrphanWells} & 9191 & pass & \texttt{--} \\
+\texttt{ccMigrateControlKeys} & 6881 & pass & \texttt{S} \\
+\texttt{reviewRunRows} & 9259 & pass & \texttt{D} \\
+\texttt{ccNoDataReason} & 4453 & pass & \texttt{S} \\
+\texttt{reviewStatisticsRows} & 8997 & pass & \texttt{--} \\
+\texttt{ccOperator} & 6459 & pass & \texttt{R} \\
+\texttt{risingCurveDisplayRows} & 9959 & pass & \texttt{D} \\
+\texttt{ccP} & 6338 & pass & \texttt{DS} \\
+\texttt{risingCurveRows} & 9956 & pass & \texttt{--} \\
+\texttt{ccParseJavaDate} & 5902 & pass & \texttt{S} \\
+\texttt{roleFromName} & 8109 & pass & \texttt{R} \\
+\texttt{ccPeakRates} & 5813 & pass & \texttt{S} \\
+\texttt{rqResult} & 2607 & pass & \texttt{ES} \\
+\texttt{ccPhase} & 6272 & pass & \texttt{S} \\
+\texttt{rqRows} & 4129 & pass & \texttt{--} \\
+\texttt{ccPlatform} & 6457 & pass & \texttt{R} \\
+\texttt{runAt} & 8903 & pass & \texttt{S} \\
+\texttt{ccPng} & 6795 & pass & \texttt{RS} \\
+\texttt{runDurationMinutes} & 8150 & pass & \texttt{R} \\
+\texttt{ccProtocolKey} & 6053 & pass & \texttt{R} \\
+\texttt{runIsInstrumentAnalysed} & 10865 & pass & \texttt{R} \\
+\texttt{ccQ} & 5909 & pass & \texttt{S} \\
+\texttt{runIsSuperseded} & 10916 & pass & \texttt{R} \\
+\texttt{ccQsLog} & 5841 & pass & \texttt{S} \\
+\texttt{runName} & 8894 & const & \texttt{--} \\
+\texttt{ccQuantSaturation} & 5895 & pass & \texttt{S} \\
+\texttt{runProcessingState} & 10847 & pass & \texttt{R} \\
+\texttt{ccRemember} & 6903 & pass & \texttt{--} \\
+\texttt{runTimeline} & 4511 & pass & \texttt{R} \\
+\texttt{ccRestore} & 6904 & pass & \texttt{--} \\
+\texttt{runTimes} & 4532 & pass & \texttt{R} \\
+\texttt{ccRowsFor} & 6481 & pass & \texttt{S} \\
+\texttt{safeName} & 2078 & pass & \texttt{S} \\
+\texttt{ccRowsFromRuns} & 6461 & pass & \texttt{--} \\
+\texttt{safeRe} & 2083 & pass & \texttt{S} \\
+\texttt{ccSChartSvg} & 6676 & pass & \texttt{D} \\
+\texttt{sampleComparisonRows} & 8983 & pass & \texttt{S} \\
+\texttt{ccSetCfg} & 6267 & state & \texttt{S} \\
+\texttt{scrollToEl} & 2080 & pass & \texttt{ES} \\
+\texttt{ccSetpoints} & 5835 & pass & \texttt{R} \\
+\texttt{sd} & 2092 & pass & \texttt{S} \\
+\texttt{ccShift} & 6561 & pass & \texttt{D} \\
+\texttt{selAdd} & 11172 & pass & \texttt{S} \\
+\texttt{ccSignal} & 6456 & pass & \texttt{S} \\
+\texttt{selApplyCsv} & 11194 & pass & \texttt{D} \\
+\texttt{ccSpark} & 6600 & pass & \texttt{DS} \\
+\texttt{selBuildReport} & 11327 & pass & \texttt{--} \\
+\texttt{ccSpec} & 6501 & pass & \texttt{DS} \\
+\texttt{selCatalogue} & 11151 & pass & \texttt{--} \\
+\texttt{ccStatic} & 5911 & pass & \texttt{R} \\
+\texttt{selClear} & 11174 & pass & \texttt{--} \\
+\texttt{ccStatus} & 6573 & pass & \texttt{D} \\
+\texttt{selCsvTemplate} & 11188 & pass & \texttt{--} \\
+\texttt{ccSvgToPng} & 6809 & pass & \texttt{S} \\
+\texttt{selDataItems} & 11112 & pass & \texttt{--} \\
+\texttt{ccThermalSteps} & 5724 & pass & \texttt{S} \\
+\texttt{selDownloadReport} & 11384 & pass & \texttt{R} \\
+\texttt{ccThermalSummary} & 5826 & pass & \texttt{S} \\
+\texttt{selDownloadZip} & 11266 & pass & \texttt{R} \\
+\texttt{ccThin} & 5805 & pass & \texttt{S} \\
+\texttt{selGraphContext} & 11099 & pass & \texttt{S} \\
+\texttt{ccTransitionPairs} & 5764 & pass & \texttt{R} \\
+\texttt{selImageItems} & 11104 & pass & \texttt{--} \\
+\texttt{ccTransitions} & 5776 & pass & \texttt{S} \\
+\texttt{selItem} & 11152 & pass & \texttt{S} \\
+\texttt{ccTrend} & 6322 & pass & \texttt{DS} \\
+\texttt{selMatch} & 11153 & pass & \texttt{S} \\
+\texttt{ccU} & 6344 & pass & \texttt{DS} \\
+\texttt{selMatchAll} & 11167 & pass & \texttt{S} \\
+\texttt{ccValue} & 6491 & pass & \texttt{DS} \\
+\texttt{selReadme} & 11237 & pass & \texttt{D} \\
+\texttt{ccVariants} & 6488 & pass & \texttt{DS} \\
+\texttt{selRemove} & 11173 & pass & \texttt{S} \\
+\texttt{ccVersionMarks} & 6611 & pass & \texttt{D} \\
+\texttt{selReportTitle} & 11278 & pass & \texttt{--} \\
+\texttt{ccWestgard} & 6288 & pass & \texttt{D} \\
+\texttt{selRunIndex} & 11095 & pass & \texttt{--} \\
+\texttt{ccXAxis} & 6494 & pass & \texttt{DS} \\
+\texttt{selSelected} & 11162 & pass & \texttt{--} \\
+\texttt{ccXbarS} & 6352 & pass & \texttt{DS} \\
+\texttt{selTableBlock} & 11281 & pass & \texttt{DRS} \\
+\texttt{ccZipAll} & 6818 & pass & \texttt{--} \\
+\texttt{selWithExportNames} & 11261 & pass & \texttt{S} \\
+\texttt{ce} & 2068 & pass & \texttt{S} \\
+\texttt{selZipEntries} & 11219 & pass & \texttt{--} \\
+\texttt{chiSqP} & 2159 & pass & \texttt{DS} \\
+\texttt{selectedWells} & 8927 & pass & \texttt{DR} \\
+\texttt{clone} & 2075 & pass & \texttt{S} \\
+\texttt{setLanguage} & 2031 & pass & \texttt{ES} \\
+\texttt{cmdClose} & 11520 & pass & \texttt{--} \\
+\texttt{setPhase} & 7015 & excl & \texttt{--} \\
+\texttt{cmdEl} & 11417 & pass & \texttt{S} \\
+\texttt{setSelectItems} & 8907 & pass & \texttt{S} \\
+\texttt{cmdExec} & 11433 & pass & \texttt{R} \\
+\texttt{sha256Hex} & 2211 & pass & \texttt{S} \\
+\texttt{cmdInit} & 11522 & pass & \texttt{--} \\
+\texttt{sheetOf} & 5052 & pass & \texttt{DR} \\
+\texttt{cmdOpen} & 11510 & pass & \texttt{--} \\
+\texttt{shortDate} & 8895 & pass & \texttt{S} \\
+\texttt{cmdPrint} & 11418 & pass & \texttt{DS} \\
+\texttt{showCuteToast} & 2022 & pass & \texttt{D} \\
+\texttt{cmdRunLine} & 11488 & pass & \texttt{R} \\
+\texttt{showReviewSheet} & 10083 & pass & \texttt{R} \\
+\texttt{cmdRunScript} & 11496 & pass & \texttt{S} \\
+\texttt{showTab} & 10335 & pass & \texttt{R} \\
+\texttt{cmdScriptToggle} & 11505 & pass & \texttt{S} \\
+\texttt{sopAnalystName} & 11185 & pass & \texttt{--} \\
+\texttt{cmdStatusLine} & 11430 & pass & \texttt{--} \\
+\texttt{sopBase} & 4219 & pass & \texttt{--} \\
+\texttt{cmdTable} & 11425 & pass & \texttt{D} \\
+\texttt{sopCanonical} & 4363 & pass & \texttt{S} \\
+\texttt{cmdToggle} & 11521 & pass & \texttt{--} \\
+\texttt{sopChanged} & 4369 & pass & \texttt{--} \\
+\texttt{controlBatchGraph} & 4469 & pass & \texttt{DS} \\
+\texttt{sopColour} & 5166 & pass & \texttt{S} \\
+\texttt{controlBatchRecords} & 4459 & pass & \texttt{--} \\
+\texttt{sopControlIdentity} & 4410 & pass & \texttt{R} \\
+\texttt{controlCategory} & 9301 & pass & \texttt{R} \\
+\texttt{sopControlSpec} & 4487 & pass & \texttt{R} \\
+\texttt{controlProfileRoot} & 9290 & pass & \texttt{RS} \\
+\texttt{sopCq} & 4380 & pass & \texttt{R} \\
+\texttt{controlRootKey} & 9287 & pass & \texttt{R} \\
+\texttt{sopCriteriaRows} & 4731 & pass & \texttt{--} \\
+\texttt{controlRootName} & 9283 & pass & \texttt{R} \\
+\texttt{sopCurrentRows} & 5047 & pass & \texttt{--} \\
+\texttt{cpMethodOf} & 2570 & pass & \texttt{DR} \\
+\texttt{sopDownloadBundle} & 5075 & pass & \texttt{--} \\
+\texttt{crc32} & 2199 & pass & \texttt{S} \\
+\texttt{sopDownloadWorkbook} & 5067 & pass & \texttt{--} \\
+\texttt{csvOf} & 5051 & pass & \texttt{D} \\
+\texttt{sopEvaluateAll} & 4695 & pass & \texttt{--} \\
+\texttt{csvq} & 8075 & pass & \texttt{S} \\
+\texttt{sopEvaluateRun} & 4558 & pass & \texttt{RS} \\
+\texttt{currentReviewSheet} & 5629 & pass & \texttt{--} \\
+\texttt{sopEvents} & 4747 & pass & \texttt{--} \\
+\texttt{currentTab} & 5628 & pass & \texttt{--} \\
+\texttt{sopField} & 4836 & pass & \texttt{S} \\
+\texttt{curveAnalysisGroups} & 8278 & pass & \texttt{R} \\
+\texttt{sopFmt} & 4493 & pass & \texttt{S} \\
+\texttt{curveColour} & 9865 & pass & \texttt{RS} \\
+\texttt{sopFmtTime} & 4499 & pass & \texttt{S} \\
+\texttt{curveKey} & 9864 & pass & \texttt{RS} \\
+\texttt{sopHash} & 4367 & pass & \texttt{S} \\
+\texttt{curveRowsSelected} & 9841 & pass & \texttt{--} \\
+\texttt{sopInterpretationRows} & 4705 & pass & \texttt{S} \\
+\texttt{curveSignal} & 9840 & pass & \texttt{R} \\
+\texttt{sopJSON} & 4368 & pass & \texttt{--} \\
+\texttt{cv} & 2102 & pass & \texttt{S} \\
+\texttt{sopLab} & 11180 & pass & \texttt{--} \\
+\texttt{datasetMetadata} & 8526 & pass & \texttt{RS} \\
+\texttt{sopLabName} & 11184 & pass & \texttt{--} \\
+\texttt{decodeAcq} & 2334 & pass & \texttt{RS} \\
+\texttt{sopLabScreening} & 4433 & pass & \texttt{--} \\
+\texttt{decodeAnalyses} & 2687 & pass & \texttt{E} \\
+\texttt{sopLabel} & 5167 & pass & \texttt{S} \\
+\texttt{decodeEds} & 3735 & pass & \texttt{S} \\
+\texttt{sopLoadStored} & 4338 & pass & \texttt{--} \\
+\texttt{decodeIxo} & 2811 & pass & \texttt{S} \\
+\texttt{sopMatcher} & 4372 & pass & \texttt{S} \\
+\texttt{decodePlateModel} & 2432 & pass & \texttt{E} \\
+\texttt{sopMaybeSelectScDefault} & 4340 & pass & \texttt{--} \\
+\texttt{decodeProtocol} & 2507 & pass & \texttt{E} \\
+\texttt{sopMeta} & 4704 & pass & \texttt{--} \\
+\texttt{decodeRelQuant} & 2624 & pass & \texttt{E} \\
+\texttt{sopNormalise} & 4348 & pass & \texttt{S} \\
+\texttt{decodeSubsets} & 2495 & pass & \texttt{E} \\
+\texttt{sopNum} & 4379 & pass & \texttt{S} \\
+\texttt{derivedSettings} & 10413 & pass & \texttt{--} \\
+\texttt{sopOmitted} & 4381 & pass & \texttt{R} \\
+\texttt{derivedSettingsFor} & 10570 & pass & \texttt{R} \\
+\texttt{sopOutcomeFor} & 4830 & pass & \texttt{R} \\
+\texttt{detectedControlRoots} & 9323 & pass & \texttt{--} \\
+\texttt{sopProcedureHTML} & 4887 & pass & \texttt{--} \\
+\texttt{displayRunTick} & 8899 & pass & \texttt{RS} \\
+\texttt{sopProcessingApplicabil…} & 10872 & pass & \texttt{R} \\
+\texttt{distributionsFor} & 8490 & pass & \texttt{RS} \\
+\texttt{sopProfileEdited} & 4874 & pass & \texttt{R} \\
+\texttt{dosStamp} & 2277 & pass & \texttt{S} \\
+\texttt{sopReadme} & 5053 & pass & \texttt{--} \\
+\texttt{download} & 3172 & pass & \texttt{--} \\
+\texttt{sopReplicateMinimum} & 4400 & pass & \texttt{S} \\
+\texttt{downloadCanvas} & 9460 & pass & \texttt{S} \\
+\texttt{sopResultForWell} & 4700 & pass & \texttt{RS} \\
+\texttt{downloadCurveCSV} & 10061 & pass & \texttt{--} \\
+\texttt{sopRunApplicability} & 4389 & pass & \texttt{R} \\
+\texttt{downloadCurveCSVCore} & 10062 & pass & \texttt{--} \\
+\texttt{sopRunRows} & 4735 & pass & \texttt{--} \\
+\texttt{downloadForensicCSV} & 10070 & pass & \texttt{--} \\
+\texttt{sopSampleRows} & 4717 & pass & \texttt{S} \\
+\texttt{downloadReviewBundle} & 9491 & pass & \texttt{--} \\
+\texttt{sopSetPath} & 4849 & state & \texttt{S} \\
+\texttt{downloadWebsiteArchive} & 8071 & pass & \texttt{--} \\
+\texttt{sopStdCurves} & 4542 & pass & \texttt{R} \\
+\texttt{drawAmplificationCurves} & 9909 & pass & \texttt{RS} \\
+\texttt{sopStore} & 4339 & pass & \texttt{--} \\
+\texttt{drawLeveyJennings} & 9767 & pass & \texttt{S} \\
+\texttt{sopTableEditor} & 4855 & pass & \texttt{S} \\
+\texttt{drawPlateMapImage} & 9661 & pass & \texttt{--} \\
+\texttt{sopTargetSpec} & 4382 & pass & \texttt{R} \\
+\texttt{drawRisingCurveBundle} & 9971 & pass & \texttt{DS} \\
+\texttt{sopTime} & 4494 & pass & \texttt{S} \\
+\texttt{drawTemperatureTrace} & 4035 & pass & \texttt{RS} \\
+\texttt{sourceCRCOf} & 8148 & pass & \texttt{R} \\
+\texttt{dt} & 3166 & pass & \texttt{S} \\
+\texttt{sourceSHA256Of} & 8149 & pass & \texttt{R} \\
+\texttt{dyeChemistryOf} & 8252 & pass & \texttt{R} \\
+\texttt{sourceSha256} & 2204 & pass & \texttt{S} \\
+\texttt{ec} & 3986 & pass & \texttt{R} \\
+\texttt{sourceUidOf} & 8147 & pass & \texttt{R} \\
+\texttt{edsDerived} & 4050 & pass & \texttt{RS} \\
+\texttt{stamp} & 8083 & pass & \texttt{--} \\
+\texttt{edsEvents} & 3902 & pass & \texttt{RS} \\
+\texttt{stripLotDate} & 9278 & pass & \texttt{R} \\
+\texttt{edsRecordTables} & 3989 & pass & \texttt{R} \\
+\texttt{studyRows} & 3539 & pass & \texttt{R} \\
+\texttt{edsSignalRows} & 4137 & pass & \texttt{--} \\
+\texttt{svgEsc} & 5106 & pass & \texttt{S} \\
+\texttt{effSliwinProxy} & 6969 & pass & \texttt{R} \\
+\texttt{svgMessage} & 5162 & pass & \texttt{S} \\
+\texttt{effWol} & 6950 & pass & \texttt{R} \\
+\texttt{svgPlot} & 5117 & pass & \texttt{S} \\
+\texttt{efficiencyFromSlope} & 6989 & pass & \texttt{D} \\
+\texttt{svgToJpeg} & 11072 & pass & \texttt{DS} \\
+\texttt{emptyReview} & 9454 & pass & \texttt{D} \\
+\texttt{tDistTwoTail} & 2138 & pass & \texttt{S} \\
+\texttt{esc} & 2076 & pass & \texttt{S} \\
+\texttt{tTest} & 2162 & pass & \texttt{S} \\
+\texttt{exportCatalogue} & 8602 & pass & \texttt{--} \\
+\texttt{table} & 8044 & pass & \texttt{S} \\
+\texttt{exportCatalogueCore} & 8639 & pass & \texttt{--} \\
+\texttt{tag} & 8043 & pass & \texttt{DS} \\
+\texttt{exportName} & 4115 & pass & \texttt{S} \\
+\texttt{textEncoder} & 2069 & const & \texttt{--} \\
+\texttt{extent} & 5163 & pass & \texttt{S} \\
+\texttt{tmRows} & 8190 & pass & \texttt{--} \\
+\texttt{extraForensicEvents} & 4774 & pass & \texttt{--} \\
+\texttt{toCSV} & 8079 & pass & \texttt{S} \\
+\texttt{extraForensicEventsUnca…} & 4783 & pass & \texttt{--} \\
+\texttt{txt} & 3272 & priv & \texttt{--} \\
+\texttt{findingEvidenceKey} & 9508 & pass & \texttt{D} \\
+\texttt{ui} & 2001 & pass & \texttt{S} \\
+\texttt{findingKey} & 9512 & pass & \texttt{D} \\
+\texttt{uniq} & 2084 & pass & \texttt{S} \\
+\texttt{findingTextKey} & 9496 & pass & \texttt{S} \\
+\texttt{uniqueCurveCount} & 8154 & pass & \texttt{R} \\
+\texttt{fitLin} & 2186 & pass & \texttt{S} \\
+\texttt{validateHistoryBoundary} & 7036 & pass & \texttt{S} \\
+\texttt{flagName} & 3301 & pass & \texttt{D} \\
+\texttt{validateRunBoundary} & 7026 & pass & \texttt{RS} \\
+\texttt{fmt} & 3164 & priv & \texttt{--} \\
+\texttt{variablesFor} & 8518 & pass & \texttt{R} \\
+\texttt{fmtTick} & 5115 & pass & \texttt{S} \\
+\texttt{websiteSource} & 8060 & pass & \texttt{S} \\
+\texttt{forensicCounts} & 4776 & pass & \texttt{--} \\
+\texttt{wellPos} & 3171 & priv & \texttt{--} \\
+\texttt{forensicSnapshot} & 4768 & pass & \texttt{--} \\
+\texttt{wellRows} & 8158 & pass & \texttt{R} \\
+\texttt{gByDate} & 5182 & pass & \texttt{S} \\
+\texttt{wellSignal} & 4503 & pass & \texttt{R} \\
+\texttt{gCutLines} & 5172 & pass & \texttt{S} \\
+\texttt{wellToPos} & 2321 & pass & \texttt{RS} \\
+\texttt{gRunDate} & 5181 & pass & \texttt{R} \\
+\texttt{westgardReview} & 9364 & pass & \texttt{S} \\
+\texttt{gRunTicks} & 5183 & pass & \texttt{R} \\
+\texttt{wireGraphs} & 5611 & pass & \texttt{--} \\
+\texttt{gRunWells} & 5170 & pass & \texttt{RS} \\
+\texttt{wirePanel} & 6919 & pass & \texttt{--} \\
+\texttt{gTargets} & 5171 & pass & \texttt{R} \\
+\texttt{wireQualityReview} & 10089 & pass & \texttt{--} \\
+\texttt{gammap} & 2143 & pass & \texttt{S} \\
+\texttt{wireSop} & 5085 & pass & \texttt{--} \\
+\texttt{graphAllZip} & 5590 & pass & \texttt{--} \\
+\texttt{withExportNames} & 4124 & pass & \texttt{S} \\
+\texttt{graphContext} & 5543 & pass & \texttt{--} \\
+\texttt{xesc} & 2077 & pass & \texttt{S} \\
+\texttt{graphFileBase} & 5579 & pass & \texttt{--} \\
+\texttt{xlsxCell} & 4157 & pass & \texttt{RS} \\
+\texttt{graphPng} & 5582 & pass & \texttt{--} \\
+\texttt{xlsxCol} & 4156 & pass & \texttt{S} \\
+\texttt{graphSvgText} & 5580 & pass & \texttt{--} \\
+\texttt{xml} & 3269 & priv & \texttt{--} \\
+\texttt{hashColour} & 9465 & pass & \texttt{S} \\
+\texttt{zhPhrase} & 1922 & pass & \texttt{S} \\
+\bottomrule\end{longtable}}
+
+
+\section{The evidence files}
+The records are machine-readable and are delivered beside the page, so any verdict
+can be re-derived without re-running anything.
+
+{\small
+\begin{longtable}{@{}lrll@{}}
+\toprule \textbf{File} & \textbf{Bytes} & \textbf{What it holds} & \textbf{SHA-256 (first 24)} \\\midrule\endfirsthead
+\toprule \textbf{File} & \textbf{Bytes} & \textbf{What it holds} & \textbf{SHA-256 (first 24)} \\\midrule\endhead
+\texttt{validation\_full.json} & 585,589 & every symbol: argument… & \texttt{8c0099eebf8fbfc7e1f53d…} \\
+\texttt{rdml\_validation\_data.j…} & 49,563 & the named cases of Cha… & \texttt{93f25eecbd6dcccb4d13f1…} \\
+\texttt{invariants\_results.json} & 2,711 & the property checks an… & \texttt{31125f8e2694c86db2835d…} \\
+\texttt{synthetic\_probe\_result…} & 3,610 & the generated run and … & \texttt{fd780d4f8adec9423fc693…} \\
+\texttt{endtoend.json} & 4,527 & every tab, view, graph… & \texttt{07952c0358260a1f3c6e1d…} \\
+\texttt{schema\_findings.json} & 8,946 & the measurements behin… & \texttt{2e959d01605b992bcb6207…} \\
+\texttt{docdata.json} & 34,405 & the material the conso… & \texttt{f061c10ec137e2a42576fb…} \\
+\texttt{srcmap.json} & 978,957 & the line range of ever… & \texttt{6619bd22f3b0a95ceb160e…} \\
+\texttt{fnindex.json} & 69,626 & the parsed index of th… & \texttt{c718c4e6d6078d2c146de2…} \\
+\bottomrule
+\end{longtable}}
+
+
+\section{The harness}
+Two files: one drives the page and runs the three passes, the other is the probe
+that runs inside it. Both are printed in full, because a validation record that
+cannot be re-run is an assertion.
+
+\subsection*{The driver}
+
+\begin{lstlisting}[language=JavaScript,basicstyle=\ttfamily\scriptsize\color{white},numbers=left,firstnumber=1]
+/* Whole-page validation capture, in three passes.
+ *   A  discovery: probe everything once, find which probes change global state
+ *   B  clean pass: probe everything again in a fresh page, with those names held back,
+ *      so no record in the report was taken after the state had been disturbed
+ *   C  isolation: probe each state-changing name in a page of its own
+ * The delivered records are B + C.
+ */
+const { chromium } = require('playwright');
+const fs = require('fs'), path = require('path'), crypto = require('crypto');
+const PAGE = path.resolve('prod.html');
+const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+const corpus = fs.readdirSync('corpus').sort().map(f => path.resolve('corpus', f));
+const probeSrc = fs.readFileSync('probe_all.js', 'utf8');
+const RDML_FIXTURE = 'example_2_tm_annotated.rdml';
+
+async function freshPage(browser) {
+  const p = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+  const errs = []; p.on('pageerror', e => errs.push(e.message.split('\n')[0]));
+  await p.goto('file://' + PAGE);
+  await p.evaluate(() => document.querySelector('nav button[data-tab="load"]').click());
+  await p.setInputFiles('#file', corpus);
+  await p.waitForFunction(() => !document.querySelector('#read').disabled, null, { timeout: 120000 });
+  await p.click('#read');
+  await p.waitForFunction(() => /Read \d+ run/.test(document.querySelector('#readmsg').innerText), null, { timeout: 600000 });
+  await p.evaluate(() => {
+    ['load','sop','results','panel','graphs','review','export','integrity'].forEach(t => { try { showTab(t); } catch (e) {} });
+    showTab('review');
+    ['overview','plate','compare','statistics','controls','runs','curves','instrument']
+      .forEach(t => { const b = document.querySelector(`[data-review="${t}"]`); if (b) try { b.click(); } catch (e) {} });
+  });
+  /* the RDML fixture is decoded by the page's own reader, so rdmlParse is probed on real bytes */
+  const b64 = fs.readFileSync(path.join('rdml', RDML_FIXTURE)).toString('base64');
+  await p.evaluate(async ({ b64, name }) => {
+    const bin = atob(b64), u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    const ents = await rdmlEntries(u.buffer, name);
+    const xml = new TextDecoder().decode(ents.find(e => /rdml_data\.xml$/i.test(e.name)).bytes);
+    globalThis.__FIXTURES = { rdmlXml: xml, rdmlName: name, rdmlBytes: u };
+  }, { b64, name: RDML_FIXTURE });
+  /* the EDS module's own decoded structure, produced by the page from a real container */
+  const edsName = '4Plex_Multiplex_MMx_10uL.eds';
+  const edsB64 = fs.readFileSync(path.join('corpus', edsName)).toString('base64');
+  await p.evaluate(async ({ b64, name }) => {
+    const bin = atob(b64), u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    globalThis.__FIXTURES.edsName = name;
+    try { globalThis.__FIXTURES.edsDoc = await EDS.parseEds(name, u); }
+    catch (e) { globalThis.__FIXTURES.edsDoc = null; globalThis.__FIXTURES.edsError = e.message; }
+  }, { b64: edsB64, name: edsName });
+  return { p, errs };
+}
+const run = (p, opts) => p.evaluate(({ srcText, only, skip }) => {
+  globalThis.__PROBE_ONLY = only; globalThis.__PROBE_SKIP = skip;
+  return new Function('return (' + srcText + ')')()();
+}, { srcText: probeSrc, only: opts.only || null, skip: opts.skip || [] });
+
+(async () => {
+  const b = await chromium.launch();
+  const allErrs = [];
+
+  /* A — discovery */
+  let { p, errs } = await freshPage(b); allErrs.push(...errs);
+  const A = await run(p, {});
+  const mutators = A.rows.filter(r => r.klass === 'mutates').map(r => r.name);
+  const state = await p.evaluate(() => ({
+    runs: RUNS.length, wells: RUNS.reduce((n, r) => n + (r.wells || []).length, 0),
+    files: RUNS.map(r => r.file), kinds: [...new Set(RUNS.flatMap(r => r.kinds || []))]
+  }));
+  await p.context().close();
+  console.log('A: indexed', A.indexed, JSON.stringify(A.tally), 'mutators', mutators.length, mutators.join(','));
+
+  /* B — clean pass */
+  ({ p, errs } = await freshPage(b)); allErrs.push(...errs);
+  const B = await run(p, { skip: mutators });
+  await p.context().close();
+  console.log('B:', JSON.stringify(B.tally), 'tainted', B.tainted);
+
+  /* C — one page per state-changing name */
+  const C = [];
+  for (const nm of mutators) {
+    const { p: pc, errs: ec } = await freshPage(b); allErrs.push(...ec);
+    const r = await run(pc, { only: [nm] });
+    await pc.context().close();
+    const row = (r.rows || [])[0];
+    if (row) { row.isolated = true; C.push(row); }
+    console.log('C:', nm, row && row.klass);
+  }
+
+  const rows = B.rows.concat(C);
+  const tally = {}; rows.forEach(r => tally[r.klass] = (tally[r.klass] || 0) + 1);
+  const provTally = {}; rows.forEach(r => (r.args || []).forEach(a => provTally[a.prov] = (provTally[a.prov] || 0) + 1));
+  const out = {
+    build: { page: 'qpcr_qc_forensics.html', sha256: sha(PAGE), bytes: fs.statSync(PAGE).size },
+    capturedAt: new Date().toISOString(),
+    corpus: corpus.concat([path.resolve('rdml', RDML_FIXTURE)])
+      .map(f => ({ file: path.basename(f), bytes: fs.statSync(f).size, sha256: sha(f) })),
+    state, pageErrors: allErrs, passes: { A: A.tally, B: B.tally, isolated: C.length },
+    indexed: A.indexed, missingAtRuntime: A.missingAtRuntime, tally, provTally, rows
+  };
+  fs.writeFileSync('validation_full.json', JSON.stringify(out, null, 1));
+  console.log('final', JSON.stringify(tally), 'prov', JSON.stringify(provTally), 'pageErrors', allErrs.length);
+  await b.close();
+})();
+
+\end{lstlisting}
+
+\subsection*{The probe}
+\begin{lstlisting}[language=JavaScript,basicstyle=\ttfamily\scriptsize\color{white},numbers=left,firstnumber=1]
+() => {
+  /* ------------------------------------------------------------------ *
+   * Whole-page validation capture.
+   * For every top-level function and constant in the production build,
+   * record the exact arguments used, where each argument came from
+   * (provenance class), the exact return value, whether global state
+   * changed, and which side effects were attempted.
+   * ------------------------------------------------------------------ */
+
+  /* ---------- 0. neutralise side effects, count them ---------- */
+  const side = { download: 0, objectUrl: 0, anchorClick: 0, print: 0, alert: 0 };
+  const realDownload = window.download;
+  if (typeof realDownload === 'function') window.download = () => { side.download++; };
+  const realCreate = URL.createObjectURL;
+  URL.createObjectURL = () => { side.objectUrl++; return 'blob:probe'; };
+  const realClick = HTMLAnchorElement.prototype.click;
+  HTMLAnchorElement.prototype.click = function () { side.anchorClick++; };
+  window.print = () => { side.print++; };
+  window.alert = () => { side.alert++; };
+  const sideSnap = () => ({ ...side });
+  const sideDelta = (a, b) => { const d = {}; for (const k of Object.keys(b)) if (b[k] !== a[k]) d[k] = b[k] - a[k]; return d; };
+
+  /* ---------- 1. the index ---------- */
+  const src = [...document.querySelectorAll('script')].map(s => s.textContent).sort((a, b) => b.length - a.length)[0] || '';
+  const declared = new Set();
+  for (const m of src.matchAll(/^(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(/gm)) declared.add(m[1]);
+  for (const m of src.matchAll(/^(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=/gm)) declared.add(m[1]);
+  const ONLY = (globalThis.__PROBE_ONLY && globalThis.__PROBE_ONLY.length) ? new Set(globalThis.__PROBE_ONLY) : null;
+  const SKIP = new Set(globalThis.__PROBE_SKIP || []);
+  const index = [...declared].sort().filter(n => (!ONLY || ONLY.has(n)) && !SKIP.has(n));
+  const missing = index.filter(n => { try { return typeof eval(n) === 'undefined'; } catch (e) { return true; } });
+
+  /* ---------- 2. serialisation ---------- */
+  const safe = (v, depth, arrCap) => {
+    const seen = new WeakSet();
+    const walk = (x, d) => {
+      if (x === null) return null;
+      const t = typeof x;
+      if (t === 'function') return '<function ' + (x.name || 'anonymous') + '>';
+      if (t !== 'object') return t === 'number' && !Number.isFinite(x) ? String(x) : x;
+      if (seen.has(x)) return '<cycle>';
+      if (d > (depth === undefined ? 4 : depth)) return '<deep>';
+      if (x instanceof Node) return '<' + (x.nodeName || 'node').toLowerCase() + '>';
+      if (x instanceof Map) return '<Map size=' + x.size + '>';
+      if (x instanceof Set) return '<Set size=' + x.size + '>';
+      if (ArrayBuffer.isView(x)) return '<' + x.constructor.name + ' length=' + x.length + '>';
+      if (x instanceof ArrayBuffer) return '<ArrayBuffer byteLength=' + x.byteLength + '>';
+      if (x instanceof Date) return x.toISOString();
+      seen.add(x);
+      if (Array.isArray(x)) {
+        const cap = arrCap === undefined ? 12 : arrCap;
+        const head = x.slice(0, cap).map(y => walk(y, d + 1));
+        return x.length > cap ? head.concat(['…+' + (x.length - cap) + ' more']) : head;
+      }
+      const o = {}; const ks = Object.keys(x);
+      for (const k of ks.slice(0, 24)) o[k] = walk(x[k], d + 1);
+      if (ks.length > 24) o['…'] = (ks.length - 24) + ' more keys';
+      return o;
+    };
+    try { return JSON.stringify(walk(v, 0)); } catch (e) { return '"<unserialisable: ' + e.message + '>"'; }
+  };
+  const clip = (s, n) => (s && s.length > n ? s.slice(0, n) + ' …[' + s.length + ' chars total]' : s);
+  const shape = v => v === undefined ? 'undefined' : v === null ? 'null'
+    : Array.isArray(v) ? 'array[' + v.length + ']'
+    : v instanceof Node ? 'DOM <' + v.nodeName.toLowerCase() + '>'
+    : typeof v === 'object' ? 'object{' + Object.keys(v).length + ' keys}'
+    : typeof v === 'string' ? 'string[' + v.length + ']'
+    : typeof v;
+
+  /* ---------- 3. fixtures, each with its provenance ---------- */
+  /* R = a real instrument or exchange file, unmodified, decoded by the page's own intake
+     D = derived by the code under test from an R input
+     S = synthetic value written for this probe
+     E = the live DOM of the page after the real files were loaded and every view rendered */
+  const F = (v, prov, desc) => ({ v, prov, desc });
+
+  const run   = (typeof RUNS !== 'undefined' && RUNS[0]) || null;
+  const runName = run ? run.file : '(no run)';
+  const well  = (run && (run.wells || [])[0]) || null;
+  const curve = (well && well.curve) || (run && (Object.values(run.allCurves || {})[0] || {}).curve) || [1,1,1,2,4,8,16,32,48,52,53,53];
+  const curveProv = (well && well.curve) ? 'R' : 'S';
+  const inst  = (() => { try { return ccInstruments()[0]; } catch (e) { return null; } })();
+  const ccRows = (() => { try { return inst ? ccRowsFor(inst.key) : []; } catch (e) { return []; } })();
+  const ccDef  = (typeof CC_CHARTS !== 'undefined' && CC_CHARTS[0]) || null;
+  const ccRes  = (() => { try { return ccDef && ccRows.length ? ccCompute(ccDef, ccRows, '') : null; } catch (e) { return null; } })();
+  const ev     = (() => { try { return (reviewForensicEvents() || [])[0] || null; } catch (e) { return null; } })();
+  const allEv  = (() => { try { return reviewForensicEvents() || []; } catch (e) { return []; } })();
+  const sopEv  = (() => { try { return (sopEvaluateAll() || [])[0] || null; } catch (e) { return null; } })();
+  const graph  = (typeof GRAPHS !== 'undefined' && GRAPHS[0]) || null;
+  const nums   = [1,2,3,4,5,6,7,8,9,10];
+  const series = [0,1,2,3,4,5,6,7,8,9];
+  const cols2  = [{ key:'a', label:'A' }, { key:'b', label:'B' }];
+  const rows2  = [{ a:1, b:2 }, { a:3, b:4 }];
+
+  const R_RUN  = 'RUNS[0], the run model the page built from ' + runName;
+  const BY_NAME = {
+    run:F(run,'R',R_RUN), r:F(run,'R',R_RUN), experiment:F(run,'R',R_RUN),
+    w:F(well,'R','RUNS[0].wells[0]'), well:F(well,'R','RUNS[0].wells[0]'),
+    row:F(well,'R','RUNS[0].wells[0]'), rec:F(well,'R','RUNS[0].wells[0]'),
+    x:F(1,'S','the number 1'), y:F(nums,'S','1..10'), v:F(1,'S','the number 1'), n:F(3,'S','the number 3'),
+    rows:F(ccRows,'D','ccRowsFor(first instrument) — history rows derived from the loaded files'),
+    all:F(ccRows,'D','ccRowsFor(first instrument)'), list:F(ccRows,'D','ccRowsFor(first instrument)'),
+    arr:F(nums,'S','1..10'), a:F(nums,'S','1..10'), b:F(nums,'S','1..10'),
+    values:F(nums,'S','1..10'), data:F(nums,'S','1..10'),
+    curve:F(curve,curveProv,curveProv==='R'?'the fluorescence curve of RUNS[0].wells[0]':'a 12-point rising curve'),
+    cur:F(curve,curveProv,'as curve'),
+    pts:F((ccRes && ccRes.pts) || nums.map(v=>({y:v})),ccRes?'D':'S','points computed by ccCompute from the history rows'),
+    def:F(ccDef,'S','CC_CHARTS[0], a chart definition declared in the page'),
+    d:F(ccDef,'S','CC_CHARTS[0]'), chart:F(ccDef,'S','CC_CHARTS[0]'),
+    cfg:F((()=>{try{return ccCfg(ccDef&&ccDef.id);}catch(e){return {};}})(),'D','ccCfg of that chart'),
+    res:F(ccRes,'D','ccCompute(CC_CHARTS[0], history rows)'),
+    result:F(ccRes,'D','ccCompute(CC_CHARTS[0], history rows)'),
+    e:F(ev,'D','reviewForensicEvents()[0] — an event the page derived from the loaded files'),
+    event:F(ev,'D','reviewForensicEvents()[0]'),
+    events:F(allEv,'D','reviewForensicEvents() in full'),
+    ev:F(sopEv,'D','sopEvaluateAll()[0] — a profile answer derived from the loaded files'),
+    g:F(graph,'S','GRAPHS[0], a graph definition declared in the page'),
+    c:F(graph?{g:graph,ri:0,run,target:'',metric:'outcome',signal:'stored',log:false,colourby:'outcome',level:'end',control:'0'}:null,'D','a chart context over GRAPHS[0] and RUNS[0]'),
+    ctx:F(null,'S','null'),
+    s:F('text','S','the string "text"'), str:F('text','S','the string "text"'), text:F('text','S','the string "text"'),
+    name:F((run&&run.file)||'name','R','the file name of RUNS[0]'),
+    title:F('title','S','the string "title"'), label:F('label','S','the string "label"'),
+    key:F((inst&&inst.key)||'key','D','the key of the first instrument in the history'),
+    id:F((ccDef&&ccDef.id)||'heat_rate','S','the id of CC_CHARTS[0]'),
+    tab:F('review','S','the tab name "review"'), kind:F('review','S','"review"'),
+    type:F('i','S','the string "i"'), mode:F('order','S','"order"'),
+    sev:F('review','S','"review"'), severity:F('review','S','"review"'),
+    pos:F((well&&well.pos)||0,'R','the plate position of RUNS[0].wells[0]'),
+    channel:F((well&&well.channel)||0,'R','the channel of RUNS[0].wells[0]'),
+    idx:F(0,'S','0'), i:F(0,'S','0'), index:F(0,'S','0'),
+    cols:F((run&&run.cols)||12,'R','the plate width of RUNS[0]'),
+    limit:F(0.5,'S','0.5'), step:F(1,'S','1'), ri:F(0,'S','0'),
+    instrument:F((inst&&inst.key)||'','D','the first instrument key in the history'),
+    variant:F('','S','the empty string'), target:F('','S','the empty string'), sample:F('','S','the empty string'),
+    profile:F((typeof SOP!=='undefined'?SOP:null),'S','a deep copy of the active review profile'),
+    sop:F((typeof SOP!=='undefined'?SOP:null),'S','a deep copy of the active review profile'),
+    p:F((typeof SOP!=='undefined'?SOP:null),'S','a deep copy of the active review profile'),
+    o:F({},'S','{}'), obj:F({},'S','{}'), opts:F({},'S','{}'), options:F({},'S','{}'),
+    filter:F('','S','the empty string'), forExport:F(false,'S','false'), on:F(true,'S','true'), flag:F(true,'S','true'),
+    dom:F(document,'E','the live document'), root:F(document,'E','the live document'), doc:F(document,'E','the live document'),
+    el:F(document.body,'E','the live <body>'), an:F(document.body,'E','the live <body>'), node:F(document.body,'E','the live <body>'),
+    b64:F('AAECAwQ=','S','base64 of the bytes 00 01 02 03 04'),
+    bytes:F(new Uint8Array([0,1,2,3]),'S','the bytes 00 01 02 03'),
+    buf:F(new ArrayBuffer(8),'S','an 8-byte buffer'),
+    entries:F([],'S','[]'), zip:F({entries:[]},'S','{entries:[]}'),
+    m:F(new Map([['k',1]]),'S','Map k->1'), map:F(new Map([['k',1]]),'S','Map k->1'), set:F(new Set(['k']),'S','Set{k}'),
+    t:F(Date.now(),'S','the current time in ms'), time:F(Date.now(),'S','the current time in ms'), date:F(Date.now(),'S','the current time in ms'),
+    f:F(x=>x,'S','the identity function'), fn:F(x=>x,'S','the identity function'), cb:F(x=>x,'S','the identity function'),
+    push:F(()=>{},'S','a no-op'), note:F(()=>{},'S','a no-op'), task:F(null,'S','null'), fallback:F(null,'S','null'),
+    html:F('<b>x</b>','S','the markup <b>x</b>'),
+    groups:F([[1,2,3],[2,3,4]],'S','two small groups'), counts:F([1,2,3],'S','1,2,3'),
+    win:F(5,'S','5'), min:F(1,'S','1'), slices:F(4,'S','4'),
+    expo:F([1,1,1],'S','1,1,1'), bad:F([0,1,0],'S','0,1,0'), source:F('probe','S','"probe"'),
+    j:F({schema:'qpcr-instrument-history/1',rows:[]},'S','an empty history document'),
+    canvas:F((()=>{const c=document.createElement('canvas');c.width=900;c.height=520;return c;})(),'S','a blank 900x520 canvas'),
+    cv:F((()=>{const c=document.createElement('canvas');c.width=900;c.height=520;return c;})(),'S','a blank 900x520 canvas'),
+    force:F(false,'S','false')
+  };
+  ['profile','sop','p'].forEach(k => { if (BY_NAME[k].v && typeof structuredClone === 'function') { try { BY_NAME[k] = F(structuredClone(BY_NAME[k].v),'S',BY_NAME[k].desc); } catch (e) {} } });
+  const NAMES = Object.keys(BY_NAME).sort((a,b) => b.length - a.length);
+
+  const edsRun = (typeof RUNS!=='undefined' ? RUNS.find(r => r.eds) : null) || null;
+  const R_EDS = edsRun ? ('the first run in RUNS whose source is an .eds container (' + edsRun.file + ')') : 'no .eds run loaded';
+  const NEWCANVAS = () => { const c = document.createElement('canvas'); c.width = 900; c.height = 520; return c; };
+  const CURVEWELLS = () => (run && (run.wells||[]).filter(w => (w.curve||[]).length).slice(0,8)) || [];
+  const CURVEROWS = () => { try { return (reviewRisingCurves ? reviewRisingCurves() : []).slice(0,8); } catch (e) { return CURVEWELLS().map(w => ({ experiment:'e', channel:w.channel, curve:w.curve, well:w.well })); } };
+  const FIX = (globalThis.__FIXTURES || { rdmlXml:'<rdml/>', rdmlName:'none', rdmlBytes:new Uint8Array(0) });
+
+  const OVERRIDE = {
+    analysisResults: () => [F({el:document.createElement('div')},'S','an analysis stub whose element holds no <obj> results'), F(12,'S','12')],
+    applyRawFilePriority: () => [F((typeof RUNS!=='undefined'?RUNS:[]),'R','RUNS in full, as loaded from the corpus')],
+    drawRisingCurveBundle: () => [F(NEWCANVAS(),'S','a blank 900x520 canvas'), F(CURVEROWS(),'D','rising-curve rows derived from the loaded runs')],
+    drawTemperatureTrace: () => [F(NEWCANVAS(),'S','a blank 900x520 canvas'), BY_NAME.run],
+    rdmlParse: () => [F(FIX.rdmlXml,'R','the rdml_data.xml of '+FIX.rdmlName+', decoded by the page'), F(FIX.rdmlName,'R','its file name'), F(FIX.rdmlBytes,'R','its bytes')],
+    appTaskWrap: () => [F(['a'],'S','["a"]'), F(()=>{},'S','a no-op')],
+    assignRoles: () => [F((typeof RUNS!=='undefined'?RUNS.slice(0,1):[]),'R','[RUNS[0]]')],
+    ccC: () => [F([1,2,3,2,1],'S','a five-point series'), BY_NAME.cfg],
+    ccP: () => [F([1,2,1],'S','three counts'), F([10,10,10],'S','three denominators'), BY_NAME.cfg],
+    ccU: () => [F([1,2,1],'S','three counts'), F([10,10,10],'S','three denominators'), BY_NAME.cfg],
+    ccPhase: () => [F([1,2,3,4,5],'S','1..5'), F(3,'S','3')],
+    ccDynamic: () => [BY_NAME.run, (BY_NAME.ev.v ? BY_NAME.ev : F({rows:[],icMedian:null},'S','an evaluation with no control rows')), F((()=>{try{return forensicCounts();}catch(e){return {copied:new Map(),findings:new Map()};}})(),'D','forensicCounts() over the loaded runs')],
+    qsExport: () => [F(FIX.edsDoc,'R','the decoded structure EDS.parseEds returned for '+FIX.edsName), F({},'S','{}')],
+    qsTables: () => [F(FIX.edsDoc,'R','the decoded structure EDS.parseEds returned for '+FIX.edsName), F({},'S','{}')],
+    qsInstrument: () => [F(FIX.edsDoc,'R','the decoded structure EDS.parseEds returned for '+FIX.edsName)],
+    studyRows: () => [F(FIX.edsDoc,'R','the decoded structure EDS.parseEds returned for '+FIX.edsName)],
+    ccThin: () => [F(series,'S','0..9 as x'), F(series,'S','0..9 as y'), F(4,'S','4')],
+    ccPeakRates: () => [F(series,'S','0..9'), F(series,'S','0..9'), F(3,'S','3'), F(0.1,'S','0.1')],
+    ccTransitions: () => [F(series,'S','0..9'), F(series,'S','0..9'), F([[0,1]],'S','one segment'), F(0.5,'S','0.5')],
+    ccValue: () => [BY_NAME.def, F(ccRows[0]||{},'D','the first history row'), F('','S','the empty string')],
+    ce: () => [F('div','S','"div"')],
+    dosStamp: () => [F(new Date(),'S','the current date')],
+    downloadCanvas: () => [F(document.createElement('canvas'),'S','a blank canvas'), F('probe.png','S','"probe.png"')],
+    drawAmplificationCurves: () => [F(NEWCANVAS(),'S','a blank 900x520 canvas'), F(CURVEWELLS(),'R','the first eight wells of RUNS[0] that carry a curve'), F('stored','S','"stored"'), F(false,'S','false'), F({},'S','{}')],
+    drawLeveyJennings: () => [F(document.createElement('canvas'),'S','a blank canvas'), F({points:[],mean:0,sd:1},'S','an empty chart')],
+    edsDerived: () => [F((run&&run.eds)?run:{eds:{exp:{},plate:{}}},(run&&run.eds)?'R':'S',(run&&run.eds)?R_RUN:'a minimal stand-in'), F(()=>{},'S','a no-op')],
+    edsEvents: () => [F((run&&run.eds)?run:{eds:{analysis:{}},wells:[]},(run&&run.eds)?'R':'S',(run&&run.eds)?R_RUN:'a minimal stand-in'), F(()=>{},'S','a no-op')],
+    extent: () => [F(series,'S','0..9'), F(0.05,'S','0.05')],
+    gByDate: () => [F(rows2,'S','two rows'), F(()=>run,'S','a resolver returning RUNS[0]')],
+    makeXlsx: () => [F([{name:'S1',rows:[['A','B'],[1,2]]}],'S','a one-sheet workbook of two rows')],
+    ownQuery: () => [F(document.body,'E','the live <body>'), F('div','S','"div"')],
+    ownQueryAll: () => [F(document.body,'E','the live <body>'), F('div','S','"div"')],
+    qsWorkbook: () => [F((run&&run.eds)?run:{eds:{plate:{wells:[]},exp:{}},wells:[]},(run&&run.eds)?'R':'S',(run&&run.eds)?R_RUN:'a minimal stand-in'), F({},'S','{}')],
+    reviewDisplayFindings: () => [F((()=>{try{return reviewEventsWithoutIntegrity()||[];}catch(e){return [];}})(),'D','reviewEventsWithoutIntegrity()')],
+    setSelectItems: () => [F(document.createElement('select'),'S','an empty <select>'), F([{value:'1',label:'one'}],'S','one item'), F(null,'S','null')],
+    sopField: () => [F('Label','S','"Label"'), F('run.integrity','S','a field path'), F('text','S','"text"'), F({},'S','{}'), F('','S','the empty string')],
+    sopSetPath: () => [F('notes','S','"notes"'), F('probe','S','"probe"')],
+    sopTableEditor: () => [F(document.createElement('div'),'S','an empty <div>'), F(rows2,'S','two rows'), F(cols2,'S','two columns'), F('Add','S','"Add"'), F(()=>({}),'S','a factory')],
+    svgPlot: () => [F({title:'probe',x:[0,10],y:[0,10],series:[{type:'line',data:series.map((v,i)=>[i,v])}]},'S','a ten-point line plot')],
+    tTest: () => [F(series,'S','0..9'), F(series.map(v=>v+1),'S','0..9 shifted by 1'), F('two','S','"two"')],
+    table: () => [F(cols2,'S','two columns'), F(rows2,'S','two rows'), F({},'S','{}')],
+    toCSV: () => [F(cols2,'S','two columns'), F(rows2,'S','two rows')],
+    westgardReview: () => [F(series.map(v=>({y:v})),'S','ten points'), F(0,'S','0'), F(1,'S','1')],
+    readStagedCore: () => [F(null,'S','null')],
+    makeStoredZip: () => [F([{name:'a.txt',data:new Uint8Array([65])}],'S','a one-entry archive')],
+    base64ToBytes: () => [F('AAECAwQ=','S','base64 of 00 01 02 03 04')],
+    localizeDOM: () => [F(document.body,'E','the live <body>'), F(false,'S','false')],
+    validateHistoryBoundary: () => [F({schema:'qpcr-instrument-history/1',rows:[]},'S','an empty history document'), F('probe','S','"probe"')],
+    selApplyCsv: () => [F(selCsvTemplate(),'D','the selection template the page writes, taken back unchanged')],
+    selReadme: () => [F(selCatalogue().slice(0,3),'D','the first three catalogue items')],
+    selTableBlock: () => [F(pdfDoc(),'D','a report document opened by the page'),
+                          F((()=>{try{return allWellRows().slice(0,5);}catch(e){return [{a:1}];}})(),'R','five stored result rows'),
+                          F('','S','no note')]
+  };
+
+  const EXCLUDE = {
+    main:'entry point; re-runs the whole page',
+    boot:'entry point; re-runs the whole page',
+    init:'entry point; re-runs the whole page',
+    setPhase:'mutates the lifecycle phase by design',
+    ccImport:'replaces the instrument history by design',
+    sopApply:'replaces the active profile by design',
+    invalidateAnalysisCaches:'clears caches by design'
+  };
+
+  /* ---------- 4. mutation detection ---------- */
+  const snapshot = () => safe({
+    runs:(typeof RUNS!=='undefined'?RUNS.length:-1),
+    wells:(typeof RUNS!=='undefined'?RUNS.reduce((n,r)=>n+((r.wells||[]).length),0):-1),
+    cq:(typeof RUNS!=='undefined'?RUNS.flatMap(r=>(r.wells||[]).slice(0,40).map(w=>w.CpRaw)):[]),
+    sop:(typeof SOP!=='undefined'?SOP:null),
+    cc:(typeof CC_STATE!=='undefined'?{i:CC_STATE.instrument,f:CC_STATE.filter}:''),
+    phase:(typeof APP_STATE!=='undefined'?APP_STATE.phase+'/'+APP_STATE.generation:''),
+    pasted:(typeof PASTED!=='undefined'&&PASTED?(PASTED.rows||[]).length:-1)
+  }, 6, 200);
+  const clean = {
+    sop:(typeof SOP!=='undefined'?structuredClone(SOP):null),
+    cc:(typeof CC_STATE!=='undefined'?{...CC_STATE}:null),
+    runs:(typeof RUNS!=='undefined'?RUNS.length:-1)
+  };
+  let tainted = false;
+  const restore = () => {
+    try {
+      if (clean.sop && typeof SOP!=='undefined') { for (const k of Object.keys(SOP)) delete SOP[k]; Object.assign(SOP, structuredClone(clean.sop)); }
+      if (clean.cc && typeof CC_STATE!=='undefined') Object.assign(CC_STATE, clean.cc, { cache:null });
+    } catch (e) {}
+    if (typeof RUNS!=='undefined' && RUNS.length !== clean.runs) tainted = true;
+  };
+
+  /* ---------- 5. probe ---------- */
+  const out = [];
+  /* Names declared inside a module IIFE are not addressable from the page scope.
+     Those the module exports are probed through the module object; the rest are
+     reported as private helpers, exercised only through their module's entry points. */
+  const NS = [];
+  for (const m of src.matchAll(/^const\s+([A-Za-z_$][\w$]*)\s*=\s*\(\s*\(\s*\)\s*=>/gm)) {
+    try { const o = eval(m[1]); if (o && typeof o === 'object') NS.push({ name:m[1], obj:o }); } catch (e) {}
+  }
+  const viaNS = nm => { for (const n of NS) if (Object.prototype.hasOwnProperty.call(n.obj, nm)) return n; return null; };
+
+  for (const nm of index) {
+    let fn, reachedVia = 'page scope';
+    try { fn = eval(nm); }
+    catch (e) {
+      const ns = viaNS(nm);
+      if (ns) { fn = ns.obj[nm]; reachedVia = ns.name + '.' + nm; }
+      else { out.push({ name:nm, klass:'private', detail:'declared inside a module closure; not addressable by name from the page scope, and not exported' }); continue; }
+    }
+
+    if (typeof fn !== 'function') {
+      out.push({ name:nm, klass:'constant', reachedVia, kindOf:shape(fn),
+                 value:clip(safe(fn, 4, 40), 4000),
+                 detail: Array.isArray(fn) ? ('array of ' + fn.length) : typeof fn });
+      continue;
+    }
+    if (EXCLUDE[nm]) { out.push({ name:nm, klass:'excluded', detail:EXCLUDE[nm] }); continue; }
+
+    let params = [];
+    try {
+      const sig = Function.prototype.toString.call(fn).replace(/\/\*[\s\S]*?\*\//g,'');
+      const m = sig.match(/^[^(]*\(([^)]*)\)/) || sig.match(/^\s*(?:async\s*)?([A-Za-z_$][\w$]*)\s*=>/);
+      params = m ? String(m[1]||'').split(',').map(s=>s.trim().split(/[=:]/)[0].trim()).filter(Boolean) : [];
+    } catch (e) { params = []; }
+
+    let descs = [], unfilled = [], viaOverride = !!OVERRIDE[nm];
+    if (viaOverride) { try { descs = OVERRIDE[nm](); } catch (e) { descs = []; } }
+    else for (const raw of params) {
+      if (raw.startsWith('...')) break;
+      const key = raw.replace(/^\{|\}$/g,'').toLowerCase();
+      const hit = NAMES.find(k=>k===key) || NAMES.find(k=>key.startsWith(k)||key.endsWith(k));
+      if (hit && BY_NAME[hit].v !== null && BY_NAME[hit].v !== undefined) descs.push(BY_NAME[hit]);
+      else { unfilled.push(raw); descs.push(F(undefined,'S','not supplied (undefined)')); }
+    }
+    if (!viaOverride && unfilled.length === params.length && params.length) {
+      out.push({ name:nm, klass:'no-fixture', reachedVia, detail:'no fixture for: '+unfilled.join(', '), arity:fn.length, params:params.join(',') });
+      continue;
+    }
+
+    const argRec = descs.map((D,i) => ({
+      param: (viaOverride ? (params[i]||('arg'+(i+1))) : (params[i]||('arg'+(i+1)))),
+      prov: D.prov, from: D.desc, shape: shape(D.v), value: clip(safe(D.v, 3, 8), 500)
+    }));
+
+    const before = snapshot(), sBefore = sideSnap();
+    let klass, detail = '', outputShape = '', outputValue = '';
+    try {
+      const v = fn(...descs.map(D=>D.v));
+      const after = snapshot();
+      outputShape = shape(v);
+      outputValue = clip(safe(v, 4, 10), 1200);
+      if (after !== before) { klass='mutates'; detail='global state changed during a read-only probe'; restore(); }
+      else klass='pass';
+      if (unfilled.length) detail += (detail?'; ':'') + 'partial: '+unfilled.join(', ')+' not supplied';
+    } catch (err) {
+      if (snapshot() !== before) restore();
+      klass = 'threw';
+      outputShape = 'threw';
+      outputValue = String((err && err.message) || err).slice(0,300);
+      detail = unfilled.length ? ('unfilled: '+unfilled.join(', ')) : '';
+    }
+    out.push({ name:nm, klass, detail, reachedVia, arity:fn.length, params:params.join(','),
+               viaOverride, args:argRec, outputShape, output:outputValue,
+               sideEffects: sideDelta(sBefore, sideSnap()) });
+  }
+
+  if (typeof realDownload === 'function') window.download = realDownload;
+  URL.createObjectURL = realCreate;
+  HTMLAnchorElement.prototype.click = realClick;
+
+  const tally = {}; out.forEach(o => tally[o.klass] = (tally[o.klass]||0)+1);
+  const provTally = {};
+  out.forEach(o => (o.args||[]).forEach(a => provTally[a.prov] = (provTally[a.prov]||0)+1));
+  return { indexed:index.length, missingAtRuntime:missing, tally, provTally, side, tainted,
+           runsLoaded:(typeof RUNS!=='undefined'?RUNS.length:-1), rows:out };
+}
+
+\end{lstlisting}
+
+\section{Re-running it}
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+node fnindex.cjs prod.html     # fnindex.json   the parsed index
+python3 srcmap.py              # srcmap.json    line ranges
+node capture_all.cjs           # validation_full.json  (three passes)
+node endtoend.cjs              # endtoend.json
+node invariants.cjs prod.html corpus 3
+node synthetic_probe.cjs prod.html corpus
+node schema_findings.cjs       # schema_findings.json
+node docdata.cjs               # docdata.json
+python3 genchap.py && python3 genval2.py       # the chapters
+\end{lstlisting}
+

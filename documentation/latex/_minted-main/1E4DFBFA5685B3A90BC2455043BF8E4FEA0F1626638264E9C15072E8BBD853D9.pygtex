@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function} \PYG{n+nx}{renderTab}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{)\PYGZob{}}
+  \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n+nx}{DIRTY}\PYG{p}{.}\PYG{n+nx}{has}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{))}\PYG{k}{return}\PYG{p}{;}\PYG{n+nx}{DIRTY}\PYG{p}{.}\PYG{o+ow}{delete}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{);}\PYG{n+nx}{APP\PYGZus{}STATE}\PYG{p}{.}\PYG{n+nx}{activeTab}\PYG{o}{=}\PYG{n+nx}{name}\PYG{p}{;}
+  \PYG{k+kd}{const} \PYG{n+nx}{t0}\PYG{o}{=}\PYG{n+nx}{performance}\PYG{p}{.}\PYG{n+nx}{now}\PYG{o}{?}\PYG{n+nx}{performance}\PYG{p}{.}\PYG{n+nx}{now}\PYG{p}{()}\PYG{o}{:}\PYG{n+nb}{Date}\PYG{p}{.}\PYG{n+nx}{now}\PYG{p}{();}
+  \PYG{k}{try}\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}load\PYGZdq{}}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{renderLoaded}\PYG{p}{();}\PYG{n+nx}{renderDerived}\PYG{p}{();\PYGZcb{}}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}export\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderExports}\PYG{p}{();}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}sop\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderSop}\PYG{p}{();}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}results\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderResults}\PYG{p}{();}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}graphs\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderGraphs}\PYG{p}{();}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}panel\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderPanel}\PYG{p}{();}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}integrity\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderIntegrity}\PYG{p}{();}
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}review\PYGZdq{}}\PYG{p}{)\PYGZob{}[}\PYG{l+s+s2}{\PYGZdq{}overview\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}plate\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}compare\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}statistics\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}controls\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}runs\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}curves\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}rising\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}instrument\PYGZdq{}}\PYG{p}{].}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{s}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{DIRTY}\PYG{p}{.}\PYG{n+nx}{add}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}review:\PYGZdq{}}\PYG{o}{+}\PYG{n+nx}{s}\PYG{p}{));}\PYG{n+nx}{renderReviewSheetLazy}\PYG{p}{(}\PYG{n+nx}{currentReviewSheet}\PYG{p}{());\PYGZcb{}}
+  \PYG{p}{\PYGZcb{}}\PYG{k}{catch}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{)\PYGZob{}}
+    \PYG{n+nx}{appError}\PYG{p}{(}\PYG{l+s+sb}{`render:}\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nx}{name}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+sb}{`}\PYG{p}{,}\PYG{n+nx}{e}\PYG{p}{);}
+    \PYG{k+kd}{const} \PYG{n+nx}{target}\PYG{o}{=}\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{querySelector}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}tab\PYGZhy{}\PYGZdq{}}\PYG{o}{+}\PYG{n+nx}{name}\PYG{p}{);}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{target}\PYG{p}{)}\PYG{n+nx}{target}\PYG{p}{.}\PYG{n+nx}{insertAdjacentHTML}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}afterbegin\PYGZdq{}}\PYG{p}{,}\PYG{l+s+sb}{`\PYGZlt{}div class=\PYGZdq{}notice bad\PYGZdq{}\PYGZgt{}This view could not be rendered. The diagnostic record contains the error: \PYGZlt{}code\PYGZgt{}}\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nx}{esc}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{.}\PYG{n+nx}{message}\PYG{o}{||}\PYG{n+nx}{e}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+sb}{\PYGZlt{}/code\PYGZgt{}\PYGZlt{}/div\PYGZgt{}`}\PYG{p}{);}
+  \PYG{p}{\PYGZcb{}}\PYG{k}{finally}\PYG{p}{\PYGZob{}}\PYG{n+nx}{localizeDOM}\PYG{p}{(}\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{querySelector}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}tab\PYGZhy{}\PYGZdq{}}\PYG{o}{+}\PYG{n+nx}{name}\PYG{p}{)}\PYG{o}{||}\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{body}\PYG{p}{);}
+    \PYG{k+kd}{const} \PYG{n+nx}{ms}\PYG{o}{=}\PYG{p}{(}\PYG{n+nx}{performance}\PYG{p}{.}\PYG{n+nx}{now}\PYG{o}{?}\PYG{n+nx}{performance}\PYG{p}{.}\PYG{n+nx}{now}\PYG{p}{()}\PYG{o}{:}\PYG{n+nb}{Date}\PYG{p}{.}\PYG{n+nx}{now}\PYG{p}{())}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{t0}\PYG{p}{;}
+    \PYG{n+nx}{APP\PYGZus{}STATS}\PYG{p}{.}\PYG{n+nx}{lastRender}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{n+nx}{tab}\PYG{o}{:}\PYG{n+nx}{name}\PYG{p}{,}\PYG{n+nx}{ms}\PYG{p}{\PYGZcb{};}\PYG{n+nx}{APP\PYGZus{}STATS}\PYG{p}{.}\PYG{n+nx}{renders}\PYG{p}{[}\PYG{n+nx}{name}\PYG{p}{]}\PYG{o}{=}\PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{round}\PYG{p}{(}\PYG{n+nx}{ms}\PYG{p}{);}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{ms}\PYG{o}{\PYGZgt{}}\PYG{n+nx}{APP\PYGZus{}STATS}\PYG{p}{.}\PYG{n+nx}{maxRenderMs}\PYG{p}{)}\PYG{n+nx}{APP\PYGZus{}STATS}\PYG{p}{.}\PYG{n+nx}{maxRenderMs}\PYG{o}{=}\PYG{n+nx}{ms}\PYG{p}{;}
+    \PYG{n+nx}{appStatusPaint}\PYG{p}{();\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,57 @@
+\chapter{Synthetic equipment-history demonstration}\label{ch:roche}
+
+\begin{notebox}[title={Scope of the demonstration}]
+The equipment-history figures in this chapter use newly generated values. Their scale and broad relationships were calibrated from aggregate summaries supplied with the project; no source run, date, identifier or measurement is reproduced. The plots are teaching examples and do not establish instrument condition.
+\end{notebox}
+
+\section{Generated data and boundary}
+The generator creates 351 synthetic history rows for two anonymous demonstration instruments. It samples each metric from a separate calibrated distribution and then applies the observed qualitative relationships: cooling and transition duration move together, optical background follows exposure and reference changes, and hold offset is distinct from within-run spread.
+
+\readingnote{Use the figures to learn the page's chart vocabulary and export structure. Replace the synthetic series with approved records before making a maintenance or release decision.}
+
+\begin{table}[htbp]\centering\small
+\caption{Synthetic equipment-history coverage. All identifiers and values are generated.}
+\begin{tabular}{@{}lll@{}}\toprule
+Synthetic instrument & Rows & Purpose\\\midrule
+IXO-DEMO-A & 130 & thermal and optical scale example\\
+IXO-DEMO-B & 221 & thermal, optical and mechanical scale example\\\bottomrule
+\end{tabular}\end{table}
+
+\section{Reproducible generation}
+\path{generator/reconstruct_roche.py} uses seed \texttt{20260922}. It models each instrument and program stratum separately, draws in transformed coordinates, restores measurement units, and samples missingness independently. The generator retains no raw well data and writes only synthetic JSON, CSV, SVG and check files.
+
+\fig{roche_equipment_distributions.png}{Synthetic distributions for the equipment-history metrics. The shapes resemble the supplied summaries without copying their observations.}{roche-distributions}
+\readingnote{A distribution shows the range used by the demonstration; it is not a specification and it is not a probability of failure.}
+
+\section{Maintenance-oriented associations}
+
+\subsection{Cooling rate and transition duration}
+\fig{roche_cooling_transition.png}{Synthetic cooling rate versus 95--60\,$^\circ$C transition duration.}{roche-cooling}
+\readingnote{A shift toward slower cooling with longer transitions is a reason to inspect thermal traces, program settings and service records together. The generated relationship is descriptive only.}
+
+\subsection{Optical reference, exposure and background}
+\fig{roche_lamp_background.png}{Synthetic lamp-reference versus fluorescence background for channel 465--510.}{roche-lamp}
+\fig{roche_exposure_background.png}{Synthetic exposure versus fluorescence background for channel 465--510.}{roche-exposure}
+\readingnote{A background change can follow exposure, plate chemistry or optical alignment. Confirm with a comparable reference plate before attributing it to lamp or filter wear.}
+
+\subsection{Hold offset and stability}
+\fig{roche_hold_stability.png}{Synthetic mean hold offset versus within-run spread.}{roche-hold}
+\readingnote{Separate bias from variability. A temperature-verification plate and the recorded program are required to investigate an equipment effect.}
+
+\section{SC control and review export}
+The corrected SC profile groups controls by explicit name and target rules. Canonical families are \texttt{415B}, \texttt{410CP}, \texttt{NTC}, extraction blank, grinding/environment blank, negative maize and negative soy. Suffixes for extraction date, aliquot and dilution remain available in the exact-name fields.
+
+The synthetic full export contains 351 decoded runs with no decode errors. Its review bundle contains plate map, sample comparison, statistics, control charts, runs and QC, amplification curves, forensic log and one instrument-record directory per run. Positive-control batch, age and thermal series are exported when the source rows provide the required fields; a missing extraction date leaves an age series empty.
+
+\readingnote{An empty chart means that its eligibility rule was not met. It is not a zero measurement and must not be filled with a guessed run date or pooled control.}
+
+\section{Limits of interpretation}
+The profile is review-only until approved by the laboratory. It does not replace the historical SOP, a validated acceptance limit, vendor verification, or service documentation. A correlation is an investigation prompt; it is not a causal finding or a remaining-life estimate.
+
+\section{Files and checks}
+The reproducible generator is \path{generator/reconstruct_roche.py}; the SC full graph/review export is described by \path{SC_1-3GM21_4.10.2021_VV_graphs_SC_profile.zip.json}. The profile name is \texttt{SC screening -- SOP-06 laboratory default}, version 1.0, SHA-256 \texttt{cf9064ae1684dc8b22e0cc60217a7dd2ee5bb251ce57b60c7b568c772be4bcfd}.
+
+\readingnote{The generated artefacts are suitable for demonstrations, regression checks and presentation examples. They are not evidence about a real instrument, run, operator or laboratory result.}
+
+
+

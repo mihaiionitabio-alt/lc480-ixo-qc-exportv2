@@ -1,0 +1,96 @@
+\chapter{Control identity, useful graphs and maintenance associations}\label{ch:identity}
+
+\section{What changed in the 22 September revision}
+The earlier demonstration could show empty positive-control charts when the loaded laboratory profile did not identify
+the controls. An empty plot is not evidence that control measurements are absent. The corrected page distinguishes
+configuration, eligibility and an incomplete statistical baseline. This revision keeps the 58-chart catalogue, removes
+misleading pooled limits from the older control overview, and adds three descriptive graphs based on explicit control identity.
+
+\begin{infobox}
+The SC mapping is a \textbf{review-only profile}. It supplies candidate name rules; it does not certify the applicable
+historical SOP, reference-material concentration, aliquot, or the interpretation of a sample-versus-LOD comparison.
+The supplied procedures were used to define synthetic examples, not to execute laboratory work.
+\end{infobox}
+
+\section{Identity before statistics}
+An ordinary specimen code is not a positive control simply because its vendor role is \emph{Unknown} or \emph{Calibrator}.
+The page first matches a configured name rule and target. A negative matrix is expected not to amplify the screening target,
+but its endogenous taxon target can amplify. That endogenous signal is a reference check, not automatically a fixed-input
+internal positive control and not a blank.
+
+For longitudinal control data the key retains the target, complete normalized material label, extraction date and any
+aliquot or dilution suffix. The panel also requires the same instrument, recorded program fingerprint and firmware before
+enabling statistical alarms. Matching by a shortened root is available in Review only as a descriptive view.
+Different extraction batches are not pooled to estimate one control mean or SD.
+
+The date parser accepts a calendar-valid day.month.four-digit-year label. It rejects impossible dates and malformed years,
+and marks an extraction date after the run as inconsistent. It does not repair these labels by guessing. Unknown or invalid
+dates are isolated by source in panel control keys. The original text remains visible and exportable.
+
+\input{code/sopControlIdentity}
+\input{code/ccBaselineNeed}
+
+\section{Which graphs are useful}
+\begin{longtable}{@{}p{4cm}p{11cm}@{}}
+\toprule View & Revised use\\\midrule\endhead
+Positive-control Cq & One material, extraction batch, aliquot/dilution, target and instrument/program at a time. Non-detection
+must be reviewed alongside the Cq of detected replicates.\\
+Negative-control rate & Separate reaction blanks, extraction blanks, grinding/environment blanks and negative matrices.
+Each stage has its own positive count and eligible denominator. Legacy pooled history remains explicitly labelled as stage unknown.\\
+Endogenous reference & Inspect the biological reference separately; a fixed IC shift needs a configured reference Cq and a
+matching IC target. Subtracting each run's own median would hide a common shift.\\
+Root-name overview & Exploratory only. The older control graph retains the SOP range but no longer displays pooled mean/SD lines.\\
+Thermal and mechanical plots & Compare comparable programs and instrument configurations. A trend is an investigation trigger,
+not proof of component wear or a validated remaining-life estimate.\\
+Operator funnel & Shows unadjusted event rates and workload. It does not adjust for extraction batch, assay, instrument or
+case mix and cannot establish an operator effect.\\
+\bottomrule
+\end{longtable}
+
+\section{New descriptive associations}
+The three new plots use one synthetic control group per run, with detected and total replicate counts retained in their
+CSV rows. Colours distinguish instrument, target, full control batch and program. Only finite detected Cq means enter the
+scatter plots; missing Cq is not replaced by a cut-off.
+\readingnote{These are descriptive associations. Read them with detection counts, program settings and maintenance records;
+do not treat a slope as a failure probability.}
+
+\fig{g_all_x_control_batches.png}{Control extraction batches over calendar time. The example deliberately changes from a
+March extraction to a July extraction; these are separate series.}{control_batches}
+
+\fig{g_all_x_control_age.png}{Control mean Cq against days since the labelled extraction. Invalid, missing or future
+extraction dates are excluded from the plotted age values. The example includes an explicitly simulated age effect.}{control_age}
+
+\fig{g_all_x_control_thermal.png}{Control mean Cq against measured peak cooling rate. Both change with time in this
+synthetic example; the association does not distinguish ageing extract from changing cooling performance.}{control_thermal}
+
+\input{code/controlBatchRecords}
+\input{code/controlBatchGraph}
+
+No correlation coefficient, significance test or causal score is assigned. Before estimating an equipment effect, match
+material and extraction batch, target, dilution, program and analysis settings; inspect run order, service dates and operator
+allocation. A prospective verification using a stable reference material is stronger evidence than a pooled correlation.
+The current implementation groups by the recorded program string; it does not yet enforce a complete analysis-settings
+fingerprint or model reagent lot, operator and extract age jointly.
+
+\section{Baseline and alarm corrections}
+Statistical limits and forecasts are suppressed until the configured Phase-I size is available (default 20, minimum configurable
+size 5) in a single instrument/program/firmware cohort. Specification checks remain separate from statistical checks.
+The default trend fit uses Phase I rather than continually refitting every new point. A zero-event p-chart baseline no longer
+silently ignores a later positive event. It is still a simple binomial approximation; sparse-event uncertainty is not modelled
+by an exact predictive interval.
+
+The erroneous across-run $R_{4s}$ rule was removed. That rule needs appropriately standardized controls within a run;
+adjacent run means are not a substitute. The remaining run rules are descriptive monitoring tools, not validated laboratory
+acceptance criteria. Review uses exact names by default and a fixed initial baseline; root grouping cannot raise Westgard alarms.
+
+\section{Demonstration and interpretation limits}
+The regenerated set contains 57 synthetic runs and 325 synthetic history rows. Thirty screening runs include 24 runs of
+the March control extraction and six of the July extraction. The short July batch intentionally illustrates an incomplete
+baseline. Historical summary rows contain no dated positive-control metrics because their synthetic well-level batch identities
+are not available. They continue to demonstrate thermal, optical, mechanical and process-stage histories.
+
+The new plots show associations rather than equipment diagnoses. LED current, cover motion, cooling and operator differences
+were planted independently by the generator. The maintenance suggestions in the catalogue are hypotheses to investigate.
+Calibrated temperature verification, optical reference measurements and service records remain external evidence.
+
+

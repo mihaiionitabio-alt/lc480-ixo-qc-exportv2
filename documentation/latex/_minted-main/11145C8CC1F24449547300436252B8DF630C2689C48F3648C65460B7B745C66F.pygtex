@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{ccSetCfg}\PYG{p}{(}\PYG{n+nx}{id}\PYG{p}{,}\PYG{n+nx}{patch}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{SOP}\PYG{p}{.}\PYG{n+nx}{controlCharts}\PYG{o}{=}\PYG{n+nx}{SOP}\PYG{p}{.}\PYG{n+nx}{controlCharts}\PYG{o}{||}\PYG{p}{\PYGZob{}\PYGZcb{};}
+\PYG{+w}{  }\PYG{n+nx}{SOP}\PYG{p}{.}\PYG{n+nx}{controlCharts}\PYG{p}{[}\PYG{n+nx}{id}\PYG{p}{]}\PYG{o}{=}\PYG{n+nb}{Object}\PYG{p}{.}\PYG{n+nx}{assign}\PYG{p}{(\PYGZob{}\PYGZcb{},}\PYG{n+nx}{SOP}\PYG{p}{.}\PYG{n+nx}{controlCharts}\PYG{p}{[}\PYG{n+nx}{id}\PYG{p}{]}\PYG{o}{||}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{n+nx}{patch}\PYG{p}{);}\PYG{n+nx}{sopChanged}\PYG{p}{();\PYGZcb{}}
+\end{Verbatim}

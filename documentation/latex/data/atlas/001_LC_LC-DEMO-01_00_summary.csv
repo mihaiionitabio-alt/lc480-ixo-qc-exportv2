@@ -1,0 +1,44 @@
+code, chart, group, variant, runs, status, detail, latest, unit, alarms, chart_type, file
+B-H3b, Settling time at the denaturation step, hardware, , 150, alarm, "outside the limits: beyond 3σ,  4 of 5 beyond 1σ,  8 on one side", 4.13, s, 49, i, B-H3b_settling.svg
+B-H4, Temperature at the moment of reading, hardware, , 150, alarm, "sustained shift since 2025-05-17 (-0.5008 → -0.4034 °C from setpoint,  54 runs) — find the cause; if the new level is accepted,  start a new baseline on that date", -0.3965616214200094, °C from setpoint, 55, xbars, B-H4_hold_temp.svg
+B-O1, "Replicate precision (pooled SD,  Cq < 30)", operator, , 150, alarm, outside the limits: beyond 3σ, 0.7530953156790325, Cq SD, 10, i, B-O1_rep_sd.svg
+B-O5, Contamination rate by operator (funnel), operator, legacy pooled (stage unknown), 150, alarm, 1 operator(s) outside 99.8 %, , share of NTC wells, 1, funnel, B-O5_ntc_op_legacy_pooled_stage_unknown.svg
+A-H4, Run duration, hardware, , 150, watch, signal in the last 5 runs, 97.605564514784, minutes, 3, i, A-H4_run_minutes.svg
+B-H1, Peak heating rate (2-s window), hardware, , 150, watch, "sustained shift since 2025-05-17 (4.884 → 4.769 °C/s,  54 runs) · still inside the specification — find the cause; if the new level is accepted,  start a new baseline on that date", 4.7571, °C/s, 55, trend, B-H1_heat_rate.svg
+B-H2, Peak cooling rate (2-s window), hardware, , 150, watch, "sustained shift since 2025-03-03 (2.4 → 2.279 °C/s,  68 runs) · still inside the specification — find the cause; if the new level is accepted,  start a new baseline on that date", 2.21796, °C/s, 104, trend, B-H2_cool_rate.svg
+B-H8, Lamp reference channel (stability), hardware, 533-580, 150, watch, signal in the last 5 runs, 21064, reference counts, 5, i, B-H8_lamp_ref_533-580.svg
+B-H9, Lamp drift within a run, hardware, 465-510, 150, watch, signal in the last 5 runs, 0.4084647132018944, % change in the run, 8, i, B-H9_lamp_drift_465-510.svg
+B-M5, Negative controls by process stage, method, legacy pooled (stage unknown), 150, watch, signal in the last 5 runs, 0, share of NTC wells, 7, p, B-M5_ntc_rate_legacy_pooled_stage_unknown.svg
+B-O6, Repeat / inconclusive / invalid rate by operator (funnel), operator, , 150, watch, 1 outside 95 %, , share of results, 1, funnel, B-O6_action_op.svg
+A-H3, Background fluorescence per channel, hardware, 465-510, 150, in control, in control, 1767.4233965596661, fluorescence, 4, i, A-H3_bg_median_465-510.svg
+A-H3, Background fluorescence per channel, hardware, 533-580, 150, in control, in control, 1435.1200607790424, fluorescence, 1, i, A-H3_bg_median_533-580.svg
+A-H3b, End-point fluorescence per channel, hardware, 465-510, 150, in control, in control, 2600.8279763391033, fluorescence, 0, i, A-H3b_plateau_median_465-510.svg
+A-H3b, End-point fluorescence per channel, hardware, 533-580, 150, in control, in control, 1374.9323564254194, fluorescence, 4, i, A-H3b_plateau_median_533-580.svg
+A-M1, Positive control Cq (Levey-Jennings), method, 35S | DEMO-CRM, 150, in control, in control, 34.11777008209103, Cq, 0, i, A-M1_pc_cq_35S_DEMO-CRM.svg
+A-M1, Positive control Cq (Levey-Jennings), method, T-NOS | DEMO-CRM, 150, in control, in control, 31.333945831702348, Cq, 0, i, A-M1_pc_cq_T-NOS_DEMO-CRM.svg
+A-M1, Positive control Cq (Levey-Jennings), method, HMG | DEMO-CRM, 150, in control, in control, 22.891763522541904, Cq, 6, i, A-M1_pc_cq_HMG_DEMO-CRM.svg
+A-S4, Run end → last change, software, , 150, in control, in control, -0.038286458583750974, log10 hours, 0, i, A-S4_edit_delay.svg
+A-S6, Forensic findings per run, software, , 150, in control, in control, 77, findings, 1, c, A-S6_findings.svg
+B-H11, Automatic integration time / exposure, hardware, 465-510, 150, in control, in control, 238, ms, 1, i, B-H11_exposure_465-510.svg
+B-H11, Automatic integration time / exposure, hardware, 533-580, 150, in control, in control, 92, ms, 1, i, B-H11_exposure_533-580.svg
+B-H17, Channel switch time, hardware, , 150, in control, in control, 1045, ms, 0, i, B-H17_chan_switch.svg
+B-H3, Overshoot at the denaturation step, hardware, , 150, in control, in control, 5.4, °C, 45, cusum, B-H3_overshoot.svg
+B-H3c, Transition time A → B °C, hardware, 95→60 °C, 150, in control, in control, 15.25765915220159, s, 86, i, B-H3c_transition_95-to-60.svg
+B-H3c, Transition time A → B °C, hardware, 60→72 °C, 150, in control, in control, 2.4129608330226113, s, 2, i, B-H3c_transition_60-to-72.svg
+B-H3c, Transition time A → B °C, hardware, 72→95 °C, 150, in control, in control, 4.895648722486546, s, 57, i, B-H3c_transition_72-to-95.svg
+B-H3c, Transition time A → B °C, hardware, 72→40 °C, 150, in control, in control, 16.143564437058213, s, 51, i, B-H3c_transition_72-to-40.svg
+B-H8, Lamp reference channel (stability), hardware, 465-510, 150, in control, in control, 7060, reference counts, 14, i, B-H8_lamp_ref_465-510.svg
+B-H9, Lamp drift within a run, hardware, 533-580, 150, in control, in control, -2.2010213007095443, % change in the run, 0, i, B-H9_lamp_drift_533-580.svg
+B-M1, Probe signal strength (positive control), method, 35S | DEMO-CRM, 150, in control, in control, 1556.60202633382, fluorescence, 9, ewma, B-M1_pc_amplitude_35S_DEMO-CRM.svg
+B-M1, Probe signal strength (positive control), method, T-NOS | DEMO-CRM, 150, in control, in control, 1617.462643275739, fluorescence, 0, ewma, B-M1_pc_amplitude_T-NOS_DEMO-CRM.svg
+B-M1, Probe signal strength (positive control), method, HMG | DEMO-CRM, 150, in control, in control, 1602.0201654808025, fluorescence, 0, ewma, B-M1_pc_amplitude_HMG_DEMO-CRM.svg
+B-M10, Late signal / stochastic-zone results, method, , 150, in control, in control, 0, share of results, 0, p, B-M10_late_rate.svg
+B-O11, Copied-data events, operator, , 150, in control, in control, 0, events, 0, c, B-O11_copied.svg
+B-O3, Row / column pattern, operator, , 150, in control, in control, 0.0678736418355314, Cq, 5, i, B-O3_rowcol.svg
+B-O7, Manual interventions, operator, , 150, in control, in control, 0, share of settings, 13, p, B-O7_manual_rate.svg
+B-O9, Stored calls that disagree with the SOP, operator, , 150, in control, in control, 0.1875, share of wells, 0, p, B-O9_call_disagree.svg
+B-S10, Temperature-log intervals over 500 ms, software, , 150, in control, in control, 0.0022095959595959595, share of intervals, 1, p, B-S10_templog_late.svg
+B-S11, Invalid fluorescence readings, software, , 150, in control, in control, 0, share of readings, 1, p, B-S11_invalid_acq.svg
+B-S9, Cycle-timing regularity, software, , 150, in control, in control, 20.605349312572702, ms, 0, i, B-S9_cycle_sd.svg
+B-M3, PCR efficiency from the standards, method, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , % efficiency, 0, trend, B-M3_efficiency.svg
+B-M6, IC shift from fixed reference, method, , 0, not enough data, requires a fixed IC reference Cq and matching IC target, , cycles, 0, ewma, B-M6_ic_shift.svg

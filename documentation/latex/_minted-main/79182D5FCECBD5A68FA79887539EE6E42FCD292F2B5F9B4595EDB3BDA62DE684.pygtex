@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{sopTime}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{v}\PYG{o}{==}\PYG{k+kc}{null}\PYG{o}{||}\PYG{n+nx}{v}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}\PYG{k}{return}\PYG{+w}{ }\PYG{k+kc}{NaN}\PYG{p}{;}\PYG{k}{if}\PYG{p}{(}\PYG{o+ow}{typeof}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}number\PYGZdq{}}\PYG{p}{)}\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{o}{=}\PYG{n+nb}{String}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{).}\PYG{n+nx}{trim}\PYG{p}{();}\PYG{k}{if}\PYG{p}{(}\PYG{l+s+sr}{/\PYGZca{}1899/}\PYG{p}{.}\PYG{n+nx}{test}\PYG{p}{(}\PYG{n+nx}{s}\PYG{p}{))}\PYG{k}{return}\PYG{+w}{ }\PYG{k+kc}{NaN}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{t}\PYG{o}{=}\PYG{n+nb}{Date}\PYG{p}{.}\PYG{n+nx}{parse}\PYG{p}{(}\PYG{l+s+sr}{/\PYGZca{}\PYGZbs{}d\PYGZob{}4\PYGZcb{}\PYGZhy{}\PYGZbs{}d\PYGZbs{}d\PYGZhy{}\PYGZbs{}d\PYGZbs{}d \PYGZbs{}d/}\PYG{p}{.}\PYG{n+nx}{test}\PYG{p}{(}\PYG{n+nx}{s}\PYG{p}{)}\PYG{o}{?}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}T\PYGZdq{}}\PYG{p}{)}\PYG{o}{:}\PYG{n+nx}{s}\PYG{p}{);}\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{Number}\PYG{p}{.}\PYG{n+nb}{isFinite}\PYG{p}{(}\PYG{n+nx}{t}\PYG{p}{)}\PYG{o}{?}\PYG{n+nx}{t}\PYG{o}{:}\PYG{k+kc}{NaN}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

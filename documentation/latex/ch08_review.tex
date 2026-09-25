@@ -1,0 +1,43 @@
+\chapter{Tab 6 · Quality \& forensic review}\label{ch:review}
+
+\section{Purpose}
+The review tab answers file-integrity, result-consistency and control-identity questions. Its export contains plate map,
+sample comparison, statistics, control charts, runs and QC, amplification curves and instrument records.
+\readingnote{Use the sheet that answers the current check; the export does not replace the source instrument file.}
+
+\figui{ui_review.png}{Review overview for the synthetic data set: experiments, stored and linked results, structural errors (the two planted errors), review findings.}{ui_review}
+
+\section{The forensic log}
+Every check writes events with a severity (\emph{error}, \emph{review}, \emph{info}), an area, a finding and the evidence.
+The log collects structural checks, SOP findings and interpretation evidence. Control-chart alarm points are shown in Tab~2
+and remain in the chart CSV/SVG exports; they are not duplicated here.
+
+\input{code/reviewForensicEvents}
+\input{code/reviewForensicEventsCore}
+\input{code/integrityEvents}
+
+\subsection*{Additional forensic checks}
+\texttt{extraForensicEvents()} looks for identical curves or Cq values where independent data are expected (\emph{Copied data}),
+dates in the wrong order, changes long after the run, stored calls that disagree with the SOP and similar signs.
+
+\input{code/extraForensicEvents}
+\input{code/westgardReview}
+
+Exact control names are now the default. The SC profile adds a canonical-family view for descriptive pooling while retaining
+the original sample text. Review baselines use the initial configured run count; pooling does not change stored values.
+
+\section{Findings on the synthetic data}
+\input{tables/forensic_counts}
+\input{tables/forensic_planted}
+
+The synthetic gallery includes a dilution-series example in which one NTC shows a late signal; the example demonstrates a
+failed negative-control rule without reproducing a laboratory result.
+
+Most review findings are expected for this data set: many wells are named but not included in an analysis
+(\emph{Analysis membership}), and the history contains the planted trends, which the control charts report as alarms.
+\readingnote{A red point is outside a displayed limit; an amber point is an enabled pattern rule inside the limits. Both
+are review prompts. A missing chart series means that its data or eligibility requirements were not available.}
+
+\fig[0.9]{g_all_x_findings.png}{\texttt{x\_findings} — Pareto of error and review findings by area.}{findings}
+
+

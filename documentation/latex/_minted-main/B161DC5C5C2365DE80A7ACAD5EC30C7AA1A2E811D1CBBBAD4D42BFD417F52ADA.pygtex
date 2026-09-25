@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{async} \PYG{k+kd}{function} \PYG{n+nx}{readStaged}\PYG{p}{()\PYGZob{}}
+  \PYG{c+cm}{/* One entry point, one exit state: whatever happens inside, the phase is defined again}
+\PYG{c+cm}{     when this returns and any fault is recorded once. */}
+  \PYG{k+kd}{const} \PYG{n+nx}{task}\PYG{o}{=}\PYG{n+nx}{appTaskStart}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Reading experiment files\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{STAGED}\PYG{p}{.}\PYG{n+nx}{length}\PYG{p}{,}\PYG{k+kc}{true}\PYG{p}{);}
+  \PYG{k}{try}\PYG{p}{\PYGZob{}}\PYG{k}{return} \PYG{k}{await} \PYG{n+nx}{readStagedCore}\PYG{p}{(}\PYG{n+nx}{task}\PYG{p}{);\PYGZcb{}}
+  \PYG{k}{catch}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{appError}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}read\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{e}\PYG{p}{);}\PYG{k+kd}{const} \PYG{n+nx}{m}\PYG{o}{=}\PYG{n+nx}{\PYGZdl{}}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}readmsg\PYGZdq{}}\PYG{p}{);}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{m}\PYG{p}{)}\PYG{n+nx}{m}\PYG{p}{.}\PYG{n+nx}{innerHTML}\PYG{o}{=}\PYG{l+s+sb}{`\PYGZlt{}div class=\PYGZdq{}notice bad\PYGZdq{}\PYGZgt{}The read stopped: }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nx}{esc}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{.}\PYG{n+nx}{message}\PYG{o}{||}\PYG{n+nb}{String}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{))}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+sb}{\PYGZlt{}/div\PYGZgt{}`}\PYG{p}{;\PYGZcb{}}
+  \PYG{k}{finally}\PYG{p}{\PYGZob{}}\PYG{n+nx}{appTaskEnd}\PYG{p}{(}\PYG{n+nx}{task}\PYG{p}{);}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{APP\PYGZus{}STATE}\PYG{p}{.}\PYG{n+nx}{phase}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}reading\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{setPhase}\PYG{p}{(}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{length}\PYG{o}{?}\PYG{l+s+s2}{\PYGZdq{}ready\PYGZdq{}}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}idle\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}read finished\PYGZdq{}}\PYG{p}{);}
+    \PYG{n+nx}{appStatusPaint}\PYG{p}{();\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
