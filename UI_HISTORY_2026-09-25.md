@@ -48,3 +48,9 @@ This record covers the GitHub website update made after the technical documentat
 - Verified in Chromium: page loads without errors; the whole template and all 84 full-example lines parse without errors.
 - The LaTeX documentation and PDF were not modified.
 - Updated SHA-256: `CFBAC45B429D66022339E082AEFD4BB4CCD1C0D6A195F12E6F89E008D9D4C4DF`; size 939,974 bytes.
+
+## Follow-up — control-chart types in the default script — 2026-09-25
+
+- Every `select cc:… ` line in the Script-box template now uses the chart's own type (`trend`, `ewma`, `cusum`, `xbars`, `p`, `u`, `c`, `funnel` or `i`) instead of `type=i` for all 58 charts. With `type=i`, the 16 `p`/`u`/`c`/`funnel` charts drew empty and appeared in the archive under `errors/`.
+- Verified in Chromium: page loads without errors; the whole template parses without errors.
+- Updated SHA-256: `086D07E3FDAB35476F544C56E0F2ED9C74B008F14160E2015D7D62FE90951BE8`; size 940025 bytes.
