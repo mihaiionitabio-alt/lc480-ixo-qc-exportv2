@@ -1,0 +1,5810 @@
+{
+ "schema": "qpcr-instrument-history/1",
+ "written": "2026-09-21T00:00:00Z",
+ "note": "SYNTHETIC demonstration history — all values are made up. Not laboratory measurements.",
+ "sop": {
+  "name": "DEMO laboratory SOP (synthetic example)",
+  "version": "1.0",
+  "sha256": ""
+ },
+ "rows": [
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0001",
+   "run": "DEMO_LC2_HIST_0001",
+   "file": "DEMO_LC2_HIST_0001",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1736854200000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.5254014142942,
+    "edit_delay": 1.3112114067074827,
+    "bg_median": {
+     "465-510": 1318.9212357158578,
+     "533-580": 829.8868025882973
+    },
+    "plateau_median": {
+     "465-510": 1975.383915408416,
+     "533-580": 1463.750923299423
+    },
+    "heat_rate": 4.72074,
+    "cool_rate": 2.39976,
+    "overshoot": 5.32,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.214016238034286,
+     "60→72 °C": 2.4423733900238296,
+     "72→95 °C": 4.825531843238426,
+     "72→40 °C": 16.20056025662505
+    },
+    "hold_temp": {
+     "mean": -0.43063107422242597,
+     "sd": 0.03259997112973102,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6879,
+     "533-580": 11952
+    },
+    "lamp_drift": {
+     "465-510": -1.9112265126348158,
+     "533-580": -1.4106657923417318
+    },
+    "exposure": {
+     "465-510": 255,
+     "533-580": 309
+    },
+    "chan_switch": 1043,
+    "cycle_sd": 41.09963316411545,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 2,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.10819248734457092,
+    "rowcol": 0.46508778525184175,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 111
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.53752249778804,
+     "T-NOS | DEMO-CRM": 30.619758613528028,
+     "HMG | DEMO-CRM": 23.093781117259617
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1237.199262797245,
+     "T-NOS | DEMO-CRM": 1378.580317025369,
+     "HMG | DEMO-CRM": 1493.4183468124816
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0002",
+   "run": "DEMO_LC2_HIST_0002",
+   "file": "DEMO_LC2_HIST_0002",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1737556200000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.93671201204594,
+    "edit_delay": 0.9039158673762973,
+    "bg_median": {
+     "465-510": 1640.5838868020649,
+     "533-580": 1714.6633089983443
+    },
+    "plateau_median": {
+     "465-510": 1962.7908271728925,
+     "533-580": 2206.593966065701
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.47248,
+    "overshoot": 5.41,
+    "settling": 4.95,
+    "transition": {
+     "95→60 °C": 15.250624343514197,
+     "60→72 °C": 2.4517777246892507,
+     "72→95 °C": 4.850701540228234,
+     "72→40 °C": 16.308805844705542
+    },
+    "hold_temp": {
+     "mean": -0.4267934941415936,
+     "sd": 0.025660002563474234,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6824,
+     "533-580": 11919
+    },
+    "lamp_drift": {
+     "465-510": -1.8096918650770124,
+     "533-580": -1.3630489626874296
+    },
+    "exposure": {
+     "465-510": 287,
+     "533-580": 259
+    },
+    "chan_switch": 1043,
+    "cycle_sd": 33.559564579593484,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 16,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.19460696600820404,
+    "rowcol": 0.4550897632782202,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 119
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.937504869464746,
+     "T-NOS | DEMO-CRM": 30.65096364666373,
+     "HMG | DEMO-CRM": 22.82241086863981
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1615.7871114037885,
+     "T-NOS | DEMO-CRM": 1583.9102749405674,
+     "HMG | DEMO-CRM": 1561.9491084291585
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0003",
+   "run": "DEMO_LC2_HIST_0003",
+   "file": "DEMO_LC2_HIST_0003",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1737729000000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.58507926476936,
+    "edit_delay": -0.5745746184990309,
+    "bg_median": {
+     "465-510": 1853.8738415117919,
+     "533-580": 1904.597526595051
+    },
+    "plateau_median": {
+     "465-510": 2230.643281525051,
+     "533-580": 2114.1881418579305
+    },
+    "heat_rate": 4.77528,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.34,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.249670686818881,
+     "60→72 °C": 2.4376716257699558,
+     "72→95 °C": 4.877223247433218,
+     "72→40 °C": 16.099324977387404
+    },
+    "hold_temp": {
+     "mean": -0.4244930237617073,
+     "sd": 0.02730511921176857,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6850,
+     "533-580": 11937
+    },
+    "lamp_drift": {
+     "465-510": -1.5285180727938397,
+     "533-580": -1.4970244142621123
+    },
+    "exposure": {
+     "465-510": 253,
+     "533-580": 297
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 48.2872332440185,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 14,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.09854865922809908,
+    "rowcol": 0.45930016400006296,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 102
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.829998120500164,
+     "T-NOS | DEMO-CRM": 31.172781173384795,
+     "HMG | DEMO-CRM": 23.502684563472805
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1472.882174209695,
+     "T-NOS | DEMO-CRM": 1289.7008284405856,
+     "HMG | DEMO-CRM": 1479.1460494010005
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0004",
+   "run": "DEMO_LC2_HIST_0004",
+   "file": "DEMO_LC2_HIST_0004",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1739190600000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 67.70688365821665,
+    "edit_delay": -0.3956855063676538,
+    "bg_median": {
+     "465-510": 1798.0706399208461,
+     "533-580": 1488.158610559612
+    },
+    "plateau_median": {
+     "465-510": 2480.3600219098807,
+     "533-580": 1493.2722508777535
+    },
+    "heat_rate": 4.77528,
+    "cool_rate": 2.41794,
+    "overshoot": 5.3500000000000005,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.26254714104316,
+     "60→72 °C": 2.4364422526415703,
+     "72→95 °C": 4.843007773953153,
+     "72→40 °C": 16.43611861351281
+    },
+    "hold_temp": {
+     "mean": -0.42534353638184985,
+     "sd": 0.02188606653833304,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6825,
+     "533-580": 11845
+    },
+    "lamp_drift": {
+     "465-510": -1.7316209739003423,
+     "533-580": -1.5590753079298656
+    },
+    "exposure": {
+     "465-510": 207,
+     "533-580": 273
+    },
+    "chan_switch": 1033,
+    "cycle_sd": 42.20667712845296,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.3532228381257632,
+    "rowcol": 0.022674499999985505,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 100
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.21518767875914,
+     "T-NOS | DEMO-CRM": 31.20685240428205,
+     "HMG | DEMO-CRM": 22.884450542110994
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1684.3563253083287,
+     "T-NOS | DEMO-CRM": 1653.9633384698523,
+     "HMG | DEMO-CRM": 1568.6051196063177
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0005",
+   "run": "DEMO_LC2_HIST_0005",
+   "file": "DEMO_LC2_HIST_0005",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1739367000000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.51172812435564,
+    "edit_delay": -0.8478817367488547,
+    "bg_median": {
+     "465-510": 1752.4453707372897,
+     "533-580": 1765.6673567063424
+    },
+    "plateau_median": {
+     "465-510": 2209.3175369722067,
+     "533-580": 1219.4416702306103
+    },
+    "heat_rate": 4.77528,
+    "cool_rate": 2.3937,
+    "overshoot": 5.36,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.30219827835269,
+     "60→72 °C": 2.438836927259704,
+     "72→95 °C": 4.827099419508843,
+     "72→40 °C": 15.80902256337534
+    },
+    "hold_temp": {
+     "mean": -0.42465071623688666,
+     "sd": 0.030883627261682936,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6862,
+     "533-580": 11906
+    },
+    "lamp_drift": {
+     "465-510": -1.7193820797172708,
+     "533-580": -0.8631812411075397
+    },
+    "exposure": {
+     "465-510": 258,
+     "533-580": 271
+    },
+    "chan_switch": 1035,
+    "cycle_sd": 59.605323291107666,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 24,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 1,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.31550276830231516,
+    "rowcol": 0.18204706728247233,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 130
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.085112003835405,
+     "T-NOS | DEMO-CRM": 31.390493460381443,
+     "HMG | DEMO-CRM": 23.095341845243414
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1513.24318570479,
+     "T-NOS | DEMO-CRM": 1331.002626909431,
+     "HMG | DEMO-CRM": 1378.9649817399145
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0006",
+   "run": "DEMO_LC2_HIST_0006",
+   "file": "DEMO_LC2_HIST_0006",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1739529000000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 72.81323962750754,
+    "edit_delay": 0.22622885028578493,
+    "bg_median": {
+     "465-510": 1669.3903823514167,
+     "533-580": 1638.9834235441913
+    },
+    "plateau_median": {
+     "465-510": 2648.4507470206986,
+     "533-580": 1462.0624681029537
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.4,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.263933259528168,
+     "60→72 °C": 2.4502369017919268,
+     "72→95 °C": 4.828883087610437,
+     "72→40 °C": 16.22545423661533
+    },
+    "hold_temp": {
+     "mean": -0.4261608255368196,
+     "sd": 0.03432406291241117,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6840,
+     "533-580": 11899
+    },
+    "lamp_drift": {
+     "465-510": -2.1639165034762398,
+     "533-580": -1.756286794734415
+    },
+    "exposure": {
+     "465-510": 299,
+     "533-580": 285
+    },
+    "chan_switch": 1038,
+    "cycle_sd": 29.55663609142589,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 16,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 6
+    },
+    "rep_sd": 0.35987638303471303,
+    "rowcol": 0.2112124076856442,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 111
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.06188876145191,
+     "T-NOS | DEMO-CRM": 31.004838742829143,
+     "HMG | DEMO-CRM": 23.13926702015617
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1755.2284391285937,
+     "T-NOS | DEMO-CRM": 1604.8726737331829,
+     "HMG | DEMO-CRM": 1497.1192713959013
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0007",
+   "run": "DEMO_LC2_HIST_0007",
+   "file": "DEMO_LC2_HIST_0007",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1741602600000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.38722310199103,
+    "edit_delay": -0.960808807490012,
+    "bg_median": {
+     "465-510": 1746.6218533862536,
+     "533-580": 2070.841689338727
+    },
+    "plateau_median": {
+     "465-510": 2220.297762626451,
+     "533-580": 2149.080419308542
+    },
+    "heat_rate": 4.7874,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.3500000000000005,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.247947128926523,
+     "60→72 °C": 2.454712146674649,
+     "72→95 °C": 4.8704944371053465,
+     "72→40 °C": 16.248487805943483
+    },
+    "hold_temp": {
+     "mean": -0.4371121006586634,
+     "sd": 0.03478681837876701,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6866,
+     "533-580": 11931
+    },
+    "lamp_drift": {
+     "465-510": -1.2096360024446056,
+     "533-580": -1.1632416136488457
+    },
+    "exposure": {
+     "465-510": 239,
+     "533-580": 268
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 23.218107251213343,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 18,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.48347778866962604,
+    "rowcol": 0.18535479852401196,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 116
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.7804992399622,
+     "T-NOS | DEMO-CRM": 32.05769979325958,
+     "HMG | DEMO-CRM": 23.04310661236333
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1491.7888392747527,
+     "T-NOS | DEMO-CRM": 1331.3812548851952,
+     "HMG | DEMO-CRM": 1478.428049850362
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0008",
+   "run": "DEMO_LC2_HIST_0008",
+   "file": "DEMO_LC2_HIST_0008",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1742128200000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.66797599370362,
+    "edit_delay": -1.230784363208679,
+    "bg_median": {
+     "465-510": 1776.7683426264296,
+     "533-580": 1422.7808538966683
+    },
+    "plateau_median": {
+     "465-510": 2506.2868929034744,
+     "533-580": 1590.670590914385
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.35734,
+    "overshoot": 5.3500000000000005,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.247407339188008,
+     "60→72 °C": 2.446189066446725,
+     "72→95 °C": 4.88589139052742,
+     "72→40 °C": 16.073164678092816
+    },
+    "hold_temp": {
+     "mean": -0.43372536524699745,
+     "sd": 0.03273575044547852,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6898,
+     "533-580": 11959
+    },
+    "lamp_drift": {
+     "465-510": -1.9079876153043267,
+     "533-580": -1.6414155898026324
+    },
+    "exposure": {
+     "465-510": 280,
+     "533-580": 264
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 17.114450420915205,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 18,
+     "n": 8151
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.23832134783036915,
+    "rowcol": 0.5252326787911668,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 126
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.015740364912,
+     "T-NOS | DEMO-CRM": 32.11072645560542,
+     "HMG | DEMO-CRM": 23.361211144802507
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1666.8933006326317,
+     "T-NOS | DEMO-CRM": 1583.7574331555868,
+     "HMG | DEMO-CRM": 1305.9289374395717
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0009",
+   "run": "DEMO_LC2_HIST_0009",
+   "file": "DEMO_LC2_HIST_0009",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1744903800000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.5781464880862,
+    "edit_delay": -0.19313559534486358,
+    "bg_median": {
+     "465-510": 1654.9697856188159,
+     "533-580": 1851.6200896583985
+    },
+    "plateau_median": {
+     "465-510": 2829.8613038414524,
+     "533-580": 2060.4151327882696
+    },
+    "heat_rate": 4.77528,
+    "cool_rate": 2.44218,
+    "overshoot": 5.46,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.310943763196386,
+     "60→72 °C": 2.450450872508015,
+     "72→95 °C": 4.867813113690224,
+     "72→40 °C": 16.203632187578286
+    },
+    "hold_temp": {
+     "mean": -0.43345773206940175,
+     "sd": 0.023555730801911652,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6897,
+     "533-580": 11882
+    },
+    "lamp_drift": {
+     "465-510": -1.5980230490287484,
+     "533-580": -0.9094376411358871
+    },
+    "exposure": {
+     "465-510": 296,
+     "533-580": 287
+    },
+    "chan_switch": 1028,
+    "cycle_sd": 18.260583246749963,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 17,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.3011633818674801,
+    "rowcol": 0.46873567285969037,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 121
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.265975557009035,
+     "T-NOS | DEMO-CRM": 31.193941559663113,
+     "HMG | DEMO-CRM": 23.27770205945835
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1629.516193167612,
+     "T-NOS | DEMO-CRM": 1461.1484646679737,
+     "HMG | DEMO-CRM": 1414.9815763957229
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0010",
+   "run": "DEMO_LC2_HIST_0010",
+   "file": "DEMO_LC2_HIST_0010",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1746196200000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.17879455118197,
+    "edit_delay": -0.15919367760537934,
+    "bg_median": {
+     "465-510": 1499.5732186347714,
+     "533-580": 1958.6801430929868
+    },
+    "plateau_median": {
+     "465-510": 2174.0757399949407,
+     "533-580": 695.1199200292085
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.3755200000000003,
+    "overshoot": 5.39,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.314564076857573,
+     "60→72 °C": 2.433612373739275,
+     "72→95 °C": 4.93489602503883,
+     "72→40 °C": 16.660193263254207
+    },
+    "hold_temp": {
+     "mean": -0.4332757005066165,
+     "sd": 0.03314692310159026,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6841,
+     "533-580": 11476
+    },
+    "lamp_drift": {
+     "465-510": -1.991779860674629,
+     "533-580": -1.0710295162561554
+    },
+    "exposure": {
+     "465-510": 255,
+     "533-580": 302
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 47.49811709640888,
+    "invalid_acq": {
+     "bad": 2,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 15,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.2112209541499866,
+    "rowcol": 0.18687979024684345,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 122
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.47702383245852,
+     "T-NOS | DEMO-CRM": 30.689812595791057,
+     "HMG | DEMO-CRM": 23.20648671839652
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1408.652747406507,
+     "T-NOS | DEMO-CRM": 1473.1908129346896,
+     "HMG | DEMO-CRM": 1602.112828347133
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0011",
+   "run": "DEMO_LC2_HIST_0011",
+   "file": "DEMO_LC2_HIST_0011",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1746977400000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.92050202725365,
+    "edit_delay": 0.20578863361390126,
+    "bg_median": {
+     "465-510": 1676.5133954892572,
+     "533-580": 1916.290625429726
+    },
+    "plateau_median": {
+     "465-510": 2098.885996609966,
+     "533-580": 1730.8401620791326
+    },
+    "heat_rate": 4.7874,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.39,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.376951603670369,
+     "60→72 °C": 2.4452844041284667,
+     "72→95 °C": 4.904951724097269,
+     "72→40 °C": 16.329792972841133
+    },
+    "hold_temp": {
+     "mean": -0.4255439634263674,
+     "sd": 0.03606100142111257,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6854,
+     "533-580": 11893
+    },
+    "lamp_drift": {
+     "465-510": -1.5156369354361627,
+     "533-580": -1.5674341250629757
+    },
+    "exposure": {
+     "465-510": 282,
+     "533-580": 272
+    },
+    "chan_switch": 1043,
+    "cycle_sd": 57.20403555458747,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 15,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.6218826181450856,
+    "rowcol": 0.4718070801561981,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 105
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.88174059855619,
+     "T-NOS | DEMO-CRM": 31.272021341445075,
+     "HMG | DEMO-CRM": 23.094656895710976
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1559.4729908445672,
+     "T-NOS | DEMO-CRM": 1688.316335005919,
+     "HMG | DEMO-CRM": 1750.942443374659
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0012",
+   "run": "DEMO_LC2_HIST_0012",
+   "file": "DEMO_LC2_HIST_0012",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1747229400000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 67.70208900524094,
+    "edit_delay": -0.49037221713716284,
+    "bg_median": {
+     "465-510": 1143.1181778753453,
+     "533-580": 1430.2466361946924
+    },
+    "plateau_median": {
+     "465-510": 1950.2012904918247,
+     "533-580": 1166.6244623301104
+    },
+    "heat_rate": 4.79952,
+    "cool_rate": 2.44824,
+    "overshoot": 5.3500000000000005,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.36640524769254,
+     "60→72 °C": 2.4537366856702354,
+     "72→95 °C": 4.880059641538476,
+     "72→40 °C": 16.34645297934892
+    },
+    "hold_temp": {
+     "mean": -0.4351943768892482,
+     "sd": 0.02951783677387887,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6901,
+     "533-580": 11964
+    },
+    "lamp_drift": {
+     "465-510": -1.5641976271150186,
+     "533-580": -1.2978770581860422
+    },
+    "exposure": {
+     "465-510": 337,
+     "533-580": 278
+    },
+    "chan_switch": 1041,
+    "cycle_sd": 35.50157648383632,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 24,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 6
+    },
+    "rep_sd": 0.6778464537312313,
+    "rowcol": 0.21000434786117805,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 108
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.01307324544846,
+     "T-NOS | DEMO-CRM": 31.35765016055098,
+     "HMG | DEMO-CRM": 23.137877334813467
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1428.268150312397,
+     "T-NOS | DEMO-CRM": 1443.519729916646,
+     "HMG | DEMO-CRM": 1426.6406210773387
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0013",
+   "run": "DEMO_LC2_HIST_0013",
+   "file": "DEMO_LC2_HIST_0013",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1749821400000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.59580051723593,
+    "edit_delay": 0.08262372226042387,
+    "bg_median": {
+     "465-510": 1823.9109371779589,
+     "533-580": 1601.2046905923398
+    },
+    "plateau_median": {
+     "465-510": 2547.0168291656273,
+     "533-580": 1608.1459855011392
+    },
+    "heat_rate": 4.7874,
+    "cool_rate": 2.38158,
+    "overshoot": 5.32,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.41355475448338,
+     "60→72 °C": 2.4364256731934093,
+     "72→95 °C": 4.983109329861173,
+     "72→40 °C": 16.406929974483837
+    },
+    "hold_temp": {
+     "mean": -0.43373518318286963,
+     "sd": 0.029715750686562088,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6870,
+     "533-580": 11962
+    },
+    "lamp_drift": {
+     "465-510": -1.4468059115984186,
+     "533-580": -1.5174147236794528
+    },
+    "exposure": {
+     "465-510": 269,
+     "533-580": 330
+    },
+    "chan_switch": 1034,
+    "cycle_sd": 26.90091757525878,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 21,
+     "n": 8128
+    },
+    "action_rate": {
+     "bad": 2,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.14396054506446698,
+    "rowcol": 0.5235441120440882,
+    "manual_rate": {
+     "bad": 1,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 108
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.54208434502856,
+     "T-NOS | DEMO-CRM": 31.555179404234043,
+     "HMG | DEMO-CRM": 23.12157956937745
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1478.3074040187848,
+     "T-NOS | DEMO-CRM": 1414.2491839484767,
+     "HMG | DEMO-CRM": 1413.8763685872761
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0014",
+   "run": "DEMO_LC2_HIST_0014",
+   "file": "DEMO_LC2_HIST_0014",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1749987000000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 67.92669881114647,
+    "edit_delay": -0.5103928562282866,
+    "bg_median": {
+     "465-510": 1626.5900010520777,
+     "533-580": 2123.697788949034
+    },
+    "plateau_median": {
+     "465-510": 2720.7809797572495,
+     "533-580": 2068.735072946824
+    },
+    "heat_rate": 4.7934600000000005,
+    "cool_rate": 2.38158,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.413447379665756,
+     "60→72 °C": 2.4572709050418204,
+     "72→95 °C": 4.960854148367441,
+     "72→40 °C": 16.740873606130602
+    },
+    "hold_temp": {
+     "mean": -0.43538163984936407,
+     "sd": 0.020991707945379395,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6845,
+     "533-580": 11876
+    },
+    "lamp_drift": {
+     "465-510": -1.9138118594883997,
+     "533-580": -1.2871213214480721
+    },
+    "exposure": {
+     "465-510": 240,
+     "533-580": 299
+    },
+    "chan_switch": 1040,
+    "cycle_sd": 15.769841443944294,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 15,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.24777325034775632,
+    "rowcol": 0.4606603237343668,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 100
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.053888551833225,
+     "T-NOS | DEMO-CRM": 31.78738449084635,
+     "HMG | DEMO-CRM": 23.050132671086114
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1442.815592755389,
+     "T-NOS | DEMO-CRM": 1364.4640522510763,
+     "HMG | DEMO-CRM": 1515.3225767441015
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0015",
+   "run": "DEMO_LC2_HIST_0015",
+   "file": "DEMO_LC2_HIST_0015",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1750087800000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.89332248743828,
+    "edit_delay": -0.018591149151979645,
+    "bg_median": {
+     "465-510": 1295.2883069196957,
+     "533-580": 1274.6493127449678
+    },
+    "plateau_median": {
+     "465-510": 1900.0825524703844,
+     "533-580": 1552.8519211228931
+    },
+    "heat_rate": 4.78134,
+    "cool_rate": 2.44218,
+    "overshoot": 5.4,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.396900258422336,
+     "60→72 °C": 2.4391084048278238,
+     "72→95 °C": 4.933671218929421,
+     "72→40 °C": 16.54959614022684
+    },
+    "hold_temp": {
+     "mean": -0.4335184273038765,
+     "sd": 0.03426887959245178,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 7211,
+     "533-580": 11801
+    },
+    "lamp_drift": {
+     "465-510": -1.7526880731199368,
+     "533-580": -1.0117647219054686
+    },
+    "exposure": {
+     "465-510": 264,
+     "533-580": 280
+    },
+    "chan_switch": 1040,
+    "cycle_sd": 50.03838159929502,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 12,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.12903551503808217,
+    "rowcol": 0.18311478671570372,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 117
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.836777968921034,
+     "T-NOS | DEMO-CRM": 31.213349649357287,
+     "HMG | DEMO-CRM": 23.114785862611647
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1682.6256581205894,
+     "T-NOS | DEMO-CRM": 1600.4705117039637,
+     "HMG | DEMO-CRM": 1379.5901275134675
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0016",
+   "run": "DEMO_LC2_HIST_0016",
+   "file": "DEMO_LC2_HIST_0016",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1750786200000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.42132118146304,
+    "edit_delay": 1.4789618727593428,
+    "bg_median": {
+     "465-510": 1793.1105212009716,
+     "533-580": 1797.8206212245557
+    },
+    "plateau_median": {
+     "465-510": 2163.315325837637,
+     "533-580": 1835.7787194876507
+    },
+    "heat_rate": 4.74498,
+    "cool_rate": 2.35734,
+    "overshoot": 5.41,
+    "settling": 4.13,
+    "transition": {
+     "95→60 °C": 15.42251611194003,
+     "60→72 °C": 2.430872199774526,
+     "72→95 °C": 4.9699989020762105,
+     "72→40 °C": 16.538766751445312
+    },
+    "hold_temp": {
+     "mean": -0.4194435829311201,
+     "sd": 0.034137550235651265,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6838,
+     "533-580": 11886
+    },
+    "lamp_drift": {
+     "465-510": -1.7751200628665065,
+     "533-580": -1.299655590907642
+    },
+    "exposure": {
+     "465-510": 285,
+     "533-580": 316
+    },
+    "chan_switch": 1032,
+    "cycle_sd": 24.81847636354041,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 18,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 6
+    },
+    "rep_sd": 0.11344875173088086,
+    "rowcol": 0.20851611640037165,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 111
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.285553872750455,
+     "T-NOS | DEMO-CRM": 30.921324874086967,
+     "HMG | DEMO-CRM": 23.032737480246883
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1359.7141097629476,
+     "T-NOS | DEMO-CRM": 1509.1011388879715,
+     "HMG | DEMO-CRM": 1527.833652463498
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0017",
+   "run": "DEMO_LC2_HIST_0017",
+   "file": "DEMO_LC2_HIST_0017",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1750941000000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.21999677129155,
+    "edit_delay": -0.07435860540788922,
+    "bg_median": {
+     "465-510": 1829.9464395444493,
+     "533-580": 1615.3396828319276
+    },
+    "plateau_median": {
+     "465-510": 1868.5504074689147,
+     "533-580": 1716.3565803820986
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.43006,
+    "overshoot": 5.39,
+    "settling": 4.13,
+    "transition": {
+     "95→60 °C": 15.356039121120684,
+     "60→72 °C": 2.4349895641532733,
+     "72→95 °C": 4.929257901852043,
+     "72→40 °C": 16.782032845035893
+    },
+    "hold_temp": {
+     "mean": -0.43141322379571456,
+     "sd": 0.030410571710520556,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6914,
+     "533-580": 11873
+    },
+    "lamp_drift": {
+     "465-510": -1.5635048779141603,
+     "533-580": -0.8598726557218179
+    },
+    "exposure": {
+     "465-510": 328,
+     "533-580": 272
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 32.96309678926758,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 18,
+     "n": 8118
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.06397619760397534,
+    "rowcol": 0.34019203030852546,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 111
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.926239975200744,
+     "T-NOS | DEMO-CRM": 31.63909054692778,
+     "HMG | DEMO-CRM": 22.88453070661748
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1319.883866116048,
+     "T-NOS | DEMO-CRM": 1642.5878423452382,
+     "HMG | DEMO-CRM": 1454.9807772563595
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0018",
+   "run": "DEMO_LC2_HIST_0018",
+   "file": "DEMO_LC2_HIST_0018",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1753713000000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 73.45435080082608,
+    "edit_delay": 0.4071864392991474,
+    "bg_median": {
+     "465-510": 1638.953622816434,
+     "533-580": 1839.6726447147337
+    },
+    "plateau_median": {
+     "465-510": 2261.581292435728,
+     "533-580": 2113.974195660149
+    },
+    "heat_rate": 4.7571,
+    "cool_rate": 2.41188,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.434551121964496,
+     "60→72 °C": 2.4308638699023954,
+     "72→95 °C": 4.953687855674975,
+     "72→40 °C": 16.623388174444138
+    },
+    "hold_temp": {
+     "mean": -0.417772638411258,
+     "sd": 0.023842885521885984,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6806,
+     "533-580": 11840
+    },
+    "lamp_drift": {
+     "465-510": -1.9059093941961176,
+     "533-580": -1.3306551608229191
+    },
+    "exposure": {
+     "465-510": 282,
+     "533-580": 358
+    },
+    "chan_switch": 1041,
+    "cycle_sd": 41.90612902501544,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 26,
+     "n": 8128
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.2966171806114843,
+    "rowcol": 0.523386823195177,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 113
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.20279472595747,
+     "T-NOS | DEMO-CRM": 30.81567528851204,
+     "HMG | DEMO-CRM": 23.00077165509403
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1187.5374315027732,
+     "T-NOS | DEMO-CRM": 1577.9256313563164,
+     "HMG | DEMO-CRM": 1402.6277719071984
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0019",
+   "run": "DEMO_LC2_HIST_0019",
+   "file": "DEMO_LC2_HIST_0019",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1755189000000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 70.40845706700314,
+    "edit_delay": -0.880781461404378,
+    "bg_median": {
+     "465-510": 1987.0562471588648,
+     "533-580": 1972.1533120344286
+    },
+    "plateau_median": {
+     "465-510": 2860.6599552858843,
+     "533-580": 1148.9356101647477
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.38764,
+    "overshoot": 5.45,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.391088219511186,
+     "60→72 °C": 2.444671753149056,
+     "72→95 °C": 4.950690305358271,
+     "72→40 °C": 16.73137968853232
+    },
+    "hold_temp": {
+     "mean": -0.4258674892443738,
+     "sd": 0.02760839010920608,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6872,
+     "533-580": 11830
+    },
+    "lamp_drift": {
+     "465-510": -1.6521580132035119,
+     "533-580": -1.655869931497073
+    },
+    "exposure": {
+     "465-510": 286,
+     "533-580": 341
+    },
+    "chan_switch": 1040,
+    "cycle_sd": 27.67209807205489,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 23,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 6
+    },
+    "rep_sd": 0.28042278522721453,
+    "rowcol": 0.21062606098510586,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 116
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.679544140566165,
+     "T-NOS | DEMO-CRM": 31.389091686450843,
+     "HMG | DEMO-CRM": 22.99437993306439
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1479.9270973482414,
+     "T-NOS | DEMO-CRM": 1558.6119485561396,
+     "HMG | DEMO-CRM": 1505.247977709446
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0020",
+   "run": "DEMO_LC2_HIST_0020",
+   "file": "DEMO_LC2_HIST_0020",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1755181800000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 67.9492133003361,
+    "edit_delay": 0.44630421901675016,
+    "bg_median": {
+     "465-510": 1707.378330750627,
+     "533-580": 2003.4430196867813
+    },
+    "plateau_median": {
+     "465-510": 2621.488082632681,
+     "533-580": 1723.261692768489
+    },
+    "heat_rate": 4.78134,
+    "cool_rate": 2.44824,
+    "overshoot": 5.38,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.406233968225216,
+     "60→72 °C": 2.432931125883326,
+     "72→95 °C": 4.961352838086722,
+     "72→40 °C": 16.54883366002857
+    },
+    "hold_temp": {
+     "mean": -0.4236040085733902,
+     "sd": 0.028712264018987445,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6867,
+     "533-580": 11865
+    },
+    "lamp_drift": {
+     "465-510": -1.322520632940199,
+     "533-580": -0.7224967881852399
+    },
+    "exposure": {
+     "465-510": 259,
+     "533-580": 306
+    },
+    "chan_switch": 1045,
+    "cycle_sd": 37.57983483943352,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 17,
+     "n": 8128
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.356188701729479,
+    "rowcol": 0.5265911619361072,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 99
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.792741752778795,
+     "T-NOS | DEMO-CRM": 31.327438590380567,
+     "HMG | DEMO-CRM": 23.083683350710594
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1584.186587104313,
+     "T-NOS | DEMO-CRM": 1731.743383588785,
+     "HMG | DEMO-CRM": 1474.1283823854722
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0021",
+   "run": "DEMO_LC2_HIST_0021",
+   "file": "DEMO_LC2_HIST_0021",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1755358200000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.50731718547651,
+    "edit_delay": -0.5211307328942849,
+    "bg_median": {
+     "465-510": 1521.6112704220084,
+     "533-580": 1686.8305934724444
+    },
+    "plateau_median": {
+     "465-510": 2625.301057543825,
+     "533-580": 2064.2450099156717
+    },
+    "heat_rate": 4.73892,
+    "cool_rate": 2.38764,
+    "overshoot": 5.44,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.430326212381008,
+     "60→72 °C": 2.4421681704452687,
+     "72→95 °C": 4.954468624918387,
+     "72→40 °C": 16.766225698471803
+    },
+    "hold_temp": {
+     "mean": -0.4378267275869203,
+     "sd": 0.027931109722834937,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6871,
+     "533-580": 11867
+    },
+    "lamp_drift": {
+     "465-510": -1.4677015967485674,
+     "533-580": -0.9456697448213538
+    },
+    "exposure": {
+     "465-510": 255,
+     "533-580": 279
+    },
+    "chan_switch": 1043,
+    "cycle_sd": 33.37243812264354,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 22,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.35277657903524495,
+    "rowcol": 0.022318365788774667,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 108
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.875480711399604,
+     "T-NOS | DEMO-CRM": 31.997537972821238,
+     "HMG | DEMO-CRM": 23.332404698750313
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1549.9004677736896,
+     "T-NOS | DEMO-CRM": 1588.987547143852,
+     "HMG | DEMO-CRM": 1516.319146570482
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0022",
+   "run": "DEMO_LC2_HIST_0022",
+   "file": "DEMO_LC2_HIST_0022",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1755527400000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.08246024768044,
+    "edit_delay": -0.0009287194046946751,
+    "bg_median": {
+     "465-510": 1749.9860977706528,
+     "533-580": 1651.8605383246877
+    },
+    "plateau_median": {
+     "465-510": 2396.5245618359327,
+     "533-580": 1446.419870776732
+    },
+    "heat_rate": 4.7571,
+    "cool_rate": 2.36946,
+    "overshoot": 5.38,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.36695827620137,
+     "60→72 °C": 2.4430006717408497,
+     "72→95 °C": 4.95582869862322,
+     "72→40 °C": 16.299437662076016
+    },
+    "hold_temp": {
+     "mean": -0.41674839476110964,
+     "sd": 0.022605475238762114,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6893,
+     "533-580": 11912
+    },
+    "lamp_drift": {
+     "465-510": -1.624034696708192,
+     "533-580": -1.4327668880836537
+    },
+    "exposure": {
+     "465-510": 273,
+     "533-580": 302
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 27.032836818442362,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 15,
+     "n": 8118
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.06573104858174057,
+    "rowcol": 0.34459700163896073,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 107
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.281322910003226,
+     "T-NOS | DEMO-CRM": 31.46275515818579,
+     "HMG | DEMO-CRM": 23.0396209332877
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1424.5183183746885,
+     "T-NOS | DEMO-CRM": 1451.8576541048017,
+     "HMG | DEMO-CRM": 1499.7702961024097
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0023",
+   "run": "DEMO_LC2_HIST_0023",
+   "file": "DEMO_LC2_HIST_0023",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1756207800000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.27928730204442,
+    "edit_delay": 1.0928779717230808,
+    "bg_median": {
+     "465-510": 1653.6606826737475,
+     "533-580": 1607.6250613665343
+    },
+    "plateau_median": {
+     "465-510": 2413.565940698816,
+     "533-580": 1955.6145596864108
+    },
+    "heat_rate": 4.78134,
+    "cool_rate": 2.41188,
+    "overshoot": 5.29,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.4051278773227,
+     "60→72 °C": 2.4466513280878526,
+     "72→95 °C": 4.918283199913312,
+     "72→40 °C": 16.77054125813548
+    },
+    "hold_temp": {
+     "mean": -0.4297268993180338,
+     "sd": 0.02389589435240116,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6796,
+     "533-580": 11847
+    },
+    "lamp_drift": {
+     "465-510": -1.8712135937993803,
+     "533-580": -1.5528777360740929
+    },
+    "exposure": {
+     "465-510": 237,
+     "533-580": 275
+    },
+    "chan_switch": 1031,
+    "cycle_sd": 14.835576201797734,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 10,
+     "n": 8151
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.2821025883887296,
+    "rowcol": 0.5388853384412001,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 108
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.97099985394851,
+     "T-NOS | DEMO-CRM": 30.968217451232004,
+     "HMG | DEMO-CRM": 22.887753420434002
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1430.1750808380552,
+     "T-NOS | DEMO-CRM": 1450.2640463237828,
+     "HMG | DEMO-CRM": 1413.919092230613
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0024",
+   "run": "DEMO_LC2_HIST_0024",
+   "file": "DEMO_LC2_HIST_0024",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1756315800000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.01702105153383,
+    "edit_delay": -1.2485199991506537,
+    "bg_median": {
+     "465-510": 1198.5475197628593,
+     "533-580": 1282.5957970888069
+    },
+    "plateau_median": {
+     "465-510": 1841.5993097561527,
+     "533-580": 1762.2696148240652
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.3937,
+    "overshoot": 5.3500000000000005,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.370004020220575,
+     "60→72 °C": 2.4652540117643964,
+     "72→95 °C": 4.935470339193214,
+     "72→40 °C": 16.47831600339043
+    },
+    "hold_temp": {
+     "mean": -0.420465653554563,
+     "sd": 0.03283956822152283,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6826,
+     "533-580": 11916
+    },
+    "lamp_drift": {
+     "465-510": -0.9878445621364829,
+     "533-580": -1.2272561008374923
+    },
+    "exposure": {
+     "465-510": 288,
+     "533-580": 307
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 30.86728818559117,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 10,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.12050869176214657,
+    "rowcol": 0.1848911324823951,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 122
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.7661222920958,
+     "T-NOS | DEMO-CRM": 31.769044279573045,
+     "HMG | DEMO-CRM": 23.12819356063083
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1440.0075613904216,
+     "T-NOS | DEMO-CRM": 1490.9531458327751,
+     "HMG | DEMO-CRM": 1695.2451111981015
+    },
+    "ntc_rate": {
+     "bad": 2,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0025",
+   "run": "DEMO_LC2_HIST_0025",
+   "file": "DEMO_LC2_HIST_0025",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1756315800000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.98098450419927,
+    "edit_delay": -0.33241140746830505,
+    "bg_median": {
+     "465-510": 1665.9085581671102,
+     "533-580": 1074.4734229048158
+    },
+    "plateau_median": {
+     "465-510": 2494.0377171803448,
+     "533-580": 1903.3891480601521
+    },
+    "heat_rate": 4.7874,
+    "cool_rate": 2.39976,
+    "overshoot": 5.48,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.410954582882981,
+     "60→72 °C": 2.438463608996179,
+     "72→95 °C": 4.940974551471305,
+     "72→40 °C": 16.318941058411387
+    },
+    "hold_temp": {
+     "mean": -0.4236591414588744,
+     "sd": 0.02814616771972726,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6876,
+     "533-580": 11854
+    },
+    "lamp_drift": {
+     "465-510": -1.3723383790546493,
+     "533-580": -0.792797315818198
+    },
+    "exposure": {
+     "465-510": 272,
+     "533-580": 337
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 34.98495405641899,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 25,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.4820017734709442,
+    "rowcol": 0.47403558460596423,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 105
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.524516067954615,
+     "T-NOS | DEMO-CRM": 32.184426388160915,
+     "HMG | DEMO-CRM": 23.021719637151143
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1490.065599301013,
+     "T-NOS | DEMO-CRM": 1377.0962729091568,
+     "HMG | DEMO-CRM": 1423.7823061818585
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0026",
+   "run": "DEMO_LC2_HIST_0026",
+   "file": "DEMO_LC2_HIST_0026",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1756485000000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.9335218119935,
+    "edit_delay": -0.020333361122865865,
+    "bg_median": {
+     "465-510": 1646.9273026178475,
+     "533-580": 2017.6530682752093
+    },
+    "plateau_median": {
+     "465-510": 2412.642930335925,
+     "533-580": 1708.1906728556614
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.54,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.43558667524976,
+     "60→72 °C": 2.4580627552124406,
+     "72→95 °C": 4.943356915701285,
+     "72→40 °C": 16.714198262418577
+    },
+    "hold_temp": {
+     "mean": -0.4287289956843346,
+     "sd": 0.032296340123793996,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6820,
+     "533-580": 11903
+    },
+    "lamp_drift": {
+     "465-510": -1.4875568416637759,
+     "533-580": -0.9858032069580306
+    },
+    "exposure": {
+     "465-510": 267,
+     "533-580": 229
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 34.07554495080576,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 16,
+     "n": 8151
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.5462807035661226,
+    "rowcol": 0.5466057534844895,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 108
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.99288893046232,
+     "T-NOS | DEMO-CRM": 31.670109075231952,
+     "HMG | DEMO-CRM": 22.879245624885446
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1599.2256937820853,
+     "T-NOS | DEMO-CRM": 1582.1587912262132,
+     "HMG | DEMO-CRM": 1651.1117296387943
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0027",
+   "run": "DEMO_LC2_HIST_0027",
+   "file": "DEMO_LC2_HIST_0027",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1757176200000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.32955316526228,
+    "edit_delay": -0.3335300075708524,
+    "bg_median": {
+     "465-510": 1796.5768800522578,
+     "533-580": 1986.2378443271864
+    },
+    "plateau_median": {
+     "465-510": 2313.2564223577847,
+     "533-580": 1153.9444329318824
+    },
+    "heat_rate": 4.7874,
+    "cool_rate": 2.3937,
+    "overshoot": 5.44,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.347683703402357,
+     "60→72 °C": 2.456349606001204,
+     "72→95 °C": 4.962640853952436,
+     "72→40 °C": 16.653888682258547
+    },
+    "hold_temp": {
+     "mean": -0.41873023131537335,
+     "sd": 0.033166002896153096,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6850,
+     "533-580": 12230
+    },
+    "lamp_drift": {
+     "465-510": -1.2710971924772523,
+     "533-580": -1.1906131177594113
+    },
+    "exposure": {
+     "465-510": 279,
+     "533-580": 257
+    },
+    "chan_switch": 1031,
+    "cycle_sd": 21.683034871094904,
+    "invalid_acq": {
+     "bad": 2,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.4514688642767529,
+    "rowcol": 0.45496112059909993,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 107
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.12227285115755,
+     "T-NOS | DEMO-CRM": 31.771363477371423,
+     "HMG | DEMO-CRM": 23.10238015976234
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1520.7431561047842,
+     "T-NOS | DEMO-CRM": 1763.691714067494,
+     "HMG | DEMO-CRM": 1496.3520503013794
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0028",
+   "run": "DEMO_LC2_HIST_0028",
+   "file": "DEMO_LC2_HIST_0028",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1757161800000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.21975796851382,
+    "edit_delay": 0.008200641393943262,
+    "bg_median": {
+     "465-510": 1665.4334537331579,
+     "533-580": 1834.92648281011
+    },
+    "plateau_median": {
+     "465-510": 2346.310854846233,
+     "533-580": 1952.3558755832628
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.38158,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.38475169593658,
+     "60→72 °C": 2.4625548545750546,
+     "72→95 °C": 4.931194599661096,
+     "72→40 °C": 16.349574996454034
+    },
+    "hold_temp": {
+     "mean": -0.4292280121730672,
+     "sd": 0.03326604857451717,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6868,
+     "533-580": 11884
+    },
+    "lamp_drift": {
+     "465-510": -1.8643087909532101,
+     "533-580": -1.2670882887382269
+    },
+    "exposure": {
+     "465-510": 247,
+     "533-580": 246
+    },
+    "chan_switch": 1040,
+    "cycle_sd": 31.001971337861825,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 16,
+     "n": 8151
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.5228303402016196,
+    "rowcol": 0.5459931487006761,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 128
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.07387968291347,
+     "T-NOS | DEMO-CRM": 30.837171138023535,
+     "HMG | DEMO-CRM": 23.349203284213118
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1427.7158281610552,
+     "T-NOS | DEMO-CRM": 1699.2305322997722,
+     "HMG | DEMO-CRM": 1721.3443728246007
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0029",
+   "run": "DEMO_LC2_HIST_0029",
+   "file": "DEMO_LC2_HIST_0029",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1758893400000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.15399707217955,
+    "edit_delay": -0.058700999990100325,
+    "bg_median": {
+     "465-510": 1874.7037701087638,
+     "533-580": 2074.54066998311
+    },
+    "plateau_median": {
+     "465-510": 2605.476735160287,
+     "533-580": 2685.5083858455014
+    },
+    "heat_rate": 4.7874,
+    "cool_rate": 2.41794,
+    "overshoot": 5.4,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.389079427664132,
+     "60→72 °C": 2.449471644624086,
+     "72→95 °C": 4.907933656357058,
+     "72→40 °C": 16.29927680282837
+    },
+    "hold_temp": {
+     "mean": -0.43713250687925265,
+     "sd": 0.03566482334904689,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6872,
+     "533-580": 12013
+    },
+    "lamp_drift": {
+     "465-510": -1.772646265379405,
+     "533-580": -1.5752212345844807
+    },
+    "exposure": {
+     "465-510": 268,
+     "533-580": 288
+    },
+    "chan_switch": 1045,
+    "cycle_sd": 22.333912233091425,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 16,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.20218775226271915,
+    "rowcol": 0.022792407782368636,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 130
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.280677359527665,
+     "T-NOS | DEMO-CRM": 32.4060085367378,
+     "HMG | DEMO-CRM": 23.393898470369567
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2023-11-20",
+     "T-NOS | DEMO-CRM": "extracted 2023-11-20",
+     "HMG | DEMO-CRM": "extracted 2023-11-20"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1635.6649622529847,
+     "T-NOS | DEMO-CRM": 1666.3771907652022,
+     "HMG | DEMO-CRM": 1791.8986595715369
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0030",
+   "run": "DEMO_LC2_HIST_0030",
+   "file": "DEMO_LC2_HIST_0030",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1760711400000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.34141239821714,
+    "edit_delay": -0.257423304842899,
+    "bg_median": {
+     "465-510": 1612.206676569064,
+     "533-580": 1937.3142103603723
+    },
+    "plateau_median": {
+     "465-510": 2870.7082013533054,
+     "533-580": 1938.4028161470187
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.3755200000000003,
+    "overshoot": 5.36,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.340189794352202,
+     "60→72 °C": 2.4307190287407114,
+     "72→95 °C": 4.915106151109983,
+     "72→40 °C": 16.544847018176423
+    },
+    "hold_temp": {
+     "mean": -0.4309430507848,
+     "sd": 0.031566446582430296,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6846,
+     "533-580": 11799
+    },
+    "lamp_drift": {
+     "465-510": -1.3838901643044794,
+     "533-580": -1.0074395426303062
+    },
+    "exposure": {
+     "465-510": 241,
+     "533-580": 280
+    },
+    "chan_switch": 1037,
+    "cycle_sd": 29.70350395337698,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 12,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.4508010898497187,
+    "rowcol": 0.18630702448017444,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 122
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.182907151914854,
+     "T-NOS | DEMO-CRM": 31.449588152426738,
+     "HMG | DEMO-CRM": 22.922073352663027
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1440.3720361508804,
+     "T-NOS | DEMO-CRM": 1558.7810799041029,
+     "HMG | DEMO-CRM": 1477.3256233861468
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0031",
+   "run": "DEMO_LC2_HIST_0031",
+   "file": "DEMO_LC2_HIST_0031",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1762785000000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.31135456798408,
+    "edit_delay": 0.3231309314026981,
+    "bg_median": {
+     "465-510": 1695.4394362923915,
+     "533-580": 1601.5105428516956
+    },
+    "plateau_median": {
+     "465-510": 2162.8499312421573,
+     "533-580": 1259.6354775830805
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.44824,
+    "overshoot": 5.43,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.333978332000479,
+     "60→72 °C": 2.4510288853677733,
+     "72→95 °C": 4.924080416492259,
+     "72→40 °C": 16.046346938195168
+    },
+    "hold_temp": {
+     "mean": -0.4392240666138611,
+     "sd": 0.03056834227407987,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6899,
+     "533-580": 11906
+    },
+    "lamp_drift": {
+     "465-510": -1.3057008350005843,
+     "533-580": -1.5865101361796747
+    },
+    "exposure": {
+     "465-510": 282,
+     "533-580": 266
+    },
+    "chan_switch": 1037,
+    "cycle_sd": 26.70948831478345,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 17,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.15936603879293998,
+    "rowcol": 0.46854784386383364,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 110
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.981856461367435,
+     "T-NOS | DEMO-CRM": 31.151237830557342,
+     "HMG | DEMO-CRM": 23.45548477564634
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1317.1415911149675,
+     "T-NOS | DEMO-CRM": 1450.9161135345244,
+     "HMG | DEMO-CRM": 1261.8869144113803
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0032",
+   "run": "DEMO_LC2_HIST_0032",
+   "file": "DEMO_LC2_HIST_0032",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1763292600000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.34673866613102,
+    "edit_delay": -0.8449092244897076,
+    "bg_median": {
+     "465-510": 1740.7719213967396,
+     "533-580": 1844.4156343211878
+    },
+    "plateau_median": {
+     "465-510": 2289.081185148693,
+     "533-580": 2265.379633405563
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.3755200000000003,
+    "overshoot": 5.4,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.255331644648011,
+     "60→72 °C": 2.4512851421557733,
+     "72→95 °C": 4.826375790846146,
+     "72→40 °C": 16.289614979877108
+    },
+    "hold_temp": {
+     "mean": -0.4341831095831989,
+     "sd": 0.03243412909802767,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6841,
+     "533-580": 11891
+    },
+    "lamp_drift": {
+     "465-510": -1.5492674959872765,
+     "533-580": -1.2897663373829007
+    },
+    "exposure": {
+     "465-510": 279,
+     "533-580": 356
+    },
+    "chan_switch": 1037,
+    "cycle_sd": 19.499988962277637,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 1,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.3556257965832395,
+    "rowcol": 0.1852472234306772,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 129
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.57990236408768,
+     "T-NOS | DEMO-CRM": 30.68367709577787,
+     "HMG | DEMO-CRM": 23.179622516039597
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1848.8658246266873,
+     "T-NOS | DEMO-CRM": 1332.019584650698,
+     "HMG | DEMO-CRM": 1566.8887009737039
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0033",
+   "run": "DEMO_LC2_HIST_0033",
+   "file": "DEMO_LC2_HIST_0033",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1763479800000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.75329149546383,
+    "edit_delay": 0.3687964012788255,
+    "bg_median": {
+     "465-510": 1748.2540576691474,
+     "533-580": 1893.6108788009146
+    },
+    "plateau_median": {
+     "465-510": 2379.1130702292135,
+     "533-580": 1714.0938572666914
+    },
+    "heat_rate": 4.7571,
+    "cool_rate": 2.44218,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.296351298411587,
+     "60→72 °C": 2.452989588678602,
+     "72→95 °C": 4.90522174415936,
+     "72→40 °C": 16.192424912541167
+    },
+    "hold_temp": {
+     "mean": -0.4268122087543055,
+     "sd": 0.02808304591310628,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6873,
+     "533-580": 11857
+    },
+    "lamp_drift": {
+     "465-510": -0.8835619123384152,
+     "533-580": -1.490062692720378
+    },
+    "exposure": {
+     "465-510": 293,
+     "533-580": 293
+    },
+    "chan_switch": 1037,
+    "cycle_sd": 25.77576929189879,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 12,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.14607301061914962,
+    "rowcol": 0.18418877458156863,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 133
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.810731750755565,
+     "T-NOS | DEMO-CRM": 31.407031988187477,
+     "HMG | DEMO-CRM": 23.137566986348382
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1236.0466117518713,
+     "T-NOS | DEMO-CRM": 1544.9978604217308,
+     "HMG | DEMO-CRM": 1615.5084895093173
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0034",
+   "run": "DEMO_LC2_HIST_0034",
+   "file": "DEMO_LC2_HIST_0034",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1763634600000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.21711714756032,
+    "edit_delay": -0.33525362700006434,
+    "bg_median": {
+     "465-510": 1570.5251804987731,
+     "533-580": 2095.306035657687
+    },
+    "plateau_median": {
+     "465-510": 2461.204266194889,
+     "533-580": 2302.73440838465
+    },
+    "heat_rate": 4.77528,
+    "cool_rate": 2.3755200000000003,
+    "overshoot": 5.44,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.291716529592412,
+     "60→72 °C": 2.4451009868382805,
+     "72→95 °C": 4.840077500356075,
+     "72→40 °C": 16.405075488122268
+    },
+    "hold_temp": {
+     "mean": -0.42076530960285036,
+     "sd": 0.03209239992981184,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6841,
+     "533-580": 11903
+    },
+    "lamp_drift": {
+     "465-510": -1.998864502507641,
+     "533-580": -1.2133772669408782
+    },
+    "exposure": {
+     "465-510": 259,
+     "533-580": 316
+    },
+    "chan_switch": 1034,
+    "cycle_sd": 32.74197823523055,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 9,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.09893613949683434,
+    "rowcol": 0.48164247579151087,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 118
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.759132246269495,
+     "T-NOS | DEMO-CRM": 31.45623948191331,
+     "HMG | DEMO-CRM": 23.353735795687665
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1547.2249340787048,
+     "T-NOS | DEMO-CRM": 1616.0616436907237,
+     "HMG | DEMO-CRM": 1550.1652340816222
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0035",
+   "run": "DEMO_LC2_HIST_0035",
+   "file": "DEMO_LC2_HIST_0035",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1763731800000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.34329897287019,
+    "edit_delay": 1.0794920423000234,
+    "bg_median": {
+     "465-510": 1606.6597878878651,
+     "533-580": 1554.9710486955382
+    },
+    "plateau_median": {
+     "465-510": 2479.431602916753,
+     "533-580": 2006.193342551332
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.39976,
+    "overshoot": 5.37,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.27644341509907,
+     "60→72 °C": 2.439273477332594,
+     "72→95 °C": 4.8286611804745485,
+     "72→40 °C": 16.079570940296687
+    },
+    "hold_temp": {
+     "mean": -0.4389957377205879,
+     "sd": 0.02877934097384179,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6880,
+     "533-580": 11854
+    },
+    "lamp_drift": {
+     "465-510": -1.4487404281356768,
+     "533-580": -1.3473155641143282
+    },
+    "exposure": {
+     "465-510": 267,
+     "533-580": 292
+    },
+    "chan_switch": 1030,
+    "cycle_sd": 14.4096305827643,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 14,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 2,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.23805573290911503,
+    "rowcol": 0.4581323182420541,
+    "manual_rate": {
+     "bad": 1,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 110
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.919974983194614,
+     "T-NOS | DEMO-CRM": 30.925353591069083,
+     "HMG | DEMO-CRM": 22.989797452011025
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1476.1492022908772,
+     "T-NOS | DEMO-CRM": 1597.6952054716585,
+     "HMG | DEMO-CRM": 1412.457270305457
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0036",
+   "run": "DEMO_LC2_HIST_0036",
+   "file": "DEMO_LC2_HIST_0036",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1763829000000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.41163841214741,
+    "edit_delay": -0.7993694776326036,
+    "bg_median": {
+     "465-510": 1652.9098769643629,
+     "533-580": 1214.4627049810645
+    },
+    "plateau_median": {
+     "465-510": 2014.9715942555301,
+     "533-580": 2218.8578376202217
+    },
+    "heat_rate": 4.78134,
+    "cool_rate": 2.424,
+    "overshoot": 5.32,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.265573120239251,
+     "60→72 °C": 2.4504657980665767,
+     "72→95 °C": 4.842947858070636,
+     "72→40 °C": 16.159411629313162
+    },
+    "hold_temp": {
+     "mean": -0.4197389585964344,
+     "sd": 0.029933797844921506,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6880,
+     "533-580": 11904
+    },
+    "lamp_drift": {
+     "465-510": -1.47817586475865,
+     "533-580": -1.4872538535841362
+    },
+    "exposure": {
+     "465-510": 287,
+     "533-580": 216
+    },
+    "chan_switch": 1042,
+    "cycle_sd": 70.70202595540323,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 18,
+     "n": 8118
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.1663260502893064,
+    "rowcol": 0.35247539035833486,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 119
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.16976008381677,
+     "T-NOS | DEMO-CRM": 31.8085121284244,
+     "HMG | DEMO-CRM": 23.17020719031557
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1614.1082461355077,
+     "T-NOS | DEMO-CRM": 1368.5509096244657,
+     "HMG | DEMO-CRM": 1562.2063029188123
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0037",
+   "run": "DEMO_LC2_HIST_0037",
+   "file": "DEMO_LC2_HIST_0037",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1763915400000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.42880209942749,
+    "edit_delay": 0.06360179208790044,
+    "bg_median": {
+     "465-510": 1590.5039140228703,
+     "533-580": 1813.5960167464589
+    },
+    "plateau_median": {
+     "465-510": 2838.4170634803127,
+     "533-580": 2202.3920245024333
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.3755200000000003,
+    "overshoot": 5.4,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.265861540167172,
+     "60→72 °C": 2.4509537796380916,
+     "72→95 °C": 4.8528759871304,
+     "72→40 °C": 16.198842017367085
+    },
+    "hold_temp": {
+     "mean": -0.42555473280608663,
+     "sd": 0.025362676317365412,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6846,
+     "533-580": 11917
+    },
+    "lamp_drift": {
+     "465-510": -1.3900580205169515,
+     "533-580": -1.9094426000209543
+    },
+    "exposure": {
+     "465-510": 284,
+     "533-580": 253
+    },
+    "chan_switch": 1029,
+    "cycle_sd": 36.46702459185668,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 16,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 6
+    },
+    "rep_sd": 0.14930831665119212,
+    "rowcol": 0.21160113578050954,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 103
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.32734721433104,
+     "T-NOS | DEMO-CRM": 31.52225989493437,
+     "HMG | DEMO-CRM": 22.818159631626497
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1703.8762090199211,
+     "T-NOS | DEMO-CRM": 1532.5742267765527,
+     "HMG | DEMO-CRM": 1672.2805806895183
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0038",
+   "run": "DEMO_LC2_HIST_0038",
+   "file": "DEMO_LC2_HIST_0038",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1765035000000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.01325460226435,
+    "edit_delay": -1.1190160851798412,
+    "bg_median": {
+     "465-510": 1629.8382686048062,
+     "533-580": 1895.8031158772567
+    },
+    "plateau_median": {
+     "465-510": 2400.4630837245463,
+     "533-580": 2646.2451959043547
+    },
+    "heat_rate": 4.8177,
+    "cool_rate": 2.49066,
+    "overshoot": 5.38,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.279479971461042,
+     "60→72 °C": 2.437173338124322,
+     "72→95 °C": 4.852406068272109,
+     "72→40 °C": 16.08024004034213
+    },
+    "hold_temp": {
+     "mean": -0.4341623050538095,
+     "sd": 0.02680529657166375,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6817,
+     "533-580": 11832
+    },
+    "lamp_drift": {
+     "465-510": -0.9920496466619018,
+     "533-580": -1.0172586105122368
+    },
+    "exposure": {
+     "465-510": 263,
+     "533-580": 280
+    },
+    "chan_switch": 1031,
+    "cycle_sd": 79.61679653851189,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 20,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.44974285682510995,
+    "rowcol": 0.45745802135080227,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 107
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.07979761543678,
+     "T-NOS | DEMO-CRM": 31.18121976177154,
+     "HMG | DEMO-CRM": 23.336138553273944
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1452.2276369648202,
+     "T-NOS | DEMO-CRM": 1399.696654291064,
+     "HMG | DEMO-CRM": 1473.1471005782169
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0039",
+   "run": "DEMO_LC2_HIST_0039",
+   "file": "DEMO_LC2_HIST_0039",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1765881000000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.59623389092928,
+    "edit_delay": -0.2169586235546721,
+    "bg_median": {
+     "465-510": 1940.5697575928932,
+     "533-580": 1697.5148829215818
+    },
+    "plateau_median": {
+     "465-510": 2033.7959763763329,
+     "533-580": 2303.728240591926
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.49066,
+    "overshoot": 5.44,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.225879741176728,
+     "60→72 °C": 2.450643214481724,
+     "72→95 °C": 4.846582281762188,
+     "72→40 °C": 16.2396649525931
+    },
+    "hold_temp": {
+     "mean": -0.43423722432896544,
+     "sd": 0.021954746284146613,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6816,
+     "533-580": 11918
+    },
+    "lamp_drift": {
+     "465-510": -1.863577598771528,
+     "533-580": -1.3193305832915185
+    },
+    "exposure": {
+     "465-510": 281,
+     "533-580": 273
+    },
+    "chan_switch": 1037,
+    "cycle_sd": 25.069701422321554,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 24,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.31215148155340994,
+    "rowcol": 0.45752769959179346,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 100
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.181543059266495,
+     "T-NOS | DEMO-CRM": 31.925475512476662,
+     "HMG | DEMO-CRM": 22.97558627103675
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1242.9396120874912,
+     "T-NOS | DEMO-CRM": 1440.0736841790092,
+     "HMG | DEMO-CRM": 1446.0487367491749
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0040",
+   "run": "DEMO_LC2_HIST_0040",
+   "file": "DEMO_LC2_HIST_0040",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1766230200000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.60299043462649,
+    "edit_delay": 0.6639309670101148,
+    "bg_median": {
+     "465-510": 2003.7922051753355,
+     "533-580": 1687.685038298305
+    },
+    "plateau_median": {
+     "465-510": 2681.0689215806497,
+     "533-580": 1955.057995626942
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.424,
+    "overshoot": 5.38,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.241449878953373,
+     "60→72 °C": 2.4544819571910197,
+     "72→95 °C": 4.883010872274279,
+     "72→40 °C": 15.889459530847269
+    },
+    "hold_temp": {
+     "mean": -0.4398360207472111,
+     "sd": 0.029243331139782523,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6868,
+     "533-580": 11920
+    },
+    "lamp_drift": {
+     "465-510": -1.4409774380868954,
+     "533-580": -1.5257532260751467
+    },
+    "exposure": {
+     "465-510": 262,
+     "533-580": 358
+    },
+    "chan_switch": 1030,
+    "cycle_sd": 35.96657307526029,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 11,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.12651732102080074,
+    "rowcol": 0.021941657290819757,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 99
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.14334575875977,
+     "T-NOS | DEMO-CRM": 30.863436444091352,
+     "HMG | DEMO-CRM": 22.639507107293678
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1371.3580015516611,
+     "T-NOS | DEMO-CRM": 1337.5453017260702,
+     "HMG | DEMO-CRM": 1164.9046954074079
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0041",
+   "run": "DEMO_LC2_HIST_0041",
+   "file": "DEMO_LC2_HIST_0041",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1766410200000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.48190773321761,
+    "edit_delay": 0.41677320737024376,
+    "bg_median": {
+     "465-510": 1697.9163728265116,
+     "533-580": 1950.590757035743
+    },
+    "plateau_median": {
+     "465-510": 1830.336905508947,
+     "533-580": 1893.0685051029225
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.41188,
+    "overshoot": 5.37,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.242925788920017,
+     "60→72 °C": 2.445019373707875,
+     "72→95 °C": 4.864334918328247,
+     "72→40 °C": 16.030101757481418
+    },
+    "hold_temp": {
+     "mean": -0.42631589106491413,
+     "sd": 0.03134308816179436,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6845,
+     "533-580": 11896
+    },
+    "lamp_drift": {
+     "465-510": -2.279280990178329,
+     "533-580": -1.3267891590746397
+    },
+    "exposure": {
+     "465-510": 280,
+     "533-580": 262
+    },
+    "chan_switch": 1043,
+    "cycle_sd": 53.921330246212236,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.21121693949499748,
+    "rowcol": 0.18585339214246563,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 129
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.731145440611044,
+     "T-NOS | DEMO-CRM": 31.179618475105563,
+     "HMG | DEMO-CRM": 23.307797632878074
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1658.9935113531105,
+     "T-NOS | DEMO-CRM": 1703.7687969554552,
+     "HMG | DEMO-CRM": 1673.8599116965327
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0042",
+   "run": "DEMO_LC2_HIST_0042",
+   "file": "DEMO_LC2_HIST_0042",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1767526200000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.4022991871896,
+    "edit_delay": -0.18637862357777835,
+    "bg_median": {
+     "465-510": 1645.5410068035264,
+     "533-580": 1981.937461411497
+    },
+    "plateau_median": {
+     "465-510": 2427.9960954784674,
+     "533-580": 1882.1974163282912
+    },
+    "heat_rate": 4.71468,
+    "cool_rate": 2.36946,
+    "overshoot": 5.39,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.216747651196528,
+     "60→72 °C": 2.42214813876764,
+     "72→95 °C": 4.819946923284964,
+     "72→40 °C": 15.871553414271139
+    },
+    "hold_temp": {
+     "mean": -0.4334387252181612,
+     "sd": 0.03367563791648317,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6841,
+     "533-580": 11846
+    },
+    "lamp_drift": {
+     "465-510": -1.8285271250947306,
+     "533-580": -1.4588779992824354
+    },
+    "exposure": {
+     "465-510": 327,
+     "533-580": 249
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 23.08110138155106,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 17,
+     "n": 8128
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "rep_sd": 0.4698078138022347,
+    "rowcol": 0.5238626297376069,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 119
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.981596206675164,
+     "T-NOS | DEMO-CRM": 30.86338655963987,
+     "HMG | DEMO-CRM": 22.908682034423816
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1552.7868158417446,
+     "T-NOS | DEMO-CRM": 1707.6068419164717,
+     "HMG | DEMO-CRM": 1522.4990796059221
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0043",
+   "run": "DEMO_LC2_HIST_0043",
+   "file": "DEMO_LC2_HIST_0043",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1767616200000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.87582564713607,
+    "edit_delay": 0.5439607842018058,
+    "bg_median": {
+     "465-510": 1667.9116913134183,
+     "533-580": 1835.5933434456335
+    },
+    "plateau_median": {
+     "465-510": 2423.214992649541,
+     "533-580": 1909.5227994373122
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.41188,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.200493557287071,
+     "60→72 °C": 2.4285168343619308,
+     "72→95 °C": 4.834501571487171,
+     "72→40 °C": 15.901621890452386
+    },
+    "hold_temp": {
+     "mean": -0.43381838778568754,
+     "sd": 0.034143704684287374,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6897,
+     "533-580": 11928
+    },
+    "lamp_drift": {
+     "465-510": -1.6310725476875108,
+     "533-580": -1.3156440338714992
+    },
+    "exposure": {
+     "465-510": 305,
+     "533-580": 272
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 28.269623956642,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 13,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.10062637863827498,
+    "rowcol": 0.47163955562767074,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 118
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.61438527017161,
+     "T-NOS | DEMO-CRM": 30.787811750991978,
+     "HMG | DEMO-CRM": 22.78683457775364
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1514.1456384374808,
+     "T-NOS | DEMO-CRM": 1616.4470429490457,
+     "HMG | DEMO-CRM": 1582.4412437231583
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0044",
+   "run": "DEMO_LC2_HIST_0044",
+   "file": "DEMO_LC2_HIST_0044",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1767713400000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.6030703964854,
+    "edit_delay": 0.7150497850073547,
+    "bg_median": {
+     "465-510": 1146.5125890072406,
+     "533-580": 1225.4629588264163
+    },
+    "plateau_median": {
+     "465-510": 1880.371606263353,
+     "533-580": 2111.37168318649
+    },
+    "heat_rate": 4.77528,
+    "cool_rate": 2.38764,
+    "overshoot": 5.48,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.21221466933197,
+     "60→72 °C": 2.451835637423104,
+     "72→95 °C": 4.8270744068404445,
+     "72→40 °C": 15.90684909125525
+    },
+    "hold_temp": {
+     "mean": -0.42989658354352805,
+     "sd": 0.030361888596257283,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6866,
+     "533-580": 12241
+    },
+    "lamp_drift": {
+     "465-510": -1.8222128924765155,
+     "533-580": -1.4457036240053565
+    },
+    "exposure": {
+     "465-510": 301,
+     "533-580": 296
+    },
+    "chan_switch": 1029,
+    "cycle_sd": 46.54169885656809,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 23,
+     "n": 8118
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.37150794408674087,
+    "rowcol": 0.3435866436487276,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 129
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.50683251530132,
+     "T-NOS | DEMO-CRM": 30.32145147392501,
+     "HMG | DEMO-CRM": 22.928066846329067
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1495.4954154842062,
+     "T-NOS | DEMO-CRM": 1437.4030335817206,
+     "HMG | DEMO-CRM": 1523.277990122315
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0045",
+   "run": "DEMO_LC2_HIST_0045",
+   "file": "DEMO_LC2_HIST_0045",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1768303800000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 67.81290721775262,
+    "edit_delay": -0.7590776916282356,
+    "bg_median": {
+     "465-510": 1630.474417688794,
+     "533-580": 1654.6089448251346
+    },
+    "plateau_median": {
+     "465-510": 2267.0726150442006,
+     "533-580": 2110.9859308291598
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.424,
+    "overshoot": 5.45,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.201965746241983,
+     "60→72 °C": 2.4360202254744565,
+     "72→95 °C": 4.856513345883073,
+     "72→40 °C": 16.375135882720524
+    },
+    "hold_temp": {
+     "mean": -0.41860227938473343,
+     "sd": 0.025632080841573267,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6874,
+     "533-580": 11876
+    },
+    "lamp_drift": {
+     "465-510": -1.6766578618976842,
+     "533-580": -1.467888591327293
+    },
+    "exposure": {
+     "465-510": 250,
+     "533-580": 281
+    },
+    "chan_switch": 1042,
+    "cycle_sd": 29.663890315771905,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 17,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.2618489040255208,
+    "rowcol": 0.4501693173666998,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 125
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.67161582852325,
+     "T-NOS | DEMO-CRM": 31.527832408809907,
+     "HMG | DEMO-CRM": 23.290359338713916
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1664.7732608820183,
+     "T-NOS | DEMO-CRM": 1406.7494116517998,
+     "HMG | DEMO-CRM": 1585.3401327829745
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0046",
+   "run": "DEMO_LC2_HIST_0046",
+   "file": "DEMO_LC2_HIST_0046",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1768566600000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.43426652771889,
+    "edit_delay": -0.017697212361459484,
+    "bg_median": {
+     "465-510": 1743.6139430918302,
+     "533-580": 1775.5213821649456
+    },
+    "plateau_median": {
+     "465-510": 2635.0477105831233,
+     "533-580": 1642.735987802213
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.2382302802948,
+     "60→72 °C": 2.4540883121668498,
+     "72→95 °C": 4.848782403351899,
+     "72→40 °C": 15.95040619920824
+    },
+    "hold_temp": {
+     "mean": -0.4260732560600928,
+     "sd": 0.03186745597833794,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6870,
+     "533-580": 11892
+    },
+    "lamp_drift": {
+     "465-510": -1.8147370713539723,
+     "533-580": -1.507426918921075
+    },
+    "exposure": {
+     "465-510": 228,
+     "533-580": 279
+    },
+    "chan_switch": 1040,
+    "cycle_sd": 40.058335537067755,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.16746681122602392,
+    "rowcol": 0.022662957513527333,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 98
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.04671754613202,
+     "T-NOS | DEMO-CRM": 31.424246891870656,
+     "HMG | DEMO-CRM": 23.109593389439368
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1433.4288185278463,
+     "T-NOS | DEMO-CRM": 1527.3654482116547,
+     "HMG | DEMO-CRM": 1513.240418417359
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0047",
+   "run": "DEMO_LC2_HIST_0047",
+   "file": "DEMO_LC2_HIST_0047",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1770733800000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.20867557294223,
+    "edit_delay": 1.3513661987483756,
+    "bg_median": {
+     "465-510": 1856.4529743347705,
+     "533-580": 2053.710002723431
+    },
+    "plateau_median": {
+     "465-510": 2114.939002155986,
+     "533-580": 2142.8522236835292
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.46036,
+    "overshoot": 5.43,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.248679840335907,
+     "60→72 °C": 2.4429899076078128,
+     "72→95 °C": 4.882775135889982,
+     "72→40 °C": 16.0410610291907
+    },
+    "hold_temp": {
+     "mean": -0.42970580379819956,
+     "sd": 0.028145591371524635,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6884,
+     "533-580": 11838
+    },
+    "lamp_drift": {
+     "465-510": -1.9312280251127052,
+     "533-580": -0.8463919241968079
+    },
+    "exposure": {
+     "465-510": 251,
+     "533-580": 338
+    },
+    "chan_switch": 1035,
+    "cycle_sd": 17.65614651573809,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 19,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.09248024587021832,
+    "rowcol": 0.46169694386472504,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 115
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.33392660264894,
+     "T-NOS | DEMO-CRM": 31.026398030593725,
+     "HMG | DEMO-CRM": 22.915055163410862
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1531.196558914285,
+     "T-NOS | DEMO-CRM": 1381.398505332749,
+     "HMG | DEMO-CRM": 1340.2003775468659
+    },
+    "ntc_rate": {
+     "bad": 1,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0048",
+   "run": "DEMO_LC2_HIST_0048",
+   "file": "DEMO_LC2_HIST_0048",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1771248600000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.20834263961801,
+    "edit_delay": 0.36482557008153066,
+    "bg_median": {
+     "465-510": 1925.1771447031201,
+     "533-580": 1946.9887798649843
+    },
+    "plateau_median": {
+     "465-510": 2327.889743236943,
+     "533-580": 1988.408953500064
+    },
+    "heat_rate": 4.751040000000001,
+    "cool_rate": 2.41794,
+    "overshoot": 5.41,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.210295464971372,
+     "60→72 °C": 2.4507571461284035,
+     "72→95 °C": 4.841511415409463,
+     "72→40 °C": 16.09756479981084
+    },
+    "hold_temp": {
+     "mean": -0.43915597202412743,
+     "sd": 0.030653185296764116,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6909,
+     "533-580": 11890
+    },
+    "lamp_drift": {
+     "465-510": -1.9455315247482288,
+     "533-580": -1.0143719243668892
+    },
+    "exposure": {
+     "465-510": 253,
+     "533-580": 241
+    },
+    "chan_switch": 1043,
+    "cycle_sd": 28.1164608834288,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 21,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 2
+    },
+    "rep_sd": 0.11376149801447516,
+    "rowcol": 0.4873121758273878,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 123
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.84441431550046,
+     "T-NOS | DEMO-CRM": 30.700224226551587,
+     "HMG | DEMO-CRM": 23.021002810429216
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1437.192263984836,
+     "T-NOS | DEMO-CRM": 1307.7766932546378,
+     "HMG | DEMO-CRM": 1317.6611308982979
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0049",
+   "run": "DEMO_LC2_HIST_0049",
+   "file": "DEMO_LC2_HIST_0049",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1771853400000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.03014959210472,
+    "edit_delay": 0.274668456139475,
+    "bg_median": {
+     "465-510": 1534.2335536022642,
+     "533-580": 1807.5609088507676
+    },
+    "plateau_median": {
+     "465-510": 2352.0513933337124,
+     "533-580": 1504.225120960779
+    },
+    "heat_rate": 4.7571,
+    "cool_rate": 2.38764,
+    "overshoot": 5.3500000000000005,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.217465970438894,
+     "60→72 °C": 2.461469337399643,
+     "72→95 °C": 4.8438066487824845,
+     "72→40 °C": 16.11421189419078
+    },
+    "hold_temp": {
+     "mean": -0.4255612875435481,
+     "sd": 0.02709132563578077,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6850,
+     "533-580": 11897
+    },
+    "lamp_drift": {
+     "465-510": -1.55745028211077,
+     "533-580": -1.3986263055736796
+    },
+    "exposure": {
+     "465-510": 260,
+     "533-580": 239
+    },
+    "chan_switch": 1038,
+    "cycle_sd": 29.115827085255383,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 10,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.5137327683036781,
+    "rowcol": 0.18603170531780247,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 103
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.74632538159521,
+     "T-NOS | DEMO-CRM": 30.67895137955895,
+     "HMG | DEMO-CRM": 23.303166331853188
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1587.504043514424,
+     "T-NOS | DEMO-CRM": 1333.9200607619396,
+     "HMG | DEMO-CRM": 1411.3002400565524
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0050",
+   "run": "DEMO_LC2_HIST_0050",
+   "file": "DEMO_LC2_HIST_0050",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1773419400000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 68.10807142706464,
+    "edit_delay": 0.9597623349255989,
+    "bg_median": {
+     "465-510": 1826.499553559514,
+     "533-580": 1680.1696931862098
+    },
+    "plateau_median": {
+     "465-510": 2662.227538124727,
+     "533-580": 1420.6896008374679
+    },
+    "heat_rate": 4.76316,
+    "cool_rate": 2.4058200000000003,
+    "overshoot": 5.33,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.255206400240846,
+     "60→72 °C": 2.4573536743164874,
+     "72→95 °C": 4.857508340186004,
+     "72→40 °C": 16.024859735927066
+    },
+    "hold_temp": {
+     "mean": -0.422710254586932,
+     "sd": 0.03248130550640051,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6803,
+     "533-580": 11957
+    },
+    "lamp_drift": {
+     "465-510": -0.9591599604906635,
+     "533-580": -1.2108353253214355
+    },
+    "exposure": {
+     "465-510": 240,
+     "533-580": 248
+    },
+    "chan_switch": 1035,
+    "cycle_sd": 42.442416244089706,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 14,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.22380234968907226,
+    "rowcol": 0.022519855432462564,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 97
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.181462054955496,
+     "T-NOS | DEMO-CRM": 31.617750118992895,
+     "HMG | DEMO-CRM": 23.170729184115082
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1562.8888598706944,
+     "T-NOS | DEMO-CRM": 1479.0275353193538,
+     "HMG | DEMO-CRM": 1584.2150738057035
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0051",
+   "run": "DEMO_LC2_HIST_0051",
+   "file": "DEMO_LC2_HIST_0051",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1773664200000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 66.95591615105666,
+    "edit_delay": -1.2930947593336006,
+    "bg_median": {
+     "465-510": 1274.8912425851927,
+     "533-580": 1716.2303295462432
+    },
+    "plateau_median": {
+     "465-510": 2828.328763549801,
+     "533-580": 1287.4915121429349
+    },
+    "heat_rate": 4.7571,
+    "cool_rate": 2.41188,
+    "overshoot": 5.39,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.238422977185598,
+     "60→72 °C": 2.4241086407887,
+     "72→95 °C": 4.860935831465974,
+     "72→40 °C": 16.266937301544267
+    },
+    "hold_temp": {
+     "mean": -0.4284714610777514,
+     "sd": 0.025510836805031373,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6877,
+     "533-580": 11884
+    },
+    "lamp_drift": {
+     "465-510": -1.9976636674990809,
+     "533-580": -1.2747309023754203
+    },
+    "exposure": {
+     "465-510": 299,
+     "533-580": 290
+    },
+    "chan_switch": 1038,
+    "cycle_sd": 52.09225412958482,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 14,
+     "n": 8121
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.15291465692467543,
+    "rowcol": 0.18393433457891764,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 130
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.53936212427864,
+     "T-NOS | DEMO-CRM": 32.04680628378972,
+     "HMG | DEMO-CRM": 23.00385331104336
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1555.596845194136,
+     "T-NOS | DEMO-CRM": 1430.0535678844042,
+     "HMG | DEMO-CRM": 1433.55521003322
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0052",
+   "run": "DEMO_LC2_HIST_0052",
+   "file": "DEMO_LC2_HIST_0052",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1773678600000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 70.10603989756856,
+    "edit_delay": 0.7196404359719181,
+    "bg_median": {
+     "465-510": 1306.2462589539916,
+     "533-580": 1203.9216269905887
+    },
+    "plateau_median": {
+     "465-510": 2525.5649539059013,
+     "533-580": 1489.9394383824344
+    },
+    "heat_rate": 4.7328600000000005,
+    "cool_rate": 2.43006,
+    "overshoot": 5.39,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.268787159332684,
+     "60→72 °C": 2.4507890036472038,
+     "72→95 °C": 4.86346989774916,
+     "72→40 °C": 16.10052259870878
+    },
+    "hold_temp": {
+     "mean": -0.41478318491852134,
+     "sd": 0.024652067863671363,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6815,
+     "533-580": 11713
+    },
+    "lamp_drift": {
+     "465-510": -2.041410081847874,
+     "533-580": -1.5914471056744417
+    },
+    "exposure": {
+     "465-510": 316,
+     "533-580": 367
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 18.93358629278657,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 12,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.19511336273253754,
+    "rowcol": 0.457477135855692,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 110
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.76678793904422,
+     "T-NOS | DEMO-CRM": 31.615250275261097,
+     "HMG | DEMO-CRM": 22.689949546621808
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1393.4319790132697,
+     "T-NOS | DEMO-CRM": 1460.8921425861226,
+     "HMG | DEMO-CRM": 1403.091577137958
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0053",
+   "run": "DEMO_LC2_HIST_0053",
+   "file": "DEMO_LC2_HIST_0053",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1774791000000,
+   "operator": "operator-96fc0cae",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 69.4267124801905,
+    "edit_delay": -0.3130468945248253,
+    "bg_median": {
+     "465-510": 1619.39383495964,
+     "533-580": 1735.782425342921
+    },
+    "plateau_median": {
+     "465-510": 2533.715860643168,
+     "533-580": 1697.830010766191
+    },
+    "heat_rate": 4.78134,
+    "cool_rate": 2.36946,
+    "overshoot": 5.34,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.293786601550126,
+     "60→72 °C": 2.4356134984813527,
+     "72→95 °C": 4.891060634839382,
+     "72→40 °C": 16.53701734041842
+    },
+    "hold_temp": {
+     "mean": -0.4363965076619016,
+     "sd": 0.027710957052137674,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6840,
+     "533-580": 11884
+    },
+    "lamp_drift": {
+     "465-510": -1.163056265802143,
+     "533-580": -1.2618005503197947
+    },
+    "exposure": {
+     "465-510": 298,
+     "533-580": 273
+    },
+    "chan_switch": 1038,
+    "cycle_sd": 19.31152372227158,
+    "invalid_acq": {
+     "bad": 2,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 11,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.2232105400776528,
+    "rowcol": 0.45551975990970184,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 130
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 33.079376961750015,
+     "T-NOS | DEMO-CRM": 30.930646177166253,
+     "HMG | DEMO-CRM": 23.196136482923055
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1551.1878518799622,
+     "T-NOS | DEMO-CRM": 1578.9758706687714,
+     "HMG | DEMO-CRM": 1451.7345836660934
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0054",
+   "run": "DEMO_LC2_HIST_0054",
+   "file": "DEMO_LC2_HIST_0054",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1775734200000,
+   "operator": "operator-81023fd5",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 67.6735081065849,
+    "edit_delay": 0.19605466311098085,
+    "bg_median": {
+     "465-510": 1715.1584079885463,
+     "533-580": 1692.2191727530183
+    },
+    "plateau_median": {
+     "465-510": 2535.681492559611,
+     "533-580": 1322.0260785137611
+    },
+    "heat_rate": 4.76922,
+    "cool_rate": 2.3755200000000003,
+    "overshoot": 5.4,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.316898182925248,
+     "60→72 °C": 2.444425462317567,
+     "72→95 °C": 4.849327468382905,
+     "72→40 °C": 16.238488225610762
+    },
+    "hold_temp": {
+     "mean": -0.4320544383944612,
+     "sd": 0.02882885188967506,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6870,
+     "533-580": 11920
+    },
+    "lamp_drift": {
+     "465-510": -1.5203158836424795,
+     "533-580": -1.2169472907332517
+    },
+    "exposure": {
+     "465-510": 288,
+     "533-580": 341
+    },
+    "chan_switch": 1047,
+    "cycle_sd": 26.271037740004022,
+    "invalid_acq": {
+     "bad": 1,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 15,
+     "n": 8122
+    },
+    "action_rate": {
+     "bad": 0,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 1,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.7601726151386036,
+    "rowcol": 0.02230887217169865,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 1
+    },
+    "findings": {
+     "count": 110
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.79105969668845,
+     "T-NOS | DEMO-CRM": 31.84666996412437,
+     "HMG | DEMO-CRM": 23.076874065568862
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1314.3900347738931,
+     "T-NOS | DEMO-CRM": 1452.5918983506754,
+     "HMG | DEMO-CRM": 1488.6319933920147
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  },
+  {
+   "key": "demo-hist-DEMO_LC2_HIST_0055",
+   "run": "DEMO_LC2_HIST_0055",
+   "file": "DEMO_LC2_HIST_0055",
+   "platform": "LC",
+   "instrument": "LC · LC-DEMO-02",
+   "date": 1776529800000,
+   "operator": "operator-538c64e4",
+   "software": "LCS480 1.5.1.62",
+   "firmware": "HTC_VER_10",
+   "block_cycles": null,
+   "protocol": "",
+   "m": {
+    "run_minutes": 70.31091082142378,
+    "edit_delay": -0.47561828215216867,
+    "bg_median": {
+     "465-510": 1552.0849105985212,
+     "533-580": 1515.626801875834
+    },
+    "plateau_median": {
+     "465-510": 2723.394647708076,
+     "533-580": 1486.5454766476792
+    },
+    "heat_rate": 4.78134,
+    "cool_rate": 2.41794,
+    "overshoot": 5.34,
+    "settling": 4.54,
+    "transition": {
+     "95→60 °C": 15.349613372611445,
+     "60→72 °C": 2.4290859381193,
+     "72→95 °C": 4.872771470465345,
+     "72→40 °C": 16.51720058635359
+    },
+    "hold_temp": {
+     "mean": -0.4397761352433427,
+     "sd": 0.030041537588445376,
+     "n": 45
+    },
+    "lamp_ref": {
+     "465-510": 6881,
+     "533-580": 11909
+    },
+    "lamp_drift": {
+     "465-510": -1.505597332428095,
+     "533-580": -1.2558580771510894
+    },
+    "exposure": {
+     "465-510": 225,
+     "533-580": 280
+    },
+    "chan_switch": 1038,
+    "cycle_sd": 35.81089432339244,
+    "invalid_acq": {
+     "bad": 0,
+     "n": 135
+    },
+    "templog_late": {
+     "bad": 20,
+     "n": 8105
+    },
+    "action_rate": {
+     "bad": 1,
+     "n": 12
+    },
+    "late_rate": {
+     "bad": 0,
+     "n": 8
+    },
+    "call_disagree": {
+     "bad": 0,
+     "n": 4
+    },
+    "rep_sd": 0.2268056614323291,
+    "rowcol": 0.4656002728828473,
+    "manual_rate": {
+     "bad": 0,
+     "n": 28
+    },
+    "copied": {
+     "count": 0
+    },
+    "findings": {
+     "count": 115
+    },
+    "pc_cq": {
+     "35S | DEMO-CRM": 32.53755064177931,
+     "T-NOS | DEMO-CRM": 31.11817376810499,
+     "HMG | DEMO-CRM": 22.929532762152633
+    },
+    "pc_batch": {
+     "35S | DEMO-CRM": "extracted 2025-09-29",
+     "T-NOS | DEMO-CRM": "extracted 2025-09-29",
+     "HMG | DEMO-CRM": "extracted 2025-09-29"
+    },
+    "pc_amplitude": {
+     "35S | DEMO-CRM": 1436.9552488199959,
+     "T-NOS | DEMO-CRM": 1502.2256968982094,
+     "HMG | DEMO-CRM": 1777.542100699171
+    },
+    "ntc_rate": {
+     "bad": 0,
+     "n": 6
+    }
+   },
+   "synthetic": true
+  }
+ ]
+}
