@@ -54,3 +54,11 @@ This record covers the GitHub website update made after the technical documentat
 - Every `select cc:… ` line in the Script-box template now uses the chart's own type (`trend`, `ewma`, `cusum`, `xbars`, `p`, `u`, `c`, `funnel` or `i`) instead of `type=i` for all 58 charts. With `type=i`, the 16 `p`/`u`/`c`/`funnel` charts drew empty and appeared in the archive under `errors/`.
 - Verified in Chromium: page loads without errors; the whole template parses without errors.
 - Updated SHA-256: `086D07E3FDAB35476F544C56E0F2ED9C74B008F14160E2015D7D62FE90951BE8`; size 940025 bytes.
+
+## Follow-up — Console mode keyboard keys — 2026-09-25
+
+- The Console mode buttons showed keys (1–9, 0, −, +, arrows) but no key was handled outside the chart-type / x-axis pick lists. A key listener now presses the button that currently shows the key: digits as labelled, `-` or `−` zoom out, `+` or `=` zoom in, arrow keys pan.
+- It is active only while Console mode is open, never while a pick list is open (that list keeps its own 1–9 / 0 / Escape keys), never while typing in a text field, and never with Ctrl, Alt or Cmd, so browser zoom (Ctrl + / Ctrl −) is unchanged.
+- The reset-view button (⟲) has no key and stays click-only.
+- Verified in Chromium: every labelled key reaches its command, 0 leaves the console, a pick-list number is not also sent to the chart buttons, no page errors.
+- Updated SHA-256: `8DF4472EBA4831BAB5C0C712A30C60CDD20AD3E179ED1164C91C441DB33C770B`; size 940696 bytes.
