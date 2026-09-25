@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Console mode · qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5</title>
+<title>Missy, RUO - A single-file local HTML page for .ixo, .eds/.edt and .rdml experiment runs</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Offline reader for Roche LightCycler 480 .ixo and Applied Biosystems QuantStudio 3/5 .eds files: traceable stored values, container integrity checks, open qPCR exports, graphs, quality review, forensic log and JSON-LD metadata.">
 <meta name="application-name" content="qPCR raw values, quality-control and forensic export tool">
@@ -288,7 +288,11 @@ main{padding:22px;max-width:1180px;padding-bottom:64px}
 /* status bar: one line at the bottom that says what the page is doing */
 #statusbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);
   font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-#statusbar .sb-line{display:flex;align-items:center;gap:10px;padding:6px 12px;flex-wrap:wrap}
+#statusbar .sb-line{display:flex;align-items:center;gap:10px;padding:6px 12px;flex-wrap:wrap;justify-content:flex-start}
+#statusbar .bottom-page-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-start;max-width:none;margin:0 2px 0 0;order:0}
+#statusbar .bottom-page-tools label{display:flex;align-items:center;gap:5px;margin:0;min-width:0;white-space:nowrap}
+#statusbar .bottom-page-tools select{padding:4px 7px}
+#statusbar .bottom-page-tools button{white-space:nowrap}
 #statusbar .sb-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
 #statusbar.busy .sb-dot{background:var(--accent);animation:sbpulse 1s ease-in-out infinite}
 #statusbar.fault .sb-dot{background:var(--bad)}
@@ -461,22 +465,15 @@ body.lang-zh .cute-toast.show{opacity:1;transform:translateY(0) scale(1)}
 .cute-toast b{font-size:21px}.cute-toast span{font-size:13px}
 @keyframes cute-bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(3deg)}}
 @media(max-width:850px){.header-row{flex-direction:column}.page-tools{justify-content:flex-start;max-width:none}}
+@media(max-width:850px){#statusbar .sb-line{align-items:flex-start;gap:7px}#statusbar .bottom-page-tools{width:100%;margin-right:0}#statusbar .sb-right{margin-left:0;width:100%;flex-wrap:wrap}}
 @media(max-width:850px){.console-identity{align-items:flex-start;flex-direction:column;gap:4px}.console-profile{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.cute-friends span{animation:none}.cute-toast{transition:none}}
 </style>
 <header>
   <div class="header-row">
     <div class="header-copy">
-      <h1>qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5</h1>
+      <h1>Missy, RUO - A single-file local HTML page for .ixo, .eds/.edt and .rdml experiment runs</h1>
       
-    </div>
-    <div class="missy-header-mark" id="missy-header-logo" aria-label="MISSY RUO NOT VALIDATED"></div>
-    <div class="page-tools">
-      <label>Language<select id="language-select" aria-label="Language">
-        <option value="en">English</option><option value="zh">中文</option>
-      </select></label>
-      <button class="ghost" id="dl-site-en" type="button">Download English website (ZIP)</button>
-      <button class="ghost" id="dl-site-zh" type="button">Download Chinese website (ZIP)</button>
     </div>
   </div>
   <div class="console-identity" id="console-identity" aria-live="polite">
@@ -1144,6 +1141,13 @@ zip handover_2026_09</textarea>
 
 <div id="statusbar" aria-live="polite">
   <div class="sb-line">
+    <div class="page-tools bottom-page-tools" aria-label="Language and website downloads">
+      <label>Language<select id="language-select" aria-label="Language">
+        <option value="en">English</option><option value="zh">中文</option>
+      </select></label>
+      <button class="ghost" id="dl-site-en" type="button">Download English website (ZIP)</button>
+      <button class="ghost" id="dl-site-zh" type="button">Download Chinese website (ZIP)</button>
+    </div>
     <span class="sb-dot"></span>
     <span id="sb-state"><b>Starting</b></span>
     <span class="sb-bar" id="sb-progress" hidden><i></i></span>
@@ -2215,8 +2219,7 @@ function rememberedLanguage(){try{return localStorage.getItem(languageStorageKey
 function setLanguage(lang,announce){
   UI_LANG=lang==="zh"?"zh":"en";document.documentElement.lang=UI_LANG==="zh"?"zh-CN":"en";
   document.body.classList.toggle("lang-zh",UI_LANG==="zh");
-  document.title=UI_LANG==="zh"?ZH_TERMS["qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5"]
-    :"qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5";
+  document.title="Missy, RUO - A single-file local HTML page for .ixo, .eds/.edt and .rdml experiment runs";
   const select=document.querySelector("#language-select");if(select)select.value=UI_LANG;
   try{localStorage.setItem(languageStorageKey(),UI_LANG);}catch{}
   if(typeof refreshAll==="function")refreshAll();
