@@ -19,15 +19,12 @@ lab12_fixture_*/
 # pre-withdrawal snapshots
 *.before_20260928_identifier_withdrawal
 
-# --- intermediate output of the build; not committed ------------------------
-# documentation/latex/ is the tree that builds the 28 September document and is
-# committed whole, including fig/fndiag/, fig/gallery/, code/src/, _src_page.tex,
-# _src_rdml.tex, chV2a_diagrams.tex and chV2b_gallery.tex.  Do not ignore them.
-functions.json
-diagram_index.json
-gallery.json
-coverage.json
-cc_status*.json
+# --- the document source IS committed ---------------------------------------
+# These were listed as build output when documentation/latex/ was the 25 September
+# tree and the diagrams were regenerated.  documentation/latex/ is now the tree that
+# builds the 28 September document, and fig/fndiag/, fig/gallery/, code/src/ and the
+# generated chapters are its source.  Ignoring them silently dropped 1,047 of 1,057
+# new files from a commit; the only reason it was caught is that someone counted.
 
 # --- build litter ------------------------------------------------------------
 *.aux
@@ -47,7 +44,7 @@ documentation/latex/main.pdf
 #   is a PUBLISHED ADDRESS and must stay tracked.  The 1,409-page document is a
 #   Release asset and simply never enters the working tree.
 # documentation/latex/chV2_functions.tex is committed here: this repository ships
-#   the source of record.
+#   the source of record, and .before_singlecolumn_20260924 is its real input.
 
 # --- local -------------------------------------------------------------------
 .DS_Store
