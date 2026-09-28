@@ -1,0 +1,3 @@
+  "The passive reference (ROX) is lower than usual: less master mix dispensed, a master mix without or with less ROX, or wrong dye settings. Normalise
+d results may be noisier; check the master mix and pipetting.":"被动参比（ROX）比平时低：分配的预混液减少、预混液不含或含较少 ROX，或染料设置错误。归
+一化结果可能更嘈杂；检查预混液和移液。",

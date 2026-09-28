@@ -1,0 +1,2 @@
+  "Transition time A → B °C":"转换时间 A → B °C",
+  "LC TemperatureLog · QS log sample temperature · run program":"LC 温度日志 · QS 日志样品温度 · 运行程序",

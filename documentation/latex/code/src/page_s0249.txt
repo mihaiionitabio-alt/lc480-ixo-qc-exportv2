@@ -1,0 +1,4 @@
+  "Control identity":"对照标识","Name grouping":"名称分组",
+  "Automatic root names (recommended)":"自动根名称（推荐）","Keep exact sample names":"保留完整样品名称",
+  "Download chart data (CSV)":"下载图表数据（CSV）","Save chart as PNG":"将图表保存为 PNG",
+  "Adjust detected control categories":"调整已识别的对照类别",

@@ -1,0 +1,3 @@
+  "More results fall in the late-signal or stochastic zone: low template amounts, inhibition, degraded samples or less sensitive reagents. These resul
+ts are less reliable; follow the SOP for repeats.":"落在晚期信号或随机区的结果增多：模板量低、抑制、样品降解或试剂灵敏度降低。这些结果可靠性较低；按 S
+OP 重复。",

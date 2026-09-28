@@ -1,0 +1,3 @@
+  "The probe signal of the control is weaker than usual: probe degradation (light, freeze–thaw), a new lot with less signal, wrong dye/quencher setup 
+or weaker optics. Weak signal makes Cq calls less reliable; check reagent storage and lot.":"对照的探针信号比平时弱：探针降解（光照、反复冻融）、新批
+次信号较弱、染料/淬灭剂设置错误或光学变弱。信号弱会降低 Cq 判读可靠性；检查试剂储存和批次。",

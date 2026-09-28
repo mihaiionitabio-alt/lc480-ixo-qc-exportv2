@@ -1,0 +1,2 @@
+  "The passive reference is higher than usual: more volume, a master mix with more ROX, or evaporation concentrating the wells. Check the master mix t
+ype and the seal.":"被动参比比平时高：体积更大、预混液 ROX 更多，或蒸发使孔内浓缩。检查预混液类型和封膜。",

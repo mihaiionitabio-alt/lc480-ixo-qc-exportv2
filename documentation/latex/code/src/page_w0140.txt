@@ -1,0 +1,3 @@
+  "Longer exposures than usual: the instrument is compensating for weak light — weaker probe or dye, wrong plate or seal, dirty optics, or an ageing l
+amp/LED. If it keeps rising over many runs, service the optics.":"曝光时间比平时长：仪器在补偿弱光 — 探针或染料变弱、板或封膜错误、光学部件脏污或灯/LE
+D 老化。若多次运行持续上升，维修光学部件。",

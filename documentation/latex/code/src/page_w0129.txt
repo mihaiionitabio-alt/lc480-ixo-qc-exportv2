@@ -1,0 +1,3 @@
+  "Cooling is faster than usual. Typical after cleaning the filters, a fan replacement or a service, or in a cooler room. Note the event and, if it wa
+s a service, start a new baseline on that date.":"冷却比平时快。常见于清洁过滤网、更换风扇或维修之后，或室温较低时。记录该事件；如为维修，在该日期设定
+新基线。",

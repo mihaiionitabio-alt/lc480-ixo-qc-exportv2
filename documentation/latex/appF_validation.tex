@@ -6,686 +6,689 @@ classes of the arguments it was called with. A symbol with no class took no
 argument or was not called.
 
 {\footnotesize
-\begin{longtable}{@{}lrll@{}}
+\begin{xltabular}{\linewidth}{|l|r|X|X|}
+\caption{Symbols of the area \emph{Every symbol, with its verdict}}\\
+\hline
 
-\toprule \textbf{Symbol} & \textbf{Line} & \textbf{Result} & \textbf{Cls} \\ \midrule\endhead
-\texttt{\$} & 3161 & pass & \texttt{S} \\
-\texttt{heatColour} & 8949 & pass & \texttt{S} \\
-\texttt{\$\$} & 6999 & pass & \texttt{S} \\
-\texttt{hex} & 3167 & priv & \texttt{--} \\
-\texttt{ANALYSIS\_CLASS\_RE} & 2549 & const & \texttt{--} \\
-\texttt{hexBEToDouble} & 2325 & pass & \texttt{S} \\
-\texttt{ANALYSIS\_KINDS} & 2550 & const & \texttt{--} \\
-\texttt{inflate} & 2244 & pass & \texttt{S} \\
-\texttt{APP\_LIMITS} & 7004 & const & \texttt{--} \\
-\texttt{inflateRaw} & 3214 & priv & \texttt{--} \\
-\texttt{APP\_PHASE\_TEXT} & 7942 & const & \texttt{--} \\
-\texttt{ini} & 3275 & priv & \texttt{--} \\
-\texttt{APP\_PHASE\_TRANSITIONS} & 7014 & const & \texttt{--} \\
-\texttt{instrumentRecordTables} & 9419 & pass & \texttt{R} \\
-\texttt{APP\_SB\_LAST} & 7972 & const & \texttt{--} \\
-\texttt{instrumentZip} & 10054 & pass & \texttt{--} \\
-\texttt{APP\_STATE} & 7005 & const & \texttt{--} \\
-\texttt{intake} & 10125 & state & \texttt{D} \\
-\texttt{APP\_STATS} & 7902 & const & \texttt{--} \\
-\texttt{integrityEvents} & 3886 & pass & \texttt{RS} \\
-\texttt{APP\_TASK\_LABEL} & 7918 & const & \texttt{--} \\
-\texttt{integrityLabel} & 3881 & pass & \texttt{R} \\
-\texttt{APP\_VERSION} & 7000 & const & \texttt{--} \\
-\texttt{integrityMismatches} & 9548 & pass & \texttt{--} \\
-\texttt{AST} & 11551 & const & \texttt{--} \\
-\texttt{invalidateAnalysisCaches} & 4765 & excl & \texttt{--} \\
-\texttt{BASE\_MACHINE\_METADATA} & 8471 & const & \texttt{--} \\
-\texttt{isEdsName} & 3734 & pass & \texttt{R} \\
-\texttt{BLANK\_ROLES} & 9038 & const & \texttt{--} \\
-\texttt{isoLocal} & 3728 & pass & \texttt{S} \\
-\texttt{CALL} & 2050 & const & \texttt{--} \\
-\texttt{ixoIntegrity} & 3866 & pass & \texttt{S} \\
-\texttt{CALL\_LINE} & 9863 & const & \texttt{--} \\
-\texttt{javaHashOrder} & 3587 & priv & \texttt{--} \\
-\texttt{CC\_BY\_ID} & 6259 & const & \texttt{--} \\
-\texttt{kid} & 3270 & priv & \texttt{--} \\
-\texttt{CC\_C4} & 6271 & pass & \texttt{S} \\
-\texttt{kids} & 3271 & priv & \texttt{--} \\
-\texttt{CC\_CHARTS} & 6074 & const & \texttt{--} \\
-\texttt{languageStorageKey} & 2029 & pass & \texttt{--} \\
-\texttt{CC\_COL} & 6450 & const & \texttt{--} \\
-\texttt{legendFromMap} & 5164 & pass & \texttt{S} \\
-\texttt{CC\_DEFAULT\_CFG} & 6260 & const & \texttt{--} \\
-\texttt{lgamma} & 2105 & pass & \texttt{S} \\
-\texttt{CC\_GROUPS} & 6069 & const & \texttt{--} \\
-\texttt{localizeDOM} & 2002 & pass & \texttt{ES} \\
-\texttt{CC\_HIST\_KEY} & 6449 & const & \texttt{--} \\
-\texttt{machineMetadataDocument} & 8584 & pass & \texttt{--} \\
-\texttt{CC\_LIMIT\_FLAG} & 6455 & const & \texttt{--} \\
-\texttt{machineMetadataJSON} & 8597 & pass & \texttt{--} \\
-\texttt{CC\_LIMIT\_TEXT} & 6373 & const & \texttt{--} \\
-\texttt{makeBaselineCSV} & 8353 & pass & \texttt{R} \\
-\texttt{CC\_RULES\_OFF} & 6264 & const & \texttt{--} \\
-\texttt{makeQpcrWide} & 8329 & pass & \texttt{DR} \\
-\texttt{CC\_SEG\_PALETTE} & 6454 & const & \texttt{--} \\
-\texttt{makeQpcrWideTables} & 8342 & pass & \texttt{R} \\
-\texttt{CC\_STATE} & 6448 & const & \texttt{--} \\
-\texttt{makeRDES} & 8366 & pass & \texttt{DR} \\
-\texttt{CC\_TARGET\_ALIAS} & 4408 & const & \texttt{--} \\
-\texttt{makeRDESTables} & 8379 & pass & \texttt{R} \\
-\texttt{CC\_TZ} & 5901 & const & \texttt{--} \\
-\texttt{makeRDML} & 8324 & pass & \texttt{R} \\
-\texttt{CMD} & 11395 & const & \texttt{--} \\
-\texttt{makeRDMLXML} & 8280 & pass & \texttt{R} \\
-\texttt{CMD\_HELP} & 11396 & const & \texttt{--} \\
-\texttt{makeStoredZip} & 2282 & pass & \texttt{S} \\
-\texttt{CONSOLE\_DICT} & 6432 & const & \texttt{--} \\
-\texttt{makeWebsiteArchive} & 8064 & pass & \texttt{S} \\
-\texttt{CONTROL\_CATEGORY\_OPTIONS} & 8888 & const & \texttt{--} \\
-\texttt{makeXlsx} & 4164 & pass & \texttt{S} \\
-\texttt{CQ\_ANALYSIS\_KINDS} & 9089 & const & \texttt{--} \\
-\texttt{makeZip} & 3250 & priv & \texttt{--} \\
-\texttt{CQ\_HEADERS} & 10252 & const & \texttt{--} \\
-\texttt{markDirty} & 5627 & pass & \texttt{--} \\
-\texttt{CQ\_NEGATIVE\_STATUS} & 9066 & const & \texttt{--} \\
-\texttt{mean} & 2090 & pass & \texttt{S} \\
-\texttt{CRC\_T} & 3180 & priv & \texttt{--} \\
-\texttt{median} & 2093 & pass & \texttt{S} \\
-\texttt{CRC\_TABLE} & 2198 & const & \texttt{--} \\
-\texttt{metaRows} & 8213 & pass & \texttt{--} \\
-\texttt{CSV\_EXAMPLE} & 10301 & const & \texttt{--} \\
-\texttt{metadataId} & 8479 & pass & \texttt{RS} \\
-\texttt{CURVE\_KEY\_COLOURS} & 9862 & const & \texttt{--} \\
-\texttt{metricCard} & 9457 & pass & \texttt{DS} \\
-\texttt{DEFAULT\_LANG} & 993 & const & \texttt{--} \\
-\texttt{mgApplyChartView} & 7326 & pass & \texttt{--} \\
-\texttt{DIRTY} & 5626 & const & \texttt{--} \\
-\texttt{mgBuildQueue} & 7058 & pass & \texttt{--} \\
-\texttt{EDS} & 3158 & const & \texttt{--} \\
-\texttt{mgChartAxisOptions} & 7185 & pass & \texttt{S} \\
-\texttt{FINDING\_SEVERITY\_RANK} & 9495 & const & \texttt{--} \\
-\texttt{mgChartTypeOptions} & 7180 & pass & \texttt{S} \\
-\texttt{FLAGS} & 3282 & const & \texttt{--} \\
-\texttt{mgChooseFiles} & 7423 & pass & \texttt{--} \\
-\texttt{FORENSIC\_CACHE} & 4764 & const & \texttt{--} \\
-\texttt{mgClose} & 7881 & pass & \texttt{--} \\
-\texttt{GRAPHS} & 5189 & const & \texttt{--} \\
-\texttt{mgCommand} & 7375 & pass & \texttt{S} \\
-\texttt{GRAPH\_METRICS} & 5541 & const & \texttt{--} \\
-\texttt{mgGo} & 7393 & pass & \texttt{S} \\
-\texttt{GRAPH\_STATE} & 5542 & const & \texttt{--} \\
-\texttt{mgGoChart} & 7399 & pass & \texttt{S} \\
-\texttt{I18N\_ORIGINAL\_TEXT} & 1920 & const & \texttt{--} \\
-\texttt{mgGraphCtx} & 7720 & pass & \texttt{S} \\
-\texttt{INHIB} & 8041 & const & \texttt{--} \\
-\texttt{mgInit} & 7885 & pass & \texttt{--} \\
-\texttt{JSONLD\_STANDARDS} & 8472 & const & \texttt{--} \\
-\texttt{mgIt} & 7443 & pass & \texttt{S} \\
-\texttt{LC\_CALC\_STATE\_LABELS} & 2568 & const & \texttt{--} \\
-\texttt{mgItem} & 7178 & pass & \texttt{--} \\
-\texttt{LOADED\_LIMIT} & 8783 & const & \texttt{--} \\
-\texttt{mgItemKey} & 7849 & pass & \texttt{S} \\
-\texttt{MD5} & 3184 & pass & \texttt{--} \\
-\texttt{mgItemSentence} & 7307 & pass & \texttt{S} \\
-\texttt{MG} & 7053 & const & \texttt{--} \\
-\texttt{mgLeaveTo} & 7428 & pass & \texttt{S} \\
-\texttt{MG\_COMMANDS} & 7343 & const & \texttt{--} \\
-\texttt{mgOpen} & 7876 & pass & \texttt{--} \\
-\texttt{MG\_GLYPH} & 7054 & const & \texttt{--} \\
-\texttt{mgPan} & 7341 & pass & \texttt{S} \\
-\texttt{MG\_PICT} & 7441 & const & \texttt{--} \\
-\texttt{mgPanelItems} & 7657 & pass & \texttt{D} \\
-\texttt{MG\_TYPE\_LABEL} & 7179 & const & \texttt{--} \\
-\texttt{mgReadFiles} & 7416 & state & \texttt{--} \\
-\texttt{MG\_VIEWS} & 7831 & const & \texttt{--} \\
-\texttt{mgRefresh} & 7858 & pass & \texttt{--} \\
-\texttt{MG\_WORD} & 7055 & const & \texttt{--} \\
-\texttt{mgRender} & 7204 & pass & \texttt{--} \\
-\texttt{NAME\_ROLE\_RULES} & 8101 & const & \texttt{--} \\
-\texttt{mgSafe} & 7445 & pass & \texttt{S} \\
-\texttt{NEGATIVE\_FAMILY} & 2061 & const & \texttt{--} \\
-\texttt{mgScope} & 7841 & pass & \texttt{S} \\
-\texttt{NON\_RESULT\_CLASSES} & 2777 & const & \texttt{--} \\
-\texttt{mgScopeFilter} & 7852 & pass & \texttt{D} \\
-\texttt{ORPHAN\_CURVE\_KEY} & 8915 & const & \texttt{--} \\
-\texttt{mgScopeMark} & 7845 & pass & \texttt{--} \\
-\texttt{P} & 3304 & priv & \texttt{--} \\
-\texttt{mgSetChartAxis} & 7412 & pass & \texttt{S} \\
-\texttt{PAIRING\_RULES} & 2606 & const & \texttt{--} \\
-\texttt{mgSetChartType} & 7408 & pass & \texttt{S} \\
-\texttt{PALETTE} & 2066 & const & \texttt{--} \\
-\texttt{mgSheet} & 7285 & pass & \texttt{S} \\
-\texttt{PASTED} & 8040 & const & \texttt{--} \\
-\texttt{mgSheetClose} & 7306 & pass & \texttt{--} \\
-\texttt{PDF\_PAGE} & 10939 & const & \texttt{--} \\
-\texttt{mgSheetPick} & 7300 & pass & \texttt{S} \\
-\texttt{PDF\_SPELL} & 10946 & const & \texttt{--} \\
-\texttt{mgStage} & 7319 & pass & \texttt{--} \\
-\texttt{PDF\_WINANSI} & 10942 & const & \texttt{--} \\
-\texttt{mgStageSet} & 7325 & pass & \texttt{S} \\
-\texttt{PLATE\_PASTELS} & 8887 & const & \texttt{--} \\
-\texttt{mgStatusPaint} & 7193 & pass & \texttt{--} \\
-\texttt{PSEUDO\_MAP} & 4103 & const & \texttt{--} \\
-\texttt{mgToggle} & 7884 & pass & \texttt{--} \\
-\texttt{QS\_AMP} & 3724 & const & \texttt{--} \\
-\texttt{mgTxt} & 7446 & pass & \texttt{S} \\
-\texttt{QS\_DEFAULT\_COLS} & 3551 & priv & \texttt{--} \\
-\texttt{mgViewExport} & 7804 & pass & \texttt{--} \\
-\texttt{QS\_DYE\_FILTER} & 3719 & const & \texttt{--} \\
-\texttt{mgViewGraphs} & 7725 & pass & \texttt{--} \\
-\texttt{QS\_KIND} & 3726 & const & \texttt{--} \\
-\texttt{mgViewIntegrity} & 7789 & pass & \texttt{--} \\
-\texttt{QS\_TASK\_ROLE} & 3722 & const & \texttt{--} \\
-\texttt{mgViewLoad} & 7449 & pass & \texttt{--} \\
-\texttt{RDML\_REANALYSIS\_TOOLS} & 10846 & const & \texttt{--} \\
-\texttt{mgViewPanel} & 7695 & pass & \texttt{--} \\
-\texttt{RDML\_SAMPLE\_ROLE} & 10666 & const & \texttt{--} \\
-\texttt{mgViewResults} & 7576 & pass & \texttt{--} \\
-\texttt{REP\_REGEX} & 2044 & const & \texttt{--} \\
-\texttt{mgViewReview} & 7756 & pass & \texttt{--} \\
-\texttt{RESULT\_PROPS} & 2578 & const & \texttt{--} \\
-\texttt{mgViewSop} & 7507 & pass & \texttt{--} \\
-\texttt{REVIEW\_COLOURS} & 8880 & const & \texttt{--} \\
-\texttt{mgZoom} & 7334 & pass & \texttt{S} \\
-\texttt{REVIEW\_RENDERERS} & 5630 & const & \texttt{--} \\
-\texttt{modesInit} & 11634 & pass & \texttt{--} \\
-\texttt{REVIEW\_STATE} & 8891 & const & \texttt{--} \\
-\texttt{niceTicks} & 5107 & pass & \texttt{S} \\
-\texttt{ROLES} & 2043 & const & \texttt{--} \\
-\texttt{num} & 2082 & pass & \texttt{S} \\
-\texttt{ROLE\_COLOURS} & 2062 & const & \texttt{--} \\
-\texttt{operatorOf} & 8146 & pass & \texttt{R} \\
-\texttt{ROLE\_LINE} & 2064 & const & \texttt{--} \\
-\texttt{option} & 2081 & pass & \texttt{S} \\
-\texttt{ROWS} & 3170 & priv & \texttt{--} \\
-\texttt{orphanBlankRole} & 9039 & pass & \texttt{R} \\
-\texttt{RUNS} & 8039 & const & \texttt{--} \\
-\texttt{orphanCurveCandidates} & 9098 & pass & \texttt{R} \\
-\texttt{SAMPLE\_HEADERS} & 10253 & const & \texttt{--} \\
-\texttt{orphanOtherChannels} & 9049 & pass & \texttt{R} \\
-\texttt{SAMPLE\_TYPE} & 2051 & const & \texttt{--} \\
-\texttt{outputDistribution} & 8483 & pass & \texttt{DRS} \\
-\texttt{SAMPLE\_TYPE\_LABEL} & 10407 & const & \texttt{--} \\
-\texttt{ownQuery} & 2685 & pass & \texttt{ES} \\
-\texttt{SEL\_STATE} & 11094 & const & \texttt{--} \\
-\texttt{ownQueryAll} & 2684 & pass & \texttt{ES} \\
-\texttt{SEL\_TABLE\_ROWS} & 11277 & const & \texttt{--} \\
-\texttt{ownedBy} & 2675 & pass & \texttt{E} \\
-\texttt{SERIES\_PALETTE} & 9861 & const & \texttt{--} \\
-\texttt{ownsResult} & 2781 & pass & \texttt{ES} \\
-\texttt{SOP} & 4335 & const & \texttt{--} \\
-\texttt{pad2} & 3564 & priv & \texttt{--} \\
-\texttt{SOP\_ACTION\_LABEL} & 4846 & const & \texttt{--} \\
-\texttt{parseCqTable} & 10255 & pass & \texttt{S} \\
-\texttt{SOP\_AUTO\_DEFAULT} & 4336 & const & \texttt{--} \\
-\texttt{parseEds} & 3305 & pass & \texttt{RS} \\
-\texttt{SOP\_CACHE} & 4337 & const & \texttt{--} \\
-\texttt{parseLog} & 3521 & priv & \texttt{--} \\
-\texttt{SOP\_OUTCOMES} & 4206 & const & \texttt{--} \\
-\texttt{pastedDatasetMetadata} & 8572 & pass & \texttt{--} \\
-\texttt{SOP\_OUTCOME\_DEFAULTS} & 4207 & const & \texttt{--} \\
-\texttt{pdfDoc} & 11000 & pass & \texttt{--} \\
-\texttt{SOP\_OUTCOME\_OPTIONS} & 4835 & const & \texttt{--} \\
-\texttt{pdfFit} & 10984 & pass & \texttt{DRS} \\
-\texttt{SOP\_PRESETS} & 4236 & const & \texttt{--} \\
-\texttt{pdfStr} & 10950 & pass & \texttt{S} \\
-\texttt{SOP\_SCHEMA} & 4205 & const & \texttt{--} \\
-\texttt{pdfWidth} & 10966 & pass & \texttt{DS} \\
-\texttt{SOP\_VIEW} & 4998 & const & \texttt{--} \\
-\texttt{pdfWrap} & 10990 & pass & \texttt{DRS} \\
-\texttt{STAGED} & 10124 & const & \texttt{--} \\
-\texttt{percentile} & 2095 & pass & \texttt{S} \\
-\texttt{STORED\_SOP} & 4333 & const & \texttt{--} \\
-\texttt{physicalCurveRows} & 8932 & pass & \texttt{D} \\
-\texttt{STORED\_SOP\_IS\_TEMPLATE} & 4334 & const & \texttt{--} \\
-\texttt{pill} & 3165 & priv & \texttt{--} \\
-\texttt{SVG\_CLIP\_N} & 5116 & const & \texttt{--} \\
-\texttt{plateColour} & 9617 & pass & \texttt{RS} \\
-\texttt{TYPE\_TO\_ROLE} & 2056 & const & \texttt{--} \\
-\texttt{plateMapRows} & 8955 & pass & \texttt{DR} \\
-\texttt{UI\_LANG} & 1919 & const & \texttt{--} \\
-\texttt{posToLimsWell} & 2320 & pass & \texttt{R} \\
-\texttt{UNKNOWN\_ROLE} & 2042 & const & \texttt{--} \\
-\texttt{posToWell} & 2319 & pass & \texttt{R} \\
-\texttt{WELL\_HEADERS} & 10254 & const & \texttt{--} \\
-\texttt{propText} & 2315 & pass & \texttt{ER} \\
-\texttt{ZH\_TERMS} & 994 & const & \texttt{--} \\
-\texttt{propValues} & 2317 & pass & \texttt{ER} \\
-\texttt{acceptPasted} & 10313 & pass & \texttt{S} \\
-\texttt{pseudoOn} & 4114 & pass & \texttt{--} \\
-\texttt{acquiredCurveCount} & 8157 & pass & \texttt{R} \\
-\texttt{pseudoRun} & 4116 & pass & \texttt{R} \\
-\texttt{acquisitionStats} & 2422 & pass & \texttt{R} \\
-\texttt{pseudonymMap} & 4104 & pass & \texttt{--} \\
-\texttt{allWellRows} & 8189 & pass & \texttt{--} \\
-\texttt{pv} & 2316 & pass & \texttt{ER} \\
-\texttt{analysisChoices} & 8916 & pass & \texttt{R} \\
-\texttt{pyScript} & 8428 & pass & \texttt{--} \\
-\texttt{analysisGroups} & 8269 & pass & \texttt{D} \\
-\texttt{qsCalDate} & 3565 & priv & \texttt{--} \\
-\texttt{analysisKind} & 2559 & pass & \texttt{DR} \\
-\texttt{qsCols} & 3558 & priv & \texttt{--} \\
-\texttt{analysisResults} & 2790 & pass & \texttt{S} \\
-\texttt{qsExport} & 3691 & pass & \texttt{RS} \\
-\texttt{appCancel} & 7929 & pass & \texttt{--} \\
-\texttt{qsHeader} & 3592 & priv & \texttt{--} \\
-\texttt{appDiagnostics} & 7025 & pass & \texttt{--} \\
-\texttt{qsInstrument} & 3574 & pass & \texttt{R} \\
-\texttt{appError} & 7006 & pass & \texttt{RS} \\
-\texttt{qsRGB} & 3571 & priv & \texttt{--} \\
-\texttt{appFmtMB} & 7945 & pass & \texttt{S} \\
-\texttt{qsStamp} & 3566 & priv & \texttt{--} \\
-\texttt{appFmtMs} & 7944 & pass & \texttt{S} \\
-\texttt{qsTables} & 3612 & pass & \texttt{RS} \\
-\texttt{appHeapMB} & 7921 & pass & \texttt{--} \\
-\texttt{qsWorkbook} & 4179 & pass & \texttt{RS} \\
-\texttt{appNotice} & 7923 & pass & \texttt{DS} \\
-\texttt{quantChannels} & 9090 & pass & \texttt{R} \\
-\texttt{appReadSuperseded} & 7934 & state & \texttt{S} \\
-\texttt{rScript} & 8389 & pass & \texttt{--} \\
-\texttt{appStagedBytes} & 7922 & pass & \texttt{--} \\
-\texttt{range} & 2101 & pass & \texttt{S} \\
-\texttt{appStatusInit} & 8027 & pass & \texttt{--} \\
-\texttt{rdmlAttrId} & 10663 & pass & \texttt{ER} \\
-\texttt{appStatusPaint} & 7973 & pass & \texttt{--} \\
-\texttt{rdmlEntries} & 10641 & pass & \texttt{S} \\
-\texttt{appStatusReport} & 8021 & pass & \texttt{--} \\
-\texttt{rdmlId} & 8268 & pass & \texttt{S} \\
-\texttt{appStatusSnapshot} & 7946 & pass & \texttt{--} \\
-\texttt{rdmlIsContainer} & 10645 & pass & \texttt{S} \\
-\texttt{appTaskEnd} & 7909 & pass & \texttt{S} \\
-\texttt{rdmlKeyOf} & 10895 & pass & \texttt{S} \\
-\texttt{appTaskStart} & 7903 & pass & \texttt{DS} \\
-\texttt{rdmlKid} & 10657 & pass & \texttt{ER} \\
-\texttt{appTaskStep} & 7908 & pass & \texttt{S} \\
-\texttt{rdmlKids} & 10652 & pass & \texttt{ER} \\
-\texttt{appTaskWrap} & 7914 & pass & \texttt{S} \\
-\texttt{rdmlNum} & 10659 & pass & \texttt{ER} \\
-\texttt{applyRawFilePriority} & 10898 & pass & \texttt{R} \\
-\texttt{rdmlParse} & 10667 & pass & \texttt{R} \\
-\texttt{argb} & 3273 & priv & \texttt{--} \\
-\texttt{rdmlSampleType} & 8262 & pass & \texttt{R} \\
-\texttt{assignRoles} & 8114 & pass & \texttt{R} \\
-\texttt{rdmlStem} & 10892 & pass & \texttt{R} \\
-\texttt{astBuild} & 11595 & pass & \texttt{--} \\
-\texttt{rdmlText} & 10658 & pass & \texttt{ER} \\
-\texttt{astClose} & 11607 & pass & \texttt{--} \\
-\texttt{readLists} & 2580 & pass & \texttt{E} \\
-\texttt{astCount} & 11586 & pass & \texttt{--} \\
-\texttt{readStaged} & 10195 & state & \texttt{--} \\
-\texttt{astEl} & 11552 & pass & \texttt{S} \\
-\texttt{readStagedCore} & 10206 & state & \texttt{S} \\
-\texttt{astInit} & 11609 & pass & \texttt{--} \\
-\texttt{readZip} & 2251 & pass & \texttt{S} \\
-\texttt{astOpen} & 11606 & pass & \texttt{--} \\
-\texttt{recalcCt} & 3515 & pass & \texttt{RS} \\
-\texttt{astOutput} & 11591 & pass & \texttt{--} \\
-\texttt{refreshAll} & 10327 & pass & \texttt{--} \\
-\texttt{astRender} & 11553 & pass & \texttt{--} \\
-\texttt{rememberedLanguage} & 2030 & pass & \texttt{--} \\
-\texttt{astToggle} & 11608 & pass & \texttt{--} \\
-\texttt{renderCcDetail} & 6725 & pass & \texttt{--} \\
-\texttt{avg} & 2091 & pass & \texttt{S} \\
-\texttt{renderConsoleIdentity} & 7960 & pass & \texttt{S} \\
-\texttt{base64ToBytes} & 2318 & pass & \texttt{S} \\
-\texttt{renderControlCategoryEd…} & 9339 & pass & \texttt{--} \\
-\texttt{baseName} & 8084 & pass & \texttt{--} \\
-\texttt{renderDerived} & 10574 & pass & \texttt{--} \\
-\texttt{betacf} & 2112 & pass & \texttt{S} \\
-\texttt{renderDiagnostics} & 8815 & pass & \texttt{--} \\
-\texttt{betai} & 2132 & pass & \texttt{S} \\
-\texttt{renderExports} & 8832 & pass & \texttt{--} \\
-\texttt{bindCurveTip} & 9938 & pass & \texttt{S} \\
-\texttt{renderGraphs} & 5549 & pass & \texttt{--} \\
-\texttt{boot} & 10342 & excl & \texttt{--} \\
-\texttt{renderIntegrity} & 9563 & pass & \texttt{--} \\
-\texttt{bracketList} & 3274 & priv & \texttt{--} \\
-\texttt{renderLoaded} & 8784 & pass & \texttt{--} \\
-\texttt{bundleReadme} & 8736 & pass & \texttt{--} \\
-\texttt{renderMachineMetadata} & 8598 & pass & \texttt{--} \\
-\texttt{bundleZip} & 8692 & pass & \texttt{--} \\
-\texttt{renderPanel} & 6684 & pass & \texttt{--} \\
-\texttt{byKey} & 2085 & pass & \texttt{S} \\
-\texttt{renderQualityReview} & 10078 & pass & \texttt{--} \\
-\texttt{bytesFrom} & 2079 & pass & \texttt{S} \\
-\texttt{renderQualityReviewLazy} & 10082 & pass & \texttt{--} \\
-\texttt{calcStateLabel} & 2569 & pass & \texttt{S} \\
-\texttt{renderResults} & 5103 & pass & \texttt{--} \\
-\texttt{catColour} & 5165 & pass & \texttt{DS} \\
-\texttt{renderReviewComparison} & 9683 & pass & \texttt{--} \\
-\texttt{ccAlarmDir} & 6437 & pass & \texttt{DS} \\
-\texttt{renderReviewControls} & 9741 & pass & \texttt{--} \\
-\texttt{ccAllRows} & 6476 & pass & \texttt{--} \\
-\texttt{renderReviewCurves} & 9879 & pass & \texttt{--} \\
-\texttt{ccBaselineNeed} & 4452 & pass & \texttt{D} \\
-\texttt{renderReviewInstrument} & 10016 & pass & \texttt{--} \\
-\texttt{ccC} & 6348 & pass & \texttt{DS} \\
-\texttt{renderReviewOverview} & 9587 & pass & \texttt{--} \\
-\texttt{ccCUSUM} & 6305 & pass & \texttt{DS} \\
-\texttt{renderReviewPlate} & 9624 & pass & \texttt{--} \\
-\texttt{ccCalibSummary} & 5883 & pass & \texttt{RS} \\
-\texttt{renderReviewRising} & 9992 & pass & \texttt{--} \\
-\texttt{ccCanonTarget} & 4409 & pass & \texttt{S} \\
-\texttt{renderReviewRuns} & 9801 & pass & \texttt{--} \\
-\texttt{ccCfg} & 6265 & pass & \texttt{S} \\
-\texttt{renderReviewSheetLazy} & 5655 & pass & \texttt{R} \\
-\texttt{ccChartRows} & 6801 & pass & \texttt{DS} \\
-\texttt{renderReviewStatistics} & 9704 & pass & \texttt{--} \\
-\texttt{ccChartSvg} & 6616 & pass & \texttt{DS} \\
-\texttt{renderSop} & 5102 & pass & \texttt{--} \\
-\texttt{ccCompute} & 6507 & pass & \texttt{DS} \\
-\texttt{renderSopEditor} & 4907 & pass & \texttt{--} \\
-\texttt{ccDecodeArz} & 5689 & pass & \texttt{S} \\
-\texttt{renderSopHeader} & 4878 & pass & \texttt{--} \\
-\texttt{ccDynamic} & 5979 & pass & \texttt{DR} \\
-\texttt{renderSopResults} & 4999 & pass & \texttt{--} \\
-\texttt{ccEWMA} & 6299 & pass & \texttt{DS} \\
-\texttt{renderTab} & 5633 & pass & \texttt{R} \\
-\texttt{ccEvents} & 6906 & pass & \texttt{D} \\
-\texttt{replicateReviewRows} & 9017 & pass & \texttt{S} \\
-\texttt{ccExtractOnLoad} & 6030 & pass & \texttt{RS} \\
-\texttt{resultAnswers} & 9076 & pass & \texttt{R} \\
-\texttt{ccFunnel} & 6364 & pass & \texttt{D} \\
-\texttt{resultCq} & 9070 & pass & \texttt{R} \\
-\texttt{ccHistoryCSV} & 6873 & pass & \texttt{--} \\
-\texttt{resultKindOf} & 2589 & pass & \texttt{DS} \\
-\texttt{ccHistoryJSON} & 6868 & pass & \texttt{D} \\
-\texttt{reviewBundleEntries} & 9469 & pass & \texttt{--} \\
-\texttt{ccI} & 6274 & pass & \texttt{DS} \\
-\texttt{reviewControlSeries} & 9382 & pass & \texttt{S} \\
-\texttt{ccImport} & 6894 & excl & \texttt{--} \\
-\texttt{reviewDisplayCounts} & 9536 & pass & \texttt{D} \\
-\texttt{ccInstrumentKey} & 6458 & pass & \texttt{R} \\
-\texttt{reviewDisplayFindings} & 9517 & pass & \texttt{D} \\
-\texttt{ccInstruments} & 6480 & pass & \texttt{--} \\
-\texttt{reviewEventsWithoutInte…} & 9545 & pass & \texttt{--} \\
-\texttt{ccIxoAcquisitions} & 5714 & pass & \texttt{S} \\
-\texttt{reviewForensicEvents} & 4188 & pass & \texttt{--} \\
-\texttt{ccIxoTemperatureLog} & 5703 & pass & \texttt{S} \\
-\texttt{reviewForensicEventsCore} & 4775 & pass & \texttt{--} \\
-\texttt{ccLzss} & 5674 & pass & \texttt{DS} \\
-\texttt{reviewForensicEventsCor…} & 9200 & pass & \texttt{--} \\
-\texttt{ccMedian} & 5910 & pass & \texttt{S} \\
-\texttt{reviewOrphanWells} & 9191 & pass & \texttt{--} \\
-\texttt{ccMigrateControlKeys} & 6881 & pass & \texttt{S} \\
-\texttt{reviewRunRows} & 9259 & pass & \texttt{D} \\
-\texttt{ccNoDataReason} & 4453 & pass & \texttt{S} \\
-\texttt{reviewStatisticsRows} & 8997 & pass & \texttt{--} \\
-\texttt{ccOperator} & 6459 & pass & \texttt{R} \\
-\texttt{risingCurveDisplayRows} & 9959 & pass & \texttt{D} \\
-\texttt{ccP} & 6338 & pass & \texttt{DS} \\
-\texttt{risingCurveRows} & 9956 & pass & \texttt{--} \\
-\texttt{ccParseJavaDate} & 5902 & pass & \texttt{S} \\
-\texttt{roleFromName} & 8109 & pass & \texttt{R} \\
-\texttt{ccPeakRates} & 5813 & pass & \texttt{S} \\
-\texttt{rqResult} & 2607 & pass & \texttt{ES} \\
-\texttt{ccPhase} & 6272 & pass & \texttt{S} \\
-\texttt{rqRows} & 4129 & pass & \texttt{--} \\
-\texttt{ccPlatform} & 6457 & pass & \texttt{R} \\
-\texttt{runAt} & 8903 & pass & \texttt{S} \\
-\texttt{ccPng} & 6795 & pass & \texttt{RS} \\
-\texttt{runDurationMinutes} & 8150 & pass & \texttt{R} \\
-\texttt{ccProtocolKey} & 6053 & pass & \texttt{R} \\
-\texttt{runIsInstrumentAnalysed} & 10865 & pass & \texttt{R} \\
-\texttt{ccQ} & 5909 & pass & \texttt{S} \\
-\texttt{runIsSuperseded} & 10916 & pass & \texttt{R} \\
-\texttt{ccQsLog} & 5841 & pass & \texttt{S} \\
-\texttt{runName} & 8894 & const & \texttt{--} \\
-\texttt{ccQuantSaturation} & 5895 & pass & \texttt{S} \\
-\texttt{runProcessingState} & 10847 & pass & \texttt{R} \\
-\texttt{ccRemember} & 6903 & pass & \texttt{--} \\
-\texttt{runTimeline} & 4511 & pass & \texttt{R} \\
-\texttt{ccRestore} & 6904 & pass & \texttt{--} \\
-\texttt{runTimes} & 4532 & pass & \texttt{R} \\
-\texttt{ccRowsFor} & 6481 & pass & \texttt{S} \\
-\texttt{safeName} & 2078 & pass & \texttt{S} \\
-\texttt{ccRowsFromRuns} & 6461 & pass & \texttt{--} \\
-\texttt{safeRe} & 2083 & pass & \texttt{S} \\
-\texttt{ccSChartSvg} & 6676 & pass & \texttt{D} \\
-\texttt{sampleComparisonRows} & 8983 & pass & \texttt{S} \\
-\texttt{ccSetCfg} & 6267 & state & \texttt{S} \\
-\texttt{scrollToEl} & 2080 & pass & \texttt{ES} \\
-\texttt{ccSetpoints} & 5835 & pass & \texttt{R} \\
-\texttt{sd} & 2092 & pass & \texttt{S} \\
-\texttt{ccShift} & 6561 & pass & \texttt{D} \\
-\texttt{selAdd} & 11172 & pass & \texttt{S} \\
-\texttt{ccSignal} & 6456 & pass & \texttt{S} \\
-\texttt{selApplyCsv} & 11194 & pass & \texttt{D} \\
-\texttt{ccSpark} & 6600 & pass & \texttt{DS} \\
-\texttt{selBuildReport} & 11327 & pass & \texttt{--} \\
-\texttt{ccSpec} & 6501 & pass & \texttt{DS} \\
-\texttt{selCatalogue} & 11151 & pass & \texttt{--} \\
-\texttt{ccStatic} & 5911 & pass & \texttt{R} \\
-\texttt{selClear} & 11174 & pass & \texttt{--} \\
-\texttt{ccStatus} & 6573 & pass & \texttt{D} \\
-\texttt{selCsvTemplate} & 11188 & pass & \texttt{--} \\
-\texttt{ccSvgToPng} & 6809 & pass & \texttt{S} \\
-\texttt{selDataItems} & 11112 & pass & \texttt{--} \\
-\texttt{ccThermalSteps} & 5724 & pass & \texttt{S} \\
-\texttt{selDownloadReport} & 11384 & pass & \texttt{R} \\
-\texttt{ccThermalSummary} & 5826 & pass & \texttt{S} \\
-\texttt{selDownloadZip} & 11266 & pass & \texttt{R} \\
-\texttt{ccThin} & 5805 & pass & \texttt{S} \\
-\texttt{selGraphContext} & 11099 & pass & \texttt{S} \\
-\texttt{ccTransitionPairs} & 5764 & pass & \texttt{R} \\
-\texttt{selImageItems} & 11104 & pass & \texttt{--} \\
-\texttt{ccTransitions} & 5776 & pass & \texttt{S} \\
-\texttt{selItem} & 11152 & pass & \texttt{S} \\
-\texttt{ccTrend} & 6322 & pass & \texttt{DS} \\
-\texttt{selMatch} & 11153 & pass & \texttt{S} \\
-\texttt{ccU} & 6344 & pass & \texttt{DS} \\
-\texttt{selMatchAll} & 11167 & pass & \texttt{S} \\
-\texttt{ccValue} & 6491 & pass & \texttt{DS} \\
-\texttt{selReadme} & 11237 & pass & \texttt{D} \\
-\texttt{ccVariants} & 6488 & pass & \texttt{DS} \\
-\texttt{selRemove} & 11173 & pass & \texttt{S} \\
-\texttt{ccVersionMarks} & 6611 & pass & \texttt{D} \\
-\texttt{selReportTitle} & 11278 & pass & \texttt{--} \\
-\texttt{ccWestgard} & 6288 & pass & \texttt{D} \\
-\texttt{selRunIndex} & 11095 & pass & \texttt{--} \\
-\texttt{ccXAxis} & 6494 & pass & \texttt{DS} \\
-\texttt{selSelected} & 11162 & pass & \texttt{--} \\
-\texttt{ccXbarS} & 6352 & pass & \texttt{DS} \\
-\texttt{selTableBlock} & 11281 & pass & \texttt{DRS} \\
-\texttt{ccZipAll} & 6818 & pass & \texttt{--} \\
-\texttt{selWithExportNames} & 11261 & pass & \texttt{S} \\
-\texttt{ce} & 2068 & pass & \texttt{S} \\
-\texttt{selZipEntries} & 11219 & pass & \texttt{--} \\
-\texttt{chiSqP} & 2159 & pass & \texttt{DS} \\
-\texttt{selectedWells} & 8927 & pass & \texttt{DR} \\
-\texttt{clone} & 2075 & pass & \texttt{S} \\
-\texttt{setLanguage} & 2031 & pass & \texttt{ES} \\
-\texttt{cmdClose} & 11520 & pass & \texttt{--} \\
-\texttt{setPhase} & 7015 & excl & \texttt{--} \\
-\texttt{cmdEl} & 11417 & pass & \texttt{S} \\
-\texttt{setSelectItems} & 8907 & pass & \texttt{S} \\
-\texttt{cmdExec} & 11433 & pass & \texttt{R} \\
-\texttt{sha256Hex} & 2211 & pass & \texttt{S} \\
-\texttt{cmdInit} & 11522 & pass & \texttt{--} \\
-\texttt{sheetOf} & 5052 & pass & \texttt{DR} \\
-\texttt{cmdOpen} & 11510 & pass & \texttt{--} \\
-\texttt{shortDate} & 8895 & pass & \texttt{S} \\
-\texttt{cmdPrint} & 11418 & pass & \texttt{DS} \\
-\texttt{showCuteToast} & 2022 & pass & \texttt{D} \\
-\texttt{cmdRunLine} & 11488 & pass & \texttt{R} \\
-\texttt{showReviewSheet} & 10083 & pass & \texttt{R} \\
-\texttt{cmdRunScript} & 11496 & pass & \texttt{S} \\
-\texttt{showTab} & 10335 & pass & \texttt{R} \\
-\texttt{cmdScriptToggle} & 11505 & pass & \texttt{S} \\
-\texttt{sopAnalystName} & 11185 & pass & \texttt{--} \\
-\texttt{cmdStatusLine} & 11430 & pass & \texttt{--} \\
-\texttt{sopBase} & 4219 & pass & \texttt{--} \\
-\texttt{cmdTable} & 11425 & pass & \texttt{D} \\
-\texttt{sopCanonical} & 4363 & pass & \texttt{S} \\
-\texttt{cmdToggle} & 11521 & pass & \texttt{--} \\
-\texttt{sopChanged} & 4369 & pass & \texttt{--} \\
-\texttt{controlBatchGraph} & 4469 & pass & \texttt{DS} \\
-\texttt{sopColour} & 5166 & pass & \texttt{S} \\
-\texttt{controlBatchRecords} & 4459 & pass & \texttt{--} \\
-\texttt{sopControlIdentity} & 4410 & pass & \texttt{R} \\
-\texttt{controlCategory} & 9301 & pass & \texttt{R} \\
-\texttt{sopControlSpec} & 4487 & pass & \texttt{R} \\
-\texttt{controlProfileRoot} & 9290 & pass & \texttt{RS} \\
-\texttt{sopCq} & 4380 & pass & \texttt{R} \\
-\texttt{controlRootKey} & 9287 & pass & \texttt{R} \\
-\texttt{sopCriteriaRows} & 4731 & pass & \texttt{--} \\
-\texttt{controlRootName} & 9283 & pass & \texttt{R} \\
-\texttt{sopCurrentRows} & 5047 & pass & \texttt{--} \\
-\texttt{cpMethodOf} & 2570 & pass & \texttt{DR} \\
-\texttt{sopDownloadBundle} & 5075 & pass & \texttt{--} \\
-\texttt{crc32} & 2199 & pass & \texttt{S} \\
-\texttt{sopDownloadWorkbook} & 5067 & pass & \texttt{--} \\
-\texttt{csvOf} & 5051 & pass & \texttt{D} \\
-\texttt{sopEvaluateAll} & 4695 & pass & \texttt{--} \\
-\texttt{csvq} & 8075 & pass & \texttt{S} \\
-\texttt{sopEvaluateRun} & 4558 & pass & \texttt{RS} \\
-\texttt{currentReviewSheet} & 5629 & pass & \texttt{--} \\
-\texttt{sopEvents} & 4747 & pass & \texttt{--} \\
-\texttt{currentTab} & 5628 & pass & \texttt{--} \\
-\texttt{sopField} & 4836 & pass & \texttt{S} \\
-\texttt{curveAnalysisGroups} & 8278 & pass & \texttt{R} \\
-\texttt{sopFmt} & 4493 & pass & \texttt{S} \\
-\texttt{curveColour} & 9865 & pass & \texttt{RS} \\
-\texttt{sopFmtTime} & 4499 & pass & \texttt{S} \\
-\texttt{curveKey} & 9864 & pass & \texttt{RS} \\
-\texttt{sopHash} & 4367 & pass & \texttt{S} \\
-\texttt{curveRowsSelected} & 9841 & pass & \texttt{--} \\
-\texttt{sopInterpretationRows} & 4705 & pass & \texttt{S} \\
-\texttt{curveSignal} & 9840 & pass & \texttt{R} \\
-\texttt{sopJSON} & 4368 & pass & \texttt{--} \\
-\texttt{cv} & 2102 & pass & \texttt{S} \\
-\texttt{sopLab} & 11180 & pass & \texttt{--} \\
-\texttt{datasetMetadata} & 8526 & pass & \texttt{RS} \\
-\texttt{sopLabName} & 11184 & pass & \texttt{--} \\
-\texttt{decodeAcq} & 2334 & pass & \texttt{RS} \\
-\texttt{sopLabScreening} & 4433 & pass & \texttt{--} \\
-\texttt{decodeAnalyses} & 2687 & pass & \texttt{E} \\
-\texttt{sopLabel} & 5167 & pass & \texttt{S} \\
-\texttt{decodeEds} & 3735 & pass & \texttt{S} \\
-\texttt{sopLoadStored} & 4338 & pass & \texttt{--} \\
-\texttt{decodeIxo} & 2811 & pass & \texttt{S} \\
-\texttt{sopMatcher} & 4372 & pass & \texttt{S} \\
-\texttt{decodePlateModel} & 2432 & pass & \texttt{E} \\
-\texttt{sopMaybeSelectScDefault} & 4340 & pass & \texttt{--} \\
-\texttt{decodeProtocol} & 2507 & pass & \texttt{E} \\
-\texttt{sopMeta} & 4704 & pass & \texttt{--} \\
-\texttt{decodeRelQuant} & 2624 & pass & \texttt{E} \\
-\texttt{sopNormalise} & 4348 & pass & \texttt{S} \\
-\texttt{decodeSubsets} & 2495 & pass & \texttt{E} \\
-\texttt{sopNum} & 4379 & pass & \texttt{S} \\
-\texttt{derivedSettings} & 10413 & pass & \texttt{--} \\
-\texttt{sopOmitted} & 4381 & pass & \texttt{R} \\
-\texttt{derivedSettingsFor} & 10570 & pass & \texttt{R} \\
-\texttt{sopOutcomeFor} & 4830 & pass & \texttt{R} \\
-\texttt{detectedControlRoots} & 9323 & pass & \texttt{--} \\
-\texttt{sopProcedureHTML} & 4887 & pass & \texttt{--} \\
-\texttt{displayRunTick} & 8899 & pass & \texttt{RS} \\
-\texttt{sopProcessingApplicabil…} & 10872 & pass & \texttt{R} \\
-\texttt{distributionsFor} & 8490 & pass & \texttt{RS} \\
-\texttt{sopProfileEdited} & 4874 & pass & \texttt{R} \\
-\texttt{dosStamp} & 2277 & pass & \texttt{S} \\
-\texttt{sopReadme} & 5053 & pass & \texttt{--} \\
-\texttt{download} & 3172 & pass & \texttt{--} \\
-\texttt{sopReplicateMinimum} & 4400 & pass & \texttt{S} \\
-\texttt{downloadCanvas} & 9460 & pass & \texttt{S} \\
-\texttt{sopResultForWell} & 4700 & pass & \texttt{RS} \\
-\texttt{downloadCurveCSV} & 10061 & pass & \texttt{--} \\
-\texttt{sopRunApplicability} & 4389 & pass & \texttt{R} \\
-\texttt{downloadCurveCSVCore} & 10062 & pass & \texttt{--} \\
-\texttt{sopRunRows} & 4735 & pass & \texttt{--} \\
-\texttt{downloadForensicCSV} & 10070 & pass & \texttt{--} \\
-\texttt{sopSampleRows} & 4717 & pass & \texttt{S} \\
-\texttt{downloadReviewBundle} & 9491 & pass & \texttt{--} \\
-\texttt{sopSetPath} & 4849 & state & \texttt{S} \\
-\texttt{downloadWebsiteArchive} & 8071 & pass & \texttt{--} \\
-\texttt{sopStdCurves} & 4542 & pass & \texttt{R} \\
-\texttt{drawAmplificationCurves} & 9909 & pass & \texttt{RS} \\
-\texttt{sopStore} & 4339 & pass & \texttt{--} \\
-\texttt{drawLeveyJennings} & 9767 & pass & \texttt{S} \\
-\texttt{sopTableEditor} & 4855 & pass & \texttt{S} \\
-\texttt{drawPlateMapImage} & 9661 & pass & \texttt{--} \\
-\texttt{sopTargetSpec} & 4382 & pass & \texttt{R} \\
-\texttt{drawRisingCurveBundle} & 9971 & pass & \texttt{DS} \\
-\texttt{sopTime} & 4494 & pass & \texttt{S} \\
-\texttt{drawTemperatureTrace} & 4035 & pass & \texttt{RS} \\
-\texttt{sourceCRCOf} & 8148 & pass & \texttt{R} \\
-\texttt{dt} & 3166 & pass & \texttt{S} \\
-\texttt{sourceSHA256Of} & 8149 & pass & \texttt{R} \\
-\texttt{dyeChemistryOf} & 8252 & pass & \texttt{R} \\
-\texttt{sourceSha256} & 2204 & pass & \texttt{S} \\
-\texttt{ec} & 3986 & pass & \texttt{R} \\
-\texttt{sourceUidOf} & 8147 & pass & \texttt{R} \\
-\texttt{edsDerived} & 4050 & pass & \texttt{RS} \\
-\texttt{stamp} & 8083 & pass & \texttt{--} \\
-\texttt{edsEvents} & 3902 & pass & \texttt{RS} \\
-\texttt{stripLotDate} & 9278 & pass & \texttt{R} \\
-\texttt{edsRecordTables} & 3989 & pass & \texttt{R} \\
-\texttt{studyRows} & 3539 & pass & \texttt{R} \\
-\texttt{edsSignalRows} & 4137 & pass & \texttt{--} \\
-\texttt{svgEsc} & 5106 & pass & \texttt{S} \\
-\texttt{effSliwinProxy} & 6969 & pass & \texttt{R} \\
-\texttt{svgMessage} & 5162 & pass & \texttt{S} \\
-\texttt{effWol} & 6950 & pass & \texttt{R} \\
-\texttt{svgPlot} & 5117 & pass & \texttt{S} \\
-\texttt{efficiencyFromSlope} & 6989 & pass & \texttt{D} \\
-\texttt{svgToJpeg} & 11072 & pass & \texttt{DS} \\
-\texttt{emptyReview} & 9454 & pass & \texttt{D} \\
-\texttt{tDistTwoTail} & 2138 & pass & \texttt{S} \\
-\texttt{esc} & 2076 & pass & \texttt{S} \\
-\texttt{tTest} & 2162 & pass & \texttt{S} \\
-\texttt{exportCatalogue} & 8602 & pass & \texttt{--} \\
-\texttt{table} & 8044 & pass & \texttt{S} \\
-\texttt{exportCatalogueCore} & 8639 & pass & \texttt{--} \\
-\texttt{tag} & 8043 & pass & \texttt{DS} \\
-\texttt{exportName} & 4115 & pass & \texttt{S} \\
-\texttt{textEncoder} & 2069 & const & \texttt{--} \\
-\texttt{extent} & 5163 & pass & \texttt{S} \\
-\texttt{tmRows} & 8190 & pass & \texttt{--} \\
-\texttt{extraForensicEvents} & 4774 & pass & \texttt{--} \\
-\texttt{toCSV} & 8079 & pass & \texttt{S} \\
-\texttt{extraForensicEventsUnca…} & 4783 & pass & \texttt{--} \\
-\texttt{txt} & 3272 & priv & \texttt{--} \\
-\texttt{findingEvidenceKey} & 9508 & pass & \texttt{D} \\
-\texttt{ui} & 2001 & pass & \texttt{S} \\
-\texttt{findingKey} & 9512 & pass & \texttt{D} \\
-\texttt{uniq} & 2084 & pass & \texttt{S} \\
-\texttt{findingTextKey} & 9496 & pass & \texttt{S} \\
-\texttt{uniqueCurveCount} & 8154 & pass & \texttt{R} \\
-\texttt{fitLin} & 2186 & pass & \texttt{S} \\
-\texttt{validateHistoryBoundary} & 7036 & pass & \texttt{S} \\
-\texttt{flagName} & 3301 & pass & \texttt{D} \\
-\texttt{validateRunBoundary} & 7026 & pass & \texttt{RS} \\
-\texttt{fmt} & 3164 & priv & \texttt{--} \\
-\texttt{variablesFor} & 8518 & pass & \texttt{R} \\
-\texttt{fmtTick} & 5115 & pass & \texttt{S} \\
-\texttt{websiteSource} & 8060 & pass & \texttt{S} \\
-\texttt{forensicCounts} & 4776 & pass & \texttt{--} \\
-\texttt{wellPos} & 3171 & priv & \texttt{--} \\
-\texttt{forensicSnapshot} & 4768 & pass & \texttt{--} \\
-\texttt{wellRows} & 8158 & pass & \texttt{R} \\
-\texttt{gByDate} & 5182 & pass & \texttt{S} \\
-\texttt{wellSignal} & 4503 & pass & \texttt{R} \\
-\texttt{gCutLines} & 5172 & pass & \texttt{S} \\
-\texttt{wellToPos} & 2321 & pass & \texttt{RS} \\
-\texttt{gRunDate} & 5181 & pass & \texttt{R} \\
-\texttt{westgardReview} & 9364 & pass & \texttt{S} \\
-\texttt{gRunTicks} & 5183 & pass & \texttt{R} \\
-\texttt{wireGraphs} & 5611 & pass & \texttt{--} \\
-\texttt{gRunWells} & 5170 & pass & \texttt{RS} \\
-\texttt{wirePanel} & 6919 & pass & \texttt{--} \\
-\texttt{gTargets} & 5171 & pass & \texttt{R} \\
-\texttt{wireQualityReview} & 10089 & pass & \texttt{--} \\
-\texttt{gammap} & 2143 & pass & \texttt{S} \\
-\texttt{wireSop} & 5085 & pass & \texttt{--} \\
-\texttt{graphAllZip} & 5590 & pass & \texttt{--} \\
-\texttt{withExportNames} & 4124 & pass & \texttt{S} \\
-\texttt{graphContext} & 5543 & pass & \texttt{--} \\
-\texttt{xesc} & 2077 & pass & \texttt{S} \\
-\texttt{graphFileBase} & 5579 & pass & \texttt{--} \\
-\texttt{xlsxCell} & 4157 & pass & \texttt{RS} \\
-\texttt{graphPng} & 5582 & pass & \texttt{--} \\
-\texttt{xlsxCol} & 4156 & pass & \texttt{S} \\
-\texttt{graphSvgText} & 5580 & pass & \texttt{--} \\
-\texttt{xml} & 3269 & priv & \texttt{--} \\
-\texttt{hashColour} & 9465 & pass & \texttt{S} \\
-\texttt{zhPhrase} & 1922 & pass & \texttt{S} \\
-\bottomrule\end{longtable}}
+
+\hline \textbf{Symbol} & \textbf{Line} & \textbf{Result} & \textbf{Cls} \\ \hline\endhead
+\texttt{\$} & 3161 & pass & \texttt{S} \\ \hline
+\texttt{heatColour} & 8949 & pass & \texttt{S} \\ \hline
+\texttt{\$\$} & 6999 & pass & \texttt{S} \\ \hline
+\texttt{hex} & 3167 & priv & \texttt{--} \\ \hline
+\texttt{ANALYSIS\_CLASS\_RE} & 2549 & const & \texttt{--} \\ \hline
+\texttt{hexBEToDouble} & 2325 & pass & \texttt{S} \\ \hline
+\texttt{ANALYSIS\_KINDS} & 2550 & const & \texttt{--} \\ \hline
+\texttt{inflate} & 2244 & pass & \texttt{S} \\ \hline
+\texttt{APP\_LIMITS} & 7004 & const & \texttt{--} \\ \hline
+\texttt{inflateRaw} & 3214 & priv & \texttt{--} \\ \hline
+\texttt{APP\_PHASE\_TEXT} & 7942 & const & \texttt{--} \\ \hline
+\texttt{ini} & 3275 & priv & \texttt{--} \\ \hline
+\texttt{APP\_PHASE\_TRANSITIONS} & 7014 & const & \texttt{--} \\ \hline
+\texttt{instrumentRecordTables} & 9419 & pass & \texttt{R} \\ \hline
+\texttt{APP\_SB\_LAST} & 7972 & const & \texttt{--} \\ \hline
+\texttt{instrumentZip} & 10054 & pass & \texttt{--} \\ \hline
+\texttt{APP\_STATE} & 7005 & const & \texttt{--} \\ \hline
+\texttt{intake} & 10125 & state & \texttt{D} \\ \hline
+\texttt{APP\_STATS} & 7902 & const & \texttt{--} \\ \hline
+\texttt{integrityEvents} & 3886 & pass & \texttt{RS} \\ \hline
+\texttt{APP\_TASK\_LABEL} & 7918 & const & \texttt{--} \\ \hline
+\texttt{integrityLabel} & 3881 & pass & \texttt{R} \\ \hline
+\texttt{APP\_VERSION} & 7000 & const & \texttt{--} \\ \hline
+\texttt{integrityMismatches} & 9548 & pass & \texttt{--} \\ \hline
+\texttt{AST} & 11551 & const & \texttt{--} \\ \hline
+\texttt{invalidateAnalysisCaches} & 4765 & excl & \texttt{--} \\ \hline
+\texttt{BASE\_MACHINE\_METADATA} & 8471 & const & \texttt{--} \\ \hline
+\texttt{isEdsName} & 3734 & pass & \texttt{R} \\ \hline
+\texttt{BLANK\_ROLES} & 9038 & const & \texttt{--} \\ \hline
+\texttt{isoLocal} & 3728 & pass & \texttt{S} \\ \hline
+\texttt{CALL} & 2050 & const & \texttt{--} \\ \hline
+\texttt{ixoIntegrity} & 3866 & pass & \texttt{S} \\ \hline
+\texttt{CALL\_LINE} & 9863 & const & \texttt{--} \\ \hline
+\texttt{javaHashOrder} & 3587 & priv & \texttt{--} \\ \hline
+\texttt{CC\_BY\_ID} & 6259 & const & \texttt{--} \\ \hline
+\texttt{kid} & 3270 & priv & \texttt{--} \\ \hline
+\texttt{CC\_C4} & 6271 & pass & \texttt{S} \\ \hline
+\texttt{kids} & 3271 & priv & \texttt{--} \\ \hline
+\texttt{CC\_CHARTS} & 6074 & const & \texttt{--} \\ \hline
+\texttt{languageStorageKey} & 2029 & pass & \texttt{--} \\ \hline
+\texttt{CC\_COL} & 6450 & const & \texttt{--} \\ \hline
+\texttt{legendFromMap} & 5164 & pass & \texttt{S} \\ \hline
+\texttt{CC\_DEFAULT\_CFG} & 6260 & const & \texttt{--} \\ \hline
+\texttt{lgamma} & 2105 & pass & \texttt{S} \\ \hline
+\texttt{CC\_GROUPS} & 6069 & const & \texttt{--} \\ \hline
+\texttt{localizeDOM} & 2002 & pass & \texttt{ES} \\ \hline
+\texttt{CC\_HIST\_KEY} & 6449 & const & \texttt{--} \\ \hline
+\texttt{machineMetadataDocument} & 8584 & pass & \texttt{--} \\ \hline
+\texttt{CC\_LIMIT\_FLAG} & 6455 & const & \texttt{--} \\ \hline
+\texttt{machineMetadataJSON} & 8597 & pass & \texttt{--} \\ \hline
+\texttt{CC\_LIMIT\_TEXT} & 6373 & const & \texttt{--} \\ \hline
+\texttt{makeBaselineCSV} & 8353 & pass & \texttt{R} \\ \hline
+\texttt{CC\_RULES\_OFF} & 6264 & const & \texttt{--} \\ \hline
+\texttt{makeQpcrWide} & 8329 & pass & \texttt{DR} \\ \hline
+\texttt{CC\_SEG\_PALETTE} & 6454 & const & \texttt{--} \\ \hline
+\texttt{makeQpcrWideTables} & 8342 & pass & \texttt{R} \\ \hline
+\texttt{CC\_STATE} & 6448 & const & \texttt{--} \\ \hline
+\texttt{makeRDES} & 8366 & pass & \texttt{DR} \\ \hline
+\texttt{CC\_TARGET\_ALIAS} & 4408 & const & \texttt{--} \\ \hline
+\texttt{makeRDESTables} & 8379 & pass & \texttt{R} \\ \hline
+\texttt{CC\_TZ} & 5901 & const & \texttt{--} \\ \hline
+\texttt{makeRDML} & 8324 & pass & \texttt{R} \\ \hline
+\texttt{CMD} & 11395 & const & \texttt{--} \\ \hline
+\texttt{makeRDMLXML} & 8280 & pass & \texttt{R} \\ \hline
+\texttt{CMD\_HELP} & 11396 & const & \texttt{--} \\ \hline
+\texttt{makeStoredZip} & 2282 & pass & \texttt{S} \\ \hline
+\texttt{CONSOLE\_DICT} & 6432 & const & \texttt{--} \\ \hline
+\texttt{makeWebsiteArchive} & 8064 & pass & \texttt{S} \\ \hline
+\texttt{CONTROL\_CATEGORY\_OPTIONS} & 8888 & const & \texttt{--} \\ \hline
+\texttt{makeXlsx} & 4164 & pass & \texttt{S} \\ \hline
+\texttt{CQ\_ANALYSIS\_KINDS} & 9089 & const & \texttt{--} \\ \hline
+\texttt{makeZip} & 3250 & priv & \texttt{--} \\ \hline
+\texttt{CQ\_HEADERS} & 10252 & const & \texttt{--} \\ \hline
+\texttt{markDirty} & 5627 & pass & \texttt{--} \\ \hline
+\texttt{CQ\_NEGATIVE\_STATUS} & 9066 & const & \texttt{--} \\ \hline
+\texttt{mean} & 2090 & pass & \texttt{S} \\ \hline
+\texttt{CRC\_T} & 3180 & priv & \texttt{--} \\ \hline
+\texttt{median} & 2093 & pass & \texttt{S} \\ \hline
+\texttt{CRC\_TABLE} & 2198 & const & \texttt{--} \\ \hline
+\texttt{metaRows} & 8213 & pass & \texttt{--} \\ \hline
+\texttt{CSV\_EXAMPLE} & 10301 & const & \texttt{--} \\ \hline
+\texttt{metadataId} & 8479 & pass & \texttt{RS} \\ \hline
+\texttt{CURVE\_KEY\_COLOURS} & 9862 & const & \texttt{--} \\ \hline
+\texttt{metricCard} & 9457 & pass & \texttt{DS} \\ \hline
+\texttt{DEFAULT\_LANG} & 993 & const & \texttt{--} \\ \hline
+\texttt{mgApplyChartView} & 7326 & pass & \texttt{--} \\ \hline
+\texttt{DIRTY} & 5626 & const & \texttt{--} \\ \hline
+\texttt{mgBuildQueue} & 7058 & pass & \texttt{--} \\ \hline
+\texttt{EDS} & 3158 & const & \texttt{--} \\ \hline
+\texttt{mgChartAxisOptions} & 7185 & pass & \texttt{S} \\ \hline
+\texttt{FINDING\_SEVERITY\_RANK} & 9495 & const & \texttt{--} \\ \hline
+\texttt{mgChartTypeOptions} & 7180 & pass & \texttt{S} \\ \hline
+\texttt{FLAGS} & 3282 & const & \texttt{--} \\ \hline
+\texttt{mgChooseFiles} & 7423 & pass & \texttt{--} \\ \hline
+\texttt{FORENSIC\_CACHE} & 4764 & const & \texttt{--} \\ \hline
+\texttt{mgClose} & 7881 & pass & \texttt{--} \\ \hline
+\texttt{GRAPHS} & 5189 & const & \texttt{--} \\ \hline
+\texttt{mgCommand} & 7375 & pass & \texttt{S} \\ \hline
+\texttt{GRAPH\_METRICS} & 5541 & const & \texttt{--} \\ \hline
+\texttt{mgGo} & 7393 & pass & \texttt{S} \\ \hline
+\texttt{GRAPH\_STATE} & 5542 & const & \texttt{--} \\ \hline
+\texttt{mgGoChart} & 7399 & pass & \texttt{S} \\ \hline
+\texttt{I18N\_ORIGINAL\_TEXT} & 1920 & const & \texttt{--} \\ \hline
+\texttt{mgGraphCtx} & 7720 & pass & \texttt{S} \\ \hline
+\texttt{INHIB} & 8041 & const & \texttt{--} \\ \hline
+\texttt{mgInit} & 7885 & pass & \texttt{--} \\ \hline
+\texttt{JSONLD\_STANDARDS} & 8472 & const & \texttt{--} \\ \hline
+\texttt{mgIt} & 7443 & pass & \texttt{S} \\ \hline
+\texttt{LC\_CALC\_STATE\_LABELS} & 2568 & const & \texttt{--} \\ \hline
+\texttt{mgItem} & 7178 & pass & \texttt{--} \\ \hline
+\texttt{LOADED\_LIMIT} & 8783 & const & \texttt{--} \\ \hline
+\texttt{mgItemKey} & 7849 & pass & \texttt{S} \\ \hline
+\texttt{MD5} & 3184 & pass & \texttt{--} \\ \hline
+\texttt{mgItemSentence} & 7307 & pass & \texttt{S} \\ \hline
+\texttt{MG} & 7053 & const & \texttt{--} \\ \hline
+\texttt{mgLeaveTo} & 7428 & pass & \texttt{S} \\ \hline
+\texttt{MG\_COMMANDS} & 7343 & const & \texttt{--} \\ \hline
+\texttt{mgOpen} & 7876 & pass & \texttt{--} \\ \hline
+\texttt{MG\_GLYPH} & 7054 & const & \texttt{--} \\ \hline
+\texttt{mgPan} & 7341 & pass & \texttt{S} \\ \hline
+\texttt{MG\_PICT} & 7441 & const & \texttt{--} \\ \hline
+\texttt{mgPanelItems} & 7657 & pass & \texttt{D} \\ \hline
+\texttt{MG\_TYPE\_LABEL} & 7179 & const & \texttt{--} \\ \hline
+\texttt{mgReadFiles} & 7416 & state & \texttt{--} \\ \hline
+\texttt{MG\_VIEWS} & 7831 & const & \texttt{--} \\ \hline
+\texttt{mgRefresh} & 7858 & pass & \texttt{--} \\ \hline
+\texttt{MG\_WORD} & 7055 & const & \texttt{--} \\ \hline
+\texttt{mgRender} & 7204 & pass & \texttt{--} \\ \hline
+\texttt{NAME\_ROLE\_RULES} & 8101 & const & \texttt{--} \\ \hline
+\texttt{mgSafe} & 7445 & pass & \texttt{S} \\ \hline
+\texttt{NEGATIVE\_FAMILY} & 2061 & const & \texttt{--} \\ \hline
+\texttt{mgScope} & 7841 & pass & \texttt{S} \\ \hline
+\texttt{NON\_RESULT\_CLASSES} & 2777 & const & \texttt{--} \\ \hline
+\texttt{mgScopeFilter} & 7852 & pass & \texttt{D} \\ \hline
+\texttt{ORPHAN\_CURVE\_KEY} & 8915 & const & \texttt{--} \\ \hline
+\texttt{mgScopeMark} & 7845 & pass & \texttt{--} \\ \hline
+\texttt{P} & 3304 & priv & \texttt{--} \\ \hline
+\texttt{mgSetChartAxis} & 7412 & pass & \texttt{S} \\ \hline
+\texttt{PAIRING\_RULES} & 2606 & const & \texttt{--} \\ \hline
+\texttt{mgSetChartType} & 7408 & pass & \texttt{S} \\ \hline
+\texttt{PALETTE} & 2066 & const & \texttt{--} \\ \hline
+\texttt{mgSheet} & 7285 & pass & \texttt{S} \\ \hline
+\texttt{PASTED} & 8040 & const & \texttt{--} \\ \hline
+\texttt{mgSheetClose} & 7306 & pass & \texttt{--} \\ \hline
+\texttt{PDF\_PAGE} & 10939 & const & \texttt{--} \\ \hline
+\texttt{mgSheetPick} & 7300 & pass & \texttt{S} \\ \hline
+\texttt{PDF\_SPELL} & 10946 & const & \texttt{--} \\ \hline
+\texttt{mgStage} & 7319 & pass & \texttt{--} \\ \hline
+\texttt{PDF\_WINANSI} & 10942 & const & \texttt{--} \\ \hline
+\texttt{mgStageSet} & 7325 & pass & \texttt{S} \\ \hline
+\texttt{PLATE\_PASTELS} & 8887 & const & \texttt{--} \\ \hline
+\texttt{mgStatusPaint} & 7193 & pass & \texttt{--} \\ \hline
+\texttt{PSEUDO\_MAP} & 4103 & const & \texttt{--} \\ \hline
+\texttt{mgToggle} & 7884 & pass & \texttt{--} \\ \hline
+\texttt{QS\_AMP} & 3724 & const & \texttt{--} \\ \hline
+\texttt{mgTxt} & 7446 & pass & \texttt{S} \\ \hline
+\texttt{QS\_DEFAULT\_COLS} & 3551 & priv & \texttt{--} \\ \hline
+\texttt{mgViewExport} & 7804 & pass & \texttt{--} \\ \hline
+\texttt{QS\_DYE\_FILTER} & 3719 & const & \texttt{--} \\ \hline
+\texttt{mgViewGraphs} & 7725 & pass & \texttt{--} \\ \hline
+\texttt{QS\_KIND} & 3726 & const & \texttt{--} \\ \hline
+\texttt{mgViewIntegrity} & 7789 & pass & \texttt{--} \\ \hline
+\texttt{QS\_TASK\_ROLE} & 3722 & const & \texttt{--} \\ \hline
+\texttt{mgViewLoad} & 7449 & pass & \texttt{--} \\ \hline
+\texttt{RDML\_REANALYSIS\_TOOLS} & 10846 & const & \texttt{--} \\ \hline
+\texttt{mgViewPanel} & 7695 & pass & \texttt{--} \\ \hline
+\texttt{RDML\_SAMPLE\_ROLE} & 10666 & const & \texttt{--} \\ \hline
+\texttt{mgViewResults} & 7576 & pass & \texttt{--} \\ \hline
+\texttt{REP\_REGEX} & 2044 & const & \texttt{--} \\ \hline
+\texttt{mgViewReview} & 7756 & pass & \texttt{--} \\ \hline
+\texttt{RESULT\_PROPS} & 2578 & const & \texttt{--} \\ \hline
+\texttt{mgViewSop} & 7507 & pass & \texttt{--} \\ \hline
+\texttt{REVIEW\_COLOURS} & 8880 & const & \texttt{--} \\ \hline
+\texttt{mgZoom} & 7334 & pass & \texttt{S} \\ \hline
+\texttt{REVIEW\_RENDERERS} & 5630 & const & \texttt{--} \\ \hline
+\texttt{modesInit} & 11634 & pass & \texttt{--} \\ \hline
+\texttt{REVIEW\_STATE} & 8891 & const & \texttt{--} \\ \hline
+\texttt{niceTicks} & 5107 & pass & \texttt{S} \\ \hline
+\texttt{ROLES} & 2043 & const & \texttt{--} \\ \hline
+\texttt{num} & 2082 & pass & \texttt{S} \\ \hline
+\texttt{ROLE\_COLOURS} & 2062 & const & \texttt{--} \\ \hline
+\texttt{operatorOf} & 8146 & pass & \texttt{R} \\ \hline
+\texttt{ROLE\_LINE} & 2064 & const & \texttt{--} \\ \hline
+\texttt{option} & 2081 & pass & \texttt{S} \\ \hline
+\texttt{ROWS} & 3170 & priv & \texttt{--} \\ \hline
+\texttt{orphanBlankRole} & 9039 & pass & \texttt{R} \\ \hline
+\texttt{RUNS} & 8039 & const & \texttt{--} \\ \hline
+\texttt{orphanCurveCandidates} & 9098 & pass & \texttt{R} \\ \hline
+\texttt{SAMPLE\_HEADERS} & 10253 & const & \texttt{--} \\ \hline
+\texttt{orphanOtherChannels} & 9049 & pass & \texttt{R} \\ \hline
+\texttt{SAMPLE\_TYPE} & 2051 & const & \texttt{--} \\ \hline
+\texttt{outputDistribution} & 8483 & pass & \texttt{DRS} \\ \hline
+\texttt{SAMPLE\_TYPE\_LABEL} & 10407 & const & \texttt{--} \\ \hline
+\texttt{ownQuery} & 2685 & pass & \texttt{ES} \\ \hline
+\texttt{SEL\_STATE} & 11094 & const & \texttt{--} \\ \hline
+\texttt{ownQueryAll} & 2684 & pass & \texttt{ES} \\ \hline
+\texttt{SEL\_TABLE\_ROWS} & 11277 & const & \texttt{--} \\ \hline
+\texttt{ownedBy} & 2675 & pass & \texttt{E} \\ \hline
+\texttt{SERIES\_PALETTE} & 9861 & const & \texttt{--} \\ \hline
+\texttt{ownsResult} & 2781 & pass & \texttt{ES} \\ \hline
+\texttt{SOP} & 4335 & const & \texttt{--} \\ \hline
+\texttt{pad2} & 3564 & priv & \texttt{--} \\ \hline
+\texttt{SOP\_ACTION\_LABEL} & 4846 & const & \texttt{--} \\ \hline
+\texttt{parseCqTable} & 10255 & pass & \texttt{S} \\ \hline
+\texttt{SOP\_AUTO\_DEFAULT} & 4336 & const & \texttt{--} \\ \hline
+\texttt{parseEds} & 3305 & pass & \texttt{RS} \\ \hline
+\texttt{SOP\_CACHE} & 4337 & const & \texttt{--} \\ \hline
+\texttt{parseLog} & 3521 & priv & \texttt{--} \\ \hline
+\texttt{SOP\_OUTCOMES} & 4206 & const & \texttt{--} \\ \hline
+\texttt{pastedDatasetMetadata} & 8572 & pass & \texttt{--} \\ \hline
+\texttt{SOP\_OUTCOME\_DEFAULTS} & 4207 & const & \texttt{--} \\ \hline
+\texttt{pdfDoc} & 11000 & pass & \texttt{--} \\ \hline
+\texttt{SOP\_OUTCOME\_OPTIONS} & 4835 & const & \texttt{--} \\ \hline
+\texttt{pdfFit} & 10984 & pass & \texttt{DRS} \\ \hline
+\texttt{SOP\_PRESETS} & 4236 & const & \texttt{--} \\ \hline
+\texttt{pdfStr} & 10950 & pass & \texttt{S} \\ \hline
+\texttt{SOP\_SCHEMA} & 4205 & const & \texttt{--} \\ \hline
+\texttt{pdfWidth} & 10966 & pass & \texttt{DS} \\ \hline
+\texttt{SOP\_VIEW} & 4998 & const & \texttt{--} \\ \hline
+\texttt{pdfWrap} & 10990 & pass & \texttt{DRS} \\ \hline
+\texttt{STAGED} & 10124 & const & \texttt{--} \\ \hline
+\texttt{percentile} & 2095 & pass & \texttt{S} \\ \hline
+\texttt{STORED\_SOP} & 4333 & const & \texttt{--} \\ \hline
+\texttt{physicalCurveRows} & 8932 & pass & \texttt{D} \\ \hline
+\texttt{STORED\_SOP\_IS\_TEMPLATE} & 4334 & const & \texttt{--} \\ \hline
+\texttt{pill} & 3165 & priv & \texttt{--} \\ \hline
+\texttt{SVG\_CLIP\_N} & 5116 & const & \texttt{--} \\ \hline
+\texttt{plateColour} & 9617 & pass & \texttt{RS} \\ \hline
+\texttt{TYPE\_TO\_ROLE} & 2056 & const & \texttt{--} \\ \hline
+\texttt{plateMapRows} & 8955 & pass & \texttt{DR} \\ \hline
+\texttt{UI\_LANG} & 1919 & const & \texttt{--} \\ \hline
+\texttt{posToLimsWell} & 2320 & pass & \texttt{R} \\ \hline
+\texttt{UNKNOWN\_ROLE} & 2042 & const & \texttt{--} \\ \hline
+\texttt{posToWell} & 2319 & pass & \texttt{R} \\ \hline
+\texttt{WELL\_HEADERS} & 10254 & const & \texttt{--} \\ \hline
+\texttt{propText} & 2315 & pass & \texttt{ER} \\ \hline
+\texttt{ZH\_TERMS} & 994 & const & \texttt{--} \\ \hline
+\texttt{propValues} & 2317 & pass & \texttt{ER} \\ \hline
+\texttt{acceptPasted} & 10313 & pass & \texttt{S} \\ \hline
+\texttt{pseudoOn} & 4114 & pass & \texttt{--} \\ \hline
+\texttt{acquiredCurveCount} & 8157 & pass & \texttt{R} \\ \hline
+\texttt{pseudoRun} & 4116 & pass & \texttt{R} \\ \hline
+\texttt{acquisitionStats} & 2422 & pass & \texttt{R} \\ \hline
+\texttt{pseudonymMap} & 4104 & pass & \texttt{--} \\ \hline
+\texttt{allWellRows} & 8189 & pass & \texttt{--} \\ \hline
+\texttt{pv} & 2316 & pass & \texttt{ER} \\ \hline
+\texttt{analysisChoices} & 8916 & pass & \texttt{R} \\ \hline
+\texttt{pyScript} & 8428 & pass & \texttt{--} \\ \hline
+\texttt{analysisGroups} & 8269 & pass & \texttt{D} \\ \hline
+\texttt{qsCalDate} & 3565 & priv & \texttt{--} \\ \hline
+\texttt{analysisKind} & 2559 & pass & \texttt{DR} \\ \hline
+\texttt{qsCols} & 3558 & priv & \texttt{--} \\ \hline
+\texttt{analysisResults} & 2790 & pass & \texttt{S} \\ \hline
+\texttt{qsExport} & 3691 & pass & \texttt{RS} \\ \hline
+\texttt{appCancel} & 7929 & pass & \texttt{--} \\ \hline
+\texttt{qsHeader} & 3592 & priv & \texttt{--} \\ \hline
+\texttt{appDiagnostics} & 7025 & pass & \texttt{--} \\ \hline
+\texttt{qsInstrument} & 3574 & pass & \texttt{R} \\ \hline
+\texttt{appError} & 7006 & pass & \texttt{RS} \\ \hline
+\texttt{qsRGB} & 3571 & priv & \texttt{--} \\ \hline
+\texttt{appFmtMB} & 7945 & pass & \texttt{S} \\ \hline
+\texttt{qsStamp} & 3566 & priv & \texttt{--} \\ \hline
+\texttt{appFmtMs} & 7944 & pass & \texttt{S} \\ \hline
+\texttt{qsTables} & 3612 & pass & \texttt{RS} \\ \hline
+\texttt{appHeapMB} & 7921 & pass & \texttt{--} \\ \hline
+\texttt{qsWorkbook} & 4179 & pass & \texttt{RS} \\ \hline
+\texttt{appNotice} & 7923 & pass & \texttt{DS} \\ \hline
+\texttt{quantChannels} & 9090 & pass & \texttt{R} \\ \hline
+\texttt{appReadSuperseded} & 7934 & state & \texttt{S} \\ \hline
+\texttt{rScript} & 8389 & pass & \texttt{--} \\ \hline
+\texttt{appStagedBytes} & 7922 & pass & \texttt{--} \\ \hline
+\texttt{range} & 2101 & pass & \texttt{S} \\ \hline
+\texttt{appStatusInit} & 8027 & pass & \texttt{--} \\ \hline
+\texttt{rdmlAttrId} & 10663 & pass & \texttt{ER} \\ \hline
+\texttt{appStatusPaint} & 7973 & pass & \texttt{--} \\ \hline
+\texttt{rdmlEntries} & 10641 & pass & \texttt{S} \\ \hline
+\texttt{appStatusReport} & 8021 & pass & \texttt{--} \\ \hline
+\texttt{rdmlId} & 8268 & pass & \texttt{S} \\ \hline
+\texttt{appStatusSnapshot} & 7946 & pass & \texttt{--} \\ \hline
+\texttt{rdmlIsContainer} & 10645 & pass & \texttt{S} \\ \hline
+\texttt{appTaskEnd} & 7909 & pass & \texttt{S} \\ \hline
+\texttt{rdmlKeyOf} & 10895 & pass & \texttt{S} \\ \hline
+\texttt{appTaskStart} & 7903 & pass & \texttt{DS} \\ \hline
+\texttt{rdmlKid} & 10657 & pass & \texttt{ER} \\ \hline
+\texttt{appTaskStep} & 7908 & pass & \texttt{S} \\ \hline
+\texttt{rdmlKids} & 10652 & pass & \texttt{ER} \\ \hline
+\texttt{appTaskWrap} & 7914 & pass & \texttt{S} \\ \hline
+\texttt{rdmlNum} & 10659 & pass & \texttt{ER} \\ \hline
+\texttt{applyRawFilePriority} & 10898 & pass & \texttt{R} \\ \hline
+\texttt{rdmlParse} & 10667 & pass & \texttt{R} \\ \hline
+\texttt{argb} & 3273 & priv & \texttt{--} \\ \hline
+\texttt{rdmlSampleType} & 8262 & pass & \texttt{R} \\ \hline
+\texttt{assignRoles} & 8114 & pass & \texttt{R} \\ \hline
+\texttt{rdmlStem} & 10892 & pass & \texttt{R} \\ \hline
+\texttt{astBuild} & 11595 & pass & \texttt{--} \\ \hline
+\texttt{rdmlText} & 10658 & pass & \texttt{ER} \\ \hline
+\texttt{astClose} & 11607 & pass & \texttt{--} \\ \hline
+\texttt{readLists} & 2580 & pass & \texttt{E} \\ \hline
+\texttt{astCount} & 11586 & pass & \texttt{--} \\ \hline
+\texttt{readStaged} & 10195 & state & \texttt{--} \\ \hline
+\texttt{astEl} & 11552 & pass & \texttt{S} \\ \hline
+\texttt{readStagedCore} & 10206 & state & \texttt{S} \\ \hline
+\texttt{astInit} & 11609 & pass & \texttt{--} \\ \hline
+\texttt{readZip} & 2251 & pass & \texttt{S} \\ \hline
+\texttt{astOpen} & 11606 & pass & \texttt{--} \\ \hline
+\texttt{recalcCt} & 3515 & pass & \texttt{RS} \\ \hline
+\texttt{astOutput} & 11591 & pass & \texttt{--} \\ \hline
+\texttt{refreshAll} & 10327 & pass & \texttt{--} \\ \hline
+\texttt{astRender} & 11553 & pass & \texttt{--} \\ \hline
+\texttt{rememberedLanguage} & 2030 & pass & \texttt{--} \\ \hline
+\texttt{astToggle} & 11608 & pass & \texttt{--} \\ \hline
+\texttt{renderCcDetail} & 6725 & pass & \texttt{--} \\ \hline
+\texttt{avg} & 2091 & pass & \texttt{S} \\ \hline
+\texttt{renderConsoleIdentity} & 7960 & pass & \texttt{S} \\ \hline
+\texttt{base64ToBytes} & 2318 & pass & \texttt{S} \\ \hline
+\texttt{renderControlCategoryEd…} & 9339 & pass & \texttt{--} \\ \hline
+\texttt{baseName} & 8084 & pass & \texttt{--} \\ \hline
+\texttt{renderDerived} & 10574 & pass & \texttt{--} \\ \hline
+\texttt{betacf} & 2112 & pass & \texttt{S} \\ \hline
+\texttt{renderDiagnostics} & 8815 & pass & \texttt{--} \\ \hline
+\texttt{betai} & 2132 & pass & \texttt{S} \\ \hline
+\texttt{renderExports} & 8832 & pass & \texttt{--} \\ \hline
+\texttt{bindCurveTip} & 9938 & pass & \texttt{S} \\ \hline
+\texttt{renderGraphs} & 5549 & pass & \texttt{--} \\ \hline
+\texttt{boot} & 10342 & excl & \texttt{--} \\ \hline
+\texttt{renderIntegrity} & 9563 & pass & \texttt{--} \\ \hline
+\texttt{bracketList} & 3274 & priv & \texttt{--} \\ \hline
+\texttt{renderLoaded} & 8784 & pass & \texttt{--} \\ \hline
+\texttt{bundleReadme} & 8736 & pass & \texttt{--} \\ \hline
+\texttt{renderMachineMetadata} & 8598 & pass & \texttt{--} \\ \hline
+\texttt{bundleZip} & 8692 & pass & \texttt{--} \\ \hline
+\texttt{renderPanel} & 6684 & pass & \texttt{--} \\ \hline
+\texttt{byKey} & 2085 & pass & \texttt{S} \\ \hline
+\texttt{renderQualityReview} & 10078 & pass & \texttt{--} \\ \hline
+\texttt{bytesFrom} & 2079 & pass & \texttt{S} \\ \hline
+\texttt{renderQualityReviewLazy} & 10082 & pass & \texttt{--} \\ \hline
+\texttt{calcStateLabel} & 2569 & pass & \texttt{S} \\ \hline
+\texttt{renderResults} & 5103 & pass & \texttt{--} \\ \hline
+\texttt{catColour} & 5165 & pass & \texttt{DS} \\ \hline
+\texttt{renderReviewComparison} & 9683 & pass & \texttt{--} \\ \hline
+\texttt{ccAlarmDir} & 6437 & pass & \texttt{DS} \\ \hline
+\texttt{renderReviewControls} & 9741 & pass & \texttt{--} \\ \hline
+\texttt{ccAllRows} & 6476 & pass & \texttt{--} \\ \hline
+\texttt{renderReviewCurves} & 9879 & pass & \texttt{--} \\ \hline
+\texttt{ccBaselineNeed} & 4452 & pass & \texttt{D} \\ \hline
+\texttt{renderReviewInstrument} & 10016 & pass & \texttt{--} \\ \hline
+\texttt{ccC} & 6348 & pass & \texttt{DS} \\ \hline
+\texttt{renderReviewOverview} & 9587 & pass & \texttt{--} \\ \hline
+\texttt{ccCUSUM} & 6305 & pass & \texttt{DS} \\ \hline
+\texttt{renderReviewPlate} & 9624 & pass & \texttt{--} \\ \hline
+\texttt{ccCalibSummary} & 5883 & pass & \texttt{RS} \\ \hline
+\texttt{renderReviewRising} & 9992 & pass & \texttt{--} \\ \hline
+\texttt{ccCanonTarget} & 4409 & pass & \texttt{S} \\ \hline
+\texttt{renderReviewRuns} & 9801 & pass & \texttt{--} \\ \hline
+\texttt{ccCfg} & 6265 & pass & \texttt{S} \\ \hline
+\texttt{renderReviewSheetLazy} & 5655 & pass & \texttt{R} \\ \hline
+\texttt{ccChartRows} & 6801 & pass & \texttt{DS} \\ \hline
+\texttt{renderReviewStatistics} & 9704 & pass & \texttt{--} \\ \hline
+\texttt{ccChartSvg} & 6616 & pass & \texttt{DS} \\ \hline
+\texttt{renderSop} & 5102 & pass & \texttt{--} \\ \hline
+\texttt{ccCompute} & 6507 & pass & \texttt{DS} \\ \hline
+\texttt{renderSopEditor} & 4907 & pass & \texttt{--} \\ \hline
+\texttt{ccDecodeArz} & 5689 & pass & \texttt{S} \\ \hline
+\texttt{renderSopHeader} & 4878 & pass & \texttt{--} \\ \hline
+\texttt{ccDynamic} & 5979 & pass & \texttt{DR} \\ \hline
+\texttt{renderSopResults} & 4999 & pass & \texttt{--} \\ \hline
+\texttt{ccEWMA} & 6299 & pass & \texttt{DS} \\ \hline
+\texttt{renderTab} & 5633 & pass & \texttt{R} \\ \hline
+\texttt{ccEvents} & 6906 & pass & \texttt{D} \\ \hline
+\texttt{replicateReviewRows} & 9017 & pass & \texttt{S} \\ \hline
+\texttt{ccExtractOnLoad} & 6030 & pass & \texttt{RS} \\ \hline
+\texttt{resultAnswers} & 9076 & pass & \texttt{R} \\ \hline
+\texttt{ccFunnel} & 6364 & pass & \texttt{D} \\ \hline
+\texttt{resultCq} & 9070 & pass & \texttt{R} \\ \hline
+\texttt{ccHistoryCSV} & 6873 & pass & \texttt{--} \\ \hline
+\texttt{resultKindOf} & 2589 & pass & \texttt{DS} \\ \hline
+\texttt{ccHistoryJSON} & 6868 & pass & \texttt{D} \\ \hline
+\texttt{reviewBundleEntries} & 9469 & pass & \texttt{--} \\ \hline
+\texttt{ccI} & 6274 & pass & \texttt{DS} \\ \hline
+\texttt{reviewControlSeries} & 9382 & pass & \texttt{S} \\ \hline
+\texttt{ccImport} & 6894 & excl & \texttt{--} \\ \hline
+\texttt{reviewDisplayCounts} & 9536 & pass & \texttt{D} \\ \hline
+\texttt{ccInstrumentKey} & 6458 & pass & \texttt{R} \\ \hline
+\texttt{reviewDisplayFindings} & 9517 & pass & \texttt{D} \\ \hline
+\texttt{ccInstruments} & 6480 & pass & \texttt{--} \\ \hline
+\texttt{reviewEventsWithoutInte…} & 9545 & pass & \texttt{--} \\ \hline
+\texttt{ccIxoAcquisitions} & 5714 & pass & \texttt{S} \\ \hline
+\texttt{reviewForensicEvents} & 4188 & pass & \texttt{--} \\ \hline
+\texttt{ccIxoTemperatureLog} & 5703 & pass & \texttt{S} \\ \hline
+\texttt{reviewForensicEventsCore} & 4775 & pass & \texttt{--} \\ \hline
+\texttt{ccLzss} & 5674 & pass & \texttt{DS} \\ \hline
+\texttt{reviewForensicEventsCor…} & 9200 & pass & \texttt{--} \\ \hline
+\texttt{ccMedian} & 5910 & pass & \texttt{S} \\ \hline
+\texttt{reviewOrphanWells} & 9191 & pass & \texttt{--} \\ \hline
+\texttt{ccMigrateControlKeys} & 6881 & pass & \texttt{S} \\ \hline
+\texttt{reviewRunRows} & 9259 & pass & \texttt{D} \\ \hline
+\texttt{ccNoDataReason} & 4453 & pass & \texttt{S} \\ \hline
+\texttt{reviewStatisticsRows} & 8997 & pass & \texttt{--} \\ \hline
+\texttt{ccOperator} & 6459 & pass & \texttt{R} \\ \hline
+\texttt{risingCurveDisplayRows} & 9959 & pass & \texttt{D} \\ \hline
+\texttt{ccP} & 6338 & pass & \texttt{DS} \\ \hline
+\texttt{risingCurveRows} & 9956 & pass & \texttt{--} \\ \hline
+\texttt{ccParseJavaDate} & 5902 & pass & \texttt{S} \\ \hline
+\texttt{roleFromName} & 8109 & pass & \texttt{R} \\ \hline
+\texttt{ccPeakRates} & 5813 & pass & \texttt{S} \\ \hline
+\texttt{rqResult} & 2607 & pass & \texttt{ES} \\ \hline
+\texttt{ccPhase} & 6272 & pass & \texttt{S} \\ \hline
+\texttt{rqRows} & 4129 & pass & \texttt{--} \\ \hline
+\texttt{ccPlatform} & 6457 & pass & \texttt{R} \\ \hline
+\texttt{runAt} & 8903 & pass & \texttt{S} \\ \hline
+\texttt{ccPng} & 6795 & pass & \texttt{RS} \\ \hline
+\texttt{runDurationMinutes} & 8150 & pass & \texttt{R} \\ \hline
+\texttt{ccProtocolKey} & 6053 & pass & \texttt{R} \\ \hline
+\texttt{runIsInstrumentAnalysed} & 10865 & pass & \texttt{R} \\ \hline
+\texttt{ccQ} & 5909 & pass & \texttt{S} \\ \hline
+\texttt{runIsSuperseded} & 10916 & pass & \texttt{R} \\ \hline
+\texttt{ccQsLog} & 5841 & pass & \texttt{S} \\ \hline
+\texttt{runName} & 8894 & const & \texttt{--} \\ \hline
+\texttt{ccQuantSaturation} & 5895 & pass & \texttt{S} \\ \hline
+\texttt{runProcessingState} & 10847 & pass & \texttt{R} \\ \hline
+\texttt{ccRemember} & 6903 & pass & \texttt{--} \\ \hline
+\texttt{runTimeline} & 4511 & pass & \texttt{R} \\ \hline
+\texttt{ccRestore} & 6904 & pass & \texttt{--} \\ \hline
+\texttt{runTimes} & 4532 & pass & \texttt{R} \\ \hline
+\texttt{ccRowsFor} & 6481 & pass & \texttt{S} \\ \hline
+\texttt{safeName} & 2078 & pass & \texttt{S} \\ \hline
+\texttt{ccRowsFromRuns} & 6461 & pass & \texttt{--} \\ \hline
+\texttt{safeRe} & 2083 & pass & \texttt{S} \\ \hline
+\texttt{ccSChartSvg} & 6676 & pass & \texttt{D} \\ \hline
+\texttt{sampleComparisonRows} & 8983 & pass & \texttt{S} \\ \hline
+\texttt{ccSetCfg} & 6267 & state & \texttt{S} \\ \hline
+\texttt{scrollToEl} & 2080 & pass & \texttt{ES} \\ \hline
+\texttt{ccSetpoints} & 5835 & pass & \texttt{R} \\ \hline
+\texttt{sd} & 2092 & pass & \texttt{S} \\ \hline
+\texttt{ccShift} & 6561 & pass & \texttt{D} \\ \hline
+\texttt{selAdd} & 11172 & pass & \texttt{S} \\ \hline
+\texttt{ccSignal} & 6456 & pass & \texttt{S} \\ \hline
+\texttt{selApplyCsv} & 11194 & pass & \texttt{D} \\ \hline
+\texttt{ccSpark} & 6600 & pass & \texttt{DS} \\ \hline
+\texttt{selBuildReport} & 11327 & pass & \texttt{--} \\ \hline
+\texttt{ccSpec} & 6501 & pass & \texttt{DS} \\ \hline
+\texttt{selCatalogue} & 11151 & pass & \texttt{--} \\ \hline
+\texttt{ccStatic} & 5911 & pass & \texttt{R} \\ \hline
+\texttt{selClear} & 11174 & pass & \texttt{--} \\ \hline
+\texttt{ccStatus} & 6573 & pass & \texttt{D} \\ \hline
+\texttt{selCsvTemplate} & 11188 & pass & \texttt{--} \\ \hline
+\texttt{ccSvgToPng} & 6809 & pass & \texttt{S} \\ \hline
+\texttt{selDataItems} & 11112 & pass & \texttt{--} \\ \hline
+\texttt{ccThermalSteps} & 5724 & pass & \texttt{S} \\ \hline
+\texttt{selDownloadReport} & 11384 & pass & \texttt{R} \\ \hline
+\texttt{ccThermalSummary} & 5826 & pass & \texttt{S} \\ \hline
+\texttt{selDownloadZip} & 11266 & pass & \texttt{R} \\ \hline
+\texttt{ccThin} & 5805 & pass & \texttt{S} \\ \hline
+\texttt{selGraphContext} & 11099 & pass & \texttt{S} \\ \hline
+\texttt{ccTransitionPairs} & 5764 & pass & \texttt{R} \\ \hline
+\texttt{selImageItems} & 11104 & pass & \texttt{--} \\ \hline
+\texttt{ccTransitions} & 5776 & pass & \texttt{S} \\ \hline
+\texttt{selItem} & 11152 & pass & \texttt{S} \\ \hline
+\texttt{ccTrend} & 6322 & pass & \texttt{DS} \\ \hline
+\texttt{selMatch} & 11153 & pass & \texttt{S} \\ \hline
+\texttt{ccU} & 6344 & pass & \texttt{DS} \\ \hline
+\texttt{selMatchAll} & 11167 & pass & \texttt{S} \\ \hline
+\texttt{ccValue} & 6491 & pass & \texttt{DS} \\ \hline
+\texttt{selReadme} & 11237 & pass & \texttt{D} \\ \hline
+\texttt{ccVariants} & 6488 & pass & \texttt{DS} \\ \hline
+\texttt{selRemove} & 11173 & pass & \texttt{S} \\ \hline
+\texttt{ccVersionMarks} & 6611 & pass & \texttt{D} \\ \hline
+\texttt{selReportTitle} & 11278 & pass & \texttt{--} \\ \hline
+\texttt{ccWestgard} & 6288 & pass & \texttt{D} \\ \hline
+\texttt{selRunIndex} & 11095 & pass & \texttt{--} \\ \hline
+\texttt{ccXAxis} & 6494 & pass & \texttt{DS} \\ \hline
+\texttt{selSelected} & 11162 & pass & \texttt{--} \\ \hline
+\texttt{ccXbarS} & 6352 & pass & \texttt{DS} \\ \hline
+\texttt{selTableBlock} & 11281 & pass & \texttt{DRS} \\ \hline
+\texttt{ccZipAll} & 6818 & pass & \texttt{--} \\ \hline
+\texttt{selWithExportNames} & 11261 & pass & \texttt{S} \\ \hline
+\texttt{ce} & 2068 & pass & \texttt{S} \\ \hline
+\texttt{selZipEntries} & 11219 & pass & \texttt{--} \\ \hline
+\texttt{chiSqP} & 2159 & pass & \texttt{DS} \\ \hline
+\texttt{selectedWells} & 8927 & pass & \texttt{DR} \\ \hline
+\texttt{clone} & 2075 & pass & \texttt{S} \\ \hline
+\texttt{setLanguage} & 2031 & pass & \texttt{ES} \\ \hline
+\texttt{cmdClose} & 11520 & pass & \texttt{--} \\ \hline
+\texttt{setPhase} & 7015 & excl & \texttt{--} \\ \hline
+\texttt{cmdEl} & 11417 & pass & \texttt{S} \\ \hline
+\texttt{setSelectItems} & 8907 & pass & \texttt{S} \\ \hline
+\texttt{cmdExec} & 11433 & pass & \texttt{R} \\ \hline
+\texttt{sha256Hex} & 2211 & pass & \texttt{S} \\ \hline
+\texttt{cmdInit} & 11522 & pass & \texttt{--} \\ \hline
+\texttt{sheetOf} & 5052 & pass & \texttt{DR} \\ \hline
+\texttt{cmdOpen} & 11510 & pass & \texttt{--} \\ \hline
+\texttt{shortDate} & 8895 & pass & \texttt{S} \\ \hline
+\texttt{cmdPrint} & 11418 & pass & \texttt{DS} \\ \hline
+\texttt{showCuteToast} & 2022 & pass & \texttt{D} \\ \hline
+\texttt{cmdRunLine} & 11488 & pass & \texttt{R} \\ \hline
+\texttt{showReviewSheet} & 10083 & pass & \texttt{R} \\ \hline
+\texttt{cmdRunScript} & 11496 & pass & \texttt{S} \\ \hline
+\texttt{showTab} & 10335 & pass & \texttt{R} \\ \hline
+\texttt{cmdScriptToggle} & 11505 & pass & \texttt{S} \\ \hline
+\texttt{sopAnalystName} & 11185 & pass & \texttt{--} \\ \hline
+\texttt{cmdStatusLine} & 11430 & pass & \texttt{--} \\ \hline
+\texttt{sopBase} & 4219 & pass & \texttt{--} \\ \hline
+\texttt{cmdTable} & 11425 & pass & \texttt{D} \\ \hline
+\texttt{sopCanonical} & 4363 & pass & \texttt{S} \\ \hline
+\texttt{cmdToggle} & 11521 & pass & \texttt{--} \\ \hline
+\texttt{sopChanged} & 4369 & pass & \texttt{--} \\ \hline
+\texttt{controlBatchGraph} & 4469 & pass & \texttt{DS} \\ \hline
+\texttt{sopColour} & 5166 & pass & \texttt{S} \\ \hline
+\texttt{controlBatchRecords} & 4459 & pass & \texttt{--} \\ \hline
+\texttt{sopControlIdentity} & 4410 & pass & \texttt{R} \\ \hline
+\texttt{controlCategory} & 9301 & pass & \texttt{R} \\ \hline
+\texttt{sopControlSpec} & 4487 & pass & \texttt{R} \\ \hline
+\texttt{controlProfileRoot} & 9290 & pass & \texttt{RS} \\ \hline
+\texttt{sopCq} & 4380 & pass & \texttt{R} \\ \hline
+\texttt{controlRootKey} & 9287 & pass & \texttt{R} \\ \hline
+\texttt{sopCriteriaRows} & 4731 & pass & \texttt{--} \\ \hline
+\texttt{controlRootName} & 9283 & pass & \texttt{R} \\ \hline
+\texttt{sopCurrentRows} & 5047 & pass & \texttt{--} \\ \hline
+\texttt{cpMethodOf} & 2570 & pass & \texttt{DR} \\ \hline
+\texttt{sopDownloadBundle} & 5075 & pass & \texttt{--} \\ \hline
+\texttt{crc32} & 2199 & pass & \texttt{S} \\ \hline
+\texttt{sopDownloadWorkbook} & 5067 & pass & \texttt{--} \\ \hline
+\texttt{csvOf} & 5051 & pass & \texttt{D} \\ \hline
+\texttt{sopEvaluateAll} & 4695 & pass & \texttt{--} \\ \hline
+\texttt{csvq} & 8075 & pass & \texttt{S} \\ \hline
+\texttt{sopEvaluateRun} & 4558 & pass & \texttt{RS} \\ \hline
+\texttt{currentReviewSheet} & 5629 & pass & \texttt{--} \\ \hline
+\texttt{sopEvents} & 4747 & pass & \texttt{--} \\ \hline
+\texttt{currentTab} & 5628 & pass & \texttt{--} \\ \hline
+\texttt{sopField} & 4836 & pass & \texttt{S} \\ \hline
+\texttt{curveAnalysisGroups} & 8278 & pass & \texttt{R} \\ \hline
+\texttt{sopFmt} & 4493 & pass & \texttt{S} \\ \hline
+\texttt{curveColour} & 9865 & pass & \texttt{RS} \\ \hline
+\texttt{sopFmtTime} & 4499 & pass & \texttt{S} \\ \hline
+\texttt{curveKey} & 9864 & pass & \texttt{RS} \\ \hline
+\texttt{sopHash} & 4367 & pass & \texttt{S} \\ \hline
+\texttt{curveRowsSelected} & 9841 & pass & \texttt{--} \\ \hline
+\texttt{sopInterpretationRows} & 4705 & pass & \texttt{S} \\ \hline
+\texttt{curveSignal} & 9840 & pass & \texttt{R} \\ \hline
+\texttt{sopJSON} & 4368 & pass & \texttt{--} \\ \hline
+\texttt{cv} & 2102 & pass & \texttt{S} \\ \hline
+\texttt{sopLab} & 11180 & pass & \texttt{--} \\ \hline
+\texttt{datasetMetadata} & 8526 & pass & \texttt{RS} \\ \hline
+\texttt{sopLabName} & 11184 & pass & \texttt{--} \\ \hline
+\texttt{decodeAcq} & 2334 & pass & \texttt{RS} \\ \hline
+\texttt{sopLabScreening} & 4433 & pass & \texttt{--} \\ \hline
+\texttt{decodeAnalyses} & 2687 & pass & \texttt{E} \\ \hline
+\texttt{sopLabel} & 5167 & pass & \texttt{S} \\ \hline
+\texttt{decodeEds} & 3735 & pass & \texttt{S} \\ \hline
+\texttt{sopLoadStored} & 4338 & pass & \texttt{--} \\ \hline
+\texttt{decodeIxo} & 2811 & pass & \texttt{S} \\ \hline
+\texttt{sopMatcher} & 4372 & pass & \texttt{S} \\ \hline
+\texttt{decodePlateModel} & 2432 & pass & \texttt{E} \\ \hline
+\texttt{sopMaybeSelectScDefault} & 4340 & pass & \texttt{--} \\ \hline
+\texttt{decodeProtocol} & 2507 & pass & \texttt{E} \\ \hline
+\texttt{sopMeta} & 4704 & pass & \texttt{--} \\ \hline
+\texttt{decodeRelQuant} & 2624 & pass & \texttt{E} \\ \hline
+\texttt{sopNormalise} & 4348 & pass & \texttt{S} \\ \hline
+\texttt{decodeSubsets} & 2495 & pass & \texttt{E} \\ \hline
+\texttt{sopNum} & 4379 & pass & \texttt{S} \\ \hline
+\texttt{derivedSettings} & 10413 & pass & \texttt{--} \\ \hline
+\texttt{sopOmitted} & 4381 & pass & \texttt{R} \\ \hline
+\texttt{derivedSettingsFor} & 10570 & pass & \texttt{R} \\ \hline
+\texttt{sopOutcomeFor} & 4830 & pass & \texttt{R} \\ \hline
+\texttt{detectedControlRoots} & 9323 & pass & \texttt{--} \\ \hline
+\texttt{sopProcedureHTML} & 4887 & pass & \texttt{--} \\ \hline
+\texttt{displayRunTick} & 8899 & pass & \texttt{RS} \\ \hline
+\texttt{sopProcessingApplicabil…} & 10872 & pass & \texttt{R} \\ \hline
+\texttt{distributionsFor} & 8490 & pass & \texttt{RS} \\ \hline
+\texttt{sopProfileEdited} & 4874 & pass & \texttt{R} \\ \hline
+\texttt{dosStamp} & 2277 & pass & \texttt{S} \\ \hline
+\texttt{sopReadme} & 5053 & pass & \texttt{--} \\ \hline
+\texttt{download} & 3172 & pass & \texttt{--} \\ \hline
+\texttt{sopReplicateMinimum} & 4400 & pass & \texttt{S} \\ \hline
+\texttt{downloadCanvas} & 9460 & pass & \texttt{S} \\ \hline
+\texttt{sopResultForWell} & 4700 & pass & \texttt{RS} \\ \hline
+\texttt{downloadCurveCSV} & 10061 & pass & \texttt{--} \\ \hline
+\texttt{sopRunApplicability} & 4389 & pass & \texttt{R} \\ \hline
+\texttt{downloadCurveCSVCore} & 10062 & pass & \texttt{--} \\ \hline
+\texttt{sopRunRows} & 4735 & pass & \texttt{--} \\ \hline
+\texttt{downloadForensicCSV} & 10070 & pass & \texttt{--} \\ \hline
+\texttt{sopSampleRows} & 4717 & pass & \texttt{S} \\ \hline
+\texttt{downloadReviewBundle} & 9491 & pass & \texttt{--} \\ \hline
+\texttt{sopSetPath} & 4849 & state & \texttt{S} \\ \hline
+\texttt{downloadWebsiteArchive} & 8071 & pass & \texttt{--} \\ \hline
+\texttt{sopStdCurves} & 4542 & pass & \texttt{R} \\ \hline
+\texttt{drawAmplificationCurves} & 9909 & pass & \texttt{RS} \\ \hline
+\texttt{sopStore} & 4339 & pass & \texttt{--} \\ \hline
+\texttt{drawLeveyJennings} & 9767 & pass & \texttt{S} \\ \hline
+\texttt{sopTableEditor} & 4855 & pass & \texttt{S} \\ \hline
+\texttt{drawPlateMapImage} & 9661 & pass & \texttt{--} \\ \hline
+\texttt{sopTargetSpec} & 4382 & pass & \texttt{R} \\ \hline
+\texttt{drawRisingCurveBundle} & 9971 & pass & \texttt{DS} \\ \hline
+\texttt{sopTime} & 4494 & pass & \texttt{S} \\ \hline
+\texttt{drawTemperatureTrace} & 4035 & pass & \texttt{RS} \\ \hline
+\texttt{sourceCRCOf} & 8148 & pass & \texttt{R} \\ \hline
+\texttt{dt} & 3166 & pass & \texttt{S} \\ \hline
+\texttt{sourceSHA256Of} & 8149 & pass & \texttt{R} \\ \hline
+\texttt{dyeChemistryOf} & 8252 & pass & \texttt{R} \\ \hline
+\texttt{sourceSha256} & 2204 & pass & \texttt{S} \\ \hline
+\texttt{ec} & 3986 & pass & \texttt{R} \\ \hline
+\texttt{sourceUidOf} & 8147 & pass & \texttt{R} \\ \hline
+\texttt{edsDerived} & 4050 & pass & \texttt{RS} \\ \hline
+\texttt{stamp} & 8083 & pass & \texttt{--} \\ \hline
+\texttt{edsEvents} & 3902 & pass & \texttt{RS} \\ \hline
+\texttt{stripLotDate} & 9278 & pass & \texttt{R} \\ \hline
+\texttt{edsRecordTables} & 3989 & pass & \texttt{R} \\ \hline
+\texttt{studyRows} & 3539 & pass & \texttt{R} \\ \hline
+\texttt{edsSignalRows} & 4137 & pass & \texttt{--} \\ \hline
+\texttt{svgEsc} & 5106 & pass & \texttt{S} \\ \hline
+\texttt{effSliwinProxy} & 6969 & pass & \texttt{R} \\ \hline
+\texttt{svgMessage} & 5162 & pass & \texttt{S} \\ \hline
+\texttt{effWol} & 6950 & pass & \texttt{R} \\ \hline
+\texttt{svgPlot} & 5117 & pass & \texttt{S} \\ \hline
+\texttt{efficiencyFromSlope} & 6989 & pass & \texttt{D} \\ \hline
+\texttt{svgToJpeg} & 11072 & pass & \texttt{DS} \\ \hline
+\texttt{emptyReview} & 9454 & pass & \texttt{D} \\ \hline
+\texttt{tDistTwoTail} & 2138 & pass & \texttt{S} \\ \hline
+\texttt{esc} & 2076 & pass & \texttt{S} \\ \hline
+\texttt{tTest} & 2162 & pass & \texttt{S} \\ \hline
+\texttt{exportCatalogue} & 8602 & pass & \texttt{--} \\ \hline
+\texttt{table} & 8044 & pass & \texttt{S} \\ \hline
+\texttt{exportCatalogueCore} & 8639 & pass & \texttt{--} \\ \hline
+\texttt{tag} & 8043 & pass & \texttt{DS} \\ \hline
+\texttt{exportName} & 4115 & pass & \texttt{S} \\ \hline
+\texttt{textEncoder} & 2069 & const & \texttt{--} \\ \hline
+\texttt{extent} & 5163 & pass & \texttt{S} \\ \hline
+\texttt{tmRows} & 8190 & pass & \texttt{--} \\ \hline
+\texttt{extraForensicEvents} & 4774 & pass & \texttt{--} \\ \hline
+\texttt{toCSV} & 8079 & pass & \texttt{S} \\ \hline
+\texttt{extraForensicEventsUnca…} & 4783 & pass & \texttt{--} \\ \hline
+\texttt{txt} & 3272 & priv & \texttt{--} \\ \hline
+\texttt{findingEvidenceKey} & 9508 & pass & \texttt{D} \\ \hline
+\texttt{ui} & 2001 & pass & \texttt{S} \\ \hline
+\texttt{findingKey} & 9512 & pass & \texttt{D} \\ \hline
+\texttt{uniq} & 2084 & pass & \texttt{S} \\ \hline
+\texttt{findingTextKey} & 9496 & pass & \texttt{S} \\ \hline
+\texttt{uniqueCurveCount} & 8154 & pass & \texttt{R} \\ \hline
+\texttt{fitLin} & 2186 & pass & \texttt{S} \\ \hline
+\texttt{validateHistoryBoundary} & 7036 & pass & \texttt{S} \\ \hline
+\texttt{flagName} & 3301 & pass & \texttt{D} \\ \hline
+\texttt{validateRunBoundary} & 7026 & pass & \texttt{RS} \\ \hline
+\texttt{fmt} & 3164 & priv & \texttt{--} \\ \hline
+\texttt{variablesFor} & 8518 & pass & \texttt{R} \\ \hline
+\texttt{fmtTick} & 5115 & pass & \texttt{S} \\ \hline
+\texttt{websiteSource} & 8060 & pass & \texttt{S} \\ \hline
+\texttt{forensicCounts} & 4776 & pass & \texttt{--} \\ \hline
+\texttt{wellPos} & 3171 & priv & \texttt{--} \\ \hline
+\texttt{forensicSnapshot} & 4768 & pass & \texttt{--} \\ \hline
+\texttt{wellRows} & 8158 & pass & \texttt{R} \\ \hline
+\texttt{gByDate} & 5182 & pass & \texttt{S} \\ \hline
+\texttt{wellSignal} & 4503 & pass & \texttt{R} \\ \hline
+\texttt{gCutLines} & 5172 & pass & \texttt{S} \\ \hline
+\texttt{wellToPos} & 2321 & pass & \texttt{RS} \\ \hline
+\texttt{gRunDate} & 5181 & pass & \texttt{R} \\ \hline
+\texttt{westgardReview} & 9364 & pass & \texttt{S} \\ \hline
+\texttt{gRunTicks} & 5183 & pass & \texttt{R} \\ \hline
+\texttt{wireGraphs} & 5611 & pass & \texttt{--} \\ \hline
+\texttt{gRunWells} & 5170 & pass & \texttt{RS} \\ \hline
+\texttt{wirePanel} & 6919 & pass & \texttt{--} \\ \hline
+\texttt{gTargets} & 5171 & pass & \texttt{R} \\ \hline
+\texttt{wireQualityReview} & 10089 & pass & \texttt{--} \\ \hline
+\texttt{gammap} & 2143 & pass & \texttt{S} \\ \hline
+\texttt{wireSop} & 5085 & pass & \texttt{--} \\ \hline
+\texttt{graphAllZip} & 5590 & pass & \texttt{--} \\ \hline
+\texttt{withExportNames} & 4124 & pass & \texttt{S} \\ \hline
+\texttt{graphContext} & 5543 & pass & \texttt{--} \\ \hline
+\texttt{xesc} & 2077 & pass & \texttt{S} \\ \hline
+\texttt{graphFileBase} & 5579 & pass & \texttt{--} \\ \hline
+\texttt{xlsxCell} & 4157 & pass & \texttt{RS} \\ \hline
+\texttt{graphPng} & 5582 & pass & \texttt{--} \\ \hline
+\texttt{xlsxCol} & 4156 & pass & \texttt{S} \\ \hline
+\texttt{graphSvgText} & 5580 & pass & \texttt{--} \\ \hline
+\texttt{xml} & 3269 & priv & \texttt{--} \\ \hline
+\texttt{hashColour} & 9465 & pass & \texttt{S} \\ \hline
+\texttt{zhPhrase} & 1922 & pass & \texttt{S} \\ \hline
+\end{xltabular}}
 
 
 \section{The evidence files}
@@ -693,20 +696,22 @@ The records are machine-readable and are delivered beside the page, so any verdi
 can be re-derived without re-running anything.
 
 {\small
-\begin{longtable}{@{}lrll@{}}
-\toprule \textbf{File} & \textbf{Bytes} & \textbf{What it holds} & \textbf{SHA-256 (first 24)} \\\midrule\endfirsthead
-\toprule \textbf{File} & \textbf{Bytes} & \textbf{What it holds} & \textbf{SHA-256 (first 24)} \\\midrule\endhead
-\texttt{validation\_full.json} & 585,589 & every symbol: argument… & \texttt{8c0099eebf8fbfc7e1f53d…} \\
-\texttt{rdml\_validation\_data.j…} & 49,563 & the named cases of Cha… & \texttt{93f25eecbd6dcccb4d13f1…} \\
-\texttt{invariants\_results.json} & 2,711 & the property checks an… & \texttt{31125f8e2694c86db2835d…} \\
-\texttt{synthetic\_probe\_result…} & 3,610 & the generated run and … & \texttt{fd780d4f8adec9423fc693…} \\
-\texttt{endtoend.json} & 4,527 & every tab, view, graph… & \texttt{07952c0358260a1f3c6e1d…} \\
-\texttt{schema\_findings.json} & 8,946 & the measurements behin… & \texttt{2e959d01605b992bcb6207…} \\
-\texttt{docdata.json} & 34,405 & the material the conso… & \texttt{f061c10ec137e2a42576fb…} \\
-\texttt{srcmap.json} & 978,957 & the line range of ever… & \texttt{6619bd22f3b0a95ceb160e…} \\
-\texttt{fnindex.json} & 69,626 & the parsed index of th… & \texttt{c718c4e6d6078d2c146de2…} \\
-\bottomrule
-\end{longtable}}
+\begin{xltabular}{\linewidth}{|l|r|X|X|}
+\caption{Symbols of the area \emph{The evidence files}}\\
+\hline
+
+\hline \textbf{File} & \textbf{Bytes} & \textbf{What it holds} & \textbf{SHA-256 (first 24)} \\\hline\endfirsthead
+\hline \textbf{File} & \textbf{Bytes} & \textbf{What it holds} & \textbf{SHA-256 (first 24)} \\\hline\endhead
+\texttt{validation\_full.json} & 585,589 & every symbol: argument… & \texttt{8c0099eebf8fbfc7e1f53d…} \\ \hline
+\texttt{rdml\_validation\_data.j…} & 49,563 & the named cases of Cha… & \texttt{93f25eecbd6dcccb4d13f1…} \\ \hline
+\texttt{invariants\_results.json} & 2,711 & the property checks an… & \texttt{31125f8e2694c86db2835d…} \\ \hline
+\texttt{synthetic\_probe\_result…} & 3,610 & the generated run and … & \texttt{fd780d4f8adec9423fc693…} \\ \hline
+\texttt{endtoend.json} & 4,527 & every tab, view, graph… & \texttt{07952c0358260a1f3c6e1d…} \\ \hline
+\texttt{schema\_findings.json} & 8,946 & the measurements behin… & \texttt{2e959d01605b992bcb6207…} \\ \hline
+\texttt{docdata.json} & 34,405 & the material the conso… & \texttt{f061c10ec137e2a42576fb…} \\ \hline
+\texttt{srcmap.json} & 978,957 & the line range of ever… & \texttt{6619bd22f3b0a95ceb160e…} \\ \hline
+\texttt{fnindex.json} & 69,626 & the parsed index of th… & \texttt{c718c4e6d6078d2c146de2…} \\ \hline
+\end{xltabular}}
 
 
 \section{The harness}

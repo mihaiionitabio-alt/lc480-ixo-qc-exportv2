@@ -1,0 +1,2 @@
+  "One column per well, first column named Cycles exactly as pcrbatch() demands. Column names carry target and sample so replicate groups form with on
+e sub().":"每个孔位一列，首列按 pcrbatch() 要求命名为 Cycles；列名包含目标和样品，便于构建重复孔组。",

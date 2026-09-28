@@ -1,0 +1,2 @@
+  "1 · Load files":"1 · 加载文件","2 · SOP":"2 · SOP","3 · Results":"3 · 结果","4 · Control panel":"4 · 控制面板","5 · Graphs":"5 · 图表","6 · Quality
+ & forensic review":"6 · 质量与取证审核","7 · Open formats":"7 · 开放格式",

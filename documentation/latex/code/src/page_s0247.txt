@@ -1,0 +1,2 @@
+  "Replicate spread review limit (Cq)":"重复孔差异审核限值（Cq）",
+  "Download statistics (CSV)":"下载统计表（CSV）",

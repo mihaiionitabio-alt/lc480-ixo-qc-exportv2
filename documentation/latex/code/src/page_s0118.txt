@@ -1,0 +1,5 @@
+  "The instrument answers the PC faster than usual: harmless (firmware or PC change).":"仪器响应 PC 比平时快：无害（固件或 PC 变化）。",
+  "The 1-s timer fires more punctually than usual: harmless.":"1 秒定时器比平时更准时：无害。",
+  "The scheduler falls behind less often: normal.":"调度器落后的次数减少：正常。",
+  "Images are processed sooner than usual: harmless.":"图像处理比平时更早开始：无害。",
+  "Image analysis is faster than usual: harmless (firmware update).":"图像分析比平时快：无害（固件更新）。",

@@ -1,0 +1,2 @@
+  "End-point fluorescence is higher than usual: more template or probe, a new reagent lot, or a brighter light source after service. Check for saturat
+ion (B-H12).":"终点荧光比平时高：模板或探针更多、新试剂批次，或维修后光源更亮。检查饱和（B-H12）。",

@@ -1,0 +1,2 @@
+  ". A Cq above the cut-off counts as not detected. A mean Cq above the late-signal limit, or a quantity below the minimum, gets the late-signal outco
+me.":"。Cq 高于截断值视为未检出。平均 Cq 高于晚期信号限值，或定量值低于最小值时，给出晚期/低值结果。",

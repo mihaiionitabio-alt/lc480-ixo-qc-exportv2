@@ -1,0 +1,3 @@
+  "The block zones disagree more than usual: wells in different parts of the plate see different temperatures, which shows up as edge or row/column Cq
+ patterns (B-O3). Check plate seating and seal; if it persists or exceeds 1.5 °C, request a block uniformity service.":"各区域温差比平时大：板上不同位
+置的孔温度不同，表现为边缘或行/列 Cq 模式（B-O3）。检查板放置和封膜；若持续或超过 1.5 °C，申请加热块均一性维修。",

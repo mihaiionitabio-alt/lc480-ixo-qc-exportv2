@@ -1,0 +1,2 @@
+  "The filter-wheel position offset stepped up: the wheel slipped, was re-homed or serviced. Check the dye calibration if unexplained.":"滤光轮位置偏
+移向上阶跃：滤光轮打滑、重新归位或维修过。如无法解释，检查染料校准。",

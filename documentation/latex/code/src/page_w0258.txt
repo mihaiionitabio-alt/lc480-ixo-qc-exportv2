@@ -1,0 +1,2 @@
+  "These checks describe recoverability and internal consistency; they do not replace method-specific acceptance.":"这些检查用于说明数据可恢复性和内部
+一致性，不能替代方法特定的接收标准。",

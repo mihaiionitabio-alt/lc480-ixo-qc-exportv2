@@ -1,0 +1,3 @@
+  "The filter-wheel position offset stepped down: the wheel slipped, was re-homed or serviced. Wrong filter positions change the signal in every chann
+el; check the dye calibration if unexplained.":"滤光轮位置偏移向下阶跃：滤光轮打滑、重新归位或维修过。滤光片位置错误会改变所有通道的信号；如无法解释，
+检查染料校准。",

@@ -1,0 +1,2 @@
+  "Every setting the page could read out of the container, each with the property it came from. The same table shown on the Load tab.":"列出页面从容器
+读取的全部设置及其来源属性，与“加载”页显示的表格相同。",

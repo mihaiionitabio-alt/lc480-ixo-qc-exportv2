@@ -1,0 +1,3 @@
+  "Each run as a green dot at its start, with the experiment creation (blue, above) and the last recorded change (red, below, joined by a dashed line)
+. Long gaps between run and last change are the first thing an auditor asks about.":"每次运行以其开始时刻的绿点表示，实验创建（蓝色，上方）与最后记录
+的修改（红色，下方，以虚线相连）一并标出。运行与最后修改之间的长时间间隔是审核人员首先关注的问题。",

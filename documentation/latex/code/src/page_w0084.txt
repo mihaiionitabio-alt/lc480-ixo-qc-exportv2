@@ -1,0 +1,2 @@
+  "Hardware, software, method and operator control charts per instrument. Click a tile for the chart and its settings.":"按仪器显示硬件、软件、方法和
+操作人员控制图。点击卡片查看图表及其设置。",

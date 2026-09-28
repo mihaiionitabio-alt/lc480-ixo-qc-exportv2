@@ -1,0 +1,2 @@
+  "The internal control in samples amplifies earlier than the configured fixed reference Cq. Check control input, assay settings and reference applica
+bility before attributing a cause.":"样品中的内对照扩增早于运行中位数：加入的内对照更多，或中位数受抑制样品影响。通常无害；检查内对照加量。",

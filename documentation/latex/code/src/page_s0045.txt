@@ -1,0 +1,2 @@
+  "Block zone uniformity (95th percentile)":"模块分区均匀性（第 95 百分位）",
+  "Difference between the warmest and coolest of the six zones, 95th percentile over the run.":"六个分区中最热与最冷之差，取整个运行的第 95 百分位。",

@@ -1,0 +1,2 @@
+  "Download this table (CSV)":"下载此表（CSV）","What was read":"读取内容",
+  "Stored values, exactly as the instrument wrote them":"仪器保存的原始数值",

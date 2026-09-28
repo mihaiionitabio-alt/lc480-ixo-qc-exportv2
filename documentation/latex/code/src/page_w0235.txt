@@ -1,0 +1,2 @@
+  "Each download states which tool consumes it and what was checked. Where a format has a version that matters, the version that actually works is use
+d rather than the newest or the oldest.":"每项下载均说明适用工具及已完成的检查。若格式版本会影响兼容性，则采用实际验证可用的版本。",

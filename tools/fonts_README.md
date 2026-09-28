@@ -4,7 +4,7 @@ The document is typeset with **Microsoft YaHei** (`msyh.ttc`) as its main, sans 
 family. That font is proprietary and ships with Windows; it is **not** in this repository and must
 not be redistributed here.
 
-To build the document, put a copy at `docs/latex/fonts/msyh.ttc`.
+To build the document, put a copy at `documentation/latex/fonts/msyh.ttc`.
 
 On Windows it is already on the machine:
 
@@ -20,6 +20,6 @@ the listings must render ideographs in a monospace face. Substitutes that are fr
 - **Source Han Sans** / **Source Han Mono** — Adobe, SIL Open Font License
 
 To use one, edit the three `\setmainfont` / `\setsansfont` / `\setmonofont` lines at the top of
-`docs/latex/main.tex`. Line breaking, page count and the figure numbers will shift a little; the
+`documentation/latex/main.tex`. Line breaking, page count and the figure numbers will shift a little; the
 acceptance check in `tools/verify_base_plus_update_2026-09-27.py` asserts an exact page count, so
 adjust that number if you change the font.

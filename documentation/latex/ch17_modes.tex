@@ -30,7 +30,7 @@ graphs tab asks; a table asks the same function the export writes. That is what
 makes a figure in a report the figure on the screen.
 
 {\small
-\begin{longtable}{@{}p{3.0cm}p{2.1cm}p{6.8cm}p{3.8cm}@{}}
+\begin{xltabular}{\linewidth}{|X|X|X|X|}
 \caption{The catalogue both modes select from.}\label{tab:catalogue} \\
 \toprule \textbf{Identifier} & \textbf{Kind} & \textbf{Group} & \textbf{What it is} \\\midrule\endfirsthead
 \toprule \textbf{Identifier} & \textbf{Kind} & \textbf{Group} & \textbf{What it is} \\\midrule\endhead
@@ -70,7 +70,7 @@ makes a figure in a report the figure on the screen.
 \texttt{data:amplification\_curves} & data & Tables & Amplification curves \\
 \texttt{data:sop\_answers} & data & Tables & Profile answers \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{Command mode}
@@ -79,7 +79,7 @@ The commands are deliberately few and deliberately literal: a line that reads
 \vfn{select img:curves} does one thing, and the window says what it did.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \caption{Every command the window accepts.}\label{tab:cmd-commands} \\
 \toprule \textbf{Command} & \textbf{What it does} \\\midrule\endfirsthead
 \toprule \textbf{Command} & \textbf{What it does} \\\midrule\endhead
@@ -103,7 +103,7 @@ The commands are deliberately few and deliberately literal: a line that reads
 \texttt{script} & open the box for a pasted procedure \\
 \texttt{close} & leave command mode \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 A pattern may carry \vfn{*} and \vfn{?}, and three words stand for groups:
@@ -113,7 +113,7 @@ A pattern may carry \vfn{*} and \vfn{?}, and three words stand for groups:
 \section{Command examples and output contract}
 The command window accepts the same identifiers shown in the assisted checklist. A command changes the selection or builds an output; it does not alter stored values.
 
-\begin{longtable}{@{}p{3.3cm}p{5.2cm}p{5.2cm}@{}}
+\begin{xltabular}{\linewidth}{|X|X|X|}
 \caption{Image and graph families, options and outputs.}\label{tab:mode-image-options}\\
 \toprule Family & Example and options & Output\\\hline\endfirsthead
 \toprule Family & Example and options & Output\\\hline\endhead
@@ -126,7 +126,7 @@ Control charts & \texttt{select cc:heat\_rate type=ewma x=date lambda=0.2 L=3} &
 Chart groups & \texttt{select cc:hardware}; \texttt{select cc:all} & 28 hardware charts or all 58 chart items\\\hline
 Tables and records & \texttt{select data:cq\_values data:runs\_and\_qc rec:instrument\_records} & report tables and downloadable CSV/ZIP rows\\\hline
 \bottomrule
-\end{longtable}
+\end{xltabular}
 
 \vhead{Worked command sequence}
 \begin{lstlisting}[style=vstyle,language=text,numbers=left,firstnumber=1]
@@ -212,7 +212,7 @@ every item, whether it is available and whether it is included; only the
 \vfn{include} column is read back, so a file written months ago still applies.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Column} & \textbf{Meaning} \\\midrule\endfirsthead
 \toprule \textbf{Column} & \textbf{Meaning} \\\midrule\endhead
 \texttt{id} & the item identifier; this is what is matched \\
@@ -222,7 +222,7 @@ every item, whether it is available and whether it is included; only the
 \texttt{available} & whether the loaded data can produce it now \\
 \texttt{include} & yes or no; the only column read back \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \vhead{The first lines of the template}
 \begin{lstlisting}[style=vstyle,language=text,numbers=left,firstnumber=1]
@@ -251,7 +251,7 @@ checksum, the files that were loaded and what was selected, followed by one
 section per item.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Part} & \textbf{What it holds} \\\midrule\endfirsthead
 \toprule \textbf{Part} & \textbf{What it holds} \\\midrule\endhead
 cover & laboratory, analyst, profile, checksum, files, contents \\
@@ -259,7 +259,7 @@ figure section & the drawing at the width of the text, then the numbers behind i
 table section & the table, one row per line, with the number of rows not shown \\
 every page & the same text block as this document uses \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 Two rules govern the tables in a report, and they are the rules this document

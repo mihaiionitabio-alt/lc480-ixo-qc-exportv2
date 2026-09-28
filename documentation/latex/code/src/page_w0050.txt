@@ -1,0 +1,2 @@
+  "The instrument measures the lamp through a reference channel. The first reading of each run tracks lamp ageing (manual: warning at 50 %, lifetime ≈
+ 500 h).":"仪器通过参考通道测量灯的强度。每次运行的首次读数反映灯的老化（手册：50 % 时报警，寿命约 500 小时）。",

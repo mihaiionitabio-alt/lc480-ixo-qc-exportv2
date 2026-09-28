@@ -1,0 +1,2 @@
+  "Levey-Jennings Cq by experiment. Replicate wells are collapsed to one point per run. Limits and Westgard rules are shown only from three or more ru
+ns.":"按实验绘制 Levey-Jennings Cq 图。每次运行的重复孔合并为一个点；至少有 3 次运行时才显示控制限和 Westgard 规则。",

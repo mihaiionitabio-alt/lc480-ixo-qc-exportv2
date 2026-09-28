@@ -1,0 +1,3 @@
+  "The block overshoots more than it used to (CUSUM drifting up). The controller is compensating for a slower block, or the sensor is ageing. Samples 
+briefly see higher temperatures; check heating rate (B-H1) and plan a temperature verification.":"加热块过冲比以往大（CUSUM 向上漂移）。控制器在补偿变
+慢的加热块，或传感器老化。样品会短暂承受更高温度；检查加热速率（B-H1）并安排温度验证。",

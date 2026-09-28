@@ -1,0 +1,3 @@
+  "Overview":"概览","Plate map":"板图","Sample comparison":"样品比较","Statistics":"统计",
+  "Control charts":"质控图","Runs and QC":"运行与质控","Amplification curves":"扩增曲线",
+  "Instrument records":"仪器记录","Review overview":"审核概览",

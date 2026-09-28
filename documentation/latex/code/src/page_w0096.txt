@@ -1,0 +1,4 @@
+  "At the moment of reading the block is colder than usual compared with the setpoint (more negative offset). Real sample temperature is lower: anneal
+ing becomes less stringent. Check cooling (B-H2) and room temperature; persistent change needs a temperature verification plate or recalibration. S ab
+ove its limit = temperature not stable during the reading.":"读数时加热块相对设定值比平时更冷（偏移更负）。实际样品温度更低：退火严格性降低。检查冷却
+（B-H2）和室温；持续变化需用温度验证板或重新校准。S 超限 = 读数期间温度不稳定。",

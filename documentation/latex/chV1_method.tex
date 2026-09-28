@@ -11,7 +11,7 @@ verdict can re-derive it without trusting the harness.
 \section{What was under test}
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Item} & \textbf{Value} \\\midrule\endfirsthead
 \toprule \textbf{Item} & \textbf{Value} \\\midrule\endhead
 \texttt{page} & \texttt{qpcr\_qc\_forensics.html (identical copy index.html)} \\
@@ -20,7 +20,8 @@ verdict can re-derive it without trusting the harness.
 \texttt{captured} & \texttt{2026-09-24 12:06:13 UTC} \\
 \texttt{symbols indexed} & \texttt{676} \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
+
 
 \section{The corpus}
 Every file below was loaded through the page's own intake --- the same path an
@@ -30,19 +31,30 @@ experiments; they are identified here by what they contain and by their checksum
 not by their origin.
 
 {\small
-\begin{longtable}{@{}lrl@{}}
+\begin{xltabular}{\linewidth}{|X|r|l|}
 \caption{The corpus the whole of this part was measured on.}\label{tab:val-corpus} \\
 \toprule \textbf{File} & \textbf{Bytes} & \textbf{SHA-256 (first 24)} \\\midrule\endfirsthead
 \toprule \textbf{File} & \textbf{Bytes} & \textbf{SHA-256 (first 24)} \\\midrule\endhead
 \texttt{MULTIPLEX-4CH.eds} & 2,376,494 & \texttt{8e65cbd6585d5caf70d14778} \\
 \texttt{ABSQUANT-DEMO.ixo} & 4,636,210 & \texttt{e820f46933485d5a4a1c94b9} \\
-\texttt{CORPUS-EDS-3.eds} & 2,869,499 & \texttt{(withheld)} \\
+\texttt{(fourth file --- identification withdrawn)} & --- & \texttt{---} \\
 \texttt{example\_2\_tm\_annotated.rdml} & 252,547 & \texttt{e018dbad7ec4071af8825439} \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
-\readingnote{The third exchange file is listed as \texttt{CORPUS-EDS-3.eds}. Its own file name and checksum are withheld: its provenance could not be confirmed as a vendor or template file, and an unconfirmed file is treated as laboratory material. Its byte count is kept because every measurement in this part was taken on it.}
+\begin{notebox}[title={\textbf{One corpus file was withdrawn, 28 September 2026}}]
+The fourth file loaded on 24 September could not be identified afterwards: no file of its size or
+checksum remains on the machine that ran the harness, and its origin is not recorded. Because its
+origin cannot be established, its identification is withdrawn from this document --- its name, its
+size and its checksum are removed, and it is referred to below as \texttt{FILE-4-WITHDRAWN}.
+
+What this part still prints from it is a plate geometry (16 by 24, 40 cycles, 288 results), a
+creation date in 2015, and the values the page derived while decoding it. It carries no sample name
+and no value tied to a sample identity; the page's own profile recorded it as not matching the
+laboratory's method. The records made on it are kept because they are the record of what was
+actually tested, and withdrawing a test silently would be worse than naming the gap.
+\end{notebox}
 
 Reading them produced 0 runs and 0 stored results, with no page error.
 
@@ -52,7 +64,7 @@ from, so a verdict can be weighed: a function exercised only on class~S input ha
 been shown to run, not to be right on laboratory data.
 
 {\small
-\begin{longtable}{@{}llr@{}}
+\begin{xltabular}{\linewidth}{|X|l|r|}
 \toprule \textbf{Class} & \textbf{Meaning} & \textbf{Arguments} \\\midrule\endfirsthead
 \toprule \textbf{Class} & \textbf{Meaning} & \textbf{Arguments} \\\midrule\endhead
 \texttt{R} & a real instrument or exchange file, unmodified, decoded by the page i… & 140 \\
@@ -60,7 +72,7 @@ been shown to run, not to be right on laboratory data.
 \texttt{S} & synthetic, written for this probe & 336 \\
 \texttt{E} & the live interface of the page after the corpus was loaded & 23 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{The three passes}
@@ -68,14 +80,14 @@ A probe that changes application state poisons every probe after it, so the
 capture runs three times.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Pass} & \textbf{What it does} \\\midrule\endfirsthead
 \toprule \textbf{Pass} & \textbf{What it does} \\\midrule\endhead
 A, discovery & probe every symbol once; record which probes changed global state \\
 B, clean & probe again in a new page with those names held back \\
 C, isolation & probe each state-changing name in a page of its own \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 The delivered records are B plus C. One name, \vfn{renderPanel}, is state-changing
@@ -85,7 +97,7 @@ itself. That is the whole reason the three passes exist.
 \section{What a verdict means}
 
 {\small
-\begin{longtable}{@{}llr@{}}
+\begin{xltabular}{\linewidth}{|X|l|r|}
 \toprule \textbf{Verdict} & \textbf{Meaning} & \textbf{Symbols} \\\midrule\endfirsthead
 \toprule \textbf{Verdict} & \textbf{Meaning} & \textbf{Symbols} \\\midrule\endhead
 \texttt{pass} & called with the stated input; returned the value shown; global state … & 527 \\
@@ -94,7 +106,7 @@ itself. That is the whole reason the three passes exist.
 \texttt{state} & changes application state; probed in a page of its own & 7 \\
 \texttt{excl} & deliberately not called & 4 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \begin{notebox}[title={\textbf{What this part does not claim}}]

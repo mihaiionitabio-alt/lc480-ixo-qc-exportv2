@@ -1,0 +1,4 @@
+  "Seconds the block needs to go from one programmed temperature to the next (e.g. 95 → 60 °C): from leaving ±0.5 °C of the start temperature until fi
+rst within ±0.5 °C of the target, median over all cycles of the run. One chart per transition of the program. Includes ramp and overshoot, so it shows
+ how much of every cycle is spent moving instead of holding.":"加热块从一个设定温度到下一个设定温度（如 95 → 60 °C）所需的秒数：从离开起始温度 ±0.5 °C
+ 到首次进入目标温度 ±0.5 °C，取运行中所有循环的中位数。程序中每种转换各一张图。包含升降温和过冲，因此显示每个循环中用于移动而非保持的时间。",

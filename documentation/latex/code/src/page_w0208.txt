@@ -1,0 +1,2 @@
+  "End-point fluorescence (or amplitude above background) against the stored Cq. Late, low-plateau curves separate from true amplification; undetected
+ wells are drawn at the right edge.":"终点荧光（或高于背景的幅度）与保存的 Cq 对比。晚期、低平台曲线与真实扩增可区分；未检出的孔绘于右侧边缘。",

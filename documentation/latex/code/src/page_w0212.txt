@@ -1,0 +1,3 @@
+  "QuantStudio only: difference between the stored Ct and the crossing of the stored ΔRn with the stored threshold. Differences beyond ±0.2 require an
+ algorithm/settings/provenance review; they do not prove that stored data were edited.":"仅限 QuantStudio：保存的 Ct 与保存的 ΔRn 和保存阈值交点之间的
+差值。差值超过 ±0.2 表明 Ct 写入后阈值、基线或曲线被修改过。",

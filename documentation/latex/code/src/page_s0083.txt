@@ -1,0 +1,5 @@
+  "2 · Control panel":"2 · 控制面板",
+  "3 · Load":"3 · 加载",
+  "4 · Graphs":"4 · 图表",
+  "5 · Quality & forensic review":"5 · 质量与取证审核",
+  "6 · Open formats":"6 · 开放格式",

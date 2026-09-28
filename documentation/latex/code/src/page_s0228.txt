@@ -1,0 +1,3 @@
+  "Upload a CSV instead":"改为上传 CSV","Read pasted values":"读取粘贴值",
+  "Load the ENGL worked example":"加载 ENGL 示例",
+  "Read from the experiment file":"从实验文件读取",

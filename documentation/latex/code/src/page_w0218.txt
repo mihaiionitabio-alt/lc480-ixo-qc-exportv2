@@ -1,0 +1,2 @@
+  "Median background and median end-point fluorescence of every channel per run: slow drift here is an instrument or reagent trend.":"各运行每个通道的
+背景中位数与终点荧光中位数：缓慢漂移反映仪器或试剂趋势。",

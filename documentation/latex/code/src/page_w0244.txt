@@ -1,0 +1,2 @@
+  "Table-first, side-by-side comparison across every analysis. The review threshold only highlights a difference; it does not replace an assay-specifi
+c acceptance rule.":"以表格并排比较所有分析。审核阈值仅用于突出差异，不能替代检测项目自身的接收规则。",

@@ -1,0 +1,7 @@
+  "Passive reference (ROX) level":"被动参比（ROX）水平",
+  "passive reference":"被动参比",
+  "Median passive-reference level of named wells.":"已命名孔被动参比水平的中位数。",
+  "A step = new master-mix lot or ROX concentration.":"阶跃 = 新的预混液批号或 ROX 浓度变化。",
+  "PCR efficiency from the standards":"由标准品得到的 PCR 效率",
+  "% efficiency":"效率 %",
+  "Efficiency of the standard curve per run and target.":"每次运行、每个靶标标准曲线的效率。",

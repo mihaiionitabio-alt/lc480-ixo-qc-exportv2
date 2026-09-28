@@ -1,0 +1,2 @@
+  "The automatic category applies to every dated or capitalised spelling under the same root. Change any row without renaming the samples in the sourc
+e files.":"自动类别适用于同一根名称下所有带日期或大小写不同的写法。无需修改源文件中的样品名称即可调整。",

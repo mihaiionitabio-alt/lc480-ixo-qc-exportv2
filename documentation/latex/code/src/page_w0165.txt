@@ -1,0 +1,3 @@
+  "More fluorescence readings are marked invalid by the instrument: optics, lamp or camera problems, or the signal was out of range. Check exposure (B
+-H11) and lamp (B-H8); affected wells may need repeating.":"被仪器标记为无效的荧光读数增多：光学、灯或相机问题，或信号超出范围。检查曝光（B-H11）和灯
+（B-H8）；受影响的孔可能需要重做。",

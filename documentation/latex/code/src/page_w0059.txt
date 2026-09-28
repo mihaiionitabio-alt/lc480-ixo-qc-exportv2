@@ -1,0 +1,2 @@
+  "A step at a recalibration shows how much the optics changed; a large step deserves a service question.":"重新校准时的阶跃反映光学系统的变化程度；阶
+跃较大时应咨询维修服务。",

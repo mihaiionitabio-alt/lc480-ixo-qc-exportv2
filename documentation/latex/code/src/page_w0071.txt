@@ -1,0 +1,2 @@
+  "Falling with a stable Cq = probe or dye degradation (storage, freeze-thaw); a step at a lot change = the lot. Compare with B-H8/B-H10 to exclude th
+e optics.":"Cq 稳定而信号下降 = 探针或染料降解（储存、反复冻融）；更换批号时出现阶跃 = 批号问题。与 B-H8/B-H10 对照以排除光学原因。",

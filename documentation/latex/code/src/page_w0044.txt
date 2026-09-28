@@ -1,0 +1,2 @@
+  "X̄ drifting away from its usual offset = temperature calibration drift (verify with a temperature plate). S rising = unstable control.":"X̄ 偏离其
+通常偏差 = 温度校准漂移（用温度验证板确认）。S 上升 = 控制不稳定。",

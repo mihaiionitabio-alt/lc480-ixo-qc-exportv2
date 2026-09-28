@@ -1,0 +1,2 @@
+  "Melting temperature, peak area and peak height for every well, as the Tm Calling analysis stored them. Only runs that carry such an analysis produc
+e this.":"包含 Tm Calling 分析保存的每孔熔解温度、峰面积和峰高，仅对含此类分析的运行提供。",

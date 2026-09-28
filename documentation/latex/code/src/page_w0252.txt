@@ -1,0 +1,2 @@
+  "One row per run, followed by a traceable log of structural findings, provenance and instrument-versus-name disagreements.":"每次运行一行，并附有结
+构性发现、来源及仪器类型与名称不一致情况的可追溯日志。",

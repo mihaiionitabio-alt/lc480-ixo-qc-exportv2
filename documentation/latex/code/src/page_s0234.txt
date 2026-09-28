@@ -1,0 +1,2 @@
+  "Download Cq table (CSV)":"下载 Cq 表（CSV）","Download melting peaks (CSV)":"下载熔解峰（CSV）",
+  "Formats other tools read":"其他工具可读取的格式",

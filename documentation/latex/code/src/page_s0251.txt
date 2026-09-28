@@ -1,0 +1,2 @@
+  "Reset automatic categories":"恢复自动类别",
+  "Runs, QC and forensic log":"运行、质控与追溯日志",

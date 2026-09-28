@@ -1,0 +1,3 @@
+  "The lamp reference reading is higher than usual: typically a new lamp or a service (start a new baseline). Otherwise a reference-sensor fault; chec
+k the lamp intensity % in the instrument software.":"灯参考读数比平时高：通常是换了新灯或维修（设定新基线）。否则为参考传感器故障；在仪器软件中检查灯
+强度 %。",

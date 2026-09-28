@@ -1,0 +1,2 @@
+  "Version 1.4 with every dye declared. rdmlpython refuses LinRegPCR below 1.4, and raises KeyError on a target whose dye was never declared; both wer
+e checked by running it.":"采用 RDML 1.4 并声明所有染料；已通过实际运行验证 rdmlpython / LinRegPCR 的兼容性。",

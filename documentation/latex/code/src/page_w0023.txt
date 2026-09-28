@@ -1,0 +1,2 @@
+  "their task is UNKNOWN in the plate setup, so the instrument's AMPNC rule cannot fire on them":"其在板设置中的任务为 UNKNOWN，因此仪器的 AMPNC 规则
+无法对其生效",

@@ -1,0 +1,3 @@
+  "Sample 1":"样品 1","Sample 2":"样品 2","Highlight when |difference| is at least":"当 |差值| 至少为以下数值时突出显示",
+  "Download comparison (CSV)":"下载比较表（CSV）",
+  "Statistics and mistake finding":"统计与错误排查",

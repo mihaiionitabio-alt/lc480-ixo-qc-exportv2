@@ -1,0 +1,2 @@
+  "Probe signal strength (positive control)":"探针信号强度（阳性对照）",
+  "Amplitude (plateau above background) of the same control each run.":"同一对照每次运行的幅度（高于背景的平台值）。",

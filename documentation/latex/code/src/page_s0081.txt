@@ -1,0 +1,7 @@
+  "Stored calls that disagree with the SOP":"与 SOP 不一致的保存判定",
+  "Consistency and fairness: do calls follow the written rules?":"一致性与公平性：判定是否遵循书面规则？",
+  "Disagreement concentrated in one person or case type → training or bias check.":"不一致集中在某个人或某类案例 → 培训或偏倚核查。",
+  "Copied-data events":"复制数据事件",
+  "events":"事件",
+  "Must be zero.":"必须为零。",
+  "Any event is a forensic finding.":"任何事件都是一项取证发现。",

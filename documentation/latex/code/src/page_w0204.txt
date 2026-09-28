@@ -1,0 +1,2 @@
+  "One point per well. Colour by SOP outcome or by role. Red dashed line: Cq cut-off; orange: late-signal limit (per target).":"每孔一个点。按 SOP 结
+果或角色着色。红色虚线：Cq 截断值；橙色：晚期信号限值（按靶标）。",

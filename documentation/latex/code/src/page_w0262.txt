@@ -1,0 +1,2 @@
+  "Every stored crossing point with its well, sample, target, role and call. The plain table most downstream work starts from.":"包含每个保存的交叉点
+及其孔位、样品、目标、角色和判定结果，是大多数后续分析的基础表格。",

@@ -1,0 +1,1 @@
+  "Camera readout is faster than usual: firmware or controller change. Harmless.":"相机读出比平时快：固件或控制器变化。无害。",

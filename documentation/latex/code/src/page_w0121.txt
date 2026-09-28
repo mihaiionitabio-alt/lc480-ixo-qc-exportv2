@@ -1,0 +1,3 @@
+  "The positive control amplified earlier than its range: more control template (new lot, pipetting), contamination, or a more efficient reaction. Wes
+tgard rules decide whether the run is rejected; check the control lot and pipetting.":"阳性对照扩增早于其范围：对照模板更多（新批次、移液）、污染或反
+应效率更高。由 Westgard 规则决定是否拒绝该运行；检查对照批次和移液。",

@@ -1,0 +1,4 @@
+  "LightCycler 480: raw fluorescence as stored in the AcquisitionStore, with no smoothing and no baseline subtraction. QuantStudio: the stored Rn by d
+efault, or the stored ΔRn (with its threshold), the multicomponent signal per dye, or the raw filter-set data. Controls are drawn over ordinary sample
+s so they stay visible.":"LightCycler 480：AcquisitionStore 中保存的原始荧光，不做平滑与基线扣除。QuantStudio：默认显示保存的 Rn，也可显示保存的 ΔRn（
+含阈值）、各染料的多组分信号或原始滤光片组数据。对照曲线绘制在普通样品之上，便于查看。",

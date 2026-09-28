@@ -1,0 +1,3 @@
+  "Header, Sample Setup, Raw Data, Amplification Data, Multicomponent Data and Results, tab-delimited, following the export specification of the Quant
+Studio command-line guide (MAN0010409, chapter 3). For LIS/LIMS parsers that expect that layout.":"包含文件头、样品设置、原始数据、扩增数据、多组分数
+据与结果，制表符分隔，遵循 QuantStudio 命令行指南（MAN0010409 第 3 章）的导出规范，供期望该格式的 LIS/LIMS 解析程序使用。",

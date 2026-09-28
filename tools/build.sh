@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
+# ---------------------------------------------------------------------------
+# NOT RUNNABLE IN THIS REPOSITORY, and kept only as the record of how the
+# diagrams and the gallery were generated.  Three things are missing here:
+#   * it uses docs/latex/ — the layout of a separate repository that was never
+#     built; this one uses documentation/latex/
+#   * it calls extract2.mjs and gen_diagrams.py, which are not committed
+#   * it reads chV2_functions.tex.before_singlecolumn_20260924, which is not
+#     committed either: the generated chapter supersedes it (705 entries and
+#     705 diagrams against that file's 676 and none)
+# To rebuild the document as committed you do not need this script.  Supply
+# documentation/latex/fonts/msyh.ttc and run xelatex over main.tex three times.
+# ---------------------------------------------------------------------------
 # Rebuild the 28 September 2026 documentation from a clone of this repository.
 #
 #   bash tools/build.sh /path/to/index_interactive_2026-09-27.html

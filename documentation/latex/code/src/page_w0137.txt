@@ -1,0 +1,2 @@
+  "Lamp output rises during the run more than usual: the lamp was still warming up at the start, or it flickers. Early-cycle baselines can be affected
+; allow warm-up and check the lamp.":"运行中灯输出上升超过平常：开始时灯仍在预热，或灯闪烁。早期循环基线可能受影响；确保预热并检查灯。",

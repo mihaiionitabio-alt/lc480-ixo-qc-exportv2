@@ -1,0 +1,3 @@
+  "The new uniformity calibration shows the edges relatively brighter than before: optics or illumination changed, or the calibration plate differed. 
+Confirm with a repeat calibration before accepting it.":"新的均一性校准显示边缘相对以前更亮：光学或照明发生变化，或校准板不同。接受前请重复校准确认。"
+,

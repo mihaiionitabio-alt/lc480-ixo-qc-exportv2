@@ -49,7 +49,7 @@ The specification defines eight sample types. The page maps six, one of which th
 specification does not define.
 
 {\small
-\begin{longtable}{@{}lll@{}}
+\begin{xltabular}{\linewidth}{|X|l|l|}
 \caption{The declared sample types and what the page makes of them.}\label{tab:d2-vocabulary} \\
 \toprule \textbf{Type} & \textbf{Meaning in the specification} & \textbf{What the page reports} \\\midrule\endfirsthead
 \toprule \textbf{Type} & \textbf{Meaning in the specification} & \textbf{What the page reports} \\\midrule\endhead
@@ -63,7 +63,7 @@ specification does not define.
 \texttt{opt} & optical calibrator sample & reported as Unknown \\
 \texttt{neg} & not defined by the specification & Negative control (unreachable) \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 A minus-RT control and a no-target-present control are blanks: nothing should
@@ -75,7 +75,7 @@ exists to catch.
 A file carrying one reaction of each declared type, read by the page:
 
 {\small
-\begin{longtable}{@{}llllll@{}}
+\begin{xltabular}{\linewidth}{|X|l|l|l|l|l|}
 \toprule \textbf{Well} & \textbf{Sample} & \textbf{Declared} & \textbf{Role assigned} & \textbf{Value} & \textbf{Call} \\\midrule\endfirsthead
 \toprule \textbf{Well} & \textbf{Sample} & \textbf{Declared} & \textbf{Role assigned} & \textbf{Value} & \textbf{Call} \\\midrule\endhead
 \texttt{A01} & \texttt{S\_unkn} & \texttt{unkn} & Unknown & 20.5 & Analysed \\
@@ -85,7 +85,7 @@ A file carrying one reaction of each declared type, read by the page:
 \texttt{A05} & \texttt{S\_opt} & \texttt{opt} & Unknown & 18 & Analysed \\
 \texttt{A06} & \texttt{S\_ntc} & \texttt{ntc} & NTC & 35.5 & Analysed \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \vhead{Proposed correction}
 \begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
@@ -106,7 +106,7 @@ to a number and keeps it, so a reaction the file declares to have no result is
 stored with a value of $-1$ and called analysed.
 
 {\small
-\begin{longtable}{@{}lrrrrrr@{}}
+\begin{xltabular}{\linewidth}{|X|r|r|r|r|r|r|}
 \caption{The not-available sentinel on the corpus.}\label{tab:d3-sentinel} \\
 \toprule \textbf{File} & \textbf{Reactions} & \textbf{Below zero} & \textbf{Called analysed} & \textbf{Undetermined} & \textbf{N0 at -1} & \textbf{Efficiency at -1} \\\midrule\endfirsthead
 \toprule \textbf{File} & \textbf{Reactions} & \textbf{Below zero} & \textbf{Called analysed} & \textbf{Undetermined} & \textbf{N0 at -1} & \textbf{Efficiency at -1} \\\midrule\endhead
@@ -118,7 +118,7 @@ stored with a value of $-1$ and called analysed.
 \texttt{example\_4\_i…} & 285 & 19 & 19 & 0 & 19 & 3 \\
 \texttt{example\_LCG…} & 50 & 0 & 0 & 50 & 0 & 0 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 Two files are affected, 19 of 285 reactions in each. A value of $-1$ sorts below
@@ -148,13 +148,13 @@ A sample may declare a different type for each target. The reader reads the firs
 declaration and applies it to every target of that sample.
 
 {\small
-\begin{longtable}{@{}llllll@{}}
+\begin{xltabular}{\linewidth}{|X|l|l|l|l|l|}
 \toprule \textbf{Well} & \textbf{Sample} & \textbf{Target} & \textbf{Declared for it} & \textbf{Role assigned} & \textbf{Value} \\\midrule\endfirsthead
 \toprule \textbf{Well} & \textbf{Sample} & \textbf{Target} & \textbf{Declared for it} & \textbf{Role assigned} & \textbf{Value} \\\midrule\endhead
 \texttt{A01} & \texttt{S\_dual} & \texttt{T1} & \texttt{std} & Standard & 22 \\
 \texttt{A01} & \texttt{S\_dual} & \texttt{T2} & \texttt{ntp} & Standard & 34 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 The no-target-present reaction is reported as a standard carrying a value of 34,
@@ -224,7 +224,7 @@ hides its helpers.
 \vhead{Functions that change application state}
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Function} & \textbf{What it changes} \\\midrule\endfirsthead
 \toprule \textbf{Function} & \textbf{What it changes} \\\midrule\endhead
 \texttt{appReadSuperseded} & global state changed during a read-only probe \\
@@ -235,11 +235,11 @@ hides its helpers.
 \texttt{readStagedCore} & global state changed during a read-only probe \\
 \texttt{sopSetPath} & global state changed during a read-only probe \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \vhead{Entry points that are not called}
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Symbol} & \textbf{Reason} \\\midrule\endfirsthead
 \toprule \textbf{Symbol} & \textbf{Reason} \\\midrule\endhead
 \texttt{boot} & entry point; re-runs the whole page \\
@@ -247,7 +247,7 @@ hides its helpers.
 \texttt{invalidateAnalysisCaches} & clears caches by design \\
 \texttt{setPhase} & mutates the lifecycle phase by design \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \vhead{Helpers private to a module}

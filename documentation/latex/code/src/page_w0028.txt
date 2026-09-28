@@ -1,0 +1,4 @@
+  "Header plus Sample Setup, Raw Data, Amplification Data, Multicomponent Data, analysis summaries and Results as tab-delimited sections (MAN0010409, 
+chapter 3), with the columns and row order of the software's own export. For LIS/LIMS parsers that expect that layout.":"文件头及样品设置、原始数据、
+扩增数据、多组分数据、分析汇总与结果，以制表符分隔的分节形式输出（MAN0010409 第 3 章），列与行顺序与软件自身导出一致，供期望该格式的 LIS/LIMS 解析程序
+使用。",

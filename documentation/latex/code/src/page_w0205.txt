@@ -1,0 +1,2 @@
+  "One point per sample and target with two or more detected replicates. The dashed line is the SOP maximum SD.":"每个含两个及以上检出重复孔的样品/靶
+标一个点。虚线为 SOP 最大标准差。",

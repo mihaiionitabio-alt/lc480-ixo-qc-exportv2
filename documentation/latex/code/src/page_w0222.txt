@@ -1,0 +1,2 @@
+  "experiment, hands you the numbers the instrument stored, and writes them in formats that open-source tools read directly. Nothing is uploaded; ever
+ything runs in this page.":"实验，呈现仪器保存的数值，并导出为开源工具可直接读取的格式。数据不会上传，所有处理均在本页面中完成。",

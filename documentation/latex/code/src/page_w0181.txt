@@ -1,0 +1,3 @@
+  "This operator gets more repeats, inconclusive or invalid results than expected for their workload: check sample handling, pipetting and SOP underst
+anding; use it for training, not ranking.":"该操作人员的重复、不确定或无效结果多于其工作量下的预期：检查样品处理、移液和对 SOP 的理解；用于培训而非排
+名。",

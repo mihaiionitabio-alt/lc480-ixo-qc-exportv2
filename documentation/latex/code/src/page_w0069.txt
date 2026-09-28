@@ -1,0 +1,2 @@
+  "Across-run rules flag unexpected control behaviour. R-4s is not applied to run means. Investigate lot, extraction batch, assay and instrument effec
+ts.":"跨运行规则提示异常；不对运行均值应用 R-4s。需检查批次、提取、方法和仪器因素。",

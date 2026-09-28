@@ -1,0 +1,2 @@
+  "Background fluorescence is higher than usual: more probe or a degraded probe (free dye), fluorescent contamination, a different plate type, or a li
+ght leak. Check the reagent lot and plate type.":"背景荧光比平时高：探针过多或探针降解（游离染料）、荧光污染、板型不同或漏光。检查试剂批次和板型。",

@@ -1,0 +1,3 @@
+  "The block needs longer to settle. With normal ramp rates: control tuning or sensor lag. With slower ramps as well: thermal ageing. Long settling sh
+ortens the real hold time at the setpoint and can lower efficiency.":"加热块稳定所需时间变长。升降温速率正常时：控制参数或传感器滞后。升降温同时变慢时
+：热系统老化。稳定时间过长会缩短在设定温度的实际保持时间，可能降低扩增效率。",

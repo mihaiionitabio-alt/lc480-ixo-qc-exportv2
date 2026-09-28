@@ -1,0 +1,2 @@
+  "Block temperature beyond the setpoint before it settles. The LC480 overshoots 4–6 °C by design, identically every cycle.":"模块温度在稳定前超过设定
+值的幅度。LC480 按设计每个循环都过冲 4–6 °C，且保持一致。",

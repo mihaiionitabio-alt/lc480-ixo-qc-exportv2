@@ -67,15 +67,15 @@
 \newcommand{\dnasep}{\par\medskip\begin{center}\includegraphics[width=0.82\textwidth]{fig/dna_separator.png}\end{center}\medskip}
 
 \pagestyle{fancy}\fancyhf{}
-\fancyhead[L]{\raisebox{-0.12cm}{\includegraphics[height=0.42cm]{fig/missy_option3_full.png}}\quad\small MISSY TECHNICAL DOCUMENTATION\quad v2026-09-21 r2\quad 25 September 2026}
+\fancyhead[L]{\raisebox{-0.12cm}{\includegraphics[height=0.42cm]{fig/missy_option3_full.png}}\quad\small MISSY TECHNICAL DOCUMENTATION\quad v2026-09-21 r2\quad 28 September 2026}
 \fancyhead[R]{\small RUO / NOT VALIDATED}
 
-\newcommand{\documentpages}{1072}
+\newcommand{\documentpages}{1401}
 \fancyfoot[C]{\small Page \thepage\ of \documentpages}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 \fancypagestyle{plain}{\fancyhf{}
-  \fancyhead[L]{\raisebox{-0.12cm}{\includegraphics[height=0.42cm]{fig/missy_option3_full.png}}\quad\small MISSY TECHNICAL DOCUMENTATION\quad v2026-09-21 r2\quad 25 September 2026}
+  \fancyhead[L]{\raisebox{-0.12cm}{\includegraphics[height=0.42cm]{fig/missy_option3_full.png}}\quad\small MISSY TECHNICAL DOCUMENTATION\quad v2026-09-21 r2\quad 28 September 2026}
   \fancyhead[R]{\small RUO / NOT VALIDATED}
   \fancyfoot[C]{\small Page \thepage\ of \documentpages}
   \renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0pt}}
@@ -85,7 +85,7 @@
 \normalsize A single-file web page for \texttt{.ixo}, \texttt{.eds/.edt} and \texttt{.rdml} experiment runs\\[10pt]
 \large Technical documentation with complete source, release 2026-09-21 r2, final RDML-enabled build}
 \author{Documentation of \page\ (identical copy: \texttt{index.html})}
-\date{25 September 2026 -- RDML input and per-function validation}
+\date{28 September 2026 -- per-function validation with software diagrams}
 
 \begin{document}
 \maketitle
@@ -119,6 +119,7 @@ Instrument and software names are used only to identify the file formats.
 
 \tableofcontents
 \listoffigures
+\listoftables
 
 \input{ch01_intro}
 \input{ch02_data}
@@ -140,7 +141,9 @@ Instrument and software names are used only to identify the file formats.
 \input{ch18_structure}
 \input{ch19_missy}
 \input{chV1_method}
+\input{chV2a_diagrams}
 \input{chV2_functions}
+\input{chV2b_gallery}
 \input{chV3_oracles}
 \input{chV4_rdml}
 \input{chV5_findings}

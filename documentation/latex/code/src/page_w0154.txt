@@ -1,0 +1,3 @@
+  "The run took longer than usual for this protocol: slower ramps (B-H1/B-H2), longer exposures (B-H11), a pause, or the instrument computer slowing. 
+Look at those charts for the same run.":"该程序运行比平时慢：升降温变慢（B-H1/B-H2）、曝光变长（B-H11）、暂停或仪器计算机变慢。查看同一运行的相关图表
+。",

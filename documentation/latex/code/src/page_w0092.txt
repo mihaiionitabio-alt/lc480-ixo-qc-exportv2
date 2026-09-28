@@ -1,0 +1,4 @@
+  "Heating is slower than usual. A single low run: plate not seated, wrong plate type, blocked air vents or a warm room that day. A slow fall over man
+y runs: Peltier elements or thermal paste ageing — plan a thermal service before the specification (4.3 °C/s on the LightCycler) is reached.":"加热比
+平时慢。单次偏低：当天板未放好、板型错误、通风口堵塞或室温偏高。多次运行缓慢下降：Peltier 元件或导热膏老化 — 在达到规格下限（LightCycler 为 4.3 °C/s）
+前安排热系统维护。",

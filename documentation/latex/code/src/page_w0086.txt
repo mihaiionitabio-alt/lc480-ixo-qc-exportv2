@@ -1,0 +1,4 @@
+  "Control charts for predictive maintenance and quality control, one instrument at a time. Each tile is one chart built from numbers the instrument w
+rote into its own files; the dot shows its state on the latest run (green in control, amber watch, red alarm, grey not enough data). Click a tile to o
+pen the chart, how to read it and its settings.":"用于预测性维护和质量控制的控制图，每次显示一台仪器。每张卡片是一张控制图，数据来自仪器自己写入文件的
+数值；圆点表示最近一次运行的状态（绿色受控，琥珀色需关注，红色报警，灰色数据不足）。点击卡片可打开图表、解读说明及其设置。",

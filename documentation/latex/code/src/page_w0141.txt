@@ -1,0 +1,3 @@
+  "More well images are saturated: signal too strong for the camera (too much template or dye, wrong exposure settings, reflective plate). Saturated w
+ells give wrong curve shapes and Cq; dilute samples or check the plate type.":"饱和的孔图像增多：信号对相机过强（模板或染料过多、曝光设置错误、反光板
+）。饱和孔的曲线形状和 Cq 不准确；稀释样品或检查板型。",

@@ -1,0 +1,4 @@
+  "Reads a finished LightCycler 480 .ixo or QuantStudio 3/5 .eds experiment, hands you the numbers the instrument stored, draws them, reviews them and
+ writes them in formats that open-source tools read directly. Nothing is uploaded; everything runs in this page.":"读取已完成的 LightCycler 480 .ixo 
+或 QuantStudio 3/5 .eds 实验，校验文件容器是否完整，呈现仪器保存的数值，绘图、审核，并导出为开源工具可直接读取的格式。数据不会上传，所有处理均在本页面
+中完成。",

@@ -1,0 +1,2 @@
+  "LightCycler 480 — raw values, open formats and quality control":"LightCycler 480 - 原始数据、开放格式与质量控制",
+  "Reads a finished":"读取已完成的",

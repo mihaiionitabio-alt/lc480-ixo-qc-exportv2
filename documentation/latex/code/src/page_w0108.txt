@@ -1,0 +1,2 @@
+  "The well spots found by the ROI calibration are smaller than before: focus or alignment changed. Wells may be read off-centre; repeat the ROI calib
+ration.":"ROI 校准找到的孔光斑比以前小：焦距或对准发生变化。孔可能被偏心读取；重新进行 ROI 校准。",

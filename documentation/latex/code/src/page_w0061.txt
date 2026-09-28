@@ -1,0 +1,2 @@
+  "A jump = camera or its interface; a slow rise = controller slowing (compare with software charts).":"跳变 = 相机或其接口问题；缓慢上升 = 控制器变慢
+（与软件图表对照）。",

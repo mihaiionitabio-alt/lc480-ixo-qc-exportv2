@@ -1,0 +1,3 @@
+  "More command errors than usual: communication problems between PC and instrument, a firmware/software mismatch or a hardware fault. Read the instru
+ment log for the run and contact service if it repeats.":"命令错误比平时多：PC 与仪器通信问题、固件/软件不匹配或硬件故障。查看该运行的仪器日志，反复出
+现请联系维修。",

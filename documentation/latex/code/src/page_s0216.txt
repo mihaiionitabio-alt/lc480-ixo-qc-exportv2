@@ -1,0 +1,1 @@
+  "Stacked counts of sample/target outcomes for every loaded run.":"每个已加载运行的样品/靶标结果堆叠计数。",

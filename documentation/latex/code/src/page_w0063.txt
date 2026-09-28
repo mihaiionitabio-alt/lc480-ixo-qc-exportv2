@@ -1,0 +1,2 @@
+  "Time between the channels of one reading, net of integration (≈ 1.0–1.4 s; filter switch < 0.65 s by the manual).":"一次读数中各通道之间的时间，扣
+除积分时间（约 1.0–1.4 s；手册规定滤光片切换 < 0.65 s）。",

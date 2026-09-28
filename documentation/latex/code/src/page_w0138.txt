@@ -1,0 +1,2 @@
+  "The LED needs more current than usual to give the same light: normal LED ageing. The trend line forecasts when the driver will reach its limit — pl
+an an optics service before that.":"LED 需要比平时更大的电流才能输出相同光强：LED 正常老化。趋势线预测驱动器何时达到极限 — 在此之前安排光学维修。",

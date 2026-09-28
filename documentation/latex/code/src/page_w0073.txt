@@ -1,0 +1,2 @@
+  "A slow drop = degrading standard or reagent; outside 90–110 % fails MIQE-style acceptance.":"缓慢下降 = 标准品或试剂降解；超出 90–110 % 不符合 MIQE
+ 风格的验收标准。",

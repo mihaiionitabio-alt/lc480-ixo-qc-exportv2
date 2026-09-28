@@ -1,0 +1,2 @@
+  "The heated cover is warmer than its setpoint: control fault or sensor error. Seals can deform; report to service if repeated.":"热盖温度高于设定值
+：控制故障或传感器误差。封膜可能变形；反复出现请联系维修。",

@@ -1,0 +1,2 @@
+  "Rising over time with the same protocol = cooling capacity dropping (fans, dust, room temperature).":"同一程序下逐渐升高 = 散热能力下降（风扇、灰尘
+、室温）。",

@@ -1,0 +1,8 @@
+  "Data were packed for the PC faster than usual: harmless.":"数据比平时更快打包给 PC：无害。",
+  "Fewer command errors than usual: normal.":"命令错误比平时少：正常。",
+  "Cycles are more regular than usual: harmless.":"循环比平时更规律：无害。",
+  "Fewer late temperature-log intervals: normal.":"温度日志延迟间隔减少：正常。",
+  "Fewer invalid readings: normal.":"无效读数减少：正常。",
+  "Fewer wells whose stored Ct cannot be reproduced: normal.":"存储 Ct 无法复现的孔减少：正常。",
+  "Results were finalised sooner after the run than usual: good practice.":"运行后结果定稿比平时更快：良好做法。",
+  "Fewer forensic findings than usual: normal.":"法证发现比平时少：正常。",

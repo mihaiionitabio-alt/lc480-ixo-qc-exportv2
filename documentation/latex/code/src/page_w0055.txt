@@ -1,0 +1,2 @@
+  "A slow rise is compatible with weaker signal; verify matched controls and optical configuration before attributing ageing (compare with B-H8/B-H10)
+; a jump after a reagent change points to the method instead.":"缓慢上升证实光源老化（与 B-H8/B-H10 对照）；更换试剂后出现跳变则指向方法问题。",

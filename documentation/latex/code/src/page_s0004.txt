@@ -1,0 +1,2 @@
+  "Drop .ixo, .eds, .edt or .zip here":"将 .ixo、.eds、.edt 或 .zip 拖到这里",
+  "the curve-based exports need an .ixo or .eds file.":"基于曲线的导出需要 .ixo 或 .eds 文件。",

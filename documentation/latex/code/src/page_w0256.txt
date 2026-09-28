@@ -1,0 +1,2 @@
+  "Run metadata, thermal program, detection channels, subsets, analysis objects, standard curves and the instrument's own replicate statistics, decode
+d verbatim from the file.":"逐项解码文件中的运行元数据、温度程序、检测通道、子集、分析对象、标准曲线及仪器自身的重复孔统计。",

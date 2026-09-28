@@ -1,0 +1,2 @@
+  "Drop one or more .ixo files, or a .zip containing them. Several runs can be loaded at once — the Quality review tab compares them.":"拖入一个或多个
+ .ixo 文件，也可拖入包含这些文件的 .zip。可同时加载多个运行，并在“质量审核”中进行比较。",

@@ -1,0 +1,4 @@
+  "Nothing here is recomputed. For .ixo files Cq is the stored crossing point, concentration the stored CalcConc and the call the instrument's own. Fo
+r .eds files Cq is the stored Ct, the call follows the stored amplification status, and flags, ΔCt, ΔΔCt and RQ are the analysis software's own.":"此
+处不重新计算任何数值。对于 .ixo 文件，Cq 为保存的交叉点，浓度为保存的 CalcConc，判定为仪器自身结果。对于 .eds 文件，Cq 为保存的 Ct，判定依据保存的扩增
+状态，标记、ΔCt、ΔΔCt 与 RQ 均为分析软件自身的结果。",

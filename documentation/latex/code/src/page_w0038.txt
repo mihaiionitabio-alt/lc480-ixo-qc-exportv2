@@ -1,0 +1,2 @@
+  "Falling cooling with stable heating = clogged fan filter or failing fan (clean the filters, check fans) before Peltier replacement.":"加热正常而冷
+却下降 = 风扇滤网堵塞或风扇故障（先清洁滤网、检查风扇），再考虑更换帕尔帖元件。",

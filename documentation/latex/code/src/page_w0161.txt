@@ -1,0 +1,3 @@
+  "Data were packed long after the run ended: the file was saved or transferred late (PC off, network down, run left on the instrument). For forensic 
+review, check that nothing was changed in between.":"运行结束很久后数据才打包：文件保存或传输延迟（PC 关闭、网络中断、运行留在仪器上）。法证审查时，确
+认期间未做任何修改。",

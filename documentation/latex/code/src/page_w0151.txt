@@ -1,0 +1,2 @@
+  "The cover takes longer to rise: drive wear or the cover sticking to the seal. Check the seal type and the drive.":"热盖上升时间变长：驱动磨损或热盖
+粘在封膜上。检查封膜类型和驱动。",

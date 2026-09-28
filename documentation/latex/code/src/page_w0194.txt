@@ -1,0 +1,2 @@
+  "Rows are tried top to bottom; the first whose pattern matches the target name applies. Patterns:":"按自上而下的顺序匹配，第一个与靶标名称匹配的行生
+效。模式：",

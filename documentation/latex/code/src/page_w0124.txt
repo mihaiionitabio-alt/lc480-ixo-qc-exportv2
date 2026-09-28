@@ -1,0 +1,3 @@
+  "PCR efficiency is lower than usual (below 90 % is outside MIQE): inhibition, degraded reagents, poor primer/probe, or wrong dilutions of the standa
+rds. Quantities will be biased; repeat the standard curve.":"PCR 效率比平时低（低于 90 % 超出 MIQE）：抑制、试剂降解、引物/探针不佳或标准品稀释错误。
+定量将有偏差；重做标准曲线。",

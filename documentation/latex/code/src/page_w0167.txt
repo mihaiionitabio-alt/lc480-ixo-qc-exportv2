@@ -1,0 +1,2 @@
+  "The file was last changed much later than usual after the run: late analysis, or re-analysis long after the run. For forensic review, check who cha
+nged what and why (audit trail).":"文件最后修改时间比平时晚得多：分析延迟，或运行后很久重新分析。法证审查时，检查谁修改了什么以及原因（审计追踪）。",

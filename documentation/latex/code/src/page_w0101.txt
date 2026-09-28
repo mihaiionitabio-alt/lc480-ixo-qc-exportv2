@@ -1,0 +1,2 @@
+  "Lamp output falls during the run more than usual: the lamp is unstable (ageing) or was not warmed up. Late-cycle fluorescence may be under-reported
+; check the lamp.":"运行中灯输出下降超过平常：灯不稳定（老化）或未充分预热。后期循环荧光可能偏低；检查灯。",

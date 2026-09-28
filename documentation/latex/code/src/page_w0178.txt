@@ -1,0 +1,2 @@
+  "Dispensed volumes vary more across the plate: pipetting technique, a pipette out of calibration or a failing multichannel channel. Check the pipett
+es and the operator's technique.":"板上分配体积差异变大：移液技术、移液器超出校准或多道移液器某通道故障。检查移液器和操作人员技术。",

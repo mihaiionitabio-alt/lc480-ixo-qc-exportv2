@@ -1,0 +1,3 @@
+  "Signal":"信号","Stored curve (raw / Rn)":"保存的曲线（原始 / Rn）","ΔRn with threshold":"ΔRn 与阈值",
+  "Multicomponent (per dye)":"多组分（按染料）","Raw filter-set data":"原始滤光片组数据",
+  "All samples":"全部样品","Target / dye / filter":"靶标 / 染料 / 滤光片","Show threshold":"显示阈值",

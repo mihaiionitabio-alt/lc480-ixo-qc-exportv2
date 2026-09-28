@@ -1,0 +1,2 @@
+  "Drop .ixo or .zip here":"将 .ixo 或 .zip 拖到这里","or click to choose files":"或点击选择文件",
+  "Read the files":"读取文件","Or paste Cq values from any instrument":"或粘贴任意仪器的 Cq 值",

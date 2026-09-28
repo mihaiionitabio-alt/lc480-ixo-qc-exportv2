@@ -1,0 +1,2 @@
+  ", wildcards":"，通配符",
+  "for anything, or a regular expression written as":"表示任意，或写成正则表达式",

@@ -1,0 +1,2 @@
+  "The run took longer than the software predicted: slower ramps, longer exposures or computer delays add up. Look at the thermal and software charts 
+for the same run.":"运行时间比软件预测的长：升降温变慢、曝光变长或计算机延迟累积。查看同一运行的热和软件图表。",

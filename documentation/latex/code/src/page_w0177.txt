@@ -1,0 +1,3 @@
+  "Replicates agree less than usual: pipetting imprecision (technique, uncalibrated pipette, bubbles), poor mixing or bad plate sealing. Check the pip
+ette calibration and retrain if it is linked to one operator.":"重复孔一致性比平时差：移液不精确（技术、移液器未校准、气泡）、混合不充分或封板不良。检
+查移液器校准；若与某一操作人员相关，需再培训。",

@@ -1,0 +1,2 @@
+  "The cover lowers faster than usual: typical after lubrication or a drive service. Harmless.":"热盖下降比平时快：常见于润滑或驱动维修后。无害。",
+  "The cover rises faster than usual: harmless.":"热盖上升比平时快：无害。",

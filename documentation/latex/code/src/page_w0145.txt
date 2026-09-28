@@ -1,0 +1,2 @@
+  "Filter-wheel moves are slower: friction in the bearing, a weakening motor or dust. The wheel may start to miss positions (B-H15). Plan a service if
+ the rise continues.":"滤光轮移动变慢：轴承摩擦、电机变弱或积尘。滤光轮可能开始定位偏差（B-H15）。若持续上升，安排维修。",

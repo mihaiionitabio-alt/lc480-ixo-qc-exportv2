@@ -1,0 +1,2 @@
+  "Switching between channels is faster than usual: firmware or mechanical change. Harmless, but note it.":"通道切换比平时快：固件或机械变化。无害，但
+应记录。",

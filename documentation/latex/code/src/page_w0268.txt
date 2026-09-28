@@ -1,0 +1,2 @@
+  "Every table above plus both scripts, so a whole experiment can be handed over in a single file.":"包含上述所有表格和两个脚本，可用单个文件交付完整
+实验。",

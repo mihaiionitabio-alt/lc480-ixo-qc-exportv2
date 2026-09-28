@@ -1,0 +1,3 @@
+  "Cq against log10 of the stored standard quantity, fitted by least squares on this page. The label shows slope, R², efficiency and range against the
+ SOP limits; residuals are in the table.":"Cq 对保存的标准品定量值 log10 作图，并在本页用最小二乘法拟合。标签显示斜率、R²、效率与范围及其与 SOP 限值的
+比较；残差见表格。",

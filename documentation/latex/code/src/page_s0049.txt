@@ -1,0 +1,5 @@
+  "Heated cover temperature":"热盖温度",
+  "Median cover temperature during the run (setpoint 105 °C).":"运行期间热盖温度的中位数（设定值 105 °C）。",
+  "Below the setpoint = cover heater fault; condensation and evaporation follow.":"低于设定值 = 热盖加热器故障，随之出现冷凝和蒸发。",
+  "Xenon lamp intensity (reference channel)":"氙灯强度（参考通道）",
+  "reference counts":"参考计数",

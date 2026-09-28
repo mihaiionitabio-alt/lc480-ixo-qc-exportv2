@@ -1,0 +1,5 @@
+  "Settling time at the denaturation step":"变性步骤的稳定时间",
+  "Seconds from the 90 % point until the block stays within ±0.5 °C of the setpoint.":"从 90 % 点到模块稳定在设定值 ±0.5 °C 内所需的秒数。",
+  "Longer settling with a normal ramp rate points to control tuning or sensor lag.":"升降温速率正常而稳定时间变长，提示控制参数或传感器滞后问题。",
+  "Temperature at the moment of reading":"读数时的温度",
+  "°C from setpoint":"与设定值的偏差 °C",

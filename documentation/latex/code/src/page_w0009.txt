@@ -1,0 +1,2 @@
+  "The mapping stays on this page unless you download it. Keep it with the laboratory records, not with published data.":"对照表仅保留在本页面中，除非
+您主动下载。请与实验室记录一同保存，不要随公开数据发布。",

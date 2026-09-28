@@ -1,0 +1,2 @@
+  "Nothing here is recomputed. Cq is the crossing point the LightCycler stored; concentration is its":"此处不重新计算任何数值。Cq 为 LightCycler 保存
+的交叉点，浓度来自",

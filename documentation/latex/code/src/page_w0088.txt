@@ -1,0 +1,2 @@
+  "Changes update the profile SHA-256 like any other SOP rule; save the profile on the SOP page to keep them.":"修改会像其他 SOP 规则一样更新配置文件
+的 SHA-256；请在 SOP 页面保存配置文件以保留修改。",

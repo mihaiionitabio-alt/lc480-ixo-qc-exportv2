@@ -1,0 +1,3 @@
+  "Heating is faster than usual. Usually harmless: after a service, a new block or a firmware change. If isolated, check the run used the same protoco
+l and plate; very fast ramps with a larger overshoot can stress samples.":"加热比平时快。通常无害：维修、更换加热块或固件更新之后。若为孤立点，检查该
+运行是否使用相同程序和板型；过快的升温伴随更大过冲可能影响样品。",

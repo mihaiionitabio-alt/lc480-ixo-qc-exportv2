@@ -1,0 +1,3 @@
+  "Shorter exposures than usual: the signal is brighter (more template, new reagent lot, higher probe concentration) or the light source is stronger a
+fter a service. Check for saturation (B-H12).":"曝光时间比平时短：信号更亮（模板更多、新试剂批次、探针浓度更高）或维修后光源更强。检查饱和（B-H12）。"
+,

@@ -1,0 +1,3 @@
+  "A slow fall over months is Peltier or thermal-interface ageing; the fitted line gives a conditional limit-crossing estimate, not a failure date. A 
+single low run points to the plate or a blocked vent that day.":"数月内缓慢下降表明帕尔帖元件或导热界面老化；趋势线可预测何时低于下限。单次偏低多与当
+天的板或通风口堵塞有关。",

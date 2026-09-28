@@ -1,0 +1,3 @@
+  "More no-template controls show a Cq: contamination (reagents, pipettes, bench, amplicon carry-over) or probe degradation giving false signal. Stop,
+ decontaminate, replace reagents; results of affected runs need review.":"出现 Cq 的无模板对照增多：污染（试剂、移液器、台面、扩增产物残留）或探针降解
+产生假信号。停止工作、去污、更换试剂；受影响运行的结果需审查。",

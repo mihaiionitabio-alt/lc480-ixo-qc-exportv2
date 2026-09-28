@@ -1,0 +1,1 @@
+  "QuantStudio export layout (TXT)":"QuantStudio 导出格式（TXT）",

@@ -1,0 +1,2 @@
+  "The background calibration offset is lower than before: cleaner block or new calibration plate. Harmless.":"背景校准偏移比以前低：加热块更干净或使
+用了新校准板。无害。",

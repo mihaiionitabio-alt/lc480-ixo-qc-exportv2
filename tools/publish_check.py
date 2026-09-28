@@ -22,7 +22,11 @@ FORBIDDEN_NAMES = {
 FORBIDDEN_DIRS = {'2025_2', '_minted-main', 'build_aux_backup_20260924'}
 FORBIDDEN_EXT = {'.aux', '.log', '.out', '.toc', '.lof', '.lot', '.fls', '.fdb_latexmk'}
 
-# a real run file from this laboratory is named like SC_1-7GM25_18.08.2025_VV.ixo
+# A real run file from this laboratory is named SC, an underscore or space, a small
+# number, a hyphen, a second number, GM, a two-digit year, then the acquisition date
+# and the operator's initials.  No example is written out: any string of that shape is
+# a sample identifier, so an illustrative one is a leak.  The pattern below is the
+# only description of it that this file carries.
 REAL_RUN = re.compile(r'^SC[ _]\d+[-\d_]*GM\d{2}[_ ].*\.(ixo|eds|edt|rdml)$', re.I)
 # a file whose NAME says it is an exported mapping of pseudonyms to identifiers
 MAP_FILE = re.compile(r'pseudonym[_ -]?map.*\.(csv|tsv|json|xlsx|txt)$', re.I)
@@ -31,7 +35,10 @@ MAP_FILE = re.compile(r'pseudonym[_ -]?map.*\.(csv|tsv|json|xlsx|txt)$', re.I)
 BY_DESIGN = {'publish_check.py', 'no_real_data_check.py', 'gitignore.txt',
              'gitignore_repo_root.txt', 'verify_base_plus_update_2026-09-27.py',
              'make_upload_list.py'}
-IDENT_NAME = re.compile(r'\b\d{1,3}[-\d_]*GM\d{2}\b|\b2025_2\b|leak_identifiers', re.I)
+# No \b on either side of the identifier.  In a real name underscores sit exactly where
+# those boundaries were asserted, so the \b form matched none of the real names - not one
+# of the three tried, including the one that reached GitHub on 25 September.
+IDENT_NAME = re.compile(r'\d{1,3}[-\d_ ]*GM\d{2}|2025_2|leak_identifiers', re.I)
 
 # text patterns that suggest a real identifier or a pseudonym mapping got in
 TEXT_PATTERNS = [
@@ -42,7 +49,7 @@ TEXT_PATTERNS = [
     # never be published is a mapping OF VALUES: the rule above catches it in text, and
     # MAP_FILE catches a file whose name says it is one.
     (re.compile(r'\bpseudonym[ -]map\b', re.I), 'those two words in prose'),
-    (re.compile(r'\b\d+\s*GM\d{2}\b'), 'a laboratory sample identifier'),
+    (re.compile(r'\d{1,3}[-\d_ ]*GM\d{2}'), 'a laboratory sample identifier'),
     (re.compile(r'\bNASA\s+F.{0,3}\s+Component\s+Design\b', re.I), 'an engineering standard named in the text'),
     (re.compile(r'\bJERG-2-610\b', re.I), 'an engineering standard named in the text'),
     # the four strings withdrawn on 28 September.  A file the upload list does not

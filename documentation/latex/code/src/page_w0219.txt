@@ -1,0 +1,2 @@
+  "Minutes from run start to run end, coloured by instrument. A run much shorter than its siblings with the same protocol deserves a look at the log."
+:"从运行开始到结束的分钟数，按仪器着色。若某运行明显短于同一程序的其他运行，应查看日志。",

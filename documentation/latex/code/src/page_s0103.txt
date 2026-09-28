@@ -1,0 +1,1 @@
+  "The LED runs cooler than usual: cooler room or improved airflow. Harmless.":"LED 结温比平时低：室温较低或气流改善。无害。",

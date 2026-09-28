@@ -1,0 +1,3 @@
+  "Choose one graph. Limits, colours and outcomes come from the active SOP profile, so the graphs change when the profile does. Each graph can be save
+d as SVG or PNG together with the numbers behind it.":"选择一张图。限值、颜色与结果均来自当前 SOP 配置文件，配置文件修改后图表随之改变。每张图均可连同
+其数据一起保存为 SVG 或 PNG。",

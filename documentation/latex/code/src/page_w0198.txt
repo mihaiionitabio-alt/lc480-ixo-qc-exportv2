@@ -1,0 +1,3 @@
+  "Match by the sample name (patterns as above) or by the resolved role (NTC, Blank, Negative control, Positive control, Calibrator, Standard). Leave 
+the Cq range empty when any detection is acceptable.":"按样品名称（模式同上）或识别出的角色（NTC、Blank、Negative control、Positive control、Calibrato
+r、Standard）匹配。任何检出均可接受时，Cq 范围留空。",

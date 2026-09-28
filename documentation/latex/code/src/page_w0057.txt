@@ -1,0 +1,2 @@
+  "A rise = exposure logic or camera fault, or overloaded samples; values above zero make the curve plateau unreliable.":"上升 = 曝光逻辑或相机故障，
+或样品过载；大于零时曲线平台不可靠。",

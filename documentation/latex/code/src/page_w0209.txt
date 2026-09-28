@@ -1,0 +1,3 @@
+  "For each detection channel / target: background (mean of cycles 3–10) and end-point fluorescence of every well, including wells outside the analyse
+s. A shifted background points to plate, seal or optical problems.":"每个检测通道 / 靶标：各孔的背景（第 3–10 循环平均值）与终点荧光，包括分析之外的孔
+。背景偏移提示板、封膜或光学问题。",

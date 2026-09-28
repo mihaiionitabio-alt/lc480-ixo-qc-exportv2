@@ -1,0 +1,1 @@
+  "Number of sample/target results per outcome under the active SOP, controls included.":"当前 SOP 下每种结果的样品/靶标结果数（含对照）。",

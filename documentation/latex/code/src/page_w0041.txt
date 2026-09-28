@@ -1,0 +1,2 @@
+  "Watch for change, not size: a CUSUM drifting up or down means the controller or the temperature sensor has changed.":"关注变化而非大小：CUSUM 向上
+或向下漂移表示控制器或温度传感器发生了变化。",

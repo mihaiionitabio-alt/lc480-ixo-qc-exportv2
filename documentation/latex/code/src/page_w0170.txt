@@ -1,0 +1,2 @@
+  "The probe signal is stronger than usual: a new lot, higher probe concentration or a stronger light source. Check for saturation (B-H12) and that th
+resholds still suit the curves.":"探针信号比平时强：新批次、探针浓度更高或光源更强。检查饱和（B-H12）以及阈值是否仍适合曲线。",

@@ -1,0 +1,2 @@
+  "Stored relative-quantification results: ΔΔCt summaries with RQ and confidence limits from QuantStudio, pairing ratios from LightCycler.":"保存的相
+对定量结果：QuantStudio 的 ΔΔCt 汇总（含 RQ 及置信限），以及 LightCycler 的配对比值。",

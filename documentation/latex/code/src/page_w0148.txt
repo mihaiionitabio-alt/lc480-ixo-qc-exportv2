@@ -1,0 +1,3 @@
+  "Camera readout takes longer than usual. A jump points to the camera or its connection; a slow rise, together with the software charts (B-S1–S4), po
+ints to the embedded computer slowing down.":"相机读出时间比平时长。突然跳升指向相机或其连接；缓慢上升且伴随软件图表（B-S1–S4）变化，指向嵌入式计算机
+变慢。",

@@ -1,0 +1,671 @@
+{
+ "errs": [],
+ "img": [
+  {
+   "id": "img:timeline",
+   "title": "Run timeline — created, run, analysis, last change",
+   "specs": 1,
+   "traces": 12,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:curves",
+   "title": "Amplification curves coloured by SOP outcome",
+   "specs": 1,
+   "traces": 97,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:plate",
+   "title": "Plate heat map",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:unanalysed",
+   "title": "Signal in wells that are not in any analysis",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:cqstrip",
+   "title": "Cq by target with SOP cut-offs",
+   "specs": 1,
+   "traces": 96,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:repsd",
+   "title": "Replicate spread — mean Cq against SD",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:stdcurve",
+   "title": "Standard curve with residuals and SOP limits",
+   "specs": 1,
+   "traces": 3,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:ic",
+   "title": "Internal control / reference Cq per sample (inhibition)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:endpoint",
+   "title": "Fluorescence level against Cq",
+   "specs": 1,
+   "traces": 2,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:levels",
+   "title": "Background and plateau fluorescence per channel",
+   "specs": 1,
+   "traces": 5,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:outcomes",
+   "title": "SOP outcomes per target",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:temperature",
+   "title": "Block, cover and zone temperature (QuantStudio log)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:recalc",
+   "title": "Stored Ct against the Ct re-derived on this page",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:lc_thermal",
+   "title": "Block temperature trace (LightCycler temperature log)",
+   "specs": 1,
+   "traces": 1,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_timeline",
+   "title": "Runs on a calendar — run time and last change",
+   "specs": 1,
+   "traces": 223,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_delay",
+   "title": "Hours from run end to the last recorded change",
+   "specs": 1,
+   "traces": 1,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_accept",
+   "title": "Run acceptance grid",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:x_outcomes",
+   "title": "SOP outcomes per run",
+   "specs": 1,
+   "traces": 0,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_control",
+   "title": "Control Cq across runs with SOP range",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:x_signal",
+   "title": "Background and plateau fluorescence across runs",
+   "specs": 1,
+   "traces": 4,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_duration",
+   "title": "Run duration and instrument use",
+   "specs": 1,
+   "traces": 2,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_findings",
+   "title": "Forensic findings by area (Pareto)",
+   "specs": 1,
+   "traces": 4,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "img:x_control_batches",
+   "title": "Control extraction batches",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:x_control_age",
+   "title": "Control extract age versus Cq",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "img:x_control_thermal",
+   "title": "Control Cq versus cooling rate",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  }
+ ],
+ "cc": [
+  {
+   "id": "cc:heat_rate",
+   "title": "Peak heating rate (2-s window)",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:cool_rate",
+   "title": "Peak cooling rate (2-s window)",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:overshoot",
+   "title": "Overshoot at the denaturation step",
+   "specs": 1,
+   "traces": 12,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:settling",
+   "title": "Settling time at the denaturation step",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:transition",
+   "title": "Transition time A → B °C",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:hold_temp",
+   "title": "Temperature at the moment of reading",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:zone_spread",
+   "title": "Block zone uniformity (95th percentile)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:heatsink_max",
+   "title": "Heat-sink maximum",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:cover_temp",
+   "title": "Heated cover temperature",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:lamp_ref",
+   "title": "Lamp reference channel (stability)",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:lamp_drift",
+   "title": "Lamp drift within a run",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:led_current",
+   "title": "LED drive current",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:led_junction",
+   "title": "LED junction temperature (maximum)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:exposure",
+   "title": "Automatic integration time / exposure",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:saturation",
+   "title": "Saturated well images",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:calib_uniformity",
+   "title": "Uniformity calibration: edge-to-centre ratio",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:calib_background",
+   "title": "Background calibration: mean offset",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:calib_roi",
+   "title": "Well-position (ROI) calibration: spot diameter",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:wheel_ms",
+   "title": "Filter-wheel move time",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:wheel_slow",
+   "title": "Filter-wheel moves slower than 500 ms",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:encoder",
+   "title": "Filter-wheel position offset",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:cam_overhead",
+   "title": "Camera readout time beyond the exposure",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:chan_switch",
+   "title": "Channel switch time",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:cover_down",
+   "title": "Heated cover lowering time",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:cover_up",
+   "title": "Heated cover raising time",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:bg_median",
+   "title": "Background fluorescence per channel",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:plateau_median",
+   "title": "End-point fluorescence per channel",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:run_minutes",
+   "title": "Run duration",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:cmd_rt",
+   "title": "Reply time to the PC software",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:tick_late",
+   "title": "Once-per-second timer lateness",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:catch_up",
+   "title": "Scheduler falling behind",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:img_proc",
+   "title": "Image → processing delay",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:roi_ms",
+   "title": "Image analysis time",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:runtime_err",
+   "title": "Run-time prediction error",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:handoff_min",
+   "title": "Data hand-off time",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:log_errors",
+   "title": "Command errors in the instrument log",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:cycle_sd",
+   "title": "Cycle-timing regularity",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:templog_late",
+   "title": "Temperature-log intervals over 500 ms",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:invalid_acq",
+   "title": "Invalid fluorescence readings",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:ct_mismatch",
+   "title": "Stored Ct not reproducible (> 0.2)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:edit_delay",
+   "title": "Run end → last change",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:findings",
+   "title": "Forensic findings per run",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:pc_cq",
+   "title": "Positive control Cq (Levey-Jennings)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:pc_amplitude",
+   "title": "Probe signal strength (positive control)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:rox_level",
+   "title": "Passive reference (ROX) level",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:efficiency",
+   "title": "PCR efficiency from the standards",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:ntc_rate",
+   "title": "Negative controls by process stage",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:ic_shift",
+   "title": "IC shift from fixed reference",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:low_conf",
+   "title": "Low Cq confidence",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:late_rate",
+   "title": "Late signal / stochastic-zone results",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:rep_sd",
+   "title": "Replicate precision (pooled SD, Cq < 30)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:rox_cv",
+   "title": "Dispensed-volume spread (ROX CV)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:rowcol",
+   "title": "Row / column pattern",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:ntc_op",
+   "title": "Contamination rate by operator (funnel)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:action_op",
+   "title": "Repeat / inconclusive / invalid rate by operator (funnel)",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:manual_rate",
+   "title": "Manual interventions",
+   "specs": 1,
+   "traces": 9,
+   "stable": false,
+   "err": null
+  },
+  {
+   "id": "cc:call_disagree",
+   "title": "Stored calls that disagree with the SOP",
+   "specs": 0,
+   "traces": 0,
+   "stable": true,
+   "err": null
+  },
+  {
+   "id": "cc:copied",
+   "title": "Copied-data events",
+   "specs": 1,
+   "traces": 10,
+   "stable": false,
+   "err": null
+  }
+ ]
+}

@@ -1,0 +1,2 @@
+  "Per-analysis descriptive statistics plus targeted review counts for missing curves, uncertain calls, large replicate spread and amplified positions
+ omitted from every analysis.":"按分析显示描述性统计，并汇总缺失曲线、不确定判定、重复孔差异过大及未纳入分析的扩增孔位。",

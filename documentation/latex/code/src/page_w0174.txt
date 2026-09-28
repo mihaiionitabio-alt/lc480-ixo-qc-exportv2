@@ -1,0 +1,3 @@
+  "The internal control in samples is delayed: inhibition from the sample matrix or extraction carry-over (ethanol, salts), or extraction losses. Affe
+cted samples may give false negatives; re-extract or dilute.":"样品中的内对照延迟：样品基质抑制或提取残留（乙醇、盐），或提取损失。受影响样品可能出现
+假阴性；重新提取或稀释。",

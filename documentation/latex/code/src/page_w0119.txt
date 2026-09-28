@@ -1,0 +1,2 @@
+  "The run finished earlier than the software predicted: the prediction model changed, or the run was shortened. Check that the run completed.":"运行
+比软件预测的更早结束：预测模型改变或运行被缩短。确认运行已完成。",

@@ -1,0 +1,3 @@
+  "More settings or wells were changed by hand (threshold, baseline, omitted wells, manual calls): the automatic analysis does not suit the data, or r
+esults were adjusted. Each change should be justified in the record.":"手动修改的设置或孔增多（阈值、基线、剔除孔、手动判读）：自动分析不适合数据，或
+结果被调整。每项修改都应在记录中说明理由。",

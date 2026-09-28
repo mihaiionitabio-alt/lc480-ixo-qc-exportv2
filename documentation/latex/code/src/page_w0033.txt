@@ -1,0 +1,3 @@
+  "Compare a transition only with itself and the same program. A cooling transition that lengthens while heating transitions stay flat points to heat 
+removal (fans, filters, heat sink); all transitions lengthening together points to the Peltier elements or the room.":"只将同一转换在相同程序下比较。
+降温转换变长而升温转换稳定，指向散热（风扇、过滤网、散热器）；所有转换同时变长，指向 Peltier 元件或室温。",

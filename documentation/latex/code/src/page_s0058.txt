@@ -1,0 +1,3 @@
+  "Uniformity calibration: edge-to-centre ratio":"均匀性校准：边缘与中心之比",
+  "edge / centre":"边缘 / 中心",
+  "Changes only when the instrument is recalibrated.":"仅在仪器重新校准时变化。",

@@ -1,0 +1,3 @@
+  "End-point fluorescence is lower than usual: weaker amplification (inhibition, degraded reagents, less template) or weaker optics. If the positive-c
+ontrol Cq is normal, suspect the probe or the optics.":"终点荧光比平时低：扩增变弱（抑制、试剂降解、模板减少）或光学变弱。若阳性对照 Cq 正常，怀疑探针
+或光学部件。",

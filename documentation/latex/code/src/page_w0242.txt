@@ -1,0 +1,2 @@
+  "Every physical position from the block declared by the instrument, including named positions that were not included in an analysis.":"显示仪器声明
+温控模块中的每个物理孔位，包括已命名但未纳入分析的孔位。",

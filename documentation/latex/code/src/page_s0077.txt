@@ -1,0 +1,8 @@
+  "Dispensed-volume spread (ROX CV)":"加样体积离散度（ROX CV）",
+  "Raw passive-reference level varies with the dispensed volume.":"被动参比的原始水平随加样体积变化。",
+  "High CV = uneven pipetting or bubbles.":"CV 高 = 移液不均匀或有气泡。",
+  "Row / column pattern":"行 / 列模式",
+  "Largest mean Cq offset of a plate row or column.":"板上某一行或某一列的最大平均 Cq 偏移。",
+  "One row or column off = a faulty multichannel tip or loading-order error.":"某行或某列偏移 = 多道移液器某个吸头故障或加样顺序错误。",
+  "Contamination rate by operator (funnel)":"按操作人员的污染率（漏斗图）",
+  "NTC positives per operator against the number of NTCs they ran.":"每位操作人员的 NTC 阳性数与其所做 NTC 总数的对比。",

@@ -1,0 +1,2 @@
+  "Runs (rows) against the SOP criteria (columns): green met, amber review, red rejected, grey not applicable.":"运行（行）对照 SOP 标准（列）：绿色符
+合，琥珀色待审核，红色拒收，灰色不适用。",

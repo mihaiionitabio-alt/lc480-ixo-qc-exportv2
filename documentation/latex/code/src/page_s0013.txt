@@ -1,0 +1,5 @@
+  "Load one or more .ixo or .eds experiments to use this sheet.":"请先加载一个或多个 .ixo 或 .eds 实验。",
+  "Instrument family":"仪器系列","Container integrity":"容器完整性","Amp status":"扩增状态","Flags":"标记",
+  "ΔCq":"ΔCq","RQ":"RQ","Reference":"参照","Target Cq":"靶标 Cq","Reference Cq":"参照 Cq","ΔCq mean":"ΔCq 均值",
+  "ΔCq SE":"ΔCq 标准误","ΔΔCq":"ΔΔCq","RQ / ratio":"RQ / 比值","Min":"最小值","Max":"最大值","n":"n",
+  "Forensic log (CSV)":"容器完整性与取证日志（CSV）",

@@ -1,0 +1,4 @@
+  "Every dated event the file carries: experiment creation, run start and end, analysis creation and edits, the last recorded change (for .eds, the ne
+west ZIP entry date is the last save), instrument log and calibrations. Events more than 7 days from the run are listed in the table and marked at the
+ edge.":"文件中所有带日期的事件：实验创建、运行开始与结束、分析创建与编辑、最后记录的修改（.eds 文件中最新的 ZIP 条目日期即最后保存时间）、仪器日志与
+校准。距运行超过 7 天的事件列在表中并标在图边缘。",

@@ -1,0 +1,997 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Console mode · qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Offline reader for Roche LightCycler 480 .ixo and Applied Biosystems QuantStudio 3/5 .eds files: traceable stored values, container integrity checks, open qPCR exports, graphs, quality review, forensic log and JSON-LD metadata.">
+<meta name="application-name" content="qPCR raw values, quality-control and forensic export tool">
+<meta name="software-version" content="2026.09.23.hardening2">
+
+<!--
+  MACHINE-READABLE LANDING-PAGE METADATA
+  This source-level graph describes the application even before JavaScript runs.
+  After local .ixo files are read, the page replaces this graph in memory with a
+  DataCatalog containing one Dataset per experiment and DataDownload nodes for
+  every export that the decoded content can actually produce. No local path or
+  experiment value is transmitted; the graph remains inside this offline page.
+-->
+<script id="machine-metadata" type="application/ld+json">
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "pav": "http://purl.org/pav/",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "#application",
+      "@type": ["SoftwareApplication", "WebApplication", "prov:SoftwareAgent"],
+      "name": "qPCR raw values, quality-control and forensic export tool",
+      "alternateName": "qPCR 原始数据、质量控制与取证导出工具",
+      "description": "Offline, browser-based reader for completed Roche LightCycler 480 .ixo and Applied Biosystems QuantStudio 3/5 .eds experiments, with traceable stored values, container integrity checks, quality review, forensic logging, graphs and open-format exports.",
+      "dcterms:title": "LightCycler 480 raw values and quality-control tool",
+      "dcterms:description": "Read-only decoding and standards-mapped export of LightCycler 480 qPCR primary data.",
+      "applicationCategory": "ScientificApplication",
+      "applicationSubCategory": "qPCR data interoperability and quality control",
+      "operatingSystem": "Any operating system with a modern browser",
+      "browserRequirements": "JavaScript; File API; typed arrays; decompression support",
+      "softwareVersion": "2026.09.23.hardening2",
+      "dateModified": "2026-09-23",
+      "inLanguage": ["en", "zh"],
+      "isAccessibleForFree": true,
+      "featureList": [
+        "Read Roche LightCycler 480 .ixo files locally",
+        "Read Applied Biosystems QuantStudio 3/5 .eds files and .edt templates locally",
+        "Verify the .ixo trailing checksum, the .eds ZIP CRC-32 and the .eds Tamper MD5",
+        "Preserve stored Cq, calls, fluorescence and provenance",
+        "Export RDML 1.4, CSV, TSV, QuantStudio-layout text and analysis-ready curve tables",
+        "Draw amplification, multicomponent, raw filter, plate, Levey-Jennings and run-temperature graphs",
+        "Keep a forensic log of integrity, control, flag and traceability findings",
+        "Review plates, controls, omitted curves and instrument records",
+        "Publish in-page Schema.org JSON-LD metadata"
+      ],
+      "mainEntity": {"@id": "#catalog"},
+      "subjectOf": {"@id": "#metadata-profile"},
+      "rdfs:comment": "This node describes the offline application. Experiment-specific Dataset nodes are added after local files are read."
+    },
+    {
+      "@id": "#catalog",
+      "@type": ["DataCatalog", "dcat:Catalog"],
+      "name": "LightCycler 480 decoded experiment catalog",
+      "description": "An in-memory catalog of the experiments selected by the user in this browser session.",
+      "dcterms:title": "LightCycler 480 decoded experiment catalog",
+      "dcterms:description": "Local, transient catalog; it is empty until one or more .ixo or .eds files are read.",
+      "isPartOf": {"@id": "#application"},
+      "subjectOf": {"@id": "#metadata-profile"},
+      "rdfs:comment": "The catalog is populated locally and is never uploaded. Each child Dataset retains its source identifier, timestamps, checksums, measurement description and available distributions."
+    },
+    {
+      "@id": "#metadata-profile",
+      "@type": "DigitalDocument",
+      "name": "LightCycler 480 local dataset metadata profile",
+      "description": "A descriptive JSON-LD profile using Schema.org Dataset, DataCatalog and DataDownload with DCAT, PROV-O, PAV and SPDX terms.",
+      "citation": [
+        {"@id": "https://doi.org/10.1038/sdata.2016.18"},
+        {"@id": "https://doi.org/10.1038/s41597-020-0486-7"},
+        {"@id": "https://doi.org/10.5334/dsj-2020-043"},
+        {"@id": "https://schema.org/docs/data-and-datasets.html"}
+      ],
+      "rdfs:comment": "The profile is FAIR-aligned but does not claim FAIR certification, repository TRUSTworthiness or CARE compliance. License, consent, access authority and Indigenous governance must be supplied by the responsible data steward and are never inferred by this software."
+    },
+    {
+      "@id": "https://doi.org/10.1038/sdata.2016.18",
+      "@type": "ScholarlyArticle",
+      "name": "The FAIR Guiding Principles for scientific data management and stewardship"
+    },
+    {
+      "@id": "https://doi.org/10.1038/s41597-020-0486-7",
+      "@type": "ScholarlyArticle",
+      "name": "The TRUST Principles for digital repositories"
+    },
+    {
+      "@id": "https://doi.org/10.5334/dsj-2020-043",
+      "@type": "ScholarlyArticle",
+      "name": "The CARE Principles for Indigenous Data Governance"
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --ink:#12181f; --muted:#5b6672; --line:#dfe4ea; --bg:#f6f7f9; --card:#fff;
+  --accent:#1f6feb; --ok:#1b7837; --warn:#d97706; --bad:#c0392b; --soft:#eef4ff;
+}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:18px 22px}
+.header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.header-copy{min-width:0}
+.missy-header-mark{width:150px;height:50px;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:4px;padding:2px}.missy-header-mark svg{display:block;width:150px;height:50px}
+header h1{margin:0;font-size:19px;font-weight:650}
+header p{margin:5px 0 0;color:var(--muted);font-size:13.5px;max-width:74ch}
+.console-identity{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:12px;padding:8px 11px;border:1px solid var(--line);border-radius:7px;background:var(--soft);font-size:12.5px;font-variant-numeric:tabular-nums}
+.console-mode{display:flex;align-items:center;gap:8px;min-width:0}.console-mode b{white-space:nowrap}.console-mode span:last-child{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.console-profile{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.state-glyph{font-size:16px;line-height:1;color:var(--accent)}.state-ok{color:var(--ok)}.state-watch{color:var(--warn)}.state-alarm{color:var(--bad)}.state-unknown{color:var(--muted)}
+.page-tools{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;justify-content:flex-end;max-width:620px}
+.page-tools label{margin:0;min-width:125px}
+.page-tools select{padding:6px 8px}
+.page-tools button{white-space:nowrap}
+nav{background:var(--card);border-bottom:1px solid var(--line);padding:0 22px;display:flex;gap:2px;overflow-x:auto;position:sticky;top:0;z-index:20}
+nav button{background:none;border:0;border-bottom:2px solid transparent;padding:11px 13px;font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;white-space:nowrap}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+main{padding:22px;max-width:1180px;padding-bottom:64px}
+/* ============================================================
+   Microgravity console overlay
+   One object on screen, targets no smaller than a gloved finger,
+   no hover, no drag, no small dismiss controls. Every action has a
+   number so it can be spoken, typed or pressed.
+   ============================================================ */
+/* Command mode and Assisted mode: two ways into the same selection */
+#cmdm{position:fixed;inset:0;z-index:210;display:none;flex-direction:column;background:#05070c;color:#d7e3f4;
+  font:15px/1.5 ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+#cmdm.on{display:flex}
+#cmdm *{box-sizing:border-box}
+#cmd-top{flex:none;display:flex;align-items:center;gap:16px;padding:12px 22px;border-bottom:2px solid #1e2a3a;background:#080c14}
+#cmd-title{font-size:20px;font-weight:700;color:#e8edf5}
+#cmd-status{flex:1;color:#8fa4bf;font-size:13.5px}
+#cmd-tools button{background:#16202e;color:#d7e3f4;border:1px solid #2a3a4f;border-radius:6px;padding:6px 12px;margin-left:8px;cursor:pointer;font:inherit;font-size:13.5px}
+#cmd-tools button:hover{background:#1e2a3a}
+#cmd-out{flex:1;overflow:auto;padding:16px 22px;white-space:pre-wrap}
+.cmd-line{padding:1px 0}
+.cmd-line.echo{color:#7fd1ff}
+.cmd-line.ok{color:#5fd68a}
+.cmd-line.warn{color:#ffc14d}
+.cmd-line.bad{color:#ff7a7a}
+#cmd-script-wrap{flex:none;padding:12px 22px;border-top:1px solid #1e2a3a;background:#070b12}
+#cmd-script-wrap label{display:block;color:#8fa4bf;font-size:13px;margin-bottom:6px}
+#cmd-script{width:100%;background:#0b1119;color:#d7e3f4;border:1px solid #2a3a4f;border-radius:6px;padding:10px;font:inherit;font-size:13.5px}
+#cmd-script-run{margin-top:8px;background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:8px 18px;cursor:pointer;font:inherit}
+#cmd-inwrap{flex:none;display:flex;align-items:center;gap:10px;padding:12px 22px;border-top:2px solid #1e2a3a;background:#080c14}
+#cmd-prompt{color:#5fd68a;font-weight:700}
+#cmd-in{flex:1;background:transparent;border:0;outline:0;color:#e8edf5;font:inherit;font-size:16px}
+
+#astm{position:fixed;inset:0;z-index:210;display:none;flex-direction:column;background:#f6f8fb;color:#0f172a;
+  font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+#astm.on{display:flex}
+#astm *{box-sizing:border-box}
+#ast-top{flex:none;display:flex;align-items:center;gap:16px;padding:12px 22px;border-bottom:1px solid #d7dee8;background:#fff}
+#ast-title-text{font-size:19px;font-weight:700}
+#ast-count{flex:1;color:#5b6b80;font-size:13.5px}
+#ast-top button{background:#eef2f7;border:1px solid #cbd5e1;border-radius:6px;padding:6px 14px;cursor:pointer;font:inherit}
+#ast-body{flex:1;display:flex;gap:0;overflow:hidden}
+#ast-form{flex:none;width:340px;padding:18px 20px;border-right:1px solid #d7dee8;background:#fff;overflow:auto}
+#ast-form label{display:block;margin-bottom:12px;font-size:13.5px;color:#334155}
+#ast-form input[type=text],#ast-form select{width:100%;margin-top:4px;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;font:inherit;font-size:14px}
+#ast-out{border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;margin:14px 0}
+#ast-out legend{font-size:13px;color:#5b6b80;padding:0 4px}
+#ast-out label{margin:0 0 4px;display:flex;gap:8px;align-items:center}
+#ast-buttons{display:flex;flex-direction:column;gap:8px}
+#ast-buttons button,#ast-upload{background:#eef2f7;border:1px solid #cbd5e1;border-radius:6px;padding:8px 14px;cursor:pointer;font:inherit;font-size:14px;text-align:center}
+#ast-buttons button.primary{background:#1d4ed8;color:#fff;border-color:#1d4ed8;font-weight:600}
+#ast-upload input{display:none}
+.ast-msg{margin-top:12px;font-size:13.5px;min-height:20px}
+.ast-msg.ok{color:#15803d}
+.ast-msg.warn{color:#b45309}
+.ast-msg.bad{color:#b91c1c}
+#ast-list{flex:1;overflow:auto;padding:18px 22px}
+#astm section,#astm .ast-group{display:block}
+.ast-group{margin-bottom:22px}
+.ast-group h3{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:15px}
+.ast-count{color:#5b6b80;font-weight:400;font-size:13px}
+.ast-group h3 button{margin-left:0;background:#eef2f7;border:1px solid #cbd5e1;border-radius:5px;padding:2px 10px;font-size:12.5px;cursor:pointer}
+.ast-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:8px}
+.ast-item{display:grid;grid-template-columns:22px 1fr;grid-template-rows:auto auto auto;gap:0 6px;
+  background:#fff;border:1px solid #dbe2ec;border-radius:8px;padding:9px 11px;cursor:pointer}
+.ast-item input{grid-row:1/4;align-self:start;margin-top:3px}
+.ast-title{font-weight:600;font-size:14px}
+.ast-id{font:12px ui-monospace,Menlo,Consolas,monospace;color:#5b6b80}
+.ast-note{font-size:12.5px;color:#5b6b80;font-weight:400;line-height:1.4}
+#astm .ast-item,#astm .ast-item span{font-weight:400}
+#astm .ast-item .ast-title{font-weight:600}
+#ast-form label{font-weight:600}
+#ast-form input,#ast-form select{font-weight:400}
+.ast-item.ast-off{opacity:.55}
+
+#mg{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;background:#05070c;color:#e8edf5;
+  font:16px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+#mg.on{display:flex}
+#mg *{box-sizing:border-box}
+#mg .mg-num{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+#mg-top{flex:none;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:14px 26px;border-bottom:2px solid #1e2a3a;background:#080c14}
+#mg-mode{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;letter-spacing:.01em}
+#mg-mode .dot{width:16px;height:16px;border-radius:50%;background:#37d67a;flex:none}
+#mg.sev-alarm #mg-mode .dot{background:#ff5252}
+#mg.sev-watch #mg-mode .dot{background:#ffb020}
+#mg.sev-none  #mg-mode .dot{background:#8b98a9}
+#mg-facts{font-size:17px;color:#9fb0c6}
+#mg-facts b{color:#e8edf5}
+#mg-close{margin-left:auto}
+#mg-nav{flex:1 1 100%;display:flex;gap:7px;overflow-x:auto;padding-top:2px}
+#mg-nav button.on{border-color:#4ea1ff;background:#12243c;color:#cfe4ff;font-weight:650}
+#mg-sheet{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(5,7,12,.93)}
+#mg-sheet[hidden]{display:none}
+.mg-sheet-box{width:min(760px,92vw);border:2px solid #2b3a4d;border-radius:14px;background:#0b111b;padding:22px 24px}
+.mg-sheet-box h2{margin:0 0 14px;font-size:24px}
+#mg-sheet-list{display:flex;flex-direction:column;gap:12px}
+#mg-sheet-list button{all:unset;cursor:pointer;min-height:76px;display:flex;flex-direction:column;justify-content:center;gap:4px;
+  padding:12px 18px;border:2px solid #2b3a4d;border-radius:12px;background:#0f1724;color:#e8edf5}
+#mg-sheet-list button .k{font-size:14px;color:#9fb0c6;letter-spacing:.08em}
+#mg-sheet-list button .l{font-size:21px;font-weight:700}
+#mg-sheet-list button.current{border-color:#4ea1ff;background:#12243c}
+#mg-sheet-list button:focus-visible{outline:4px solid #4ea1ff;outline-offset:3px}
+#mg-sheet-foot{margin-top:16px;font-size:16px;color:#9fb0c6}
+#mg-nav button{flex:none;border:1px solid #2b3a4d;border-radius:7px;background:#0b111b;color:#cfe0f5;padding:9px 12px;font:15px/1.2 inherit;cursor:pointer;white-space:nowrap}
+#mg-nav button:hover,#mg-nav button:focus-visible{border-color:#4ea1ff;background:#12243a}
+#mg-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:22px 26px;overflow:auto}
+#mg.charting #mg-body{justify-content:stretch;padding:0;overflow:hidden}
+#mg.charting #mg-count,#mg.charting #mg-card> :not(#mg-chart){display:none}
+#mg.charting #mg-card{flex:1;display:flex;min-height:0;border:0;border-radius:0;padding:0;background:#f7f9fc}
+#mg-count{font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8b9cb3;margin-bottom:10px}
+#mg-card{border:2px solid #22303f;border-radius:14px;background:#0b111b;padding:22px 26px}
+#mg-card.alarm{border-color:#ff5252}
+#mg-card.watch{border-color:#ffb020}
+#mg-card.ok{border-color:#37d67a}
+#mg-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+#mg-glyph{font-size:30px;line-height:1}
+#mg-code{font-size:20px;color:#9fb0c6;font-family:ui-monospace,Menlo,Consolas,monospace}
+#mg-title{font-size:30px;font-weight:700;letter-spacing:-.01em}
+#mg-value{margin:14px 0 6px;font-size:62px;font-weight:700;line-height:1;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+#mg-value .unit{font-size:26px;color:#9fb0c6;margin-left:10px;font-weight:600}
+#mg-limits{font-size:19px;color:#9fb0c6}
+#mg-state{margin-top:12px;font-size:22px;line-height:1.35}
+#mg-evidence{margin-top:10px;font-size:17px;color:#9fb0c6}
+#mg-pict{font-size:34px;line-height:1;width:46px;text-align:center;flex:0 0 auto}
+#mg-kind{font-size:15px;letter-spacing:.09em;text-transform:uppercase;color:#9fb0c6;border:2px solid currentColor;border-radius:8px;padding:3px 10px;flex:0 0 auto}
+#mg-rows{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2px 26px}
+#mg-rows .r{display:flex;justify-content:space-between;gap:18px;font-size:19px;padding:9px 2px;border-bottom:1px solid rgba(159,176,198,.28)}
+#mg-rows .r b{font-weight:400;color:#9fb0c6}
+#mg-rows .r span{font-weight:650;text-align:right;font-variant-numeric:tabular-nums}
+#mg-card.with-chart #mg-rows{display:none}
+#mg-gcap{font-size:21px;font-weight:650;padding:4px 0 12px;width:100%;text-align:center;flex:0 0 auto;color:#0b111b}
+#mg.charting.theme-dark #mg-gcap{color:#e5e7eb}
+#mg.charting #mg-chart{flex-direction:column}
+#mg-chart-stage{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;will-change:transform;transition:transform .12s ease}
+#mg.charting #mg-chart-stage{flex:1 1 auto;min-height:0}
+#mg.charting #mg-chart-stage svg{flex:1 1 auto;min-height:0;width:100%;align-self:stretch;object-fit:contain}
+
+#mg-chart{margin-top:14px;background:#f7f9fc;border-radius:10px;padding:8px;display:none;max-height:40vh;overflow:hidden}
+#mg-chart.on{display:block}
+#mg-chart svg{width:100%;height:auto;max-height:30vh;display:block}
+#mg.charting #mg-chart{display:flex;flex:1;align-items:center;justify-content:center;margin:0;padding:22px;max-height:none;border-radius:0;overflow:hidden;touch-action:none}
+#mg.charting #mg-chart svg{width:100%;height:100%;max-height:none;object-fit:contain;transform-origin:center center;transition:transform .12s ease}
+#mg.charting.theme-dark #mg-chart{background:#0b111b}
+#mg.charting.theme-dark #mg-chart svg{filter:invert(.9) hue-rotate(180deg) contrast(1.05)}
+#mg-card.with-chart #mg-value{font-size:40px;margin:8px 0 4px}
+#mg-card.with-chart #mg-state{font-size:19px;margin-top:8px}
+#mg-card.with-chart #mg-evidence{display:none}
+#mg-actions{flex:none;display:flex;gap:16px;padding:16px 26px 12px;flex-wrap:wrap;border-top:2px solid #1e2a3a;background:#080c14}
+.mg-act{all:unset;cursor:pointer;min-width:196px;min-height:88px;flex:1 1 196px;display:flex;flex-direction:column;justify-content:center;
+  gap:6px;padding:12px 18px;border:2px solid #2b3a4d;border-radius:12px;background:#0f1724;color:#e8edf5}
+.mg-act:focus-visible{outline:4px solid #4ea1ff;outline-offset:3px}
+.mg-act .k{font-size:15px;color:#9fb0c6;letter-spacing:.1em}
+.mg-act .l{font-size:22px;font-weight:700}
+.mg-act.primary{border-color:#4ea1ff;background:#12243c}
+.mg-act.danger{border-color:#ff5252}
+.mg-act[disabled]{opacity:.4;cursor:default}
+#mg.charting #mg-actions{padding-top:14px}
+#mg-statusbar{flex:none;display:flex;align-items:center;gap:8px;min-height:34px;padding:6px 26px;border-top:1px solid #1e2a3a;background:#080c14;color:#9fb0c6;font-size:13px;font-variant-numeric:tabular-nums}
+#mg-statusbar b{color:#e8edf5;font-weight:650}
+#mg-statusbar .mg-sb-dot{width:8px;height:8px;border-radius:50%;background:#37d67a;flex:none}
+#mg-statusbar .mg-sb-sep{color:#52657d}
+#mg.charting #mg-statusbar{background:#080c14}
+@media (max-width:900px){#mg-value{font-size:46px}#mg-title{font-size:24px}.mg-act{min-width:150px}}
+@media (prefers-reduced-motion:reduce){#mg *{transition:none!important;animation:none!important}}
+/* status bar: one line at the bottom that says what the page is doing */
+#statusbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+#statusbar .sb-line{display:flex;align-items:center;gap:10px;padding:6px 12px;flex-wrap:wrap}
+#statusbar .sb-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+#statusbar.busy .sb-dot{background:var(--accent);animation:sbpulse 1s ease-in-out infinite}
+#statusbar.fault .sb-dot{background:var(--bad)}
+@keyframes sbpulse{0%,100%{opacity:1}50%{opacity:.25}}
+#statusbar b{color:var(--ink);font-weight:600}
+#statusbar .sb-sep{color:var(--line)}
+#statusbar .sb-bar{flex:none;width:120px;height:6px;border-radius:3px;background:var(--soft);overflow:hidden}
+#statusbar .sb-bar i{display:block;height:100%;background:var(--accent);width:0}
+#statusbar button{font:inherit;font-size:11.5px;padding:2px 8px;border:1px solid var(--line);background:var(--bg);
+  color:var(--ink);border-radius:5px;cursor:pointer}
+#statusbar button:hover{border-color:var(--accent);color:var(--accent)}
+#statusbar .sb-right{margin-left:auto;display:flex;gap:6px;align-items:center}
+#statusbar .sb-detail{display:none;padding:2px 12px 10px;border-top:1px dashed var(--line);max-height:38vh;overflow:auto}
+#statusbar.open .sb-detail{display:block}
+#statusbar .sb-detail table{width:100%;border-collapse:collapse;font-size:11.5px}
+#statusbar .sb-detail td{padding:2px 8px 2px 0;vertical-align:top}
+#statusbar .sb-detail td.k{color:var(--muted);white-space:nowrap}
+#statusbar .sb-fault{color:var(--bad)}
+section{display:none}
+section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:16px 18px;margin:0 0 16px}
+.card h2{margin:0 0 4px;font-size:15.5px;font-weight:650}
+.card h3{margin:16px 0 6px;font-size:14px;font-weight:650}
+.card p.sub{margin:0 0 12px;color:var(--muted);font-size:13.5px;max-width:80ch}
+label{display:block;font-size:13px;font-weight:600;margin:0 0 4px}
+input[type=text],input[type=number],select,textarea{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:13.5px;background:#fff}
+textarea{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;min-height:120px}
+button.act{background:var(--accent);color:#fff;border:0;border-radius:7px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}
+button.act:hover{filter:brightness(1.08)}
+button.act[disabled]{background:#aab4c0;cursor:not-allowed}
+button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font:inherit;font-size:13.5px;cursor:pointer}
+button.ghost:hover{background:var(--soft);border-color:var(--accent)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.row>div{flex:1 1 190px;min-width:150px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:12px}
+.dl{border:1px solid var(--line);border-radius:8px;padding:12px 13px;background:#fff;display:flex;flex-direction:column;gap:7px}
+.dl b{font-size:13.5px}
+.dl span{color:var(--muted);font-size:12.5px;line-height:1.45;flex:1}
+.dl button{align-self:flex-start}
+.drop{border:2px dashed #c4ccd6;border-radius:9px;padding:26px;text-align:center;color:var(--muted);background:#fbfcfd;cursor:pointer}
+.drop.hot{border-color:var(--accent);background:var(--soft);color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+th{background:#f2f5f8;font-weight:650;position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{max-height:440px;overflow:auto;border:1px solid var(--line);border-radius:7px}
+.scroll table{margin:0;border:0}
+.tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:11.5px;font-weight:600;background:#eef1f5;color:var(--muted)}
+.tag.ok{background:#e7f6ec;color:var(--ok)}
+.tag.warn{background:#fdf3e6;color:var(--warn)}
+.tag.bad{background:#fde8e8;color:var(--bad)}
+.notice{background:#f7f9fb;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:5px;padding:10px 13px;font-size:13.5px;color:var(--muted);margin:10px 0}
+.notice.warn{border-left-color:var(--warn)}
+.notice.bad{border-left-color:var(--bad)}
+.notice.ok{border-left-color:var(--ok)}
+.err{color:var(--bad);font-size:13.5px}
+code,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:#f2f5f8;padding:1px 5px;border-radius:4px}
+pre{background:#12181f;color:#e6edf3;padding:13px;border-radius:7px;overflow:auto;font-size:12px;line-height:1.5}
+details{margin:9px 0}
+summary{cursor:pointer;font-weight:600;font-size:13.5px}
+canvas{max-width:100%;border:1px solid var(--line);border-radius:7px;background:#fff}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font-size:13.5px}
+.kv b{font-weight:600;color:var(--muted)}
+.hint{font-size:12.5px;color:var(--muted);margin-top:3px}
+.review-tabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);margin:-4px 0 16px}
+.review-tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:9px 11px;
+  color:var(--muted);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.review-tabs button.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:650}
+.review-sheet{display:none}.review-sheet.on{display:block}
+.toolbar{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin:10px 0}
+.toolbar label{min-width:150px;flex:0 1 260px}.toolbar button{flex:0 0 auto}
+.control-category-editor{border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fbfcfd}
+.control-category-editor[open] summary{margin-bottom:5px}
+.control-category-editor .scroll{max-height:300px;margin-top:8px}
+.control-category-editor table{margin:0}
+.control-category-editor select{min-width:210px}
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0 14px}
+.metric{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fbfcfd}
+.metric b{display:block;font-size:20px;line-height:1.15;font-variant-numeric:tabular-nums}
+.metric span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.metric.bad{border-left:4px solid var(--bad)}.metric.warn{border-left:4px solid var(--warn)}
+.metric.ok{border-left:4px solid var(--ok)}
+.plate-scroll{overflow:auto;padding:2px 0 8px}
+.plate-grid{display:grid;gap:3px;min-width:max-content;align-items:stretch}
+.plate-corner,.plate-head,.plate-rowhead{display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:10.5px;font-weight:650;min-width:24px}
+.plate-well{width:96px;min-height:49px;border:1px solid #cbd5e1;border-radius:5px;padding:4px 5px;
+  overflow:hidden;background:#fff;position:relative}
+.plate-well strong{display:block;font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plate-well span{display:block;font-size:9.5px;color:#55606d;line-height:1.25;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.plate-well.empty{background:#fafafa;color:#a4adb8}
+.plate-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:7px}
+.plate-legend i{display:inline-block;width:11px;height:11px;border:1px solid #cbd5e1;border-radius:3px;
+  vertical-align:-1px;margin-right:4px}
+.chart-wrap{overflow:auto;margin-top:10px}.chart-wrap canvas{min-width:620px}
+.legend{display:flex;gap:11px;flex-wrap:wrap;margin:7px 0;font-size:11.5px;color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:3px;margin-right:4px}
+.integrity-records{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.integrity-record{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card,#fff);min-width:0}
+.integrity-record-head{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.integrity-index{flex:0 0 2rem;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:650}
+.integrity-file{min-width:0;flex:1 1 auto;overflow-wrap:anywhere;word-break:break-word}
+.integrity-badge{flex:none;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--muted);font-size:12px;white-space:nowrap}
+.integrity-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px;margin:12px 0 0 2rem}
+.integrity-fields>div{min-width:0}
+.integrity-fields dt{color:var(--muted);font-size:12px;font-weight:650;margin-bottom:2px;letter-spacing:.03em}
+.integrity-fields dd{margin:0;overflow-wrap:anywhere;word-break:break-word;font-size:13.5px}
+.integrity-value{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.45}
+@media (max-width:760px){.integrity-record-head{display:grid;grid-template-columns:2rem minmax(0,1fr)}
+  .integrity-badge{grid-column:2;justify-self:start}
+  .integrity-fields{grid-template-columns:1fr;margin-left:2rem}}
+.record-block{margin:0 0 18px}.record-block h3{display:flex;justify-content:space-between;gap:12px}
+.empty-state{padding:26px;text-align:center;border:1px dashed #cbd5e1;border-radius:8px;color:var(--muted)}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 8px;
+  font-size:12px;line-height:1.4;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;white-space:nowrap;z-index:5}
+.sop-sec{border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:8px 0;background:#fbfcfd}
+.sop-sec>summary{font-weight:650;font-size:14px;cursor:pointer}
+.sop-sec[open]>summary{margin-bottom:8px}
+.sop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 14px}
+.sop-field{display:flex;flex-direction:column;gap:3px;margin:0}
+.sop-field>span{font-size:12.5px;color:var(--muted)}
+.sop-table td,.sop-table th{padding:3px 5px}
+.sop-table input,.sop-table select{padding:4px 6px;font-size:12.5px}
+.sop-pill{display:inline-block;padding:1px 8px;border-radius:10px;color:#fff;font-size:11.5px;font-weight:600;white-space:nowrap;text-shadow:0 0 2px rgba(0,0,0,.35)}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0;padding:0;list-style:none;counter-reset:st}
+.steps li{flex:1 1 170px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fbfcfd;font-size:12.5px;color:var(--muted)}
+.steps li b{display:block;color:var(--ink);font-size:13px}
+#g-chart svg{display:block;border:1px solid var(--line);border-radius:7px;background:#fff}
+.cc-group{margin:14px 0 6px}.cc-group h3{margin:0 0 8px;font-size:14.5px}.cc-group h3 .hint{font-weight:400;margin-left:6px}
+.cc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px}
+.cc-tile{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;min-height:118px}
+.cc-tile:hover,.cc-tile:focus-visible{border-color:var(--accent);box-shadow:0 1px 6px rgba(31,111,235,.18)}
+.cc-tile.off{opacity:.55}
+.cc-top{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}.cc-top i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.cc-top b{color:var(--ink)}.cc-top span{margin-left:auto;font-size:10.5px;letter-spacing:.02em}
+.cc-title{font-size:12.8px;font-weight:600;line-height:1.3;color:var(--ink)}
+.cc-foot{font-size:11px;color:var(--muted);line-height:1.3}.cc-fun{font-size:11px;color:var(--muted);padding:12px 0}
+.cc-lim{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin:4px 0 10px}.cc-lim>div{border:1px solid var(--line);border-radius:8px;padding:8px 11px;background:#fbfcfe}.cc-lim p{margin:4px 0 0;font-size:13px;line-height:1.45;color:var(--ink)}
+.cc-missing{margin-top:6px}.cc-missing summary{font-size:12px;color:var(--muted);cursor:pointer}
+.cc-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.cc-pill{display:inline-block;color:#fff;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:600;margin-right:6px}
+#cc-chart svg{display:block;width:100%;height:auto;max-width:980px;border:1px solid var(--line);border-radius:7px;background:#fff;margin-bottom:8px}
+.cute-friends,.cute-toast{display:none}
+@media print{nav,.tabs,header nav{position:static!important;top:auto!important}.cc-grid{grid-template-columns:repeat(3,1fr)}}
+body.lang-zh{
+  --bg:#fff8fc;--card:#fffefd;--line:#eadcea;--soft:#fff0f8;--accent:#df5d9b;
+  background:
+    radial-gradient(circle at 8% 16%,#fff0a8 0 5px,transparent 6px),
+    radial-gradient(circle at 91% 22%,#bdeff0 0 7px,transparent 8px),
+    linear-gradient(145deg,#fff8fc 0%,#f7fffd 48%,#fff9ee 100%);
+  font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Segoe UI,sans-serif
+}
+body.lang-zh header{background:linear-gradient(120deg,#fff7cc,#ffe9f5 48%,#dcf8f3)}
+body.lang-zh nav{background:rgba(255,255,255,.91);backdrop-filter:blur(8px)}
+body.lang-zh .card{border-radius:18px;box-shadow:0 7px 22px rgba(163,93,139,.08)}
+body.lang-zh button{border-radius:12px}
+body.lang-zh button.act{background:linear-gradient(135deg,#ee7fb0,#ca69cd)}
+body.lang-zh .drop{border-color:#e7a6c9;background:linear-gradient(145deg,#fffafd,#f1fffb)}
+body.lang-zh .metric{border-radius:13px;background:linear-gradient(145deg,#fff,#fff8fc)}
+body.lang-zh .cute-friends{display:block;position:fixed;inset:auto 12px 12px auto;z-index:30;pointer-events:none}
+.cute-friends span{display:inline-block;font-size:30px;filter:drop-shadow(0 3px 5px rgba(85,45,70,.18));
+  animation:cute-bob 2.2s ease-in-out infinite}
+.cute-friends span:nth-child(2){animation-delay:.35s}.cute-friends span:nth-child(3){animation-delay:.7s}
+body.lang-zh .cute-toast{display:flex;position:fixed;right:18px;bottom:64px;z-index:45;max-width:340px;
+  gap:8px;align-items:center;padding:10px 14px;border:1px solid #efb6d2;border-radius:16px 16px 4px 16px;
+  background:#fff;color:#713451;box-shadow:0 10px 30px rgba(116,51,82,.18);opacity:0;transform:translateY(12px) scale(.96);
+  transition:opacity .18s,transform .18s;pointer-events:none}
+body.lang-zh .cute-toast.show{opacity:1;transform:translateY(0) scale(1)}
+.cute-toast b{font-size:21px}.cute-toast span{font-size:13px}
+@keyframes cute-bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@media(max-width:850px){.header-row{flex-direction:column}.page-tools{justify-content:flex-start;max-width:none}}
+@media(max-width:850px){.console-identity{align-items:flex-start;flex-direction:column;gap:4px}.console-profile{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.cute-friends span{animation:none}.cute-toast{transition:none}}
+</style>
+<header>
+  <div class="header-row">
+    <div class="header-copy">
+      <h1>qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5</h1>
+      <p>Reads a finished LightCycler 480 .ixo or QuantStudio 3/5 .eds experiment, hands you the numbers the instrument stored, draws them, reviews them and writes them in formats that open-source tools read directly. Nothing is uploaded; everything runs in this page.</p>
+    </div>
+    <div class="missy-header-mark" id="missy-header-logo" aria-label="MISSY RUO NOT VALIDATED"></div>
+    <div class="page-tools">
+      <label>Language<select id="language-select" aria-label="Language">
+        <option value="en">English</option><option value="zh">中文</option>
+      </select></label>
+      <button class="ghost" id="dl-site-en" type="button">Download English website (ZIP)</button>
+      <button class="ghost" id="dl-site-zh" type="button">Download Chinese website (ZIP)</button>
+    </div>
+  </div>
+  <div class="console-identity" id="console-identity" aria-live="polite">
+    <div class="console-mode"><span class="state-glyph" id="console-mode-glyph">○</span><b id="console-mode-text">No data</b><span id="console-data-summary">Load experiment files to begin.</span></div>
+    <div class="console-profile" id="console-profile">SOP: no profile applied</div>
+  </div>
+</header>
+
+<nav>
+  <button data-tab="load" class="on">1 · Load files</button>
+  <button data-tab="sop">2 · SOP</button>
+  <button data-tab="results">3 · Results</button>
+  <button data-tab="panel">4 · Control panel</button>
+  <button data-tab="graphs">5 · Graphs</button>
+  <button data-tab="review">6 · Quality &amp; forensic review</button>
+  <button data-tab="export">7 · Open formats</button>
+  <button data-tab="integrity">8 · File integrity</button>
+
+</nav>
+
+<main>
+
+<!-- ============================== LOAD ============================== -->
+<section id="tab-load" class="on">
+  <div class="card">
+    <h2>Load an experiment</h2>
+    <p class="sub">Drop one or more LightCycler 480 .ixo files, QuantStudio .eds files or .edt templates, or a .zip containing them. Several runs — from either instrument — can be loaded at once; the Quality review tab compares them.</p>
+    <div class="drop" id="drop">
+      <b>Drop .ixo, .eds, .edt or .zip here</b><br><span style="font-size:13px">or click to choose files</span>
+      <input type="file" id="file" multiple accept=".ixo,.eds,.edt,.rdml,.zip" hidden>
+    </div>
+    <div id="loadmsg" style="margin-top:11px;font-size:13.5px"></div>
+    <div style="margin-top:13px"><button class="act" id="read" disabled>Read the files</button></div>
+    <div id="readmsg" style="margin-top:11px"></div>
+    <ol class="steps">
+      <li><b>1 · Load files</b>Drop the files. The files are decoded locally and their stored values are preserved.</li>
+      <li><b>2 · SOP</b>Pick or open the laboratory profile; outcomes and run acceptance follow it.</li>
+      <li><b>3 · Results</b>Review run acceptance and sample interpretations produced by the active SOP.</li>
+      <li><b>4 · Control panel</b>Hardware, software, method and operator control charts per instrument.</li>
+      <li><b>5 · Graphs</b>One graph at a time for a single run, drawn with the SOP limits.</li>
+      <li><b>6 · Review</b>File, result, timeline and interpretation findings, plate map, controls, curves and instrument records.</li>
+    </ol>
+  </div>
+
+  <details class="card">
+    <summary style="font-size:15.5px;font-weight:650">Or paste Cq values from any instrument</summary>
+    <p class="sub">A pasted table can be tidied and downloaded again, but it carries no fluorescence, so the
+       curve-based exports need an .ixo file. Paste or upload a table with a sample column and a Cq column — the header names are matched loosely, so exports from most instruments work as
+       they are. A well column is used if present.</p>
+    <textarea id="csvin" placeholder="Well,Sample Name,Cq&#10;1,Example WD,22.7&#10;2,Example WD,22.3&#10;3,Example 1:4,24.2&#10;4,Example 1:4,24.9"></textarea>
+    <div class="row" style="margin-top:10px">
+      <div style="flex:0 0 auto"><button class="ghost" id="csvfilebtn">Upload a CSV instead</button>
+        <input type="file" id="csvfile" accept=".csv,.tsv,.txt" hidden></div>
+      <div style="flex:0 0 auto"><button class="act" id="csvread">Read pasted values</button></div>
+      <div style="flex:0 0 auto"><button class="ghost" id="csvdemo">Load the ENGL worked example</button></div>
+    </div>
+    <div id="csvmsg" style="margin-top:11px"></div>
+  </details>
+
+  <div class="card" id="loadedcard" style="display:none">
+    <h2>What was read</h2>
+    <p class="sub">One row per file. Open the Review tab for the forensic log.</p>
+    <div id="loaded"></div>
+  </div>
+
+  <details class="card" id="derivedcard" style="display:none">
+    <summary style="font-size:15.5px;font-weight:650;cursor:pointer">Settings read from one experiment file (details)</summary>
+    <div class="toolbar"><label>Experiment<select id="derived-run"></select></label></div>
+    <p class="sub">Everything below was taken out of the container itself. Nothing here was typed, assumed or
+       defaulted — each line names the property it came from, so a value you disagree with can be traced back to
+       the bytes it was read from.</p>
+    <div id="derived"></div>
+    <div style="margin-top:12px"><button class="ghost" id="dl-derived">Download this table (CSV)</button>
+      <button class="ghost" id="dl-derived-all">Download for all runs (CSV)</button></div>
+  </details>
+
+
+</section>
+
+<!-- ============================== CONTROL PANEL ============================== -->
+<section id="tab-panel">
+  <div class="card">
+    <h2>Control panel</h2>
+    <p class="sub">Control charts for predictive maintenance and quality control, one instrument at a time. Each tile is one chart built from numbers the instrument wrote into its own files; the dot shows its state on the latest run (green in control, amber watch, red alarm, grey not enough data). Click a tile to open the chart, how to read it and its settings.</p>
+    <div class="toolbar">
+      <label style="flex:1 1 320px">Instrument<select id="cc-inst"></select></label>
+      <label style="flex:1 1 320px">Protocol<select id="cc-proto"></select></label>
+      <label>Show<select id="cc-filter"><option value="all">All charts</option><option value="attention">Only charts that need attention</option></select></label>
+      <button class="ghost" id="cc-import" type="button">Import history (JSON)</button><input type="file" id="cc-file" accept=".json" hidden>
+      <button class="ghost" id="cc-export" type="button">Export history (JSON)</button>
+      <button class="ghost" id="cc-export-csv" type="button">Export history (CSV)</button>
+      <button id="cc-zip" type="button">All control charts, all instruments (ZIP)</button>
+      <label style="min-width:120px"><span><input id="cc-zip-png" type="checkbox" style="width:auto"> with PNG</span></label>
+      <label style="min-width:170px"><span><input id="cc-remember" type="checkbox" style="width:auto"> Remember history in this browser</span></label>
+    </div>
+    <div id="cc-msg"></div>
+    <div id="cc-summary"></div>
+    <div id="cc-tiles"></div>
+  </div>
+  <div class="card" id="cc-detail" hidden></div>
+  <div class="card">
+    <h2>Single-run diagnostic graphs</h2>
+    <p class="sub">The graphs behind several tiles, for one run at a time.</p>
+    <div class="toolbar">
+      <button class="ghost" type="button" data-goto-graph="lc_thermal">Block temperature — LightCycler</button>
+      <button class="ghost" type="button" data-goto-graph="temperature">Block, cover and zones — QuantStudio</button>
+      <button class="ghost" type="button" data-goto-graph="curves">Amplification curves</button>
+      <button class="ghost" type="button" data-goto-graph="plate">Plate heat map</button>
+      <button class="ghost" type="button" data-goto-graph="levels">Background and plateau</button>
+      <button class="ghost" type="button" data-goto-graph="recalc">Stored vs re-derived Ct</button>
+      <button class="ghost" type="button" data-goto-graph="timeline">Run timeline</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SOP ============================== -->
+<section id="tab-sop">
+  <div class="card">
+    <h2>Laboratory SOP profile</h2>
+    <p class="sub">State your laboratory's own acceptance and interpretation rules once, save them as a profile file and reuse it. The stored Cq values and calls are never changed; every outcome says which rule produced it, and every export carries the profile's name, version and SHA-256.</p>
+    <div class="toolbar">
+      <label>Start from<select id="sop-preset"><option value="sc">SC screening — SOP-06 laboratory default</option></select></label>
+      <button class="ghost" id="sop-apply-preset" type="button">Use this starting point</button>
+      <button class="ghost" id="sop-open" type="button">Open profile (JSON)</button><input type="file" id="sop-file" accept=".json" hidden>
+      <button class="act" id="sop-save" type="button">Save profile (JSON)</button>
+      <label style="min-width:120px"><span><input id="sop-lock" type="checkbox" style="width:auto"> Lock profile</span></label>
+    </div>
+    <div id="sop-msg"></div>
+    <div id="sop-head"></div>
+    <div id="sop-editor"></div>
+  </div>
+</section>
+
+<!-- ============================== RESULTS ============================== -->
+<section id="tab-results">
+  <div class="card">
+    <h2>Results under this SOP</h2>
+    <p class="sub">Run acceptance and the interpretation of every sample, recomputed as soon as the profile changes.</p>
+    <div id="sop-metrics"></div>
+    <div class="toolbar">
+      <label>View<select id="sop-view"><option value="samples">Sample report</option><option value="targets">Results by target</option>
+        <option value="criteria">Run acceptance criteria</option><option value="runs">Runs</option></select></label>
+      <label>Experiment<select id="sop-run"></select></label>
+      <label>Show<select id="sop-outcome"><option value="">Everything</option><option value="attention">Only what needs action</option>
+        <option value="Positive">Positive</option><option value="Negative">Negative</option><option value="Inconclusive">Inconclusive</option>
+        <option value="Repeat">Repeat</option><option value="Invalid">Invalid</option><option value="Invalid run">Invalid run</option>
+        <option value="Control fail">Control fail</option></select></label>
+      <label>Search<input id="sop-search" type="search" placeholder="sample, target, reason…"></label>
+    </div>
+    <div id="sop-results"></div>
+    <div class="toolbar">
+      <button class="ghost" id="sop-dl-csv" type="button">Download this view (CSV)</button>
+      <button class="ghost" id="sop-dl-xlsx" type="button">Download SOP report (XLSX)</button>
+      <button class="act" id="sop-dl-zip" type="button">Download SOP bundle (ZIP)</button>
+    </div>
+    <p class="hint">Downloads follow the pseudonymisation switch in Open formats.</p>
+  </div>
+</section>
+
+<!-- ============================== GRAPHS ============================== -->
+<section id="tab-graphs">
+  <div class="card">
+    <h2>Graphs</h2>
+    <p class="sub">Choose one graph. Limits, colours and outcomes come from the active SOP profile, so the graphs change when the profile does. Each graph can be saved as SVG or PNG together with the numbers behind it.</p>
+    <div class="toolbar">
+      <label style="flex:1 1 360px">Graph<select id="g-graph"></select></label>
+      <label id="g-run-wrap">Experiment<select id="g-run"></select></label>
+      <label id="g-target-wrap">Target<select id="g-target"></select></label>
+      <label id="g-metric-wrap">Colour shows<select id="g-metric"><option value="outcome">SOP outcome</option>
+        <option value="status">Analysis status (incl. signal outside analyses)</option><option value="cq">Stored Cq</option>
+        <option value="end_fluorescence">End-point fluorescence</option><option value="background">Background fluorescence</option>
+        <option value="amplitude">Amplitude above background</option></select></label>
+      <label id="g-signal-wrap">Signal<select id="g-signal"><option value="stored">Stored curve (raw / Rn)</option><option value="drn">ΔRn with threshold (QuantStudio)</option></select></label>
+      <label id="g-log-wrap" style="min-width:120px"><span><input id="g-log" type="checkbox" style="width:auto"> Log axis</span></label>
+      <label id="g-colourby-wrap">Colour by<select id="g-colourby"><option value="outcome">SOP outcome</option><option value="role">Role</option></select></label>
+      <label id="g-level-wrap">Level<select id="g-level"><option value="end">End-point fluorescence</option><option value="amplitude">Amplitude above background</option></select></label>
+      <label id="g-control-wrap">SOP control<select id="g-control"></select></label>
+    </div>
+    <p class="hint" id="g-note"></p>
+    <div id="g-chart" class="chart-wrap"></div>
+    <p class="hint" id="g-sop"></p>
+    <div class="toolbar">
+      <button class="ghost" id="g-dl-svg" type="button">Save as SVG</button>
+      <button class="ghost" id="g-dl-png" type="button">Save as PNG</button>
+      <button class="ghost" id="g-dl-csv" type="button">Download the data (CSV)</button>
+      <button class="act" id="g-dl-all" type="button">All graphs for this run + all runs (ZIP)</button>
+    </div>
+    <div id="g-table"></div>
+  </div>
+</section>
+
+<!-- ============================== EXPORT ============================== -->
+<section id="tab-export">
+  <div class="card">
+    <h2>Formats other tools read</h2>
+    <p class="sub">Each download states which tool consumes it and what was checked. Where a format has a version that
+       matters, the version that actually works is used rather than the newest or the oldest.</p>
+    <div class="toolbar">
+      <label style="flex:0 1 auto"><span><input id="exp-pseudo" type="checkbox" checked style="width:auto"> Pseudonymise sample names in downloads (controls keep their names; the original .eds path is withheld)</span></label>
+      <button class="ghost" id="dl-pseudo-map" type="button">Download pseudonym mapping (CSV)</button>
+    </div>
+    <p class="hint">The mapping stays on this page unless you download it. Keep it with the laboratory records, not with published data.</p>
+    <div class="grid" id="exports"></div>
+  </div>
+
+  <div class="card metadata-guide" id="metadata-guide">
+    <h2>Machine-readable metadata (JSON-LD)</h2>
+    <button class="ghost" id="dl-metadata">Dataset metadata (JSON-LD)</button>
+  </div>
+  <div class="card" id="diagnostics-card">
+    <h2>Local diagnostics</h2>
+    <p class="sub">Read-only operating evidence for support and review. It contains lifecycle state, limits, timings, file names and error text; it does not contain measurements, Cq values or calls.</p>
+    <div id="diag-summary"></div>
+    <div class="toolbar"><button class="ghost" id="diag-refresh" type="button">Refresh diagnostics</button><button class="ghost" id="diag-save" type="button">Save diagnostics (JSON)</button></div>
+    <details><summary>Recent notices and faults</summary><div id="diag-log" style="margin-top:8px"></div></details>
+  </div>
+  <div class="card">
+    <h2>Ready-to-run scripts</h2>
+    <p class="sub">These assume the downloaded files are in the working directory. They are plain text — read them
+       before running them.</p>
+    <div class="grid" id="scripts"></div>
+    <details><summary>Preview the R script for qpcR</summary><pre id="prev-r"></pre></details>
+    <details><summary>Preview the Python script for rdmlpython / LinRegPCR</summary><pre id="prev-py"></pre></details>
+  </div>
+</section>
+
+<!-- ============================== QUALITY REVIEW ============================== -->
+<section id="tab-review">
+  <div class="card">
+    <h2>Quality review</h2>
+    <p class="sub">Inspect the plate, compare samples, review descriptive statistics, follow controls across
+      experiments, inspect the stored curves, and audit the instrument record. Calculations are descriptive;
+      stored Cq, calls and fluorescence are never replaced.</p>
+    <div class="review-tabs" id="review-tabs">
+      <button data-review="overview" class="on">Overview</button>
+      <button data-review="plate">Plate map</button>
+      <button data-review="compare">Sample comparison</button>
+      <button data-review="statistics">Statistics</button>
+      <button data-review="controls">Control charts</button>
+      <button data-review="runs">Runs and QC</button>
+      <button data-review="curves">Amplification curves</button>
+      <button data-review="rising">Rising curves without result</button>
+      <button data-review="instrument">Instrument records</button>
+    </div>
+
+    <div class="review-sheet on" data-review-sheet="overview">
+      <h2>Review overview</h2>
+      <p class="sub">A compact count of recoveries and review findings. Open the detailed sheets to see every row.</p>
+      <div id="review-overview"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="plate">
+      <h2>Plate map</h2>
+      <p class="sub">Every physical position from the block declared by the instrument, including named positions
+        that were not included in an analysis.</p>
+      <div class="toolbar">
+        <label>Experiment<select id="plate-run"></select></label>
+        <label>Analysis / target<select id="plate-target"></select></label>
+        <label>Colour by<select id="plate-colour">
+          <option value="role">Resolved role</option><option value="subset">Subset membership</option>
+          <option value="type">Instrument sample type</option><option value="call">Stored call</option>
+          <option value="cq">Stored Cq</option>
+        </select></label>
+        <button class="ghost" id="dl-plate-csv">Download plate map (CSV)</button>
+        <button class="ghost" id="dl-plate-png">Save plate map as PNG</button>
+      </div>
+      <div id="review-plate"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="compare">
+      <h2>Sample comparison</h2>
+      <p class="sub">Table-first, side-by-side comparison across every analysis. The review threshold only
+        highlights a difference; it does not replace an assay-specific acceptance rule.</p>
+      <div class="toolbar">
+        <label>Sample 1<select id="cmp-a"></select></label>
+        <label>Sample 2<select id="cmp-b"></select></label>
+        <label>Highlight when |difference| is at least
+          <input id="cmp-limit" type="number" value="1" min="0" step="0.1"></label>
+        <button class="ghost" id="dl-compare">Download comparison (CSV)</button>
+      </div>
+      <div id="review-compare"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="statistics">
+      <h2>Statistics and mistake finding</h2>
+      <p class="sub">Per-analysis descriptive statistics plus targeted review counts for missing curves,
+        uncertain calls, large replicate spread and amplified positions omitted from every analysis.</p>
+      <div class="toolbar">
+        <label>Replicate spread review limit (Cq)
+          <input id="stat-rep-limit" type="number" value="1" min="0" step="0.1"></label>
+        <button class="ghost" id="dl-statistics">Download statistics (CSV)</button>
+      </div>
+      <div id="review-statistics"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="controls">
+      <h2>Control charts</h2>
+      <p class="sub">Levey-Jennings Cq by experiment. Replicate wells are collapsed to one point per run.
+        Limits and Westgard rules are shown only from three or more runs.</p>
+      <div class="toolbar">
+        <label>Control identity<select id="lj-series"></select></label>
+        <label>Name grouping<select id="lj-grouping">
+          <option value="root" selected>Root names (descriptive pooling only)</option>
+          <option value="exact">Keep exact sample names</option>
+        </select></label>
+        <button class="ghost" id="dl-lj-csv">Download chart data (CSV)</button>
+        <button class="ghost" id="dl-lj-png">Save chart as PNG</button>
+      </div>
+      <details class="control-category-editor" id="control-category-editor">
+        <summary>Adjust detected control categories</summary>
+        <p class="hint">The automatic category applies to every dated or capitalised spelling under the
+          same root. Change any row without renaming the samples in the source files.</p>
+        <div id="control-category-table"></div>
+        <button class="ghost" id="reset-control-categories" type="button">Reset automatic categories</button>
+      </details>
+      <div id="review-controls"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="runs">
+      <h2>Runs, QC and forensic log</h2>
+      <p class="sub">One row per run, followed by a traceable log of structural findings, provenance and
+        instrument-versus-name disagreements.</p>
+      <div class="toolbar">
+        <label>Show<select id="fx-level"><option value="attention">Errors and review items</option><option value="error">Errors only</option><option value="all">Everything, including information</option></select></label>
+        <label>Experiment<select id="fx-run"></select></label>
+        <button class="ghost" id="dl-runs">Download runs and forensic log (CSV)</button></div>
+      <div id="review-runs"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="curves">
+      <h2>Amplification curves</h2>
+      <p class="sub">LightCycler 480: raw fluorescence as stored in the AcquisitionStore, with no smoothing and no baseline subtraction. QuantStudio: the stored Rn by default, or the stored ΔRn (with its threshold), the multicomponent signal per dye, or the raw filter-set data. Controls are drawn over ordinary samples so they stay visible.</p>
+      <div class="toolbar">
+        <label>Experiment<select id="curve-run"></select></label>
+        <label>Analysis / target<select id="curve-target"></select></label>
+        <label id="curve-signal-wrap">Signal<select id="curve-signal">
+          <option value="stored">Stored curve (raw / Rn)</option><option value="drn">ΔRn with threshold</option>
+          <option value="mc">Multicomponent (per dye)</option><option value="raw">Raw filter-set data</option></select></label>
+        <label>Sample<select id="curve-sample"></select></label>
+        <label>Colour by<select id="curve-colour"><option value="role">Resolved role</option>
+          <option value="call">Stored call</option><option value="sample">Sample</option>
+          <option value="target">Target / dye / filter</option><option value="well">Well</option><option value="sop">SOP outcome</option></select></label>
+        <label style="min-width:120px"><span><input id="curve-log" type="checkbox"> Log fluorescence axis</span></label>
+        <label style="min-width:120px"><span><input id="curve-thr" type="checkbox" checked> Show threshold</span></label>
+        <button class="ghost" id="dl-curves-csv">Download curves (CSV)</button>
+        <button class="ghost" id="dl-curves-png">Save chart as PNG</button>
+      </div>
+      <div id="review-curves"></div>
+    </div>
+
+    <div class="review-sheet" data-review-sheet="rising">
+      <h2>Rising curves without a result in their own channel</h2>
+      <p class="sub">Each row is a stored amplification trace that rises but has no Cq/Ct or explicit no-crossing result in the same channel. The table keeps the experiment, plate location, channel, other-channel Cq/Ct evidence and raw amplitude. The combined plot normalises each trace to its own baseline and amplitude so curves from different experiments remain visible together; stored fluorescence is unchanged.</p>
+      <div class="toolbar">
+        <label>Experiment<select id="rising-run"></select></label>
+        <label>Show<select id="rising-level"><option value="all">All rising curves</option><option value="error">Errors only</option><option value="review">Review only</option></select></label>
+        <button class="ghost" id="dl-rising-csv">Download rising-curve review (CSV)</button>
+        <button class="ghost" id="dl-rising-png">Save combined rising curves (PNG)</button>
+      </div>
+      <div id="review-rising"></div>
+    </div>
+
+  <div class="review-sheet" data-review-sheet="instrument">
+      <h2>Instrument records</h2>
+      <p class="sub">Run metadata, thermal program, detection channels, analysis objects and the instrument's own replicate statistics — plus, for QuantStudio files, calibrations, software modules, target settings, flag rules, the instrument log and the block temperature trace — decoded verbatim from the file.</p>
+      <div class="toolbar">
+        <label>Experiment<select id="instrument-run"></select></label>
+        <button class="ghost" id="dl-instrument">Download instrument records (ZIP)</button>
+      </div>
+      <div id="review-instrument"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FILE INTEGRITY ============================== -->
+<section id="tab-integrity">
+  <div class="card">
+    <h2>File integrity</h2>
+    <p class="sub">Only file-integrity mismatches are listed here, one per line. Stored Cq values, calls and curves are not changed. A clean list means that no mismatch was detected in the loaded files.</p>
+    <div id="integrity-summary"></div>
+    <div id="integrity-list" class="scroll"></div>
+    <div class="toolbar"><button class="ghost" id="dl-integrity" type="button">Download file-integrity list (CSV)</button></div>
+  </div>
+</section>
+
+</main>
+
+<!-- Status bar: lifecycle phase, work in progress, what is loaded, faults -->
+<!-- Console mode: activated with the status-bar button -->
+<div id="mg" role="application" aria-label="Microgravity console" aria-live="polite">
+  <div id="mg-top">
+    <div id="mg-mode"><span class="dot"></span><span id="mg-mode-text">Ready</span></div>
+    <div id="mg-facts"></div>
+    <nav id="mg-nav" aria-label="Page tabs">
+      <button type="button" data-tab="load">1 · Load files</button>
+      <button type="button" data-tab="sop">2 · SOP</button>
+      <button type="button" data-tab="results">3 · Results</button>
+      <button type="button" data-tab="panel">4 · Control panel</button>
+      <button type="button" data-tab="graphs">5 · Graphs</button>
+      <button type="button" data-tab="review">6 · Quality &amp; forensic review</button>
+      <button type="button" data-tab="export">7 · Open formats</button>
+    <button type="button" data-tab="integrity">8 · File integrity</button>
+    </nav>
+  </div>
+  <div id="mg-body">
+    <div id="mg-count"></div>
+    <div id="mg-card">
+      <div id="mg-head"><span id="mg-pict" aria-hidden="true">▣</span><span id="mg-glyph">●</span><span id="mg-code"></span><span id="mg-title"></span><span id="mg-kind"></span></div>
+      <div id="mg-value"></div>
+      <div id="mg-limits"></div>
+      <div id="mg-state"></div>
+      <div id="mg-evidence"></div>
+      <div id="mg-rows"></div>
+      <div id="mg-chart"></div>
+    </div>
+  </div>
+  <div id="mg-statusbar" aria-live="polite"><span class="mg-sb-dot"></span><b id="mg-sb-state">Ready — no files read</b><span class="mg-sb-sep">|</span><span id="mg-sb-load">memory —</span><span class="mg-sb-sep">·</span><span id="mg-sb-render">export drawn in —</span></div>
+  <div id="mg-actions"></div>
+  <div id="mg-sheet" role="dialog" aria-modal="true" aria-labelledby="mg-sheet-title" hidden>
+    <div class="mg-sheet-box">
+      <h2 id="mg-sheet-title"></h2>
+      <div id="mg-sheet-list"></div>
+      <div id="mg-sheet-foot">0 or Escape · close</div>
+    </div>
+  </div>
+</div>
+
+<!-- Command mode: a typed window for a procedure that has been written down -->
+<div id="cmdm" role="application" aria-label="Command mode">
+  <div id="cmd-top">
+    <div id="cmd-title">Command mode</div>
+    <div id="cmd-status"></div>
+    <div id="cmd-tools">
+      <button type="button" id="cmd-script-toggle">Script</button>
+      <button type="button" id="cmd-clear">Clear</button>
+      <button type="button" id="cmd-close">Close</button>
+    </div>
+  </div>
+  <div id="cmd-out" aria-live="polite"></div>
+  <div id="cmd-script-wrap" hidden>
+    <label for="cmd-script">Paste a procedure, one command per line. Lines starting with # are notes.</label>
+    <textarea id="cmd-script" spellcheck="false" rows="8" placeholder="# report for the current run
+lab Laboratory of molecular biology
+analyst A. Popescu
+title Weekly screening report
+only img:curves
+select img:plate data:cq_values data:runs_and_qc
+pdf weekly_screening"></textarea>
+    <button type="button" id="cmd-script-run">Run</button>
+  </div>
+  <div id="cmd-inwrap"><span id="cmd-prompt">&gt;</span><input id="cmd-in" type="text" spellcheck="false" autocomplete="off" aria-label="command"></div>
+</div>
+
+<!-- Assisted mode: the same catalogue as a checklist -->
+<div id="astm" role="application" aria-label="Assisted mode">
+  <div id="ast-top">
+    <div id="ast-title-text">Assisted mode — choose what goes into the report</div>
+    <div id="ast-count"></div>
+    <button type="button" id="ast-close">Close</button>
+  </div>
+  <div id="ast-body">
+    <div id="ast-form">
+      <label>Laboratory<input type="text" id="ast-lab" placeholder="laboratory name"></label>
+      <label>Analysis by<input type="text" id="ast-analyst" placeholder="who is doing the analysis"></label>
+      <label>Report title<input type="text" id="ast-title" placeholder="left empty, the page names it"></label>
+      <label>Run for run-level figures<select id="ast-run"></select></label>
+      <fieldset id="ast-out">
+        <legend>What to produce</legend>
+        <label><input type="radio" name="ast-out" value="pdf" checked> A PDF report</label>
+        <label><input type="radio" name="ast-out" value="zip"> An archive of the files</label>
+        <label><input type="radio" name="ast-out" value="both"> Both</label>
+      </fieldset>
+      <div id="ast-buttons">
+        <button type="button" id="ast-build" class="primary">Build</button>
+        <button type="button" id="ast-template">Download the selection as CSV</button>
+        <label id="ast-upload">Load a selection CSV<input type="file" id="ast-file" accept=".csv,text/csv"></label>
+      </div>
+      <div id="ast-msg" class="ast-msg"></div>
+    </div>
+    <div id="ast-list"></div>
+  </div>
+</div>
+
+<div id="statusbar" aria-live="polite">
+  <div class="sb-line">
+    <span class="sb-dot"></span>
+    <span id="sb-state"><b>Starting</b></span>
+    <span class="sb-bar" id="sb-progress" hidden><i></i></span>
+    <span id="sb-load"></span>
+    <span class="sb-right">
+      <span id="sb-faults"></span>
+      <button type="button" id="sb-cancel" hidden>Stop</button>
+      <button type="button" id="sb-command">Command mode</button>
+      <button type="button" id="sb-console">Console mode</button>
+      <button type="button" id="sb-assist">Assisted mode</button>
+      <button type="button" id="sb-save">Save status report</button>
+      <button type="button" id="sb-toggle" aria-expanded="false">Details</button>
+    </span>
+  </div>
+  <div class="sb-detail" id="sb-detail"></div>
+</div>
+<div class="cute-friends" aria-hidden="true"><span>🐰</span><span>🐼</span><span>🐣</span></div>
+<div class="cute-toast" id="cute-toast" role="status" aria-live="polite"><b>🐰</b><span></span></div>
+<script>
+/*
+ * Application design notes
+ * ------------------------
+ * This single-file application is organised as three deliberately small
+ * boundaries: file intake/decoding, SOP evaluation, and rendering/export.
+ * Data crosses a boundary as plain validated objects. Rendering is read-only
+ * with respect to the run model; imports are versioned and cancellable; and
+ * failures are recorded as structured events instead of being silently
+ * swallowed. The notes are kept here so the browser file remains auditable
+ * without requiring a build system or a network service.
+ */
+const DEFAULT_LANG="en";
+const ZH_TERMS={
+  "qPCR raw values, open formats, quality control and forensics — LightCycler 480 · QuantStudio 3/5":"qPCR 原始数据、开放格式、质量控制与取证分析 — LightCycler 480 · QuantStudio 3/5",

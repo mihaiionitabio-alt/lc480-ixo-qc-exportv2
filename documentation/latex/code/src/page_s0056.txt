@@ -1,0 +1,3 @@
+  "Saturated well images":"饱和孔图像",
+  "share of well images":"孔图像比例",
+  "Share of well images with at least one saturated pixel.":"至少含一个饱和像素的孔图像比例。",

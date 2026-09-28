@@ -1,0 +1,3 @@
+  "The LED runs hotter than usual: reduced cooling of the optics (fans, filters, room temperature) or higher drive current (B-H10). Heat shortens LED 
+life and can shift its colour; check airflow.":"LED 结温比平时高：光学部件冷却不足（风扇、过滤网、室温）或驱动电流升高（B-H10）。高温缩短 LED 寿命并可
+能改变光谱；检查气流。",

@@ -1,0 +1,123 @@
+\chapter{Software diagrams: method and legend}\label{ch:val-diagrams}
+
+Chapter~\ref{ch:val-functions} ends each symbol's record with a diagram of that symbol. This chapter
+says where the diagrams come from, how to read one, and records the verification of the interactive
+chart view added on 27 September 2026.
+
+\section{What was parsed}
+
+The page is a single HTML file. Its own script was separated from the inlined chart library and
+parsed with a JavaScript parser (acorn, ECMAScript 2022). Every function node in the resulting
+syntax tree was collected: function declarations, function expressions and arrow functions, whether
+named directly or by the variable, property or assignment they are bound to. 830 named functions
+were found, 614 of them at the top level of the script; the remainder are defined inside another
+function and are named on the diagram of the function that contains them. Every name declared at the
+top level that is not a function was treated as shared state; 124 such names were found.
+
+The diagrams are generated from the source by parsing it, not written by hand, so they describe the
+code as it is rather than as it was intended.
+
+\section{How the arrows were derived}
+
+For each function, every call expression in its own body was collected, excluding calls that belong
+to a nested \emph{named} function, which gets its own entry. A call written inside an anonymous
+callback counts as a call by the function that contains it, because that is how the code reads. An
+arrow is drawn only between symbols defined in the page; calls to the browser, to the standard
+library and to array methods are not drawn, as they would swamp the diagram. A function that calls
+itself is not drawn as calling itself.
+
+\section{How to read a diagram}
+
+Left: the functions in the page that call this one. Nothing on the left means the function is either
+an entry point --- an event handler, the boot sequence --- or is reached through a table of
+definitions rather than by name. Centre: the symbol itself, with its arguments as they are written
+in the source, whether it returns a value, and the named helpers defined inside it. Right: the
+functions it calls. Below: in blue, the shared state it mentions; in amber, the effects detected in
+its body --- writing to the document, producing a download, reading a file, browser storage,
+hashing, drawing an interactive figure, wiring events, notifying the user. A symbol with no chips
+computes from its arguments and changes nothing outside itself.
+
+For a declared value rather than a function, the left column lists the functions that mention it.
+At most seven boxes are drawn on each side; any remainder is counted in a final box, and the true
+degree is stated under the centre box.
+
+\section{What a diagram does not tell you}
+
+The arrows are static: they show that a call appears in the source, not how often it runs or whether
+a branch is taken. A function reached only through an event handler or through a table of
+definitions --- the graph renderers, for instance --- shows no callers even though it runs.
+
+\section{Validation record: the interactive chart view}
+
+An on-screen interactive view of the charts was added on 27 September 2026, drawn with an inlined
+chart library so the page remains a single offline file. \texttt{svgPlot} remains the single source
+of truth: it still draws every chart, and its SVG is what the \texttt{.svg} download, the
+\texttt{.png} rasteriser, the ZIP and the export atlas take. The interactive figure is rebuilt from
+the same options object \texttt{svgPlot} was handed. The drawn SVG is not discarded when a figure is
+shown: it is moved into a hidden holder that stays first in document order, so an export that reads
+the chart out of the page still reads the drawn SVG.
+
+Both the page as published and the page proposed to replace it were loaded in a browser, given the
+same 55 demonstration runs, and asked for every entry in the download catalogue. Each entry was
+hashed and the two sets compared.
+
+\begin{center}\small
+\begin{table}[H]\centering\small
+\begin{tabular}{|l|r|}
+\hline
+Page validated & \texttt{index.html}, 2\,021\,629\,B \\ \hline
+Its SHA-256 & \texttt{327183b2\ldots cedd3753} \\ \hline
+Compared against & the page then published, 940\,696\,B, \texttt{8df4472e\ldots b33c770b} \\ \hline
+Runs read from the demonstration set & 55 (\texttt{LC-DEMO-01}) \\ \hline
+Catalogue entries produced by both pages & 101 \\ \hline
+Export entries written by both pages & 139 \\ \hline
+Byte-identical between the two pages & \vPASS{} 138 of 139 \\ \hline
+The one difference & \texttt{README.txt}: its own \texttt{Built:} time, 1.3\,s apart \\ \hline
+Entries that failed to draw & 0 \\ \hline
+Graphs drawn through the interactive layer & 13 of 25 \\ \hline
+Graphs kept on their drawn SVG & 12 of 25 \\ \hline
+Control charts drawn interactively & 20 --- every chart with data in this set \\ \hline
+Control charts kept on their drawn SVG & 38 of 58 defined \\ \hline
+Page errors / console errors & 0 / 0 \\ \hline
+Time to catalogue ready, published page / this page & 215\,ms / 240\,ms \\ \hline
+\end{tabular}
+\caption{Symbols of the area \emph{Validation record: the interactive chart view}}
+\end{table}
+\end{center}
+
+\begin{notebox}[title={\textbf{This record was re-measured on 28 September 2026}}]
+The figures above replace an earlier record taken against a build of 2\,007\,034 bytes. That build
+was made from the page as it stood on 25 September and did not carry three fixes that were already
+in the published page, so it was never released; the page validated here is the interactive layer
+re-applied to the published page itself. Both pages were driven headless with the same 55
+demonstration runs, every catalogue item was selected, and the export set each page wrote was hashed
+entry by entry. The counts for the interactive layer are measured through the catalogue's own export
+path with default options and one instrument, which is why they differ from the earlier record's
+23 of 25: that figure was taken in the interface with a target chosen for each graph.
+\end{notebox}
+
+
+\subsection*{Defects found during the work}
+
+\textbf{A page element shadowed the module loader.} The page contains an element with
+\texttt{id="exports"}. A browser exposes every element id as a window property, so the chart
+library's loader read that element as a module environment and attached itself to it instead of to
+the window. The library was then undefined, with no error raised anywhere. The library is now
+evaluated with \texttt{exports}, \texttt{module} and \texttt{define} shadowed.
+
+\textbf{A stylesheet rule blanked a correctly built figure.} The rules that style a drawn chart apply
+to every SVG inside the chart box, including the layered SVGs an interactive figure is made of,
+giving one of them an opaque white background. The figure was built correctly --- the nodes were all
+present and countable --- but painted over. Only a screenshot revealed it. The rules are now scoped
+away from the interactive figures.
+
+\textbf{An asynchronous draw outlived its own figure.} Drawing finishes asynchronously. Replacing a
+figure before it settled left the remainder of that work with nothing to act on, which surfaced as a
+page error. Figures are now released before their nodes are replaced, and the late rejection is
+handled.
+
+\subsection*{What was deliberately not changed}
+
+The plate heat map and the run acceptance grid draw their own grid of rectangles rather than going
+through \texttt{svgPlot}. They keep their drawn SVG, so their exported bytes are untouched. No stored
+value, no call, no chart mathematics and no exported byte changed.

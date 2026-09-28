@@ -1,0 +1,2 @@
+  "Image analysis takes longer: the instrument computer is slowing (storage, memory) or the plate layout is heavier (more wells, more dyes). Compare w
+ith runs of the same plate layout.":"图像分析时间变长：仪器计算机变慢（存储、内存）或板布局更复杂（更多孔、更多染料）。与相同板布局的运行比较。",

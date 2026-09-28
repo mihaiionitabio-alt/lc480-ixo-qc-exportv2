@@ -1,0 +1,2 @@
+  "The task scheduler falls behind more often: the instrument computer cannot keep up. Watch reply time (B-S1) and processing delay (B-S3); a vendor c
+heck may be needed.":"任务调度器更频繁落后：仪器计算机跟不上。关注响应时间（B-S1）和处理延迟（B-S3）；可能需要厂商检查。",

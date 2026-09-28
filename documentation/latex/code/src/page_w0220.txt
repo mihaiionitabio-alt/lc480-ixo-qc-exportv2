@@ -1,0 +1,2 @@
+  "Count of error and review findings in the forensic log, grouped by area, largest first.":"取证日志中错误与待审核发现的数量，按领域分组，从多到少排
+列。",

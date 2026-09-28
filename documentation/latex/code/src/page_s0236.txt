@@ -1,0 +1,3 @@
+  "Machine-readable metadata (JSON-LD)":"机器可读元数据（JSON-LD）",
+  "Dataset metadata (JSON-LD)":"数据集元数据（JSON-LD）",
+  "Ready-to-run scripts":"可直接运行的脚本",

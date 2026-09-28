@@ -1,0 +1,3 @@
+  "One plate row or column differs from the rest: a blocked or faulty multichannel tip, a pipetting order error, or a block zone problem (B-H5). Look 
+at the plate heat map to see which row or column.":"某一行或列与其他不同：多道移液器吸头堵塞或故障、移液顺序错误，或加热块区域问题（B-H5）。查看板热图
+以确定是哪一行或列。",

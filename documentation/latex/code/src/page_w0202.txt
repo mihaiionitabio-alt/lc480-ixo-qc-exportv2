@@ -1,0 +1,3 @@
+  "Every physical position. Choose what the colour shows: SOP outcome, stored Cq, end fluorescence, background, amplitude, or analysis status (which a
+lso shows wells with signal that are in no analysis, and omitted wells).":"全部物理孔位。可选择颜色表示：SOP 结果、保存的 Cq、终点荧光、背景、幅度或分
+析状态（同时显示有信号但未纳入分析的孔及被忽略的孔）。",

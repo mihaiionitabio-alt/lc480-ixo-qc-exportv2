@@ -1,0 +1,3 @@
+  "More stored calls disagree with the SOP rules: calls were made by hand, the software settings differ from the SOP, or the SOP profile loaded in the
+ page is not the one in use. Review each disagreement.":"与 SOP 规则不一致的存储判读增多：判读为手动、软件设置与 SOP 不同，或页面加载的 SOP 配置不是实
+际使用的。逐项审查不一致之处。",

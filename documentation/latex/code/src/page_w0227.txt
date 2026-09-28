@@ -1,0 +1,4 @@
+  "A pasted table can be tidied and downloaded again, but it carries no fluorescence, so the curve-based exports need an .ixo or .eds file. Paste or u
+pload a table with a sample column and a Cq column — the header names are matched loosely, so exports from most instruments work as they are. A well c
+olumn is used if present.":"粘贴的表格可整理后重新下载，但其中不含荧光数据，因此曲线类导出仍需要 .ixo 文件。请粘贴或上传包含样品列和 Cq 列的表格；系统
+会宽松匹配列名，如有孔位列也会一并使用。",

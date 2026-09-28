@@ -1,0 +1,4 @@
+  "Cooling is slower than usual: the heat sink is not getting rid of heat. First clean the fan filters and check that all fans run and the vents are f
+ree; then check room temperature. If cooling keeps falling while heating stays normal after cleaning, the Peltier/heat-sink contact needs service.":"
+冷却比平时慢：散热器散热不足。先清洁风扇过滤网，检查所有风扇运转、通风口畅通；再检查室温。清洁后若冷却仍持续下降而加热正常，需维修 Peltier/散热器接触
+。",

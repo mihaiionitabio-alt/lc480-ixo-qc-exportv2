@@ -1,0 +1,3 @@
+  "Nothing here is recomputed. Cq is the crossing point the LightCycler stored; concentration is its CalcConc; the call is its own classification. Dow
+nload the table for your own analysis.":"此处不重新计算任何数值。Cq 为 LightCycler 保存的交叉点，浓度来自 CalcConc，判定结果为仪器自身分类。可下载表格
+进行进一步分析。",

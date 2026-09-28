@@ -1,4 +1,5 @@
 % ---- validation part: listings, colours and macros -------------------------
+\usepackage{float}
 \usepackage{listings}
 \tcbuselibrary{listings}
 \definecolor{vkw}{HTML}{0550AE}
@@ -64,9 +65,9 @@
 }
 \lstset{style=vstyle}
 % Draw a rule below every table row.  Long cells wrap rather than being clipped.
-\AtBeginEnvironment{tabular}{\small\sloppy\everycr{\noalign{\hrule height .25pt}}}
-\AtBeginEnvironment{tabularx}{\small\sloppy\everycr{\noalign{\hrule height .25pt}}}
-\AtBeginEnvironment{longtable}{\small\sloppy\everycr{\noalign{\hrule height .25pt}}}
+\AtBeginEnvironment{tabular}{\small\sloppy}
+\AtBeginEnvironment{tabularx}{\small\sloppy}
+\AtBeginEnvironment{longtable}{\small\sloppy}
 \newcommand{\vPASS}{\textcolor{vok}{\textbf{pass}}}
 \newcommand{\vFAIL}{\textcolor{vbad}{\textbf{fail}}}
 \newcommand{\vWARN}[1]{\textcolor{vwarn}{\textbf{#1}}}
@@ -80,3 +81,42 @@
 \makeatother
 
 
+
+% ---- 2026-09-28: one code design for the whole document --------------------
+% The box is the one used by the function-diagram material: near-white with a
+% thin grey rule.  The numbered gutter is the manual's own, brought inside the
+% box so a listing reads as one object.
+\definecolor{codebg}{HTML}{FAFBFC}
+\definecolor{codeborder}{HTML}{D1D5DB}
+\definecolor{codenum}{HTML}{5B7086}
+\lstset{
+  backgroundcolor=\color{codebg},
+  frame=single, framesep=3pt, framerule=0.5pt, rulecolor=\color{codeborder},
+  numbers=left, numbersep=7pt,
+  numberstyle=\ttfamily\tiny\color{codenum},
+  xleftmargin=26pt, framexleftmargin=26pt,
+  aboveskip=6pt, belowskip=6pt,
+}
+% a diagram sits at the end of a function's record
+\newcommand{\fndiag}[1]{%
+  \vhead{Software diagram}%
+  \nopagebreak\noindent\includegraphics[width=\linewidth]{fig/fndiag/#1.pdf}\par\medskip}
+\newcommand{\fnnodiag}[1]{\vhead{Software diagram}\nopagebreak\noindent{\small #1}\par\medskip}
+
+% a private-use character marks a break opportunity inside a long run; it prints as nothing
+\lstset{breaklines=true,breakatwhitespace=false,breakindent=0pt,
+  postbreak=\mbox{\textcolor{codenum}{$\hookrightarrow$}\space},
+  literate={}{{\discretionary{}{}{}}}{0}}
+
+% ---- 2026-09-28: tables that fill the text block, indexes that do not collide ----
+\usepackage{xltabular}          % longtable that also takes X columns
+\keepXColumns
+\setlength{\LTcapwidth}{\linewidth}
+% A figure or table number here reads 19.705; the standard boxes are made for 1.1.
+\makeatletter
+\renewcommand*\l@figure{\@dottedtocline{1}{1.5em}{4.6em}}
+\let\l@table\l@figure
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3.4em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{4.9em}{4.2em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{9.1em}{5.0em}}
+\makeatother

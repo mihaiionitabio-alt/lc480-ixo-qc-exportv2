@@ -1,0 +1,2 @@
+  "The LED is driven with less current than usual: either the LED is brighter than expected (after a service) or the driver is limiting. Check that si
+gnal levels (A-H3) did not drop.":"LED 驱动电流比平时低：LED 比预期更亮（维修后）或驱动器限流。检查信号水平（A-H3）是否下降。",

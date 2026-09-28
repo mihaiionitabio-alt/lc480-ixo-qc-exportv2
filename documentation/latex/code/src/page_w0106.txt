@@ -1,0 +1,3 @@
+  "The new uniformity calibration shows the plate edges relatively darker than before: optics or illumination changed. Check that the calibration was 
+done with the correct plate, and watch for edge effects in the results.":"新的均一性校准显示板边缘相对以前更暗：光学或照明发生变化。检查校准是否使用了
+正确的板，并注意结果中的边缘效应。",

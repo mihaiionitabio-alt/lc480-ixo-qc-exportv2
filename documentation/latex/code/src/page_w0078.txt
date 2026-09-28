@@ -1,0 +1,2 @@
+  "Outside the 99.8 % line → investigate; the funnel keeps small workloads from looking unfair.":"超出 99.8 % 线 → 调查；漏斗图可避免工作量小的人员显
+得不公平。",

@@ -1,0 +1,2 @@
+  "The well spots are larger than before: focus or alignment changed, or a different plate type was used for calibration. Repeat the ROI calibration w
+ith the correct plate.":"孔光斑比以前大：焦距或对准发生变化，或校准使用了不同板型。用正确的板重新进行 ROI 校准。",

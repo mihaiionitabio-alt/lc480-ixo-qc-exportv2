@@ -1,0 +1,2 @@
+  "Cooling rate (10–90 %)":"冷却速率（10–90 %）",
+  "How well the heat sink and fans remove heat. Median of every cooling step.":"散热器和风扇带走热量的能力。取所有降温步骤的中位数。",

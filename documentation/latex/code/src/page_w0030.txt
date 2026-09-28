@@ -1,0 +1,2 @@
+  "This graph uses the QuantStudio instrument log. For a LightCycler run choose “Block temperature trace (LightCycler temperature log)”.":"此图使用 Qu
+antStudio 仪器日志。LightCycler 运行请选择“加热块温度曲线（LightCycler 温度日志）”。",

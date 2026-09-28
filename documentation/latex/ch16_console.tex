@@ -19,7 +19,7 @@ the same thing twice. The counts below are from the corpus used throughout this
 part.
 
 {\small
-\begin{longtable}{@{}p{3.0cm}p{2.1cm}p{6.8cm}p{3.8cm}@{}}
+\begin{xltabular}{\linewidth}{|X|X|X|X|}
 \caption{The eight console views and what each built from the corpus.}\label{tab:console-views} \\
 \toprule \textbf{View} & \textbf{Items} & \textbf{Kinds of item} & \textbf{Severity} \\\midrule\endfirsthead
 \toprule \textbf{View} & \textbf{Items} & \textbf{Kinds of item} & \textbf{Severity} \\\midrule\endhead
@@ -32,7 +32,7 @@ part.
 \texttt{export} & 12 & export 12 & ok 12 \\
 \texttt{integrity} & 1 & integrity 1 & ok 1 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{An item}
@@ -42,7 +42,7 @@ behind it, a small table of detail and the actions that can follow. The item bel
 is the first one the load view builds.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Field} & \textbf{Content} \\\midrule\endfirsthead
 \toprule \textbf{Field} & \textbf{Content} \\\midrule\endhead
 \texttt{code} & LOAD \\
@@ -51,11 +51,11 @@ is the first one the load view builds.
 \texttt{kind} & files read \\
 \texttt{state} & Decoded file metadata and stored results are ready. Open File integrity for any … \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \vhead{The detail rows of that item}
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Row} & \textbf{Value} \\\midrule\endfirsthead
 \toprule \textbf{Row} & \textbf{Value} \\\midrule\endhead
 Stored results & 830 \\
@@ -65,7 +65,7 @@ Instruments & SVT001, Pilot-510, DVT07 \\
 Operators & Demo \\
 Active profile & SC screening — SOP-06 laboratory default v1.0 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{Pictograms}
@@ -97,7 +97,7 @@ the one the code carries; a button in the interface sends exactly the same text,
 so the two paths cannot drift apart.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \caption{Every command the console recognises.}\label{tab:console-commands} \\
 \toprule \textbf{Command} & \textbf{Pattern} \\\midrule\endfirsthead
 \toprule \textbf{Command} & \textbf{Pattern} \\\midrule\endhead
@@ -129,7 +129,7 @@ next run & \texttt{\textasciicircum{}next run\$} \\
 download a file & \texttt{\textasciicircum{}export (\textbackslash\{\}d+)\$} \\
 exit & \texttt{\textasciicircum{}exit\$} \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{The actions offered on the items}
@@ -137,7 +137,7 @@ An item that can be acted on carries its action with it, so the operator never h
 to remember where to go next.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Offered as} & \textbf{Sends} \\\midrule\endfirsthead
 \toprule \textbf{Offered as} & \textbf{Sends} \\\midrule\endhead
 Choose experiment files & \texttt{choose files} \\
@@ -164,7 +164,7 @@ Download this file & \texttt{export 9} \\
 Download this file & \texttt{export 10} \\
 Open File integrity on the page & \texttt{open page integrity} \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{The view builders}

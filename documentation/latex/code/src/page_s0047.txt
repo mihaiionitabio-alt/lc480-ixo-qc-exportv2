@@ -1,0 +1,2 @@
+  "Heat-sink maximum":"散热器最高温度",
+  "Highest heat-sink temperature during the run.":"运行期间散热器的最高温度。",

@@ -1,0 +1,2 @@
+  "One row per run (counts, status) and one per finding: controls, flags, replicate spread, Ct traceability, calibrations and instrument log.":"每个运
+行一行（校验值、计数、状态），每条发现一行：容器校验、对照、标记、重复孔离散度、Ct 可追溯性、校准与仪器日志。",

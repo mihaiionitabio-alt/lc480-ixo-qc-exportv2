@@ -1,0 +1,2 @@
+  "Identical curves or Cq values were found where independent data are expected: copied or duplicated data. This is a forensic finding — secure the or
+iginal files and investigate.":"在应为独立数据处发现相同的曲线或 Cq 值：数据被复制或重复。这是法证发现 — 保全原始文件并调查。",

@@ -1,0 +1,2 @@
+  "An EWMA creeping up means one zone is losing its match; look at the Temperature graph to find which.":"EWMA 缓慢上升表示某一分区逐渐失配；请在温度
+图中查找是哪一个分区。",

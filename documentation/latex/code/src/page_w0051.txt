@@ -1,0 +1,2 @@
+  "The fitted line predicts when 50 % of the starting value is reached — order the lamp before that. A point far below the line is a sudden lamp or li
+ght-guide fault.":"拟合线预测何时降至起始值的 50 % — 请在此之前订购新灯。明显低于拟合线的点表示灯或光导突发故障。",

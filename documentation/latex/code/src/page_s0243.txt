@@ -1,0 +1,4 @@
+  "Experiment":"实验","Analysis / target":"分析 / 目标","Colour by":"着色依据",
+  "Resolved role":"解析角色","Subset membership":"子集归属","Instrument sample type":"仪器样品类型",
+  "Stored call":"保存的判定结果","Stored Cq":"保存的 Cq",
+  "Download plate map (CSV)":"下载板图（CSV）","Save plate map as PNG":"将板图保存为 PNG",

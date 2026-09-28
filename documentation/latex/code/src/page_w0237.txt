@@ -1,0 +1,2 @@
+  "These assume the downloaded files are in the working directory. They are plain text — read them before running them.":"脚本假定下载文件位于工作目录
+中。脚本为纯文本，请在运行前检查。",

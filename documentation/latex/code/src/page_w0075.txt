@@ -1,0 +1,2 @@
+  "Pipetting precision; replicates above Cq 30 are left out so stochastic noise does not hide skill.":"移液精密度；Cq 30 以上的重复孔不计入，以免随机
+噪声掩盖技能差异。",

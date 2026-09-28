@@ -13,7 +13,7 @@ declare what they take and what they give, and talk to each other only through
 those declarations. Five of its rules were applied literally.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \caption{What the component-design method contributed.}\label{tab:struct-component} \\
 \toprule \textbf{Rule taken} & \textbf{Where it shows in the page} \\\midrule\endfirsthead
 \toprule \textbf{Rule taken} & \textbf{Where it shows in the page} \\\midrule\endhead
@@ -23,7 +23,7 @@ commands separated from measurements & a command changes state and says so; a me
 no hidden state & the seven functions that change state are named, a… \\
 deterministic behaviour & the same file gives the same values; the property … \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 The strongest of these is the third. A component that both measures and acts can
@@ -37,7 +37,7 @@ are separated, how data flows between them, what happens when something fails, a
 what the crew sees while it is happening. Six of its requirements shaped the page.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \caption{What the architectural standard contributed.}\label{tab:struct-arch} \\
 \toprule \textbf{Requirement} & \textbf{How the page meets it} \\\midrule\endfirsthead
 \toprule \textbf{Requirement} & \textbf{How the page meets it} \\\midrule\endhead
@@ -48,7 +48,7 @@ bounded resources & a large selection is decoded one file at a time … \\
 the operator is told what is happening & every long operation is a named task with progre… \\
 an interface that works under stress & the console: large type, one fact per item, ever… \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{The shape that came out of it}
@@ -58,7 +58,7 @@ band, and the bands are in the file in the order the data moves through them, so
 the line number of a function says which band it belongs to.
 
 {\small
-\begin{longtable}{@{}lll@{}}
+\begin{xltabular}{\linewidth}{|X|l|l|}
 \toprule \textbf{Band} & \textbf{What lives there} & \textbf{What it may call} \\\midrule\endfirsthead
 \toprule \textbf{Band} & \textbf{What lives there} & \textbf{What it may call} \\\midrule\endhead
 utilities & formatting, hashing, archives, small mathematics & nothing above it \\
@@ -67,7 +67,7 @@ model & the run model, the plate, the curves, the history & utilities \\
 deciders & the profile, the control charts, the forensic review & model, utilities \\
 views & tabs, graphs, the console, the two modes, the exports & everything below \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 \section{What neither method excuses}

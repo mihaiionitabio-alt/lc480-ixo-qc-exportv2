@@ -1,0 +1,3 @@
+  "The block reaches a stable temperature faster than usual. Harmless in itself; if it coincides with a step in overshoot and offset, the controller w
+as re-tuned or recalibrated (start a new baseline).":"加热块比平时更快达到稳定温度。本身无害；若与过冲和偏移的阶跃同时出现，说明控制器已重新调整或校准
+（设定新基线）。",

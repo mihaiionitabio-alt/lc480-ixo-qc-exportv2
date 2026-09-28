@@ -1,0 +1,2 @@
+  "Download relative quantification (CSV)":"下载相对定量结果（CSV）",
+  "Relative quantification (stored)":"相对定量（保存值）",

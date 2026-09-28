@@ -1,0 +1,2 @@
+  "Raw fluorescence as stored in the AcquisitionStore, with no smoothing and no baseline subtraction. Controls are drawn over ordinary samples so they
+ stay visible.":"显示 AcquisitionStore 中保存的原始荧光数据，不进行平滑或基线扣除。对照曲线绘制在普通样品之上，便于查看。",

@@ -1,0 +1,2 @@
+  "Images wait longer before processing: the instrument computer is busy, storage is slow or nearly full. Clear old data on the instrument; persistent
+ rise = vendor check.":"图像处理前等待时间变长：仪器计算机繁忙、存储慢或接近满。清理仪器上的旧数据；持续上升 = 厂商检查。",

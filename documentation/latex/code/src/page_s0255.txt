@@ -1,0 +1,2 @@
+  "Sample":"样品","Log fluorescence axis":"荧光轴使用对数刻度",
+  "Download curves (CSV)":"下载扩增曲线（CSV）","Save chart as PNG":"将图表保存为 PNG",

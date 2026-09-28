@@ -1,0 +1,3 @@
+  "The lamp reference reading is lower than usual: less light reaches the reference sensor. Lamp near the end of its range, light guide or filter dirt
+y, or the lamp was not warmed up. Check lamp intensity % and hours in Tools → Instruments.":"灯参考读数比平时低：到达参考传感器的光减少。灯接近寿命末
+期、光导或滤光片脏污，或灯未充分预热。在 Tools → Instruments 中检查灯强度 % 和使用小时数。",

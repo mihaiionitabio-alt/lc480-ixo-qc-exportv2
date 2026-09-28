@@ -1,0 +1,3 @@
+  "Inspect the plate, compare samples, review descriptive statistics, follow controls across experiments, inspect the stored curves, and audit the ins
+trument record. Calculations are descriptive; stored Cq, calls and fluorescence are never replaced.":"查看板图、比较样品、审核描述性统计、跨实验跟踪对
+照、检查已保存的扩增曲线，并审计仪器记录。所有计算仅用于描述，不会替换仪器保存的 Cq、判定结果或荧光数据。",

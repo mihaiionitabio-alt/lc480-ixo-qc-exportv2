@@ -1,0 +1,3 @@
+  "The 1-s timer fires late: the embedded computer is overloaded or its storage is slow. Timing of steps and readings can drift; if it keeps rising, r
+equest a vendor check of the instrument computer.":"1 秒定时器延迟触发：嵌入式计算机过载或存储慢。步骤和读数的时间可能漂移；若持续上升，请厂商检查仪器
+计算机。",

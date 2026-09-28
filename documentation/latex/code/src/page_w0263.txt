@@ -1,0 +1,2 @@
+  "Stored Cq beside the full amplification curve, one row per cycle. The long-format table for scripts that expect tidy data.":"将保存的 Cq 与完整扩增
+曲线并列，每个循环一行，适用于长格式数据脚本。",

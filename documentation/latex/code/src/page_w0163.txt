@@ -1,0 +1,3 @@
+  "Cycle length varies more within the run: the instrument paused, waited for the computer, or thermal steps took variable time. Irregular cycles can 
+change Cq; check the run timeline graph.":"运行内循环时长波动变大：仪器暂停、等待计算机，或热步骤耗时不一。不规律的循环可能改变 Cq；查看运行时间线图。
+",

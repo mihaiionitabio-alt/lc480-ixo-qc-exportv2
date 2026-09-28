@@ -1,0 +1,4 @@
+  "At the moment of reading the block is warmer than usual compared with the setpoint. Real sample temperature is higher: annealing is more stringent 
+and weakly binding probes can lose signal. Typical after a recalibration (start a new baseline); otherwise verify with a temperature plate. S above it
+s limit = temperature not stable during the reading.":"读数时加热块相对设定值比平时更热。实际样品温度更高：退火更严格，结合较弱的探针可能信号降低。常
+见于重新校准后（设定新基线）；否则用温度验证板核实。S 超限 = 读数期间温度不稳定。",

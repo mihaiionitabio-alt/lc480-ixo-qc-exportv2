@@ -1,0 +1,1 @@
+  "The heat sink stays cooler than usual: cooler room or cleaned fans/filters. Harmless.":"散热器温度比平时低：室温较低或风扇/过滤网已清洁。无害。",

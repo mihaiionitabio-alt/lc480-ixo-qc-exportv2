@@ -1,0 +1,2 @@
+  "Cq of the targets the SOP marks as internal control or reference. The band is the run median ± the SOP maximum IC shift; points above it suggest in
+hibition or low input.":"SOP 标记为内控或参照基因的靶标 Cq。参考线为运行中位数及 SOP 允许的最大内控偏移；高于该线的点提示抑制或模板量低。",

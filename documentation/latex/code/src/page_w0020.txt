@@ -1,0 +1,2 @@
+  "QuantStudio only: per-dye multicomponent signal and every filter-set reading, one row per named well and cycle — the data under the stored Rn.":"仅
+限 QuantStudio：各染料的多组分信号及全部滤光片组读数，每个已命名孔位、每个循环一行，即保存的 Rn 所依据的数据。",

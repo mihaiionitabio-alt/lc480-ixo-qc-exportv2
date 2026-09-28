@@ -1,0 +1,4 @@
+  "Run metadata, thermal program, detection channels, analysis objects and the instrument's own replicate statistics — plus, for QuantStudio files, ca
+librations, software modules, target settings, flag rules, the instrument log and the block temperature trace — decoded verbatim from the file.":"运行
+元数据、容器完整性、热循环程序、检测通道、分析对象及仪器自身的重复统计；QuantStudio 文件另含校准、软件模块、靶标设置、标记规则、仪器日志与模块温度曲线
+，均按原样从文件解码。",

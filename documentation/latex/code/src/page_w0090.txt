@@ -1,0 +1,3 @@
+  "The block moves between these two temperatures faster than usual: after a service, a cleaned fan filter or a cooler room. Harmless; if it coincides
+ with a step in overshoot or offset, start a new baseline on the service date.":"加热块在这两个温度之间的移动比平时快：维修、清洁风扇过滤网或室温较低
+之后。无害；若与过冲或偏移的阶跃同时出现，在维修日期设定新基线。",

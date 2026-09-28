@@ -1,0 +1,2 @@
+  "container checksum matches":"容器校验值一致","container checksum MISMATCH":"容器校验值不一致","no container checksum":"无容器校验值","not checked":
+"未检查",

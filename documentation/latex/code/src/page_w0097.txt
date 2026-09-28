@@ -1,0 +1,2 @@
+  "The six block zones agree better than usual. Harmless; typical after a block service or recalibration.":"六个区域温度一致性比平时更好。无害；常见于
+加热块维修或校准后。",

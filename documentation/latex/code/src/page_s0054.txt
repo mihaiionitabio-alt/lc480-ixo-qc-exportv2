@@ -1,0 +1,5 @@
+  "LED junction temperature (maximum)":"LED 结温（最高值）",
+  "Hottest LED junction temperature in the run.":"运行中 LED 结温的最高值。",
+  "Higher than usual = LED cooling problem; LEDs age faster when hot.":"高于平常 = LED 散热问题；LED 在高温下老化更快。",
+  "Automatic integration time / exposure":"自动积分时间 / 曝光时间",
+  "Both instruments lengthen exposure automatically when the signal is weak.":"信号较弱时，两种仪器都会自动延长曝光时间。",

@@ -1,0 +1,2 @@
+  "The instrument raises current to keep light output: a rising trend is LED ageing; the line predicts when it reaches the limit you set.":"仪器会提高
+电流以维持光输出：上升趋势表示 LED 老化；拟合线可预测何时达到您设定的限值。",

@@ -1,0 +1,2 @@
+  "Filter-wheel moves are faster than usual: typical after a motor service or firmware change. Harmless.":"滤光轮移动比平时快：常见于电机维修或固件更
+新后。无害。",

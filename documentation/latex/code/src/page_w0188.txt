@@ -1,0 +1,4 @@
+  "State your laboratory's own acceptance and interpretation rules once, save them as a profile file and reuse it. The stored Cq values and calls are 
+never changed; every outcome says which rule produced it, and every export carries the profile's name, version and SHA-256.":"将本实验室的验收与结果解
+释规则一次性写好，保存为配置文件并重复使用。保存的 Cq 值与判定不会被修改；每个结果都注明产生它的规则，每个导出文件都带有配置文件的名称、版本与 SHA-256
+。",

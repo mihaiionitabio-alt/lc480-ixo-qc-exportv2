@@ -1,0 +1,3 @@
+  "The instrument answers the PC more slowly: embedded computer busy or ageing, storage slow, or network/USB problems. Rising together with B-S2/B-S3 
+= instrument computer; alone = PC or connection.":"仪器响应 PC 变慢：嵌入式计算机繁忙或老化、存储慢或网络/USB 问题。与 B-S2/B-S3 同时上升 = 仪器计算机
+；单独上升 = PC 或连接。",

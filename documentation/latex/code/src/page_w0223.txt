@@ -1,0 +1,3 @@
+  "Reads a finished .ixo experiment, hands you the numbers the instrument stored, and writes them in formats that open-source tools read directly. Not
+hing is uploaded; everything runs in this page.":"读取已完成的 .ixo 实验，呈现仪器保存的数值，并导出为开源工具可直接读取的格式。数据不会上传，所有处理
+均在本页面中完成。",

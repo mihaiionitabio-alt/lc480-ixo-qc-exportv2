@@ -1,0 +1,2 @@
+  "Offset (X̄) and stability (S) of the block while the camera reads, one subgroup per run.":"相机读数时模块温度的偏差（X̄）和稳定性（S），每次运行为
+一个子组。",

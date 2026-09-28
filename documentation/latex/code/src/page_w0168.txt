@@ -1,0 +1,2 @@
+  "More forensic findings than usual for one run: open the Quality & forensic review tab for this run and resolve each finding before accepting the re
+sults.":"单次运行的法证发现比平时多：打开该运行的质量与法证审查页，在接受结果前逐项处理。",

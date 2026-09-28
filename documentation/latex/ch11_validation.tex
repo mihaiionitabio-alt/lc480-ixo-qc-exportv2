@@ -1,0 +1,28 @@
+\chapter{Validation and limits}\label{ch:validation}
+
+\section{Earlier control-mapping revision checks}
+The earlier control-mapping browser checks cover explicit sample/control matching, negative matrix versus endogenous reference, retained aliquot
+identity, valid and invalid extraction dates, a positive event after a zero-event baseline, incomplete baselines, mixed
+instrument cohorts and the review-only laboratory scaffold. The generator rebuilds the synthetic runs, screenshots,
+control-chart ZIP and code extracts from the revised HTML. Its identifier check examines textual metadata, including
+Map values; coincidental simulated numeric measurements are not treated as identifiers.
+
+The original release reported cell-by-cell agreement with vendor exports. That historical result is not a new validation
+claim for this revision. The correction does not intentionally change the vendor export layout. Laboratory acceptance,
+historical method applicability and the meaning of ambiguous aliquot labels still require verification.
+
+Current Roche-reconstruction and offline performance checks are described in Chapter~\ref{ch:roche}. The earlier gallery was retained; the complete browser screenshot suite was not rerun for this update.
+
+\section{Known limits}
+\begin{itemize}
+\item The page reads what the instrument stored. It cannot verify real well temperatures (a temperature-verification plate does)
+      or light output (a fluorescence reference plate does).
+\item Lamp hours, plate loading and the error log of the LightCycler are not in the \texttt{.ixo}; they are in an Instrument Problem
+      Report. QuantStudio LED hours and drawer events are not in the \texttt{.eds}.
+\item The QuantStudio \texttt{messages.log} is not a documented interface; a firmware update may rename lines. Version changes are
+      marked on every chart.
+\item Control limits need about 20 runs per instrument and program; before that the tiles stay grey.
+\item Operator charts need an individual operator per run; a shared account groups all runs under one name.
+\item The synthetic data set of this document is illustrative. Its trends and faults were chosen to show the charts, not to
+      describe the behaviour of any instrument.
+\end{itemize}

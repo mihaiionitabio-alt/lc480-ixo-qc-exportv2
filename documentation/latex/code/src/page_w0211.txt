@@ -1,0 +1,3 @@
+  "From the instrument log inside the .eds file: sample block mean, heated cover and the spread between block zones, against minutes from the first re
+cord. The dashed line is the SOP maximum zone spread.":"来自 .eds 文件中的仪器日志：样品模块平均温度、热盖温度与模块分区温差，横轴为距第一条记录的分钟
+数。虚线为 SOP 允许的最大分区温差。",

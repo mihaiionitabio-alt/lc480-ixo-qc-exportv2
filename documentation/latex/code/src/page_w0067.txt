@@ -1,0 +1,2 @@
+  "Non-zero requires checking algorithm, precision, stored settings and provenance; it does not establish post-analysis editing.":"不为零 = 分析后设置
+或数据被修改（需取证跟进）。",

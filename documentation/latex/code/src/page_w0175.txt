@@ -1,0 +1,2 @@
+  "More wells have low Cq confidence: noisy or odd-shaped curves from weak probes, bubbles, evaporation or low template. Review the flagged curves bef
+ore reporting.":"低 Cq 置信度的孔增多：弱探针、气泡、蒸发或模板少导致的噪声或异常曲线。报告前审查被标记的曲线。",

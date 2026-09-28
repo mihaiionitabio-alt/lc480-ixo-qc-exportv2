@@ -1,0 +1,2 @@
+  "The run finished faster than usual for this protocol: the run was stopped early or cycles were skipped. Check the run was complete before accepting
+ results.":"该程序运行比平时快：运行被提前停止或跳过了循环。接受结果前确认运行完整。",

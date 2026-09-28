@@ -1,0 +1,3 @@
+  "The positive control amplified later than its range: degraded control or reagents, inhibition, pipetting error, or weaker optics. A trend over seve
+ral runs points to reagent storage or lot ageing; a single point to the run itself.":"阳性对照扩增晚于其范围：对照或试剂降解、抑制、移液错误或光学变弱
+。多次运行的趋势指向试剂储存或批次老化；单个点指向该运行本身。",

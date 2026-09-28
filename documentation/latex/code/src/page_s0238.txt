@@ -1,0 +1,3 @@
+  "Preview the R script for qpcR":"预览 qpcR 的 R 脚本",
+  "Preview the Python script for rdmlpython / LinRegPCR":"预览 rdmlpython / LinRegPCR 的 Python 脚本",
+  "Quality review":"质量审核",

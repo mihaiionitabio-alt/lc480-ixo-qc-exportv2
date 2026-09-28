@@ -1,0 +1,6 @@
+  "Repeat / inconclusive / invalid rate by operator (funnel)":"按操作人员的重复 / 不确定 / 无效率（漏斗图）",
+  "Analytical robustness per person.":"每个人的分析稳健性。",
+  "As B-O5.":"同 B-O5。",
+  "Manual interventions":"人工干预",
+  "share of settings":"设置比例",
+  "Share of settings or wells changed by hand.":"人工修改的设置或孔所占比例。",

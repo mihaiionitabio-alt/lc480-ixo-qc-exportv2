@@ -55,7 +55,7 @@ RDML reader and precedence & 10497--10778 & \texttt{rdmlParse}, \texttt{runProce
 The validation used the attached RDML XSD, format notes, workshop files and the .eds instrument RDML/EDS pair. XML structure was checked against the supplied schema vocabulary; browser execution and cross-format comparison were the release checks. No laboratory identifiers or measurements were added to the synthetic documentation data.
 
 \begin{center}\small
-\begin{longtable}{@{}p{5.0cm}p{2.3cm}p{2.2cm}p{4.0cm}@{}}\toprule
+\begin{xltabular}{\linewidth}{|X|X|X|X|}\toprule
 Input set & Files / runs & Result & Check\\\midrule\endfirsthead
 \toprule Input set & Files / runs & Result & Check\\\midrule\endhead
 Workshop RDML examples & 6 / 12 & 0 page errors & raw, third-party and melt fields decoded\\
@@ -65,7 +65,7 @@ RAS RDML + matching EDS & 2 / 4 & instrument wins & RDML marked \texttt{supersed
 Synthetic fixture oracle & 1 fixture & 27/27 & Cq sentinel, controls, rising curves and stored-value invariants\\
 Stateful function probe & 4 fixtures & 444 passes & 8 mutating functions rerun in isolation\\
 SC screening corpus & 351 files & 8,775 graphs & 0 decode, tab, graph or export errors in the prior regression run\\\bottomrule
-\end{longtable}
+\end{xltabular}
 \end{center}
 
 \section{Release result}

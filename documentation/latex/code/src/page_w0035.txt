@@ -1,0 +1,2 @@
+  "How fast the Peltier elements heat the block. Median of every heating step in the run.":"帕尔帖元件加热模块的速度。取本次运行所有升温步骤的中位数。
+",

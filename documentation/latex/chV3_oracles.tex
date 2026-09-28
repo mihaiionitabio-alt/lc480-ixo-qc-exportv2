@@ -13,7 +13,7 @@ something that must be true of the values and fails loudly when it is not, witho
 naming the function that has to keep it true.
 
 {\small
-\begin{longtable}{@{}lll@{}}
+\begin{xltabular}{\linewidth}{|X|l|l|}
 \caption{The property checks and their results.}\label{tab:val-invariants} \\
 \toprule \textbf{Property} & \textbf{Why it must hold} & \textbf{Result} \\\midrule\endfirsthead
 \toprule \textbf{Property} & \textbf{Why it must hold} & \textbf{Result} \\\midrule\endhead
@@ -34,7 +34,7 @@ every distinct finding accounts for al… & no occurrence may be lost in groupin
 integrity findings stay out of the rev… & they belong to tab 8 only & pass \\
 exports do not change stored values & building a report must never touch the… & pass \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \par 16 of 16 hold on this build.
 
@@ -48,7 +48,7 @@ agreement is evidence and a disagreement is a defect. It is the input that found
 the sentinel defect of 23~September, which no real file had exposed.
 
 {\small
-\begin{longtable}{@{}lll@{}}
+\begin{xltabular}{\linewidth}{|X|l|l|}
 \caption{Checks against a run whose answers were fixed first.}\label{tab:val-synthetic} \\
 \toprule \textbf{Check} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
 \toprule \textbf{Check} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
@@ -80,7 +80,7 @@ the run is rejected & \texttt{Rejected} & pass \\
 every sample becomes invalid & \texttt{True} & pass \\
 stored Cq is unchanged by rejection & \texttt{[30, 30]} & pass \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \par 27 of 27 hold. The outcome tally the page produced from the fixture: Positive 26, Negative 13, Repeat 3, Inconclusive 0, Invalid run 0, Control pass 5, Control fail 0.
 
@@ -97,7 +97,7 @@ graph drawn, every console view built and every export button pressed with the
 download path stubbed and counted.
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Tab} & \textbf{Result} \\\midrule\endfirsthead
 \toprule \textbf{Tab} & \textbf{Result} \\\midrule\endhead
 \texttt{load} & rendered \\
@@ -109,10 +109,10 @@ download path stubbed and counted.
 \texttt{export} & rendered \\
 \texttt{integrity} & rendered \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Review view} & \textbf{Result} \\\midrule\endfirsthead
 \toprule \textbf{Review view} & \textbf{Result} \\\midrule\endhead
 \texttt{overview} & rendered \\
@@ -124,10 +124,10 @@ download path stubbed and counted.
 \texttt{curves} & rendered \\
 \texttt{instrument} & rendered \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Console view} & \textbf{Result} \\\midrule\endfirsthead
 \toprule \textbf{Console view} & \textbf{Result} \\\midrule\endhead
 \texttt{load} & 4 items \\
@@ -139,12 +139,12 @@ download path stubbed and counted.
 \texttt{export} & 12 items \\
 \texttt{integrity} & 1 items \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 \vhead{Graphs}25 graphs were drawn; none failed.\par
 
 {\small
-\begin{longtable}{@{}ll@{}}
+\begin{xltabular}{\linewidth}{|X|l|}
 \toprule \textbf{Export button} & \textbf{Result} \\\midrule\endfirsthead
 \toprule \textbf{Export button} & \textbf{Result} \\\midrule\endhead
 \texttt{Download pseudonym mapping (CSV)} & 1 file(s) \\
@@ -155,10 +155,10 @@ download path stubbed and counted.
 \texttt{Download R script} & 1 file(s) \\
 \texttt{Download Python script} & 1 file(s) \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 {\small
-\begin{longtable}{@{}lr@{}}
+\begin{xltabular}{\linewidth}{|X|r|}
 \caption{Every file the export buttons produced.}\label{tab:val-exports} \\
 \toprule \textbf{File written} & \textbf{Bytes} \\\midrule\endfirsthead
 \toprule \textbf{File written} & \textbf{Bytes} \\\midrule\endhead
@@ -166,26 +166,26 @@ download path stubbed and counted.
 \texttt{3\_runs\_2026-09-24-12-05-04\_cq\_values.csv} & 183,649 \\
 \texttt{3\_runs\_2026-09-24-12-05-04\_runs\_qc\_forensic\_log.csv} & 7,790 \\
 \texttt{MULTIPLEX-4CH\_the instrument software\_export.txt} & 1,195,442 \\
-\texttt{CORPUS-EDS-3\_the instrument software\_export.txt} & 1,423,438 \\
+\texttt{FILE-4-WITHDRAWN\_the instrument software\_export.txt} & 1,423,438 \\
 \texttt{MULTIPLEX-4CH\_the instrument software\_export.xlsx} & 8,097,639 \\
-\texttt{CORPUS-EDS-3\_the instrument software\_export.xlsx} & 9,529,573 \\
+\texttt{FILE-4-WITHDRAWN\_the instrument software\_export.xlsx} & 9,529,573 \\
 \texttt{MULTIPLEX-4CH\_01\_Standard\_curve\_GAPDH.rdes.tsv} & 513,796 \\
 \texttt{MULTIPLEX-4CH\_02\_Standard\_curve\_FZD1.rdes.tsv} & 505,575 \\
 \texttt{MULTIPLEX-4CH\_03\_Standard\_curve\_APOE.rdes.tsv} & 505,626 \\
 \texttt{MULTIPLEX-4CH\_04\_Standard\_curve\_CD44.rdes.tsv} & 504,249 \\
 \texttt{ABSQUANT-DEMO\_01\_Abs\_Quant\_2nd\_Derivative\_Max.rdes.tsv} & 726,222 \\
 \texttt{ABSQUANT-DEMO\_02\_Abs\_Quant\_Fit\_Points.rdes.tsv} & 697,737 \\
-\texttt{CORPUS-EDS-3.rdes.tsv} & 1,604,310 \\
+\texttt{FILE-4-WITHDRAWN.rdes.tsv} & 1,604,310 \\
 \texttt{MULTIPLEX-4CH.rdml} & 773,381 \\
 \texttt{ABSQUANT-DEMO.rdml} & 903,424 \\
-\texttt{CORPUS-EDS-3.rdml} & 563,338 \\
+\texttt{FILE-4-WITHDRAWN.rdml} & 563,338 \\
 \texttt{MULTIPLEX-4CH\_01\_Standard\_curve\_GAPDH\_qpcR\_curves.csv} & 40,573 \\
 \texttt{MULTIPLEX-4CH\_02\_Standard\_curve\_FZD1\_qpcR\_curves.csv} & 39,896 \\
 \texttt{MULTIPLEX-4CH\_03\_Standard\_curve\_APOE\_qpcR\_curves.csv} & 40,027 \\
 \texttt{MULTIPLEX-4CH\_04\_Standard\_curve\_CD44\_qpcR\_curves.csv} & 39,050 \\
 \texttt{ABSQUANT-DEMO\_01\_Abs\_Quant\_2nd\_Derivative\_Max\_qpcR\_curves.csv} & 19,980 \\
 \texttt{ABSQUANT-DEMO\_02\_Abs\_Quant\_Fit\_Points\_qpcR\_curves.csv} & 19,980 \\
-\texttt{CORPUS-EDS-3\_qpcR\_curves.csv} & 103,439 \\
+\texttt{FILE-4-WITHDRAWN\_qpcR\_curves.csv} & 103,439 \\
 \texttt{3\_runs\_2026-09-24-12-05-05\_melting\_peaks.csv} & 17,731 \\
 \texttt{3\_runs\_2026-09-24-12-05-05\_experiment\_settings.csv} & 12,845 \\
 \texttt{3\_runs\_2026-09-24-12-05-05\_multicomponent\_raw.csv} & 1,549,824 \\
@@ -195,7 +195,7 @@ download path stubbed and counted.
 \texttt{analyse\_with\_qpcR.R} & 1,661 \\
 \texttt{analyse\_with\_linregpcr.py} & 1,486 \\
 \bottomrule
-\end{longtable}}
+\end{xltabular}}
 
 
 The exercise raised 0 page errors.

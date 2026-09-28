@@ -1,0 +1,3 @@
+  "This operator's NTC positive rate is higher than expected for their workload: outside 95 % = watch, outside 99.8 % = investigate the operator's con
+tamination-control technique (gloves, tips, workflow) and offer retraining.":"该操作人员的 NTC 阳性率高于其工作量下的预期：超出 95 % = 关注，超出 99.8
+ % = 调查其防污染技术（手套、吸头、流程）并提供再培训。",

@@ -1,0 +1,3 @@
+  "More wells have a stored Ct that the page cannot reproduce from the stored data: manual threshold or baseline changes, a software version change, o
+r data edited after analysis. Check the analysis settings and the audit trail.":"存储 Ct 无法由存储数据复现的孔增多：手动修改了阈值或基线、软件版本变
+化，或分析后数据被编辑。检查分析设置和审计追踪。",

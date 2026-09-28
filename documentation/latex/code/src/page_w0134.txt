@@ -1,0 +1,3 @@
+  "The heat sink runs hotter than usual: airflow is reduced (dust in filters, failing fan, instrument too close to a wall) or the room is warm. Expect
+ slower cooling (B-H2). Clean filters, check fans and clearance.":"散热器温度比平时高：气流减少（过滤网积尘、风扇故障、仪器离墙太近）或室温偏高。冷却
+会变慢（B-H2）。清洁过滤网，检查风扇和间距。",

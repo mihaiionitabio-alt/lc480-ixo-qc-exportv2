@@ -1,0 +1,2 @@
+  "Processing time per run. The dashed line is the SOP maximum; bars above it are flagged in the run acceptance.":"各运行的处理时间。虚线为 SOP 上限；
+超过上限的柱在运行验收中被标记。",

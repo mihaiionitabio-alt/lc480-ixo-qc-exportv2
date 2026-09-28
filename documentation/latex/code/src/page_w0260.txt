@@ -1,0 +1,2 @@
+  "The CSV contains every cycle of every selected curve, including curves hidden by overlap in the chart.":"CSV 包含每条已选曲线的全部循环数据，包括图
+中因重叠而不可见的曲线。",

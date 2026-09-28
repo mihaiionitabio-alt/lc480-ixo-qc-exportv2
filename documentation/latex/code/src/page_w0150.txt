@@ -1,0 +1,3 @@
+  "The cover takes longer to lower: the drive mechanism is wearing or needs lubrication, or something obstructs it (tall plate, misplaced adapter). Th
+e trend forecasts when the drive will reach its limit.":"热盖下降时间变长：驱动机构磨损或需润滑，或有阻碍（板太高、适配器放错）。趋势线预测驱动何时达
+到极限。",

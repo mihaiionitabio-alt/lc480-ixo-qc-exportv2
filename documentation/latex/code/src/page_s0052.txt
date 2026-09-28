@@ -1,0 +1,7 @@
+  "Lamp drift within a run":"运行内的灯强度漂移",
+  "% change in the run":"运行内变化 %",
+  "How much the lamp intensity changes during one run.":"一次运行中灯强度的变化幅度。",
+  "Growing drift is typical of a lamp near the end of its life.":"漂移逐渐增大是灯接近寿命终点的典型表现。",
+  "LED drive current":"LED 驱动电流",
+  "current (as logged)":"电流（日志原值）",
+  "Median LED current during the run.":"运行期间 LED 电流的中位数。",

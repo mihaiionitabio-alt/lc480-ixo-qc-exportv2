@@ -27,7 +27,7 @@ Metadata values are wrapped to the report text width. A list of run names is one
 \section{Catalogue}
 The current catalogue contains 25 graph figures, 18 data tables and 58 individual control-chart figures: 101 concrete items. The selectors \texttt{cc:all}, \texttt{cc:hardware}, \texttt{cc:software}, \texttt{cc:method} and \texttt{cc:operator} expand to the relevant chart items. The same item builders supply assisted mode, command mode, PDF and ZIP output.
 
-\begin{longtable}{@{}p{3.1cm}p{4.0cm}p{7.0cm}@{}}
+\begin{xltabular}{\linewidth}{|X|X|X|}
 \toprule Identifier & Kind & Options \\\midrule\endfirsthead
 \toprule Identifier & Kind & Options \\\midrule\endhead
 \texttt{img:*} & figure & target, metric, signal, log, colourby, level, control \\
@@ -35,7 +35,7 @@ The current catalogue contains 25 graph figures, 18 data tables and 58 individua
 \texttt{rec:*} & table & run, rows, pseudo \\
 \texttt{cc:*} & figure & type, x, phase1, lambda, L, k, h, specLo, specHi, warnAhead, charts \\
 \bottomrule
-\end{longtable}
+\end{xltabular}
 
 \section{Command grammar}
 \begin{itemize}

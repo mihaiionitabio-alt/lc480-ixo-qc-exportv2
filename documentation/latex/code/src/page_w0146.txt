@@ -1,0 +1,2 @@
+  "More filter-wheel moves take longer than 500 ms: mechanical wear or intermittent motor problems, often before the median (B-H14) changes. Plan a se
+rvice.":"超过 500 ms 的滤光轮移动增多：机械磨损或电机间歇性问题，通常早于中位数（B-H14）的变化。安排维修。",

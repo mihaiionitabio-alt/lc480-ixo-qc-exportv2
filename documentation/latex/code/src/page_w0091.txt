@@ -1,0 +1,5 @@
+  "The block needs longer to move between these two temperatures, so every cycle spends less time at the programmed hold. A cooling transition (e.g. 9
+5 → 60 °C) getting longer = heat removal (clean fan filters, check fans, room temperature); heating transitions getting longer = Peltier ageing. Sampl
+es spend more time at intermediate temperatures, which can favour non-specific annealing.":"加热块在这两个温度之间移动所需时间变长，每个循环在设定保持
+温度的时间减少。降温转换（如 95 → 60 °C）变长 = 散热问题（清洁风扇过滤网、检查风扇、室温）；升温转换变长 = Peltier 老化。样品在中间温度停留更久，可能
+促进非特异性退火。",

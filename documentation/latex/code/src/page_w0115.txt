@@ -1,0 +1,3 @@
+  "Background fluorescence is lower than usual: less dye or probe in the wells, a different plate or seal, less volume, or weaker excitation. Check re
+agent preparation and the exposure chart (B-H11).":"背景荧光比平时低：孔中染料或探针减少、板或封膜不同、体积减少或激发光减弱。检查试剂配制和曝光图（B-
+H11）。",

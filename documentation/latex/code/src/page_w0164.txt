@@ -1,0 +1,3 @@
+  "More temperature-log intervals exceed 500 ms: the control loop is being interrupted — computer overload or a communication problem. Temperature con
+trol may be affected; check the thermal charts.":"超过 500 ms 的温度日志间隔增多：控制回路被打断 — 计算机过载或通信问题。温度控制可能受影响；查看热相
+关图表。",

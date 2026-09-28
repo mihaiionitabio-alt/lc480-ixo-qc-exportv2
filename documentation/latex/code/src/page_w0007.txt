@@ -1,0 +1,2 @@
+  "Pseudonymise sample names in downloads (controls keep their names; the original .eds path is withheld)":"下载时对样品名称进行假名化（对照保留原名；
+不输出 .eds 原始路径）",

@@ -1,0 +1,2 @@
+  "Run acceptance and the interpretation of every sample, recomputed as soon as the profile changes.":"运行验收与每个样品的结果解释，配置文件一经修改
+即重新计算。",
