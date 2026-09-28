@@ -8,6 +8,6 @@
   - What changed in this rebuild: [`DOCUMENTATION_REBUILD_2026-09-28.md`](documentation/DOCUMENTATION_REBUILD_2026-09-28.md)
   - Revalidation record: [`documentation/revalidation_2026-09-28/`](documentation/revalidation_2026-09-28/README.md)
   - Command mode reference: [`COMMAND_MODE.md`](documentation/COMMAND_MODE.md)
-- Previous documentation (25 September 2026): [`qPCR_QC_forensics_documentation_2026-09-25_base_plus_update.pdf`](documentation/qPCR_QC_forensics_documentation_2026-09-25_base_plus_update.pdf) and the [`documentation/`](documentation/) folder
+- Earlier update records and notes: [`documentation/`](documentation/)
 
 The browser page runs locally in the browser and does not upload experiment files.

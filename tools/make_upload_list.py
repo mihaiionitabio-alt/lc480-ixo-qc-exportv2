@@ -50,8 +50,8 @@ add('documentation/qPCR_QC_forensics_documentation_2026-09-28.pdf',
     'documentation/qPCR_QC_forensics_documentation_2026-09-28.pdf')
 add('documentation/revalidation_2026-09-28','documentation/revalidation_2026-09-28')
 for f in ('BASE_PDF_UPDATE_2026-09-25.md','DOCUMENTATION_REBUILD_2026-09-28.md','DOCUMENTATION_UPDATE_2026-09-27.md',
-          'README.md','RDML_SUPPORT_PLAN_2026-09-24.md','RDML_SUPPORT_IMPLEMENTED_2026-09-24.md',
-          'qPCR_QC_forensics_documentation_2026-09-25_base_plus_update.pdf'):
+          'README.md','RDML_SUPPORT_PLAN_2026-09-24.md','RDML_SUPPORT_IMPLEMENTED_2026-09-24.md'):
+    # the 25 September PDF is superseded by the 28 September one and no longer published
     add('documentation/'+f,'documentation/'+f)
 add('validation_2026-09-24','validation')
 # lab12_fixture_20260923 holds 12 REAL laboratory .ixo runs (30 MB).  Binary, so a

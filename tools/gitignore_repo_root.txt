@@ -42,11 +42,11 @@ _minted-*/
 documentation/latex/main.pdf
 
 # --- NOT ignored, deliberately ----------------------------------------------
-# documentation/qPCR_QC_forensics_documentation_2026-09-25_base_plus_update.pdf
-#   is a PUBLISHED ADDRESS and must stay tracked.  So is
-#   qPCR_QC_forensics_documentation_2026-09-28.pdf, which documentation/latex/ builds
-#   and which is committed despite its 53 MB.  The superseded 1,409-page document of
-#   27 September is not committed.
+# documentation/qPCR_QC_forensics_documentation_2026-09-28.pdf is the current
+#   document, which documentation/latex/ builds, and is committed despite its 53 MB.
+#   The superseded 25 September PDF was removed from the tree on 28 September (it
+#   remains in the history); the 1,409-page document of 27 September was never
+#   committed.
 # documentation/latex/chV2_functions.tex is committed here: it IS the source of
 #   record - 705 subsections, 705 diagrams.  The .before_singlecolumn_20260924 file
 #   it was generated from (676 subsections, no diagrams) is not committed; the
