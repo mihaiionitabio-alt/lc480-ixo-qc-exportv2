@@ -1,0 +1,32 @@
+const MG_COMMANDS=[
+  {re:/^next$/, id:"next", act:()=>mgGo(1)},
+  {re:/^previous$/, id:"previous", act:()=>mgGo(-1)},
+  {re:/^chart previous$/, id:"chart previous", act:()=>mgGoChart(-1)},
+  {re:/^chart next$/, id:"chart next", act:()=>mgGoChart(1)},
+  {re:/^chart close$/, id:"chart close", act:()=>{MG.chart=false;}},
+  {re:/^zoom (in|out|reset)$/,id:"zoom",act:m=>mgZoom(m[1])},
+  {re:/^pan (left|right|up|down)$/,id:"pan",act:m=>mgPan(m[1]==="left"?-180:m[1]==="right"?180:0,m[1]==="up"?-140:m[1]==="down"?140:0)},
+  {re:/^(chart type|type menu|change chart type)$/, id:"chart type menu", act:()=>mgSheet("type")},
+  {re:/^(x axis|axis menu|change x axis)$/, id:"x axis menu", act:()=>mgSheet("axis")},
+  {re:/^(close|close menu|dismiss)$/, id:"close menu", act:()=>mgSheetClose()},
+  {re:/^read files$/, id:"read staged files", act:()=>mgReadFiles()},
+  {re:/^choose files$/, id:"choose experiment files", act:()=>mgChooseFiles()},
+  {re:/^open page (load|sop|results|panel|graphs|review|export|integrity)$/, id:"leave for a page", act:m=>mgLeaveTo(m[1])},
+  {re:/^(view )?(load files|load view|sop view|results view|panel view|charts view|review view|formats view|file integrity|integrity view)$/, id:"console view",
+    act:m=>{const k={"load files":"load","load view":"load","sop view":"sop","results view":"results","panel view":"panel","charts view":"panel","review view":"review","formats view":"export","file integrity":"integrity","integrity view":"integrity"}[m[2]];if(k)mgScope(k);}},
+  {re:/^type (i|ewma|cusum|trend|xbars|p|u|c|funnel)$/, id:"chart type", act:m=>mgSetChartType(m[1])},
+  {re:/^x (order|date|hours|cycles)$/, id:"x axis", act:m=>mgSetChartAxis(m[1])},
+  {re:/^theme light$/, id:"theme light", act:()=>{MG.theme="light";}},
+  {re:/^theme dark$/, id:"theme dark", act:()=>{MG.theme="dark";}},
+  {re:/^chart$/, id:"chart", act:()=>{MG.chart=!MG.chart;}},
+  {re:/^panel$/, id:"panel", act:()=>mgLeaveTo("panel")},
+  {re:/^results$/, id:"results", act:()=>mgLeaveTo("results")},
+  {re:/^review$/, id:"review", act:()=>mgLeaveTo("review")},
+  {re:/^load$/, id:"load", act:()=>mgLeaveTo("load")},
+  {re:/^sop$/, id:"sop", act:()=>mgLeaveTo("sop")},
+  {re:/^next run$/, id:"next run", act:()=>{if(RUNS.length>1){MG.run=((MG.run|0)+1)%RUNS.length;mgRefresh();}}},
+  {re:/^export (\d+)$/, id:"download a file", act:m=>{
+     const i=Number(m[1]),it=(MG.exports||[])[i];
+     if(it)try{it.run();appNotice&&appNotice("console","Download requested: "+it.title);}catch(e){appError("console:export",e);}}},
+  {re:/^exit$/, id:"exit", act:()=>mgClose()}
+];

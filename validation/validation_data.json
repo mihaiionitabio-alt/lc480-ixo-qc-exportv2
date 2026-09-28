@@ -1,0 +1,2114 @@
+{
+ "records": [
+  {
+   "fn": "rdmlEntries",
+   "case": "CORPUS-RDML-1.rdml",
+   "inputDesc": "ArrayBuffer of CORPUS-RDML-1.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 69062
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 1120493,
+    "crcVerified": true,
+    "declaredSize": 1120493,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlEntries",
+   "case": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "inputDesc": "ArrayBuffer of GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 23248
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 426891,
+    "crcVerified": true,
+    "declaredSize": 426891,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlEntries",
+   "case": "example_1_raw.rdml",
+   "inputDesc": "ArrayBuffer of example_1_raw.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 252382
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 2672358,
+    "crcVerified": true,
+    "declaredSize": 2672358,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlEntries",
+   "case": "example_2_tm_annotated.rdml",
+   "inputDesc": "ArrayBuffer of example_2_tm_annotated.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 252547
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 2673978,
+    "crcVerified": true,
+    "declaredSize": 2673978,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlEntries",
+   "case": "example_3_linregpcr.rdml",
+   "inputDesc": "ArrayBuffer of example_3_linregpcr.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 260964
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 2734096,
+    "crcVerified": true,
+    "declaredSize": 2734096,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlEntries",
+   "case": "example_4_interrun.rdml",
+   "inputDesc": "ArrayBuffer of example_4_interrun.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 262745
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 2746864,
+    "crcVerified": true,
+    "declaredSize": 2746864,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlEntries",
+   "case": "example_LCGreen_raw.rdml",
+   "inputDesc": "ArrayBuffer of example_LCGreen_raw.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "bytes": 52635
+   },
+   "output": {
+    "count": 1,
+    "names": [
+     "rdml_data.xml"
+    ],
+    "firstBytes": 480689,
+    "crcVerified": true,
+    "declaredSize": 480689,
+    "method": 8
+   },
+   "expect": "exactly one entry named rdml_data.xml, CRC-32 verified by readZip",
+   "pass": true
+  },
+  {
+   "fn": "rdmlIsContainer",
+   "case": "positive — RDML entries",
+   "inputDesc": "entries from rdmlEntries(CORPUS-RDML-1.rdml)",
+   "inputProvenance": "D",
+   "input": {
+    "names": [
+     "rdml_data.xml"
+    ]
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "rdmlIsContainer",
+   "case": "negative — QuantStudio entry names",
+   "inputDesc": "literal entry list with the two .eds top-level XML names",
+   "inputProvenance": "S",
+   "input": {
+    "names": [
+     "experiment.xml",
+     "plate_setup.xml"
+    ]
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "rdmlIsContainer",
+   "case": "negative — empty list",
+   "inputDesc": "[]",
+   "inputProvenance": "S",
+   "input": {
+    "names": []
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKids",
+   "case": "<run> → <react>",
+   "inputDesc": "the first <run> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "D",
+   "input": {
+    "host": "<run id=\"Run001\">",
+    "child": "react"
+   },
+   "output": {
+    "count": 96,
+    "firstLocalName": "react"
+   },
+   "expect": "96 element(s)",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKids",
+   "case": "<run> → <pcrFormat>",
+   "inputDesc": "the first <run> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "D",
+   "input": {
+    "host": "<run id=\"Run001\">",
+    "child": "pcrFormat"
+   },
+   "output": {
+    "count": 1,
+    "firstLocalName": "pcrFormat"
+   },
+   "expect": "1 element(s)",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKids",
+   "case": "<run> → <absent>",
+   "inputDesc": "the first <run> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "D",
+   "input": {
+    "host": "<run id=\"Run001\">",
+    "child": "absent"
+   },
+   "output": {
+    "count": 0,
+    "firstLocalName": null
+   },
+   "expect": "0 element(s)",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKids",
+   "case": "<react> → <data>",
+   "inputDesc": "the first <react> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "D",
+   "input": {
+    "host": "<react id=\"1\">",
+    "child": "data"
+   },
+   "output": {
+    "count": 2,
+    "firstLocalName": "data"
+   },
+   "expect": "2 element(s)",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKids",
+   "case": "<data> → <adp>",
+   "inputDesc": "the first <data> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "D",
+   "input": {
+    "host": "<data id=\"\">",
+    "child": "adp"
+   },
+   "output": {
+    "count": 40,
+    "firstLocalName": "adp"
+   },
+   "expect": "40 element(s)",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKids",
+   "case": "null host",
+   "inputDesc": "rdmlKids(null,\"react\")",
+   "inputProvenance": "S",
+   "input": {
+    "host": null,
+    "child": "react"
+   },
+   "output": {
+    "count": 0
+   },
+   "expect": "empty array, no throw",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKid",
+   "case": "present",
+   "inputDesc": "<run> of CORPUS-RDML-1.rdml, name \"pcrFormat\"",
+   "inputProvenance": "D",
+   "input": {
+    "name": "pcrFormat"
+   },
+   "output": {
+    "localName": "pcrFormat"
+   },
+   "expect": "the <pcrFormat> element",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKid",
+   "case": "absent",
+   "inputDesc": "<run>, name \"noSuchElement\"",
+   "inputProvenance": "S",
+   "input": {
+    "name": "noSuchElement"
+   },
+   "output": null,
+   "expect": "null",
+   "pass": true
+  },
+  {
+   "fn": "rdmlText",
+   "case": "cqDetectionMethod",
+   "inputDesc": "<run> of CORPUS-RDML-1.rdml, name \"cqDetectionMethod\"",
+   "inputProvenance": "D",
+   "input": {
+    "name": "cqDetectionMethod"
+   },
+   "output": "other",
+   "expect": "\"other\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlText",
+   "case": "instrument",
+   "inputDesc": "<run> of CORPUS-RDML-1.rdml, name \"instrument\"",
+   "inputProvenance": "D",
+   "input": {
+    "name": "instrument"
+   },
+   "output": "QuantStudio Dx",
+   "expect": "\"QuantStudio Dx\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlText",
+   "case": "backgroundDeterminationMethod",
+   "inputDesc": "<run> of CORPUS-RDML-1.rdml, name \"backgroundDeterminationMethod\"",
+   "inputProvenance": "D",
+   "input": {
+    "name": "backgroundDeterminationMethod"
+   },
+   "output": "Background Subtraction",
+   "expect": "\"Background Subtraction\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlText",
+   "case": "dataCollectionSoftware",
+   "inputDesc": "<run> of CORPUS-RDML-1.rdml, name \"dataCollectionSoftware\"",
+   "inputProvenance": "D",
+   "input": {
+    "name": "dataCollectionSoftware"
+   },
+   "output": "QuantStudio 3 and 5 Software\n                1.6.1",
+   "expect": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+   "pass": true,
+   "note": "FINDING V-1: the element spans two source lines, so the returned string keeps the newline and the indentation of the file. rdmlText trims only the ends."
+  },
+  {
+   "fn": "rdmlText",
+   "case": "notPresent",
+   "inputDesc": "<run> of CORPUS-RDML-1.rdml, name \"notPresent\"",
+   "inputProvenance": "S",
+   "input": {
+    "name": "notPresent"
+   },
+   "output": "",
+   "expect": "\"\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlText",
+   "case": "FINDING V-1 — read with rdmlText but complex in the schema",
+   "inputDesc": "every element the reader reads with rdmlText, in all seven corpus files",
+   "inputProvenance": "R",
+   "input": {
+    "elementsChecked": 19,
+    "files": 7
+   },
+   "output": {
+    "affected": 2,
+    "rows": [
+     {
+      "file": "CORPUS-RDML-1.rdml",
+      "element": "dataCollectionSoftware",
+      "occurrences": 1,
+      "complexOccurrences": 1,
+      "children": [
+       "name",
+       "version"
+      ],
+      "textContentAsRead": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+      "correctReading": "name=\"QuantStudio 3 and 5 Software\" version=\"1.6.1\""
+     },
+     {
+      "file": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+      "element": "dataCollectionSoftware",
+      "occurrences": 1,
+      "complexOccurrences": 1,
+      "children": [
+       "name",
+       "version"
+      ],
+      "textContentAsRead": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+      "correctReading": "name=\"QuantStudio 3 and 5 Software\" version=\"1.6.1\""
+     }
+    ]
+   },
+   "expect": "characterisation only; see the finding",
+   "pass": true,
+   "note": "rdmlText concatenates the children of a complex element with the file's own indentation. Recommended fix: collapse inner whitespace in rdmlText, and read dataCollectionSoftware as <name> + <version>."
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "cyc",
+   "inputDesc": "the literal text as it appears in the corpus (<cyc> spelling)",
+   "inputProvenance": "R (verbatim string)",
+   "input": {
+    "xml": "<host><v>1.0</v></host>"
+   },
+   "output": 1,
+   "expect": "1",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "fluor",
+   "inputDesc": "the literal text as it appears in the corpus (<fluor> spelling)",
+   "inputProvenance": "R (verbatim string)",
+   "input": {
+    "xml": "<host><v>263682.75</v></host>"
+   },
+   "output": 263682.75,
+   "expect": "263682.75",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "cq",
+   "inputDesc": "the literal text as it appears in the corpus (<cq> spelling)",
+   "inputProvenance": "R (verbatim string)",
+   "input": {
+    "xml": "<host><v>30.3979</v></host>"
+   },
+   "output": 30.3979,
+   "expect": "30.3979",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "empty",
+   "inputDesc": "literal text, constructed for this test",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<host><v></v></host>"
+   },
+   "output": null,
+   "expect": "null",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "text",
+   "inputDesc": "literal text, constructed for this test",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<host><v>not a number</v></host>"
+   },
+   "output": null,
+   "expect": "null",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "negative",
+   "inputDesc": "the literal text as it appears in the corpus (<negative> spelling)",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<host><v>-2.5</v></host>"
+   },
+   "output": -2.5,
+   "expect": "-2.5",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "exponent",
+   "inputDesc": "the literal text as it appears in the corpus (<exponent> spelling)",
+   "inputProvenance": "R (verbatim string)",
+   "input": {
+    "xml": "<host><v>6.36e-10</v></host>"
+   },
+   "output": 6.36e-10,
+   "expect": "6.36e-10",
+   "pass": true
+  },
+  {
+   "fn": "rdmlNum",
+   "case": "absent child",
+   "inputDesc": "<host/> with no <v>",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<host/>"
+   },
+   "output": null,
+   "expect": "null",
+   "pass": true
+  },
+  {
+   "fn": "rdmlAttrId",
+   "case": "react → sample",
+   "inputDesc": "the first <react> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "D",
+   "input": {
+    "name": "sample"
+   },
+   "output": "PC_RAS",
+   "expect": "the sample id string",
+   "pass": true
+  },
+  {
+   "fn": "rdmlAttrId",
+   "case": "data → tar",
+   "inputDesc": "the first <data> of that react",
+   "inputProvenance": "D",
+   "input": {
+    "name": "tar"
+   },
+   "output": "RAS",
+   "expect": "the target id string",
+   "pass": true
+  },
+  {
+   "fn": "rdmlAttrId",
+   "case": "absent",
+   "inputDesc": "<data>, name \"noSuch\"",
+   "inputProvenance": "S",
+   "input": {
+    "name": "noSuch"
+   },
+   "output": "",
+   "expect": "\"\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "CORPUS-RDML-1.rdml [run 1/1]",
+   "inputDesc": "rdml_data.xml of CORPUS-RDML-1.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 1120493,
+    "version": "1.2"
+   },
+   "output": {
+    "run": "CORPUS-RDML-1 / Run001",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 192,
+    "curves": 96,
+    "tmWells": 0,
+    "cycles": 40,
+    "meltPoints": 0,
+    "analyses": 2,
+    "kinds": "absquant",
+    "withCq": 34,
+    "cqMin": 26.198,
+    "cqMax": 37.34,
+    "cqAtCeilingConverted": 158,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "CORPUS-RDML-1",
+    "runId": "Run001",
+    "platform": "QuantStudio Dx",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "PC_RAS",
+     "target": "RAS",
+     "CpRaw": 30.3979,
+     "cqSource": "other",
+     "curveLen": 40,
+     "curveHead": [
+      263682.75,
+      264135.25,
+      265524.62
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 0
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml [run 1/1]",
+   "inputDesc": "rdml_data.xml of GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 426891,
+    "version": "1.2"
+   },
+   "output": {
+    "run": "GeneExpression_ddCt_Fast_Adv_MMx_10uL / Run001",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 72,
+    "curves": 72,
+    "tmWells": 0,
+    "cycles": 40,
+    "meltPoints": 0,
+    "analyses": 2,
+    "kinds": "absquant",
+    "withCq": 66,
+    "cqMin": 25.445,
+    "cqMax": 30.266,
+    "cqAtCeilingConverted": 6,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "GeneExpression_ddCt_Fast_Adv_MMx_10uL",
+    "runId": "Run001",
+    "platform": "QuantStudio Dx",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "",
+     "target": "RNaseP",
+     "CpRaw": null,
+     "cqSource": "other",
+     "curveLen": 40,
+     "curveHead": [
+      0.95674616,
+      0.95647573,
+      0.95506555
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 0
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_1_raw.rdml [run 1/3]",
+   "inputDesc": "rdml_data.xml of example_1_raw.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2672358,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 1",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 149,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 1",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_1",
+     "target": "SCX",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      1.44,
+      1.43,
+      1.42
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 149
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_1_raw.rdml [run 2/3]",
+   "inputDesc": "rdml_data.xml of example_1_raw.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2672358,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 2",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 151,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 2",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_7",
+     "target": "SCX",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      1.08,
+      1.1,
+      1.1
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 151
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_1_raw.rdml [run 3/3]",
+   "inputDesc": "rdml_data.xml of example_1_raw.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2672358,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 3",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 152,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 3",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Embryo_1",
+     "target": "SCX",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      1.31,
+      1.29,
+      1.31
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 152
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_2_tm_annotated.rdml [run 1/3]",
+   "inputDesc": "rdml_data.xml of example_2_tm_annotated.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2673978,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 1",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 149,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 1",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_1",
+     "target": "SCX",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      1.44,
+      1.43,
+      1.42
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 149
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_2_tm_annotated.rdml [run 2/3]",
+   "inputDesc": "rdml_data.xml of example_2_tm_annotated.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2673978,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 2",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 151,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 2",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_7",
+     "target": "SCX",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      1.08,
+      1.1,
+      1.1
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 151
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_2_tm_annotated.rdml [run 3/3]",
+   "inputDesc": "rdml_data.xml of example_2_tm_annotated.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2673978,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 3",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 152,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 3",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Embryo_1",
+     "target": "SCX",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      1.31,
+      1.29,
+      1.31
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 152
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_3_linregpcr.rdml [run 1/3]",
+   "inputDesc": "rdml_data.xml of example_3_linregpcr.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2734096,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 1",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 149,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 90,
+    "cqMin": 19.077,
+    "cqMax": 34.001,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 6,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 1",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_1",
+     "target": "SCX",
+     "CpRaw": 33.692,
+     "cqSource": "LinRegPCR",
+     "curveLen": 45,
+     "curveHead": [
+      1.44,
+      1.43,
+      1.42
+     ],
+     "rdml": {
+      "N0": 6.36e-10,
+      "ampEff": 1.893,
+      "ampEffMet": "LinRegPCR",
+      "meltTemp": 85.635,
+      "excl": "",
+      "note": "",
+      "meltPoints": 149
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_3_linregpcr.rdml [run 2/3]",
+   "inputDesc": "rdml_data.xml of example_3_linregpcr.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2734096,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 2",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 151,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 88,
+    "cqMin": 18.997,
+    "cqMax": 37.547,
+    "cqAtCeilingConverted": 0,
+    "excl": 6,
+    "note": 13,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 2",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_7",
+     "target": "SCX",
+     "CpRaw": 34.874,
+     "cqSource": "LinRegPCR",
+     "curveLen": 45,
+     "curveHead": [
+      1.08,
+      1.1,
+      1.1
+     ],
+     "rdml": {
+      "N0": 1.67e-10,
+      "ampEff": 1.915,
+      "ampEffMet": "LinRegPCR",
+      "meltTemp": null,
+      "excl": "product with different melting temperatures detected",
+      "note": "no product with expected melting temperature;no plateau;Cq > 34;N0 unreliable;indiv PCR eff is 1.666 < 1.7",
+      "meltPoints": 151
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_3_linregpcr.rdml [run 3/3]",
+   "inputDesc": "rdml_data.xml of example_3_linregpcr.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2734096,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 3",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 152,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 88,
+    "cqMin": 22.912,
+    "cqMax": 36.394,
+    "cqAtCeilingConverted": 0,
+    "excl": 22,
+    "note": 14,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 3",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Embryo_1",
+     "target": "SCX",
+     "CpRaw": 32.96,
+     "cqSource": "LinRegPCR",
+     "curveLen": 45,
+     "curveHead": [
+      1.31,
+      1.29,
+      1.31
+     ],
+     "rdml": {
+      "N0": 6.25e-10,
+      "ampEff": 1.921,
+      "ampEffMet": "LinRegPCR",
+      "meltTemp": 85.59,
+      "excl": "",
+      "note": "",
+      "meltPoints": 152
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_4_interrun.rdml [run 1/3]",
+   "inputDesc": "rdml_data.xml of example_4_interrun.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2746864,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 1",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 149,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 90,
+    "cqMin": 19.077,
+    "cqMax": 34.001,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 6,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 1",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_1",
+     "target": "SCX",
+     "CpRaw": 33.692,
+     "cqSource": "LinRegPCR",
+     "curveLen": 45,
+     "curveHead": [
+      1.44,
+      1.43,
+      1.42
+     ],
+     "rdml": {
+      "N0": 6.36e-10,
+      "ampEff": 1.893,
+      "ampEffMet": "LinRegPCR",
+      "meltTemp": 85.635,
+      "excl": "",
+      "note": "",
+      "meltPoints": 149
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_4_interrun.rdml [run 2/3]",
+   "inputDesc": "rdml_data.xml of example_4_interrun.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2746864,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 2",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 151,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 88,
+    "cqMin": 18.997,
+    "cqMax": 37.547,
+    "cqAtCeilingConverted": 0,
+    "excl": 6,
+    "note": 13,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 2",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Adult_7",
+     "target": "SCX",
+     "CpRaw": 34.874,
+     "cqSource": "LinRegPCR",
+     "curveLen": 45,
+     "curveHead": [
+      1.08,
+      1.1,
+      1.1
+     ],
+     "rdml": {
+      "N0": 1.67e-10,
+      "ampEff": 1.915,
+      "ampEffMet": "LinRegPCR",
+      "meltTemp": null,
+      "excl": "product with different melting temperatures detected",
+      "note": "no product with expected melting temperature;no plateau;Cq > 34;N0 unreliable;indiv PCR eff is 1.666 < 1.7",
+      "meltPoints": 151
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_4_interrun.rdml [run 3/3]",
+   "inputDesc": "rdml_data.xml of example_4_interrun.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 2746864,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "Experiment / Run 3",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 95,
+    "curves": 95,
+    "tmWells": 95,
+    "cycles": 45,
+    "meltPoints": 152,
+    "analyses": 7,
+    "kinds": "absquant+tm",
+    "withCq": 88,
+    "cqMin": 22.912,
+    "cqMax": 36.394,
+    "cqAtCeilingConverted": 0,
+    "excl": 22,
+    "note": 14,
+    "integrity": "no container checksum",
+    "experimentId": "Experiment",
+    "runId": "Run 3",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "Embryo_1",
+     "target": "SCX",
+     "CpRaw": 32.96,
+     "cqSource": "LinRegPCR",
+     "curveLen": 45,
+     "curveHead": [
+      1.31,
+      1.29,
+      1.31
+     ],
+     "rdml": {
+      "N0": 6.25e-10,
+      "ampEff": 1.921,
+      "ampEffMet": "LinRegPCR",
+      "meltTemp": 85.59,
+      "excl": "",
+      "note": "",
+      "meltPoints": 152
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "example_LCGreen_raw.rdml [run 1/1]",
+   "inputDesc": "rdml_data.xml of example_LCGreen_raw.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "xmlChars": 480689,
+    "version": "1.3"
+   },
+   "output": {
+    "run": "LCGreen / Run with Artifacts",
+    "rows": 8,
+    "cols": 12,
+    "plate": "8x12",
+    "wells": 50,
+    "curves": 50,
+    "tmWells": 50,
+    "cycles": 45,
+    "meltPoints": 152,
+    "analyses": 1,
+    "kinds": "absquant+tm",
+    "withCq": 0,
+    "cqMin": null,
+    "cqMax": null,
+    "cqAtCeilingConverted": 0,
+    "excl": 0,
+    "note": 0,
+    "integrity": "no container checksum",
+    "experimentId": "LCGreen",
+    "runId": "Run with Artifacts",
+    "platform": "RDML",
+    "firstWell": {
+     "well": "A01",
+     "pos": 0,
+     "channel": 0,
+     "sample": "A_0_C_100",
+     "target": "CRE",
+     "CpRaw": null,
+     "cqSource": "RDML file",
+     "curveLen": 45,
+     "curveHead": [
+      11.06,
+      11.28,
+      11.55
+     ],
+     "rdml": {
+      "N0": null,
+      "ampEff": null,
+      "ampEffMet": "",
+      "meltTemp": null,
+      "excl": "",
+      "note": "",
+      "meltPoints": 152
+     }
+    }
+   },
+   "expect": "every react inside the declared plate; one well per react×data; curves ordered by cycle",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "wrong root element",
+   "inputDesc": "\"<notrdml/>\"",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<notrdml/>"
+   },
+   "output": "throws: not an RDML document (root element is <notrdml>)",
+   "expect": "throws, names the root element",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "not well formed",
+   "inputDesc": "\"<rdml version=\\\"1.3\\\"><<\"",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<rdml version=\"1.3\"><<"
+   },
+   "output": "throws: RDML XML is not well formed: This page contains the following errors:error on line 1 at co …[149 chars]",
+   "expect": "throws, reports the parser error",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse",
+   "case": "no experiment",
+   "inputDesc": "a valid but empty RDML root",
+   "inputProvenance": "S",
+   "input": {
+    "xml": "<rdml version=\"1.3\" xmlns=\"http://www.rdml.org\"/>"
+   },
+   "output": "throws: RDML file contains no <experiment>/<run>",
+   "expect": "throws, says there is no run",
+   "pass": true
+  },
+  {
+   "fn": "runProcessingState",
+   "case": "instrument",
+   "inputDesc": "the .eds decoded by the page intake",
+   "inputProvenance": "R/D",
+   "input": {
+    "file": "CORPUS-RDML-1.eds",
+    "instrument": "272524866",
+    "bg": "",
+    "methods": [],
+    "wellsWithCq": 34
+   },
+   "output": {
+    "state": "instrument",
+    "reason": "decoded from the instrument's own container"
+   },
+   "expect": "state \"instrument\"",
+   "pass": true
+  },
+  {
+   "fn": "runProcessingState",
+   "case": "vendor-export",
+   "inputDesc": "CORPUS-RDML-1.rdml — names an instrument, no re-analysis tool",
+   "inputProvenance": "R/D",
+   "input": {
+    "file": "CORPUS-RDML-1.rdml",
+    "instrument": "QuantStudio Dx",
+    "bg": "Background Subtraction",
+    "methods": [],
+    "wellsWithCq": 34
+   },
+   "output": {
+    "state": "vendor-export",
+    "reason": "exchange export of an analysis made by the instrument's software on QuantStudio Dx"
+   },
+   "expect": "state \"vendor-export\"",
+   "pass": true
+  },
+  {
+   "fn": "runProcessingState",
+   "case": "third-party",
+   "inputDesc": "example_3 — ampEffMet = LinRegPCR",
+   "inputProvenance": "R/D",
+   "input": {
+    "file": "example_3_linregpcr.rdml",
+    "instrument": "",
+    "bg": "LinRegPCR, constant",
+    "methods": [
+     "LinRegPCR"
+    ],
+    "wellsWithCq": 90
+   },
+   "output": {
+    "state": "third-party",
+    "tool": "LinRegPCR",
+    "reason": "the results in this file were produced by LinRegPCR, not by the instrument's software"
+   },
+   "expect": "state \"third-party\"",
+   "pass": true
+  },
+  {
+   "fn": "runProcessingState",
+   "case": "raw",
+   "inputDesc": "example_1 — no cq anywhere",
+   "inputProvenance": "R/D",
+   "input": {
+    "file": "example_1_raw.rdml",
+    "instrument": "",
+    "bg": "",
+    "methods": [],
+    "wellsWithCq": 0
+   },
+   "output": {
+    "state": "raw",
+    "reason": "the file carries fluorescence data only: no Cq, and no analysis by any software"
+   },
+   "expect": "state \"raw\"",
+   "pass": true
+  },
+  {
+   "fn": "runProcessingState",
+   "case": "no run",
+   "inputDesc": "runProcessingState(null)",
+   "inputProvenance": "S",
+   "input": null,
+   "output": {
+    "state": "unknown",
+    "reason": "no run"
+   },
+   "expect": "state \"unknown\", no throw",
+   "pass": true
+  },
+  {
+   "fn": "runIsInstrumentAnalysed",
+   "case": "instrument",
+   "inputDesc": "the instrument run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "instrument"
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "runIsInstrumentAnalysed",
+   "case": "vendor-export",
+   "inputDesc": "the vendor-export run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "vendor-export"
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "runIsInstrumentAnalysed",
+   "case": "third-party",
+   "inputDesc": "the third-party run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "third-party"
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "runIsInstrumentAnalysed",
+   "case": "raw",
+   "inputDesc": "the raw run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "raw"
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "sopProcessingApplicability",
+   "case": "instrument",
+   "inputDesc": "the instrument run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "instrument"
+   },
+   "output": {
+    "applicable": true,
+    "reason": "decoded from the instrument's own container",
+    "state": "instrument"
+   },
+   "expect": "applicable = true",
+   "pass": true
+  },
+  {
+   "fn": "sopProcessingApplicability",
+   "case": "vendor-export",
+   "inputDesc": "the vendor-export run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "vendor-export"
+   },
+   "output": {
+    "applicable": true,
+    "reason": "exchange export of an analysis made by the instrument's software on QuantStudio Dx",
+    "state": "vendor-export"
+   },
+   "expect": "applicable = true",
+   "pass": true
+  },
+  {
+   "fn": "sopProcessingApplicability",
+   "case": "third-party",
+   "inputDesc": "the third-party run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "third-party"
+   },
+   "output": {
+    "applicable": false,
+    "state": "third-party",
+    "reason": "third-party analysis — the results in this file were produced by LinRegPCR, not by the instrument's software"
+   },
+   "expect": "applicable = false",
+   "pass": true
+  },
+  {
+   "fn": "sopProcessingApplicability",
+   "case": "raw",
+   "inputDesc": "the raw run above",
+   "inputProvenance": "D",
+   "input": {
+    "state": "raw"
+   },
+   "output": {
+    "applicable": false,
+    "state": "raw",
+    "reason": "raw exchange file — the file carries fluorescence data only: no Cq, and no analysis by any software"
+   },
+   "expect": "applicable = false",
+   "pass": true
+  },
+  {
+   "fn": "rdmlStem",
+   "case": "CORPUS-RDML-1.rdml",
+   "inputDesc": "a corpus file name",
+   "inputProvenance": "R (file name)",
+   "input": {
+    "name": "CORPUS-RDML-1.rdml"
+   },
+   "output": "2026 06 15 CORPUS-RDML-1",
+   "expect": "\"2026 06 15 CORPUS-RDML-1\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlStem",
+   "case": "CORPUS-RDML-1.eds",
+   "inputDesc": "a corpus file name",
+   "inputProvenance": "R (file name)",
+   "input": {
+    "name": "CORPUS-RDML-1.eds"
+   },
+   "output": "2026 06 15 CORPUS-RDML-1",
+   "expect": "\"2026 06 15 CORPUS-RDML-1\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlStem",
+   "case": "Demo  Abs_Quant.ixo",
+   "inputDesc": "a corpus file name",
+   "inputProvenance": "S",
+   "input": {
+    "name": "Demo  Abs_Quant.ixo"
+   },
+   "output": "demo abs quant",
+   "expect": "\"demo abs quant\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlStem",
+   "case": "(empty)",
+   "inputDesc": "the empty string",
+   "inputProvenance": "S",
+   "input": {
+    "name": ""
+   },
+   "output": "",
+   "expect": "\"\"",
+   "pass": true
+  },
+  {
+   "fn": "rdmlKeyOf",
+   "case": "name and experiment",
+   "inputDesc": "the RDML run of the reference pair",
+   "inputProvenance": "D",
+   "input": {
+    "name": "CORPUS-RDML-1.rdml",
+    "experimentId": "CORPUS-RDML-1"
+   },
+   "output": [
+    "2026 06 15 CORPUS-RDML-1",
+    "CORPUS-RDML-1"
+   ],
+   "expect": "two keys",
+   "pass": true,
+   "note": "FINDING V-2: the name key is stem-normalised (\"2026 06 15 CORPUS-RDML-1\") but the experiment key is only lower-cased (\"CORPUS-RDML-1\"). The two spellings of the same identity do not match each other."
+  },
+  {
+   "fn": "applyRawFilePriority",
+   "case": "FINDING V-2 — export renamed, only the experiment id matches",
+   "inputDesc": "the same .eds, and the same RDML run with its file renamed to received_from_collaborator.rdml",
+   "inputProvenance": "D (one field changed on a real run object)",
+   "input": {
+    "vendorFile": "CORPUS-RDML-1.eds",
+    "vendorExperiment": "CORPUS-RDML-1",
+    "rdmlFile": "received_from_collaborator.rdml",
+    "rdmlExperiment": "CORPUS-RDML-1",
+    "vendorKeys": [
+     "2026 06 15 CORPUS-RDML-1",
+     "CORPUS-RDML-1"
+    ],
+    "rdmlKeys": [
+     "received from collaborator",
+     "CORPUS-RDML-1"
+    ]
+   },
+   "output": {
+    "superseded": 1
+   },
+   "expect": "the export should still be superseded: it is the same experiment",
+   "pass": true,
+   "note": "Recommended fix: rdmlKeyOf should apply rdmlStem to BOTH parts — [rdmlStem(item.name), rdmlStem(item.experimentId)]."
+  },
+  {
+   "fn": "rdmlKeyOf",
+   "case": "no experiment id",
+   "inputDesc": "an item with only a name",
+   "inputProvenance": "S",
+   "input": {
+    "name": "x.rdml"
+   },
+   "output": [
+    "x"
+   ],
+   "expect": "one key",
+   "pass": true
+  },
+  {
+   "fn": "applyRawFilePriority",
+   "case": "vendor container + its RDML export",
+   "inputDesc": "the .eds decoded by intake, plus the .rdml of the same experiment",
+   "inputProvenance": "R + R",
+   "input": {
+    "runs": [
+     {
+      "file": "CORPUS-RDML-1.eds",
+      "isRdml": false
+     },
+     {
+      "file": "CORPUS-RDML-1.rdml",
+      "isRdml": true
+     }
+    ]
+   },
+   "output": {
+    "kept": 2,
+    "superseded": [
+     {
+      "file": "CORPUS-RDML-1.rdml",
+      "by": "CORPUS-RDML-1.eds",
+      "reason": "the instrument's own file for this experiment is loaded (CORPUS-RDML-1.eds); the exchange export is kept for comparison only"
+     }
+    ]
+   },
+   "expect": "the RDML export is superseded by the .eds; nothing is discarded",
+   "pass": true
+  },
+  {
+   "fn": "runIsSuperseded",
+   "case": "before and after applyRawFilePriority",
+   "inputDesc": "the same run objects, before and after the priority pass",
+   "inputProvenance": "D",
+   "input": {
+    "before": [
+     false,
+     false
+    ]
+   },
+   "output": {
+    "after": [
+     false,
+     true
+    ]
+   },
+   "expect": "false for every run before; true only for the RDML run after",
+   "pass": true
+  },
+  {
+   "fn": "applyRawFilePriority",
+   "case": "RDML only, no vendor container",
+   "inputDesc": "the three runs of example_3_linregpcr.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "runs": [
+     {
+      "file": "example_3_linregpcr.rdml",
+      "isRdml": true
+     },
+     {
+      "file": "example_3_linregpcr.rdml",
+      "isRdml": true
+     },
+     {
+      "file": "example_3_linregpcr.rdml",
+      "isRdml": true
+     }
+    ]
+   },
+   "output": {
+    "kept": 3,
+    "superseded": 0
+   },
+   "expect": "nothing superseded",
+   "pass": true
+  },
+  {
+   "fn": "sopProcessingApplicability",
+   "case": "superseded vendor export",
+   "inputDesc": "the RDML run after the priority pass",
+   "inputProvenance": "D",
+   "input": {
+    "state": "vendor-export",
+    "superseded": true
+   },
+   "output": {
+    "applicable": false,
+    "state": "superseded",
+    "reason": "superseded — the instrument's own file for this experiment is loaded (CORPUS-RDML-1.eds); the exchange export is kept for comparison only"
+   },
+   "expect": "applicable = false, state \"superseded\"",
+   "pass": true
+  },
+  {
+   "fn": "RDML_SAMPLE_ROLE",
+   "case": "the six RDML sample types",
+   "inputDesc": "the RDML 1.3 sample-type vocabulary",
+   "inputProvenance": "Specification",
+   "input": {
+    "keys": [
+     "ntc",
+     "neg",
+     "pos",
+     "std",
+     "opt",
+     "unkn"
+    ]
+   },
+   "output": {
+    "ntc": "NTC",
+    "neg": "Negative control",
+    "pos": "Positive control",
+    "std": "Standard",
+    "opt": "Unknown",
+    "unkn": "Unknown"
+   },
+   "expect": "every type maps to a role the page already uses",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "LinRegPCR",
+   "inputDesc": "the verbatim string found in the corpus",
+   "inputProvenance": "R (verbatim)",
+   "input": {
+    "text": "LinRegPCR"
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "LinRegPCR, constant",
+   "inputDesc": "the verbatim string found in the corpus",
+   "inputProvenance": "R (verbatim)",
+   "input": {
+    "text": "LinRegPCR, constant"
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "Background Subtraction",
+   "inputDesc": "the verbatim string found in the corpus",
+   "inputProvenance": "R (verbatim)",
+   "input": {
+    "text": "Background Subtraction"
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "automated threshold and baseline settings",
+   "inputDesc": "the verbatim string found in the corpus",
+   "inputProvenance": "R (verbatim)",
+   "input": {
+    "text": "automated threshold and baseline settings"
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "(empty)",
+   "inputDesc": "a tool name from the RDML literature",
+   "inputProvenance": "S",
+   "input": {
+    "text": ""
+   },
+   "output": false,
+   "expect": "false",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "Cy0",
+   "inputDesc": "a tool name from the RDML literature",
+   "inputProvenance": "S",
+   "input": {
+    "text": "Cy0"
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "RDML_REANALYSIS_TOOLS",
+   "case": "MAK2",
+   "inputDesc": "a tool name from the RDML literature",
+   "inputProvenance": "S",
+   "input": {
+    "text": "MAK2"
+   },
+   "output": true,
+   "expect": "true",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse (Cq-ceiling rule)",
+   "case": "CORPUS-RDML-1.rdml",
+   "inputDesc": "all <data> of CORPUS-RDML-1.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "cycles": 40,
+    "rows": 192
+   },
+   "output": {
+    "converted": 158,
+    "remainingWithCq": 34,
+    "stillAtCeiling": 0,
+    "cqMax": 37.34
+   },
+   "expect": "no Cq equal to the cycle count survives; a re-analysis file loses none",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse (Cq-ceiling rule)",
+   "case": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "inputDesc": "all <data> of GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "cycles": 40,
+    "rows": 72
+   },
+   "output": {
+    "converted": 6,
+    "remainingWithCq": 66,
+    "stillAtCeiling": 0,
+    "cqMax": 30.266
+   },
+   "expect": "no Cq equal to the cycle count survives; a re-analysis file loses none",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse (Cq-ceiling rule)",
+   "case": "example_3_linregpcr.rdml",
+   "inputDesc": "all <data> of example_3_linregpcr.rdml",
+   "inputProvenance": "R",
+   "input": {
+    "cycles": 45,
+    "rows": 95
+   },
+   "output": {
+    "converted": 0,
+    "remainingWithCq": 90,
+    "stillAtCeiling": 0,
+    "cqMax": 34.001
+   },
+   "expect": "no Cq equal to the cycle count survives; a re-analysis file loses none",
+   "pass": true
+  },
+  {
+   "fn": "rdmlParse (cross-format oracle)",
+   "case": ".eds vs .rdml of the same run",
+   "inputDesc": "CORPUS-RDML-1.eds decoded by the page, and CORPUS-RDML-1.rdml read by rdmlParse",
+   "inputProvenance": "R + R",
+   "input": {
+    "edsRows": 64,
+    "rdmlRows": 192
+   },
+   "output": {
+    "matched": 64,
+    "bothUndetermined": 30,
+    "differing": 0,
+    "firstDiffs": [],
+    "rdmlOnly": 128
+   },
+   "expect": "every Cq the instrument container yields is reproduced exactly; zero differing",
+   "pass": true
+  }
+ ],
+ "corpusRuns": {
+  "CORPUS-RDML-1.rdml": 1,
+  "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml": 1,
+  "example_1_raw.rdml": 3,
+  "example_2_tm_annotated.rdml": 3,
+  "example_3_linregpcr.rdml": 3,
+  "example_4_interrun.rdml": 3,
+  "example_LCGreen_raw.rdml": 1
+ },
+ "corpus": [
+  {
+   "file": "CORPUS-RDML-1.eds",
+   "bytes": 1756735,
+   "sha256": "d2750711198559b16cc963d9f9c074c14b8a248c3fbd14436852884870d6be6c"
+  },
+  {
+   "file": "CORPUS-RDML-1.rdml",
+   "bytes": 69062,
+   "sha256": "688ef2eeec2e0fd350e8d2e585933e865b2eed7ae82e56bb0c6c0c4f60ddc384"
+  },
+  {
+   "file": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "bytes": 23248,
+   "sha256": "a26b7c8a7a596d3376d776ff32990eb80b855d5e657d274fbe56c475085a5c30"
+  },
+  {
+   "file": "example_1_raw.rdml",
+   "bytes": 252382,
+   "sha256": "a29e4918383b5199a5757047d884c149f21650a352bb9c487ccc398769b37a3a"
+  },
+  {
+   "file": "example_2_tm_annotated.rdml",
+   "bytes": 252547,
+   "sha256": "e018dbad7ec4071af882543929dad171e7297517e4e0f6a39c8cae4d8f9ba6d7"
+  },
+  {
+   "file": "example_3_linregpcr.rdml",
+   "bytes": 260964,
+   "sha256": "4806d1466a741c7f31141ce2d5cf0a02da5d329180e392d0277ddc12c82c8845"
+  },
+  {
+   "file": "example_4_interrun.rdml",
+   "bytes": 262745,
+   "sha256": "7545883ce03d305207f8b73d40b403a2a919f203908e8f4bbe27ae8b3019d4b2"
+  },
+  {
+   "file": "example_LCGreen_raw.rdml",
+   "bytes": 52635,
+   "sha256": "73f238867ae4dcdd12511b9f3519fdd5f8e6653eac3a97cbae451da4bd7e9293"
+  }
+ ],
+ "page": {
+  "file": "qpcr_qc_forensics.html",
+  "sha256": "6e14cc49153ad0662b94c47218f213051c5128fec78cc8a479ce00f17f391f4e",
+  "bytes": 860756
+ },
+ "pageErrors": [],
+ "when": "2026-09-24T08:44:56.803Z"
+}

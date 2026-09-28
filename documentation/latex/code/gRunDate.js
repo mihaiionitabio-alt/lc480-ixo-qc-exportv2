@@ -1,0 +1,1 @@
+function gRunDate(r){const T=runTimes(r);return Number.isFinite(T.start)?T.start:Number.isFinite(T.created)?T.created:Infinity;}

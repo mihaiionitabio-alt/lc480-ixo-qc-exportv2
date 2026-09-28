@@ -1,0 +1,58 @@
+[
+  {
+    "instrument": "LC · ROCHE-DEMO-A",
+    "x": "cool_rate",
+    "y": "transition|95→60 °C",
+    "n": 130,
+    "synthetic_pearson_r": 0.40619803087790096
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-B",
+    "x": "cool_rate",
+    "y": "transition|95→60 °C",
+    "n": 221,
+    "synthetic_pearson_r": -0.16990872016286754
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-A",
+    "x": "lamp_ref|465-510",
+    "y": "bg_median|465-510",
+    "n": 130,
+    "synthetic_pearson_r": 0.4123116818682835
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-B",
+    "x": "lamp_ref|465-510",
+    "y": "bg_median|465-510",
+    "n": 220,
+    "synthetic_pearson_r": 0.04791764479268459
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-A",
+    "x": "exposure|465-510",
+    "y": "bg_median|465-510",
+    "n": 130,
+    "synthetic_pearson_r": 0.13291174697756322
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-B",
+    "x": "exposure|465-510",
+    "y": "bg_median|465-510",
+    "n": 220,
+    "synthetic_pearson_r": 0.22852848538724932
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-A",
+    "x": "hold_temp|mean",
+    "y": "hold_temp|sd",
+    "n": 130,
+    "synthetic_pearson_r": -0.7288823128794667
+  },
+  {
+    "instrument": "LC · ROCHE-DEMO-B",
+    "x": "hold_temp|mean",
+    "y": "hold_temp|sd",
+    "n": 221,
+    "synthetic_pearson_r": -0.9307777366567079
+  }
+]

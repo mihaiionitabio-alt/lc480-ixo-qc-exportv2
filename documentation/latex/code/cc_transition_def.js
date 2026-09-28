@@ -1,0 +1,4 @@
+ {id:"transition",code:"B-H3c",group:"hardware",inst:["LC","QS"],type:"i",unit:"s",better:"low",variants:true,res:{LC:0.1,QS:0.5},
+  title:"Transition time A → B °C",source:"LC TemperatureLog · QS log sample temperature · run program",
+  idea:"Seconds the block needs to go from one programmed temperature to the next (e.g. 95 → 60 °C): from leaving ±0.5 °C of the start temperature until first within ±0.5 °C of the target, median over all cycles of the run. One chart per transition of the program. Includes ramp and overshoot, so it shows how much of every cycle is spent moving instead of holding.",
+  reading:"Compare a transition only with itself and the same program. A cooling transition that lengthens while heating transitions stay flat points to heat removal (fans, filters, heat sink); all transitions lengthening together points to the Peltier elements or the room."},

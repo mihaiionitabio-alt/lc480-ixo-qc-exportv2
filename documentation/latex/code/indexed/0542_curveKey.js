@@ -1,0 +1,1 @@
+function curveKey(w,mode){if(mode==="sop"){const r=sopOutcomeFor(runAt("#curve-run",0),w);return r?r.label:"Not interpreted";}return mode==="call"?w.call:mode==="sample"?w.sample:mode==="target"?w.target:mode==="well"?w.well:w.role;}

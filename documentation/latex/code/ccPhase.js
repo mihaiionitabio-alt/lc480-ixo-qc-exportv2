@@ -1,0 +1,1 @@
+function ccPhase(v,n){const f=v.filter(Number.isFinite);return f.slice(0,Math.max(Math.min(n,f.length),Math.min(5,f.length)));}

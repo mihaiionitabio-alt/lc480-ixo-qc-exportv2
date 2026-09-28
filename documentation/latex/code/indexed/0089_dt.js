@@ -1,0 +1,1 @@
+const dt=ms=>{if(!ms||!isFinite(ms)||ms<=0)return "";const d=new Date(ms);const p=n=>String(n).padStart(2,"0");const o=-d.getTimezoneOffset(),tz=`UTC${o>=0?"+":"−"}${Math.abs(o)/60}`;return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} ${tz}`};

@@ -1,0 +1,100 @@
+id,kind,group,title,shown,case,pairing,difference,sound,deviating
+img:timeline,image,Run history,"Run timeline — created, run, analysis, last change",yes,S45,series,99.8,S45_run01.rdml;S45_run02.rdml;S45_run03.rdml,S45_run18.rdml;S45_run19.rdml;S45_run20.rdml
+cc:efficiency,image,Control charts · method,PCR efficiency from the standards,yes,S4,single,99.7,S4_normal.ixo,S4_abnormal.ixo
+img:plate,image,Plate,Plate heat map,yes,S43,run,98.7,S43_run01.rdml,S43_run20.rdml
+img:x_findings,image,Across runs,Forensic findings by area (Pareto),yes,S19,series,95.2,S19_run01.eds;S19_run02.eds;S19_run03.eds,S19_run18.eds;S19_run19.eds;S19_run20.eds
+data:forensic_log,data,Tables,Forensic findings,yes,S28,series,94.0,S28_run01.eds;S28_run02.eds;S28_run03.eds,S28_run18.eds;S28_run19.eds;S28_run20.eds
+data:experiment_settings,data,Tables,Experiment settings,yes,S10,series,90.7,S10_run01.ixo;S10_run02.ixo;S10_run03.ixo,S10_run18.ixo;S10_run19.ixo;S10_run20.ixo
+img:lc_thermal,image,Run history,Block temperature trace (LightCycler temperature log),yes,S1,single,90.6,S1_normal.ixo,S1_abnormal.ixo
+img:curves,image,Fluorescence,Amplification curves coloured by SOP outcome,yes,S6,single,87.8,S6_normal.ixo,S6_abnormal.ixo
+img:recalc,image,Run history,Stored Ct against the Ct re-derived on this page,yes,S21,series,80.3,S21_run01.eds;S21_run02.eds;S21_run03.eds,S21_run18.eds;S21_run19.eds;S21_run20.eds
+img:cqstrip,image,Results,Cq by target with SOP cut-offs,yes,S32,run,78.2,S32_run01.rdml,S32_run20.rdml
+img:levels,image,Fluorescence,Background and plateau fluorescence per channel,yes,S25,run,75.6,S25_run01.eds,S25_run20.eds
+img:stdcurve,image,Results,Standard curve with residuals and SOP limits,yes,S3,single,75.3,S3_normal.ixo,S3_abnormal.ixo
+data:control_charts,data,Tables,Control chart points,yes,S43,series,75.0,S43_run01.rdml;S43_run02.rdml;S43_run03.rdml,S43_run18.rdml;S43_run19.rdml;S43_run20.rdml
+data:multicomponent_raw,data,Tables,Multicomponent raw values,yes,S25,series,74.7,S25_run01.eds;S25_run02.eds;S25_run03.eds,S25_run18.eds;S25_run19.eds;S25_run20.eds
+img:endpoint,image,Fluorescence,Fluorescence level against Cq,yes,S6,single,74.3,S6_normal.ixo,S6_abnormal.ixo
+img:x_timeline,image,Across runs,Runs on a calendar — run time and last change,yes,S45,series,74.1,S45_run01.rdml;S45_run02.rdml;S45_run03.rdml,S45_run18.rdml;S45_run19.rdml;S45_run20.rdml
+cc:rox_cv,image,Control charts · operator,Dispensed-volume spread (ROX CV),yes,S20,series,74.1,S20_run01.eds;S20_run02.eds;S20_run03.eds,S20_run18.eds;S20_run19.eds;S20_run20.eds
+data:statistics,data,Tables,Statistics,yes,S1,single,73.7,S1_normal.ixo,S1_abnormal.ixo
+cc:plateau_median,image,Control charts · hardware,End-point fluorescence per channel,yes,S38,series,71.1,S38_run01.rdml;S38_run02.rdml;S38_run03.rdml,S38_run18.rdml;S38_run19.rdml;S38_run20.rdml
+cc:bg_median,image,Control charts · hardware,Background fluorescence per channel,yes,S10,series,68.3,S10_run01.ixo;S10_run02.ixo;S10_run03.ixo,S10_run18.ixo;S10_run19.ixo;S10_run20.ixo
+cc:cool_rate,image,Control charts · hardware,Peak cooling rate (2-s window),yes,S15,series,68.0,S15_run01.ixo;S15_run02.ixo;S15_run03.ixo,S15_run18.ixo;S15_run19.ixo;S15_run20.ixo
+cc:findings,image,Control charts · software,Forensic findings per run,yes,S22,series,67.8,S22_run01.eds;S22_run02.eds;S22_run03.eds,S22_run18.eds;S22_run19.eds;S22_run20.eds
+cc:cam_overhead,image,Control charts · hardware,Camera readout time beyond the exposure,yes,S21,series,67.1,S21_run01.eds;S21_run02.eds;S21_run03.eds,S21_run18.eds;S21_run19.eds;S21_run20.eds
+cc:led_current,image,Control charts · hardware,LED drive current,yes,S25,series,66.7,S25_run01.eds;S25_run02.eds;S25_run03.eds,S25_run18.eds;S25_run19.eds;S25_run20.eds
+cc:rox_level,image,Control charts · method,Passive reference (ROX) level,yes,S22,series,66.4,S22_run01.eds;S22_run02.eds;S22_run03.eds,S22_run18.eds;S22_run19.eds;S22_run20.eds
+cc:heat_rate,image,Control charts · hardware,Peak heating rate (2-s window),yes,S11,series,66.3,S11_run01.ixo;S11_run02.ixo;S11_run03.ixo,S11_run18.ixo;S11_run19.ixo;S11_run20.ixo
+cc:cycle_sd,image,Control charts · software,Cycle-timing regularity,yes,S26,series,66.2,S26_run01.eds;S26_run02.eds;S26_run03.eds,S26_run18.eds;S26_run19.eds;S26_run20.eds
+cc:transition,image,Control charts · hardware,Transition time A → B °C,yes,S21,series,66.1,S21_run01.eds;S21_run02.eds;S21_run03.eds,S21_run18.eds;S21_run19.eds;S21_run20.eds
+cc:hold_temp,image,Control charts · hardware,Temperature at the moment of reading,yes,S27,series,66.1,S27_run01.eds;S27_run02.eds;S27_run03.eds,S27_run18.eds;S27_run19.eds;S27_run20.eds
+cc:cmd_rt,image,Control charts · software,Reply time to the PC software,yes,S27,series,65.5,S27_run01.eds;S27_run02.eds;S27_run03.eds,S27_run18.eds;S27_run19.eds;S27_run20.eds
+cc:led_junction,image,Control charts · hardware,LED junction temperature (maximum),yes,S30,series,64.9,S30_run01.eds;S30_run02.eds;S30_run03.eds,S30_run18.eds;S30_run19.eds;S30_run20.eds
+cc:lamp_ref,image,Control charts · hardware,Lamp reference channel (stability),yes,S9,series,64.8,S9_run01.ixo;S9_run02.ixo;S9_run03.ixo,S9_run18.ixo;S9_run19.ixo;S9_run20.ixo
+cc:edit_delay,image,Control charts · software,Run end → last change,yes,S19,series,64.6,S19_run01.eds;S19_run02.eds;S19_run03.eds,S19_run18.eds;S19_run19.eds;S19_run20.eds
+cc:lamp_drift,image,Control charts · hardware,Lamp drift within a run,yes,S11,series,64.4,S11_run01.ixo;S11_run02.ixo;S11_run03.ixo,S11_run18.ixo;S11_run19.ixo;S11_run20.ixo
+cc:wheel_slow,image,Control charts · hardware,Filter-wheel moves slower than 500 ms,yes,S30,series,64.3,S30_run01.eds;S30_run02.eds;S30_run03.eds,S30_run18.eds;S30_run19.eds;S30_run20.eds
+cc:exposure,image,Control charts · hardware,Automatic integration time / exposure,yes,S9,series,64.0,S9_run01.ixo;S9_run02.ixo;S9_run03.ixo,S9_run18.ixo;S9_run19.ixo;S9_run20.ixo
+cc:overshoot,image,Control charts · hardware,Overshoot at the denaturation step,yes,S15,series,63.4,S15_run01.ixo;S15_run02.ixo;S15_run03.ixo,S15_run18.ixo;S15_run19.ixo;S15_run20.ixo
+cc:ct_mismatch,image,Control charts · software,Stored Ct not reproducible (> 0.2),yes,S21,series,62.5,S21_run01.eds;S21_run02.eds;S21_run03.eds,S21_run18.eds;S21_run19.eds;S21_run20.eds
+data:amplification_curves,data,Tables,Amplification curves,yes,S43,series,62.4,S43_run01.rdml;S43_run02.rdml;S43_run03.rdml,S43_run18.rdml;S43_run19.rdml;S43_run20.rdml
+cc:manual_rate,image,Control charts · operator,Manual interventions,yes,S22,series,61.5,S22_run01.eds;S22_run02.eds;S22_run03.eds,S22_run18.eds;S22_run19.eds;S22_run20.eds
+cc:heatsink_max,image,Control charts · hardware,Heat-sink maximum,yes,S28,run,61.4,S28_run01.eds,S28_run20.eds
+cc:saturation,image,Control charts · hardware,Saturated well images,yes,S25,series,60.6,S25_run01.eds;S25_run02.eds;S25_run03.eds,S25_run18.eds;S25_run19.eds;S25_run20.eds
+cc:zone_spread,image,Control charts · hardware,Block zone uniformity (95th percentile),yes,S27,series,60.2,S27_run01.eds;S27_run02.eds;S27_run03.eds,S27_run18.eds;S27_run19.eds;S27_run20.eds
+cc:wheel_ms,image,Control charts · hardware,Filter-wheel move time,yes,S24,series,60.0,S24_run01.eds;S24_run02.eds;S24_run03.eds,S24_run18.eds;S24_run19.eds;S24_run20.eds
+cc:runtime_err,image,Control charts · software,Run-time prediction error,yes,S29,series,59.1,S29_run01.eds;S29_run02.eds;S29_run03.eds,S29_run18.eds;S29_run19.eds;S29_run20.eds
+cc:settling,image,Control charts · hardware,Settling time at the denaturation step,yes,S15,series,57.5,S15_run01.ixo;S15_run02.ixo;S15_run03.ixo,S15_run18.ixo;S15_run19.ixo;S15_run20.ixo
+cc:tick_late,image,Control charts · software,Once-per-second timer lateness,yes,S21,run,56.4,S21_run01.eds,S21_run20.eds
+data:runs_and_qc,data,Tables,Runs and quality control,yes,S28,run,52.9,S28_run01.eds,S28_run20.eds
+img:x_signal,image,Across runs,Background and plateau fluorescence across runs,yes,S10,series,48.5,S10_run01.ixo;S10_run02.ixo;S10_run03.ixo,S10_run18.ixo;S10_run19.ixo;S10_run20.ixo
+data:experiment_meta,data,Tables,Experiment metadata,yes,S14,run,45.2,S14_run01.ixo,S14_run20.ixo
+data:plate_map,data,Tables,Plate map,yes,S43,series,38.7,S43_run01.rdml;S43_run02.rdml;S43_run03.rdml,S43_run18.rdml;S43_run19.rdml;S43_run20.rdml
+img:x_delay,image,Across runs,Hours from run end to the last recorded change,yes,S27,run,33.6,S27_run01.eds,S27_run20.eds
+data:sop_criteria,data,Tables,SOP criteria,yes,S1,single,33.3,S1_normal.ixo,S1_abnormal.ixo
+data:cq_values,data,Tables,Stored Cq values,yes,S19,run,31.5,S19_run01.eds,S19_run20.eds
+img:temperature,image,Run history,"Block, cover and zone temperature (QuantStudio log)",yes,S26,run,27.5,S26_run01.eds,S26_run20.eds
+data:sop_runs,data,Tables,SOP run decisions,yes,S1,single,26.3,S1_normal.ixo,S1_abnormal.ixo
+img:x_accept,image,Across runs,Run acceptance grid,no,S7,single,19.9,S7_normal.ixo,S7_abnormal.ixo
+img:x_outcomes,image,Across runs,SOP outcomes per run,no,S5,single,6.4,S5_normal.ixo,S5_abnormal.ixo
+rec:instrument_records,data,Instrument records,Instrument records,yes,S28,series,5.1,S28_run01.eds;S28_run02.eds;S28_run03.eds,S28_run18.eds;S28_run19.eds;S28_run20.eds
+cc:copied,image,Control charts · operator,Copied-data events,no,S48,series,4.1,S48_run01.rdml;S48_run02.rdml;S48_run03.rdml,S48_run18.rdml;S48_run19.rdml;S48_run20.rdml
+img:x_duration,image,Across runs,Run duration and instrument use,no,S5,single,2.4,S5_normal.ixo,S5_abnormal.ixo
+img:unanalysed,image,Plate,Signal in wells that are not in any analysis,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:repsd,image,Results,Replicate spread — mean Cq against SD,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:ic,image,Results,Internal control / reference Cq per sample (inhibition),no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:outcomes,image,Results,SOP outcomes per target,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:x_control,image,Across runs,Control Cq across runs with SOP range,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:x_control_batches,image,Across runs,Control extraction batches,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:x_control_age,image,Across runs,Control extract age versus Cq,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+img:x_control_thermal,image,Across runs,Control Cq versus cooling rate,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+data:sop_answers,data,Tables,Profile answers,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+data:rising_curves,data,Tables,Rising curves without a channel result,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:cover_temp,image,Control charts · hardware,Heated cover temperature,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:calib_uniformity,image,Control charts · hardware,Uniformity calibration: edge-to-centre ratio,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:calib_background,image,Control charts · hardware,Background calibration: mean offset,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:calib_roi,image,Control charts · hardware,Well-position (ROI) calibration: spot diameter,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:encoder,image,Control charts · hardware,Filter-wheel position offset,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:chan_switch,image,Control charts · hardware,Channel switch time,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:cover_down,image,Control charts · hardware,Heated cover lowering time,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:cover_up,image,Control charts · hardware,Heated cover raising time,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:run_minutes,image,Control charts · hardware,Run duration,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:catch_up,image,Control charts · software,Scheduler falling behind,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:img_proc,image,Control charts · software,Image → processing delay,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:roi_ms,image,Control charts · software,Image analysis time,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:handoff_min,image,Control charts · software,Data hand-off time,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:log_errors,image,Control charts · software,Command errors in the instrument log,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:templog_late,image,Control charts · software,Temperature-log intervals over 500 ms,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:invalid_acq,image,Control charts · software,Invalid fluorescence readings,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:pc_cq,image,Control charts · method,Positive control Cq (Levey-Jennings),no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:pc_amplitude,image,Control charts · method,Probe signal strength (positive control),no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:ntc_rate,image,Control charts · method,Negative controls by process stage,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:ic_shift,image,Control charts · method,IC shift from fixed reference,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:low_conf,image,Control charts · method,Low Cq confidence,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:late_rate,image,Control charts · method,Late signal / stochastic-zone results,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:rep_sd,image,Control charts · operator,"Replicate precision (pooled SD, Cq < 30)",no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:rowcol,image,Control charts · operator,Row / column pattern,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:ntc_op,image,Control charts · operator,Contamination rate by operator (funnel),no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:action_op,image,Control charts · operator,Repeat / inconclusive / invalid rate by operator (funnel),no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+cc:call_disagree,image,Control charts · operator,Stored calls that disagree with the SOP,no,S1,single,0.0,S1_normal.ixo,S1_abnormal.ixo
+data:sample_comparison,data,Tables,Sample comparison,no,S9,series,0.0,S9_run01.ixo;S9_run02.ixo;S9_run03.ixo,S9_run18.ixo;S9_run19.ixo;S9_run20.ixo

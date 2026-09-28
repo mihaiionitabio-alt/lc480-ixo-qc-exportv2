@@ -1,0 +1,7 @@
+const { chromium }=require('playwright'); const fs=require('fs'),path=require('path');
+const PAGE=path.resolve(process.argv[2]); const DIR=path.resolve(process.argv[3]); const CODE="";
+const files=fs.readdirSync(DIR).filter(f=>/\.rdml$/i.test(f)).sort();
+(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1440,height:900}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.split('\n')[0]));await p.goto('file:///'+PAGE.replace(/\\/g,'/'));
+for(const f of files){const buf=fs.readFileSync(path.join(DIR,f));const out=await p.evaluate(async({name,b64})=>{try{const bin=atob(b64),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);const es=await rdmlEntries(u8.buffer,null);const ent=es.find(e=>/^rdml_data\.xml$/i.test(e.name));if(!ent)return {name,error:'no rdml_data.xml'};const runs=rdmlParse(new TextDecoder().decode(ent.bytes),name,u8);return {name,runs:runs.length,rows:runs.reduce((n,r)=>n+r.wells.length,0),curves:runs.reduce((n,r)=>n+Object.keys(r.allCurves).length,0),melt:runs.reduce((n,r)=>n+r.meltAcquisitionPoints,0),cq:runs.reduce((n,r)=>n+r.wells.filter(w=>resultCq(w)!==null).length,0),ceiling:runs.reduce((n,r)=>n+r.wells.filter(w=>w.rdml&&w.rdml.cqCeiling).length,0),states:[...new Set(runs.map(runProcessingState).map(x=>x.state))]};}catch(e){return {name,error:e.message};}},{name:f,b64:buf.toString('base64')});console.log(JSON.stringify(out));}
+console.log('pageErrors:',errs.length?errs:'none');await b.close();})();
+

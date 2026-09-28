@@ -1,0 +1,4783 @@
+[
+ {
+  "name": "DEFAULT_LANG",
+  "kind": "const",
+  "owner": null,
+  "start": 993,
+  "end": 993
+ },
+ {
+  "name": "ZH_TERMS",
+  "kind": "const",
+  "owner": null,
+  "start": 994,
+  "end": 1918
+ },
+ {
+  "name": "UI_LANG",
+  "kind": "let",
+  "owner": null,
+  "start": 1919,
+  "end": 1919
+ },
+ {
+  "name": "CLEAN_PAGE_SOURCE",
+  "kind": "let",
+  "owner": null,
+  "start": 1919,
+  "end": 1919
+ },
+ {
+  "name": "I18N_BUSY",
+  "kind": "let",
+  "owner": null,
+  "start": 1919,
+  "end": 1919
+ },
+ {
+  "name": "CUTE_TIMER",
+  "kind": "let",
+  "owner": null,
+  "start": 1919,
+  "end": 1919
+ },
+ {
+  "name": "CUTE_INDEX",
+  "kind": "let",
+  "owner": null,
+  "start": 1919,
+  "end": 1919
+ },
+ {
+  "name": "I18N_ORIGINAL_TEXT",
+  "kind": "const",
+  "owner": null,
+  "start": 1920,
+  "end": 1920
+ },
+ {
+  "name": "I18N_ORIGINAL_ATTR",
+  "kind": "const",
+  "owner": null,
+  "start": 1920,
+  "end": 1920
+ },
+ {
+  "name": "zhPhrase",
+  "kind": "function",
+  "owner": null,
+  "start": 1922,
+  "end": 2000
+ },
+ {
+  "name": "ui",
+  "kind": "function",
+  "owner": null,
+  "start": 2001,
+  "end": 2001
+ },
+ {
+  "name": "localizeDOM",
+  "kind": "function",
+  "owner": null,
+  "start": 2002,
+  "end": 2021
+ },
+ {
+  "name": "showCuteToast",
+  "kind": "function",
+  "owner": null,
+  "start": 2022,
+  "end": 2028
+ },
+ {
+  "name": "languageStorageKey",
+  "kind": "function",
+  "owner": null,
+  "start": 2029,
+  "end": 2029
+ },
+ {
+  "name": "rememberedLanguage",
+  "kind": "function",
+  "owner": null,
+  "start": 2030,
+  "end": 2030
+ },
+ {
+  "name": "setLanguage",
+  "kind": "function",
+  "owner": null,
+  "start": 2031,
+  "end": 2041
+ },
+ {
+  "name": "UNKNOWN_ROLE",
+  "kind": "const",
+  "owner": null,
+  "start": 2042,
+  "end": 2042
+ },
+ {
+  "name": "ROLES",
+  "kind": "const",
+  "owner": null,
+  "start": 2043,
+  "end": 2043
+ },
+ {
+  "name": "REP_REGEX",
+  "kind": "const",
+  "owner": null,
+  "start": 2044,
+  "end": 2048
+ },
+ {
+  "name": "CALL",
+  "kind": "const",
+  "owner": null,
+  "start": 2050,
+  "end": 2050
+ },
+ {
+  "name": "SAMPLE_TYPE",
+  "kind": "const",
+  "owner": null,
+  "start": 2051,
+  "end": 2055
+ },
+ {
+  "name": "TYPE_TO_ROLE",
+  "kind": "const",
+  "owner": null,
+  "start": 2056,
+  "end": 2060
+ },
+ {
+  "name": "NEGATIVE_FAMILY",
+  "kind": "const",
+  "owner": null,
+  "start": 2061,
+  "end": 2061
+ },
+ {
+  "name": "ROLE_COLOURS",
+  "kind": "const",
+  "owner": null,
+  "start": 2062,
+  "end": 2063
+ },
+ {
+  "name": "ROLE_LINE",
+  "kind": "const",
+  "owner": null,
+  "start": 2064,
+  "end": 2065
+ },
+ {
+  "name": "PALETTE",
+  "kind": "const",
+  "owner": null,
+  "start": 2066,
+  "end": 2066
+ },
+ {
+  "name": "ce",
+  "kind": "const",
+  "owner": null,
+  "start": 2068,
+  "end": 2068
+ },
+ {
+  "name": "textEncoder",
+  "kind": "const",
+  "owner": null,
+  "start": 2069,
+  "end": 2069
+ },
+ {
+  "name": "clone",
+  "kind": "function",
+  "owner": null,
+  "start": 2075,
+  "end": 2075
+ },
+ {
+  "name": "esc",
+  "kind": "function",
+  "owner": null,
+  "start": 2076,
+  "end": 2076
+ },
+ {
+  "name": "xesc",
+  "kind": "function",
+  "owner": null,
+  "start": 2077,
+  "end": 2077
+ },
+ {
+  "name": "safeName",
+  "kind": "function",
+  "owner": null,
+  "start": 2078,
+  "end": 2078
+ },
+ {
+  "name": "bytesFrom",
+  "kind": "function",
+  "owner": null,
+  "start": 2079,
+  "end": 2079
+ },
+ {
+  "name": "scrollToEl",
+  "kind": "function",
+  "owner": null,
+  "start": 2080,
+  "end": 2080
+ },
+ {
+  "name": "option",
+  "kind": "function",
+  "owner": null,
+  "start": 2081,
+  "end": 2081
+ },
+ {
+  "name": "num",
+  "kind": "function",
+  "owner": null,
+  "start": 2082,
+  "end": 2082
+ },
+ {
+  "name": "safeRe",
+  "kind": "function",
+  "owner": null,
+  "start": 2083,
+  "end": 2083
+ },
+ {
+  "name": "uniq",
+  "kind": "function",
+  "owner": null,
+  "start": 2084,
+  "end": 2084
+ },
+ {
+  "name": "byKey",
+  "kind": "function",
+  "owner": null,
+  "start": 2085,
+  "end": 2085
+ },
+ {
+  "name": "mean",
+  "kind": "function",
+  "owner": null,
+  "start": 2090,
+  "end": 2090
+ },
+ {
+  "name": "avg",
+  "kind": "const",
+  "owner": null,
+  "start": 2091,
+  "end": 2091
+ },
+ {
+  "name": "sd",
+  "kind": "function",
+  "owner": null,
+  "start": 2092,
+  "end": 2092
+ },
+ {
+  "name": "median",
+  "kind": "function",
+  "owner": null,
+  "start": 2093,
+  "end": 2093
+ },
+ {
+  "name": "percentile",
+  "kind": "function",
+  "owner": null,
+  "start": 2095,
+  "end": 2100
+ },
+ {
+  "name": "range",
+  "kind": "function",
+  "owner": null,
+  "start": 2101,
+  "end": 2101
+ },
+ {
+  "name": "cv",
+  "kind": "function",
+  "owner": null,
+  "start": 2102,
+  "end": 2102
+ },
+ {
+  "name": "lgamma",
+  "kind": "function",
+  "owner": null,
+  "start": 2105,
+  "end": 2110
+ },
+ {
+  "name": "betacf",
+  "kind": "function",
+  "owner": null,
+  "start": 2112,
+  "end": 2131
+ },
+ {
+  "name": "betai",
+  "kind": "function",
+  "owner": null,
+  "start": 2132,
+  "end": 2136
+ },
+ {
+  "name": "tDistTwoTail",
+  "kind": "function",
+  "owner": null,
+  "start": 2138,
+  "end": 2141
+ },
+ {
+  "name": "gammap",
+  "kind": "function",
+  "owner": null,
+  "start": 2143,
+  "end": 2158
+ },
+ {
+  "name": "chiSqP",
+  "kind": "function",
+  "owner": null,
+  "start": 2159,
+  "end": 2159
+ },
+ {
+  "name": "tTest",
+  "kind": "function",
+  "owner": null,
+  "start": 2162,
+  "end": 2185
+ },
+ {
+  "name": "fitLin",
+  "kind": "function",
+  "owner": null,
+  "start": 2186,
+  "end": 2193
+ },
+ {
+  "name": "CRC_TABLE",
+  "kind": "const",
+  "owner": null,
+  "start": 2198,
+  "end": 2198
+ },
+ {
+  "name": "t",
+  "kind": "const",
+  "owner": "CRC_TABLE",
+  "start": 2198,
+  "end": 2198
+ },
+ {
+  "name": "crc32",
+  "kind": "function",
+  "owner": null,
+  "start": 2199,
+  "end": 2199
+ },
+ {
+  "name": "sourceSha256",
+  "kind": "function",
+  "owner": null,
+  "start": 2204,
+  "end": 2210
+ },
+ {
+  "name": "sha256Hex",
+  "kind": "function",
+  "owner": null,
+  "start": 2211,
+  "end": 2243
+ },
+ {
+  "name": "inflate",
+  "kind": "function",
+  "owner": null,
+  "start": 2244,
+  "end": 2249
+ },
+ {
+  "name": "readZip",
+  "kind": "function",
+  "owner": null,
+  "start": 2251,
+  "end": 2276
+ },
+ {
+  "name": "dosStamp",
+  "kind": "function",
+  "owner": null,
+  "start": 2277,
+  "end": 2281
+ },
+ {
+  "name": "makeStoredZip",
+  "kind": "function",
+  "owner": null,
+  "start": 2282,
+  "end": 2307
+ },
+ {
+  "name": "propText",
+  "kind": "function",
+  "owner": null,
+  "start": 2315,
+  "end": 2315
+ },
+ {
+  "name": "pv",
+  "kind": "function",
+  "owner": null,
+  "start": 2316,
+  "end": 2316
+ },
+ {
+  "name": "propValues",
+  "kind": "function",
+  "owner": null,
+  "start": 2317,
+  "end": 2317
+ },
+ {
+  "name": "base64ToBytes",
+  "kind": "function",
+  "owner": null,
+  "start": 2318,
+  "end": 2318
+ },
+ {
+  "name": "posToWell",
+  "kind": "function",
+  "owner": null,
+  "start": 2319,
+  "end": 2319
+ },
+ {
+  "name": "posToLimsWell",
+  "kind": "function",
+  "owner": null,
+  "start": 2320,
+  "end": 2320
+ },
+ {
+  "name": "wellToPos",
+  "kind": "function",
+  "owner": null,
+  "start": 2321,
+  "end": 2324
+ },
+ {
+  "name": "hexBEToDouble",
+  "kind": "function",
+  "owner": null,
+  "start": 2325,
+  "end": 2332
+ },
+ {
+  "name": "decodeAcq",
+  "kind": "function",
+  "owner": null,
+  "start": 2334,
+  "end": 2421
+ },
+ {
+  "name": "acquisitionStats",
+  "kind": "function",
+  "owner": null,
+  "start": 2422,
+  "end": 2429
+ },
+ {
+  "name": "decodePlateModel",
+  "kind": "function",
+  "owner": null,
+  "start": 2432,
+  "end": 2493
+ },
+ {
+  "name": "decodeSubsets",
+  "kind": "function",
+  "owner": null,
+  "start": 2495,
+  "end": 2505
+ },
+ {
+  "name": "decodeProtocol",
+  "kind": "function",
+  "owner": null,
+  "start": 2507,
+  "end": 2542
+ },
+ {
+  "name": "ANALYSIS_CLASS_RE",
+  "kind": "const",
+  "owner": null,
+  "start": 2549,
+  "end": 2549
+ },
+ {
+  "name": "ANALYSIS_KINDS",
+  "kind": "const",
+  "owner": null,
+  "start": 2550,
+  "end": 2558
+ },
+ {
+  "name": "analysisKind",
+  "kind": "function",
+  "owner": null,
+  "start": 2559,
+  "end": 2563
+ },
+ {
+  "name": "LC_CALC_STATE_LABELS",
+  "kind": "const",
+  "owner": null,
+  "start": 2568,
+  "end": 2568
+ },
+ {
+  "name": "calcStateLabel",
+  "kind": "function",
+  "owner": null,
+  "start": 2569,
+  "end": 2569
+ },
+ {
+  "name": "cpMethodOf",
+  "kind": "function",
+  "owner": null,
+  "start": 2570,
+  "end": 2576
+ },
+ {
+  "name": "RESULT_PROPS",
+  "kind": "const",
+  "owner": null,
+  "start": 2578,
+  "end": 2579
+ },
+ {
+  "name": "readLists",
+  "kind": "function",
+  "owner": null,
+  "start": 2580,
+  "end": 2588
+ },
+ {
+  "name": "resultKindOf",
+  "kind": "function",
+  "owner": null,
+  "start": 2589,
+  "end": 2599
+ },
+ {
+  "name": "PAIRING_RULES",
+  "kind": "const",
+  "owner": null,
+  "start": 2606,
+  "end": 2606
+ },
+ {
+  "name": "rqResult",
+  "kind": "function",
+  "owner": null,
+  "start": 2607,
+  "end": 2623
+ },
+ {
+  "name": "decodeRelQuant",
+  "kind": "function",
+  "owner": null,
+  "start": 2624,
+  "end": 2670
+ },
+ {
+  "name": "ownedBy",
+  "kind": "function",
+  "owner": null,
+  "start": 2675,
+  "end": 2683
+ },
+ {
+  "name": "ownQueryAll",
+  "kind": "function",
+  "owner": null,
+  "start": 2684,
+  "end": 2684
+ },
+ {
+  "name": "ownQuery",
+  "kind": "function",
+  "owner": null,
+  "start": 2685,
+  "end": 2685
+ },
+ {
+  "name": "decodeAnalyses",
+  "kind": "function",
+  "owner": null,
+  "start": 2687,
+  "end": 2774
+ },
+ {
+  "name": "NON_RESULT_CLASSES",
+  "kind": "const",
+  "owner": null,
+  "start": 2777,
+  "end": 2777
+ },
+ {
+  "name": "ownsResult",
+  "kind": "function",
+  "owner": null,
+  "start": 2781,
+  "end": 2789
+ },
+ {
+  "name": "analysisResults",
+  "kind": "function",
+  "owner": null,
+  "start": 2790,
+  "end": 2809
+ },
+ {
+  "name": "decodeIxo",
+  "kind": "function",
+  "owner": null,
+  "start": 2811,
+  "end": 3153
+ },
+ {
+  "name": "EDS",
+  "kind": "const",
+  "owner": null,
+  "start": 3158,
+  "end": 3706
+ },
+ {
+  "name": "$",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3161,
+  "end": 3161
+ },
+ {
+  "name": "fmt",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3164,
+  "end": 3164
+ },
+ {
+  "name": "pill",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3165,
+  "end": 3165
+ },
+ {
+  "name": "dt",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3166,
+  "end": 3166
+ },
+ {
+  "name": "hex",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3167,
+  "end": 3167
+ },
+ {
+  "name": "ROWS",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3170,
+  "end": 3170
+ },
+ {
+  "name": "wellPos",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3171,
+  "end": 3171
+ },
+ {
+  "name": "download",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3172,
+  "end": 3176
+ },
+ {
+  "name": "CRC_T",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3180,
+  "end": 3180
+ },
+ {
+  "name": "MD5",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3184,
+  "end": 3211
+ },
+ {
+  "name": "inflateRaw",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3214,
+  "end": 3219
+ },
+ {
+  "name": "makeZip",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3250,
+  "end": 3266
+ },
+ {
+  "name": "xml",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3269,
+  "end": 3269
+ },
+ {
+  "name": "kid",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3270,
+  "end": 3270
+ },
+ {
+  "name": "kids",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3271,
+  "end": 3271
+ },
+ {
+  "name": "txt",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3272,
+  "end": 3272
+ },
+ {
+  "name": "argb",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3273,
+  "end": 3273
+ },
+ {
+  "name": "bracketList",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3274,
+  "end": 3274
+ },
+ {
+  "name": "ini",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3275,
+  "end": 3277
+ },
+ {
+  "name": "FLAGS",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3282,
+  "end": 3300
+ },
+ {
+  "name": "flagName",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3301,
+  "end": 3301
+ },
+ {
+  "name": "P",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3304,
+  "end": 3304
+ },
+ {
+  "name": "parseEds",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3305,
+  "end": 3511
+ },
+ {
+  "name": "recalcCt",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3515,
+  "end": 3519
+ },
+ {
+  "name": "parseLog",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3521,
+  "end": 3537
+ },
+ {
+  "name": "studyRows",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3539,
+  "end": 3543
+ },
+ {
+  "name": "QS_DEFAULT_COLS",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3551,
+  "end": 3557
+ },
+ {
+  "name": "qsCols",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3558,
+  "end": 3563
+ },
+ {
+  "name": "pad2",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3564,
+  "end": 3564
+ },
+ {
+  "name": "qsCalDate",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3565,
+  "end": 3565
+ },
+ {
+  "name": "qsStamp",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3566,
+  "end": 3570
+ },
+ {
+  "name": "qsRGB",
+  "kind": "const",
+  "owner": "EDS",
+  "start": 3571,
+  "end": 3571
+ },
+ {
+  "name": "qsInstrument",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3574,
+  "end": 3585
+ },
+ {
+  "name": "javaHashOrder",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3587,
+  "end": 3591
+ },
+ {
+  "name": "qsHeader",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3592,
+  "end": 3611
+ },
+ {
+  "name": "qsTables",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3612,
+  "end": 3690
+ },
+ {
+  "name": "qsExport",
+  "kind": "function",
+  "owner": "EDS",
+  "start": 3691,
+  "end": 3703
+ },
+ {
+  "name": "QS_DYE_FILTER",
+  "kind": "const",
+  "owner": null,
+  "start": 3719,
+  "end": 3721
+ },
+ {
+  "name": "QS_TASK_ROLE",
+  "kind": "const",
+  "owner": null,
+  "start": 3722,
+  "end": 3723
+ },
+ {
+  "name": "QS_AMP",
+  "kind": "const",
+  "owner": null,
+  "start": 3724,
+  "end": 3725
+ },
+ {
+  "name": "QS_KIND",
+  "kind": "const",
+  "owner": null,
+  "start": 3726,
+  "end": 3727
+ },
+ {
+  "name": "isoLocal",
+  "kind": "function",
+  "owner": null,
+  "start": 3728,
+  "end": 3733
+ },
+ {
+  "name": "isEdsName",
+  "kind": "function",
+  "owner": null,
+  "start": 3734,
+  "end": 3734
+ },
+ {
+  "name": "decodeEds",
+  "kind": "function",
+  "owner": null,
+  "start": 3735,
+  "end": 3863
+ },
+ {
+  "name": "ixoIntegrity",
+  "kind": "function",
+  "owner": null,
+  "start": 3866,
+  "end": 3880
+ },
+ {
+  "name": "integrityLabel",
+  "kind": "function",
+  "owner": null,
+  "start": 3881,
+  "end": 3885
+ },
+ {
+  "name": "integrityEvents",
+  "kind": "function",
+  "owner": null,
+  "start": 3886,
+  "end": 3901
+ },
+ {
+  "name": "edsEvents",
+  "kind": "function",
+  "owner": null,
+  "start": 3902,
+  "end": 3985
+ },
+ {
+  "name": "ec",
+  "kind": "function",
+  "owner": null,
+  "start": 3986,
+  "end": 3986
+ },
+ {
+  "name": "edsRecordTables",
+  "kind": "function",
+  "owner": null,
+  "start": 3989,
+  "end": 4034
+ },
+ {
+  "name": "drawTemperatureTrace",
+  "kind": "function",
+  "owner": null,
+  "start": 4035,
+  "end": 4047
+ },
+ {
+  "name": "edsDerived",
+  "kind": "function",
+  "owner": null,
+  "start": 4050,
+  "end": 4100
+ },
+ {
+  "name": "PSEUDO_MAP",
+  "kind": "let",
+  "owner": null,
+  "start": 4103,
+  "end": 4103
+ },
+ {
+  "name": "pseudonymMap",
+  "kind": "function",
+  "owner": null,
+  "start": 4104,
+  "end": 4113
+ },
+ {
+  "name": "pseudoOn",
+  "kind": "function",
+  "owner": null,
+  "start": 4114,
+  "end": 4114
+ },
+ {
+  "name": "exportName",
+  "kind": "function",
+  "owner": null,
+  "start": 4115,
+  "end": 4115
+ },
+ {
+  "name": "pseudoRun",
+  "kind": "function",
+  "owner": null,
+  "start": 4116,
+  "end": 4123
+ },
+ {
+  "name": "withExportNames",
+  "kind": "function",
+  "owner": null,
+  "start": 4124,
+  "end": 4128
+ },
+ {
+  "name": "rqRows",
+  "kind": "function",
+  "owner": null,
+  "start": 4129,
+  "end": 4136
+ },
+ {
+  "name": "edsSignalRows",
+  "kind": "function",
+  "owner": null,
+  "start": 4137,
+  "end": 4153
+ },
+ {
+  "name": "xlsxCol",
+  "kind": "function",
+  "owner": null,
+  "start": 4156,
+  "end": 4156
+ },
+ {
+  "name": "xlsxCell",
+  "kind": "function",
+  "owner": null,
+  "start": 4157,
+  "end": 4163
+ },
+ {
+  "name": "makeXlsx",
+  "kind": "function",
+  "owner": null,
+  "start": 4164,
+  "end": 4178
+ },
+ {
+  "name": "qsWorkbook",
+  "kind": "function",
+  "owner": null,
+  "start": 4179,
+  "end": 4186
+ },
+ {
+  "name": "reviewForensicEvents",
+  "kind": "function",
+  "owner": null,
+  "start": 4188,
+  "end": 4195
+ },
+ {
+  "name": "SOP_SCHEMA",
+  "kind": "const",
+  "owner": null,
+  "start": 4205,
+  "end": 4205
+ },
+ {
+  "name": "SOP_OUTCOMES",
+  "kind": "const",
+  "owner": null,
+  "start": 4206,
+  "end": 4206
+ },
+ {
+  "name": "SOP_OUTCOME_DEFAULTS",
+  "kind": "const",
+  "owner": null,
+  "start": 4207,
+  "end": 4218
+ },
+ {
+  "name": "sopBase",
+  "kind": "function",
+  "owner": null,
+  "start": 4219,
+  "end": 4235
+ },
+ {
+  "name": "SOP_PRESETS",
+  "kind": "const",
+  "owner": null,
+  "start": 4236,
+  "end": 4263
+ },
+ {
+  "name": "STORED_SOP",
+  "kind": "const",
+  "owner": null,
+  "start": 4333,
+  "end": 4333
+ },
+ {
+  "name": "STORED_SOP_IS_TEMPLATE",
+  "kind": "const",
+  "owner": null,
+  "start": 4334,
+  "end": 4334
+ },
+ {
+  "name": "SOP",
+  "kind": "let",
+  "owner": null,
+  "start": 4335,
+  "end": 4335
+ },
+ {
+  "name": "SOP_AUTO_DEFAULT",
+  "kind": "let",
+  "owner": null,
+  "start": 4336,
+  "end": 4336
+ },
+ {
+  "name": "SOP_CACHE",
+  "kind": "let",
+  "owner": null,
+  "start": 4337,
+  "end": 4337
+ },
+ {
+  "name": "sopLoadStored",
+  "kind": "function",
+  "owner": null,
+  "start": 4338,
+  "end": 4338
+ },
+ {
+  "name": "sopStore",
+  "kind": "function",
+  "owner": null,
+  "start": 4339,
+  "end": 4339
+ },
+ {
+  "name": "sopMaybeSelectScDefault",
+  "kind": "function",
+  "owner": null,
+  "start": 4340,
+  "end": 4347
+ },
+ {
+  "name": "sopNormalise",
+  "kind": "function",
+  "owner": null,
+  "start": 4348,
+  "end": 4362
+ },
+ {
+  "name": "sopCanonical",
+  "kind": "function",
+  "owner": null,
+  "start": 4363,
+  "end": 4366
+ },
+ {
+  "name": "sopHash",
+  "kind": "function",
+  "owner": null,
+  "start": 4367,
+  "end": 4367
+ },
+ {
+  "name": "sopJSON",
+  "kind": "function",
+  "owner": null,
+  "start": 4368,
+  "end": 4368
+ },
+ {
+  "name": "sopChanged",
+  "kind": "function",
+  "owner": null,
+  "start": 4369,
+  "end": 4369
+ },
+ {
+  "name": "sopMatcher",
+  "kind": "function",
+  "owner": null,
+  "start": 4372,
+  "end": 4378
+ },
+ {
+  "name": "sopNum",
+  "kind": "function",
+  "owner": null,
+  "start": 4379,
+  "end": 4379
+ },
+ {
+  "name": "sopCq",
+  "kind": "function",
+  "owner": null,
+  "start": 4380,
+  "end": 4380
+ },
+ {
+  "name": "sopOmitted",
+  "kind": "function",
+  "owner": null,
+  "start": 4381,
+  "end": 4381
+ },
+ {
+  "name": "sopTargetSpec",
+  "kind": "function",
+  "owner": null,
+  "start": 4382,
+  "end": 4388
+ },
+ {
+  "name": "sopRunApplicability",
+  "kind": "function",
+  "owner": null,
+  "start": 4389,
+  "end": 4399
+ },
+ {
+  "name": "sopReplicateMinimum",
+  "kind": "function",
+  "owner": null,
+  "start": 4400,
+  "end": 4405
+ },
+ {
+  "name": "CC_TARGET_ALIAS",
+  "kind": "const",
+  "owner": null,
+  "start": 4408,
+  "end": 4408
+ },
+ {
+  "name": "ccCanonTarget",
+  "kind": "function",
+  "owner": null,
+  "start": 4409,
+  "end": 4409
+ },
+ {
+  "name": "sopControlIdentity",
+  "kind": "function",
+  "owner": null,
+  "start": 4410,
+  "end": 4432
+ },
+ {
+  "name": "sopLabScreening",
+  "kind": "function",
+  "owner": null,
+  "start": 4433,
+  "end": 4451
+ },
+ {
+  "name": "ccBaselineNeed",
+  "kind": "function",
+  "owner": null,
+  "start": 4452,
+  "end": 4452
+ },
+ {
+  "name": "ccNoDataReason",
+  "kind": "function",
+  "owner": null,
+  "start": 4453,
+  "end": 4458
+ },
+ {
+  "name": "controlBatchRecords",
+  "kind": "function",
+  "owner": null,
+  "start": 4459,
+  "end": 4468
+ },
+ {
+  "name": "controlBatchGraph",
+  "kind": "function",
+  "owner": null,
+  "start": 4469,
+  "end": 4485
+ },
+ {
+  "name": "sopControlSpec",
+  "kind": "function",
+  "owner": null,
+  "start": 4487,
+  "end": 4492
+ },
+ {
+  "name": "sopFmt",
+  "kind": "function",
+  "owner": null,
+  "start": 4493,
+  "end": 4493
+ },
+ {
+  "name": "sopTime",
+  "kind": "function",
+  "owner": null,
+  "start": 4494,
+  "end": 4498
+ },
+ {
+  "name": "sopFmtTime",
+  "kind": "function",
+  "owner": null,
+  "start": 4499,
+  "end": 4500
+ },
+ {
+  "name": "wellSignal",
+  "kind": "function",
+  "owner": null,
+  "start": 4503,
+  "end": 4508
+ },
+ {
+  "name": "runTimeline",
+  "kind": "function",
+  "owner": null,
+  "start": 4511,
+  "end": 4531
+ },
+ {
+  "name": "runTimes",
+  "kind": "function",
+  "owner": null,
+  "start": 4532,
+  "end": 4539
+ },
+ {
+  "name": "sopStdCurves",
+  "kind": "function",
+  "owner": null,
+  "start": 4542,
+  "end": 4555
+ },
+ {
+  "name": "sopEvaluateRun",
+  "kind": "function",
+  "owner": null,
+  "start": 4558,
+  "end": 4694
+ },
+ {
+  "name": "sopEvaluateAll",
+  "kind": "function",
+  "owner": null,
+  "start": 4695,
+  "end": 4699
+ },
+ {
+  "name": "sopResultForWell",
+  "kind": "function",
+  "owner": null,
+  "start": 4700,
+  "end": 4703
+ },
+ {
+  "name": "sopMeta",
+  "kind": "function",
+  "owner": null,
+  "start": 4704,
+  "end": 4704
+ },
+ {
+  "name": "sopInterpretationRows",
+  "kind": "function",
+  "owner": null,
+  "start": 4705,
+  "end": 4716
+ },
+ {
+  "name": "sopSampleRows",
+  "kind": "function",
+  "owner": null,
+  "start": 4717,
+  "end": 4730
+ },
+ {
+  "name": "sopCriteriaRows",
+  "kind": "function",
+  "owner": null,
+  "start": 4731,
+  "end": 4734
+ },
+ {
+  "name": "sopRunRows",
+  "kind": "function",
+  "owner": null,
+  "start": 4735,
+  "end": 4746
+ },
+ {
+  "name": "sopEvents",
+  "kind": "function",
+  "owner": null,
+  "start": 4747,
+  "end": 4759
+ },
+ {
+  "name": "FORENSIC_CACHE",
+  "kind": "let",
+  "owner": null,
+  "start": 4764,
+  "end": 4764
+ },
+ {
+  "name": "invalidateAnalysisCaches",
+  "kind": "function",
+  "owner": null,
+  "start": 4765,
+  "end": 4767
+ },
+ {
+  "name": "forensicSnapshot",
+  "kind": "function",
+  "owner": null,
+  "start": 4768,
+  "end": 4773
+ },
+ {
+  "name": "extraForensicEvents",
+  "kind": "function",
+  "owner": null,
+  "start": 4774,
+  "end": 4774
+ },
+ {
+  "name": "reviewForensicEventsCore",
+  "kind": "function",
+  "owner": null,
+  "start": 4775,
+  "end": 4775
+ },
+ {
+  "name": "forensicCounts",
+  "kind": "function",
+  "owner": null,
+  "start": 4776,
+  "end": 4782
+ },
+ {
+  "name": "extraForensicEventsUncached",
+  "kind": "function",
+  "owner": null,
+  "start": 4783,
+  "end": 4825
+ },
+ {
+  "name": "sopOutcomeFor",
+  "kind": "function",
+  "owner": null,
+  "start": 4830,
+  "end": 4834
+ },
+ {
+  "name": "SOP_OUTCOME_OPTIONS",
+  "kind": "const",
+  "owner": null,
+  "start": 4835,
+  "end": 4835
+ },
+ {
+  "name": "sopField",
+  "kind": "function",
+  "owner": null,
+  "start": 4836,
+  "end": 4845
+ },
+ {
+  "name": "SOP_ACTION_LABEL",
+  "kind": "const",
+  "owner": null,
+  "start": 4846,
+  "end": 4848
+ },
+ {
+  "name": "sopSetPath",
+  "kind": "function",
+  "owner": null,
+  "start": 4849,
+  "end": 4854
+ },
+ {
+  "name": "sopTableEditor",
+  "kind": "function",
+  "owner": null,
+  "start": 4855,
+  "end": 4873
+ },
+ {
+  "name": "sopProfileEdited",
+  "kind": "function",
+  "owner": null,
+  "start": 4874,
+  "end": 4877
+ },
+ {
+  "name": "renderSopHeader",
+  "kind": "function",
+  "owner": null,
+  "start": 4878,
+  "end": 4886
+ },
+ {
+  "name": "sopProcedureHTML",
+  "kind": "function",
+  "owner": null,
+  "start": 4887,
+  "end": 4906
+ },
+ {
+  "name": "renderSopEditor",
+  "kind": "function",
+  "owner": null,
+  "start": 4907,
+  "end": 4997
+ },
+ {
+  "name": "SOP_VIEW",
+  "kind": "const",
+  "owner": null,
+  "start": 4998,
+  "end": 4998
+ },
+ {
+  "name": "renderSopResults",
+  "kind": "function",
+  "owner": null,
+  "start": 4999,
+  "end": 5046
+ },
+ {
+  "name": "sopCurrentRows",
+  "kind": "function",
+  "owner": null,
+  "start": 5047,
+  "end": 5050
+ },
+ {
+  "name": "csvOf",
+  "kind": "function",
+  "owner": null,
+  "start": 5051,
+  "end": 5051
+ },
+ {
+  "name": "sheetOf",
+  "kind": "function",
+  "owner": null,
+  "start": 5052,
+  "end": 5052
+ },
+ {
+  "name": "sopReadme",
+  "kind": "function",
+  "owner": null,
+  "start": 5053,
+  "end": 5066
+ },
+ {
+  "name": "sopDownloadWorkbook",
+  "kind": "function",
+  "owner": null,
+  "start": 5067,
+  "end": 5074
+ },
+ {
+  "name": "sopDownloadBundle",
+  "kind": "function",
+  "owner": null,
+  "start": 5075,
+  "end": 5084
+ },
+ {
+  "name": "wireSop",
+  "kind": "function",
+  "owner": null,
+  "start": 5085,
+  "end": 5101
+ },
+ {
+  "name": "renderSop",
+  "kind": "function",
+  "owner": null,
+  "start": 5102,
+  "end": 5102
+ },
+ {
+  "name": "renderResults",
+  "kind": "function",
+  "owner": null,
+  "start": 5103,
+  "end": 5103
+ },
+ {
+  "name": "svgEsc",
+  "kind": "function",
+  "owner": null,
+  "start": 5106,
+  "end": 5106
+ },
+ {
+  "name": "niceTicks",
+  "kind": "function",
+  "owner": null,
+  "start": 5107,
+  "end": 5114
+ },
+ {
+  "name": "fmtTick",
+  "kind": "function",
+  "owner": null,
+  "start": 5115,
+  "end": 5115
+ },
+ {
+  "name": "SVG_CLIP_N",
+  "kind": "let",
+  "owner": null,
+  "start": 5116,
+  "end": 5116
+ },
+ {
+  "name": "svgPlot",
+  "kind": "function",
+  "owner": null,
+  "start": 5117,
+  "end": 5161
+ },
+ {
+  "name": "svgMessage",
+  "kind": "function",
+  "owner": null,
+  "start": 5162,
+  "end": 5162
+ },
+ {
+  "name": "extent",
+  "kind": "function",
+  "owner": null,
+  "start": 5163,
+  "end": 5163
+ },
+ {
+  "name": "legendFromMap",
+  "kind": "function",
+  "owner": null,
+  "start": 5164,
+  "end": 5164
+ },
+ {
+  "name": "catColour",
+  "kind": "function",
+  "owner": null,
+  "start": 5165,
+  "end": 5165
+ },
+ {
+  "name": "sopColour",
+  "kind": "function",
+  "owner": null,
+  "start": 5166,
+  "end": 5166
+ },
+ {
+  "name": "sopLabel",
+  "kind": "function",
+  "owner": null,
+  "start": 5167,
+  "end": 5167
+ },
+ {
+  "name": "gRunWells",
+  "kind": "function",
+  "owner": null,
+  "start": 5170,
+  "end": 5170
+ },
+ {
+  "name": "gTargets",
+  "kind": "function",
+  "owner": null,
+  "start": 5171,
+  "end": 5171
+ },
+ {
+  "name": "gCutLines",
+  "kind": "function",
+  "owner": null,
+  "start": 5172,
+  "end": 5178
+ },
+ {
+  "name": "gRunDate",
+  "kind": "function",
+  "owner": null,
+  "start": 5181,
+  "end": 5181
+ },
+ {
+  "name": "gByDate",
+  "kind": "function",
+  "owner": null,
+  "start": 5182,
+  "end": 5182
+ },
+ {
+  "name": "gRunTicks",
+  "kind": "function",
+  "owner": null,
+  "start": 5183,
+  "end": 5188
+ },
+ {
+  "name": "GRAPHS",
+  "kind": "const",
+  "owner": null,
+  "start": 5189,
+  "end": 5540
+ },
+ {
+  "name": "GRAPH_METRICS",
+  "kind": "const",
+  "owner": null,
+  "start": 5541,
+  "end": 5541
+ },
+ {
+  "name": "GRAPH_STATE",
+  "kind": "const",
+  "owner": null,
+  "start": 5542,
+  "end": 5542
+ },
+ {
+  "name": "graphContext",
+  "kind": "function",
+  "owner": null,
+  "start": 5543,
+  "end": 5548
+ },
+ {
+  "name": "renderGraphs",
+  "kind": "function",
+  "owner": null,
+  "start": 5549,
+  "end": 5578
+ },
+ {
+  "name": "graphFileBase",
+  "kind": "function",
+  "owner": null,
+  "start": 5579,
+  "end": 5579
+ },
+ {
+  "name": "graphSvgText",
+  "kind": "function",
+  "owner": null,
+  "start": 5580,
+  "end": 5581
+ },
+ {
+  "name": "graphPng",
+  "kind": "function",
+  "owner": null,
+  "start": 5582,
+  "end": 5589
+ },
+ {
+  "name": "graphAllZip",
+  "kind": "function",
+  "owner": null,
+  "start": 5590,
+  "end": 5610
+ },
+ {
+  "name": "wireGraphs",
+  "kind": "function",
+  "owner": null,
+  "start": 5611,
+  "end": 5623
+ },
+ {
+  "name": "DIRTY",
+  "kind": "const",
+  "owner": null,
+  "start": 5626,
+  "end": 5626
+ },
+ {
+  "name": "markDirty",
+  "kind": "function",
+  "owner": null,
+  "start": 5627,
+  "end": 5627
+ },
+ {
+  "name": "currentTab",
+  "kind": "function",
+  "owner": null,
+  "start": 5628,
+  "end": 5628
+ },
+ {
+  "name": "currentReviewSheet",
+  "kind": "function",
+  "owner": null,
+  "start": 5629,
+  "end": 5629
+ },
+ {
+  "name": "REVIEW_RENDERERS",
+  "kind": "const",
+  "owner": null,
+  "start": 5630,
+  "end": 5632
+ },
+ {
+  "name": "renderTab",
+  "kind": "function",
+  "owner": null,
+  "start": 5633,
+  "end": 5654
+ },
+ {
+  "name": "renderReviewSheetLazy",
+  "kind": "function",
+  "owner": null,
+  "start": 5655,
+  "end": 5659
+ },
+ {
+  "name": "ccLzss",
+  "kind": "function",
+  "owner": null,
+  "start": 5674,
+  "end": 5688
+ },
+ {
+  "name": "ccDecodeArz",
+  "kind": "function",
+  "owner": null,
+  "start": 5689,
+  "end": 5702
+ },
+ {
+  "name": "ccIxoTemperatureLog",
+  "kind": "function",
+  "owner": null,
+  "start": 5703,
+  "end": 5711
+ },
+ {
+  "name": "ccIxoAcquisitions",
+  "kind": "function",
+  "owner": null,
+  "start": 5714,
+  "end": 5721
+ },
+ {
+  "name": "ccThermalSteps",
+  "kind": "function",
+  "owner": null,
+  "start": 5724,
+  "end": 5756
+ },
+ {
+  "name": "ccTransitionPairs",
+  "kind": "function",
+  "owner": null,
+  "start": 5764,
+  "end": 5775
+ },
+ {
+  "name": "ccTransitions",
+  "kind": "function",
+  "owner": null,
+  "start": 5776,
+  "end": 5802
+ },
+ {
+  "name": "ccThin",
+  "kind": "function",
+  "owner": null,
+  "start": 5805,
+  "end": 5812
+ },
+ {
+  "name": "ccPeakRates",
+  "kind": "function",
+  "owner": null,
+  "start": 5813,
+  "end": 5825
+ },
+ {
+  "name": "ccThermalSummary",
+  "kind": "function",
+  "owner": null,
+  "start": 5826,
+  "end": 5834
+ },
+ {
+  "name": "ccSetpoints",
+  "kind": "function",
+  "owner": null,
+  "start": 5835,
+  "end": 5838
+ },
+ {
+  "name": "ccQsLog",
+  "kind": "function",
+  "owner": null,
+  "start": 5841,
+  "end": 5881
+ },
+ {
+  "name": "ccCalibSummary",
+  "kind": "function",
+  "owner": null,
+  "start": 5883,
+  "end": 5893
+ },
+ {
+  "name": "ccQuantSaturation",
+  "kind": "function",
+  "owner": null,
+  "start": 5895,
+  "end": 5900
+ },
+ {
+  "name": "CC_TZ",
+  "kind": "const",
+  "owner": null,
+  "start": 5901,
+  "end": 5901
+ },
+ {
+  "name": "ccParseJavaDate",
+  "kind": "function",
+  "owner": null,
+  "start": 5902,
+  "end": 5906
+ },
+ {
+  "name": "ccQ",
+  "kind": "const",
+  "owner": null,
+  "start": 5909,
+  "end": 5909
+ },
+ {
+  "name": "s",
+  "kind": "const",
+  "owner": "ccQ",
+  "start": 5909,
+  "end": 5909
+ },
+ {
+  "name": "ccMedian",
+  "kind": "const",
+  "owner": null,
+  "start": 5910,
+  "end": 5910
+ },
+ {
+  "name": "ccStatic",
+  "kind": "function",
+  "owner": null,
+  "start": 5911,
+  "end": 5977
+ },
+ {
+  "name": "ccDynamic",
+  "kind": "function",
+  "owner": null,
+  "start": 5979,
+  "end": 6028
+ },
+ {
+  "name": "ccExtractOnLoad",
+  "kind": "function",
+  "owner": null,
+  "start": 6030,
+  "end": 6049
+ },
+ {
+  "name": "ccProtocolKey",
+  "kind": "function",
+  "owner": null,
+  "start": 6053,
+  "end": 6056
+ },
+ {
+  "name": "CC_GROUPS",
+  "kind": "const",
+  "owner": null,
+  "start": 6069,
+  "end": 6073
+ },
+ {
+  "name": "CC_CHARTS",
+  "kind": "const",
+  "owner": null,
+  "start": 6074,
+  "end": 6258
+ },
+ {
+  "name": "CC_BY_ID",
+  "kind": "const",
+  "owner": null,
+  "start": 6259,
+  "end": 6259
+ },
+ {
+  "name": "CC_DEFAULT_CFG",
+  "kind": "const",
+  "owner": null,
+  "start": 6260,
+  "end": 6261
+ },
+ {
+  "name": "CC_RULES_OFF",
+  "kind": "const",
+  "owner": null,
+  "start": 6264,
+  "end": 6264
+ },
+ {
+  "name": "ccCfg",
+  "kind": "function",
+  "owner": null,
+  "start": 6265,
+  "end": 6266
+ },
+ {
+  "name": "ccSetCfg",
+  "kind": "function",
+  "owner": null,
+  "start": 6267,
+  "end": 6268
+ },
+ {
+  "name": "CC_C4",
+  "kind": "const",
+  "owner": null,
+  "start": 6271,
+  "end": 6271
+ },
+ {
+  "name": "ccPhase",
+  "kind": "function",
+  "owner": null,
+  "start": 6272,
+  "end": 6272
+ },
+ {
+  "name": "ccI",
+  "kind": "function",
+  "owner": null,
+  "start": 6274,
+  "end": 6286
+ },
+ {
+  "name": "ccWestgard",
+  "kind": "function",
+  "owner": null,
+  "start": 6288,
+  "end": 6298
+ },
+ {
+  "name": "ccEWMA",
+  "kind": "function",
+  "owner": null,
+  "start": 6299,
+  "end": 6304
+ },
+ {
+  "name": "ccCUSUM",
+  "kind": "function",
+  "owner": null,
+  "start": 6305,
+  "end": 6320
+ },
+ {
+  "name": "ccTrend",
+  "kind": "function",
+  "owner": null,
+  "start": 6322,
+  "end": 6337
+ },
+ {
+  "name": "ccP",
+  "kind": "function",
+  "owner": null,
+  "start": 6338,
+  "end": 6343
+ },
+ {
+  "name": "ccU",
+  "kind": "function",
+  "owner": null,
+  "start": 6344,
+  "end": 6347
+ },
+ {
+  "name": "ccC",
+  "kind": "function",
+  "owner": null,
+  "start": 6348,
+  "end": 6351
+ },
+ {
+  "name": "ccXbarS",
+  "kind": "function",
+  "owner": null,
+  "start": 6352,
+  "end": 6363
+ },
+ {
+  "name": "ccFunnel",
+  "kind": "function",
+  "owner": null,
+  "start": 6364,
+  "end": 6370
+ },
+ {
+  "name": "CC_LIMIT_TEXT",
+  "kind": "const",
+  "owner": null,
+  "start": 6373,
+  "end": 6431
+ },
+ {
+  "name": "CONSOLE_DICT",
+  "kind": "const",
+  "owner": null,
+  "start": 6432,
+  "end": 6436
+ },
+ {
+  "name": "ccAlarmDir",
+  "kind": "function",
+  "owner": null,
+  "start": 6437,
+  "end": 6443
+ },
+ {
+  "name": "CC_STATE",
+  "kind": "const",
+  "owner": null,
+  "start": 6448,
+  "end": 6448
+ },
+ {
+  "name": "CC_HIST_KEY",
+  "kind": "const",
+  "owner": null,
+  "start": 6449,
+  "end": 6449
+ },
+ {
+  "name": "CC_COL",
+  "kind": "const",
+  "owner": null,
+  "start": 6450,
+  "end": 6450
+ },
+ {
+  "name": "CC_SEG_PALETTE",
+  "kind": "const",
+  "owner": null,
+  "start": 6454,
+  "end": 6454
+ },
+ {
+  "name": "CC_LIMIT_FLAG",
+  "kind": "const",
+  "owner": null,
+  "start": 6455,
+  "end": 6455
+ },
+ {
+  "name": "ccSignal",
+  "kind": "function",
+  "owner": null,
+  "start": 6456,
+  "end": 6456
+ },
+ {
+  "name": "ccPlatform",
+  "kind": "function",
+  "owner": null,
+  "start": 6457,
+  "end": 6457
+ },
+ {
+  "name": "ccInstrumentKey",
+  "kind": "function",
+  "owner": null,
+  "start": 6458,
+  "end": 6458
+ },
+ {
+  "name": "ccOperator",
+  "kind": "function",
+  "owner": null,
+  "start": 6459,
+  "end": 6459
+ },
+ {
+  "name": "ccRowsFromRuns",
+  "kind": "function",
+  "owner": null,
+  "start": 6461,
+  "end": 6475
+ },
+ {
+  "name": "ccAllRows",
+  "kind": "function",
+  "owner": null,
+  "start": 6476,
+  "end": 6479
+ },
+ {
+  "name": "ccInstruments",
+  "kind": "function",
+  "owner": null,
+  "start": 6480,
+  "end": 6480
+ },
+ {
+  "name": "ccRowsFor",
+  "kind": "function",
+  "owner": null,
+  "start": 6481,
+  "end": 6486
+ },
+ {
+  "name": "ccVariants",
+  "kind": "function",
+  "owner": null,
+  "start": 6488,
+  "end": 6490
+ },
+ {
+  "name": "ccValue",
+  "kind": "function",
+  "owner": null,
+  "start": 6491,
+  "end": 6493
+ },
+ {
+  "name": "ccXAxis",
+  "kind": "function",
+  "owner": null,
+  "start": 6494,
+  "end": 6500
+ },
+ {
+  "name": "ccSpec",
+  "kind": "function",
+  "owner": null,
+  "start": 6501,
+  "end": 6506
+ },
+ {
+  "name": "ccCompute",
+  "kind": "function",
+  "owner": null,
+  "start": 6507,
+  "end": 6557
+ },
+ {
+  "name": "ccShift",
+  "kind": "function",
+  "owner": null,
+  "start": 6561,
+  "end": 6572
+ },
+ {
+  "name": "ccStatus",
+  "kind": "function",
+  "owner": null,
+  "start": 6573,
+  "end": 6598
+ },
+ {
+  "name": "ccSpark",
+  "kind": "function",
+  "owner": null,
+  "start": 6600,
+  "end": 6610
+ },
+ {
+  "name": "ccVersionMarks",
+  "kind": "function",
+  "owner": null,
+  "start": 6611,
+  "end": 6615
+ },
+ {
+  "name": "ccChartSvg",
+  "kind": "function",
+  "owner": null,
+  "start": 6616,
+  "end": 6675
+ },
+ {
+  "name": "ccSChartSvg",
+  "kind": "function",
+  "owner": null,
+  "start": 6676,
+  "end": 6682
+ },
+ {
+  "name": "renderPanel",
+  "kind": "function",
+  "owner": null,
+  "start": 6684,
+  "end": 6724
+ },
+ {
+  "name": "renderCcDetail",
+  "kind": "function",
+  "owner": null,
+  "start": 6725,
+  "end": 6794
+ },
+ {
+  "name": "ccPng",
+  "kind": "function",
+  "owner": null,
+  "start": 6795,
+  "end": 6800
+ },
+ {
+  "name": "ccChartRows",
+  "kind": "function",
+  "owner": null,
+  "start": 6801,
+  "end": 6808
+ },
+ {
+  "name": "ccSvgToPng",
+  "kind": "function",
+  "owner": null,
+  "start": 6809,
+  "end": 6814
+ },
+ {
+  "name": "ccZipAll",
+  "kind": "function",
+  "owner": null,
+  "start": 6818,
+  "end": 6866
+ },
+ {
+  "name": "ccHistoryJSON",
+  "kind": "function",
+  "owner": null,
+  "start": 6868,
+  "end": 6872
+ },
+ {
+  "name": "ccHistoryCSV",
+  "kind": "function",
+  "owner": null,
+  "start": 6873,
+  "end": 6879
+ },
+ {
+  "name": "ccMigrateControlKeys",
+  "kind": "function",
+  "owner": null,
+  "start": 6881,
+  "end": 6893
+ },
+ {
+  "name": "ccImport",
+  "kind": "function",
+  "owner": null,
+  "start": 6894,
+  "end": 6902
+ },
+ {
+  "name": "ccRemember",
+  "kind": "function",
+  "owner": null,
+  "start": 6903,
+  "end": 6903
+ },
+ {
+  "name": "ccRestore",
+  "kind": "function",
+  "owner": null,
+  "start": 6904,
+  "end": 6904
+ },
+ {
+  "name": "ccEvents",
+  "kind": "function",
+  "owner": null,
+  "start": 6906,
+  "end": 6917
+ },
+ {
+  "name": "wirePanel",
+  "kind": "function",
+  "owner": null,
+  "start": 6919,
+  "end": 6936
+ },
+ {
+  "name": "effWol",
+  "kind": "function",
+  "owner": null,
+  "start": 6950,
+  "end": 6968
+ },
+ {
+  "name": "effSliwinProxy",
+  "kind": "function",
+  "owner": null,
+  "start": 6969,
+  "end": 6982
+ },
+ {
+  "name": "efficiencyFromSlope",
+  "kind": "function",
+  "owner": null,
+  "start": 6989,
+  "end": 6993
+ },
+ {
+  "name": "$$",
+  "kind": "const",
+  "owner": null,
+  "start": 6999,
+  "end": 6999
+ },
+ {
+  "name": "APP_VERSION",
+  "kind": "const",
+  "owner": null,
+  "start": 7000,
+  "end": 7000
+ },
+ {
+  "name": "APP_LIMITS",
+  "kind": "const",
+  "owner": null,
+  "start": 7004,
+  "end": 7004
+ },
+ {
+  "name": "APP_STATE",
+  "kind": "const",
+  "owner": null,
+  "start": 7005,
+  "end": 7005
+ },
+ {
+  "name": "appError",
+  "kind": "function",
+  "owner": null,
+  "start": 7006,
+  "end": 7013
+ },
+ {
+  "name": "APP_PHASE_TRANSITIONS",
+  "kind": "const",
+  "owner": null,
+  "start": 7014,
+  "end": 7014
+ },
+ {
+  "name": "setPhase",
+  "kind": "function",
+  "owner": null,
+  "start": 7015,
+  "end": 7024
+ },
+ {
+  "name": "appDiagnostics",
+  "kind": "function",
+  "owner": null,
+  "start": 7025,
+  "end": 7025
+ },
+ {
+  "name": "validateRunBoundary",
+  "kind": "function",
+  "owner": null,
+  "start": 7026,
+  "end": 7035
+ },
+ {
+  "name": "validateHistoryBoundary",
+  "kind": "function",
+  "owner": null,
+  "start": 7036,
+  "end": 7043
+ },
+ {
+  "name": "MG",
+  "kind": "const",
+  "owner": null,
+  "start": 7053,
+  "end": 7053
+ },
+ {
+  "name": "MG_GLYPH",
+  "kind": "const",
+  "owner": null,
+  "start": 7054,
+  "end": 7054
+ },
+ {
+  "name": "MG_WORD",
+  "kind": "const",
+  "owner": null,
+  "start": 7055,
+  "end": 7055
+ },
+ {
+  "name": "mgBuildQueue",
+  "kind": "function",
+  "owner": null,
+  "start": 7058,
+  "end": 7175
+ },
+ {
+  "name": "mgItem",
+  "kind": "function",
+  "owner": null,
+  "start": 7178,
+  "end": 7178
+ },
+ {
+  "name": "MG_TYPE_LABEL",
+  "kind": "const",
+  "owner": null,
+  "start": 7179,
+  "end": 7179
+ },
+ {
+  "name": "mgChartTypeOptions",
+  "kind": "function",
+  "owner": null,
+  "start": 7180,
+  "end": 7184
+ },
+ {
+  "name": "mgChartAxisOptions",
+  "kind": "function",
+  "owner": null,
+  "start": 7185,
+  "end": 7192
+ },
+ {
+  "name": "mgStatusPaint",
+  "kind": "function",
+  "owner": null,
+  "start": 7193,
+  "end": 7202
+ },
+ {
+  "name": "mgRender",
+  "kind": "function",
+  "owner": null,
+  "start": 7204,
+  "end": 7282
+ },
+ {
+  "name": "mgSheet",
+  "kind": "function",
+  "owner": null,
+  "start": 7285,
+  "end": 7299
+ },
+ {
+  "name": "mgSheetPick",
+  "kind": "function",
+  "owner": null,
+  "start": 7300,
+  "end": 7305
+ },
+ {
+  "name": "mgSheetClose",
+  "kind": "function",
+  "owner": null,
+  "start": 7306,
+  "end": 7306
+ },
+ {
+  "name": "mgItemSentence",
+  "kind": "function",
+  "owner": null,
+  "start": 7307,
+  "end": 7311
+ },
+ {
+  "name": "mgStage",
+  "kind": "function",
+  "owner": null,
+  "start": 7319,
+  "end": 7324
+ },
+ {
+  "name": "mgStageSet",
+  "kind": "function",
+  "owner": null,
+  "start": 7325,
+  "end": 7325
+ },
+ {
+  "name": "mgApplyChartView",
+  "kind": "function",
+  "owner": null,
+  "start": 7326,
+  "end": 7333
+ },
+ {
+  "name": "mgZoom",
+  "kind": "function",
+  "owner": null,
+  "start": 7334,
+  "end": 7340
+ },
+ {
+  "name": "mgPan",
+  "kind": "function",
+  "owner": null,
+  "start": 7341,
+  "end": 7341
+ },
+ {
+  "name": "MG_COMMANDS",
+  "kind": "const",
+  "owner": null,
+  "start": 7343,
+  "end": 7374
+ },
+ {
+  "name": "mgCommand",
+  "kind": "function",
+  "owner": null,
+  "start": 7375,
+  "end": 7392
+ },
+ {
+  "name": "mgGo",
+  "kind": "function",
+  "owner": null,
+  "start": 7393,
+  "end": 7398
+ },
+ {
+  "name": "mgGoChart",
+  "kind": "function",
+  "owner": null,
+  "start": 7399,
+  "end": 7407
+ },
+ {
+  "name": "mgSetChartType",
+  "kind": "function",
+  "owner": null,
+  "start": 7408,
+  "end": 7411
+ },
+ {
+  "name": "mgSetChartAxis",
+  "kind": "function",
+  "owner": null,
+  "start": 7412,
+  "end": 7415
+ },
+ {
+  "name": "mgReadFiles",
+  "kind": "function",
+  "owner": null,
+  "start": 7416,
+  "end": 7422
+ },
+ {
+  "name": "mgChooseFiles",
+  "kind": "function",
+  "owner": null,
+  "start": 7423,
+  "end": 7427
+ },
+ {
+  "name": "mgLeaveTo",
+  "kind": "function",
+  "owner": null,
+  "start": 7428,
+  "end": 7428
+ },
+ {
+  "name": "MG_PICT",
+  "kind": "const",
+  "owner": null,
+  "start": 7441,
+  "end": 7442
+ },
+ {
+  "name": "mgIt",
+  "kind": "function",
+  "owner": null,
+  "start": 7443,
+  "end": 7444
+ },
+ {
+  "name": "mgSafe",
+  "kind": "function",
+  "owner": null,
+  "start": 7445,
+  "end": 7445
+ },
+ {
+  "name": "mgTxt",
+  "kind": "function",
+  "owner": null,
+  "start": 7446,
+  "end": 7446
+ },
+ {
+  "name": "mgViewLoad",
+  "kind": "function",
+  "owner": null,
+  "start": 7449,
+  "end": 7504
+ },
+ {
+  "name": "mgViewSop",
+  "kind": "function",
+  "owner": null,
+  "start": 7507,
+  "end": 7573
+ },
+ {
+  "name": "mgViewResults",
+  "kind": "function",
+  "owner": null,
+  "start": 7576,
+  "end": 7654
+ },
+ {
+  "name": "mgPanelItems",
+  "kind": "function",
+  "owner": null,
+  "start": 7657,
+  "end": 7694
+ },
+ {
+  "name": "mgViewPanel",
+  "kind": "function",
+  "owner": null,
+  "start": 7695,
+  "end": 7717
+ },
+ {
+  "name": "mgGraphCtx",
+  "kind": "function",
+  "owner": null,
+  "start": 7720,
+  "end": 7724
+ },
+ {
+  "name": "mgViewGraphs",
+  "kind": "function",
+  "owner": null,
+  "start": 7725,
+  "end": 7753
+ },
+ {
+  "name": "mgViewReview",
+  "kind": "function",
+  "owner": null,
+  "start": 7756,
+  "end": 7786
+ },
+ {
+  "name": "mgViewIntegrity",
+  "kind": "function",
+  "owner": null,
+  "start": 7789,
+  "end": 7801
+ },
+ {
+  "name": "mgViewExport",
+  "kind": "function",
+  "owner": null,
+  "start": 7804,
+  "end": 7829
+ },
+ {
+  "name": "MG_VIEWS",
+  "kind": "const",
+  "owner": null,
+  "start": 7831,
+  "end": 7840
+ },
+ {
+  "name": "mgScope",
+  "kind": "function",
+  "owner": null,
+  "start": 7841,
+  "end": 7844
+ },
+ {
+  "name": "mgScopeMark",
+  "kind": "function",
+  "owner": null,
+  "start": 7845,
+  "end": 7848
+ },
+ {
+  "name": "mgItemKey",
+  "kind": "function",
+  "owner": null,
+  "start": 7849,
+  "end": 7849
+ },
+ {
+  "name": "mgScopeFilter",
+  "kind": "function",
+  "owner": null,
+  "start": 7852,
+  "end": 7857
+ },
+ {
+  "name": "mgRefresh",
+  "kind": "function",
+  "owner": null,
+  "start": 7858,
+  "end": 7872
+ },
+ {
+  "name": "mgOpen",
+  "kind": "function",
+  "owner": null,
+  "start": 7876,
+  "end": 7880
+ },
+ {
+  "name": "mgClose",
+  "kind": "function",
+  "owner": null,
+  "start": 7881,
+  "end": 7883
+ },
+ {
+  "name": "mgToggle",
+  "kind": "function",
+  "owner": null,
+  "start": 7884,
+  "end": 7884
+ },
+ {
+  "name": "mgInit",
+  "kind": "function",
+  "owner": null,
+  "start": 7885,
+  "end": 7895
+ },
+ {
+  "name": "APP_STATS",
+  "kind": "const",
+  "owner": null,
+  "start": 7902,
+  "end": 7902
+ },
+ {
+  "name": "appTaskStart",
+  "kind": "function",
+  "owner": null,
+  "start": 7903,
+  "end": 7907
+ },
+ {
+  "name": "appTaskStep",
+  "kind": "function",
+  "owner": null,
+  "start": 7908,
+  "end": 7908
+ },
+ {
+  "name": "appTaskEnd",
+  "kind": "function",
+  "owner": null,
+  "start": 7909,
+  "end": 7913
+ },
+ {
+  "name": "appTaskWrap",
+  "kind": "function",
+  "owner": null,
+  "start": 7914,
+  "end": 7917
+ },
+ {
+  "name": "APP_TASK_LABEL",
+  "kind": "const",
+  "owner": null,
+  "start": 7918,
+  "end": 7920
+ },
+ {
+  "name": "appHeapMB",
+  "kind": "function",
+  "owner": null,
+  "start": 7921,
+  "end": 7921
+ },
+ {
+  "name": "appStagedBytes",
+  "kind": "function",
+  "owner": null,
+  "start": 7922,
+  "end": 7922
+ },
+ {
+  "name": "appNotice",
+  "kind": "function",
+  "owner": null,
+  "start": 7923,
+  "end": 7928
+ },
+ {
+  "name": "appCancel",
+  "kind": "function",
+  "owner": null,
+  "start": 7929,
+  "end": 7933
+ },
+ {
+  "name": "appReadSuperseded",
+  "kind": "function",
+  "owner": null,
+  "start": 7934,
+  "end": 7941
+ },
+ {
+  "name": "APP_PHASE_TEXT",
+  "kind": "const",
+  "owner": null,
+  "start": 7942,
+  "end": 7943
+ },
+ {
+  "name": "appFmtMs",
+  "kind": "function",
+  "owner": null,
+  "start": 7944,
+  "end": 7944
+ },
+ {
+  "name": "appFmtMB",
+  "kind": "function",
+  "owner": null,
+  "start": 7945,
+  "end": 7945
+ },
+ {
+  "name": "appStatusSnapshot",
+  "kind": "function",
+  "owner": null,
+  "start": 7946,
+  "end": 7959
+ },
+ {
+  "name": "renderConsoleIdentity",
+  "kind": "function",
+  "owner": null,
+  "start": 7960,
+  "end": 7971
+ },
+ {
+  "name": "APP_SB_LAST",
+  "kind": "let",
+  "owner": null,
+  "start": 7972,
+  "end": 7972
+ },
+ {
+  "name": "appStatusPaint",
+  "kind": "function",
+  "owner": null,
+  "start": 7973,
+  "end": 8020
+ },
+ {
+  "name": "appStatusReport",
+  "kind": "function",
+  "owner": null,
+  "start": 8021,
+  "end": 8026
+ },
+ {
+  "name": "appStatusInit",
+  "kind": "function",
+  "owner": null,
+  "start": 8027,
+  "end": 8038
+ },
+ {
+  "name": "RUNS",
+  "kind": "let",
+  "owner": null,
+  "start": 8039,
+  "end": 8039
+ },
+ {
+  "name": "PASTED",
+  "kind": "let",
+  "owner": null,
+  "start": 8040,
+  "end": 8040
+ },
+ {
+  "name": "INHIB",
+  "kind": "let",
+  "owner": null,
+  "start": 8041,
+  "end": 8041
+ },
+ {
+  "name": "tag",
+  "kind": "function",
+  "owner": null,
+  "start": 8043,
+  "end": 8043
+ },
+ {
+  "name": "table",
+  "kind": "function",
+  "owner": null,
+  "start": 8044,
+  "end": 8052
+ },
+ {
+  "name": "websiteSource",
+  "kind": "function",
+  "owner": null,
+  "start": 8060,
+  "end": 8063
+ },
+ {
+  "name": "makeWebsiteArchive",
+  "kind": "function",
+  "owner": null,
+  "start": 8064,
+  "end": 8070
+ },
+ {
+  "name": "downloadWebsiteArchive",
+  "kind": "function",
+  "owner": null,
+  "start": 8071,
+  "end": 8074
+ },
+ {
+  "name": "csvq",
+  "kind": "function",
+  "owner": null,
+  "start": 8075,
+  "end": 8078
+ },
+ {
+  "name": "toCSV",
+  "kind": "function",
+  "owner": null,
+  "start": 8079,
+  "end": 8082
+ },
+ {
+  "name": "stamp",
+  "kind": "function",
+  "owner": null,
+  "start": 8083,
+  "end": 8083
+ },
+ {
+  "name": "baseName",
+  "kind": "function",
+  "owner": null,
+  "start": 8084,
+  "end": 8088
+ },
+ {
+  "name": "NAME_ROLE_RULES",
+  "kind": "const",
+  "owner": null,
+  "start": 8101,
+  "end": 8108
+ },
+ {
+  "name": "roleFromName",
+  "kind": "function",
+  "owner": null,
+  "start": 8109,
+  "end": 8113
+ },
+ {
+  "name": "assignRoles",
+  "kind": "function",
+  "owner": null,
+  "start": 8114,
+  "end": 8141
+ },
+ {
+  "name": "operatorOf",
+  "kind": "function",
+  "owner": null,
+  "start": 8146,
+  "end": 8146
+ },
+ {
+  "name": "sourceUidOf",
+  "kind": "function",
+  "owner": null,
+  "start": 8147,
+  "end": 8147
+ },
+ {
+  "name": "sourceCRCOf",
+  "kind": "function",
+  "owner": null,
+  "start": 8148,
+  "end": 8148
+ },
+ {
+  "name": "sourceSHA256Of",
+  "kind": "function",
+  "owner": null,
+  "start": 8149,
+  "end": 8149
+ },
+ {
+  "name": "runDurationMinutes",
+  "kind": "function",
+  "owner": null,
+  "start": 8150,
+  "end": 8153
+ },
+ {
+  "name": "uniqueCurveCount",
+  "kind": "function",
+  "owner": null,
+  "start": 8154,
+  "end": 8156
+ },
+ {
+  "name": "acquiredCurveCount",
+  "kind": "function",
+  "owner": null,
+  "start": 8157,
+  "end": 8157
+ },
+ {
+  "name": "wellRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8158,
+  "end": 8188
+ },
+ {
+  "name": "allWellRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8189,
+  "end": 8189
+ },
+ {
+  "name": "tmRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8190,
+  "end": 8212
+ },
+ {
+  "name": "metaRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8213,
+  "end": 8236
+ },
+ {
+  "name": "dyeChemistryOf",
+  "kind": "function",
+  "owner": null,
+  "start": 8252,
+  "end": 8261
+ },
+ {
+  "name": "rdmlSampleType",
+  "kind": "function",
+  "owner": null,
+  "start": 8262,
+  "end": 8267
+ },
+ {
+  "name": "rdmlId",
+  "kind": "function",
+  "owner": null,
+  "start": 8268,
+  "end": 8268
+ },
+ {
+  "name": "analysisGroups",
+  "kind": "function",
+  "owner": null,
+  "start": 8269,
+  "end": 8277
+ },
+ {
+  "name": "curveAnalysisGroups",
+  "kind": "function",
+  "owner": null,
+  "start": 8278,
+  "end": 8278
+ },
+ {
+  "name": "makeRDMLXML",
+  "kind": "function",
+  "owner": null,
+  "start": 8280,
+  "end": 8323
+ },
+ {
+  "name": "makeRDML",
+  "kind": "function",
+  "owner": null,
+  "start": 8324,
+  "end": 8324
+ },
+ {
+  "name": "makeQpcrWide",
+  "kind": "function",
+  "owner": null,
+  "start": 8329,
+  "end": 8341
+ },
+ {
+  "name": "makeQpcrWideTables",
+  "kind": "function",
+  "owner": null,
+  "start": 8342,
+  "end": 8349
+ },
+ {
+  "name": "makeBaselineCSV",
+  "kind": "function",
+  "owner": null,
+  "start": 8353,
+  "end": 8365
+ },
+ {
+  "name": "makeRDES",
+  "kind": "function",
+  "owner": null,
+  "start": 8366,
+  "end": 8378
+ },
+ {
+  "name": "makeRDESTables",
+  "kind": "function",
+  "owner": null,
+  "start": 8379,
+  "end": 8386
+ },
+ {
+  "name": "rScript",
+  "kind": "function",
+  "owner": null,
+  "start": 8389,
+  "end": 8427
+ },
+ {
+  "name": "pyScript",
+  "kind": "function",
+  "owner": null,
+  "start": 8428,
+  "end": 8466
+ },
+ {
+  "name": "BASE_MACHINE_METADATA",
+  "kind": "const",
+  "owner": null,
+  "start": 8471,
+  "end": 8471
+ },
+ {
+  "name": "JSONLD_STANDARDS",
+  "kind": "const",
+  "owner": null,
+  "start": 8472,
+  "end": 8478
+ },
+ {
+  "name": "metadataId",
+  "kind": "function",
+  "owner": null,
+  "start": 8479,
+  "end": 8482
+ },
+ {
+  "name": "outputDistribution",
+  "kind": "function",
+  "owner": null,
+  "start": 8483,
+  "end": 8489
+ },
+ {
+  "name": "distributionsFor",
+  "kind": "function",
+  "owner": null,
+  "start": 8490,
+  "end": 8517
+ },
+ {
+  "name": "variablesFor",
+  "kind": "function",
+  "owner": null,
+  "start": 8518,
+  "end": 8525
+ },
+ {
+  "name": "datasetMetadata",
+  "kind": "function",
+  "owner": null,
+  "start": 8526,
+  "end": 8571
+ },
+ {
+  "name": "pastedDatasetMetadata",
+  "kind": "function",
+  "owner": null,
+  "start": 8572,
+  "end": 8583
+ },
+ {
+  "name": "machineMetadataDocument",
+  "kind": "function",
+  "owner": null,
+  "start": 8584,
+  "end": 8596
+ },
+ {
+  "name": "machineMetadataJSON",
+  "kind": "function",
+  "owner": null,
+  "start": 8597,
+  "end": 8597
+ },
+ {
+  "name": "renderMachineMetadata",
+  "kind": "function",
+  "owner": null,
+  "start": 8598,
+  "end": 8601
+ },
+ {
+  "name": "exportCatalogue",
+  "kind": "function",
+  "owner": null,
+  "start": 8602,
+  "end": 8638
+ },
+ {
+  "name": "exportCatalogueCore",
+  "kind": "function",
+  "owner": null,
+  "start": 8639,
+  "end": 8691
+ },
+ {
+  "name": "bundleZip",
+  "kind": "function",
+  "owner": null,
+  "start": 8692,
+  "end": 8735
+ },
+ {
+  "name": "bundleReadme",
+  "kind": "function",
+  "owner": null,
+  "start": 8736,
+  "end": 8778
+ },
+ {
+  "name": "LOADED_LIMIT",
+  "kind": "let",
+  "owner": null,
+  "start": 8783,
+  "end": 8783
+ },
+ {
+  "name": "renderLoaded",
+  "kind": "function",
+  "owner": null,
+  "start": 8784,
+  "end": 8814
+ },
+ {
+  "name": "renderDiagnostics",
+  "kind": "function",
+  "owner": null,
+  "start": 8815,
+  "end": 8831
+ },
+ {
+  "name": "renderExports",
+  "kind": "function",
+  "owner": null,
+  "start": 8832,
+  "end": 8871
+ },
+ {
+  "name": "REVIEW_COLOURS",
+  "kind": "const",
+  "owner": null,
+  "start": 8880,
+  "end": 8886
+ },
+ {
+  "name": "PLATE_PASTELS",
+  "kind": "const",
+  "owner": null,
+  "start": 8887,
+  "end": 8887
+ },
+ {
+  "name": "CONTROL_CATEGORY_OPTIONS",
+  "kind": "const",
+  "owner": null,
+  "start": 8888,
+  "end": 8890
+ },
+ {
+  "name": "REVIEW_STATE",
+  "kind": "const",
+  "owner": null,
+  "start": 8891,
+  "end": 8892
+ },
+ {
+  "name": "runName",
+  "kind": "function",
+  "owner": null,
+  "start": 8894,
+  "end": 8894
+ },
+ {
+  "name": "shortDate",
+  "kind": "function",
+  "owner": null,
+  "start": 8895,
+  "end": 8898
+ },
+ {
+  "name": "displayRunTick",
+  "kind": "function",
+  "owner": null,
+  "start": 8899,
+  "end": 8902
+ },
+ {
+  "name": "runAt",
+  "kind": "function",
+  "owner": null,
+  "start": 8903,
+  "end": 8906
+ },
+ {
+  "name": "setSelectItems",
+  "kind": "function",
+  "owner": null,
+  "start": 8907,
+  "end": 8914
+ },
+ {
+  "name": "ORPHAN_CURVE_KEY",
+  "kind": "const",
+  "owner": null,
+  "start": 8915,
+  "end": 8915
+ },
+ {
+  "name": "analysisChoices",
+  "kind": "function",
+  "owner": null,
+  "start": 8916,
+  "end": 8926
+ },
+ {
+  "name": "selectedWells",
+  "kind": "function",
+  "owner": null,
+  "start": 8927,
+  "end": 8931
+ },
+ {
+  "name": "physicalCurveRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8932,
+  "end": 8948
+ },
+ {
+  "name": "heatColour",
+  "kind": "function",
+  "owner": null,
+  "start": 8949,
+  "end": 8954
+ },
+ {
+  "name": "plateMapRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8955,
+  "end": 8982
+ },
+ {
+  "name": "sampleComparisonRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8983,
+  "end": 8996
+ },
+ {
+  "name": "reviewStatisticsRows",
+  "kind": "function",
+  "owner": null,
+  "start": 8997,
+  "end": 9016
+ },
+ {
+  "name": "replicateReviewRows",
+  "kind": "function",
+  "owner": null,
+  "start": 9017,
+  "end": 9031
+ },
+ {
+  "name": "BLANK_ROLES",
+  "kind": "const",
+  "owner": null,
+  "start": 9038,
+  "end": 9038
+ },
+ {
+  "name": "orphanBlankRole",
+  "kind": "function",
+  "owner": null,
+  "start": 9039,
+  "end": 9045
+ },
+ {
+  "name": "orphanOtherChannels",
+  "kind": "function",
+  "owner": null,
+  "start": 9049,
+  "end": 9061
+ },
+ {
+  "name": "CQ_NEGATIVE_STATUS",
+  "kind": "const",
+  "owner": null,
+  "start": 9066,
+  "end": 9066
+ },
+ {
+  "name": "resultCq",
+  "kind": "function",
+  "owner": null,
+  "start": 9070,
+  "end": 9075
+ },
+ {
+  "name": "resultAnswers",
+  "kind": "function",
+  "owner": null,
+  "start": 9076,
+  "end": 9084
+ },
+ {
+  "name": "CQ_ANALYSIS_KINDS",
+  "kind": "const",
+  "owner": null,
+  "start": 9089,
+  "end": 9089
+ },
+ {
+  "name": "quantChannels",
+  "kind": "function",
+  "owner": null,
+  "start": 9090,
+  "end": 9097
+ },
+ {
+  "name": "orphanCurveCandidates",
+  "kind": "function",
+  "owner": null,
+  "start": 9098,
+  "end": 9190
+ },
+ {
+  "name": "reviewOrphanWells",
+  "kind": "function",
+  "owner": null,
+  "start": 9191,
+  "end": 9199
+ },
+ {
+  "name": "reviewForensicEventsCoreUncached",
+  "kind": "function",
+  "owner": null,
+  "start": 9200,
+  "end": 9258
+ },
+ {
+  "name": "reviewRunRows",
+  "kind": "function",
+  "owner": null,
+  "start": 9259,
+  "end": 9277
+ },
+ {
+  "name": "stripLotDate",
+  "kind": "function",
+  "owner": null,
+  "start": 9278,
+  "end": 9282
+ },
+ {
+  "name": "controlRootName",
+  "kind": "function",
+  "owner": null,
+  "start": 9283,
+  "end": 9286
+ },
+ {
+  "name": "controlRootKey",
+  "kind": "function",
+  "owner": null,
+  "start": 9287,
+  "end": 9289
+ },
+ {
+  "name": "controlProfileRoot",
+  "kind": "function",
+  "owner": null,
+  "start": 9290,
+  "end": 9300
+ },
+ {
+  "name": "controlCategory",
+  "kind": "function",
+  "owner": null,
+  "start": 9301,
+  "end": 9322
+ },
+ {
+  "name": "detectedControlRoots",
+  "kind": "function",
+  "owner": null,
+  "start": 9323,
+  "end": 9338
+ },
+ {
+  "name": "renderControlCategoryEditor",
+  "kind": "function",
+  "owner": null,
+  "start": 9339,
+  "end": 9363
+ },
+ {
+  "name": "westgardReview",
+  "kind": "function",
+  "owner": null,
+  "start": 9364,
+  "end": 9381
+ },
+ {
+  "name": "reviewControlSeries",
+  "kind": "function",
+  "owner": null,
+  "start": 9382,
+  "end": 9418
+ },
+ {
+  "name": "instrumentRecordTables",
+  "kind": "function",
+  "owner": null,
+  "start": 9419,
+  "end": 9452
+ },
+ {
+  "name": "emptyReview",
+  "kind": "function",
+  "owner": null,
+  "start": 9454,
+  "end": 9456
+ },
+ {
+  "name": "metricCard",
+  "kind": "function",
+  "owner": null,
+  "start": 9457,
+  "end": 9459
+ },
+ {
+  "name": "downloadCanvas",
+  "kind": "function",
+  "owner": null,
+  "start": 9460,
+  "end": 9464
+ },
+ {
+  "name": "hashColour",
+  "kind": "function",
+  "owner": null,
+  "start": 9465,
+  "end": 9468
+ },
+ {
+  "name": "reviewBundleEntries",
+  "kind": "function",
+  "owner": null,
+  "start": 9469,
+  "end": 9490
+ },
+ {
+  "name": "downloadReviewBundle",
+  "kind": "function",
+  "owner": null,
+  "start": 9491,
+  "end": 9494
+ },
+ {
+  "name": "FINDING_SEVERITY_RANK",
+  "kind": "const",
+  "owner": null,
+  "start": 9495,
+  "end": 9495
+ },
+ {
+  "name": "findingTextKey",
+  "kind": "function",
+  "owner": null,
+  "start": 9496,
+  "end": 9496
+ },
+ {
+  "name": "findingEvidenceKey",
+  "kind": "function",
+  "owner": null,
+  "start": 9508,
+  "end": 9511
+ },
+ {
+  "name": "findingKey",
+  "kind": "function",
+  "owner": null,
+  "start": 9512,
+  "end": 9516
+ },
+ {
+  "name": "reviewDisplayFindings",
+  "kind": "function",
+  "owner": null,
+  "start": 9517,
+  "end": 9535
+ },
+ {
+  "name": "reviewDisplayCounts",
+  "kind": "function",
+  "owner": null,
+  "start": 9536,
+  "end": 9544
+ },
+ {
+  "name": "reviewEventsWithoutIntegrity",
+  "kind": "function",
+  "owner": null,
+  "start": 9545,
+  "end": 9547
+ },
+ {
+  "name": "integrityMismatches",
+  "kind": "function",
+  "owner": null,
+  "start": 9548,
+  "end": 9562
+ },
+ {
+  "name": "renderIntegrity",
+  "kind": "function",
+  "owner": null,
+  "start": 9563,
+  "end": 9585
+ },
+ {
+  "name": "renderReviewOverview",
+  "kind": "function",
+  "owner": null,
+  "start": 9587,
+  "end": 9616
+ },
+ {
+  "name": "plateColour",
+  "kind": "function",
+  "owner": null,
+  "start": 9617,
+  "end": 9623
+ },
+ {
+  "name": "renderReviewPlate",
+  "kind": "function",
+  "owner": null,
+  "start": 9624,
+  "end": 9660
+ },
+ {
+  "name": "drawPlateMapImage",
+  "kind": "function",
+  "owner": null,
+  "start": 9661,
+  "end": 9682
+ },
+ {
+  "name": "renderReviewComparison",
+  "kind": "function",
+  "owner": null,
+  "start": 9683,
+  "end": 9703
+ },
+ {
+  "name": "renderReviewStatistics",
+  "kind": "function",
+  "owner": null,
+  "start": 9704,
+  "end": 9740
+ },
+ {
+  "name": "renderReviewControls",
+  "kind": "function",
+  "owner": null,
+  "start": 9741,
+  "end": 9766
+ },
+ {
+  "name": "drawLeveyJennings",
+  "kind": "function",
+  "owner": null,
+  "start": 9767,
+  "end": 9800
+ },
+ {
+  "name": "renderReviewRuns",
+  "kind": "function",
+  "owner": null,
+  "start": 9801,
+  "end": 9839
+ },
+ {
+  "name": "curveSignal",
+  "kind": "function",
+  "owner": null,
+  "start": 9840,
+  "end": 9840
+ },
+ {
+  "name": "curveRowsSelected",
+  "kind": "function",
+  "owner": null,
+  "start": 9841,
+  "end": 9860
+ },
+ {
+  "name": "SERIES_PALETTE",
+  "kind": "const",
+  "owner": null,
+  "start": 9861,
+  "end": 9861
+ },
+ {
+  "name": "CURVE_KEY_COLOURS",
+  "kind": "let",
+  "owner": null,
+  "start": 9862,
+  "end": 9862
+ },
+ {
+  "name": "CALL_LINE",
+  "kind": "const",
+  "owner": null,
+  "start": 9863,
+  "end": 9863
+ },
+ {
+  "name": "curveKey",
+  "kind": "function",
+  "owner": null,
+  "start": 9864,
+  "end": 9864
+ },
+ {
+  "name": "curveColour",
+  "kind": "function",
+  "owner": null,
+  "start": 9865,
+  "end": 9878
+ },
+ {
+  "name": "renderReviewCurves",
+  "kind": "function",
+  "owner": null,
+  "start": 9879,
+  "end": 9908
+ },
+ {
+  "name": "drawAmplificationCurves",
+  "kind": "function",
+  "owner": null,
+  "start": 9909,
+  "end": 9937
+ },
+ {
+  "name": "bindCurveTip",
+  "kind": "function",
+  "owner": null,
+  "start": 9938,
+  "end": 9955
+ },
+ {
+  "name": "risingCurveRows",
+  "kind": "function",
+  "owner": null,
+  "start": 9956,
+  "end": 9958
+ },
+ {
+  "name": "risingCurveDisplayRows",
+  "kind": "function",
+  "owner": null,
+  "start": 9959,
+  "end": 9970
+ },
+ {
+  "name": "drawRisingCurveBundle",
+  "kind": "function",
+  "owner": null,
+  "start": 9971,
+  "end": 9991
+ },
+ {
+  "name": "renderReviewRising",
+  "kind": "function",
+  "owner": null,
+  "start": 9992,
+  "end": 10015
+ },
+ {
+  "name": "renderReviewInstrument",
+  "kind": "function",
+  "owner": null,
+  "start": 10016,
+  "end": 10053
+ },
+ {
+  "name": "instrumentZip",
+  "kind": "function",
+  "owner": null,
+  "start": 10054,
+  "end": 10060
+ },
+ {
+  "name": "downloadCurveCSV",
+  "kind": "function",
+  "owner": null,
+  "start": 10061,
+  "end": 10061
+ },
+ {
+  "name": "downloadCurveCSVCore",
+  "kind": "function",
+  "owner": null,
+  "start": 10062,
+  "end": 10069
+ },
+ {
+  "name": "downloadForensicCSV",
+  "kind": "function",
+  "owner": null,
+  "start": 10070,
+  "end": 10077
+ },
+ {
+  "name": "renderQualityReview",
+  "kind": "function",
+  "owner": null,
+  "start": 10078,
+  "end": 10081
+ },
+ {
+  "name": "renderQualityReviewLazy",
+  "kind": "function",
+  "owner": null,
+  "start": 10082,
+  "end": 10082
+ },
+ {
+  "name": "showReviewSheet",
+  "kind": "function",
+  "owner": null,
+  "start": 10083,
+  "end": 10088
+ },
+ {
+  "name": "wireQualityReview",
+  "kind": "function",
+  "owner": null,
+  "start": 10089,
+  "end": 10119
+ },
+ {
+  "name": "STAGED",
+  "kind": "let",
+  "owner": null,
+  "start": 10124,
+  "end": 10124
+ },
+ {
+  "name": "intake",
+  "kind": "function",
+  "owner": null,
+  "start": 10125,
+  "end": 10194
+ },
+ {
+  "name": "readStaged",
+  "kind": "function",
+  "owner": null,
+  "start": 10195,
+  "end": 10205
+ },
+ {
+  "name": "readStagedCore",
+  "kind": "function",
+  "owner": null,
+  "start": 10206,
+  "end": 10247
+ },
+ {
+  "name": "CQ_HEADERS",
+  "kind": "const",
+  "owner": null,
+  "start": 10252,
+  "end": 10252
+ },
+ {
+  "name": "SAMPLE_HEADERS",
+  "kind": "const",
+  "owner": null,
+  "start": 10253,
+  "end": 10253
+ },
+ {
+  "name": "WELL_HEADERS",
+  "kind": "const",
+  "owner": null,
+  "start": 10254,
+  "end": 10254
+ },
+ {
+  "name": "parseCqTable",
+  "kind": "function",
+  "owner": null,
+  "start": 10255,
+  "end": 10300
+ },
+ {
+  "name": "CSV_EXAMPLE",
+  "kind": "const",
+  "owner": null,
+  "start": 10301,
+  "end": 10311
+ },
+ {
+  "name": "acceptPasted",
+  "kind": "function",
+  "owner": null,
+  "start": 10313,
+  "end": 10322
+ },
+ {
+  "name": "refreshAll",
+  "kind": "function",
+  "owner": null,
+  "start": 10327,
+  "end": 10334
+ },
+ {
+  "name": "showTab",
+  "kind": "function",
+  "owner": null,
+  "start": 10335,
+  "end": 10341
+ },
+ {
+  "name": "boot",
+  "kind": "function",
+  "owner": null,
+  "start": 10342,
+  "end": 10397
+ },
+ {
+  "name": "SAMPLE_TYPE_LABEL",
+  "kind": "const",
+  "owner": null,
+  "start": 10407,
+  "end": 10412
+ },
+ {
+  "name": "derivedSettings",
+  "kind": "function",
+  "owner": null,
+  "start": 10413,
+  "end": 10568
+ },
+ {
+  "name": "derivedSettingsFor",
+  "kind": "function",
+  "owner": null,
+  "start": 10570,
+  "end": 10573
+ },
+ {
+  "name": "renderDerived",
+  "kind": "function",
+  "owner": null,
+  "start": 10574,
+  "end": 10587
+ },
+ {
+  "name": "rdmlEntries",
+  "kind": "function",
+  "owner": null,
+  "start": 10641,
+  "end": 10644
+ },
+ {
+  "name": "rdmlIsContainer",
+  "kind": "function",
+  "owner": null,
+  "start": 10645,
+  "end": 10647
+ },
+ {
+  "name": "rdmlKids",
+  "kind": "function",
+  "owner": null,
+  "start": 10652,
+  "end": 10656
+ },
+ {
+  "name": "rdmlKid",
+  "kind": "function",
+  "owner": null,
+  "start": 10657,
+  "end": 10657
+ },
+ {
+  "name": "rdmlText",
+  "kind": "function",
+  "owner": null,
+  "start": 10658,
+  "end": 10658
+ },
+ {
+  "name": "rdmlNum",
+  "kind": "function",
+  "owner": null,
+  "start": 10659,
+  "end": 10662
+ },
+ {
+  "name": "rdmlAttrId",
+  "kind": "function",
+  "owner": null,
+  "start": 10663,
+  "end": 10663
+ },
+ {
+  "name": "RDML_SAMPLE_ROLE",
+  "kind": "const",
+  "owner": null,
+  "start": 10666,
+  "end": 10666
+ },
+ {
+  "name": "rdmlParse",
+  "kind": "function",
+  "owner": null,
+  "start": 10667,
+  "end": 10828
+ },
+ {
+  "name": "RDML_REANALYSIS_TOOLS",
+  "kind": "const",
+  "owner": null,
+  "start": 10846,
+  "end": 10846
+ },
+ {
+  "name": "runProcessingState",
+  "kind": "function",
+  "owner": null,
+  "start": 10847,
+  "end": 10864
+ },
+ {
+  "name": "runIsInstrumentAnalysed",
+  "kind": "function",
+  "owner": null,
+  "start": 10865,
+  "end": 10867
+ },
+ {
+  "name": "sopProcessingApplicability",
+  "kind": "function",
+  "owner": null,
+  "start": 10872,
+  "end": 10885
+ },
+ {
+  "name": "rdmlStem",
+  "kind": "function",
+  "owner": null,
+  "start": 10892,
+  "end": 10894
+ },
+ {
+  "name": "rdmlKeyOf",
+  "kind": "function",
+  "owner": null,
+  "start": 10895,
+  "end": 10897
+ },
+ {
+  "name": "applyRawFilePriority",
+  "kind": "function",
+  "owner": null,
+  "start": 10898,
+  "end": 10915
+ },
+ {
+  "name": "runIsSuperseded",
+  "kind": "function",
+  "owner": null,
+  "start": 10916,
+  "end": 10916
+ },
+ {
+  "name": "PDF_PAGE",
+  "kind": "const",
+  "owner": null,
+  "start": 10939,
+  "end": 10939
+ },
+ {
+  "name": "PDF_WINANSI",
+  "kind": "const",
+  "owner": null,
+  "start": 10942,
+  "end": 10945
+ },
+ {
+  "name": "PDF_SPELL",
+  "kind": "const",
+  "owner": null,
+  "start": 10946,
+  "end": 10949
+ },
+ {
+  "name": "pdfStr",
+  "kind": "function",
+  "owner": null,
+  "start": 10950,
+  "end": 10965
+ },
+ {
+  "name": "pdfWidth",
+  "kind": "function",
+  "owner": null,
+  "start": 10966,
+  "end": 10983
+ },
+ {
+  "name": "pdfFit",
+  "kind": "function",
+  "owner": null,
+  "start": 10984,
+  "end": 10989
+ },
+ {
+  "name": "pdfWrap",
+  "kind": "function",
+  "owner": null,
+  "start": 10990,
+  "end": 10999
+ },
+ {
+  "name": "pdfDoc",
+  "kind": "function",
+  "owner": null,
+  "start": 11000,
+  "end": 11069
+ },
+ {
+  "name": "svgToJpeg",
+  "kind": "function",
+  "owner": null,
+  "start": 11072,
+  "end": 11088
+ },
+ {
+  "name": "SEL_STATE",
+  "kind": "const",
+  "owner": null,
+  "start": 11094,
+  "end": 11094
+ },
+ {
+  "name": "selRunIndex",
+  "kind": "function",
+  "owner": null,
+  "start": 11095,
+  "end": 11098
+ },
+ {
+  "name": "selGraphContext",
+  "kind": "function",
+  "owner": null,
+  "start": 11099,
+  "end": 11103
+ },
+ {
+  "name": "selImageItems",
+  "kind": "function",
+  "owner": null,
+  "start": 11104,
+  "end": 11111
+ },
+ {
+  "name": "selDataItems",
+  "kind": "function",
+  "owner": null,
+  "start": 11112,
+  "end": 11150
+ },
+ {
+  "name": "selCatalogue",
+  "kind": "function",
+  "owner": null,
+  "start": 11151,
+  "end": 11151
+ },
+ {
+  "name": "selItem",
+  "kind": "function",
+  "owner": null,
+  "start": 11152,
+  "end": 11152
+ },
+ {
+  "name": "selMatch",
+  "kind": "function",
+  "owner": null,
+  "start": 11153,
+  "end": 11161
+ },
+ {
+  "name": "selSelected",
+  "kind": "function",
+  "owner": null,
+  "start": 11162,
+  "end": 11165
+ },
+ {
+  "name": "selMatchAll",
+  "kind": "function",
+  "owner": null,
+  "start": 11167,
+  "end": 11171
+ },
+ {
+  "name": "selAdd",
+  "kind": "function",
+  "owner": null,
+  "start": 11172,
+  "end": 11172
+ },
+ {
+  "name": "selRemove",
+  "kind": "function",
+  "owner": null,
+  "start": 11173,
+  "end": 11173
+ },
+ {
+  "name": "selClear",
+  "kind": "function",
+  "owner": null,
+  "start": 11174,
+  "end": 11174
+ },
+ {
+  "name": "sopLab",
+  "kind": "function",
+  "owner": null,
+  "start": 11180,
+  "end": 11183
+ },
+ {
+  "name": "sopLabName",
+  "kind": "function",
+  "owner": null,
+  "start": 11184,
+  "end": 11184
+ },
+ {
+  "name": "sopAnalystName",
+  "kind": "function",
+  "owner": null,
+  "start": 11185,
+  "end": 11185
+ },
+ {
+  "name": "selCsvTemplate",
+  "kind": "function",
+  "owner": null,
+  "start": 11188,
+  "end": 11193
+ },
+ {
+  "name": "selApplyCsv",
+  "kind": "function",
+  "owner": null,
+  "start": 11194,
+  "end": 11216
+ },
+ {
+  "name": "selZipEntries",
+  "kind": "function",
+  "owner": null,
+  "start": 11219,
+  "end": 11236
+ },
+ {
+  "name": "selReadme",
+  "kind": "function",
+  "owner": null,
+  "start": 11237,
+  "end": 11257
+ },
+ {
+  "name": "selWithExportNames",
+  "kind": "function",
+  "owner": null,
+  "start": 11261,
+  "end": 11265
+ },
+ {
+  "name": "selDownloadZip",
+  "kind": "function",
+  "owner": null,
+  "start": 11266,
+  "end": 11270
+ },
+ {
+  "name": "SEL_TABLE_ROWS",
+  "kind": "const",
+  "owner": null,
+  "start": 11277,
+  "end": 11277
+ },
+ {
+  "name": "selReportTitle",
+  "kind": "function",
+  "owner": null,
+  "start": 11278,
+  "end": 11280
+ },
+ {
+  "name": "selTableBlock",
+  "kind": "function",
+  "owner": null,
+  "start": 11281,
+  "end": 11326
+ },
+ {
+  "name": "selBuildReport",
+  "kind": "function",
+  "owner": null,
+  "start": 11327,
+  "end": 11383
+ },
+ {
+  "name": "selDownloadReport",
+  "kind": "function",
+  "owner": null,
+  "start": 11384,
+  "end": 11388
+ },
+ {
+  "name": "CMD",
+  "kind": "const",
+  "owner": null,
+  "start": 11395,
+  "end": 11395
+ },
+ {
+  "name": "CMD_HELP",
+  "kind": "const",
+  "owner": null,
+  "start": 11396,
+  "end": 11416
+ },
+ {
+  "name": "cmdEl",
+  "kind": "function",
+  "owner": null,
+  "start": 11417,
+  "end": 11417
+ },
+ {
+  "name": "cmdPrint",
+  "kind": "function",
+  "owner": null,
+  "start": 11418,
+  "end": 11424
+ },
+ {
+  "name": "cmdTable",
+  "kind": "function",
+  "owner": null,
+  "start": 11425,
+  "end": 11429
+ },
+ {
+  "name": "cmdStatusLine",
+  "kind": "function",
+  "owner": null,
+  "start": 11430,
+  "end": 11432
+ },
+ {
+  "name": "cmdExec",
+  "kind": "function",
+  "owner": null,
+  "start": 11433,
+  "end": 11487
+ },
+ {
+  "name": "cmdRunLine",
+  "kind": "function",
+  "owner": null,
+  "start": 11488,
+  "end": 11495
+ },
+ {
+  "name": "cmdRunScript",
+  "kind": "function",
+  "owner": null,
+  "start": 11496,
+  "end": 11504
+ },
+ {
+  "name": "cmdScriptToggle",
+  "kind": "function",
+  "owner": null,
+  "start": 11505,
+  "end": 11509
+ },
+ {
+  "name": "cmdOpen",
+  "kind": "function",
+  "owner": null,
+  "start": 11510,
+  "end": 11519
+ },
+ {
+  "name": "cmdClose",
+  "kind": "function",
+  "owner": null,
+  "start": 11520,
+  "end": 11520
+ },
+ {
+  "name": "cmdToggle",
+  "kind": "function",
+  "owner": null,
+  "start": 11521,
+  "end": 11521
+ },
+ {
+  "name": "cmdInit",
+  "kind": "function",
+  "owner": null,
+  "start": 11522,
+  "end": 11544
+ },
+ {
+  "name": "AST",
+  "kind": "const",
+  "owner": null,
+  "start": 11551,
+  "end": 11551
+ },
+ {
+  "name": "astEl",
+  "kind": "function",
+  "owner": null,
+  "start": 11552,
+  "end": 11552
+ },
+ {
+  "name": "astRender",
+  "kind": "function",
+  "owner": null,
+  "start": 11553,
+  "end": 11585
+ },
+ {
+  "name": "astCount",
+  "kind": "function",
+  "owner": null,
+  "start": 11586,
+  "end": 11590
+ },
+ {
+  "name": "astOutput",
+  "kind": "function",
+  "owner": null,
+  "start": 11591,
+  "end": 11594
+ },
+ {
+  "name": "astBuild",
+  "kind": "function",
+  "owner": null,
+  "start": 11595,
+  "end": 11605
+ },
+ {
+  "name": "astOpen",
+  "kind": "function",
+  "owner": null,
+  "start": 11606,
+  "end": 11606
+ },
+ {
+  "name": "astClose",
+  "kind": "function",
+  "owner": null,
+  "start": 11607,
+  "end": 11607
+ },
+ {
+  "name": "astToggle",
+  "kind": "function",
+  "owner": null,
+  "start": 11608,
+  "end": 11608
+ },
+ {
+  "name": "astInit",
+  "kind": "function",
+  "owner": null,
+  "start": 11609,
+  "end": 11633
+ },
+ {
+  "name": "modesInit",
+  "kind": "function",
+  "owner": null,
+  "start": 11634,
+  "end": 11638
+ }
+]

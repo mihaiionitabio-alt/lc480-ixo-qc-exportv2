@@ -1,0 +1,1 @@
+const APP_PHASE_TRANSITIONS=Object.freeze({boot:["booting"],booting:["idle","staged"],idle:["staging","reading","booting"],staging:["staged","idle","reading"],staged:["reading","staging","idle"],reading:["ready","idle","staged","staging"],ready:["staging","reading","idle"]});

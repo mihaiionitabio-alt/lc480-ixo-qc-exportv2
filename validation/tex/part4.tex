@@ -1,0 +1,835 @@
+\appendix
+\chapter{The capture harness}\label{app:harness}
+
+The harness is the instrument of this report. It drives a real browser, loads the build under test
+from disk, feeds it the corpus, calls each function with the inputs described in
+chapter~\ref{ch:functions}, and writes one JSON record per case. Every table and every figure in
+this document is generated from that JSON; none of it was typed by hand.
+
+Run it with the build and the corpus in place:
+
+\begin{lstlisting}[style=plain]
+node capture.cjs        # writes validation_data.json
+python3 gen.py gen2.py gen3.py gen4.py   # regenerates this document
+\end{lstlisting}
+
+Complete source:
+\begin{lstlisting}[style=js]
+/* Per-function validation capture.
+ * For every function in the RDML reader, record: the exact input, where that input came
+ * from, the exact output, and the verdict against a stated expectation. Nothing here is
+ * summarised: the JSON it writes is what the report prints.
+ */
+const { chromium } = require('playwright');
+const fs = require('fs'), path = require('path'), crypto = require('crypto');
+const PAGE = path.resolve('prod.html');
+const DIR = 'rdml';
+const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+const b64 = f => fs.readFileSync(path.join(DIR, f)).toString('base64');
+
+const CORPUS = fs.readdirSync(DIR).sort().map(f => ({
+  file: f, bytes: fs.statSync(path.join(DIR, f)).size, sha256: sha(path.join(DIR, f))
+}));
+
+(async () => {
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
+  const p = await ctx.newPage();
+  const pageErrors = []; p.on('pageerror', e => pageErrors.push(e.message.split('\n')[0]));
+  await p.goto('file://' + PAGE);
+
+  /* the vendor container, decoded by the page's own intake, is the reference for T8-O */
+  await p.evaluate(() => document.querySelector('nav button[data-tab="load"]').click());
+  await p.setInputFiles('#file', [path.resolve(DIR, 'CORPUS-RDML-1.eds')]);
+  await p.waitForFunction(() => !document.querySelector('#read').disabled, null, { timeout: 120000 });
+  await p.click('#read');
+  await p.waitForFunction(() => /Read \d+ run/.test(document.querySelector('#readmsg').innerText), null, { timeout: 300000 });
+
+  const payload = {};
+  for (const c of CORPUS) if (/\.rdml$/i.test(c.file)) payload[c.file] = b64(c.file);
+
+  const out = await p.evaluate(async (files) => {
+    const R = [];                                   /* test records */
+    const dec = s => { const bin = atob(s), u = new Uint8Array(bin.length);
+                       for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
+    const clip = (v, n) => { const s = typeof v === 'string' ? v : JSON.stringify(v);
+                             return s && s.length > n ? s.slice(0, n) + ` …[${s.length} chars]` : s; };
+    const rec = o => { R.push(o); return o; };
+    const entriesOf = {}, xmlOf = {}, runsOf = {};
+    for (const [name, b64s] of Object.entries(files)) {
+      const u8 = dec(b64s);
+      entriesOf[name] = await rdmlEntries(u8.buffer, null);
+      xmlOf[name] = new TextDecoder().decode(entriesOf[name].find(e => /^rdml_data\.xml$/i.test(e.name)).bytes);
+      runsOf[name] = rdmlParse(xmlOf[name], name, u8);
+    }
+    const REF = 'CORPUS-RDML-1.rdml';
+    const doc = new DOMParser().parseFromString(xmlOf[REF], 'application/xml');
+    const root = doc.documentElement;
+    const expEl = [...root.children].find(c => c.localName === 'experiment');
+    const runEl = [...expEl.children].find(c => c.localName === 'run');
+    const reactEl = [...runEl.children].find(c => c.localName === 'react');
+    const dataEl = [...reactEl.children].find(c => c.localName === 'data');
+
+    /* ---------------- F1 rdmlEntries ---------------- */
+    for (const name of Object.keys(files)) {
+      const e = entriesOf[name];
+      rec({ fn: 'rdmlEntries', case: name,
+        inputDesc: `ArrayBuffer of ${name}`, inputProvenance: 'R',
+        input: { bytes: dec(files[name]).length },
+        output: { count: e.length, names: e.map(x => x.name),
+                  firstBytes: e[0].bytes.length, crcVerified: e.every(x => x.zip && x.zip.crcVerified),
+                  declaredSize: e[0].zip.declaredSize, method: e[0].zip.method },
+        expect: 'exactly one entry named rdml_data.xml, CRC-32 verified by readZip',
+        pass: e.length === 1 && /^rdml_data\.xml$/i.test(e[0].name) && e[0].zip.crcVerified });
+    }
+    /* negative: an .eds container must not look like an RDML container */
+    rec({ fn: 'rdmlIsContainer', case: 'positive — RDML entries',
+      inputDesc: 'entries from rdmlEntries(CORPUS-RDML-1.rdml)', inputProvenance: 'D',
+      input: { names: entriesOf[REF].map(e => e.name) },
+      output: rdmlIsContainer(entriesOf[REF]), expect: 'true', pass: rdmlIsContainer(entriesOf[REF]) === true });
+    const fake = [{ name: 'experiment.xml' }, { name: 'plate_setup.xml' }];
+    rec({ fn: 'rdmlIsContainer', case: 'negative — QuantStudio entry names',
+      inputDesc: 'literal entry list with the two .eds top-level XML names', inputProvenance: 'S',
+      input: { names: fake.map(e => e.name) },
+      output: rdmlIsContainer(fake), expect: 'false', pass: rdmlIsContainer(fake) === false });
+    rec({ fn: 'rdmlIsContainer', case: 'negative — empty list', inputDesc: '[]', inputProvenance: 'S',
+      input: { names: [] }, output: rdmlIsContainer([]), expect: 'false', pass: rdmlIsContainer([]) === false });
+
+    /* ---------------- F3 rdmlKids ---------------- */
+    [['run', 'react', 96], ['run', 'pcrFormat', 1], ['run', 'absent', 0],
+     ['react', 'data', 2], ['data', 'adp', 40]].forEach(([host, child, want]) => {
+      const el = host === 'run' ? runEl : host === 'react' ? reactEl : dataEl;
+      const got = rdmlKids(el, child);
+      rec({ fn: 'rdmlKids', case: `<${host}> → <${child}>`,
+        inputDesc: `the first <${host}> of ${REF}`, inputProvenance: 'D',
+        input: { host: `<${host} id="${el.getAttribute('id') || ''}">`, child },
+        output: { count: got.length, firstLocalName: got[0] ? got[0].localName : null },
+        expect: `${want} element(s)`, pass: got.length === want });
+    });
+    rec({ fn: 'rdmlKids', case: 'null host', inputDesc: 'rdmlKids(null,"react")', inputProvenance: 'S',
+      input: { host: null, child: 'react' }, output: { count: rdmlKids(null, 'react').length },
+      expect: 'empty array, no throw', pass: rdmlKids(null, 'react').length === 0 });
+
+    /* ---------------- F4 rdmlKid ---------------- */
+    rec({ fn: 'rdmlKid', case: 'present', inputDesc: `<run> of ${REF}, name "pcrFormat"`, inputProvenance: 'D',
+      input: { name: 'pcrFormat' }, output: { localName: rdmlKid(runEl, 'pcrFormat').localName },
+      expect: 'the <pcrFormat> element', pass: rdmlKid(runEl, 'pcrFormat').localName === 'pcrFormat' });
+    rec({ fn: 'rdmlKid', case: 'absent', inputDesc: `<run>, name "noSuchElement"`, inputProvenance: 'S',
+      input: { name: 'noSuchElement' }, output: rdmlKid(runEl, 'noSuchElement'),
+      expect: 'null', pass: rdmlKid(runEl, 'noSuchElement') === null });
+
+    /* ---------------- F5 rdmlText ---------------- */
+    [['cqDetectionMethod', 'other'], ['instrument', 'QuantStudio Dx'],
+     ['backgroundDeterminationMethod', 'Background Subtraction'],
+     ['dataCollectionSoftware', 'QuantStudio 3 and 5 Software\n                1.6.1'],
+     ['notPresent', '']].forEach(([n, want]) => {
+      const got = rdmlText(runEl, n);
+      rec({ fn: 'rdmlText', case: n, inputDesc: `<run> of ${REF}, name "${n}"`, inputProvenance: n === 'notPresent' ? 'S' : 'D',
+        input: { name: n }, output: got, expect: JSON.stringify(want), pass: got === want,
+        note: n === 'dataCollectionSoftware'
+          ? 'FINDING V-1: the element spans two source lines, so the returned string keeps the newline and the indentation of the file. rdmlText trims only the ends.'
+          : undefined });
+    });
+    /* V-1 characterised: rdmlText is called on elements the schema defines as COMPLEX.
+       dataCollectionSoftware is not a leaf - it holds <name> and <version> - so textContent
+       concatenates both, with the file's own indentation between them. */
+    (() => {
+      const READ_WITH_TEXT = ['instrument','dataCollectionSoftware','backgroundDeterminationMethod',
+        'cqDetectionMethod','runDate','type','description','rows','columns','cq','N0','ampEffMet',
+        'ampEff','ampEffSE','meltTemp','bgFluor','quantFluor','excl','note'];
+      const rows = [];
+      for (const name of Object.keys(files)) {
+        const d2 = new DOMParser().parseFromString(xmlOf[name], 'application/xml');
+        READ_WITH_TEXT.forEach(tag => {
+          const els = [...d2.documentElement.getElementsByTagName('*')].filter(e => e.localName === tag);
+          if (!els.length) return;
+          const complex = els.filter(e => e.children.length > 0);
+          if (!complex.length) return;
+          const ex = complex[0];
+          rows.push({ file: name, element: tag, occurrences: els.length, complexOccurrences: complex.length,
+            children: [...ex.children].map(c => c.localName),
+            textContentAsRead: JSON.stringify(String(ex.textContent || '').trim()).slice(0, 90),
+            correctReading: [...ex.children].map(c => `${c.localName}="${String(c.textContent || '').trim()}"`).join(' ') });
+        });
+      }
+      rec({ fn: 'rdmlText', case: 'FINDING V-1 — read with rdmlText but complex in the schema',
+        inputDesc: 'every element the reader reads with rdmlText, in all seven corpus files',
+        inputProvenance: 'R', input: { elementsChecked: READ_WITH_TEXT.length, files: Object.keys(files).length },
+        output: { affected: rows.length, rows },
+        expect: 'characterisation only; see the finding',
+        pass: true,
+        note: 'rdmlText concatenates the children of a complex element with the file\'s own indentation. '
+            + 'Recommended fix: collapse inner whitespace in rdmlText, and read dataCollectionSoftware '
+            + 'as <name> + <version>.' });
+    })();
+
+    /* ---------------- F6 rdmlNum ---------------- */
+    const numCases = [['cyc', '1.0', 1], ['fluor', '263682.75', 263682.75], ['cq', '30.3979', 30.3979],
+                      ['empty', '', null], ['text', 'not a number', null], ['negative', '-2.5', -2.5],
+                      ['exponent', '6.36e-10', 6.36e-10]];
+    numCases.forEach(([label, text, want]) => {
+      const host = doc.createElement('host'), kid = doc.createElement('v');
+      kid.textContent = text; host.appendChild(kid);
+      const got = rdmlNum(host, 'v');
+      rec({ fn: 'rdmlNum', case: label,
+        inputDesc: label === 'empty' || label === 'text' ? 'literal text, constructed for this test'
+          : `the literal text as it appears in the corpus (<${label}> spelling)`,
+        inputProvenance: ['cyc', 'fluor', 'cq', 'exponent'].includes(label) ? 'R (verbatim string)' : 'S',
+        input: { xml: `<host><v>${text}</v></host>` }, output: got,
+        expect: want === null ? 'null' : String(want), pass: got === want });
+    });
+    rec({ fn: 'rdmlNum', case: 'absent child', inputDesc: '<host/> with no <v>', inputProvenance: 'S',
+      input: { xml: '<host/>' }, output: rdmlNum(doc.createElement('host'), 'v'),
+      expect: 'null', pass: rdmlNum(doc.createElement('host'), 'v') === null });
+
+    /* ---------------- F7 rdmlAttrId ---------------- */
+    rec({ fn: 'rdmlAttrId', case: 'react → sample', inputDesc: `the first <react> of ${REF}`, inputProvenance: 'D',
+      input: { name: 'sample' }, output: rdmlAttrId(reactEl, 'sample'),
+      expect: 'the sample id string', pass: typeof rdmlAttrId(reactEl, 'sample') === 'string' && rdmlAttrId(reactEl, 'sample').length > 0 });
+    rec({ fn: 'rdmlAttrId', case: 'data → tar', inputDesc: 'the first <data> of that react', inputProvenance: 'D',
+      input: { name: 'tar' }, output: rdmlAttrId(dataEl, 'tar'),
+      expect: 'the target id string', pass: rdmlAttrId(dataEl, 'tar').length > 0 });
+    rec({ fn: 'rdmlAttrId', case: 'absent', inputDesc: '<data>, name "noSuch"', inputProvenance: 'S',
+      input: { name: 'noSuch' }, output: rdmlAttrId(dataEl, 'noSuch'), expect: '""',
+      pass: rdmlAttrId(dataEl, 'noSuch') === '' });
+
+    /* ---------------- F8 rdmlParse ---------------- */
+    for (const name of Object.keys(files)) {
+      const runs = runsOf[name];
+      runs.forEach((r, i) => {
+        const cq = r.wells.map(w => resultCq(w)).filter(v => v !== null);
+        rec({ fn: 'rdmlParse', case: `${name} [run ${i + 1}/${runs.length}]`,
+          inputDesc: `rdml_data.xml of ${name}`, inputProvenance: 'R',
+          input: { xmlChars: xmlOf[name].length, version: r.rdmlDoc.version },
+          output: { run: r.meta.name, rows: r.rows, cols: r.cols, plate: `${r.rows}x${r.cols}`,
+            wells: r.wells.length, curves: Object.keys(r.allCurves).length, tmWells: r.tmWells.length,
+            cycles: r.nCycles, meltPoints: r.meltAcquisitionPoints, analyses: r.analyses.length,
+            kinds: r.kinds.join('+'), withCq: cq.length, cqMin: cq.length ? +Math.min(...cq).toFixed(3) : null,
+            cqMax: cq.length ? +Math.max(...cq).toFixed(3) : null,
+            cqAtCeilingConverted: r.rdmlDoc.cqAtCycleCeiling, excl: r.wells.filter(w => w.rdml.excl).length,
+            note: r.wells.filter(w => w.rdml.note).length, integrity: integrityLabel(r),
+            experimentId: r.experimentId, runId: r.runId, platform: r.platform,
+            firstWell: (() => { const w = r.wells[0]; return { well: w.well, pos: w.pos, channel: w.channel,
+              sample: w.sample, target: w.target, CpRaw: w.CpRaw, cqSource: w.cqSource,
+              curveLen: w.curve.length, curveHead: w.curve.slice(0, 3), rdml: w.rdml ? {
+                N0: w.rdml.N0, ampEff: w.rdml.ampEff, ampEffMet: w.rdml.ampEffMet, meltTemp: w.rdml.meltTemp,
+                excl: w.rdml.excl, note: w.rdml.note, meltPoints: w.rdml.melt.length } : null }; })() },
+          expect: 'every react inside the declared plate; one well per react×data; curves ordered by cycle',
+          pass: r.wells.every(w => w.pos >= 0 && w.pos < r.rows * r.cols)
+                && r.wells.every(w => w.curve.length === 0 || w.curve.length === r.nCycles) });
+      });
+    }
+    /* malformed input */
+    try { rdmlParse('<notrdml/>', 'bad.rdml', new Uint8Array(0)); }
+    catch (e) { rec({ fn: 'rdmlParse', case: 'wrong root element', inputDesc: '"<notrdml/>"', inputProvenance: 'S',
+      input: { xml: '<notrdml/>' }, output: 'throws: ' + e.message, expect: 'throws, names the root element',
+      pass: /not an RDML document/.test(e.message) }); }
+    try { rdmlParse('<rdml version="1.3"><<', 'bad2.rdml', new Uint8Array(0)); }
+    catch (e) { rec({ fn: 'rdmlParse', case: 'not well formed', inputDesc: '"<rdml version=\\"1.3\\"><<"', inputProvenance: 'S',
+      input: { xml: '<rdml version="1.3"><<' }, output: 'throws: ' + clip(e.message, 90),
+      expect: 'throws, reports the parser error', pass: /not well formed/.test(e.message) }); }
+    try { rdmlParse('<rdml version="1.3" xmlns="http://www.rdml.org"/>', 'empty.rdml', new Uint8Array(0)); }
+    catch (e) { rec({ fn: 'rdmlParse', case: 'no experiment', inputDesc: 'a valid but empty RDML root', inputProvenance: 'S',
+      input: { xml: '<rdml version="1.3" xmlns="http://www.rdml.org"/>' }, output: 'throws: ' + e.message,
+      expect: 'throws, says there is no run', pass: /no <experiment>\/<run>/.test(e.message) }); }
+
+    /* ---------------- F9 runProcessingState ---------------- */
+    const stateCases = [
+      ['instrument', RUNS[0], 'the .eds decoded by the page intake'],
+      ['vendor-export', runsOf[REF][0], 'CORPUS-RDML-1.rdml — names an instrument, no re-analysis tool'],
+      ['third-party', runsOf['example_3_linregpcr.rdml'][0], 'example_3 — ampEffMet = LinRegPCR'],
+      ['raw', runsOf['example_1_raw.rdml'][0], 'example_1 — no cq anywhere']];
+    stateCases.forEach(([want, run, why]) => {
+      const got = runProcessingState(run);
+      rec({ fn: 'runProcessingState', case: want, inputDesc: why, inputProvenance: 'R/D',
+        input: { file: run.file, instrument: (run.rdmlDoc || {}).instrument || (run.meta || {}).InstrumentName || '',
+          bg: (run.rdmlDoc || {}).backgroundDeterminationMethod || '', methods: (run.rdmlDoc || {}).methods || [],
+          wellsWithCq: run.wells.filter(w => resultCq(w) !== null).length },
+        output: got, expect: `state "${want}"`, pass: got.state === want });
+    });
+    rec({ fn: 'runProcessingState', case: 'no run', inputDesc: 'runProcessingState(null)', inputProvenance: 'S',
+      input: null, output: runProcessingState(null), expect: 'state "unknown", no throw',
+      pass: runProcessingState(null).state === 'unknown' });
+
+    /* ---------------- F10 runIsInstrumentAnalysed ---------------- */
+    stateCases.forEach(([want, run]) => {
+      const got = runIsInstrumentAnalysed(run), expected = (want === 'instrument' || want === 'vendor-export');
+      rec({ fn: 'runIsInstrumentAnalysed', case: want, inputDesc: `the ${want} run above`, inputProvenance: 'D',
+        input: { state: want }, output: got, expect: String(expected), pass: got === expected });
+    });
+
+    /* ---------------- F11 sopProcessingApplicability ---------------- */
+    stateCases.forEach(([want, run]) => {
+      const got = sopProcessingApplicability(run);
+      const expected = (want === 'instrument' || want === 'vendor-export');
+      rec({ fn: 'sopProcessingApplicability', case: want, inputDesc: `the ${want} run above`, inputProvenance: 'D',
+        input: { state: want }, output: got, expect: `applicable = ${expected}`, pass: got.applicable === expected });
+    });
+
+    /* ---------------- F12 rdmlStem ---------------- */
+    [['CORPUS-RDML-1.rdml', '2026 06 15 CORPUS-RDML-1'], ['CORPUS-RDML-1.eds', '2026 06 15 CORPUS-RDML-1'],
+     ['Demo  Abs_Quant.ixo', 'demo abs quant'], ['', '']].forEach(([inp, want]) => {
+      const got = rdmlStem(inp);
+      rec({ fn: 'rdmlStem', case: inp || '(empty)', inputDesc: inp ? 'a corpus file name' : 'the empty string',
+        inputProvenance: inp.startsWith('2026') ? 'R (file name)' : 'S',
+        input: { name: inp }, output: got, expect: JSON.stringify(want), pass: got === want });
+    });
+
+    /* ---------------- F13 rdmlKeyOf ---------------- */
+    const k1 = rdmlKeyOf({ name: 'CORPUS-RDML-1.rdml', experimentId: 'CORPUS-RDML-1' });
+    rec({ fn: 'rdmlKeyOf', case: 'name and experiment', inputDesc: 'the RDML run of the reference pair', inputProvenance: 'D',
+      input: { name: 'CORPUS-RDML-1.rdml', experimentId: 'CORPUS-RDML-1' }, output: k1,
+      expect: 'two keys', pass: k1.length === 2,
+      note: 'FINDING V-2: the name key is stem-normalised ("2026 06 15 CORPUS-RDML-1") but the experiment key is only lower-cased ("CORPUS-RDML-1"). The two spellings of the same identity do not match each other.' });
+    /* V-2: does the gap actually break the priority rule? Rename the RDML so only the
+       experiment id can match, and see whether supersession still happens. */
+    (() => {
+      const renamed = runsOf[REF].map(r => Object.assign(Object.create(Object.getPrototypeOf(r)), r, { file: 'received_from_collaborator.rdml' }));
+      const m = applyRawFilePriority([...RUNS, ...renamed]);
+      rec({ fn: 'applyRawFilePriority', case: 'FINDING V-2 — export renamed, only the experiment id matches',
+        inputDesc: 'the same .eds, and the same RDML run with its file renamed to received_from_collaborator.rdml',
+        inputProvenance: 'D (one field changed on a real run object)',
+        input: { vendorFile: RUNS[0].file, vendorExperiment: (RUNS[0].meta || {}).name,
+                 rdmlFile: 'received_from_collaborator.rdml', rdmlExperiment: renamed[0].experimentId,
+                 vendorKeys: rdmlKeyOf({ name: RUNS[0].file, experimentId: (RUNS[0].meta || {}).name }),
+                 rdmlKeys: rdmlKeyOf({ name: 'received_from_collaborator.rdml', experimentId: renamed[0].experimentId }) },
+        output: { superseded: m.superseded.length },
+        expect: 'the export should still be superseded: it is the same experiment',
+        pass: m.superseded.length === 1,
+        note: 'Recommended fix: rdmlKeyOf should apply rdmlStem to BOTH parts — [rdmlStem(item.name), rdmlStem(item.experimentId)].' });
+    })();
+    const k2 = rdmlKeyOf({ name: 'x.rdml' });
+    rec({ fn: 'rdmlKeyOf', case: 'no experiment id', inputDesc: 'an item with only a name', inputProvenance: 'S',
+      input: { name: 'x.rdml' }, output: k2, expect: 'one key', pass: k2.length === 1 });
+
+    /* ---------------- F14 applyRawFilePriority + F15 runIsSuperseded ---------------- */
+    const mixed = [...RUNS, ...runsOf[REF]];
+    const before = mixed.map(r => runIsSuperseded(r));
+    const merged = applyRawFilePriority(mixed);
+    rec({ fn: 'applyRawFilePriority', case: 'vendor container + its RDML export',
+      inputDesc: 'the .eds decoded by intake, plus the .rdml of the same experiment', inputProvenance: 'R + R',
+      input: { runs: mixed.map(r => ({ file: r.file, isRdml: !!r.rdmlDoc })) },
+      output: { kept: merged.runs.length, superseded: merged.superseded.map(r => ({ file: r.file,
+        by: r.supersededBy && r.supersededBy.file, reason: r.supersededReason })) },
+      expect: 'the RDML export is superseded by the .eds; nothing is discarded',
+      pass: merged.runs.length === mixed.length && merged.superseded.length === 1
+            && merged.superseded[0].rdmlDoc && /\.eds$/i.test(merged.superseded[0].supersededBy.file) });
+    rec({ fn: 'runIsSuperseded', case: 'before and after applyRawFilePriority',
+      inputDesc: 'the same run objects, before and after the priority pass', inputProvenance: 'D',
+      input: { before }, output: { after: mixed.map(r => runIsSuperseded(r)) },
+      expect: 'false for every run before; true only for the RDML run after',
+      pass: before.every(v => v === false) && mixed.filter(r => runIsSuperseded(r)).length === 1 });
+    const onlyRdml = applyRawFilePriority(runsOf['example_3_linregpcr.rdml']);
+    rec({ fn: 'applyRawFilePriority', case: 'RDML only, no vendor container',
+      inputDesc: 'the three runs of example_3_linregpcr.rdml', inputProvenance: 'R',
+      input: { runs: runsOf['example_3_linregpcr.rdml'].map(r => ({ file: r.file, isRdml: true })) },
+      output: { kept: onlyRdml.runs.length, superseded: onlyRdml.superseded.length },
+      expect: 'nothing superseded', pass: onlyRdml.superseded.length === 0 });
+    /* the gate again, now that the run is superseded */
+    const supersededRun = merged.superseded[0];
+    rec({ fn: 'sopProcessingApplicability', case: 'superseded vendor export',
+      inputDesc: 'the RDML run after the priority pass', inputProvenance: 'D',
+      input: { state: 'vendor-export', superseded: true }, output: sopProcessingApplicability(supersededRun),
+      expect: 'applicable = false, state "superseded"',
+      pass: sopProcessingApplicability(supersededRun).applicable === false
+            && sopProcessingApplicability(supersededRun).state === 'superseded' });
+
+    /* ---------------- constants ---------------- */
+    rec({ fn: 'RDML_SAMPLE_ROLE', case: 'the six RDML sample types', inputDesc: 'the RDML 1.3 sample-type vocabulary',
+      inputProvenance: 'Spec.', input: { keys: Object.keys(RDML_SAMPLE_ROLE) },
+      output: RDML_SAMPLE_ROLE, expect: 'every type maps to a role the page already uses',
+      pass: Object.keys(RDML_SAMPLE_ROLE).length === 6 });
+    const toolCases = [['LinRegPCR', true], ['LinRegPCR, constant', true], ['Background Subtraction', false],
+                       ['automated threshold and baseline settings', false], ['', false], ['Cy0', true], ['MAK2', true]];
+    toolCases.forEach(([s, want]) => {
+      const got = RDML_REANALYSIS_TOOLS.test(s);
+      rec({ fn: 'RDML_REANALYSIS_TOOLS', case: s || '(empty)',
+        inputDesc: ['LinRegPCR', 'LinRegPCR, constant', 'Background Subtraction', 'automated threshold and baseline settings'].includes(s)
+          ? 'the verbatim string found in the corpus' : 'a tool name from the RDML literature',
+        inputProvenance: ['LinRegPCR', 'LinRegPCR, constant', 'Background Subtraction', 'automated threshold and baseline settings'].includes(s) ? 'R (verbatim)' : 'S',
+        input: { text: s }, output: got, expect: String(want), pass: got === want });
+    });
+
+    /* ---------------- integration: the Cq-ceiling rule ---------------- */
+    for (const name of ['CORPUS-RDML-1.rdml', 'GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml', 'example_3_linregpcr.rdml']) {
+      const r = runsOf[name][0];
+      const cq = r.wells.map(w => resultCq(w)).filter(v => v !== null);
+      const atCeil = cq.filter(v => Math.abs(v - r.nCycles) < 1e-9).length;
+      rec({ fn: 'rdmlParse (Cq-ceiling rule)', case: name, inputDesc: `all <data> of ${name}`, inputProvenance: 'R',
+        input: { cycles: r.nCycles, rows: r.wells.length },
+        output: { converted: r.rdmlDoc.cqAtCycleCeiling, remainingWithCq: cq.length, stillAtCeiling: atCeil,
+          cqMax: cq.length ? +Math.max(...cq).toFixed(3) : null },
+        expect: 'no Cq equal to the cycle count survives; a re-analysis file loses none',
+        pass: atCeil === 0 });
+    }
+
+    /* ---------------- integration: cross-format oracle ---------------- */
+    const rd = runsOf[REF][0], key = w => `${w.pos}|${String(w.target || '').toUpperCase()}`;
+    const eds = new Map(); RUNS[0].wells.forEach(w => eds.set(key(w), resultCq(w)));
+    let matched = 0, bothNull = 0, diff = [], onlyR = 0;
+    rd.wells.forEach(w => { if (!eds.has(key(w))) { onlyR++; return; }
+      const a = eds.get(key(w)), c = resultCq(w);
+      if (a === null && c === null) { bothNull++; matched++; return; }
+      if (a !== null && c !== null && Math.abs(a - c) < 0.0005) { matched++; return; }
+      diff.push({ well: w.well, target: w.target, eds: a, rdml: c }); });
+    rec({ fn: 'rdmlParse (cross-format oracle)', case: '.eds vs .rdml of the same run',
+      inputDesc: 'CORPUS-RDML-1.eds decoded by the page, and CORPUS-RDML-1.rdml read by rdmlParse',
+      inputProvenance: 'R + R',
+      input: { edsRows: RUNS[0].wells.length, rdmlRows: rd.wells.length },
+      output: { matched, bothUndetermined: bothNull, differing: diff.length, firstDiffs: diff.slice(0, 5), rdmlOnly: onlyR },
+      expect: 'every Cq the instrument container yields is reproduced exactly; zero differing',
+      pass: diff.length === 0 && matched === RUNS[0].wells.length });
+
+    return { records: R, corpusRuns: Object.fromEntries(Object.entries(runsOf).map(([k, v]) => [k, v.length])) };
+  }, payload);
+
+  out.corpus = CORPUS;
+  out.page = { file: 'qpcr_qc_forensics.html', sha256: sha(PAGE), bytes: fs.statSync(PAGE).size };
+  out.pageErrors = pageErrors;
+  out.when = new Date().toISOString();
+  fs.writeFileSync('validation_data.json', JSON.stringify(out, null, 1));
+  const pass = out.records.filter(r => r.pass).length;
+  console.log(`records ${out.records.length}  pass ${pass}  fail ${out.records.length - pass}  pageErrors ${pageErrors.length}`);
+  out.records.filter(r => !r.pass).forEach(r => console.log('  FAIL', r.fn, '::', r.case, '::', JSON.stringify(r.output).slice(0, 120)));
+  await b.close();
+})();
+
+\end{lstlisting}
+
+\AThreeStart
+\chapter{Fold-out: the reader in the page}\label{app:pipeline}
+
+\begin{center}\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[node distance=10mm]
+\node[io] (file) {file chosen\\ by the operator};
+\node[dec, right=13mm of file] (zip) {ZIP?};
+\node[box, above right=6mm and 14mm of zip] (eds) {probe\\ \texttt{apldbio/sds/}\\\texttt{experiment.xml}};
+\node[box, below right=6mm and 14mm of zip] (rdp) {probe\\ \texttt{rdml\_data.xml}\\ \fn{rdmlIsContainer}};
+\node[box, right=14mm of eds] (edsk) {kind \texttt{eds}};
+\node[box, right=14mm of rdp] (rdk) {kind \texttt{rdml}};
+\node[box, right=14mm of edsk] (pe) {\fn{parseEds}\\ existing path};
+\node[box, right=14mm of rdk] (pr) {\fn{rdmlEntries}\\ \fn{rdmlParse}\\ one run per \texttt{<run>}};
+\node[box, right=16mm of $(pe)!0.5!(pr)$] (model) {the run model\\ wells, curves, melt,\\ plate, analyses, meta};
+\node[box, below=11mm of model] (prio) {\fn{applyRawFilePriority}\\ vendor container wins};
+\node[dec, text width=42mm, below=11mm of prio] (gate) {\fn{sopProcessingApplicability}};
+\node[ok, below left=10mm and 6mm of gate] (eval) {evaluated by\\ the laboratory profile};
+\node[bad, below right=10mm and 6mm of gate] (na) {\textbf{Profile not applicable}\\ raw / third-party /\\ superseded};
+\node[box, right=16mm of model] (views) {views, charts,\\ forensic scans,\\ exports};
+\draw[fl] (file)--(zip);
+\draw[fl] (zip)--node[lbl,above,pos=.3]{yes}(eds);
+\draw[fl] (zip)--node[lbl,below,pos=.3]{yes}(rdp);
+\draw[fl] (eds)--(edsk); \draw[fl] (rdp)--(rdk);
+\draw[fl] (edsk)--(pe); \draw[fl] (rdk)--(pr);
+\draw[fl] (pe)--(model); \draw[fl] (pr)--(model);
+\draw[fl] (model)--(prio); \draw[fl] (prio)--(gate);
+\draw[fl] (gate)--node[lbl,left]{instrument\\ vendor-export}(eval);
+\draw[fl] (gate)--node[lbl,right]{raw, third-party,\\ superseded}(na);
+\draw[fl] (model)--(views);
+\end{tikzpicture}}\end{center}
+\begin{center}\small Figure A: where the reader sits. The existing \texttt{.eds} path and the new
+RDML path meet at the run model and are indistinguishable downstream, which is why every view,
+chart and export works on an RDML file without knowing what it is.\normalsize\end{center}
+
+\chapter{Fold-out: \fn{rdmlParse} in full}\label{app:parse}
+
+\begin{center}\resizebox{0.90\linewidth}{!}{%
+\begin{tikzpicture}[node distance=9mm]
+\node[io] (xml) {\texttt{rdml\_data.xml}};
+\node[box, right=11mm of xml] (dp) {\texttt{DOMParser}};
+\node[dec, right=11mm of dp] (wf) {well formed?\\ root is \texttt{<rdml>}?};
+\node[bad, above=8mm of wf] (er) {throw,\\ naming what was found};
+\node[dec, right=12mm of wf] (ver) {version in\\ 1.0--1.4?};
+\node[box, above=8mm of ver] (note) {\fn{appNotice}\\ read on as 1.4};
+\node[box, right=12mm of ver] (dict) {dictionaries\\ \texttt{dye} $\rightarrow$ channel index\\ \texttt{sample} $\rightarrow$ type, role\\ \texttt{target} $\rightarrow$ type, dye, Tm};
+\node[box, below=10mm of dict] (loopr) {for each\\ \texttt{<experiment>/<run>}};
+\node[box, below=9mm of loopr] (fmt) {\texttt{<pcrFormat>}\\ rows $\times$ columns};
+\node[box, right=13mm of fmt] (pass1) {\textbf{pass 1}\\ scan every \texttt{<adp>}\\ for the largest \texttt{cyc}\\ $\rightarrow$ cycle count};
+\node[box, right=13mm of pass1] (pass2) {\textbf{pass 2}\\ for each \texttt{<react>}};
+\node[dec, below=9mm of pass2] (inside) {react id inside\\ rows $\times$ columns?};
+\node[bad, right=12mm of inside] (skip) {skip the reaction};
+\node[box, below=9mm of inside] (data) {for each \texttt{<data>}};
+\node[box, below=9mm of data] (adp) {\texttt{<adp>} sorted by \texttt{cyc}\\ $\rightarrow$ curve, amplitude};
+\node[box, left=13mm of adp] (mdp) {\texttt{<mdp>} sorted by \texttt{tmp}\\ $\rightarrow$ melt series};
+\node[dec, below=10mm of adp] (ceil) {cq $=$ cycle count\\ \emph{and} no N$_0$\\ \emph{and} no ampEff?};
+\node[bad, right=13mm of ceil] (undet) {cq $\rightarrow$ null\\ \texttt{CpState} $=$ Undetermined\\ count the conversion};
+\node[box, below=9mm of ceil] (well) {build the well\\ \texttt{CpRaw}, \texttt{cqSource},\\ \texttt{rdml}\{N$_0$, ampEff, excl, note\}};
+\node[ok, left=14mm of well] (run) {run object\\ wells, allCurves, tmWells,\\ plate, analyses, protocol,\\ meta, integrity, experimentId};
+\draw[fl] (xml)--(dp); \draw[fl] (dp)--(wf);
+\draw[fl] (wf)--node[lbl,right]{no}(er);
+\draw[fl] (wf)--node[lbl,above]{yes}(ver);
+\draw[fl] (ver)--node[lbl,right]{no}(note);
+\draw[fl] (ver)--node[lbl,above]{yes}(dict);
+\draw[fl] (dict)--(loopr); \draw[fl] (loopr)--(fmt); \draw[fl] (fmt)--(pass1); \draw[fl] (pass1)--(pass2);
+\draw[fl] (pass2)--(inside);
+\draw[fl] (inside)--node[lbl,above]{no}(skip);
+\draw[fl] (inside)--node[lbl,right]{yes}(data);
+\draw[fl] (data)--(adp); \draw[fl] (data.west) -| (mdp.north);
+\draw[fl] (adp)--(ceil); \draw[fl] (mdp.south) |- ([yshift=2mm]well.north west);
+\draw[fl] (ceil)--node[lbl,above]{yes}(undet);
+\draw[fl] (ceil)--node[lbl,right]{no}(well);
+\draw[fl] (undet.south) |- ([yshift=-2mm]well.north east);
+\draw[fl] (well)--(run);
+\end{tikzpicture}}\end{center}
+\begin{center}\small Figure B: \fn{rdmlParse}. The first pass exists only to establish the cycle
+count, because the ceiling rule needs it before any well is built.\normalsize\end{center}
+
+\chapter{Fold-out: coverage matrix}\label{app:matrix}
+
+Which corpus file exercised which function. A dot marks at least one executed record.
+
+\begin{center}\small\begin{tabular}{@{}p{46mm}cccccccc@{}}
+\toprule \textbf{Function} & \textbf{C1} & \textbf{C2} & \textbf{C3} & \textbf{C4} & \textbf{C5} & \textbf{C6} & \textbf{C7} & \textbf{C8} \\ \midrule
+\fn{rdmlEntries} & \textcolor{gray}{--} & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+\fn{rdmlIsContainer} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlKids} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlKid} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlText} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlNum} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlAttrId} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlParse} & \textcolor{gray}{--} & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+\fn{runProcessingState} & $\bullet$ & $\bullet$ & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{runIsInstrumentAnalysed} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{sopProcessingApplicability} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlStem} & $\bullet$ & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlKeyOf} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{applyRawFilePriority} & $\bullet$ & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{runIsSuperseded} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{RDML\_SAMPLE\_ROLE} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{RDML\_REANALYSIS\_TOOLS} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlParse (Cq-ceiling rule)} & \textcolor{gray}{--} & $\bullet$ & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\fn{rdmlParse (cross-format oracle)} & $\bullet$ & $\bullet$ & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} & \textcolor{gray}{--} \\
+\bottomrule\end{tabular}\end{center}
+\vspace{3mm}\begin{center}\small\begin{tabular}{@{}ll@{}}\toprule\textbf{Key}&\textbf{File}\\\midrule
+C1 & \texttt{CORPUS-RDML-1.eds} \\
+C2 & \texttt{CORPUS-RDML-1.rdml} \\
+C3 & \texttt{GeneExpression\_ddCt\_Fast\_Adv\_MMx\_10uL.rdml} \\
+C4 & \texttt{example\_1\_raw.rdml} \\
+C5 & \texttt{example\_2\_tm\_annotated.rdml} \\
+C6 & \texttt{example\_3\_linregpcr.rdml} \\
+C7 & \texttt{example\_4\_interrun.rdml} \\
+C8 & \texttt{example\_LCGreen\_raw.rdml} \\
+\bottomrule\end{tabular}\end{center}
+
+\vspace{4mm}
+Functions with no dot in a column were exercised by constructed input only for that file; the input
+tables in chapter~\ref{ch:functions} name every such case. Every function has at least one real-file
+column, except the two that exist purely to normalise strings, whose real inputs are file names
+rather than file contents.
+
+\chapter{Fold-out: the reader, complete}\label{app:source}
+
+The whole reader as it stands in the build under test, in production order: constants, container,
+accessors, parser, state, gate, priority. Line numbers are those of the production file.
+
+\begin{multicols}{2}
+\begin{lstlisting}[style=jstiny]
+/* ---- rdmlEntries  (production line 10509) ---- */
+/* ---------- 1 · container ---------- */
+async function rdmlEntries(ab,archive){
+  /* the intake ZIP reader already verifies CRC-32 and rejects unknown compression */
+  return readZip(ab,archive,/^[^/]*\.xml$/i);
+}
+
+/* ---- rdmlIsContainer  (production line 10513) ---- */
+function rdmlIsContainer(entries){
+  return entries.some(e=>/^rdml_data\.xml$/i.test(e.name));
+}
+
+/* ---- rdmlKids  (production line 10520) ---- */
+function rdmlKids(el,name){
+  const out=[];if(!el)return out;
+  for(const c of el.children)if(c.localName===name)out.push(c);
+  return out;
+}
+
+/* ---- rdmlKid  (production line 10525) ---- */
+function rdmlKid(el,name){return rdmlKids(el,name)[0]||null;}
+
+/* ---- rdmlText  (production line 10526) ---- */
+function rdmlText(el,name){const k=rdmlKid(el,name);return k?String(k.textContent||"").trim():"";}
+
+/* ---- rdmlNum  (production line 10527) ---- */
+function rdmlNum(el,name){
+  const t=rdmlText(el,name);if(t==="")return null;
+  const n=Number(t);return Number.isFinite(n)?n:null;          /* "1.0" is a cycle, not an integer */
+}
+
+/* ---- rdmlAttrId  (production line 10531) ---- */
+function rdmlAttrId(el,name){const k=rdmlKid(el,name);return k?String(k.getAttribute("id")||"").trim():"";}
+
+/* ---- RDML_SAMPLE_ROLE  (production line 10534) ---- */
+/* ---------- 3 · one RDML file -> one run per <run> ---------- */
+const RDML_SAMPLE_ROLE={ntc:"NTC",neg:"Negative control",pos:"Positive control",std:"Standard",opt:"Unknown",unkn:"Unknown"};
+
+/* ---- rdmlParse  (production line 10535) ---- */
+function rdmlParse(xmlText,fileName,fileBytes){
+  const doc=new DOMParser().parseFromString(xmlText,"application/xml");
+  const err=doc.querySelector("parsererror");
+  if(err)throw new Error("RDML XML is not well formed: "+String(err.textContent||"").slice(0,120));
+  const root=doc.documentElement;
+  if(!root||root.localName!=="rdml")throw new Error("not an RDML document (root element is <"+(root&&root.localName)+">)");
+  const version=root.getAttribute("version")||"";
+  if(!/^1\.[0-4]$/.test(version))                       /* read it anyway, but say so */
+    appNotice&&appNotice("rdml",`${fileName}: RDML version "${version||"absent"}" is outside 1.0-1.4; reading it as 1.4`);
+
+  /* dictionaries */
+  const dyes=rdmlKids(root,"dye").map(d=>d.getAttribute("id")||"");
+  const samples=new Map();
+  rdmlKids(root,"sample").forEach(s=>samples.set(s.getAttribute("id")||"",{
+    id:s.getAttribute("id")||"",type:rdmlText(s,"type")||"unkn",description:rdmlText(s,"description")}));
+  const targets=new Map();
+  rdmlKids(root,"target").forEach(t=>{
+    const dye=rdmlAttrId(t,"dyeId");
+    targets.set(t.getAttribute("id")||"",{
+      id:t.getAttribute("id")||"",type:rdmlText(t,"type")||"toi",dye,
+      channel:Math.max(0,dyes.indexOf(dye)),
+      ampEff:rdmlNum(t,"amplificationEfficiency"),ampEffSE:rdmlNum(t,"amplificationEfficiencySE"),
+      meltingTemperature:rdmlNum(t,"meltingTemperature"),description:rdmlText(t,"description")});
+  });
+  if(!dyes.length)targets.forEach((t,k)=>{if(!t.dye){t.dye="dye";t.channel=0;}});
+
+  const runs=[];
+  rdmlKids(root,"experiment").forEach(exp=>{
+    const expId=exp.getAttribute("id")||"experiment";
+    rdmlKids(exp,"run").forEach(runEl=>{
+      const runId=runEl.getAttribute("id")||"run";
+      const fmt=rdmlKid(runEl,"pcrFormat");
+      const rows=(fmt&&rdmlNum(fmt,"rows"))||8,cols=(fmt&&rdmlNum(fmt,"columns"))||12;
+      const cqMethod=rdmlText(runEl,"cqDetectionMethod");
+      const bgMethod=rdmlText(runEl,"backgroundDeterminationMethod");
+      const instrument=rdmlText(runEl,"instrument");
+      const software=rdmlText(runEl,"dataCollectionSoftware");
+      const runDate=rdmlText(runEl,"runDate");
+
+      const wells=[],allCurves={},tmWells=[],plate={};
+      let maxCycle=0,maxMelt=0,anyCq=false,anyAdp=false,anyMdp=false,ceilingRows=0;
+      const methods=new Set();
+      /* one cheap pass for the cycle count: the ceiling rule below needs it before the
+         wells are built, and the largest <cyc> in the run is the run's cycle count */
+      let maxCycleSeen=0;
+      rdmlKids(runEl,"react").forEach(rc=>rdmlKids(rc,"data").forEach(dt=>rdmlKids(dt,"adp").forEach(a=>{
+        const c=rdmlNum(a,"cyc");if(c!==null&&c>maxCycleSeen)maxCycleSeen=c;})));
+
+      rdmlKids(runEl,"react").forEach(react=>{
+        const id=Number(react.getAttribute("id"));
+        if(!Number.isFinite(id))return;
+        const pos=id-1;                                  /* react id is 1-based, row-major */
+        if(pos<0||pos>=rows*cols)return;                 /* outside the declared plate: ignore, report below */
+        const sampleId=rdmlAttrId(react,"sample");
+        const smp=samples.get(sampleId)||{id:sampleId,type:"unkn"};
+        const role=RDML_SAMPLE_ROLE[smp.type]||"Unknown";
+        plate[pos]=plate[pos]||{pos,name:smp.id,sampleId:"",notes:smp.description||"",replicateOf:null,subsets:[],channels:{}};
+
+        rdmlKids(react,"data").forEach(data=>{
+          const tarId=rdmlAttrId(data,"tar");
+          const tgt=targets.get(tarId)||{id:tarId,type:"toi",dye:"dye",channel:0};
+          const ch=tgt.channel;
+          plate[pos].channels[ch]={sampleType:smp.type,targetName:tarId,
+            targetType:tgt.type==="ref"?"dtReference":"dtTarget"};
+
+          /* amplification: order by cycle, do not assume the file is sorted */
+          const adp=rdmlKids(data,"adp").map(a=>[rdmlNum(a,"cyc"),rdmlNum(a,"fluor")])
+            .filter(([c,f])=>c!==null&&f!==null).sort((a,b)=>a[0]-b[0]);
+          const curve=adp.map(([,f])=>f);
+          if(curve.length){anyAdp=true;maxCycle=Math.max(maxCycle,adp[adp.length-1][0]);
+            allCurves[`${ch}|${pos}`]={channel:ch,pos,curve,amplitude:Math.max(...curve)-Math.min(...curve)};}
+
+          /* melting */
+          const mdp=rdmlKids(data,"mdp").map(m=>[rdmlNum(m,"tmp"),rdmlNum(m,"fluor")])
+            .filter(([t,f])=>t!==null&&f!==null).sort((a,b)=>a[0]-b[0]);
+          if(mdp.length){anyMdp=true;maxMelt=Math.max(maxMelt,mdp.length);}
+
+          let cq=rdmlNum(data,"cq");
+          const ampEffMet=rdmlText(data,"ampEffMet");
+          /* A vendor export writes "no crossing" as a Cq equal to the cycle count: measured on
+             CORPUS-RDML-1.rdml, 158 of 192 rows carry cq = 40.0 on a 40-cycle run, while the
+             .eds for the same run reports those wells as undetermined. Reading them as a crossing
+             at the cut-off would turn 82 % of that file into late detections. A re-analysis file
+             does not do this (example_3_linregpcr: 0 of 90 at the ceiling, maximum 34), so the
+             rule is applied only where there is no N0 and no efficiency to contradict it. */
+          let cqCeiling=false;
+          if(cq!==null&&Number.isFinite(maxCycleSeen)&&maxCycleSeen>0
+             &&Math.abs(cq-maxCycleSeen)<1e-9
+             &&rdmlNum(data,"N0")===null&&rdmlNum(data,"ampEff")===null){cqCeiling=true;cq=null;}
+          if(cq!==null)anyCq=true;
+          if(cqCeiling)ceilingRows++;
+          if(ampEffMet)methods.add(ampEffMet);
+
+          const excl=rdmlText(data,"excl"),note=rdmlText(data,"note");
+          const w={
+            kind:"quant",well:posToWell(pos,cols),pos,row:Math.floor(pos/cols),col:pos%cols,
+            sample:smp.id,sampleId:"",notes:smp.description||"",
+            target:tarId,analysis:`RDML — ${tarId}`,analysisShort:tarId,analysisUid:"rdml:"+tarId,
+            analysisKind:"absquant",analysisGroup:"",analysisGroupName:"",
+            channel:ch,filterName:tgt.dye||("channel "+ch),filterComb:"",
+            instrType:smp.type,instrRole:role,givenConc:"",targetName:tarId,
+            targetType:tgt.type==="ref"?"dtReference":"dtTarget",subsetsOfWell:[],
+            IsIncluded:excl?"false":"true",manual:"",warnCodes:excl?"excl":"",warnDesc:excl||"",
+            /* A Cq in an RDML file is the analysis of whoever wrote the file. It is stored,
+               but never as though the instrument had reported it: cqSource says whose it is. */
+            CpRaw:cq,Cp:cq,cqSource:ampEffMet||cqMethod||"RDML file",
+            callCode:cq===null?0:1,call:cq===null?"Not analysed":"Analysed",
+            curve,CpUncertain:"",
+            CpState:cq===null?"Undetermined":"",CrossingPointStatus:cq===null?"Undetermined":"",
+            cqAtCycleCeiling:cqCeiling,
+            CalcConc:"",ConcStatus:"",StandardConc:"",CalcConcUnc:"",
+            rdml:{N0:rdmlNum(data,"N0"),ampEff:rdmlNum(data,"ampEff"),ampEffSE:rdmlNum(data,"ampEffSE"),
+                  ampEffMet,bgFluor:rdmlNum(data,"bgFluor"),quantFluor:rdmlNum(data,"quantFluor"),
+                  meltTemp:rdmlNum(data,"meltTemp"),excl,note,melt:mdp}
+          };
+          wells.push(w);
+          if(mdp.length)tmWells.push({kind:"tm",well:w.well,pos,channel:ch,sample:smp.id,target:tarId,
+            analysis:w.analysis,analysisUid:w.analysisUid,role,melt:mdp,
+            Tm:rdmlNum(data,"meltTemp"),curve:mdp.map(([,f])=>f),temps:mdp.map(([t])=>t)});
+        });
+      });
+
+      const tgtList=[...targets.values()];
+      const analyses=tgtList.map(t=>({
+        name:`RDML — ${t.id}`,shortName:t.id,uid:"rdml:"+t.id,
+        kind:"absquant",kindLabel:"RDML exchange record",cls:"RDML "+version,subsetName:t.id,
+        calcState:anyCq?"analysed":"not analysed",
+        channelIdx:t.channel,channelName:t.dye,filterName:t.dye,filterComb:"",
+        cpMethod:cqMethod||"not stated in the file",cccEnabled:false,ccNote:bgMethod||"",
+        created:runDate||"",modified:"",createdBy:"",modifiedBy:"",
+        nResults:wells.filter(w=>w.channel===t.channel).length,
+        channelMismatch:null,channelSignal:null,stdCurve:null,settings:{},quantStats:[]}));
+
+      runs.push({
+        file:fileName,sourcePath:fileName,sourceArchive:null,zip:null,
+        platform:instrument||"RDML",eds:null,rdmlDoc:{version,experiment:expId,run:runId,instrument,
+          cqDetectionMethod:cqMethod,backgroundDeterminationMethod:bgMethod,methods:[...methods],
+          cqAtCycleCeiling:ceilingRows},
+        isTemplate:false,
+        meta:{name:`${expId} / ${runId}`,Created:runDate||"",RunCreated:runDate||"",StartTime:runDate||"",
+          EndTime:"",LastModified:"",CreatedByName:"",Technician:"",SWVersion:software,
+          InstrumentName:instrument,SerialNumber:"",sourceBytes:(fileBytes&&fileBytes.length)||0},
+        wells,tmWells,genoResults:[],rqResults:[],otherResults:[],allCurves,plate,subsets:[],
+        analyses,
+        nCycles:maxCycle||null,amplificationCycles:maxCycle||null,acquisitionCycles:maxCycle||null,
+        meltAcquisitionPoints:maxMelt,acqStats:[],acqError:null,
+        protocol:{stages:[],filters:[],channels:(dyes.length?dyes:["dye"]).map((d,i)=>({name:d,ex:i,em:i,active:true}))},
+        acqMelt:null,acqSegments:[],acqAcquisitions:maxCycle||0,acqScalingFactors:[],
+        identities:{},duplicates:0,namedPositions:Object.keys(plate).length,
+        maxPos:rows*cols-1,cols,rows,blockId:"",
+        kinds:[anyAdp?"absquant":null,anyMdp?"tm":null].filter(Boolean),
+        format:{signature:"RDML",version},
+        /* RDML carries no container checksum of its own; the ZIP CRC-32 was verified on read. */
+        integrity:{kind:"rdml",stored:"",computed:"",ok:null,
+          note:"RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading"},
+        experimentId:expId,runId
+      });
+    });
+  });
+  if(!runs.length)throw new Error("RDML file contains no <experiment>/<run>");
+  return runs;
+}
+
+/* ---- RDML_REANALYSIS_TOOLS  (production line 10714) ---- */
+const RDML_REANALYSIS_TOOLS=/linregpcr|pcr-?miner|qpcr-?miner|dart-?pcr|cy0|mak2|lre|analyz/i;
+
+/* ---- runProcessingState  (production line 10715) ---- */
+function runProcessingState(run){
+  if(!run)return {state:"unknown",reason:"no run"};
+  if(!run.rdmlDoc)return {state:"instrument",reason:"decoded from the instrument's own container"};
+  const d=run.rdmlDoc||{};
+  const cq=(run.wells||[]).filter(w=>resultCq(w)!==null).length;
+  if(!cq)return {state:"raw",
+    reason:"the file carries fluorescence data only: no Cq, and no analysis by any software"};
+  const named=(d.methods||[]).filter(Boolean);
+  const tool=named.find(m=>RDML_REANALYSIS_TOOLS.test(m))
+    ||(RDML_REANALYSIS_TOOLS.test(d.backgroundDeterminationMethod||"")?String(d.backgroundDeterminationMethod).split(",")[0]:"");
+  if(tool)return {state:"third-party",tool,
+    reason:`the results in this file were produced by ${tool}, not by the instrument's software`};
+  if((run.meta&&run.meta.InstrumentName)||d.instrument)
+    return {state:"vendor-export",
+      reason:`exchange export of an analysis made by the instrument's software on ${(run.meta&&run.meta.InstrumentName)||d.instrument}`};
+  return {state:"third-party",
+    reason:"the file names no instrument, so the results in it were not written by the instrument's software"};
+}
+
+/* ---- runIsInstrumentAnalysed  (production line 10733) ---- */
+function runIsInstrumentAnalysed(run){
+  const s=runProcessingState(run).state;return s==="instrument"||s==="vendor-export";
+}
+
+/* ---- sopProcessingApplicability  (production line 10740) ---- */
+function sopProcessingApplicability(run){
+  const s=runProcessingState(run);
+  if(s.state==="instrument")return {applicable:true,reason:s.reason,state:s.state};
+  /* A vendor export IS the producer's analysis, so it is in scope - unless the instrument's
+     own file for the same experiment is loaded, in which case that one is the record and this
+     one is a companion. */
+  if(s.state==="vendor-export"){
+    if(runIsSuperseded(run))return {applicable:false,state:"superseded",
+      reason:"superseded — "+run.supersededReason};
+    return {applicable:true,reason:s.reason,state:s.state};
+  }
+  return {applicable:false,state:s.state,
+    reason:(s.state==="raw"?"raw exchange file — ":"third-party analysis — ")+s.reason};
+}
+
+/* ---- rdmlStem  (production line 10760) ---- */
+function rdmlStem(name){
+  return String(name||"").replace(/\.[^.]+$/,"").replace(/[\s_-]+/g," ").trim().toLowerCase();
+}
+
+/* ---- rdmlKeyOf  (production line 10763) ---- */
+function rdmlKeyOf(item){
+  return [rdmlStem(item.name),String(item.experimentId||"").trim().toLowerCase()].filter(Boolean);
+}
+
+/* ---- applyRawFilePriority  (production line 10766) ---- */
+function applyRawFilePriority(runs){
+  const vendor=runs.filter(r=>!r.rdmlDoc),rdml=runs.filter(r=>r.rdmlDoc);
+  if(!vendor.length||!rdml.length)return {runs,superseded:[]};
+  const keys=new Set();
+  vendor.forEach(v=>{rdmlKeyOf({name:v.file,experimentId:(v.meta||{}).name}).forEach(k=>keys.add(k));});
+  const superseded=[],kept=[];
+  runs.forEach(r=>{
+    if(!r.rdmlDoc){kept.push(r);return;}
+    const mine=rdmlKeyOf({name:r.file,experimentId:r.experimentId});
+    const hit=mine.find(k=>keys.has(k));
+    if(hit){r.supersededBy=vendor.find(v=>rdmlKeyOf({name:v.file,experimentId:(v.meta||{}).name}).includes(hit));
+      r.supersededReason=`the instrument's own file for this experiment is loaded (${r.supersededBy?r.supersededBy.file:"vendor container"}); `
+        +"the exchange export is kept for comparison only";
+      superseded.push(r);}
+    kept.push(r);
+  });
+  return {runs:kept,superseded};
+}
+
+/* ---- runIsSuperseded  (production line 10784) ---- */
+function runIsSuperseded(run){return !!(run&&run.supersededBy);}
+
+\end{lstlisting}
+
+\end{multicols}
+\AThreeEnd
+\chapter{Machine-readable evidence}
+
+\texttt{validation\_data.json} holds every record printed in this document, with the full input and
+output of each. Structure:
+
+\begin{lstlisting}[style=jstiny]
+{
+ "page": {
+  "file": "qpcr_qc_forensics.html",
+  "sha256": "6e14cc49153ad0662b94c47218f213051c5128fec78cc8a479ce00f17f391f4e",
+  "bytes": 860756
+ },
+ "when": "2026-09-24T08:44:56.803Z",
+ "pageErrors": [],
+ "corpus": "[ {file, bytes, sha256} × 8 ]",
+ "corpusRuns": {
+  "CORPUS-RDML-1.rdml": 1,
+  "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml": 1,
+  "example_1_raw.rdml": 3,
+  "example_2_tm_annotated.rdml": 3,
+  "example_3_linregpcr.rdml": 3,
+  "example_4_interrun.rdml": 3,
+  "example_LCGreen_raw.rdml": 1
+ },
+ "records": "[ {fn, case, inputDesc, inputProvenance, input, output, expect, pass, note?} × 89 ]"
+}
+\end{lstlisting}

@@ -1,0 +1,139 @@
+{
+  "imported": 351,
+  "instruments": 2,
+  "deduplication": true,
+  "checks": [
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "cool_rate",
+      "variant": "",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "heat_rate",
+      "variant": "",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "settling",
+      "variant": "",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "run_minutes",
+      "variant": "",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "lamp_ref",
+      "variant": "465-510",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "lamp_ref",
+      "variant": "533-580",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "lamp_drift",
+      "variant": "465-510",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "lamp_drift",
+      "variant": "533-580",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "exposure",
+      "variant": "465-510",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "exposure",
+      "variant": "533-580",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-B",
+      "chart": "hold_temp",
+      "variant": "",
+      "finite_points": 221
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "cool_rate",
+      "variant": "",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "heat_rate",
+      "variant": "",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "settling",
+      "variant": "",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "run_minutes",
+      "variant": "",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "lamp_ref",
+      "variant": "465-510",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "lamp_ref",
+      "variant": "533-580",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "lamp_drift",
+      "variant": "465-510",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "lamp_drift",
+      "variant": "533-580",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "exposure",
+      "variant": "465-510",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "exposure",
+      "variant": "533-580",
+      "finite_points": 130
+    },
+    {
+      "instrument": "LC · ROCHE-DEMO-A",
+      "chart": "hold_temp",
+      "variant": "",
+      "finite_points": 130
+    }
+  ]
+}

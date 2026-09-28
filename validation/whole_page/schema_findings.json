@@ -1,0 +1,437 @@
+{
+ "vocabulary": {
+  "inCode": [
+   "ntc",
+   "neg",
+   "pos",
+   "std",
+   "opt",
+   "unkn"
+  ],
+  "mapping": {
+   "ntc": "NTC",
+   "neg": "Negative control",
+   "pos": "Positive control",
+   "std": "Standard",
+   "opt": "Unknown",
+   "unkn": "Unknown"
+  },
+  "inSchema": [
+   "unkn",
+   "ntc",
+   "nac",
+   "std",
+   "ntp",
+   "nrt",
+   "pos",
+   "opt"
+  ],
+  "missing": [
+   "nac",
+   "ntp",
+   "nrt"
+  ],
+  "notInSchema": [
+   "neg"
+  ]
+ },
+ "sentinel": {
+  "CORPUS-RDML-1.rdml": {
+   "reactions": 192,
+   "negativeCq": 0,
+   "negativeCqCalledAnalysed": 0,
+   "undetermined": 158,
+   "negativeN0": 0,
+   "negativeAmpEff": 0,
+   "excluded": 0
+  },
+  "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml": {
+   "reactions": 72,
+   "negativeCq": 0,
+   "negativeCqCalledAnalysed": 0,
+   "undetermined": 6,
+   "negativeN0": 0,
+   "negativeAmpEff": 0,
+   "excluded": 0
+  },
+  "example_1_raw.rdml": {
+   "reactions": 285,
+   "negativeCq": 0,
+   "negativeCqCalledAnalysed": 0,
+   "undetermined": 285,
+   "negativeN0": 0,
+   "negativeAmpEff": 0,
+   "excluded": 0
+  },
+  "example_2_tm_annotated.rdml": {
+   "reactions": 285,
+   "negativeCq": 0,
+   "negativeCqCalledAnalysed": 0,
+   "undetermined": 285,
+   "negativeN0": 0,
+   "negativeAmpEff": 0,
+   "excluded": 0
+  },
+  "example_3_linregpcr.rdml": {
+   "reactions": 285,
+   "negativeCq": 19,
+   "negativeCqCalledAnalysed": 19,
+   "undetermined": 0,
+   "negativeN0": 19,
+   "negativeAmpEff": 3,
+   "excluded": 28
+  },
+  "example_4_interrun.rdml": {
+   "reactions": 285,
+   "negativeCq": 19,
+   "negativeCqCalledAnalysed": 19,
+   "undetermined": 0,
+   "negativeN0": 19,
+   "negativeAmpEff": 3,
+   "excluded": 28
+  },
+  "example_LCGreen_raw.rdml": {
+   "reactions": 50,
+   "negativeCq": 0,
+   "negativeCqCalledAnalysed": 0,
+   "undetermined": 50,
+   "negativeN0": 0,
+   "negativeAmpEff": 0,
+   "excluded": 0
+  }
+ },
+ "format": {
+  "free_format.rdml": {
+   "runs": 1,
+   "rows": -1,
+   "cols": 1,
+   "maxPos": -2,
+   "wells": 0,
+   "integrityNote": "RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading",
+   "table": []
+  },
+  "md5_id.rdml": {
+   "runs": 1,
+   "rows": 8,
+   "cols": 12,
+   "maxPos": 95,
+   "wells": 6,
+   "integrityNote": "RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading",
+   "table": [
+    {
+     "well": "A01",
+     "pos": 0,
+     "sample": "S_unkn",
+     "target": "T1",
+     "declaredType": "unkn",
+     "role": "Unknown",
+     "cq": 20.5,
+     "call": "Analysed"
+    },
+    {
+     "well": "A02",
+     "pos": 1,
+     "sample": "S_nac",
+     "target": "T1",
+     "declaredType": "nac",
+     "role": "Unknown",
+     "cq": -1,
+     "call": "Analysed"
+    },
+    {
+     "well": "A03",
+     "pos": 2,
+     "sample": "S_ntp",
+     "target": "T1",
+     "declaredType": "ntp",
+     "role": "Unknown",
+     "cq": 33.2,
+     "call": "Analysed"
+    },
+    {
+     "well": "A04",
+     "pos": 3,
+     "sample": "S_nrt",
+     "target": "T1",
+     "declaredType": "nrt",
+     "role": "Unknown",
+     "cq": 31,
+     "call": "Analysed"
+    },
+    {
+     "well": "A05",
+     "pos": 4,
+     "sample": "S_opt",
+     "target": "T1",
+     "declaredType": "opt",
+     "role": "Unknown",
+     "cq": 18,
+     "call": "Analysed"
+    },
+    {
+     "well": "A06",
+     "pos": 5,
+     "sample": "S_ntc",
+     "target": "T1",
+     "declaredType": "ntc",
+     "role": "NTC",
+     "cq": 35.5,
+     "call": "Analysed"
+    }
+   ]
+  },
+  "plate96.rdml": {
+   "runs": 1,
+   "rows": 8,
+   "cols": 12,
+   "maxPos": 95,
+   "wells": 6,
+   "integrityNote": "RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading",
+   "table": [
+    {
+     "well": "A01",
+     "pos": 0,
+     "sample": "S_unkn",
+     "target": "T1",
+     "declaredType": "unkn",
+     "role": "Unknown",
+     "cq": 20.5,
+     "call": "Analysed"
+    },
+    {
+     "well": "A02",
+     "pos": 1,
+     "sample": "S_nac",
+     "target": "T1",
+     "declaredType": "nac",
+     "role": "Unknown",
+     "cq": -1,
+     "call": "Analysed"
+    },
+    {
+     "well": "A03",
+     "pos": 2,
+     "sample": "S_ntp",
+     "target": "T1",
+     "declaredType": "ntp",
+     "role": "Unknown",
+     "cq": 33.2,
+     "call": "Analysed"
+    },
+    {
+     "well": "A04",
+     "pos": 3,
+     "sample": "S_nrt",
+     "target": "T1",
+     "declaredType": "nrt",
+     "role": "Unknown",
+     "cq": 31,
+     "call": "Analysed"
+    },
+    {
+     "well": "A05",
+     "pos": 4,
+     "sample": "S_opt",
+     "target": "T1",
+     "declaredType": "opt",
+     "role": "Unknown",
+     "cq": 18,
+     "call": "Analysed"
+    },
+    {
+     "well": "A06",
+     "pos": 5,
+     "sample": "S_ntc",
+     "target": "T1",
+     "declaredType": "ntc",
+     "role": "NTC",
+     "cq": 35.5,
+     "call": "Analysed"
+    }
+   ]
+  },
+  "rotor72.rdml": {
+   "runs": 1,
+   "rows": 72,
+   "cols": 1,
+   "maxPos": 71,
+   "wells": 6,
+   "integrityNote": "RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading",
+   "table": [
+    {
+     "well": "A01",
+     "pos": 0,
+     "sample": "S_unkn",
+     "target": "T1",
+     "declaredType": "unkn",
+     "role": "Unknown",
+     "cq": 20.5,
+     "call": "Analysed"
+    },
+    {
+     "well": "B01",
+     "pos": 1,
+     "sample": "S_nac",
+     "target": "T1",
+     "declaredType": "nac",
+     "role": "Unknown",
+     "cq": -1,
+     "call": "Analysed"
+    },
+    {
+     "well": "C01",
+     "pos": 2,
+     "sample": "S_ntp",
+     "target": "T1",
+     "declaredType": "ntp",
+     "role": "Unknown",
+     "cq": 33.2,
+     "call": "Analysed"
+    },
+    {
+     "well": "D01",
+     "pos": 3,
+     "sample": "S_nrt",
+     "target": "T1",
+     "declaredType": "nrt",
+     "role": "Unknown",
+     "cq": 31,
+     "call": "Analysed"
+    },
+    {
+     "well": "E01",
+     "pos": 4,
+     "sample": "S_opt",
+     "target": "T1",
+     "declaredType": "opt",
+     "role": "Unknown",
+     "cq": 18,
+     "call": "Analysed"
+    },
+    {
+     "well": "F01",
+     "pos": 5,
+     "sample": "S_ntc",
+     "target": "T1",
+     "declaredType": "ntc",
+     "role": "NTC",
+     "cq": 35.5,
+     "call": "Analysed"
+    }
+   ]
+  }
+ },
+ "perTarget": {
+  "runs": 1,
+  "rows": 8,
+  "cols": 12,
+  "maxPos": 95,
+  "wells": 2,
+  "integrityNote": "RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading",
+  "table": [
+   {
+    "well": "A01",
+    "pos": 0,
+    "sample": "S_dual",
+    "target": "T1",
+    "declaredType": "std",
+    "role": "Standard",
+    "cq": 22,
+    "call": "Analysed"
+   },
+   {
+    "well": "A01",
+    "pos": 0,
+    "sample": "S_dual",
+    "target": "T2",
+    "declaredType": "std",
+    "role": "Standard",
+    "cq": 34,
+    "call": "Analysed"
+   }
+  ]
+ },
+ "intake": {
+  "acceptAttribute": "accept=\".ixo,.eds,.edt,.rdml,.zip\"",
+  "extensionTests": [
+   "/\\.ixo$/i",
+   "/\\.edt$/i",
+   "/\\.rdml$/i"
+  ],
+  "rejectionMessage": "not an .ixo, .eds, .edt, .rdml or .zip file"
+ },
+ "md5": {
+  "pageHasMD5": true,
+  "integrityNoteForFileWithHash": "RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading"
+ },
+ "corpus": [
+  {
+   "file": "CORPUS-RDML-1.eds",
+   "bytes": 1756735,
+   "sha256": "d2750711198559b16cc963d9f9c074c14b8a248c3fbd14436852884870d6be6c"
+  },
+  {
+   "file": "CORPUS-RDML-1.rdml",
+   "bytes": 69062,
+   "sha256": "688ef2eeec2e0fd350e8d2e585933e865b2eed7ae82e56bb0c6c0c4f60ddc384"
+  },
+  {
+   "file": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "bytes": 23248,
+   "sha256": "a26b7c8a7a596d3376d776ff32990eb80b855d5e657d274fbe56c475085a5c30"
+  },
+  {
+   "file": "example_1_raw.rdml",
+   "bytes": 252382,
+   "sha256": "a29e4918383b5199a5757047d884c149f21650a352bb9c487ccc398769b37a3a"
+  },
+  {
+   "file": "example_2_tm_annotated.rdml",
+   "bytes": 252547,
+   "sha256": "e018dbad7ec4071af882543929dad171e7297517e4e0f6a39c8cae4d8f9ba6d7"
+  },
+  {
+   "file": "example_3_linregpcr.rdml",
+   "bytes": 260964,
+   "sha256": "4806d1466a741c7f31141ce2d5cf0a02da5d329180e392d0277ddc12c82c8845"
+  },
+  {
+   "file": "example_4_interrun.rdml",
+   "bytes": 262745,
+   "sha256": "7545883ce03d305207f8b73d40b403a2a919f203908e8f4bbe27ae8b3019d4b2"
+  },
+  {
+   "file": "example_LCGreen_raw.rdml",
+   "bytes": 52635,
+   "sha256": "73f238867ae4dcdd12511b9f3519fdd5f8e6653eac3a97cbae451da4bd7e9293"
+  }
+ ],
+ "synthetic": [
+  {
+   "file": "free_format.rdml",
+   "bytes": 539,
+   "sha256": "6b13015dcde802bd66fd938749be1ca157fae75e34f30d5ac6e36f2aa48d510a"
+  },
+  {
+   "file": "md5_id.rdml",
+   "bytes": 616,
+   "sha256": "93b954ac506e1ff616ff30290697ed1b96d47561000ad6ca2ccea83108df004b"
+  },
+  {
+   "file": "per_target_type.rdml",
+   "bytes": 431,
+   "sha256": "6260c75c144769535298e343f07acf5c99fc31fdffa1a8cb577fefbe305abbd4"
+  },
+  {
+   "file": "plate96.rdml",
+   "bytes": 539,
+   "sha256": "ae60e935f8de47538abc5d1916e24f9ce16a51a71a0febf951e46ebe8b02d80c"
+  },
+  {
+   "file": "rotor72.rdml",
+   "bytes": 539,
+   "sha256": "817aecc44b76d7f57f1d949522226f565c205cd113f40f062b0d6439e31f3c32"
+  }
+ ],
+ "pageErrors": []
+}

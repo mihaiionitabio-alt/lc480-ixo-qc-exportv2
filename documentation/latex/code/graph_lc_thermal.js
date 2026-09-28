@@ -1,0 +1,6 @@
+GRAPHS.splice(GRAPHS.findIndex(g=>g.id==="recalc")+1,0,{id:"lc_thermal",group:"Run history",title:"Block temperature trace (LightCycler temperature log)",scope:"run",
+  note:"The block temperature the LightCycler 480 logged about every 0.41 s, decoded from the TemperatureLog inside the .ixo file, with the protocol setpoints. Heating and cooling rates, overshoot, settling and transition times on the control panel are measured on the full trace; the graph keeps the lowest and highest value of every time slice, so overshoots and short holds are not lost when it is thinned for display.",
+  render(c){const L=c.run&&c.run.cc&&c.run.cc.log;if(!L)return {svg:svgMessage("This file has no LightCycler temperature log (QuantStudio files: use the block temperature graph above)."),rows:[]};
+    const sp=ccSetpoints(c.run);
+    return {svg:svgPlot({title:runName(c.run),x:[0,L.seconds[L.seconds.length-1]/60],y:[Math.min(...L.temp)-3,Math.max(...L.temp)+3],xlab:"Minutes from the start of the log",ylab:"°C",right:62,hlabelsOutside:true,
+      series:[{type:"line",colour:"#2563eb",width:1,data:L.seconds.map((s,i)=>[s/60,L.temp[i]])}],hlines:sp.map(s=>({y:s,label:`${s} °C`,colour:"#6b7280",dash:"2 3"}))}),

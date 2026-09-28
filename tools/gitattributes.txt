@@ -1,0 +1,19 @@
+# Large binaries through Git LFS. Remove a line and add the file to .gitignore
+# instead if you would rather attach it to a Release and keep the repo small.
+*.pdf   filter=lfs diff=lfs merge=lfs -text
+*.png   filter=lfs diff=lfs merge=lfs -text
+*.jpg   filter=lfs diff=lfs merge=lfs -text
+*.zip   filter=lfs diff=lfs merge=lfs -text
+*.tgz   filter=lfs diff=lfs merge=lfs -text
+*.ixo   filter=lfs diff=lfs merge=lfs -text
+*.eds   filter=lfs diff=lfs merge=lfs -text
+
+# Text: keep the line endings the build expects. The sources are LF.
+*.tex   text eol=lf
+*.py    text eol=lf
+*.mjs   text eol=lf
+*.js    text eol=lf
+*.md    text eol=lf
+*.html  text eol=lf
+*.sh    text eol=lf
+*.ps1   text eol=crlf

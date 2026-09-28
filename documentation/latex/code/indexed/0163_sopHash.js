@@ -1,0 +1,1 @@
+function sopHash(p){return sha256Hex(new TextEncoder().encode(sopCanonical(p||SOP)));}

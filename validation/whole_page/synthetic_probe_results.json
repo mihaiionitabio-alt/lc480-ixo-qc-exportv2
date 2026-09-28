@@ -1,0 +1,237 @@
+{
+ "A": {
+  "pass": 419,
+  "constant": 111,
+  "unreachable": 35,
+  "no-fixture": 70,
+  "threw": 32,
+  "excluded": 4,
+  "mutates": 5
+ },
+ "B": {
+  "pass": 506,
+  "constant": 111,
+  "unreachable": 35,
+  "threw": 13,
+  "mutates": 7,
+  "excluded": 4
+ },
+ "C": {
+  "pass": 507,
+  "constant": 111,
+  "unreachable": 35,
+  "threw": 11,
+  "mutates": 8,
+  "excluded": 4
+ },
+ "oracle": {
+  "checks": [
+   {
+    "name": "runs decoded",
+    "got": 1,
+    "want": 1,
+    "ok": true
+   },
+   {
+    "name": "result rows",
+    "got": 92,
+    "want": 92,
+    "ok": true
+   },
+   {
+    "name": "curve entries",
+    "got": 174,
+    "want": 174,
+    "ok": true
+   },
+   {
+    "name": "integrity mismatches (clean)",
+    "got": 0,
+    "want": 0,
+    "ok": true
+   },
+   {
+    "name": "rising-curve findings",
+    "got": 2,
+    "want": 2,
+    "ok": true
+   },
+   {
+    "name": "of which error level",
+    "got": 1,
+    "want": 1,
+    "ok": true
+   },
+   {
+    "name": "flagged positions",
+    "got": [
+     "D05",
+     "D11"
+    ],
+    "want": [
+     "D05",
+     "D11"
+    ],
+    "ok": true
+   },
+   {
+    "name": "empty noise wells flagged",
+    "got": 0,
+    "want": 0,
+    "ok": true
+   },
+   {
+    "name": "undetermined rows",
+    "got": 31,
+    "want": 31,
+    "ok": true
+   },
+   {
+    "name": "undetermined read as Cq 0",
+    "got": 0,
+    "want": 0,
+    "ok": true
+   },
+   {
+    "name": "undetermined counts as answered",
+    "got": true,
+    "want": true,
+    "ok": true
+   },
+   {
+    "name": "run accepted (clean)",
+    "got": true,
+    "want": true,
+    "ok": true
+   },
+   {
+    "name": "sample groups of the target",
+    "got": 21,
+    "want": 21,
+    "ok": true
+   },
+   {
+    "name": "positive samples",
+    "got": 5,
+    "want": 5,
+    "ok": true
+   },
+   {
+    "name": "negative samples",
+    "got": 13,
+    "want": 13,
+    "ok": true
+   },
+   {
+    "name": "repeated samples",
+    "got": 3,
+    "want": 3,
+    "ok": true
+   },
+   {
+    "name": "mean Cq of a positive group",
+    "got": 30,
+    "want": 30,
+    "ok": true
+   },
+   {
+    "name": "reference Cq",
+    "got": 24,
+    "want": 24,
+    "ok": true
+   },
+   {
+    "name": "replicate spread is repeated",
+    "got": "Repeat",
+    "want": "Repeat",
+    "ok": true
+   },
+   {
+    "name": "late signal is repeated",
+    "got": "Repeat",
+    "want": "Repeat",
+    "ok": true
+   },
+   {
+    "name": "integrity stays out of the review list",
+    "got": 0,
+    "want": 0,
+    "ok": true
+   },
+   {
+    "name": "distinct never exceeds raw",
+    "got": true,
+    "want": true,
+    "ok": true
+   },
+   {
+    "name": "exports build from the fixture",
+    "got": true,
+    "want": true,
+    "ok": true
+   },
+   {
+    "name": "integrity mismatches (mismatch variant)",
+    "got": 1,
+    "want": 1,
+    "ok": true
+   },
+   {
+    "name": "the run is rejected",
+    "got": "Rejected",
+    "want": "Rejected",
+    "ok": true
+   },
+   {
+    "name": "every sample becomes invalid",
+    "got": true,
+    "want": true,
+    "ok": true
+   },
+   {
+    "name": "stored Cq is unchanged by rejection",
+    "got": [
+     30,
+     30
+    ],
+    "want": [
+     30,
+     30
+    ],
+    "ok": true
+   }
+  ],
+  "outcomes": {
+   "Positive": 26,
+   "Negative": 13,
+   "Repeat": 3,
+   "Inconclusive": 0,
+   "Invalid run": 0,
+   "Control pass": 5,
+   "Control fail": 0
+  },
+  "groupNames": [
+   "SYN-001",
+   "SYN-002",
+   "SYN-003",
+   "SYN-004",
+   "SYN-005",
+   "SYN-006",
+   "SYN-007",
+   "SYN-008",
+   "SYN-009",
+   "SYN-010",
+   "SYN-011",
+   "SYN-012",
+   "SYN-013",
+   "SYN-014",
+   "SYN-015",
+   "SYN-016",
+   "SYN-017",
+   "SYN-018",
+   "SYN-019",
+   "SYN-020",
+   "SYN-EXTRA"
+  ]
+ }
+}

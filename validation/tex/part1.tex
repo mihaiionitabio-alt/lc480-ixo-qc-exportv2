@@ -1,0 +1,260 @@
+
+\documentclass[10pt,a4paper,twoside]{report}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}[Scale=0.92]
+\setsansfont{DejaVu Sans}[Scale=0.90]
+\setmonofont{DejaVu Sans Mono}[Scale=0.80]
+\usepackage[a4paper,top=22mm,bottom=24mm,left=24mm,right=20mm,headheight=14pt]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{longtable,tabularx,booktabs,array}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc,fit,backgrounds}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{rotating}
+\sloppy\emergencystretch=3em
+
+\definecolor{kw}{RGB}{20,70,160}
+\definecolor{cm}{RGB}{90,110,90}
+\definecolor{st}{RGB}{150,60,20}
+\definecolor{rule}{RGB}{200,205,212}
+\definecolor{okc}{RGB}{20,110,60}
+\definecolor{badc}{RGB}{170,30,30}
+\definecolor{panel}{RGB}{246,248,251}
+
+\lstdefinestyle{js}{
+  language=Java, basicstyle=\ttfamily\scriptsize, keywordstyle=\color{kw},
+  commentstyle=\color{cm}\itshape, stringstyle=\color{st},
+  breaklines=true, breakatwhitespace=false, columns=fullflexible, keepspaces=true,
+  showstringspaces=false, tabsize=2, numbers=left, numberstyle=\ttfamily\tiny\color{gray},
+  numbersep=7pt, xleftmargin=20pt, framexleftmargin=16pt, frame=single, rulecolor=\color{rule},
+  backgroundcolor=\color{panel}, aboveskip=7pt, belowskip=7pt, upquote=true,
+  literate={·}{{\textperiodcentered}}1 {—}{{---}}1 {–}{{--}}1 {…}{{\ldots}}1 {≤}{{$\leq$}}1
+           {≥}{{$\geq$}}1 {×}{{$\times$}}1 {→}{{$\rightarrow$}}1 {²}{{$^2$}}1 {°}{{$^\circ$}}1
+           {₀}{{$_0$}}1 {"}{{"}}1 {"}{{"}}1 {'}{{'}}1 {'}{{'}}1
+}
+\lstdefinestyle{jstiny}{style=js, basicstyle=\ttfamily\tiny, numbers=none}
+\lstdefinestyle{plain}{style=js, keywordstyle=\color{black}, numbers=none, language={}}
+
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}\renewcommand{\footrulewidth}{0.3pt}
+\fancyhead[LE,RO]{\sffamily\scriptsize RDML reader — validation report}
+\fancyhead[RE,LO]{\sffamily\scriptsize\leftmark}
+\fancyfoot[C]{\sffamily\scriptsize Page \thepage\ of \pageref{LastPage}}
+\usepackage{lastpage}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\sffamily\scriptsize Page \thepage\ of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0.3pt}}
+
+\titleformat{\chapter}[display]{\sffamily\LARGE\bfseries}{\sffamily\normalsize\MakeUppercase{\chaptertitlename\ \thechapter}}{6pt}{}
+\titlespacing*{\chapter}{0pt}{-14pt}{18pt}
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\sffamily\normalsize\bfseries}{\thesubsection}{0.7em}{}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}
+\newcommand{\PASS}{\textcolor{okc}{\textbf{pass}}}
+\newcommand{\FAILED}{\textcolor{badc}{\textbf{fail}}}
+\newcommand{\fn}[1]{\texttt{#1}}
+\newcommand{\AThreeStart}{\clearpage\pdfpagewidth=420mm\pdfpageheight=297mm
+  \newgeometry{left=18mm,right=18mm,top=22mm,bottom=22mm,headheight=14pt,headsep=8mm,footskip=14mm}%
+  \setlength{\textwidth}{384mm}\setlength{\textheight}{230mm}%
+  \setlength{\oddsidemargin}{\dimexpr 18mm-1in\relax}%
+  \setlength{\evensidemargin}{\dimexpr 18mm-1in\relax}%
+  \setlength{\topmargin}{\dimexpr 22mm-1in\relax}%
+  \setlength{\headheight}{14pt}\setlength{\headsep}{8mm}\setlength{\footskip}{14mm}%
+  \setlength{\marginparwidth}{0pt}\setlength{\linewidth}{\textwidth}%
+  \setlength{\columnwidth}{\textwidth}\hsize=\textwidth
+  \setlength{\headwidth}{\textwidth}}
+\newcommand{\AThreeEnd}{\clearpage\pdfpagewidth=210mm\pdfpageheight=297mm\restoregeometry
+  \setlength{\headwidth}{\textwidth}}
+\tikzset{
+  box/.style={draw=rule!60!black, fill=panel, rounded corners=2pt, align=center,
+              font=\sffamily\footnotesize, inner sep=5pt, minimum height=9mm, text width=34mm},
+  wide/.style={box, text width=52mm},
+  narrow/.style={box, text width=25mm},
+  dec/.style={draw=rule!60!black, fill=white, diamond, aspect=2.4, align=center,
+              font=\sffamily\scriptsize, inner sep=1pt, text width=30mm},
+  io/.style={box, fill=white, draw=kw!70},
+  ok/.style={box, fill=okc!8, draw=okc!60},
+  bad/.style={box, fill=badc!8, draw=badc!60},
+  fl/.style={->, draw=rule!50!black, thick},
+  lbl/.style={font=\sffamily\scriptsize, inner sep=1.5pt, fill=white, align=center}
+}
+
+\begin{document}
+
+\begin{titlepage}\centering\sffamily
+\vspace*{18mm}
+{\Huge\bfseries RDML reader\par}
+\vspace{4mm}
+{\LARGE Function-by-function validation report\par}
+\vspace{10mm}
+{\large qPCR raw values, open formats, quality control and forensics\par}
+\vspace{2mm}
+{\large LightCycler 480 \textperiodcentered{} QuantStudio 3/5 \textperiodcentered{} RDML 1.0--1.4\par}
+\vspace{16mm}
+\begin{minipage}{0.86\textwidth}\centering\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Build under test & \texttt{qpcr\_qc\_forensics.html} \\
+SHA-256 & \texttt{6e14cc49153ad0662b94c47218f213051c5128fec78cc8a479ce00f17f391f4e} \\
+Size & 860,756 bytes \\
+Symbols validated & 15 functions, 2 constants \\
+Test records & 89 \\
+Corpus & 8 instrument and exchange files \\
+Browser faults during capture & 0 \\
+Capture run & \texttt{2026-09-24T08:44:56.803Z} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vfill
+{\small This report states, for every function of the RDML reader, what it was given, where that
+input came from, what it returned, and how the verdict was reached. Inputs that were constructed
+for the test are marked as such and printed in full.\par}
+\vspace{8mm}
+\end{titlepage}
+\tableofcontents
+\clearpage
+
+\chapter{Purpose, scope and reading guide}
+
+\section{What this document is}
+This is the validation record of the RDML reader added to the page on 24 September 2026. It is
+written to be checked rather than believed: every number in it was produced by a harness that is
+printed in Appendix~\ref{app:harness}, run against the build whose SHA-256 is on the title page,
+and the harness writes a machine-readable record (\texttt{validation\_data.json}) from which this
+document is generated. Re-running the harness regenerates every table here.
+
+\section{Why the provenance of the input matters}
+The functions under test were written together with most of their test inputs. That is a conflict
+of interest, and the only honest response is to declare, for every single input, where it came
+from. Three classes are used throughout, and every input table names its class:
+
+\begin{longtable}{@{}p{10mm}p{42mm}p{\dimexpr\linewidth-58mm-16pt\relax}@{}}
+\toprule
+\textbf{Class} & \textbf{Meaning} & \textbf{What it implies for the evidence} \\
+\midrule\endhead
+
+\textbf{R} & Real file, unmodified & A file supplied by the laboratory or by the RDML workshop, used byte for byte. Its SHA-256 is in Table 2. \\
+\addlinespace
+
+\textbf{D} & Derived from a real file & An object produced from a real file by a stated operation of the code under test, e.g. the first \texttt{<run>} element of a parsed document. \\
+\addlinespace
+
+\textbf{S} & Synthetic, written for the test & A literal value constructed for this report. Every synthetic value is printed in full so the reader can reproduce it. \\
+\addlinespace
+
+\bottomrule
+\end{longtable}
+
+Class~R inputs carry the whole weight of the validation: they were produced by instruments and by
+the RDML-Tools of the Freising workshop, long before this reader existed, and neither their content
+nor their structure could be arranged to suit it. Class~D inputs are real data that the code under
+test has already transformed, so they test a later stage against the output of an earlier one.
+Class~S inputs exist only for boundary conditions --- an empty string, a malformed document, a null
+argument --- where no real file offers the case. They are printed verbatim so that nothing is hidden
+in a description.
+
+\section{The strongest single piece of evidence}
+One experiment in the corpus, \texttt{CORPUS-RDML-1}, exists both as the instrument's own
+container (\texttt{.eds}) and as an RDML export of the same run. The page already decodes the first
+by a path that has nothing to do with the reader under test. Reading both and comparing the Cq of
+every reaction is therefore an external check that no amount of self-written test data could
+provide. It is reported in section~\ref{sec:oracle}.
+
+\section{How to read a function section}
+Each function gets: what it is for; its signature and its place in the call graph; its complete
+source as it stands in the build under test, with the production line numbers; a table of every
+input it was given, with the provenance class; a table of what it returned; a flow diagram where
+the control flow justifies one; and the verdict. Nothing is abbreviated. Where a returned value is
+large it is printed in full in an appendix rather than truncated in place.
+
+\chapter{The corpus and how it was obtained}\label{ch:corpus}
+
+\section{Files}
+Eight files, none of them produced by this project. Five are the exercise files of the RDML-Tools
+workshop \emph{Web-based analysis of qPCR data} (Freising, March 2023); two are exchange exports
+supplied by the laboratory; one is the instrument container that pairs with the first of those.
+
+\begin{longtable}{@{}p{56mm}r p{\dimexpr\linewidth-56mm-20mm-28pt\relax}@{}}
+\toprule
+\textbf{File} & \textbf{Bytes} & \textbf{SHA-256} \\
+\midrule\endhead
+
+\texttt{2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds} & 1,756,735 & {\ttfamily\scriptsize d2750711198559b16cc963d9f9c074c1\newline 4b8a248c3fbd14436852884870d6be6c} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small Instrument container, QuantStudio. Decoded by the page's existing \texttt{.eds} path, not by the reader under test. Reference for the cross-format oracle.}\\
+\addlinespace
+
+\texttt{2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml} & 69,062 & {\ttfamily\scriptsize 688ef2eeec2e0fd350e8d2e585933e86\newline 5b2eed7ae82e56bb0c6c0c4f60ddc384} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small RDML 1.2 export of the run above. Names an instrument; carries Cq; no re-analysis tool.}\\
+\addlinespace
+
+\texttt{Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml} & 23,248 & {\ttfamily\scriptsize a26b7c8a7a596d3376d776ff32990eb8\newline 0b855d5e657d274fbe56c475085a5c30} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small RDML 1.2 export of a QuantStudio demonstration run.}\\
+\addlinespace
+
+\texttt{example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml} & 252,382 & {\ttfamily\scriptsize a29e4918383b5199a5757047d884c149\newline f21650a352bb9c487ccc398769b37a3a} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small Workshop file, RDML 1.3. Amplification and melting fluorescence only; no Cq anywhere.}\\
+\addlinespace
+
+\texttt{example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml} & 252,547 & {\ttfamily\scriptsize e018dbad7ec4071af882543929dad171\newline e7297517e4e0f6a39c8cae4d8f9ba6d7} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small Workshop file. The same data with melting temperatures annotated on the targets.}\\
+\addlinespace
+
+\texttt{example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml} & 260,964 & {\ttfamily\scriptsize 4806d1466a741c7f31141ce2d5cf0a02\newline da5d329180e392d0277ddc12c82c8845} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small Workshop file. The same data after LinRegPCR: Cq, N$_0$, efficiency, exclusions and notes.}\\
+\addlinespace
+
+\texttt{example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml} & 262,745 & {\ttfamily\scriptsize 7545883ce03d305207f8b73d40b403a2\newline a919f203908e8f4bbe27ae8b3019d4b2} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small Workshop file. The same data again after between-plate correction.}\\
+\addlinespace
+
+\texttt{example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml} & 52,635 & {\ttfamily\scriptsize 73f238867ae4dcdd12511b9f3519fdd5\newline f8e6653eac3a97cbae451da4bd7e9293} \\
+
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small Workshop file. Single dye, one run, deliberate artefacts; no Cq.}\\
+\addlinespace
+
+\bottomrule
+\end{longtable}
+
+\section{What the corpus contains, as read}
+The table below is the output of \fn{rdmlParse} over the whole corpus and is repeated in
+section~\ref{sec:rdmlParse} with the per-run detail. It is placed here because it also serves as the
+description of the corpus.
+
+\begin{longtable}{@{}p{40mm}c c r r r r p{22mm}@{}}
+\toprule
+\textbf{File} & \textbf{ver} & \textbf{runs} & \textbf{wells} & \textbf{curves} & \textbf{melt} & \textbf{Cq} & \textbf{state} \\
+\midrule\endhead
+
+\texttt{2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE} & 1.2 & 1 & 192 & 96 & 0 & 34 & vendor-export \\
+
+\texttt{Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L} & 1.2 & 1 & 72 & 72 & 0 & 66 & -- \\
+
+\texttt{example\_\allowbreak{}1\_\allowbreak{}raw} & 1.3 & 3 & 285 & 285 & 452 & 0 & raw \\
+
+\texttt{example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated} & 1.3 & 3 & 285 & 285 & 452 & 0 & -- \\
+
+\texttt{example\_\allowbreak{}3\_\allowbreak{}linregpcr} & 1.3 & 3 & 285 & 285 & 452 & 266 & third-party \\
+
+\texttt{example\_\allowbreak{}4\_\allowbreak{}interrun} & 1.3 & 3 & 285 & 285 & 452 & 266 & -- \\
+
+\texttt{example\_\allowbreak{}LCGreen\_\allowbreak{}raw} & 1.3 & 1 & 50 & 50 & 152 & 0 & -- \\
+
+\bottomrule
+\end{longtable}
+\small ``melt'' is the number of melting acquisition points of the first run of the file; ``Cq'' is
+the number of reactions carrying a crossing point after the ceiling rule of
+section~\ref{sec:ceiling} has been applied.\normalsize

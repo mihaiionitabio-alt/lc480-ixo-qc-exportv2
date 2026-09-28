@@ -1,0 +1,12 @@
+{
+  "rows": 351,
+  "instruments": 2,
+  "unique_keys": true,
+  "counter_bounds": true,
+  "unvalidated_metrics_absent": true,
+  "source_identifiers_checked": 1661,
+  "identifier_matches": 0,
+  "identifier_check_scope": "Source identifier comparison at model fitting; standalone rebuild has no private identifiers.",
+  "seed": 20260922,
+  "limitations": "No raw-run reconstruction, no real trend preservation, no control mapping or causal inference."
+}

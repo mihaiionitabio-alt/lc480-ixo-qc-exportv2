@@ -1,0 +1,87 @@
+{
+ "rdmlEntries": {
+  "line": 10509,
+  "code": "async function rdmlEntries(ab,archive){\n  /* the intake ZIP reader already verifies CRC-32 and rejects unknown compression */\n  return readZip(ab,archive,/^[^/]*\\.xml$/i);\n}",
+  "comment": "/* ---------- 1 \u00b7 container ---------- */"
+ },
+ "rdmlIsContainer": {
+  "line": 10513,
+  "code": "function rdmlIsContainer(entries){\n  return entries.some(e=>/^rdml_data\\.xml$/i.test(e.name));\n}",
+  "comment": ""
+ },
+ "rdmlKids": {
+  "line": 10520,
+  "code": "function rdmlKids(el,name){\n  const out=[];if(!el)return out;\n  for(const c of el.children)if(c.localName===name)out.push(c);\n  return out;\n}",
+  "comment": ""
+ },
+ "rdmlKid": {
+  "line": 10525,
+  "code": "function rdmlKid(el,name){return rdmlKids(el,name)[0]||null;}",
+  "comment": ""
+ },
+ "rdmlText": {
+  "line": 10526,
+  "code": "function rdmlText(el,name){const k=rdmlKid(el,name);return k?String(k.textContent||\"\").trim():\"\";}",
+  "comment": ""
+ },
+ "rdmlNum": {
+  "line": 10527,
+  "code": "function rdmlNum(el,name){\n  const t=rdmlText(el,name);if(t===\"\")return null;\n  const n=Number(t);return Number.isFinite(n)?n:null;          /* \"1.0\" is a cycle, not an integer */\n}",
+  "comment": ""
+ },
+ "rdmlAttrId": {
+  "line": 10531,
+  "code": "function rdmlAttrId(el,name){const k=rdmlKid(el,name);return k?String(k.getAttribute(\"id\")||\"\").trim():\"\";}",
+  "comment": ""
+ },
+ "rdmlParse": {
+  "line": 10535,
+  "code": "function rdmlParse(xmlText,fileName,fileBytes){\n  const doc=new DOMParser().parseFromString(xmlText,\"application/xml\");\n  const err=doc.querySelector(\"parsererror\");\n  if(err)throw new Error(\"RDML XML is not well formed: \"+String(err.textContent||\"\").slice(0,120));\n  const root=doc.documentElement;\n  if(!root||root.localName!==\"rdml\")throw new Error(\"not an RDML document (root element is <\"+(root&&root.localName)+\">)\");\n  const version=root.getAttribute(\"version\")||\"\";\n  if(!/^1\\.[0-4]$/.test(version))                       /* read it anyway, but say so */\n    appNotice&&appNotice(\"rdml\",`${fileName}: RDML version \"${version||\"absent\"}\" is outside 1.0-1.4; reading it as 1.4`);\n\n  /* dictionaries */\n  const dyes=rdmlKids(root,\"dye\").map(d=>d.getAttribute(\"id\")||\"\");\n  const samples=new Map();\n  rdmlKids(root,\"sample\").forEach(s=>samples.set(s.getAttribute(\"id\")||\"\",{\n    id:s.getAttribute(\"id\")||\"\",type:rdmlText(s,\"type\")||\"unkn\",description:rdmlText(s,\"description\")}));\n  const targets=new Map();\n  rdmlKids(root,\"target\").forEach(t=>{\n    const dye=rdmlAttrId(t,\"dyeId\");\n    targets.set(t.getAttribute(\"id\")||\"\",{\n      id:t.getAttribute(\"id\")||\"\",type:rdmlText(t,\"type\")||\"toi\",dye,\n      channel:Math.max(0,dyes.indexOf(dye)),\n      ampEff:rdmlNum(t,\"amplificationEfficiency\"),ampEffSE:rdmlNum(t,\"amplificationEfficiencySE\"),\n      meltingTemperature:rdmlNum(t,\"meltingTemperature\"),description:rdmlText(t,\"description\")});\n  });\n  if(!dyes.length)targets.forEach((t,k)=>{if(!t.dye){t.dye=\"dye\";t.channel=0;}});\n\n  const runs=[];\n  rdmlKids(root,\"experiment\").forEach(exp=>{\n    const expId=exp.getAttribute(\"id\")||\"experiment\";\n    rdmlKids(exp,\"run\").forEach(runEl=>{\n      const runId=runEl.getAttribute(\"id\")||\"run\";\n      const fmt=rdmlKid(runEl,\"pcrFormat\");\n      const rows=(fmt&&rdmlNum(fmt,\"rows\"))||8,cols=(fmt&&rdmlNum(fmt,\"columns\"))||12;\n      const cqMethod=rdmlText(runEl,\"cqDetectionMethod\");\n      const bgMethod=rdmlText(runEl,\"backgroundDeterminationMethod\");\n      const instrument=rdmlText(runEl,\"instrument\");\n      const software=rdmlText(runEl,\"dataCollectionSoftware\");\n      const runDate=rdmlText(runEl,\"runDate\");\n\n      const wells=[],allCurves={},tmWells=[],plate={};\n      let maxCycle=0,maxMelt=0,anyCq=false,anyAdp=false,anyMdp=false,ceilingRows=0;\n      const methods=new Set();\n      /* one cheap pass for the cycle count: the ceiling rule below needs it before the\n         wells are built, and the largest <cyc> in the run is the run's cycle count */\n      let maxCycleSeen=0;\n      rdmlKids(runEl,\"react\").forEach(rc=>rdmlKids(rc,\"data\").forEach(dt=>rdmlKids(dt,\"adp\").forEach(a=>{\n        const c=rdmlNum(a,\"cyc\");if(c!==null&&c>maxCycleSeen)maxCycleSeen=c;})));\n\n      rdmlKids(runEl,\"react\").forEach(react=>{\n        const id=Number(react.getAttribute(\"id\"));\n        if(!Number.isFinite(id))return;\n        const pos=id-1;                                  /* react id is 1-based, row-major */\n        if(pos<0||pos>=rows*cols)return;                 /* outside the declared plate: ignore, report below */\n        const sampleId=rdmlAttrId(react,\"sample\");\n        const smp=samples.get(sampleId)||{id:sampleId,type:\"unkn\"};\n        const role=RDML_SAMPLE_ROLE[smp.type]||\"Unknown\";\n        plate[pos]=plate[pos]||{pos,name:smp.id,sampleId:\"\",notes:smp.description||\"\",replicateOf:null,subsets:[],channels:{}};\n\n        rdmlKids(react,\"data\").forEach(data=>{\n          const tarId=rdmlAttrId(data,\"tar\");\n          const tgt=targets.get(tarId)||{id:tarId,type:\"toi\",dye:\"dye\",channel:0};\n          const ch=tgt.channel;\n          plate[pos].channels[ch]={sampleType:smp.type,targetName:tarId,\n            targetType:tgt.type===\"ref\"?\"dtReference\":\"dtTarget\"};\n\n          /* amplification: order by cycle, do not assume the file is sorted */\n          const adp=rdmlKids(data,\"adp\").map(a=>[rdmlNum(a,\"cyc\"),rdmlNum(a,\"fluor\")])\n            .filter(([c,f])=>c!==null&&f!==null).sort((a,b)=>a[0]-b[0]);\n          const curve=adp.map(([,f])=>f);\n          if(curve.length){anyAdp=true;maxCycle=Math.max(maxCycle,adp[adp.length-1][0]);\n            allCurves[`${ch}|${pos}`]={channel:ch,pos,curve,amplitude:Math.max(...curve)-Math.min(...curve)};}\n\n          /* melting */\n          const mdp=rdmlKids(data,\"mdp\").map(m=>[rdmlNum(m,\"tmp\"),rdmlNum(m,\"fluor\")])\n            .filter(([t,f])=>t!==null&&f!==null).sort((a,b)=>a[0]-b[0]);\n          if(mdp.length){anyMdp=true;maxMelt=Math.max(maxMelt,mdp.length);}\n\n          let cq=rdmlNum(data,\"cq\");\n          const ampEffMet=rdmlText(data,\"ampEffMet\");\n          /* A vendor export writes \"no crossing\" as a Cq equal to the cycle count: measured on\n             CORPUS-RDML-1.rdml, 158 of 192 rows carry cq = 40.0 on a 40-cycle run, while the\n             .eds for the same run reports those wells as undetermined. Reading them as a crossing\n             at the cut-off would turn 82 % of that file into late detections. A re-analysis file\n             does not do this (example_3_linregpcr: 0 of 90 at the ceiling, maximum 34), so the\n             rule is applied only where there is no N0 and no efficiency to contradict it. */\n          let cqCeiling=false;\n          if(cq!==null&&Number.isFinite(maxCycleSeen)&&maxCycleSeen>0\n             &&Math.abs(cq-maxCycleSeen)<1e-9\n             &&rdmlNum(data,\"N0\")===null&&rdmlNum(data,\"ampEff\")===null){cqCeiling=true;cq=null;}\n          if(cq!==null)anyCq=true;\n          if(cqCeiling)ceilingRows++;\n          if(ampEffMet)methods.add(ampEffMet);\n\n          const excl=rdmlText(data,\"excl\"),note=rdmlText(data,\"note\");\n          const w={\n            kind:\"quant\",well:posToWell(pos,cols),pos,row:Math.floor(pos/cols),col:pos%cols,\n            sample:smp.id,sampleId:\"\",notes:smp.description||\"\",\n            target:tarId,analysis:`RDML \u2014 ${tarId}`,analysisShort:tarId,analysisUid:\"rdml:\"+tarId,\n            analysisKind:\"absquant\",analysisGroup:\"\",analysisGroupName:\"\",\n            channel:ch,filterName:tgt.dye||(\"channel \"+ch),filterComb:\"\",\n            instrType:smp.type,instrRole:role,givenConc:\"\",targetName:tarId,\n            targetType:tgt.type===\"ref\"?\"dtReference\":\"dtTarget\",subsetsOfWell:[],\n            IsIncluded:excl?\"false\":\"true\",manual:\"\",warnCodes:excl?\"excl\":\"\",warnDesc:excl||\"\",\n            /* A Cq in an RDML file is the analysis of whoever wrote the file. It is stored,\n               but never as though the instrument had reported it: cqSource says whose it is. */\n            CpRaw:cq,Cp:cq,cqSource:ampEffMet||cqMethod||\"RDML file\",\n            callCode:cq===null?0:1,call:cq===null?\"Not analysed\":\"Analysed\",\n            curve,CpUncertain:\"\",\n            CpState:cq===null?\"Undetermined\":\"\",CrossingPointStatus:cq===null?\"Undetermined\":\"\",\n            cqAtCycleCeiling:cqCeiling,\n            CalcConc:\"\",ConcStatus:\"\",StandardConc:\"\",CalcConcUnc:\"\",\n            rdml:{N0:rdmlNum(data,\"N0\"),ampEff:rdmlNum(data,\"ampEff\"),ampEffSE:rdmlNum(data,\"ampEffSE\"),\n                  ampEffMet,bgFluor:rdmlNum(data,\"bgFluor\"),quantFluor:rdmlNum(data,\"quantFluor\"),\n                  meltTemp:rdmlNum(data,\"meltTemp\"),excl,note,melt:mdp}\n          };\n          wells.push(w);\n          if(mdp.length)tmWells.push({kind:\"tm\",well:w.well,pos,channel:ch,sample:smp.id,target:tarId,\n            analysis:w.analysis,analysisUid:w.analysisUid,role,melt:mdp,\n            Tm:rdmlNum(data,\"meltTemp\"),curve:mdp.map(([,f])=>f),temps:mdp.map(([t])=>t)});\n        });\n      });\n\n      const tgtList=[...targets.values()];\n      const analyses=tgtList.map(t=>({\n        name:`RDML \u2014 ${t.id}`,shortName:t.id,uid:\"rdml:\"+t.id,\n        kind:\"absquant\",kindLabel:\"RDML exchange record\",cls:\"RDML \"+version,subsetName:t.id,\n        calcState:anyCq?\"analysed\":\"not analysed\",\n        channelIdx:t.channel,channelName:t.dye,filterName:t.dye,filterComb:\"\",\n        cpMethod:cqMethod||\"not stated in the file\",cccEnabled:false,ccNote:bgMethod||\"\",\n        created:runDate||\"\",modified:\"\",createdBy:\"\",modifiedBy:\"\",\n        nResults:wells.filter(w=>w.channel===t.channel).length,\n        channelMismatch:null,channelSignal:null,stdCurve:null,settings:{},quantStats:[]}));\n\n      runs.push({\n        file:fileName,sourcePath:fileName,sourceArchive:null,zip:null,\n        platform:instrument||\"RDML\",eds:null,rdmlDoc:{version,experiment:expId,run:runId,instrument,\n          cqDetectionMethod:cqMethod,backgroundDeterminationMethod:bgMethod,methods:[...methods],\n          cqAtCycleCeiling:ceilingRows},\n        isTemplate:false,\n        meta:{name:`${expId} / ${runId}`,Created:runDate||\"\",RunCreated:runDate||\"\",StartTime:runDate||\"\",\n          EndTime:\"\",LastModified:\"\",CreatedByName:\"\",Technician:\"\",SWVersion:software,\n          InstrumentName:instrument,SerialNumber:\"\",sourceBytes:(fileBytes&&fileBytes.length)||0},\n        wells,tmWells,genoResults:[],rqResults:[],otherResults:[],allCurves,plate,subsets:[],\n        analyses,\n        nCycles:maxCycle||null,amplificationCycles:maxCycle||null,acquisitionCycles:maxCycle||null,\n        meltAcquisitionPoints:maxMelt,acqStats:[],acqError:null,\n        protocol:{stages:[],filters:[],channels:(dyes.length?dyes:[\"dye\"]).map((d,i)=>({name:d,ex:i,em:i,active:true}))},\n        acqMelt:null,acqSegments:[],acqAcquisitions:maxCycle||0,acqScalingFactors:[],\n        identities:{},duplicates:0,namedPositions:Object.keys(plate).length,\n        maxPos:rows*cols-1,cols,rows,blockId:\"\",\n        kinds:[anyAdp?\"absquant\":null,anyMdp?\"tm\":null].filter(Boolean),\n        format:{signature:\"RDML\",version},\n        /* RDML carries no container checksum of its own; the ZIP CRC-32 was verified on read. */\n        integrity:{kind:\"rdml\",stored:\"\",computed:\"\",ok:null,\n          note:\"RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading\"},\n        experimentId:expId,runId\n      });\n    });\n  });\n  if(!runs.length)throw new Error(\"RDML file contains no <experiment>/<run>\");\n  return runs;\n}",
+  "comment": ""
+ },
+ "runProcessingState": {
+  "line": 10715,
+  "code": "function runProcessingState(run){\n  if(!run)return {state:\"unknown\",reason:\"no run\"};\n  if(!run.rdmlDoc)return {state:\"instrument\",reason:\"decoded from the instrument's own container\"};\n  const d=run.rdmlDoc||{};\n  const cq=(run.wells||[]).filter(w=>resultCq(w)!==null).length;\n  if(!cq)return {state:\"raw\",\n    reason:\"the file carries fluorescence data only: no Cq, and no analysis by any software\"};\n  const named=(d.methods||[]).filter(Boolean);\n  const tool=named.find(m=>RDML_REANALYSIS_TOOLS.test(m))\n    ||(RDML_REANALYSIS_TOOLS.test(d.backgroundDeterminationMethod||\"\")?String(d.backgroundDeterminationMethod).split(\",\")[0]:\"\");\n  if(tool)return {state:\"third-party\",tool,\n    reason:`the results in this file were produced by ${tool}, not by the instrument's software`};\n  if((run.meta&&run.meta.InstrumentName)||d.instrument)\n    return {state:\"vendor-export\",\n      reason:`exchange export of an analysis made by the instrument's software on ${(run.meta&&run.meta.InstrumentName)||d.instrument}`};\n  return {state:\"third-party\",\n    reason:\"the file names no instrument, so the results in it were not written by the instrument's software\"};\n}",
+  "comment": ""
+ },
+ "runIsInstrumentAnalysed": {
+  "line": 10733,
+  "code": "function runIsInstrumentAnalysed(run){\n  const s=runProcessingState(run).state;return s===\"instrument\"||s===\"vendor-export\";\n}",
+  "comment": ""
+ },
+ "sopProcessingApplicability": {
+  "line": 10740,
+  "code": "function sopProcessingApplicability(run){\n  const s=runProcessingState(run);\n  if(s.state===\"instrument\")return {applicable:true,reason:s.reason,state:s.state};\n  /* A vendor export IS the producer's analysis, so it is in scope - unless the instrument's\n     own file for the same experiment is loaded, in which case that one is the record and this\n     one is a companion. */\n  if(s.state===\"vendor-export\"){\n    if(runIsSuperseded(run))return {applicable:false,state:\"superseded\",\n      reason:\"superseded \u2014 \"+run.supersededReason};\n    return {applicable:true,reason:s.reason,state:s.state};\n  }\n  return {applicable:false,state:s.state,\n    reason:(s.state===\"raw\"?\"raw exchange file \u2014 \":\"third-party analysis \u2014 \")+s.reason};\n}",
+  "comment": ""
+ },
+ "rdmlStem": {
+  "line": 10760,
+  "code": "function rdmlStem(name){\n  return String(name||\"\").replace(/\\.[^.]+$/,\"\").replace(/[\\s_-]+/g,\" \").trim().toLowerCase();\n}",
+  "comment": ""
+ },
+ "rdmlKeyOf": {
+  "line": 10763,
+  "code": "function rdmlKeyOf(item){\n  return [rdmlStem(item.name),String(item.experimentId||\"\").trim().toLowerCase()].filter(Boolean);\n}",
+  "comment": ""
+ },
+ "applyRawFilePriority": {
+  "line": 10766,
+  "code": "function applyRawFilePriority(runs){\n  const vendor=runs.filter(r=>!r.rdmlDoc),rdml=runs.filter(r=>r.rdmlDoc);\n  if(!vendor.length||!rdml.length)return {runs,superseded:[]};\n  const keys=new Set();\n  vendor.forEach(v=>{rdmlKeyOf({name:v.file,experimentId:(v.meta||{}).name}).forEach(k=>keys.add(k));});\n  const superseded=[],kept=[];\n  runs.forEach(r=>{\n    if(!r.rdmlDoc){kept.push(r);return;}\n    const mine=rdmlKeyOf({name:r.file,experimentId:r.experimentId});\n    const hit=mine.find(k=>keys.has(k));\n    if(hit){r.supersededBy=vendor.find(v=>rdmlKeyOf({name:v.file,experimentId:(v.meta||{}).name}).includes(hit));\n      r.supersededReason=`the instrument's own file for this experiment is loaded (${r.supersededBy?r.supersededBy.file:\"vendor container\"}); `\n        +\"the exchange export is kept for comparison only\";\n      superseded.push(r);}\n    kept.push(r);\n  });\n  return {runs:kept,superseded};\n}",
+  "comment": ""
+ },
+ "runIsSuperseded": {
+  "line": 10784,
+  "code": "function runIsSuperseded(run){return !!(run&&run.supersededBy);}",
+  "comment": ""
+ },
+ "RDML_SAMPLE_ROLE": {
+  "line": 10534,
+  "code": "const RDML_SAMPLE_ROLE={ntc:\"NTC\",neg:\"Negative control\",pos:\"Positive control\",std:\"Standard\",opt:\"Unknown\",unkn:\"Unknown\"};",
+  "comment": "/* ---------- 3 \u00b7 one RDML file -> one run per <run> ---------- */"
+ },
+ "RDML_REANALYSIS_TOOLS": {
+  "line": 10714,
+  "code": "const RDML_REANALYSIS_TOOLS=/linregpcr|pcr-?miner|qpcr-?miner|dart-?pcr|cy0|mak2|lre|analyz/i;",
+  "comment": ""
+ }
+}

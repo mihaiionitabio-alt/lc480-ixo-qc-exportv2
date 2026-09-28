@@ -1,0 +1,295 @@
+<style>
+.missy-scn{--ink:#102f4d;--teal:#0d8790;--amber:#e7a12c;--line:#dfe6ec;
+  font:14px/1.55 system-ui,"Segoe UI",Arial,sans-serif;color:#26323c;max-width:1180px;margin:0 auto}
+.missy-scn h3{font:600 19px/1.3 system-ui,Arial,sans-serif;color:var(--ink);margin:0 0 4px}
+.missy-scn h4{font:600 15px/1.3 system-ui,Arial,sans-serif;color:var(--ink);
+  margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.missy-scn .scn-sub{color:#64757f;margin:0 0 14px}
+.missy-scn figure{margin:0 0 14px}
+.missy-scn img{display:block;width:100%;height:auto;border:1px solid var(--line);
+  border-radius:6px;background:#fff}
+.missy-scn .scn-cap{font-size:12.5px;color:#64757f;margin-top:6px}
+.missy-scn .scn-list{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.missy-scn .scn-list li{border:1px solid var(--line);border-left:3px solid var(--teal);
+  border-radius:5px;padding:10px 12px;background:#fbfdfe}
+.missy-scn .scn-list li.year{border-left-color:var(--amber)}
+.missy-scn .scn-code{font:700 12px/1 ui-monospace,"Courier New",monospace;color:#fff;
+  background:var(--ink);border-radius:3px;padding:3px 6px;margin-right:7px}
+.missy-scn .scn-kind{font:12px/1 ui-monospace,"Courier New",monospace;color:#8a99a4;float:right}
+.missy-scn .scn-name{font-weight:600;color:var(--ink)}
+.missy-scn .scn-text{margin:7px 0 0}
+.missy-scn .scn-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 0}
+.missy-scn .scn-pair figcaption,.missy-scn .scn-solo figcaption{
+  font:600 12px/1 ui-monospace,"Courier New",monospace;color:#64757f;margin:0 0 5px;
+  text-transform:uppercase;letter-spacing:.06em}
+.missy-scn details{margin-top:10px}
+.missy-scn summary{cursor:pointer;color:var(--teal);font-weight:600}
+.missy-scn .scn-note{border:1px dashed var(--amber);border-radius:5px;padding:8px 11px;
+  margin:18px 0 0;font-size:12.5px;color:#6b5a30;background:#fffdf7}
+@media (max-width:640px){.missy-scn .scn-pair{grid-template-columns:1fr}}
+</style>
+<section class="missy-scn" id="scenario-atlas">
+  <h3>Scenario atlas &mdash; what a failing run, and a failing year, look like</h3>
+  <p class="scn-sub">Sixteen patterns. S1 to S8 are single runs, each with its own sixty-second
+     loop: a fifteen-second build from cycle&nbsp;1 to cycle&nbsp;45, played four times, normal on
+     the left and abnormal on the right. S9 to S16 are the views that only appear once a year of
+     runs is opened together, and each has one normal and one abnormal figure. The explanations
+     are text on this page, not drawing inside the images.</p>
+
+  <figure>
+    <img loading="lazy" src="assets/scenarios/missy_scenarios_60s_1920.gif"
+         alt="Sixty second overview of the eight single-run scenarios"
+         width="1920" height="1080">
+    <p class="scn-cap">Overview &mdash; the eight single-run scenarios in four cycles of fifteen
+       seconds. MISSY &middot; research use only &middot; not validated &middot; every value is
+       generated for illustration.</p>
+  </figure>
+
+  <h4>Within one run &mdash; S1 to S8</h4>
+  <ul class="scn-list">
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S1</span><span class="scn-name">Technical fault</span>
+      <p class="scn-text">A detector gain step at cycle 29 lifts every amplifying trace at once, one well carries a square artefact over four cycles and one returns no signal at all. A change common to the whole block, and isolated wells that do not follow the chemistry, point at the instrument rather than at the reaction.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S1_60s.gif"
+               alt="S1, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S1_normal.png" alt="S1 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S1_abnormal.png" alt="S1 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S2</span><span class="scn-name">Human mistake</span>
+      <p class="scn-text">Two of the six replicates start late and plateau low: short or missed volume. The other replicates are unaffected, so the run failed at the bench, not in the mix.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S2_60s.gif"
+               alt="S2, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S2_normal.png" alt="S2 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S2_abnormal.png" alt="S2 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S3</span><span class="scn-name">Wrong reference material</span>
+      <p class="scn-text">The whole calibrator ladder is displaced by about 2.6 cycles while the spacing between levels is unchanged. Parallel displacement is the signature of a wrong assigned value, and every reported quantity is biased by the same factor.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S3_60s.gif"
+               alt="S3, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S3_normal.png" alt="S3 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S3_abnormal.png" alt="S3 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S4</span><span class="scn-name">Wrong dilution</span>
+      <p class="scn-text">Levels sit about one cycle apart instead of the 3.32 expected from a ten-fold series. The slope, and therefore the efficiency taken from it, is meaningless even though each curve looks healthy.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S4_60s.gif"
+               alt="S4, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S4_normal.png" alt="S4 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S4_abnormal.png" alt="S4 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S5</span><span class="scn-name">Amplified controls</span>
+      <p class="scn-text">The no-template and no-amplification controls cross late but clearly. Any result above their crossing cycle cannot be separated from contamination or carry-over.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S5_60s.gif"
+               alt="S5, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S5_normal.png" alt="S5 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S5_abnormal.png" alt="S5 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S6</span><span class="scn-name">Probe unsuited to the channel read</span>
+      <p class="scn-text">End-point signal falls to roughly a third of normal, the noise band widens and no plateau forms. Crossing cycles can still be computed, which is what makes this failure easy to accept by mistake.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S6_60s.gif"
+               alt="S6, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S6_normal.png" alt="S6 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S6_abnormal.png" alt="S6 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S7</span><span class="scn-name">Deviation from the protocol</span>
+      <p class="scn-text">A shortened annealing step pushes every crossing four to six cycles later and halves the plateau. All wells shift together, so the cause is the cycling programme, not the samples.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S7_60s.gif"
+               alt="S7, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S7_normal.png" alt="S7 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S7_abnormal.png" alt="S7 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li>
+      <span class="scn-kind">one run</span>
+      <span class="scn-code">S8</span><span class="scn-name">Inhibition and carry-over</span>
+      <p class="scn-text">The undiluted extract crosses later than its own ten-fold dilution and rises more slowly. A series that is not parallel means the matrix, not the target, is setting the crossing cycle.</p>
+      <details><summary>Animation and single-run figures</summary>
+        <figure class="scn-solo"><figcaption>60 s loop &mdash; 15 s build, four times</figcaption>
+          <img loading="lazy" src="assets/scenarios/missy_scenario_S8_60s.gif"
+               alt="S8, sixty second loop, normal beside abnormal" width="1920" height="1080"></figure>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S8_normal.png" alt="S8 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S8_abnormal.png" alt="S8 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+  </ul>
+
+  <h4>Across a year of runs &mdash; S9 to S16</h4>
+  <p class="scn-sub">These need the history, not the run. Each one is invisible on the day and
+     obvious once twelve months of experiments are plotted on the same axes.</p>
+  <ul class="scn-list">
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S9</span><span class="scn-name">Calibrator shift between lots</span>
+      <p class="scn-text">Levey-Jennings chart of the shared control across a year of runs. In the normal year the points wander inside two standard deviations with no run of points on one side. In the abnormal year a new calibrator lot lifts the control by about four tenths of a cycle from one run onward and a slow drift builds on top: every result after that date is biased, although no single run looks wrong on its own.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S9_normal.png" alt="S9 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S9_abnormal.png" alt="S9 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S10</span><span class="scn-name">Efficiency falling over the year</span>
+      <p class="scn-text">Amplification efficiency taken from each run’s calibration line. Normal stays inside the acceptance band with no direction. Abnormal leaves the band around the middle of the year and keeps falling, the pattern left by reagent or probe storage and by a master mix kept too long, and it is visible only when runs are put side by side.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S10_normal.png" alt="S10 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S10_abnormal.png" alt="S10 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S11</span><span class="scn-name">Contamination episode</span>
+      <p class="scn-text">Share of negative controls that produced a signal, by month, against the limit computed from the year. Normal sits below one per cent. Abnormal rises over three months to about fifteen per cent and then falls back after the cause is removed — the arc of a contamination episode rather than an isolated accident.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S11_normal.png" alt="S11 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S11_abnormal.png" alt="S11 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S12</span><span class="scn-name">Repeatability getting worse</span>
+      <p class="scn-text">Spread between replicates in each run. Normal is steady and inside the limit. Abnormal widens gradually and then produces single runs far outside it: pipette calibration going out, a worn tip cone, or a change in who prepares the plate.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S12_normal.png" alt="S12 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S12_abnormal.png" alt="S12 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S13</span><span class="scn-name">One analyst apart from the others</span>
+      <p class="scn-text">The same control, grouped by the person who ran it. Normal shows four groups that overlap. Abnormal shows three that agree and one displaced by about eight tenths of a cycle with a wider spread: a difference in technique or in how the mix is made up, not a difference in the samples.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S13_normal.png" alt="S13 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S13_abnormal.png" alt="S13 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S14</span><span class="scn-name">Position effect on the plate</span>
+      <p class="scn-text">Average deviation of each well position from its plate mean, over the whole year. Normal is featureless, as it should be. Abnormal shows the outer ring and the last column crossing later, the signature of evaporation or of uneven contact with the block, and it explains results that seem to depend on where the sample was put.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S14_normal.png" alt="S14 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S14_abnormal.png" alt="S14 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S15</span><span class="scn-name">Calibration lines that no longer agree</span>
+      <p class="scn-text">Every calibration line of the year on one pair of axes, coloured from the first month to the last. Normal is a tight pencil of parallel lines. Abnormal fans out: slope and intercept both wander, so a quantity calculated in one month is not comparable with the same quantity calculated in another.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S15_normal.png" alt="S15 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S15_abnormal.png" alt="S15 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+    <li class="year">
+      <span class="scn-kind">one year</span>
+      <span class="scn-code">S16</span><span class="scn-name">Digits that were not measured</span>
+      <p class="scn-text">How often each last decimal appears in the reported crossing cycles. Normal is flat at about a tenth each. Abnormal piles up on 0, 5 and 9, which is what hand transcription and rounding leave behind. It says nothing about the chemistry and everything about how the numbers reached the record.</p>
+      <details><summary>Figures for a normal and an abnormal year</summary>
+        <div class="scn-pair">
+          <figure><figcaption>normal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S16_normal.png" alt="S16 normal, generated data"></figure>
+          <figure><figcaption>abnormal</figcaption>
+            <img loading="lazy" src="assets/scenarios/missy_scenario_S16_abnormal.png" alt="S16 abnormal, generated data"></figure>
+        </div>
+      </details>
+    </li>
+  </ul>
+
+  <p class="scn-note">Everything shown here &mdash; the curves, the crossing cycles, the control
+     behaviour, the calendar of runs and the people and instruments named in the groupings &mdash;
+     is produced by a generator from stated parameters. It is made up. It illustrates the pattern
+     each failure leaves behind and is not a result from any instrument or any laboratory.</p>
+</section>

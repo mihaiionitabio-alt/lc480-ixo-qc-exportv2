@@ -1,0 +1,1 @@
+function appDiagnostics(){return {phase:APP_STATE.phase,activeTab:APP_STATE.activeTab,generation:APP_STATE.generation,runCount:RUNS.length,stagedCount:STAGED.length,lastError:APP_STATE.lastError,errorCount:APP_STATE.errorLog.length};}

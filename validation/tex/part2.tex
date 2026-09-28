@@ -1,0 +1,2077 @@
+\chapter{Function by function}\label{ch:functions}
+
+Every section below has the same five parts: what the function is for, its complete source as it
+stands in the build under test, the inputs it was given with their provenance, what it returned,
+and the verdict. Line numbers in the source listings are the line numbers of the production file.
+
+\clearpage
+\section{F1\quad\fn{rdmlEntries} --- Open the container}
+\label{sec:rdmlEntries}
+\subsection*{Purpose}
+An RDML file is a ZIP archive holding a single XML document. This function is the only
+door into the format, and it deliberately does no work of its own: it delegates to \fn{readZip},
+the reader the page already uses for QuantStudio containers, which verifies the CRC-32 of every
+entry and refuses any compression method it does not implement. Reusing it means an RDML file gets
+exactly the same container-level scrutiny as a vendor file, and that a corrupt archive fails at the
+door rather than halfway through a parse.
+\subsection*{Source, as built}
+Production file, line 10509 onwards; 4 lines.
+The comment block that precedes it in the source:
+\begin{lstlisting}[style=jstiny]
+/* ---------- 1 · container ---------- */
+\end{lstlisting}
+
+\begin{lstlisting}[style=js]
+async function rdmlEntries(ab,archive){
+  /* the intake ZIP reader already verifies CRC-32 and rejects unknown compression */
+  return readZip(ab,archive,/^[^/]*\.xml$/i);
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Every file of the corpus was passed in as an \texttt{ArrayBuffer}. The check is that
+exactly one entry comes back, that it is named \texttt{rdml\_data.xml}, and that \fn{readZip}
+reports its CRC-32 as verified. A negative case is not possible at this level: a container that is
+not a ZIP throws inside \fn{readZip} before this function returns.
+
+\begin{center}\resizebox{0.96\linewidth}{!}{%
+\begin{tikzpicture}[node distance=7mm]
+\node[io] (ab) {ArrayBuffer\\ of the .rdml file};
+\node[box, right=10mm of ab] (rz) {\fn{readZip}\\ central directory scan};
+\node[dec, right=10mm of rz] (m) {method\\ 0 or 8?};
+\node[bad, right=12mm of m] (th) {throw\\ unsupported\\ compression};
+\node[dec, below=9mm of m] (crc) {CRC-32\\ matches?};
+\node[bad, right=12mm of crc] (th2) {throw\\ CRC mismatch};
+\node[ok, below=9mm of crc] (out) {entries[]\\ name, bytes,\\ zip.crcVerified};
+\draw[fl] (ab)--(rz); \draw[fl] (rz)--(m);
+\draw[fl] (m)--node[lbl,above]{no}(th);
+\draw[fl] (m)--node[lbl,right]{yes}(crc);
+\draw[fl] (crc)--node[lbl,above]{no}(th2);
+\draw[fl] (crc)--node[lbl,right]{yes}(out);
+\end{tikzpicture}}\end{center}
+\begin{center}\small Figure: the container path. Nothing of the RDML format is looked at until the
+archive itself is proven intact.\normalsize\end{center}
+
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}69062\}\allowbreak{}} \\
+\addlinespace
+
+\small Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}23248\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}252382\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}252547\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}260964\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}262745\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml & R & Array\allowbreak{}Buffer \allowbreak{}of \allowbreak{}example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}bytes"\allowbreak{}:\allowbreak{} \allowbreak{}52635\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}1120493,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}1120493,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\small Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}426891,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}426891,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}2672358,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}2672358,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}2673978,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}2673978,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}2734096,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}2734096,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}2746864,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}2746864,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\small example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Bytes"\allowbreak{}:\allowbreak{} \allowbreak{}480689,\allowbreak{} \allowbreak{}"\allowbreak{}crc\allowbreak{}Verified"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}declared\allowbreak{}Size"\allowbreak{}:\allowbreak{} \allowbreak{}480689,\allowbreak{} \allowbreak{}"\allowbreak{}method"\allowbreak{}:\allowbreak{} \allowbreak{}8\}\allowbreak{}} & \small exactly \allowbreak{}one \allowbreak{}entry \allowbreak{}named \allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml,\allowbreak{} \allowbreak{}CRC-\allowbreak{}32 \allowbreak{}verified \allowbreak{}by \allowbreak{}read\allowbreak{}Zip & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+7 case(s) executed, 7 passed. Overall: \PASS
+\clearpage
+\section{F2\quad\fn{rdmlIsContainer} --- Decide whether this archive is an RDML file}
+\label{sec:rdmlIsContainer}
+\subsection*{Purpose}
+Intake must tell an RDML file from a QuantStudio file, and both are ZIP archives with the
+same extension possibilities. The discriminator is the entry name, not the file name, so a renamed
+file is still recognised and a file that merely ends in \texttt{.rdml} is not trusted.
+\subsection*{Source, as built}
+Production file, line 10513 onwards; 3 lines.
+\begin{lstlisting}[style=js]
+function rdmlIsContainer(entries){
+  return entries.some(e=>/^rdml_data\.xml$/i.test(e.name));
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+One positive case from the corpus and two negative ones: the entry names of a QuantStudio
+container, and an empty list. The negatives are class~S because no corpus file produces them
+naturally at this point.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small positive \allowbreak{}— \allowbreak{}RDML \allowbreak{}entries & D & entries \allowbreak{}from \allowbreak{}rdml\allowbreak{}Entries(\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml)\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}rdml\_\allowbreak{}data.\allowbreak{}xml"\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small negative \allowbreak{}— \allowbreak{}Quant\allowbreak{}Studio \allowbreak{}entry \allowbreak{}names & S & literal \allowbreak{}entry \allowbreak{}list \allowbreak{}with \allowbreak{}the \allowbreak{}two \allowbreak{}.\allowbreak{}eds \allowbreak{}top-\allowbreak{}level \allowbreak{}XML \allowbreak{}names\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}experiment.\allowbreak{}xml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}plate\_\allowbreak{}setup.\allowbreak{}xml"\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small negative \allowbreak{}— \allowbreak{}empty \allowbreak{}list & S & [\allowbreak{}]\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}names"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small positive \allowbreak{}— \allowbreak{}RDML \allowbreak{}entries & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\small negative \allowbreak{}— \allowbreak{}Quant\allowbreak{}Studio \allowbreak{}entry \allowbreak{}names & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\small negative \allowbreak{}— \allowbreak{}empty \allowbreak{}list & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+3 case(s) executed, 3 passed. Overall: \PASS
+\clearpage
+\section{F3\quad\fn{rdmlKids} --- Child elements by local name}
+\label{sec:rdmlKids}
+\subsection*{Purpose}
+RDML files in the wild are written with and without a default namespace prefix, and the
+four minor versions differ only in optional elements. Matching on \texttt{localName} makes the
+reader indifferent to both. This function is the foundation of every other accessor.
+\subsection*{Source, as built}
+Production file, line 10520 onwards; 5 lines.
+\begin{lstlisting}[style=js]
+function rdmlKids(el,name){
+  const out=[];if(!el)return out;
+  for(const c of el.children)if(c.localName===name)out.push(c);
+  return out;
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Five positive cases drawn from the reference document, chosen so that the expected counts
+are known independently: a \texttt{<run>} has 96 \texttt{<react>} children and exactly one
+\texttt{<pcrFormat>}; a \texttt{<react>} has two \texttt{<data>}; a \texttt{<data>} has 40
+\texttt{<adp>} on a 40-cycle run. One absent-name case and one null-host case cover the
+boundaries.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small <run> \allowbreak{}→ \allowbreak{}<react> & D & the \allowbreak{}first \allowbreak{}<run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}host"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<run \allowbreak{}id=\allowbreak{}\textbackslash\{\}"\allowbreak{}Run001\textbackslash\{\}"\allowbreak{}>"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}child"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}react"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small <run> \allowbreak{}→ \allowbreak{}<pcr\allowbreak{}Format> & D & the \allowbreak{}first \allowbreak{}<run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}host"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<run \allowbreak{}id=\allowbreak{}\textbackslash\{\}"\allowbreak{}Run001\textbackslash\{\}"\allowbreak{}>"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}child"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}pcr\allowbreak{}Format"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small <run> \allowbreak{}→ \allowbreak{}<absent> & D & the \allowbreak{}first \allowbreak{}<run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}host"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<run \allowbreak{}id=\allowbreak{}\textbackslash\{\}"\allowbreak{}Run001\textbackslash\{\}"\allowbreak{}>"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}child"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}absent"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small <react> \allowbreak{}→ \allowbreak{}<data> & D & the \allowbreak{}first \allowbreak{}<react> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}host"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<react \allowbreak{}id=\allowbreak{}\textbackslash\{\}"\allowbreak{}1\textbackslash\{\}"\allowbreak{}>"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}child"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}data"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small <data> \allowbreak{}→ \allowbreak{}<adp> & D & the \allowbreak{}first \allowbreak{}<data> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}host"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<data \allowbreak{}id=\allowbreak{}\textbackslash\{\}"\allowbreak{}\textbackslash\{\}"\allowbreak{}>"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}child"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}adp"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small null \allowbreak{}host & S & rdml\allowbreak{}Kids(\allowbreak{}null,\allowbreak{}"\allowbreak{}react"\allowbreak{})\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}host"\allowbreak{}:\allowbreak{} \allowbreak{}null,\allowbreak{} \allowbreak{}"\allowbreak{}child"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}react"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small <run> \allowbreak{}→ \allowbreak{}<react> & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}96,\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Local\allowbreak{}Name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}react"\allowbreak{}\}\allowbreak{}} & \small 96 \allowbreak{}element(\allowbreak{}s)\allowbreak{} & \PASS \\
+\addlinespace
+
+\small <run> \allowbreak{}→ \allowbreak{}<pcr\allowbreak{}Format> & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}1,\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Local\allowbreak{}Name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}pcr\allowbreak{}Format"\allowbreak{}\}\allowbreak{}} & \small 1 \allowbreak{}element(\allowbreak{}s)\allowbreak{} & \PASS \\
+\addlinespace
+
+\small <run> \allowbreak{}→ \allowbreak{}<absent> & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}0,\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Local\allowbreak{}Name"\allowbreak{}:\allowbreak{} \allowbreak{}null\}\allowbreak{}} & \small 0 \allowbreak{}element(\allowbreak{}s)\allowbreak{} & \PASS \\
+\addlinespace
+
+\small <react> \allowbreak{}→ \allowbreak{}<data> & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}2,\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Local\allowbreak{}Name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}data"\allowbreak{}\}\allowbreak{}} & \small 2 \allowbreak{}element(\allowbreak{}s)\allowbreak{} & \PASS \\
+\addlinespace
+
+\small <data> \allowbreak{}→ \allowbreak{}<adp> & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}40,\allowbreak{} \allowbreak{}"\allowbreak{}first\allowbreak{}Local\allowbreak{}Name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}adp"\allowbreak{}\}\allowbreak{}} & \small 40 \allowbreak{}element(\allowbreak{}s)\allowbreak{} & \PASS \\
+\addlinespace
+
+\small null \allowbreak{}host & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}count"\allowbreak{}:\allowbreak{} \allowbreak{}0\}\allowbreak{}} & \small empty \allowbreak{}array,\allowbreak{} \allowbreak{}no \allowbreak{}throw & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+6 case(s) executed, 6 passed. Overall: \PASS
+\clearpage
+\section{F4\quad\fn{rdmlKid} --- First child element by local name}
+\label{sec:rdmlKid}
+\subsection*{Purpose}
+A convenience over
+\fn{rdmlKids} for the elements the schema allows only once.
+\subsection*{Source, as built}
+Production file, line 10525 onwards; 1 lines.
+\begin{lstlisting}[style=js]
+function rdmlKid(el,name){return rdmlKids(el,name)[0]||null;}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Present and absent, on the reference \texttt{<run>}.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small present & D & <run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}pcr\allowbreak{}Format"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}pcr\allowbreak{}Format"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small absent & S & <run>,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}no\allowbreak{}Such\allowbreak{}Element"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}no\allowbreak{}Such\allowbreak{}Element"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small present & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}local\allowbreak{}Name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}pcr\allowbreak{}Format"\allowbreak{}\}\allowbreak{}} & \small the \allowbreak{}<pcr\allowbreak{}Format> \allowbreak{}element & \PASS \\
+\addlinespace
+
+\small absent & {\ttfamily\scriptsize null} & \small null & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+2 case(s) executed, 2 passed. Overall: \PASS
+\clearpage
+\section{F5\quad\fn{rdmlText} --- Trimmed text of a child element}
+\label{sec:rdmlText}
+\subsection*{Purpose}
+Most provenance fields are plain text: the instrument name, the collection software, the
+background determination method, the Cq detection method. This accessor returns the empty string
+for an absent element so that callers need no null handling.
+\subsection*{Source, as built}
+Production file, line 10526 onwards; 1 lines.
+\begin{lstlisting}[style=js]
+function rdmlText(el,name){const k=rdmlKid(el,name);return k?String(k.textContent||"").trim():"";}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Four elements of the reference \texttt{<run>} whose values can be read directly from the
+file, plus an absent name. This is where finding~V-1 was raised: see section~\ref{sec:V1}.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small cq\allowbreak{}Detection\allowbreak{}Method & D & <run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}cq\allowbreak{}Detection\allowbreak{}Method"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}cq\allowbreak{}Detection\allowbreak{}Method"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small instrument & D & <run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}instrument"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small background\allowbreak{}Determination\allowbreak{}Method & D & <run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}background\allowbreak{}Determination\allowbreak{}Method"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}background\allowbreak{}Determination\allowbreak{}Method"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small data\allowbreak{}Collection\allowbreak{}Software & D & <run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}data\allowbreak{}Collection\allowbreak{}Software"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}data\allowbreak{}Collection\allowbreak{}Software"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small not\allowbreak{}Present & S & <run> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}not\allowbreak{}Present"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}not\allowbreak{}Present"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small FINDING \allowbreak{}V-\allowbreak{}1 \allowbreak{}— \allowbreak{}read \allowbreak{}with \allowbreak{}rdml\allowbreak{}Text \allowbreak{}but \allowbreak{}complex \allowbreak{}in \allowbreak{}the \allowbreak{}schema & R & every \allowbreak{}element \allowbreak{}the \allowbreak{}reader \allowbreak{}reads \allowbreak{}with \allowbreak{}rdml\allowbreak{}Text,\allowbreak{} \allowbreak{}in \allowbreak{}all \allowbreak{}seven \allowbreak{}corpus \allowbreak{}files\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}elements\allowbreak{}Checked"\allowbreak{}:\allowbreak{} \allowbreak{}19,\allowbreak{} \allowbreak{}"\allowbreak{}files"\allowbreak{}:\allowbreak{} \allowbreak{}7\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small cq\allowbreak{}Detection\allowbreak{}Method & {\ttfamily\scriptsize "\allowbreak{}other"\allowbreak{}} & \small "\allowbreak{}other"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small instrument & {\ttfamily\scriptsize "\allowbreak{}Quant\allowbreak{}Studio \allowbreak{}Dx"\allowbreak{}} & \small "\allowbreak{}Quant\allowbreak{}Studio \allowbreak{}Dx"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small background\allowbreak{}Determination\allowbreak{}Method & {\ttfamily\scriptsize "\allowbreak{}Background \allowbreak{}Subtraction"\allowbreak{}} & \small "\allowbreak{}Background \allowbreak{}Subtraction"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small data\allowbreak{}Collection\allowbreak{}Software & {\ttfamily\scriptsize "\allowbreak{}Quant\allowbreak{}Studio \allowbreak{}3 \allowbreak{}and \allowbreak{}5 \allowbreak{}Software\textbackslash\{\}n \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{}1.\allowbreak{}6.\allowbreak{}1"\allowbreak{}} & \small "\allowbreak{}Quant\allowbreak{}Studio \allowbreak{}3 \allowbreak{}and \allowbreak{}5 \allowbreak{}Software\textbackslash\{\}n \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{} \allowbreak{}1.\allowbreak{}6.\allowbreak{}1"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small not\allowbreak{}Present & {\ttfamily\scriptsize "\allowbreak{}"\allowbreak{}} & \small "\allowbreak{}"\allowbreak{} & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsubsection*{Returned value --- case \texttt{FINDING \allowbreak{}V-\allowbreak{}1 \allowbreak{}— \allowbreak{}read \allowbreak{}with \allowbreak{}rdml\allowbreak{}Text \allowbreak{}but \allowbreak{}complex \allowbreak{}in \allowbreak{}the \allowbreak{}schema}}
+Expected: characterisation only; see the finding \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "affected": 2,
+ "rows": [
+  {
+   "file": "CORPUS-RDML-1.rdml",
+   "element": "dataCollectionSoftware",
+   "occurrences": 1,
+   "complexOccurrences": 1,
+   "children": [
+    "name",
+    "version"
+   ],
+   "textContentAsRead": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+   "correctReading": "name=\"QuantStudio 3 and 5 Software\" version=\"1.6.1\""
+  },
+  {
+   "file": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "element": "dataCollectionSoftware",
+   "occurrences": 1,
+   "complexOccurrences": 1,
+   "children": [
+    "name",
+    "version"
+   ],
+   "textContentAsRead": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+   "correctReading": "name=\"QuantStudio 3 and 5 Software\" version=\"1.6.1\""
+  }
+ ]
+}
+\end{lstlisting}
+
+\subsection*{Observations}
+\textbf{data\allowbreak{}Collection\allowbreak{}Software.} FINDING \allowbreak{}V-\allowbreak{}1:\allowbreak{} \allowbreak{}the \allowbreak{}element \allowbreak{}spans \allowbreak{}two \allowbreak{}source \allowbreak{}lines,\allowbreak{} \allowbreak{}so \allowbreak{}the \allowbreak{}returned \allowbreak{}string \allowbreak{}keeps \allowbreak{}the \allowbreak{}newline \allowbreak{}and \allowbreak{}the \allowbreak{}indentation \allowbreak{}of \allowbreak{}the \allowbreak{}file.\allowbreak{} \allowbreak{}rdml\allowbreak{}Text \allowbreak{}trims \allowbreak{}only \allowbreak{}the \allowbreak{}ends.\allowbreak{}
+\textbf{FINDING \allowbreak{}V-\allowbreak{}1 \allowbreak{}— \allowbreak{}read \allowbreak{}with \allowbreak{}rdml\allowbreak{}Text \allowbreak{}but \allowbreak{}complex \allowbreak{}in \allowbreak{}the \allowbreak{}schema.} rdml\allowbreak{}Text \allowbreak{}concatenates \allowbreak{}the \allowbreak{}children \allowbreak{}of \allowbreak{}a \allowbreak{}complex \allowbreak{}element \allowbreak{}with \allowbreak{}the \allowbreak{}file's \allowbreak{}own \allowbreak{}indentation.\allowbreak{} \allowbreak{}Recommended \allowbreak{}fix:\allowbreak{} \allowbreak{}collapse \allowbreak{}inner \allowbreak{}whitespace \allowbreak{}in \allowbreak{}rdml\allowbreak{}Text,\allowbreak{} \allowbreak{}and \allowbreak{}read \allowbreak{}data\allowbreak{}Collection\allowbreak{}Software \allowbreak{}as \allowbreak{}<name> \allowbreak{}+\allowbreak{} \allowbreak{}<version>.\allowbreak{}
+\subsection*{Verdict}
+6 case(s) executed, 6 passed. Overall: \PASS
+\clearpage
+\section{F6\quad\fn{rdmlNum} --- Numeric text of a child element}
+\label{sec:rdmlNum}
+\subsection*{Purpose}
+Cycle numbers are written \texttt{1.0}, fluorescence ranges from 0.956 to 263\,682.75, and
+$N_0$ is written in exponent form. Everything numeric is therefore parsed as a float, and anything
+that is not a finite number becomes \texttt{null} rather than \texttt{NaN} or zero --- the
+distinction that the page's own \fn{resultCq} rule depends on.
+\subsection*{Source, as built}
+Production file, line 10527 onwards; 4 lines.
+\begin{lstlisting}[style=js]
+function rdmlNum(el,name){
+  const t=rdmlText(el,name);if(t==="")return null;
+  const n=Number(t);return Number.isFinite(n)?n:null;          /* "1.0" is a cycle, not an integer */
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Four strings taken verbatim from the corpus, covering the four spellings that actually
+occur, and four constructed strings for the boundaries: empty, non-numeric, negative, and absent.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small cyc & R & the \allowbreak{}literal \allowbreak{}text \allowbreak{}as \allowbreak{}it \allowbreak{}appears \allowbreak{}in \allowbreak{}the \allowbreak{}corpus \allowbreak{}(\allowbreak{}<cyc> \allowbreak{}spelling)\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v>1.\allowbreak{}0</\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small fluor & R & the \allowbreak{}literal \allowbreak{}text \allowbreak{}as \allowbreak{}it \allowbreak{}appears \allowbreak{}in \allowbreak{}the \allowbreak{}corpus \allowbreak{}(\allowbreak{}<fluor> \allowbreak{}spelling)\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v>2636\allowbreak{}82.\allowbreak{}75</\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small cq & R & the \allowbreak{}literal \allowbreak{}text \allowbreak{}as \allowbreak{}it \allowbreak{}appears \allowbreak{}in \allowbreak{}the \allowbreak{}corpus \allowbreak{}(\allowbreak{}<cq> \allowbreak{}spelling)\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v>30.\allowbreak{}3979</\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small empty & S & literal \allowbreak{}text,\allowbreak{} \allowbreak{}constructed \allowbreak{}for \allowbreak{}this \allowbreak{}test\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v></\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small text & S & literal \allowbreak{}text,\allowbreak{} \allowbreak{}constructed \allowbreak{}for \allowbreak{}this \allowbreak{}test\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v>not \allowbreak{}a \allowbreak{}number</\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small negative & S & the \allowbreak{}literal \allowbreak{}text \allowbreak{}as \allowbreak{}it \allowbreak{}appears \allowbreak{}in \allowbreak{}the \allowbreak{}corpus \allowbreak{}(\allowbreak{}<negative> \allowbreak{}spelling)\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v>-\allowbreak{}2.\allowbreak{}5</\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small exponent & R & the \allowbreak{}literal \allowbreak{}text \allowbreak{}as \allowbreak{}it \allowbreak{}appears \allowbreak{}in \allowbreak{}the \allowbreak{}corpus \allowbreak{}(\allowbreak{}<exponent> \allowbreak{}spelling)\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host><v>6.\allowbreak{}36e-\allowbreak{}10</\allowbreak{}v></\allowbreak{}host>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small absent \allowbreak{}child & S & <host/\allowbreak{}> \allowbreak{}with \allowbreak{}no \allowbreak{}<v>\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<host/\allowbreak{}>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small cyc & {\ttfamily\scriptsize 1} & \small 1 & \PASS \\
+\addlinespace
+
+\small fluor & {\ttfamily\scriptsize 263682.\allowbreak{}75} & \small 263682.\allowbreak{}75 & \PASS \\
+\addlinespace
+
+\small cq & {\ttfamily\scriptsize 30.\allowbreak{}3979} & \small 30.\allowbreak{}3979 & \PASS \\
+\addlinespace
+
+\small empty & {\ttfamily\scriptsize null} & \small null & \PASS \\
+\addlinespace
+
+\small text & {\ttfamily\scriptsize null} & \small null & \PASS \\
+\addlinespace
+
+\small negative & {\ttfamily\scriptsize -\allowbreak{}2.\allowbreak{}5} & \small -\allowbreak{}2.\allowbreak{}5 & \PASS \\
+\addlinespace
+
+\small exponent & {\ttfamily\scriptsize 6.\allowbreak{}36e-\allowbreak{}10} & \small 6.\allowbreak{}36e-\allowbreak{}10 & \PASS \\
+\addlinespace
+
+\small absent \allowbreak{}child & {\ttfamily\scriptsize null} & \small null & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+8 case(s) executed, 8 passed. Overall: \PASS
+\clearpage
+\section{F7\quad\fn{rdmlAttrId} --- The \texttt{id} attribute of a child element}
+\label{sec:rdmlAttrId}
+\subsection*{Purpose}
+RDML links reactions to samples and targets by an \texttt{id} attribute on a child element
+rather than by text content.
+\subsection*{Source, as built}
+Production file, line 10531 onwards; 1 lines.
+\begin{lstlisting}[style=js]
+function rdmlAttrId(el,name){const k=rdmlKid(el,name);return k?String(k.getAttribute("id")||"").trim():"";}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Both real uses --- \texttt{<react><sample id>} and \texttt{<data><tar id>} --- and an
+absent name.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small react \allowbreak{}→ \allowbreak{}sample & D & the \allowbreak{}first \allowbreak{}<react> \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}sample"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small data \allowbreak{}→ \allowbreak{}tar & D & the \allowbreak{}first \allowbreak{}<data> \allowbreak{}of \allowbreak{}that \allowbreak{}react\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}tar"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small absent & S & <data>,\allowbreak{} \allowbreak{}name \allowbreak{}"\allowbreak{}no\allowbreak{}Such"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}no\allowbreak{}Such"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small react \allowbreak{}→ \allowbreak{}sample & {\ttfamily\scriptsize "\allowbreak{}PC\_\allowbreak{}RAS"\allowbreak{}} & \small the \allowbreak{}sample \allowbreak{}id \allowbreak{}string & \PASS \\
+\addlinespace
+
+\small data \allowbreak{}→ \allowbreak{}tar & {\ttfamily\scriptsize "\allowbreak{}RAS"\allowbreak{}} & \small the \allowbreak{}target \allowbreak{}id \allowbreak{}string & \PASS \\
+\addlinespace
+
+\small absent & {\ttfamily\scriptsize "\allowbreak{}"\allowbreak{}} & \small "\allowbreak{}"\allowbreak{} & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+3 case(s) executed, 3 passed. Overall: \PASS
+\clearpage
+\section{F8\quad\fn{rdmlParse} --- The document to the run model}
+\label{sec:rdmlParse}
+\subsection*{Purpose}
+This is the reader. It turns one RDML document into one run object per \texttt{<run>}
+element, in the shape the rest of the page already consumes: wells, curves, melting series, a plate
+map, analyses, protocol channels, metadata and an integrity record. Everything downstream --- the
+views, the charts, the exports, the forensic scans --- then works on an RDML file without knowing
+that it is one.
+\subsection*{Source, as built}
+Production file, line 10535 onwards; 162 lines.
+\begin{lstlisting}[style=js]
+function rdmlParse(xmlText,fileName,fileBytes){
+  const doc=new DOMParser().parseFromString(xmlText,"application/xml");
+  const err=doc.querySelector("parsererror");
+  if(err)throw new Error("RDML XML is not well formed: "+String(err.textContent||"").slice(0,120));
+  const root=doc.documentElement;
+  if(!root||root.localName!=="rdml")throw new Error("not an RDML document (root element is <"+(root&&root.localName)+">)");
+  const version=root.getAttribute("version")||"";
+  if(!/^1\.[0-4]$/.test(version))                       /* read it anyway, but say so */
+    appNotice&&appNotice("rdml",`${fileName}: RDML version "${version||"absent"}" is outside 1.0-1.4; reading it as 1.4`);
+
+  /* dictionaries */
+  const dyes=rdmlKids(root,"dye").map(d=>d.getAttribute("id")||"");
+  const samples=new Map();
+  rdmlKids(root,"sample").forEach(s=>samples.set(s.getAttribute("id")||"",{
+    id:s.getAttribute("id")||"",type:rdmlText(s,"type")||"unkn",description:rdmlText(s,"description")}));
+  const targets=new Map();
+  rdmlKids(root,"target").forEach(t=>{
+    const dye=rdmlAttrId(t,"dyeId");
+    targets.set(t.getAttribute("id")||"",{
+      id:t.getAttribute("id")||"",type:rdmlText(t,"type")||"toi",dye,
+      channel:Math.max(0,dyes.indexOf(dye)),
+      ampEff:rdmlNum(t,"amplificationEfficiency"),ampEffSE:rdmlNum(t,"amplificationEfficiencySE"),
+      meltingTemperature:rdmlNum(t,"meltingTemperature"),description:rdmlText(t,"description")});
+  });
+  if(!dyes.length)targets.forEach((t,k)=>{if(!t.dye){t.dye="dye";t.channel=0;}});
+
+  const runs=[];
+  rdmlKids(root,"experiment").forEach(exp=>{
+    const expId=exp.getAttribute("id")||"experiment";
+    rdmlKids(exp,"run").forEach(runEl=>{
+      const runId=runEl.getAttribute("id")||"run";
+      const fmt=rdmlKid(runEl,"pcrFormat");
+      const rows=(fmt&&rdmlNum(fmt,"rows"))||8,cols=(fmt&&rdmlNum(fmt,"columns"))||12;
+      const cqMethod=rdmlText(runEl,"cqDetectionMethod");
+      const bgMethod=rdmlText(runEl,"backgroundDeterminationMethod");
+      const instrument=rdmlText(runEl,"instrument");
+      const software=rdmlText(runEl,"dataCollectionSoftware");
+      const runDate=rdmlText(runEl,"runDate");
+
+      const wells=[],allCurves={},tmWells=[],plate={};
+      let maxCycle=0,maxMelt=0,anyCq=false,anyAdp=false,anyMdp=false,ceilingRows=0;
+      const methods=new Set();
+      /* one cheap pass for the cycle count: the ceiling rule below needs it before the
+         wells are built, and the largest <cyc> in the run is the run's cycle count */
+      let maxCycleSeen=0;
+      rdmlKids(runEl,"react").forEach(rc=>rdmlKids(rc,"data").forEach(dt=>rdmlKids(dt,"adp").forEach(a=>{
+        const c=rdmlNum(a,"cyc");if(c!==null&&c>maxCycleSeen)maxCycleSeen=c;})));
+
+      rdmlKids(runEl,"react").forEach(react=>{
+        const id=Number(react.getAttribute("id"));
+        if(!Number.isFinite(id))return;
+        const pos=id-1;                                  /* react id is 1-based, row-major */
+        if(pos<0||pos>=rows*cols)return;                 /* outside the declared plate: ignore, report below */
+        const sampleId=rdmlAttrId(react,"sample");
+        const smp=samples.get(sampleId)||{id:sampleId,type:"unkn"};
+        const role=RDML_SAMPLE_ROLE[smp.type]||"Unknown";
+        plate[pos]=plate[pos]||{pos,name:smp.id,sampleId:"",notes:smp.description||"",replicateOf:null,subsets:[],channels:{}};
+
+        rdmlKids(react,"data").forEach(data=>{
+          const tarId=rdmlAttrId(data,"tar");
+          const tgt=targets.get(tarId)||{id:tarId,type:"toi",dye:"dye",channel:0};
+          const ch=tgt.channel;
+          plate[pos].channels[ch]={sampleType:smp.type,targetName:tarId,
+            targetType:tgt.type==="ref"?"dtReference":"dtTarget"};
+
+          /* amplification: order by cycle, do not assume the file is sorted */
+          const adp=rdmlKids(data,"adp").map(a=>[rdmlNum(a,"cyc"),rdmlNum(a,"fluor")])
+            .filter(([c,f])=>c!==null&&f!==null).sort((a,b)=>a[0]-b[0]);
+          const curve=adp.map(([,f])=>f);
+          if(curve.length){anyAdp=true;maxCycle=Math.max(maxCycle,adp[adp.length-1][0]);
+            allCurves[`${ch}|${pos}`]={channel:ch,pos,curve,amplitude:Math.max(...curve)-Math.min(...curve)};}
+
+          /* melting */
+          const mdp=rdmlKids(data,"mdp").map(m=>[rdmlNum(m,"tmp"),rdmlNum(m,"fluor")])
+            .filter(([t,f])=>t!==null&&f!==null).sort((a,b)=>a[0]-b[0]);
+          if(mdp.length){anyMdp=true;maxMelt=Math.max(maxMelt,mdp.length);}
+
+          let cq=rdmlNum(data,"cq");
+          const ampEffMet=rdmlText(data,"ampEffMet");
+          /* A vendor export writes "no crossing" as a Cq equal to the cycle count: measured on
+             CORPUS-RDML-1.rdml, 158 of 192 rows carry cq = 40.0 on a 40-cycle run, while the
+             .eds for the same run reports those wells as undetermined. Reading them as a crossing
+             at the cut-off would turn 82 % of that file into late detections. A re-analysis file
+             does not do this (example_3_linregpcr: 0 of 90 at the ceiling, maximum 34), so the
+             rule is applied only where there is no N0 and no efficiency to contradict it. */
+          let cqCeiling=false;
+          if(cq!==null&&Number.isFinite(maxCycleSeen)&&maxCycleSeen>0
+             &&Math.abs(cq-maxCycleSeen)<1e-9
+             &&rdmlNum(data,"N0")===null&&rdmlNum(data,"ampEff")===null){cqCeiling=true;cq=null;}
+          if(cq!==null)anyCq=true;
+          if(cqCeiling)ceilingRows++;
+          if(ampEffMet)methods.add(ampEffMet);
+
+          const excl=rdmlText(data,"excl"),note=rdmlText(data,"note");
+          const w={
+            kind:"quant",well:posToWell(pos,cols),pos,row:Math.floor(pos/cols),col:pos%cols,
+            sample:smp.id,sampleId:"",notes:smp.description||"",
+            target:tarId,analysis:`RDML — ${tarId}`,analysisShort:tarId,analysisUid:"rdml:"+tarId,
+            analysisKind:"absquant",analysisGroup:"",analysisGroupName:"",
+            channel:ch,filterName:tgt.dye||("channel "+ch),filterComb:"",
+            instrType:smp.type,instrRole:role,givenConc:"",targetName:tarId,
+            targetType:tgt.type==="ref"?"dtReference":"dtTarget",subsetsOfWell:[],
+            IsIncluded:excl?"false":"true",manual:"",warnCodes:excl?"excl":"",warnDesc:excl||"",
+            /* A Cq in an RDML file is the analysis of whoever wrote the file. It is stored,
+               but never as though the instrument had reported it: cqSource says whose it is. */
+            CpRaw:cq,Cp:cq,cqSource:ampEffMet||cqMethod||"RDML file",
+            callCode:cq===null?0:1,call:cq===null?"Not analysed":"Analysed",
+            curve,CpUncertain:"",
+            CpState:cq===null?"Undetermined":"",CrossingPointStatus:cq===null?"Undetermined":"",
+            cqAtCycleCeiling:cqCeiling,
+            CalcConc:"",ConcStatus:"",StandardConc:"",CalcConcUnc:"",
+            rdml:{N0:rdmlNum(data,"N0"),ampEff:rdmlNum(data,"ampEff"),ampEffSE:rdmlNum(data,"ampEffSE"),
+                  ampEffMet,bgFluor:rdmlNum(data,"bgFluor"),quantFluor:rdmlNum(data,"quantFluor"),
+                  meltTemp:rdmlNum(data,"meltTemp"),excl,note,melt:mdp}
+          };
+          wells.push(w);
+          if(mdp.length)tmWells.push({kind:"tm",well:w.well,pos,channel:ch,sample:smp.id,target:tarId,
+            analysis:w.analysis,analysisUid:w.analysisUid,role,melt:mdp,
+            Tm:rdmlNum(data,"meltTemp"),curve:mdp.map(([,f])=>f),temps:mdp.map(([t])=>t)});
+        });
+      });
+
+      const tgtList=[...targets.values()];
+      const analyses=tgtList.map(t=>({
+        name:`RDML — ${t.id}`,shortName:t.id,uid:"rdml:"+t.id,
+        kind:"absquant",kindLabel:"RDML exchange record",cls:"RDML "+version,subsetName:t.id,
+        calcState:anyCq?"analysed":"not analysed",
+        channelIdx:t.channel,channelName:t.dye,filterName:t.dye,filterComb:"",
+        cpMethod:cqMethod||"not stated in the file",cccEnabled:false,ccNote:bgMethod||"",
+        created:runDate||"",modified:"",createdBy:"",modifiedBy:"",
+        nResults:wells.filter(w=>w.channel===t.channel).length,
+        channelMismatch:null,channelSignal:null,stdCurve:null,settings:{},quantStats:[]}));
+
+      runs.push({
+        file:fileName,sourcePath:fileName,sourceArchive:null,zip:null,
+        platform:instrument||"RDML",eds:null,rdmlDoc:{version,experiment:expId,run:runId,instrument,
+          cqDetectionMethod:cqMethod,backgroundDeterminationMethod:bgMethod,methods:[...methods],
+          cqAtCycleCeiling:ceilingRows},
+        isTemplate:false,
+        meta:{name:`${expId} / ${runId}`,Created:runDate||"",RunCreated:runDate||"",StartTime:runDate||"",
+          EndTime:"",LastModified:"",CreatedByName:"",Technician:"",SWVersion:software,
+          InstrumentName:instrument,SerialNumber:"",sourceBytes:(fileBytes&&fileBytes.length)||0},
+        wells,tmWells,genoResults:[],rqResults:[],otherResults:[],allCurves,plate,subsets:[],
+        analyses,
+        nCycles:maxCycle||null,amplificationCycles:maxCycle||null,acquisitionCycles:maxCycle||null,
+        meltAcquisitionPoints:maxMelt,acqStats:[],acqError:null,
+        protocol:{stages:[],filters:[],channels:(dyes.length?dyes:["dye"]).map((d,i)=>({name:d,ex:i,em:i,active:true}))},
+        acqMelt:null,acqSegments:[],acqAcquisitions:maxCycle||0,acqScalingFactors:[],
+        identities:{},duplicates:0,namedPositions:Object.keys(plate).length,
+        maxPos:rows*cols-1,cols,rows,blockId:"",
+        kinds:[anyAdp?"absquant":null,anyMdp?"tm":null].filter(Boolean),
+        format:{signature:"RDML",version},
+        /* RDML carries no container checksum of its own; the ZIP CRC-32 was verified on read. */
+        integrity:{kind:"rdml",stored:"",computed:"",ok:null,
+          note:"RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading"},
+        experimentId:expId,runId
+      });
+    });
+  });
+  if(!runs.length)throw new Error("RDML file contains no <experiment>/<run>");
+  return runs;
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+Every file of the corpus, all 15 runs. Two structural invariants are asserted on every run:
+every reaction lands inside the plate declared by \texttt{<pcrFormat>}, and every curve has either
+no points or exactly as many points as the run has cycles. Three malformed documents test the error
+path. The Cq ceiling rule and the cross-format oracle have their own sections.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}1120493,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}2"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}426891,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}2"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2672358,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2672358,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2672358,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2673978,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2673978,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2673978,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2734096,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2734096,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2734096,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2746864,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2746864,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}2746864,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{} & R & rdml\_\allowbreak{}data.\allowbreak{}xml \allowbreak{}of \allowbreak{}example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml\allowbreak{}Chars"\allowbreak{}:\allowbreak{} \allowbreak{}480689,\allowbreak{} \allowbreak{}"\allowbreak{}version"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}1.\allowbreak{}3"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small wrong \allowbreak{}root \allowbreak{}element & S & "\allowbreak{}<notrdml/\allowbreak{}>"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<notrdml/\allowbreak{}>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small not \allowbreak{}well \allowbreak{}formed & S & "\allowbreak{}<rdml \allowbreak{}version=\allowbreak{}\textbackslash\{\}"\allowbreak{}1.\allowbreak{}3\textbackslash\{\}"\allowbreak{}><<"\allowbreak{}\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<rdml \allowbreak{}version=\allowbreak{}\textbackslash\{\}"\allowbreak{}1.\allowbreak{}3\textbackslash\{\}"\allowbreak{}><<"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small no \allowbreak{}experiment & S & a \allowbreak{}valid \allowbreak{}but \allowbreak{}empty \allowbreak{}RDML \allowbreak{}root\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}xml"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}<rdml \allowbreak{}version=\allowbreak{}\textbackslash\{\}"\allowbreak{}1.\allowbreak{}3\textbackslash\{\}"\allowbreak{} \allowbreak{}xmlns=\allowbreak{}\textbackslash\{\}"\allowbreak{}http:\allowbreak{}/\allowbreak{}/\allowbreak{}www.\allowbreak{}rdml.\allowbreak{}org\textbackslash\{\}"\allowbreak{}/\allowbreak{}>"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small wrong \allowbreak{}root \allowbreak{}element & {\ttfamily\scriptsize "\allowbreak{}throws:\allowbreak{} \allowbreak{}not \allowbreak{}an \allowbreak{}RDML \allowbreak{}document \allowbreak{}(\allowbreak{}root \allowbreak{}element \allowbreak{}is \allowbreak{}<notrdml>)\allowbreak{}"\allowbreak{}} & \small throws,\allowbreak{} \allowbreak{}names \allowbreak{}the \allowbreak{}root \allowbreak{}element & \PASS \\
+\addlinespace
+
+\small not \allowbreak{}well \allowbreak{}formed & {\ttfamily\scriptsize "\allowbreak{}throws:\allowbreak{} \allowbreak{}RDML \allowbreak{}XML \allowbreak{}is \allowbreak{}not \allowbreak{}well \allowbreak{}formed:\allowbreak{} \allowbreak{}This \allowbreak{}page \allowbreak{}contains \allowbreak{}the \allowbreak{}following \allowbreak{}errors:\allowbreak{}error \allowbreak{}on \allowbreak{}line \allowbreak{}1 \allowbreak{}at \allowbreak{}co \allowbreak{}…[\allowbreak{}149 \allowbreak{}chars]\allowbreak{}"\allowbreak{}} & \small throws,\allowbreak{} \allowbreak{}reports \allowbreak{}the \allowbreak{}parser \allowbreak{}error & \PASS \\
+\addlinespace
+
+\small no \allowbreak{}experiment & {\ttfamily\scriptsize "\allowbreak{}throws:\allowbreak{} \allowbreak{}RDML \allowbreak{}file \allowbreak{}contains \allowbreak{}no \allowbreak{}<experiment>/\allowbreak{}<run>"\allowbreak{}} & \small throws,\allowbreak{} \allowbreak{}says \allowbreak{}there \allowbreak{}is \allowbreak{}no \allowbreak{}run & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsubsection*{Returned value --- case \texttt{2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "CORPUS-RDML-1 / Run001",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 192,
+ "curves": 96,
+ "tmWells": 0,
+ "cycles": 40,
+ "meltPoints": 0,
+ "analyses": 2,
+ "kinds": "absquant",
+ "withCq": 34,
+ "cqMin": 26.198,
+ "cqMax": 37.34,
+ "cqAtCeilingConverted": 158,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "CORPUS-RDML-1",
+ "runId": "Run001",
+ "platform": "QuantStudio Dx",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "PC_RAS",
+  "target": "RAS",
+  "CpRaw": 30.3979,
+  "cqSource": "other",
+  "curveLen": 40,
+  "curveHead": [
+   263682.75,
+   264135.25,
+   265524.62
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 0
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "GeneExpression_ddCt_Fast_Adv_MMx_10uL / Run001",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 72,
+ "curves": 72,
+ "tmWells": 0,
+ "cycles": 40,
+ "meltPoints": 0,
+ "analyses": 2,
+ "kinds": "absquant",
+ "withCq": 66,
+ "cqMin": 25.445,
+ "cqMax": 30.266,
+ "cqAtCeilingConverted": 6,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "GeneExpression_ddCt_Fast_Adv_MMx_10uL",
+ "runId": "Run001",
+ "platform": "QuantStudio Dx",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "",
+  "target": "RNaseP",
+  "CpRaw": null,
+  "cqSource": "other",
+  "curveLen": 40,
+  "curveHead": [
+   0.95674616,
+   0.95647573,
+   0.95506555
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 0
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 1",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 149,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 1",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_1",
+  "target": "SCX",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   1.44,
+   1.43,
+   1.42
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 149
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 2",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 151,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 2",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_7",
+  "target": "SCX",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   1.08,
+   1.1,
+   1.1
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 151
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 3",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 152,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 3",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Embryo_1",
+  "target": "SCX",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   1.31,
+   1.29,
+   1.31
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 152
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 1",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 149,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 1",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_1",
+  "target": "SCX",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   1.44,
+   1.43,
+   1.42
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 149
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 2",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 151,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 2",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_7",
+  "target": "SCX",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   1.08,
+   1.1,
+   1.1
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 151
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 3",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 152,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 3",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Embryo_1",
+  "target": "SCX",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   1.31,
+   1.29,
+   1.31
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 152
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 1",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 149,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 90,
+ "cqMin": 19.077,
+ "cqMax": 34.001,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 6,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 1",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_1",
+  "target": "SCX",
+  "CpRaw": 33.692,
+  "cqSource": "LinRegPCR",
+  "curveLen": 45,
+  "curveHead": [
+   1.44,
+   1.43,
+   1.42
+  ],
+  "rdml": {
+   "N0": 6.36e-10,
+   "ampEff": 1.893,
+   "ampEffMet": "LinRegPCR",
+   "meltTemp": 85.635,
+   "excl": "",
+   "note": "",
+   "meltPoints": 149
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 2",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 151,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 88,
+ "cqMin": 18.997,
+ "cqMax": 37.547,
+ "cqAtCeilingConverted": 0,
+ "excl": 6,
+ "note": 13,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 2",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_7",
+  "target": "SCX",
+  "CpRaw": 34.874,
+  "cqSource": "LinRegPCR",
+  "curveLen": 45,
+  "curveHead": [
+   1.08,
+   1.1,
+   1.1
+  ],
+  "rdml": {
+   "N0": 1.67e-10,
+   "ampEff": 1.915,
+   "ampEffMet": "LinRegPCR",
+   "meltTemp": null,
+   "excl": "product with different melting temperatures detected",
+   "note": "no product with expected melting temperature;no plateau;Cq > 34;N0 unreliable;indiv PCR
+   eff is 1.666 < 1.7",
+   "meltPoints": 151
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 3",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 152,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 88,
+ "cqMin": 22.912,
+ "cqMax": 36.394,
+ "cqAtCeilingConverted": 0,
+ "excl": 22,
+ "note": 14,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 3",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Embryo_1",
+  "target": "SCX",
+  "CpRaw": 32.96,
+  "cqSource": "LinRegPCR",
+  "curveLen": 45,
+  "curveHead": [
+   1.31,
+   1.29,
+   1.31
+  ],
+  "rdml": {
+   "N0": 6.25e-10,
+   "ampEff": 1.921,
+   "ampEffMet": "LinRegPCR",
+   "meltTemp": 85.59,
+   "excl": "",
+   "note": "",
+   "meltPoints": 152
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 1",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 149,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 90,
+ "cqMin": 19.077,
+ "cqMax": 34.001,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 6,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 1",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_1",
+  "target": "SCX",
+  "CpRaw": 33.692,
+  "cqSource": "LinRegPCR",
+  "curveLen": 45,
+  "curveHead": [
+   1.44,
+   1.43,
+   1.42
+  ],
+  "rdml": {
+   "N0": 6.36e-10,
+   "ampEff": 1.893,
+   "ampEffMet": "LinRegPCR",
+   "meltTemp": 85.635,
+   "excl": "",
+   "note": "",
+   "meltPoints": 149
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 2",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 151,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 88,
+ "cqMin": 18.997,
+ "cqMax": 37.547,
+ "cqAtCeilingConverted": 0,
+ "excl": 6,
+ "note": 13,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 2",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Adult_7",
+  "target": "SCX",
+  "CpRaw": 34.874,
+  "cqSource": "LinRegPCR",
+  "curveLen": 45,
+  "curveHead": [
+   1.08,
+   1.1,
+   1.1
+  ],
+  "rdml": {
+   "N0": 1.67e-10,
+   "ampEff": 1.915,
+   "ampEffMet": "LinRegPCR",
+   "meltTemp": null,
+   "excl": "product with different melting temperatures detected",
+   "note": "no product with expected melting temperature;no plateau;Cq > 34;N0 unreliable;indiv PCR
+   eff is 1.666 < 1.7",
+   "meltPoints": 151
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "Experiment / Run 3",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 95,
+ "curves": 95,
+ "tmWells": 95,
+ "cycles": 45,
+ "meltPoints": 152,
+ "analyses": 7,
+ "kinds": "absquant+tm",
+ "withCq": 88,
+ "cqMin": 22.912,
+ "cqMax": 36.394,
+ "cqAtCeilingConverted": 0,
+ "excl": 22,
+ "note": 14,
+ "integrity": "no container checksum",
+ "experimentId": "Experiment",
+ "runId": "Run 3",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "Embryo_1",
+  "target": "SCX",
+  "CpRaw": 32.96,
+  "cqSource": "LinRegPCR",
+  "curveLen": 45,
+  "curveHead": [
+   1.31,
+   1.29,
+   1.31
+  ],
+  "rdml": {
+   "N0": 6.25e-10,
+   "ampEff": 1.921,
+   "ampEffMet": "LinRegPCR",
+   "meltTemp": 85.59,
+   "excl": "",
+   "note": "",
+   "meltPoints": 152
+  }
+ }
+}
+\end{lstlisting}
+
+\subsubsection*{Returned value --- case \texttt{example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{}}}
+Expected: every react inside the declared plate; one well per react×data; curves ordered by cycle \hfill Verdict: \PASS
+\begin{lstlisting}[style=jstiny]
+{
+ "run": "LCGreen / Run with Artifacts",
+ "rows": 8,
+ "cols": 12,
+ "plate": "8x12",
+ "wells": 50,
+ "curves": 50,
+ "tmWells": 50,
+ "cycles": 45,
+ "meltPoints": 152,
+ "analyses": 1,
+ "kinds": "absquant+tm",
+ "withCq": 0,
+ "cqMin": null,
+ "cqMax": null,
+ "cqAtCeilingConverted": 0,
+ "excl": 0,
+ "note": 0,
+ "integrity": "no container checksum",
+ "experimentId": "LCGreen",
+ "runId": "Run with Artifacts",
+ "platform": "RDML",
+ "firstWell": {
+  "well": "A01",
+  "pos": 0,
+  "channel": 0,
+  "sample": "A_0_C_100",
+  "target": "CRE",
+  "CpRaw": null,
+  "cqSource": "RDML file",
+  "curveLen": 45,
+  "curveHead": [
+   11.06,
+   11.28,
+   11.55
+  ],
+  "rdml": {
+   "N0": null,
+   "ampEff": null,
+   "ampEffMet": "",
+   "meltTemp": null,
+   "excl": "",
+   "note": "",
+   "meltPoints": 152
+  }
+ }
+}
+\end{lstlisting}
+
+\subsection*{Verdict}
+18 case(s) executed, 18 passed. Overall: \PASS
+\clearpage
+\section{F9\quad\fn{runProcessingState} --- Who analysed this run, if anyone}
+\label{sec:runProcessingState}
+\subsection*{Purpose}
+The page reports what the instrument's producer concluded. An RDML file may carry the
+producer's analysis, another tool's analysis, or no analysis at all, and the three cases must be
+told apart before any verdict is issued. The discriminators are read from the file: a named
+instrument, a named re-analysis method, and whether any crossing point exists at all.
+\subsection*{Source, as built}
+Production file, line 10715 onwards; 18 lines.
+\begin{lstlisting}[style=js]
+function runProcessingState(run){
+  if(!run)return {state:"unknown",reason:"no run"};
+  if(!run.rdmlDoc)return {state:"instrument",reason:"decoded from the instrument's own container"};
+  const d=run.rdmlDoc||{};
+  const cq=(run.wells||[]).filter(w=>resultCq(w)!==null).length;
+  if(!cq)return {state:"raw",
+    reason:"the file carries fluorescence data only: no Cq, and no analysis by any software"};
+  const named=(d.methods||[]).filter(Boolean);
+  const tool=named.find(m=>RDML_REANALYSIS_TOOLS.test(m))
+    ||(RDML_REANALYSIS_TOOLS.test(d.backgroundDeterminationMethod||"")?String(d.backgroundDeterminationMethod).split(",")[0]:"");
+  if(tool)return {state:"third-party",tool,
+    reason:`the results in this file were produced by ${tool}, not by the instrument's software`};
+  if((run.meta&&run.meta.InstrumentName)||d.instrument)
+    return {state:"vendor-export",
+      reason:`exchange export of an analysis made by the instrument's software on ${(run.meta&&run.meta.InstrumentName)||d.instrument}`};
+  return {state:"third-party",
+    reason:"the file names no instrument, so the results in it were not written by the instrument's software"};
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+One run of each of the four states, each taken from a different real file, plus a null
+argument. The states are not asserted from the file names: the inputs table prints the three fields
+the decision is actually made on.
+
+\begin{center}\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[node distance=8mm]
+\node[io] (r) {run object};
+\node[dec, right=11mm of r] (d1) {has\\ \fn{rdmlDoc}?};
+\node[ok, above right=4mm and 13mm of d1] (inst) {\textbf{instrument}\\ vendor container};
+\node[dec, below right=4mm and 13mm of d1] (d2) {any reaction\\ with a Cq?};
+\node[bad, right=13mm of d2] (raw) {\textbf{raw}\\ nobody analysed it};
+\node[dec, below=10mm of d2] (d3) {re-analysis tool\\ named in\\ \fn{ampEffMet} or\\ background method?};
+\node[bad, right=13mm of d3] (tp) {\textbf{third-party}\\ another tool's\\ numbers};
+\node[dec, below=10mm of d3] (d4) {an instrument\\ is named?};
+\node[ok, right=13mm of d4] (ve) {\textbf{vendor-export}\\ the producer's\\ own analysis};
+\node[bad, below=9mm of d4] (tp2) {\textbf{third-party}\\ no instrument named};
+\draw[fl] (r)--(d1);
+\draw[fl] (d1)--node[lbl,above,pos=.35]{no}(inst);
+\draw[fl] (d1)--node[lbl,below,pos=.35]{yes}(d2);
+\draw[fl] (d2)--node[lbl,above]{none}(raw);
+\draw[fl] (d2)--node[lbl,right]{some}(d3);
+\draw[fl] (d3)--node[lbl,above]{yes}(tp);
+\draw[fl] (d3)--node[lbl,right]{no}(d4);
+\draw[fl] (d4)--node[lbl,above]{yes}(ve);
+\draw[fl] (d4)--node[lbl,right]{no}(tp2);
+\end{tikzpicture}}\end{center}
+\begin{center}\small Figure: the state decision. Each test reads a field of the file, never the
+file name.\normalsize\end{center}
+
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small instrument & R/D & the \allowbreak{}.\allowbreak{}eds \allowbreak{}decoded \allowbreak{}by \allowbreak{}the \allowbreak{}page \allowbreak{}intake\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}272524866"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}bg"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}methods"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}wells\allowbreak{}With\allowbreak{}Cq"\allowbreak{}:\allowbreak{} \allowbreak{}34\}\allowbreak{}} \\
+\addlinespace
+
+\small vendor-\allowbreak{}export & R/D & RAS\_\allowbreak{}FFPE.\allowbreak{}rdml \allowbreak{}— \allowbreak{}names \allowbreak{}an \allowbreak{}instrument,\allowbreak{} \allowbreak{}no \allowbreak{}re-\allowbreak{}analysis \allowbreak{}tool\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Quant\allowbreak{}Studio \allowbreak{}Dx"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}bg"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Background \allowbreak{}Subtraction"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}methods"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}wells\allowbreak{}With\allowbreak{}Cq"\allowbreak{}:\allowbreak{} \allowbreak{}34\}\allowbreak{}} \\
+\addlinespace
+
+\small third-\allowbreak{}party & R/D & example\_\allowbreak{}3 \allowbreak{}— \allowbreak{}amp\allowbreak{}Eff\allowbreak{}Met \allowbreak{}=\allowbreak{} \allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}bg"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}constant"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}methods"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}wells\allowbreak{}With\allowbreak{}Cq"\allowbreak{}:\allowbreak{} \allowbreak{}90\}\allowbreak{}} \\
+\addlinespace
+
+\small raw & R/D & example\_\allowbreak{}1 \allowbreak{}— \allowbreak{}no \allowbreak{}cq \allowbreak{}anywhere\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}bg"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}methods"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}wells\allowbreak{}With\allowbreak{}Cq"\allowbreak{}:\allowbreak{} \allowbreak{}0\}\allowbreak{}} \\
+\addlinespace
+
+\small no \allowbreak{}run & S & run\allowbreak{}Processing\allowbreak{}State(\allowbreak{}null)\allowbreak{}\newline {\ttfamily\scriptsize null} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small instrument & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}decoded \allowbreak{}from \allowbreak{}the \allowbreak{}instrument's \allowbreak{}own \allowbreak{}container"\allowbreak{}\}\allowbreak{}} & \small state \allowbreak{}"\allowbreak{}instrument"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small vendor-\allowbreak{}export & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}vendor-\allowbreak{}export"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}exchange \allowbreak{}export \allowbreak{}of \allowbreak{}an \allowbreak{}analysis \allowbreak{}made \allowbreak{}by \allowbreak{}the \allowbreak{}instrument's \allowbreak{}software \allowbreak{}on \allowbreak{}Quant\allowbreak{}Studio \allowbreak{}Dx"\allowbreak{}\}\allowbreak{}} & \small state \allowbreak{}"\allowbreak{}vendor-\allowbreak{}export"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small third-\allowbreak{}party & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}third-\allowbreak{}party"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}tool"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}the \allowbreak{}results \allowbreak{}in \allowbreak{}this \allowbreak{}file \allowbreak{}were \allowbreak{}produced \allowbreak{}by \allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}not \allowbreak{}by \allowbreak{}the \allowbreak{}instrument's \allowbreak{}software"\allowbreak{}\}\allowbreak{}} & \small state \allowbreak{}"\allowbreak{}third-\allowbreak{}party"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small raw & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}raw"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}the \allowbreak{}file \allowbreak{}carries \allowbreak{}fluorescence \allowbreak{}data \allowbreak{}only:\allowbreak{} \allowbreak{}no \allowbreak{}Cq,\allowbreak{} \allowbreak{}and \allowbreak{}no \allowbreak{}analysis \allowbreak{}by \allowbreak{}any \allowbreak{}software"\allowbreak{}\}\allowbreak{}} & \small state \allowbreak{}"\allowbreak{}raw"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small no \allowbreak{}run & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}unknown"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}no \allowbreak{}run"\allowbreak{}\}\allowbreak{}} & \small state \allowbreak{}"\allowbreak{}unknown"\allowbreak{},\allowbreak{} \allowbreak{}no \allowbreak{}throw & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+5 case(s) executed, 5 passed. Overall: \PASS
+\clearpage
+\section{F10\quad\fn{runIsInstrumentAnalysed} --- Shorthand for the two in-scope states}
+\label{sec:runIsInstrumentAnalysed}
+\subsection*{Purpose}
+Used by callers that only need the boolean.
+\subsection*{Source, as built}
+Production file, line 10733 onwards; 3 lines.
+\begin{lstlisting}[style=js]
+function runIsInstrumentAnalysed(run){
+  const s=runProcessingState(run).state;return s==="instrument"||s==="vendor-export";
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The truth table over all four states.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small instrument & D & the \allowbreak{}instrument \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small vendor-\allowbreak{}export & D & the \allowbreak{}vendor-\allowbreak{}export \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}vendor-\allowbreak{}export"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small third-\allowbreak{}party & D & the \allowbreak{}third-\allowbreak{}party \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}third-\allowbreak{}party"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small raw & D & the \allowbreak{}raw \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}raw"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small instrument & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\small vendor-\allowbreak{}export & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\small third-\allowbreak{}party & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\small raw & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+4 case(s) executed, 4 passed. Overall: \PASS
+\clearpage
+\section{F11\quad\fn{sopProcessingApplicability} --- The profile gate}
+\label{sec:sopProcessingApplicability}
+\subsection*{Purpose}
+The laboratory profile may only be applied to a run the producer's software analysed. This
+function is asked before the existing method-applicability test, because a file nobody analysed is
+out of scope whatever the method says. Its return shape is the one \fn{sopEvaluateRun} already
+consumes, so the existing code turns it into \emph{Profile not applicable --- reason} with no
+further change.
+\subsection*{Source, as built}
+Production file, line 10740 onwards; 14 lines.
+\begin{lstlisting}[style=js]
+function sopProcessingApplicability(run){
+  const s=runProcessingState(run);
+  if(s.state==="instrument")return {applicable:true,reason:s.reason,state:s.state};
+  /* A vendor export IS the producer's analysis, so it is in scope - unless the instrument's
+     own file for the same experiment is loaded, in which case that one is the record and this
+     one is a companion. */
+  if(s.state==="vendor-export"){
+    if(runIsSuperseded(run))return {applicable:false,state:"superseded",
+      reason:"superseded — "+run.supersededReason};
+    return {applicable:true,reason:s.reason,state:s.state};
+  }
+  return {applicable:false,state:s.state,
+    reason:(s.state==="raw"?"raw exchange file — ":"third-party analysis — ")+s.reason};
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+All four states, plus the superseded case, which can only arise after
+\fn{applyRawFilePriority} has run and is therefore tested in section~\ref{sec:priority}.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small instrument & D & the \allowbreak{}instrument \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small vendor-\allowbreak{}export & D & the \allowbreak{}vendor-\allowbreak{}export \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}vendor-\allowbreak{}export"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small third-\allowbreak{}party & D & the \allowbreak{}third-\allowbreak{}party \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}third-\allowbreak{}party"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small raw & D & the \allowbreak{}raw \allowbreak{}run \allowbreak{}above\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}raw"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small superseded \allowbreak{}vendor \allowbreak{}export & D & the \allowbreak{}RDML \allowbreak{}run \allowbreak{}after \allowbreak{}the \allowbreak{}priority \allowbreak{}pass\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}vendor-\allowbreak{}export"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}superseded"\allowbreak{}:\allowbreak{} \allowbreak{}true\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small instrument & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}applicable"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}decoded \allowbreak{}from \allowbreak{}the \allowbreak{}instrument's \allowbreak{}own \allowbreak{}container"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}instrument"\allowbreak{}\}\allowbreak{}} & \small applicable \allowbreak{}=\allowbreak{} \allowbreak{}true & \PASS \\
+\addlinespace
+
+\small vendor-\allowbreak{}export & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}applicable"\allowbreak{}:\allowbreak{} \allowbreak{}true,\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}exchange \allowbreak{}export \allowbreak{}of \allowbreak{}an \allowbreak{}analysis \allowbreak{}made \allowbreak{}by \allowbreak{}the \allowbreak{}instrument's \allowbreak{}software \allowbreak{}on \allowbreak{}Quant\allowbreak{}Studio \allowbreak{}Dx"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}vendor-\allowbreak{}export"\allowbreak{}\}\allowbreak{}} & \small applicable \allowbreak{}=\allowbreak{} \allowbreak{}true & \PASS \\
+\addlinespace
+
+\small third-\allowbreak{}party & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}applicable"\allowbreak{}:\allowbreak{} \allowbreak{}false,\allowbreak{} \allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}third-\allowbreak{}party"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}third-\allowbreak{}party \allowbreak{}analysis \allowbreak{}— \allowbreak{}the \allowbreak{}results \allowbreak{}in \allowbreak{}this \allowbreak{}file \allowbreak{}were \allowbreak{}produced \allowbreak{}by \allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}not \allowbreak{}by \allowbreak{}the \allowbreak{}instrument's \allowbreak{}software"\allowbreak{}\}\allowbreak{}} & \small applicable \allowbreak{}=\allowbreak{} \allowbreak{}false & \PASS \\
+\addlinespace
+
+\small raw & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}applicable"\allowbreak{}:\allowbreak{} \allowbreak{}false,\allowbreak{} \allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}raw"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}raw \allowbreak{}exchange \allowbreak{}file \allowbreak{}— \allowbreak{}the \allowbreak{}file \allowbreak{}carries \allowbreak{}fluorescence \allowbreak{}data \allowbreak{}only:\allowbreak{} \allowbreak{}no \allowbreak{}Cq,\allowbreak{} \allowbreak{}and \allowbreak{}no \allowbreak{}analysis \allowbreak{}by \allowbreak{}any \allowbreak{}software"\allowbreak{}\}\allowbreak{}} & \small applicable \allowbreak{}=\allowbreak{} \allowbreak{}false & \PASS \\
+\addlinespace
+
+\small superseded \allowbreak{}vendor \allowbreak{}export & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}applicable"\allowbreak{}:\allowbreak{} \allowbreak{}false,\allowbreak{} \allowbreak{}"\allowbreak{}state"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}superseded"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}superseded \allowbreak{}— \allowbreak{}the \allowbreak{}instrument's \allowbreak{}own \allowbreak{}file \allowbreak{}for \allowbreak{}this \allowbreak{}experiment \allowbreak{}is \allowbreak{}loaded \allowbreak{}(\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds)\allowbreak{};\allowbreak{} \allowbreak{}the \allowbreak{}exchange \allowbreak{}export \allowbreak{}is \allowbreak{}kept \allowbreak{}for \allowbreak{}comparison \allowbreak{}only"\allowbreak{}\}\allowbreak{}} & \small applicable \allowbreak{}=\allowbreak{} \allowbreak{}false,\allowbreak{} \allowbreak{}state \allowbreak{}"\allowbreak{}superseded"\allowbreak{} & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+5 case(s) executed, 5 passed. Overall: \PASS
+\clearpage
+\section{F12\quad\fn{rdmlStem} --- Normalise a file name for comparison}
+\label{sec:rdmlStem}
+\subsection*{Purpose}
+An export is normally named after the run it came from, but with a different extension and
+sometimes with separators changed. Comparing stems lets the priority rule recognise the pair.
+\subsection*{Source, as built}
+Production file, line 10760 onwards; 3 lines.
+\begin{lstlisting}[style=js]
+function rdmlStem(name){
+  return String(name||"").replace(/\.[^.]+$/,"").replace(/[\s_-]+/g," ").trim().toLowerCase();
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The two real names of the reference pair, a constructed name with a double space and an
+underscore, and the empty string.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & R & a \allowbreak{}corpus \allowbreak{}file \allowbreak{}name\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds & R & a \allowbreak{}corpus \allowbreak{}file \allowbreak{}name\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small Demo \allowbreak{} \allowbreak{}Abs\_\allowbreak{}Quant.\allowbreak{}ixo & S & a \allowbreak{}corpus \allowbreak{}file \allowbreak{}name\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Demo \allowbreak{} \allowbreak{}Abs\_\allowbreak{}Quant.\allowbreak{}ixo"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small (\allowbreak{}empty)\allowbreak{} & S & the \allowbreak{}empty \allowbreak{}string\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & {\ttfamily\scriptsize "\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{}} & \small "\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds & {\ttfamily\scriptsize "\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{}} & \small "\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small Demo \allowbreak{} \allowbreak{}Abs\_\allowbreak{}Quant.\allowbreak{}ixo & {\ttfamily\scriptsize "\allowbreak{}demo \allowbreak{}abs \allowbreak{}quant"\allowbreak{}} & \small "\allowbreak{}demo \allowbreak{}abs \allowbreak{}quant"\allowbreak{} & \PASS \\
+\addlinespace
+
+\small (\allowbreak{}empty)\allowbreak{} & {\ttfamily\scriptsize "\allowbreak{}"\allowbreak{}} & \small "\allowbreak{}"\allowbreak{} & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+4 case(s) executed, 4 passed. Overall: \PASS
+\clearpage
+\section{F13\quad\fn{rdmlKeyOf} --- Identity keys for a loaded item}
+\label{sec:rdmlKeyOf}
+\subsection*{Purpose}
+Produces the keys on which the priority rule matches: the file stem and the experiment
+identifier.
+\subsection*{Source, as built}
+Production file, line 10763 onwards; 3 lines.
+\begin{lstlisting}[style=js]
+function rdmlKeyOf(item){
+  return [rdmlStem(item.name),String(item.experimentId||"").trim().toLowerCase()].filter(Boolean);
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The reference pair and an item with no experiment identifier. Finding~V-2 was raised here;
+section~\ref{sec:V2} explains why it was cleared.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small name \allowbreak{}and \allowbreak{}experiment & D & the \allowbreak{}RDML \allowbreak{}run \allowbreak{}of \allowbreak{}the \allowbreak{}reference \allowbreak{}pair\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}experiment\allowbreak{}Id"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small no \allowbreak{}experiment \allowbreak{}id & S & an \allowbreak{}item \allowbreak{}with \allowbreak{}only \allowbreak{}a \allowbreak{}name\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}name"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}x.\allowbreak{}rdml"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small name \allowbreak{}and \allowbreak{}experiment & {\ttfamily\scriptsize [\allowbreak{}"\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}ras\_\allowbreak{}ffpe"\allowbreak{}]\allowbreak{}} & \small two \allowbreak{}keys & \PASS \\
+\addlinespace
+
+\small no \allowbreak{}experiment \allowbreak{}id & {\ttfamily\scriptsize [\allowbreak{}"\allowbreak{}x"\allowbreak{}]\allowbreak{}} & \small one \allowbreak{}key & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Observations}
+\textbf{name \allowbreak{}and \allowbreak{}experiment.} FINDING \allowbreak{}V-\allowbreak{}2:\allowbreak{} \allowbreak{}the \allowbreak{}name \allowbreak{}key \allowbreak{}is \allowbreak{}stem-\allowbreak{}normalised \allowbreak{}(\allowbreak{}"\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{})\allowbreak{} \allowbreak{}but \allowbreak{}the \allowbreak{}experiment \allowbreak{}key \allowbreak{}is \allowbreak{}only \allowbreak{}lower-\allowbreak{}cased \allowbreak{}(\allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}ras\_\allowbreak{}ffpe"\allowbreak{})\allowbreak{}.\allowbreak{} \allowbreak{}The \allowbreak{}two \allowbreak{}spellings \allowbreak{}of \allowbreak{}the \allowbreak{}same \allowbreak{}identity \allowbreak{}do \allowbreak{}not \allowbreak{}match \allowbreak{}each \allowbreak{}other.\allowbreak{}
+\subsection*{Verdict}
+2 case(s) executed, 2 passed. Overall: \PASS
+\clearpage
+\section{F14\quad\fn{applyRawFilePriority} --- The instrument's own file wins}
+\label{sec:applyRawFilePriority}
+\subsection*{Purpose}
+When the same experiment is loaded as a vendor container and as an RDML export, the vendor
+file is the record. The export is not discarded --- it is marked as superseded and kept, so the two
+can be compared, which is a forensic check in its own right.
+\subsection*{Source, as built}
+Production file, line 10766 onwards; 18 lines.
+\begin{lstlisting}[style=js]
+function applyRawFilePriority(runs){
+  const vendor=runs.filter(r=>!r.rdmlDoc),rdml=runs.filter(r=>r.rdmlDoc);
+  if(!vendor.length||!rdml.length)return {runs,superseded:[]};
+  const keys=new Set();
+  vendor.forEach(v=>{rdmlKeyOf({name:v.file,experimentId:(v.meta||{}).name}).forEach(k=>keys.add(k));});
+  const superseded=[],kept=[];
+  runs.forEach(r=>{
+    if(!r.rdmlDoc){kept.push(r);return;}
+    const mine=rdmlKeyOf({name:r.file,experimentId:r.experimentId});
+    const hit=mine.find(k=>keys.has(k));
+    if(hit){r.supersededBy=vendor.find(v=>rdmlKeyOf({name:v.file,experimentId:(v.meta||{}).name}).includes(hit));
+      r.supersededReason=`the instrument's own file for this experiment is loaded (${r.supersededBy?r.supersededBy.file:"vendor container"}); `
+        +"the exchange export is kept for comparison only";
+      superseded.push(r);}
+    kept.push(r);
+  });
+  return {runs:kept,superseded};
+}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The reference pair loaded together; the same pair with the export renamed so that only the
+experiment identifier can match; and a set of RDML runs with no vendor container at all, which must
+supersede nothing.
+
+\begin{center}\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[node distance=8mm]
+\node[io] (all) {all loaded runs};
+\node[box, right=11mm of all] (split) {split:\\ vendor vs RDML};
+\node[dec, right=11mm of split] (any) {both kinds\\ present?};
+\node[ok, above right=3mm and 12mm of any] (ret) {return unchanged\\ nothing superseded};
+\node[box, below right=3mm and 12mm of any] (keys) {build key set\\ from vendor runs\\ (stem, experiment)};
+\node[box, below=9mm of keys] (loop) {for each RDML run:\\ any key in the set?};
+\node[bad, right=13mm of loop] (sup) {mark superseded\\ record which file\\ and why};
+\node[ok, below=9mm of loop] (out) {\{runs, superseded\}\\ nothing discarded};
+\draw[fl] (all)--(split); \draw[fl] (split)--(any);
+\draw[fl] (any)--node[lbl,above,pos=.35]{no}(ret);
+\draw[fl] (any)--node[lbl,below,pos=.35]{yes}(keys);
+\draw[fl] (keys)--(loop);
+\draw[fl] (loop)--node[lbl,above]{yes}(sup);
+\draw[fl] (loop)--node[lbl,right]{no}(out);
+\draw[fl] (sup.south) |- ([yshift=-3mm]out.north east);
+\end{tikzpicture}}\end{center}
+\begin{center}\small Figure: the priority pass. It marks; it never removes.\normalsize\end{center}
+
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small FINDING \allowbreak{}V-\allowbreak{}2 \allowbreak{}— \allowbreak{}export \allowbreak{}renamed,\allowbreak{} \allowbreak{}only \allowbreak{}the \allowbreak{}experiment \allowbreak{}id \allowbreak{}matches & D & the \allowbreak{}same \allowbreak{}.\allowbreak{}eds,\allowbreak{} \allowbreak{}and \allowbreak{}the \allowbreak{}same \allowbreak{}RDML \allowbreak{}run \allowbreak{}with \allowbreak{}its \allowbreak{}file \allowbreak{}renamed \allowbreak{}to \allowbreak{}received\_\allowbreak{}from\_\allowbreak{}collaborator.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}vendor\allowbreak{}File"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}vendor\allowbreak{}Experiment"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}rdml\allowbreak{}File"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}received\_\allowbreak{}from\_\allowbreak{}collaborator.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}rdml\allowbreak{}Experiment"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}vendor\allowbreak{}Keys"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}2026 \allowbreak{}06 \allowbreak{}15 \allowbreak{}ras \allowbreak{}ffpe"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}ras\_\allowbreak{}ffpe"\allowbreak{}]\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}rdml\allowbreak{}Keys"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}received \allowbreak{}from \allowbreak{}collaborator"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}ras\_\allowbreak{}ffpe"\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small vendor \allowbreak{}container \allowbreak{}+\allowbreak{} \allowbreak{}its \allowbreak{}RDML \allowbreak{}export & R & the \allowbreak{}.\allowbreak{}eds \allowbreak{}decoded \allowbreak{}by \allowbreak{}intake,\allowbreak{} \allowbreak{}plus \allowbreak{}the \allowbreak{}.\allowbreak{}rdml \allowbreak{}of \allowbreak{}the \allowbreak{}same \allowbreak{}experiment\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}runs"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}\{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}is\allowbreak{}Rdml"\allowbreak{}:\allowbreak{} \allowbreak{}false\}\allowbreak{},\allowbreak{} \allowbreak{}\{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}is\allowbreak{}Rdml"\allowbreak{}:\allowbreak{} \allowbreak{}true\}\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small RDML \allowbreak{}only,\allowbreak{} \allowbreak{}no \allowbreak{}vendor \allowbreak{}container & R & the \allowbreak{}three \allowbreak{}runs \allowbreak{}of \allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}runs"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}\{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}is\allowbreak{}Rdml"\allowbreak{}:\allowbreak{} \allowbreak{}true\}\allowbreak{},\allowbreak{} \allowbreak{}\{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}is\allowbreak{}Rdml"\allowbreak{}:\allowbreak{} \allowbreak{}true\}\allowbreak{},\allowbreak{} \allowbreak{}\{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}is\allowbreak{}Rdml"\allowbreak{}:\allowbreak{} \allowbreak{}true\}\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small FINDING \allowbreak{}V-\allowbreak{}2 \allowbreak{}— \allowbreak{}export \allowbreak{}renamed,\allowbreak{} \allowbreak{}only \allowbreak{}the \allowbreak{}experiment \allowbreak{}id \allowbreak{}matches & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}superseded"\allowbreak{}:\allowbreak{} \allowbreak{}1\}\allowbreak{}} & \small the \allowbreak{}export \allowbreak{}should \allowbreak{}still \allowbreak{}be \allowbreak{}superseded:\allowbreak{} \allowbreak{}it \allowbreak{}is \allowbreak{}the \allowbreak{}same \allowbreak{}experiment & \PASS \\
+\addlinespace
+
+\small vendor \allowbreak{}container \allowbreak{}+\allowbreak{} \allowbreak{}its \allowbreak{}RDML \allowbreak{}export & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}kept"\allowbreak{}:\allowbreak{} \allowbreak{}2,\allowbreak{} \allowbreak{}"\allowbreak{}superseded"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}\{\allowbreak{}"\allowbreak{}file"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}by"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}reason"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}the \allowbreak{}instrument's \allowbreak{}own \allowbreak{}file \allowbreak{}for \allowbreak{}this \allowbreak{}experiment \allowbreak{}is \allowbreak{}loaded \allowbreak{}(\allowbreak{}2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds)\allowbreak{};\allowbreak{} \allowbreak{}the \allowbreak{}exchange \allowbreak{}export \allowbreak{}is \allowbreak{}kept \allowbreak{}for \allowbreak{}comparison \allowbreak{}only"\allowbreak{}\}\allowbreak{}]\allowbreak{}\}\allowbreak{}} & \small the \allowbreak{}RDML \allowbreak{}export \allowbreak{}is \allowbreak{}superseded \allowbreak{}by \allowbreak{}the \allowbreak{}.\allowbreak{}eds;\allowbreak{} \allowbreak{}nothing \allowbreak{}is \allowbreak{}discarded & \PASS \\
+\addlinespace
+
+\small RDML \allowbreak{}only,\allowbreak{} \allowbreak{}no \allowbreak{}vendor \allowbreak{}container & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}kept"\allowbreak{}:\allowbreak{} \allowbreak{}3,\allowbreak{} \allowbreak{}"\allowbreak{}superseded"\allowbreak{}:\allowbreak{} \allowbreak{}0\}\allowbreak{}} & \small nothing \allowbreak{}superseded & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Observations}
+\textbf{FINDING \allowbreak{}V-\allowbreak{}2 \allowbreak{}— \allowbreak{}export \allowbreak{}renamed,\allowbreak{} \allowbreak{}only \allowbreak{}the \allowbreak{}experiment \allowbreak{}id \allowbreak{}matches.} Recommended \allowbreak{}fix:\allowbreak{} \allowbreak{}rdml\allowbreak{}Key\allowbreak{}Of \allowbreak{}should \allowbreak{}apply \allowbreak{}rdml\allowbreak{}Stem \allowbreak{}to \allowbreak{}BOTH \allowbreak{}parts \allowbreak{}— \allowbreak{}[\allowbreak{}rdml\allowbreak{}Stem(\allowbreak{}item.\allowbreak{}name)\allowbreak{},\allowbreak{} \allowbreak{}rdml\allowbreak{}Stem(\allowbreak{}item.\allowbreak{}experiment\allowbreak{}Id)\allowbreak{}]\allowbreak{}.\allowbreak{}
+\subsection*{Verdict}
+3 case(s) executed, 3 passed. Overall: \PASS
+\clearpage
+\section{F15\quad\fn{runIsSuperseded} --- Has this run been superseded}
+\label{sec:runIsSuperseded}
+\subsection*{Purpose}
+One predicate, so that the gate and the views ask the same question.
+\subsection*{Source, as built}
+Production file, line 10784 onwards; 1 lines.
+\begin{lstlisting}[style=js]
+function runIsSuperseded(run){return !!(run&&run.supersededBy);}
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The same run objects before and after the priority pass.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small before \allowbreak{}and \allowbreak{}after \allowbreak{}apply\allowbreak{}Raw\allowbreak{}File\allowbreak{}Priority & D & the \allowbreak{}same \allowbreak{}run \allowbreak{}objects,\allowbreak{} \allowbreak{}before \allowbreak{}and \allowbreak{}after \allowbreak{}the \allowbreak{}priority \allowbreak{}pass\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}before"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}false,\allowbreak{} \allowbreak{}false]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small before \allowbreak{}and \allowbreak{}after \allowbreak{}apply\allowbreak{}Raw\allowbreak{}File\allowbreak{}Priority & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}after"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}false,\allowbreak{} \allowbreak{}true]\allowbreak{}\}\allowbreak{}} & \small false \allowbreak{}for \allowbreak{}every \allowbreak{}run \allowbreak{}before;\allowbreak{} \allowbreak{}true \allowbreak{}only \allowbreak{}for \allowbreak{}the \allowbreak{}RDML \allowbreak{}run \allowbreak{}after & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+1 case(s) executed, 1 passed. Overall: \PASS
+\clearpage
+\section{C1\quad\fn{RDML\_SAMPLE\_ROLE} --- Sample type to role}
+\label{sec:RDML_SAMPLE_ROLE}
+\subsection*{Purpose}
+RDML declares six sample types. They are mapped to the role vocabulary the page already
+uses for control recognition, so an imported control is recognised by the same rules as a decoded
+one.
+\subsection*{Source, as built}
+Production file, line 10534 onwards; 1 lines.
+The comment block that precedes it in the source:
+\begin{lstlisting}[style=jstiny]
+/* ---------- 3 · one RDML file -> one run per <run> ---------- */
+\end{lstlisting}
+
+\begin{lstlisting}[style=js]
+const RDML_SAMPLE_ROLE={ntc:"NTC",neg:"Negative control",pos:"Positive control",std:"Standard",opt:"Unknown",unkn:"Unknown"};
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The mapping is printed in full and its completeness against the schema is
+asserted.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small the \allowbreak{}six \allowbreak{}RDML \allowbreak{}sample \allowbreak{}types & Spec. & the \allowbreak{}RDML \allowbreak{}1.\allowbreak{}3 \allowbreak{}sample-\allowbreak{}type \allowbreak{}vocabulary\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}keys"\allowbreak{}:\allowbreak{} \allowbreak{}[\allowbreak{}"\allowbreak{}ntc"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}neg"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}pos"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}std"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}opt"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}unkn"\allowbreak{}]\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small the \allowbreak{}six \allowbreak{}RDML \allowbreak{}sample \allowbreak{}types & {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}ntc"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}NTC"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}neg"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Negative \allowbreak{}control"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}pos"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Positive \allowbreak{}control"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}std"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Standard"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}opt"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Unknown"\allowbreak{},\allowbreak{} \allowbreak{}"\allowbreak{}unkn"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Unknown"\allowbreak{}\}\allowbreak{}} & \small every \allowbreak{}type \allowbreak{}maps \allowbreak{}to \allowbreak{}a \allowbreak{}role \allowbreak{}the \allowbreak{}page \allowbreak{}already \allowbreak{}uses & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+1 case(s) executed, 1 passed. Overall: \PASS
+\clearpage
+\section{C2\quad\fn{RDML\_REANALYSIS\_TOOLS} --- Recognising a re-analysis}
+\label{sec:RDML_REANALYSIS_TOOLS}
+\subsection*{Purpose}
+Decides whether a named method belongs to a third-party tool. A false positive would put a
+producer's analysis out of scope; a false negative would let another tool's numbers be treated as
+the instrument's.
+\subsection*{Source, as built}
+Production file, line 10714 onwards; 1 lines.
+\begin{lstlisting}[style=js]
+const RDML_REANALYSIS_TOOLS=/linregpcr|pcr-?miner|qpcr-?miner|dart-?pcr|cy0|mak2|lre|analyz/i;
+\end{lstlisting}
+
+\subsection*{How it was validated}
+The four strings that actually occur in the corpus, verbatim, plus three tool names from
+the RDML literature and the empty string.
+\subsection*{Inputs}
+\begin{longtable}{@{}p{30mm}p{14mm}p{\dimexpr\linewidth-30mm-14mm-28pt\relax}@{}}
+\toprule\textbf{Case} & \textbf{Cls} & \textbf{Input, and where it came from} \\ \midrule\endhead
+
+\small Lin\allowbreak{}Reg\allowbreak{}PCR & R & the \allowbreak{}verbatim \allowbreak{}string \allowbreak{}found \allowbreak{}in \allowbreak{}the \allowbreak{}corpus\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}constant & R & the \allowbreak{}verbatim \allowbreak{}string \allowbreak{}found \allowbreak{}in \allowbreak{}the \allowbreak{}corpus\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}constant"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small Background \allowbreak{}Subtraction & R & the \allowbreak{}verbatim \allowbreak{}string \allowbreak{}found \allowbreak{}in \allowbreak{}the \allowbreak{}corpus\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Background \allowbreak{}Subtraction"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small automated \allowbreak{}threshold \allowbreak{}and \allowbreak{}baseline \allowbreak{}settings & R & the \allowbreak{}verbatim \allowbreak{}string \allowbreak{}found \allowbreak{}in \allowbreak{}the \allowbreak{}corpus\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}automated \allowbreak{}threshold \allowbreak{}and \allowbreak{}baseline \allowbreak{}settings"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small (\allowbreak{}empty)\allowbreak{} & S & a \allowbreak{}tool \allowbreak{}name \allowbreak{}from \allowbreak{}the \allowbreak{}RDML \allowbreak{}literature\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small Cy0 & S & a \allowbreak{}tool \allowbreak{}name \allowbreak{}from \allowbreak{}the \allowbreak{}RDML \allowbreak{}literature\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}Cy0"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\small MAK2 & S & a \allowbreak{}tool \allowbreak{}name \allowbreak{}from \allowbreak{}the \allowbreak{}RDML \allowbreak{}literature\newline {\ttfamily\scriptsize \{\allowbreak{}"\allowbreak{}text"\allowbreak{}:\allowbreak{} \allowbreak{}"\allowbreak{}MAK2"\allowbreak{}\}\allowbreak{}} \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Outputs and verdicts}
+\begin{longtable}{@{}p{34mm}p{\dimexpr\linewidth-34mm-44mm-28pt\relax}p{30mm}p{10mm}@{}}
+\toprule\textbf{Case} & \textbf{Returned} & \textbf{Expected} & \\ \midrule\endhead
+
+\small Lin\allowbreak{}Reg\allowbreak{}PCR & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\small Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}constant & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\small Background \allowbreak{}Subtraction & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\small automated \allowbreak{}threshold \allowbreak{}and \allowbreak{}baseline \allowbreak{}settings & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\small (\allowbreak{}empty)\allowbreak{} & {\ttfamily\scriptsize false} & \small false & \PASS \\
+\addlinespace
+
+\small Cy0 & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\small MAK2 & {\ttfamily\scriptsize true} & \small true & \PASS \\
+\addlinespace
+
+\bottomrule\end{longtable}
+\subsection*{Verdict}
+7 case(s) executed, 7 passed. Overall: \PASS

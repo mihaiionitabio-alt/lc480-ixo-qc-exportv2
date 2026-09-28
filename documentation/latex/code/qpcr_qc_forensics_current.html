@@ -10748,7 +10748,7 @@ function rdmlParse(xmlText,fileName,fileBytes){
           let cq=rdmlNum(data,"cq");
           const ampEffMet=rdmlText(data,"ampEffMet");
           /* A vendor export writes "no crossing" as a Cq equal to the cycle count: measured on
-             2026-06-15_RAS_FFPE.rdml, 158 of 192 rows carry cq = 40.0 on a 40-cycle run, while the
+             CORPUS-RDML-1.rdml, 158 of 192 rows carry cq = 40.0 on a 40-cycle run, while the
              .eds for the same run reports those wells as undetermined. Reading them as a crossing
              at the cut-off would turn 82 % of that file into late detections. A re-analysis file
              does not do this (example_3_linregpcr: 0 of 90 at the ceiling, maximum 34), so the
@@ -10844,7 +10844,7 @@ function rdmlParse(xmlText,fileName,fileBytes){
      raw            an RDML with fluorescence and no Cq at all: nobody has analysed it
 
    Measured on the corpus:
-     2026-06-15_RAS_FFPE.rdml   instrument "QuantStudio Dx", bg "Background Subtraction" -> vendor-export
+     CORPUS-RDML-1.rdml   instrument "QuantStudio Dx", bg "Background Subtraction" -> vendor-export
      example_3_linregpcr.rdml   no instrument, bg "LinRegPCR, constant", ampEffMet LinRegPCR -> third-party
      example_1_raw.rdml         no provenance, no Cq -> raw                                                */
 const RDML_REANALYSIS_TOOLS=/linregpcr|pcr-?miner|qpcr-?miner|dart-?pcr|cy0|mak2|lre|analyz/i;

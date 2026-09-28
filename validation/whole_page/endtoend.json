@@ -1,0 +1,199 @@
+{
+ "tabs": {
+  "load": "rendered",
+  "sop": "rendered",
+  "results": "rendered",
+  "panel": "rendered",
+  "graphs": "rendered",
+  "review": "rendered",
+  "export": "rendered",
+  "integrity": "rendered"
+ },
+ "reviewViews": {
+  "overview": "rendered",
+  "plate": "rendered",
+  "compare": "rendered",
+  "statistics": "rendered",
+  "controls": "rendered",
+  "runs": "rendered",
+  "curves": "rendered",
+  "instrument": "rendered"
+ },
+ "graphs": {
+  "timeline": "drawn",
+  "curves": "drawn",
+  "plate": "drawn",
+  "unanalysed": "drawn",
+  "cqstrip": "drawn",
+  "repsd": "drawn",
+  "stdcurve": "drawn",
+  "ic": "drawn",
+  "endpoint": "drawn",
+  "levels": "drawn",
+  "outcomes": "drawn",
+  "temperature": "drawn",
+  "recalc": "drawn",
+  "lc_thermal": "drawn",
+  "x_timeline": "drawn",
+  "x_delay": "drawn",
+  "x_accept": "drawn",
+  "x_outcomes": "drawn",
+  "x_control": "drawn",
+  "x_signal": "drawn",
+  "x_duration": "drawn",
+  "x_findings": "drawn",
+  "x_control_batches": "drawn",
+  "x_control_age": "drawn",
+  "x_control_thermal": "drawn"
+ },
+ "consoleViews": {
+  "load": "4 items",
+  "sop": "20 items",
+  "results": "4 items",
+  "panel": "54 items",
+  "graphs": "26 items",
+  "review": "13 items",
+  "export": "12 items",
+  "integrity": "1 items"
+ },
+ "exports": {
+  "Download pseudonym mapping (CSV)": "1 file(s)",
+  "Download": "1 file(s)",
+  "Dataset metadata (JSON-LD)": "1 file(s)",
+  "Refresh diagnostics": "0 file(s)",
+  "Save diagnostics (JSON)": "1 file(s)",
+  "Download R script": "1 file(s)",
+  "Download Python script": "1 file(s)"
+ },
+ "downloads": [
+  {
+   "name": "3_runs_2026-09-24-12-05-04_pseudonym_map.csv",
+   "bytes": 4888
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-04_cq_values.csv",
+   "bytes": 183649
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-04_runs_qc_forensic_log.csv",
+   "bytes": 7790
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_QuantStudio_export.txt",
+   "bytes": 1195442
+  },
+  {
+   "name": "QS5_384W_RNaseP_Fast_MMx_10uL_QuantStudio_export.txt",
+   "bytes": 1423438
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_QuantStudio_export.xlsx",
+   "bytes": 8097639
+  },
+  {
+   "name": "QS5_384W_RNaseP_Fast_MMx_10uL_QuantStudio_export.xlsx",
+   "bytes": 9529573
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_01_Standard_curve_GAPDH.rdes.tsv",
+   "bytes": 513796
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_02_Standard_curve_FZD1.rdes.tsv",
+   "bytes": 505575
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_03_Standard_curve_APOE.rdes.tsv",
+   "bytes": 505626
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_04_Standard_curve_CD44.rdes.tsv",
+   "bytes": 504249
+  },
+  {
+   "name": "Demo_Abs_Quant_with_SYBR_Green_I_01_Abs_Quant_2nd_Derivative_Max.rdes.tsv",
+   "bytes": 726222
+  },
+  {
+   "name": "Demo_Abs_Quant_with_SYBR_Green_I_02_Abs_Quant_Fit_Points.rdes.tsv",
+   "bytes": 697737
+  },
+  {
+   "name": "QS5_384W_RNaseP_Fast_MMx_10uL.rdes.tsv",
+   "bytes": 1604310
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL.rdml",
+   "bytes": 773381
+  },
+  {
+   "name": "Demo_Abs_Quant_with_SYBR_Green_I.rdml",
+   "bytes": 903424
+  },
+  {
+   "name": "QS5_384W_RNaseP_Fast_MMx_10uL.rdml",
+   "bytes": 563338
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_01_Standard_curve_GAPDH_qpcR_curves.csv",
+   "bytes": 40573
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_02_Standard_curve_FZD1_qpcR_curves.csv",
+   "bytes": 39896
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_03_Standard_curve_APOE_qpcR_curves.csv",
+   "bytes": 40027
+  },
+  {
+   "name": "4Plex_Multiplex_MMx_10uL_04_Standard_curve_CD44_qpcR_curves.csv",
+   "bytes": 39050
+  },
+  {
+   "name": "Demo_Abs_Quant_with_SYBR_Green_I_01_Abs_Quant_2nd_Derivative_Max_qpcR_curves.csv",
+   "bytes": 19980
+  },
+  {
+   "name": "Demo_Abs_Quant_with_SYBR_Green_I_02_Abs_Quant_Fit_Points_qpcR_curves.csv",
+   "bytes": 19980
+  },
+  {
+   "name": "QS5_384W_RNaseP_Fast_MMx_10uL_qpcR_curves.csv",
+   "bytes": 103439
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-05_melting_peaks.csv",
+   "bytes": 17731
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-05_experiment_settings.csv",
+   "bytes": 12845
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-05_multicomponent_raw.csv",
+   "bytes": 1549824
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-07_open_formats.zip",
+   "bytes": 30206808
+  },
+  {
+   "name": "3_runs_2026-09-24-12-05-07_metadata.jsonld",
+   "bytes": 40472
+  },
+  {
+   "name": "qpcr_diagnostics.json",
+   "bytes": 1335
+  },
+  {
+   "name": "analyse_with_qpcR.R",
+   "bytes": 1661
+  },
+  {
+   "name": "analyse_with_linregpcr.py",
+   "bytes": 1486
+  }
+ ],
+ "pageErrors": []
+}

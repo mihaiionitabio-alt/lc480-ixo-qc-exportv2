@@ -1,0 +1,102 @@
+{
+ "total": 16,
+ "passed": 16,
+ "checks": [
+  {
+   "name": "forensic scan is pure",
+   "why": "two identical calls must give identical events, or a cache is leaking state",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "chart computation is idempotent",
+   "why": "ccCompute must not depend on how often it has run",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "profile canonical form is stable",
+   "why": "the profile hash is exported with every result; it must round-trip",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "every flagged control point is outside its own limit",
+   "why": "a red point inside the interval is the 22 September defect",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "no rising-curve finding has an answer in its own channel",
+   "why": "the 23 September linkage rule",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "no stored Cq is read as a crossing at cycle 0",
+   "why": "Number(null) === 0, the round-2 defect",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "cycle count never exceeds the largest stored Cq by an implausible margin",
+   "why": "melt acquisitions counted as cycles",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "no stored Cq exceeds the cycles it could have crossed in",
+   "why": "a \"Cq\" of 84.6 in a melt-only run is a melting temperature in the Cq field",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "a melt-only run stores no amplification result",
+   "why": "melt results must not be written into the quantification table",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "a module without crossings raises no missing-Cq finding",
+   "why": "endpoint genotyping, gene scanning, melt-curve genotyping and Tm calling report calls and temperatures, not crossings; \"stored row with no Cq\" is their normal state",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "no analysis reports a raw numeric state",
+   "why": "calcState must be a word, not a code",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "outcome counts conserve the interpreted rows",
+   "why": "a summary that does not add up is not a summary",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "distinct findings never exceed raw events",
+   "why": "aggregation can only reduce",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "every distinct finding accounts for all its events",
+   "why": "no occurrence may be lost in grouping",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "integrity findings stay out of the review count",
+   "why": "they belong to tab 8 only",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "exports do not change stored values",
+   "why": "building a report must never touch the model",
+   "ok": true,
+   "note": ""
+  }
+ ]
+}

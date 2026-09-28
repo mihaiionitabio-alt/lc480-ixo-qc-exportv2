@@ -1,0 +1,1 @@
+function ccRestore(){try{const t=localStorage.getItem(CC_HIST_KEY);if(t){CC_STATE.remember=true;const j=validateHistoryBoundary(JSON.parse(t),"stored history");CC_STATE.imported=j.rows.slice();}}catch(e){appNotice("history restore",e.message||String(e));}}

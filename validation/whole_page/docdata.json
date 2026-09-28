@@ -1,0 +1,1414 @@
+{
+ "consoleViews": [
+  {
+   "view": "load",
+   "n": 4,
+   "kinds": {
+    "summary": 1,
+    "file": 3
+   },
+   "sev": {
+    "ok": 4
+   },
+   "sample": {
+    "code": "LOAD",
+    "title": "Files read into this session",
+    "value": "3",
+    "unit": "files",
+    "kindWord": "files read",
+    "state": "Decoded file metadata and stored results are ready. Open File integrity for any file-integrity mismatch.",
+    "rows": [
+     [
+      "Stored results",
+      "830"
+     ],
+     [
+      "Curves decoded",
+      "751"
+     ],
+     [
+      "Melting results",
+      "79"
+     ],
+     [
+      "Instruments",
+      "SVT001, Pilot-510, DVT07"
+     ],
+     [
+      "Operators",
+      "Demo"
+     ],
+     [
+      "Active profile",
+      "SC screening — SOP-06 laboratory default v1.0"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "sop",
+   "n": 20,
+   "kinds": {
+    "summary": 1,
+    "rule": 19
+   },
+   "sev": {
+    "none": 19,
+    "ok": 1
+   },
+   "sample": {
+    "code": "SOP",
+    "title": "SC screening — SOP-06 laboratory default",
+    "value": "v1.0",
+    "unit": "",
+    "kindWord": "profile",
+    "state": "Every outcome on this page is produced by this profile. Stored Cq values, calls and fluorescence are never changed.",
+    "rows": [
+     [
+      "Assay",
+      "GMO screening SOP-06 (35S / T-NOS with HMG or LEC reference)"
+     ],
+     [
+      "Author",
+      "—"
+     ],
+     [
+      "Effective",
+      "—"
+     ],
+     [
+      "Locked",
+      "no"
+     ],
+     [
+      "Minimum replicates",
+      "2"
+     ],
+     [
+      "Positive replicates",
+      "2"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "results",
+   "n": 4,
+   "kinds": {
+    "summary": 1,
+    "results": 3
+   },
+   "sev": {
+    "ok": 4
+   },
+   "sample": {
+    "code": "RES",
+    "title": "Results under this profile",
+    "value": "0",
+    "unit": "interpreted results",
+    "kindWord": "results",
+    "state": "Every run was accepted and no result needs an action.",
+    "rows": [
+     [
+      "Positive",
+      "0"
+     ],
+     [
+      "Negative",
+      "0"
+     ],
+     [
+      "Inconclusive",
+      "0"
+     ],
+     [
+      "Repeat",
+      "0"
+     ],
+     [
+      "Invalid",
+      "0"
+     ],
+     [
+      "Control failed",
+      "0"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "panel",
+   "n": 54,
+   "kinds": {
+    "summary": 1,
+    "chart": 53
+   },
+   "sev": {
+    "ok": 1,
+    "none": 53
+   },
+   "sample": {
+    "code": "CC",
+    "title": "QS · SVT001",
+    "value": "1",
+    "unit": "runs in this history",
+    "kindWord": "instrument",
+    "state": "Every chart with limits is in control on the latest run.",
+    "rows": [
+     [
+      "Instrument",
+      "QS · SVT001"
+     ],
+     [
+      "Runs",
+      "1"
+     ],
+     [
+      "Charts",
+      "53"
+     ],
+     [
+      "Outside limits",
+      "0"
+     ],
+     [
+      "To watch",
+      "0"
+     ],
+     [
+      "In control",
+      "0"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "graphs",
+   "n": 26,
+   "kinds": {
+    "summary": 1,
+    "graph": 25
+   },
+   "sev": {
+    "ok": 1,
+    "none": 25
+   },
+   "sample": {
+    "code": "G",
+    "title": "Graphs for 4Plex_Multiplex_MMx_10uL",
+    "value": "25",
+    "unit": "graphs",
+    "kindWord": "graphs",
+    "state": "Each graph below is drawn here with the limits of the active profile. Use Next run to change the experiment.",
+    "rows": [
+     [
+      "Run history",
+      "Run timeline — created, run, analysis, last change"
+     ],
+     [
+      "Fluorescence",
+      "Amplification curves coloured by SOP outcome"
+     ],
+     [
+      "Plate",
+      "Plate heat map"
+     ],
+     [
+      "Plate",
+      "Signal in wells that are not in any analysis"
+     ],
+     [
+      "Results",
+      "Cq by target with SOP cut-offs"
+     ],
+     [
+      "Results",
+      "Replicate spread — mean Cq against SD"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "review",
+   "n": 13,
+   "kinds": {
+    "summary": 1,
+    "finding": 12
+   },
+   "sev": {
+    "alarm": 3,
+    "watch": 10
+   },
+   "sample": {
+    "code": "QC",
+    "title": "Quality and forensic review",
+    "value": "32",
+    "unit": "findings",
+    "kindWord": "review",
+    "state": "3 finding(s) are error level: the evidence contradicts what the file claims about itself.",
+    "rows": [
+     [
+      "Recovery",
+      "0 error · 0 review"
+     ],
+     [
+      "Ct traceability",
+      "0 error · 1 review"
+     ],
+     [
+      "Calibration",
+      "0 error · 0 review"
+     ],
+     [
+      "Provenance",
+      "0 error · 2 review"
+     ],
+     [
+      "Plate setup",
+      "0 error · 0 review"
+     ],
+     [
+      "Instrument log",
+      "0 error · 0 review"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "export",
+   "n": 12,
+   "kinds": {
+    "export": 12
+   },
+   "sev": {
+    "ok": 12
+   },
+   "sample": {
+    "code": "OUT",
+    "title": "Formats this data set can produce",
+    "value": "11",
+    "unit": "formats",
+    "kindWord": "downloads",
+    "state": "Select a format below and press Download. Sample names follow the pseudonymisation switch on the page.",
+    "rows": [
+     [
+      "Cq values (CSV)",
+      "Every stored crossing point with its well, sample, target, role "
+     ],
+     [
+      "Forensic log (CSV)",
+      "One row per run (counts, status) and one per finding: controls, "
+     ],
+     [
+      "QuantStudio export layout (TXT)",
+      "Header plus Sample Setup, Raw Data, Amplification Data, Multicom"
+     ],
+     [
+      "QuantStudio export workbook (XLSX)",
+      "The same sheets, columns and row order as the QuantStudio softwa"
+     ],
+     [
+      "RDES table (TSV)",
+      "Stored Cq beside the full amplification curve, one row per cycle"
+     ],
+     [
+      "RDML 1.4 — for LinRegPCR",
+      "Version 1.4 with every dye declared. rdmlpython refuses LinRegPC"
+     ]
+    ]
+   }
+  },
+  {
+   "view": "integrity",
+   "n": 1,
+   "kinds": {
+    "integrity": 1
+   },
+   "sev": {
+    "ok": 1
+   },
+   "sample": {
+    "code": "INT",
+    "title": "No file-integrity mismatch",
+    "value": "0",
+    "unit": "mismatches",
+    "kindWord": "file integrity",
+    "state": "Every loaded file passed its available integrity comparisons.",
+    "rows": []
+   }
+  }
+ ],
+ "pictograms": [
+  {
+   "key": "file",
+   "glyph": "▤"
+  },
+  {
+   "key": "summary",
+   "glyph": "▣"
+  },
+  {
+   "key": "rule",
+   "glyph": "§"
+  },
+  {
+   "key": "sample",
+   "glyph": "◉"
+  },
+  {
+   "key": "run",
+   "glyph": "▥"
+  },
+  {
+   "key": "chart",
+   "glyph": "◪"
+  },
+  {
+   "key": "graph",
+   "glyph": "◩"
+  },
+  {
+   "key": "finding",
+   "glyph": "⚠"
+  },
+  {
+   "key": "export",
+   "glyph": "↓"
+  },
+  {
+   "key": "baseline",
+   "glyph": "◐"
+  },
+  {
+   "key": "instrument",
+   "glyph": "⚙"
+  },
+  {
+   "key": "control",
+   "glyph": "◈"
+  }
+ ],
+ "consoleActions": [
+  "Choose experiment files — choose files",
+  "Open the SOP view on the page — open page sop",
+  "Open the results view on the page — open page results",
+  "Open the control panel on the page — open page panel",
+  "Show the chart — chart",
+  "Next run — next run",
+  "Open the graphs view on the page — open page graphs",
+  "Draw the graph — chart",
+  "Open the review view on the page — open page review",
+  "Download Cq values (CSV) — export 0",
+  "Open the formats view on the page — open page export",
+  "Download this file — export 0",
+  "Download this file — export 1",
+  "Download this file — export 2",
+  "Download this file — export 3",
+  "Download this file — export 4",
+  "Download this file — export 5",
+  "Download this file — export 6",
+  "Download this file — export 7",
+  "Download this file — export 8",
+  "Download this file — export 9",
+  "Download this file — export 10",
+  "Open File integrity on the page — open page integrity"
+ ],
+ "consoleCommands": [
+  {
+   "id": "next",
+   "pattern": "^next$"
+  },
+  {
+   "id": "previous",
+   "pattern": "^previous$"
+  },
+  {
+   "id": "chart previous",
+   "pattern": "^chart previous$"
+  },
+  {
+   "id": "chart next",
+   "pattern": "^chart next$"
+  },
+  {
+   "id": "chart close",
+   "pattern": "^chart close$"
+  },
+  {
+   "id": "zoom",
+   "pattern": "^zoom (in|out|reset)$"
+  },
+  {
+   "id": "pan",
+   "pattern": "^pan (left|right|up|down)$"
+  },
+  {
+   "id": "chart type menu",
+   "pattern": "^(chart type|type menu|change chart type)$"
+  },
+  {
+   "id": "x axis menu",
+   "pattern": "^(x axis|axis menu|change x axis)$"
+  },
+  {
+   "id": "close menu",
+   "pattern": "^(close|close menu|dismiss)$"
+  },
+  {
+   "id": "read staged files",
+   "pattern": "^read files$"
+  },
+  {
+   "id": "choose experiment files",
+   "pattern": "^choose files$"
+  },
+  {
+   "id": "leave for a page",
+   "pattern": "^open page (load|sop|results|panel|graphs|review|export|integrity)$"
+  },
+  {
+   "id": "console view",
+   "pattern": "^(view )?(load files|load view|sop view|results view|panel view|charts view|review view|formats view|file integrity|integrity view)$"
+  },
+  {
+   "id": "chart type",
+   "pattern": "^type (i|ewma|cusum|trend|xbars|p|u|c|funnel)$"
+  },
+  {
+   "id": "x axis",
+   "pattern": "^x (order|date|hours|cycles)$"
+  },
+  {
+   "id": "theme light",
+   "pattern": "^theme light$"
+  },
+  {
+   "id": "theme dark",
+   "pattern": "^theme dark$"
+  },
+  {
+   "id": "chart",
+   "pattern": "^chart$"
+  },
+  {
+   "id": "panel",
+   "pattern": "^panel$"
+  },
+  {
+   "id": "results",
+   "pattern": "^results$"
+  },
+  {
+   "id": "review",
+   "pattern": "^review$"
+  },
+  {
+   "id": "load",
+   "pattern": "^load$"
+  },
+  {
+   "id": "sop",
+   "pattern": "^sop$"
+  },
+  {
+   "id": "next run",
+   "pattern": "^next run$"
+  },
+  {
+   "id": "download a file",
+   "pattern": "^export (\\d+)$"
+  },
+  {
+   "id": "exit",
+   "pattern": "^exit$"
+  }
+ ],
+ "cmdHelp": [
+  {
+   "command": "help",
+   "meaning": "this list"
+  },
+  {
+   "command": "list [images|data|all]",
+   "meaning": "what can be selected, with its identifier"
+  },
+  {
+   "command": "select <pattern>",
+   "meaning": "add to the selection; * and ? are allowed, e.g. select img:*"
+  },
+  {
+   "command": "deselect <pattern>",
+   "meaning": "remove from the selection"
+  },
+  {
+   "command": "only <pattern>",
+   "meaning": "clear the selection, then add the pattern"
+  },
+  {
+   "command": "clear",
+   "meaning": "empty the selection"
+  },
+  {
+   "command": "selection",
+   "meaning": "what is selected now"
+  },
+  {
+   "command": "run <number>",
+   "meaning": "which loaded run the run-level figures use"
+  },
+  {
+   "command": "runs",
+   "meaning": "the loaded runs and their numbers"
+  },
+  {
+   "command": "lab <text>",
+   "meaning": "the laboratory name for the report and the profile"
+  },
+  {
+   "command": "analyst <text>",
+   "meaning": "who is doing the analysis"
+  },
+  {
+   "command": "title <text>",
+   "meaning": "the report title"
+  },
+  {
+   "command": "profile",
+   "meaning": "the active profile, its version and checksum"
+  },
+  {
+   "command": "pdf [name]",
+   "meaning": "build the report and download it"
+  },
+  {
+   "command": "zip [name]",
+   "meaning": "build the archive and download it"
+  },
+  {
+   "command": "template",
+   "meaning": "download the selection as a CSV"
+  },
+  {
+   "command": "status",
+   "meaning": "files read, results, selection, profile"
+  },
+  {
+   "command": "script",
+   "meaning": "open the box for a pasted procedure"
+  },
+  {
+   "command": "close",
+   "meaning": "leave command mode"
+  }
+ ],
+ "catalogue": [
+  {
+   "id": "img:timeline",
+   "kind": "image",
+   "group": "Run history",
+   "title": "Run timeline — created, run, analysis, last change",
+   "note": "Every dated event the file carries: experiment creation, run start and end, analysis creation and edits, the last recorded change (for .eds, the newest ZIP entry date is the last save), instrument log and calibrations. Events more than 7 days from the run are listed in the table and marked at the edge.",
+   "available": "yes"
+  },
+  {
+   "id": "img:curves",
+   "kind": "image",
+   "group": "Fluorescence",
+   "title": "Amplification curves coloured by SOP outcome",
+   "note": "Stored curves of the selected target. Colour = outcome under the active SOP; dashed vertical lines = SOP Cq cut-off and late-signal limit; horizontal line = stored threshold (QuantStudio ΔRn).",
+   "available": "yes"
+  },
+  {
+   "id": "img:plate",
+   "kind": "image",
+   "group": "Plate",
+   "title": "Plate heat map",
+   "note": "Every physical position. Choose what the colour shows: SOP outcome, stored Cq, end fluorescence, background, amplitude, or analysis status (which also shows wells with signal that are in no analysis, and omitted wells).",
+   "available": "yes"
+  },
+  {
+   "id": "img:unanalysed",
+   "kind": "image",
+   "group": "Plate",
+   "title": "Signal in wells that are not in any analysis",
+   "note": "Rising fluorescence in positions that carry no result (unnamed wells, wells left out of every analysis, or wells without a target). These are the places where a sample may have been run but not reported.",
+   "available": "yes"
+  },
+  {
+   "id": "img:cqstrip",
+   "kind": "image",
+   "group": "Results",
+   "title": "Cq by target with SOP cut-offs",
+   "note": "One point per well. Colour by SOP outcome or by role. Red dashed line: Cq cut-off; orange: late-signal limit (per target).",
+   "available": "yes"
+  },
+  {
+   "id": "img:repsd",
+   "kind": "image",
+   "group": "Results",
+   "title": "Replicate spread — mean Cq against SD",
+   "note": "One point per sample and target with two or more detected replicates. The dashed line is the SOP maximum SD.",
+   "available": "yes"
+  },
+  {
+   "id": "img:stdcurve",
+   "kind": "image",
+   "group": "Results",
+   "title": "Standard curve with residuals and SOP limits",
+   "note": "Cq against log10 of the stored standard quantity, fitted by least squares on this page. The label shows slope, R², efficiency and range against the SOP limits; residuals are in the table.",
+   "available": "yes"
+  },
+  {
+   "id": "img:ic",
+   "kind": "image",
+   "group": "Results",
+   "title": "Internal control / reference Cq per sample (inhibition)",
+   "note": "Cq of the targets the SOP marks as internal control or reference. The band is the run median ± the SOP maximum IC shift; points above it suggest inhibition or low input.",
+   "available": "yes"
+  },
+  {
+   "id": "img:endpoint",
+   "kind": "image",
+   "group": "Fluorescence",
+   "title": "Fluorescence level against Cq",
+   "note": "End-point fluorescence (or amplitude above background) against the stored Cq. Late, low-plateau curves separate from true amplification; undetected wells are drawn at the right edge.",
+   "available": "yes"
+  },
+  {
+   "id": "img:levels",
+   "kind": "image",
+   "group": "Fluorescence",
+   "title": "Background and plateau fluorescence per channel",
+   "note": "For each detection channel / target: background (mean of cycles 3–10) and end-point fluorescence of every well, including wells outside the analyses. A shifted background points to plate, seal or optical problems.",
+   "available": "yes"
+  },
+  {
+   "id": "img:outcomes",
+   "kind": "image",
+   "group": "Results",
+   "title": "SOP outcomes per target",
+   "note": "Number of sample/target results per outcome under the active SOP, controls included.",
+   "available": "yes"
+  },
+  {
+   "id": "img:temperature",
+   "kind": "image",
+   "group": "Run history",
+   "title": "Block, cover and zone temperature (QuantStudio log)",
+   "note": "From the instrument log inside the .eds file: sample block mean, heated cover and the spread between block zones, against minutes from the first record. The dashed line is the SOP maximum zone spread.",
+   "available": "yes"
+  },
+  {
+   "id": "img:recalc",
+   "kind": "image",
+   "group": "Run history",
+   "title": "Stored Ct against the Ct re-derived on this page",
+   "note": "QuantStudio only: difference between the stored Ct and the crossing of the stored ΔRn with the stored threshold. Differences beyond ±0.2 require an algorithm/settings/provenance review; they do not prove that stored data were edited.",
+   "available": "yes"
+  },
+  {
+   "id": "img:lc_thermal",
+   "kind": "image",
+   "group": "Run history",
+   "title": "Block temperature trace (LightCycler temperature log)",
+   "note": "The block temperature the LightCycler 480 logged about every 0.41 s, decoded from the TemperatureLog inside the .ixo file, with the protocol setpoints. Heating and cooling rates, overshoot, settling and transition times on the control panel are measured on the full trace; the graph keeps the lowest and highest value of every time slice, so overshoots and short holds are not lost when it is thinned for display.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_timeline",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Runs on a calendar — run time and last change",
+   "note": "Each run as a green dot at its start, with the experiment creation (blue, above) and the last recorded change (red, below, joined by a dashed line). Long gaps between run and last change are the first thing an auditor asks about.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_delay",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Hours from run end to the last recorded change",
+   "note": "Processing time per run. The dashed line is the SOP maximum; bars above it are flagged in the run acceptance.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_accept",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Run acceptance grid",
+   "note": "Runs (rows) against the SOP criteria (columns): green met, amber review, red rejected, grey not applicable.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_outcomes",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "SOP outcomes per run",
+   "note": "Stacked counts of sample/target outcomes for every loaded run.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_control",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Control Cq across runs with SOP range",
+   "note": "Descriptive control overview. Solid band: configured SOP range. No pooled statistical limits; use extraction-batch charts for comparable groups.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_signal",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Background and plateau fluorescence across runs",
+   "note": "Median background and median end-point fluorescence of every channel per run: slow drift here is an instrument or reagent trend.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_duration",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Run duration and instrument use",
+   "note": "Minutes from run start to run end, coloured by instrument. A run much shorter than its siblings with the same protocol deserves a look at the log.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_findings",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Forensic findings by area (Pareto)",
+   "note": "Count of error and review findings in the forensic log, grouped by area, largest first.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_control_batches",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Control extraction batches",
+   "note": "Descriptive association only. Separate material, extraction batch, dilution, target, instrument and protocol. Missing/invalid extraction dates are excluded from age plots.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_control_age",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Control extract age versus Cq",
+   "note": "Descriptive association only. Separate material, extraction batch, dilution, target, instrument and protocol. Missing/invalid extraction dates are excluded from age plots.",
+   "available": "yes"
+  },
+  {
+   "id": "img:x_control_thermal",
+   "kind": "image",
+   "group": "Across runs",
+   "title": "Control Cq versus cooling rate",
+   "note": "Descriptive association only. Separate material, extraction batch, dilution, target, instrument and protocol. Missing/invalid extraction dates are excluded from age plots.",
+   "available": "yes"
+  },
+  {
+   "id": "data:cq_values",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Stored Cq values",
+   "note": "One row per stored result with well, sample, target, role and call.",
+   "available": "yes"
+  },
+  {
+   "id": "data:melting_peaks",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Melting peaks",
+   "note": "One row per stored peak with temperature, area, width and height.",
+   "available": "yes"
+  },
+  {
+   "id": "data:experiment_settings",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Experiment settings",
+   "note": "Every setting read out of the container, with the property it came from.",
+   "available": "yes"
+  },
+  {
+   "id": "data:plate_map",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Plate map",
+   "note": "The plate as the file describes it: position, sample, target and role.",
+   "available": "yes"
+  },
+  {
+   "id": "data:statistics",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Statistics",
+   "note": "Per target and group: counts, mean Cq, spread and detection.",
+   "available": "yes"
+  },
+  {
+   "id": "data:runs_and_qc",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Runs and quality control",
+   "note": "One row per run with its profile answer and the reason behind it.",
+   "available": "yes"
+  },
+  {
+   "id": "data:forensic_log",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Forensic findings",
+   "note": "Every finding with its area, severity and the evidence behind it.",
+   "available": "yes"
+  },
+  {
+   "id": "data:control_charts",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Control chart points",
+   "note": "The plotted points of the control series with their limits.",
+   "available": "yes"
+  },
+  {
+   "id": "data:amplification_curves",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Amplification curves",
+   "note": "The fluorescence of every well, one row per cycle.",
+   "available": "yes"
+  },
+  {
+   "id": "data:sop_answers",
+   "kind": "data",
+   "group": "Tables",
+   "title": "Profile answers",
+   "note": "What the laboratory profile concluded for every sample.",
+   "available": "yes"
+  }
+ ],
+ "templateHead": [
+  "id,kind,group,title,available,include",
+  "img:timeline,image,Run history,\"Run timeline — created, run, analysis, last change\",yes,no",
+  "img:curves,image,Fluorescence,Amplification curves coloured by SOP outcome,yes,no",
+  "img:plate,image,Plate,Plate heat map,yes,no"
+ ],
+ "exampleSelection": [
+  "img:curves",
+  "data:cq_values",
+  "data:runs_and_qc"
+ ],
+ "exampleCq": [
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A01",
+   "well_lims": "A1",
+   "position": 1,
+   "sample": "UHR cDNA",
+   "target": "GAPDH",
+   "analysis": "Standard curve — GAPDH",
+   "channel": 1,
+   "filter": "x4-m4",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 17.13536,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 16.98522,
+   "cq_sd_stored": 0.091637366,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.13445529553506763,
+   "cq_rederived": 17.1365,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A01",
+   "well_lims": "A1",
+   "position": 1,
+   "sample": "UHR cDNA",
+   "target": "FZD1",
+   "analysis": "Standard curve — FZD1",
+   "channel": 0,
+   "filter": "x1-m1",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 28.635874,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 28.72085,
+   "cq_sd_stored": 0.073005654,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.9021844381089397,
+   "cq_rederived": 28.6081,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A01",
+   "well_lims": "A1",
+   "position": 1,
+   "sample": "UHR cDNA",
+   "target": "APOE",
+   "analysis": "Standard curve — APOE",
+   "channel": 4,
+   "filter": "x2-m2",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 24.446917,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 24.284452,
+   "cq_sd_stored": 0.0900212,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.24430951635377451,
+   "cq_rederived": 24.4147,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A01",
+   "well_lims": "A1",
+   "position": 1,
+   "sample": "UHR cDNA",
+   "target": "CD44",
+   "analysis": "Standard curve — CD44",
+   "channel": 2,
+   "filter": "x3-m3",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 21.741442,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 21.572212,
+   "cq_sd_stored": 0.11276711,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.24027337228429582,
+   "cq_rederived": 21.7107,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A02",
+   "well_lims": "A2",
+   "position": 2,
+   "sample": "UHR cDNA",
+   "target": "GAPDH",
+   "analysis": "Standard curve — GAPDH",
+   "channel": 1,
+   "filter": "x4-m4",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 17.04153,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 16.98522,
+   "cq_sd_stored": 0.091637366,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.13445529553506763,
+   "cq_rederived": 17.057,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A02",
+   "well_lims": "A2",
+   "position": 2,
+   "sample": "UHR cDNA",
+   "target": "FZD1",
+   "analysis": "Standard curve — FZD1",
+   "channel": 0,
+   "filter": "x1-m1",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 28.664549,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 28.72085,
+   "cq_sd_stored": 0.073005654,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.9021844381089397,
+   "cq_rederived": 28.6381,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A02",
+   "well_lims": "A2",
+   "position": 2,
+   "sample": "UHR cDNA",
+   "target": "APOE",
+   "analysis": "Standard curve — APOE",
+   "channel": 4,
+   "filter": "x2-m2",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 24.464348,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 24.284452,
+   "cq_sd_stored": 0.0900212,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.24430951635377451,
+   "cq_rederived": 24.4231,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A02",
+   "well_lims": "A2",
+   "position": 2,
+   "sample": "UHR cDNA",
+   "target": "CD44",
+   "analysis": "Standard curve — CD44",
+   "channel": 2,
+   "filter": "x3-m3",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 21.750309,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 21.572212,
+   "cq_sd_stored": 0.11276711,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.24027337228429582,
+   "cq_rederived": 21.7182,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A03",
+   "well_lims": "A3",
+   "position": 3,
+   "sample": "UHR cDNA",
+   "target": "GAPDH",
+   "analysis": "Standard curve — GAPDH",
+   "channel": 1,
+   "filter": "x4-m4",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 16.971916,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 16.98522,
+   "cq_sd_stored": 0.091637366,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.13445529553506763,
+   "cq_rederived": 17.0092,
+   "omitted": ""
+  },
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "well": "A03",
+   "well_lims": "A3",
+   "position": 3,
+   "sample": "UHR cDNA",
+   "target": "FZD1",
+   "analysis": "Standard curve — FZD1",
+   "channel": 0,
+   "filter": "x1-m1",
+   "role": "Unknown",
+   "instrument_type": "UNKNOWN",
+   "replicate_of": "",
+   "cq": 28.676899,
+   "concentration": "",
+   "concentration_uncertainty": "",
+   "conc_status": "",
+   "crossing_point_status": "",
+   "warn_codes": "",
+   "warn_description": "",
+   "given_conc": "1.0",
+   "call": "NotCalculated",
+   "cycles": 40,
+   "has_curve": "yes",
+   "platform": "QuantStudio",
+   "amp_status": "",
+   "cq_confidence": "",
+   "flags": "",
+   "cq_mean_stored": 28.72085,
+   "cq_sd_stored": 0.073005654,
+   "delta_cq": "",
+   "delta_cq_mean": "",
+   "delta_delta_cq": "",
+   "rq": "",
+   "rq_min": "",
+   "rq_max": "",
+   "threshold": 0.9021844381089397,
+   "cq_rederived": 28.6443,
+   "omitted": ""
+  }
+ ],
+ "exampleRuns": [
+  {
+   "experiment": "4Plex_Multiplex_MMx_10uL",
+   "date": "2015-04-07T06:15:04+00:00",
+   "source_uid": "",
+   "source_crc32": "122e117b",
+   "operator": "",
+   "instrument": "SVT001",
+   "plate": "8x12",
+   "analyses": 4,
+   "results": 384,
+   "curves": 384,
+   "errors": 0,
+   "reviews": 3,
+   "raw_errors": 0,
+   "raw_reviews": 3,
+   "integrity": "CRC-32 valid; no Tamper record",
+   "platform": "QuantStudio",
+   "status": "Review"
+  },
+  {
+   "experiment": "Demo Abs Quant with SYBR Green I",
+   "date": "2005-06-09T11:24:49.078",
+   "source_uid": "453DEF300FC744DFBF932108FA4630A4",
+   "source_crc32": "56ac3fa9",
+   "operator": "Demo",
+   "instrument": "Pilot-510",
+   "plate": "16x24",
+   "analyses": 3,
+   "results": 158,
+   "curves": 79,
+   "errors": 2,
+   "reviews": 2,
+   "raw_errors": 2,
+   "raw_reviews": 2,
+   "integrity": "container checksum matches",
+   "platform": "LightCycler 480",
+   "status": "Error"
+  },
+  {
+   "experiment": "QS5_384W_RNaseP_Fast_MMx_10uL",
+   "date": "2015-08-27T10:12:40+00:00",
+   "source_uid": "",
+   "source_crc32": "5fdbc53e",
+   "operator": "",
+   "instrument": "DVT07",
+   "plate": "16x24",
+   "analyses": 1,
+   "results": 288,
+   "curves": 288,
+   "errors": 1,
+   "reviews": 4,
+   "raw_errors": 1,
+   "raw_reviews": 4,
+   "integrity": "CRC-32 valid; no Tamper record",
+   "platform": "QuantStudio",
+   "status": "Error"
+  }
+ ],
+ "state": {
+  "runs": 3,
+  "wells": 830,
+  "files": [
+   "4Plex_Multiplex_MMx_10uL.eds",
+   "Demo Abs Quant with SYBR Green I.ixo",
+   "QS5_384W_RNaseP_Fast_MMx_10uL.eds"
+  ]
+ },
+ "statusBar": [
+  {
+   "id": "sb-cancel",
+   "label": "Stop"
+  },
+  {
+   "id": "sb-command",
+   "label": "Command mode"
+  },
+  {
+   "id": "sb-console",
+   "label": "Console mode"
+  },
+  {
+   "id": "sb-assist",
+   "label": "Assisted mode"
+  },
+  {
+   "id": "sb-save",
+   "label": "Save status report"
+  },
+  {
+   "id": "sb-toggle",
+   "label": "Details"
+  }
+ ],
+ "pageErrors": []
+}

@@ -1,0 +1,2 @@
+const CC_DEFAULT_CFG={enabled:true,type:"",phase1:20,lambda:0.2,L:2.7,k:0.5,h:4,specLo:"",specHi:"",x:"",warnAhead:10,baseFrom:"",trendFit:"phase1",
+  rules:{r2:true,r3:true,r4:true,r5:true},action:"review"};

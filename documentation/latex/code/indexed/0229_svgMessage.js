@@ -1,0 +1,1 @@
+function svgMessage(msg){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 120" width="880" height="120" font-family="system-ui,Arial" font-size="13"><rect width="880" height="120" fill="#fff"/><text x="20" y="60" fill="#6b7280">${svgEsc(ui(msg))}</text></svg>`;}

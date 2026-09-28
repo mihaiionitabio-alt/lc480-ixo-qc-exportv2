@@ -1,0 +1,31 @@
+function wellRows(run){
+  return run.wells.map(w=>({
+    experiment:run.meta.name||run.file,
+    source_uid:sourceUidOf(run),source_crc32:sourceCRCOf(run),
+    well:w.well,well_lims:posToLimsWell(w.pos,run.cols), position:w.pos+1,
+    sample:w.sample||"", target:w.target||"", analysis:w.analysis||"",
+    channel:w.channel??"", filter:w.filterComb||"",
+    role:w.role||"", instrument_type:w.instrType||"",
+    replicate_of:Number.isFinite(w.replicateOf)?w.replicateOf+1:"",
+    cq:Number.isFinite(w.CpRaw)&&w.CpRaw>0?w.CpRaw:"",
+    concentration:w.CalcConc===""||w.CalcConc==null?"":Number(w.CalcConc),
+    concentration_uncertainty:w.CalcConcUnc??"",conc_status:w.ConcStatus||"",
+    crossing_point_status:w.CrossingPointStatus||"",warn_codes:w.warnCodes||"",warn_description:w.warnDesc||"",
+    given_conc:w.givenConc??"",
+    call:w.call||"", cycles:w.curve?w.curve.length:"",
+    has_curve:w.curve?"yes":"no",
+    platform:run.platform||"LightCycler 480",
+    amp_status:w.eds?w.eds.ampLabel:"",cq_confidence:w.eds&&w.eds.cqConf!=null?w.eds.cqConf:"",
+    flags:w.eds?w.warnCodes:"",cq_mean_stored:w.eds&&w.eds.ctMean!=null?w.eds.ctMean:"",
+    cq_sd_stored:w.eds&&w.eds.ctSd!=null?w.eds.ctSd:"",
+    delta_cq:w.eds&&w.eds.dct!=null?w.eds.dct:"",
+    delta_cq_mean:w.eds&&w.eds.ddct&&w.eds.ddct.dctMean!=null?w.eds.ddct.dctMean:"",
+    delta_delta_cq:w.eds&&w.eds.ddct&&w.eds.ddct.ddct!=null?w.eds.ddct.ddct:"",
+    rq:w.eds&&w.eds.ddct&&w.eds.ddct.rq!=null?w.eds.ddct.rq:"",
+    rq_min:w.eds&&w.eds.ddct&&w.eds.ddct.rqMin!=null?w.eds.ddct.rqMin:"",
+    rq_max:w.eds&&w.eds.ddct&&w.eds.ddct.rqMax!=null?w.eds.ddct.rqMax:"",
+    threshold:w.eds&&w.eds.threshold!=null?w.eds.threshold:"",
+    cq_rederived:w.eds&&w.eds.ctRecalc!=null?Number(w.eds.ctRecalc.toFixed(4)):"",
+    omitted:w.eds?(w.eds.omit?"yes":""):""
+  }));
+}

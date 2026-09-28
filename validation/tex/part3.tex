@@ -1,0 +1,574 @@
+\chapter{Integration validations}
+
+Three checks do not belong to a single function. Each of them is the reason a design decision was
+taken, and each is reproducible from the corpus alone.
+
+\section{The Cq ceiling rule}\label{sec:ceiling}
+
+\subsection*{The observation}
+The first reading of the two vendor exports produced a result that could not be right: 82 per cent
+of the reference file carried a crossing point of exactly 40.0 on a 40-cycle run. The instrument's
+own container for the same run reports those same reactions as undetermined. A vendor export writes
+``no crossing'' as a Cq equal to the cycle count, and reading it literally turns four fifths of a
+file into late detections.
+
+The counter-example is in the corpus too: the LinRegPCR file, which is a re-analysis rather than an
+export, has no value at the ceiling at all and a maximum of 34. So the convention belongs to the
+export path, not to RDML, and the rule must be narrow enough to leave a re-analysis untouched.
+
+\subsection*{The rule as built}
+
+\begin{lstlisting}[style=js]
+      let maxCycle=0,maxMelt=0,anyCq=false,anyAdp=false,anyMdp=false,ceilingRows=0;
+      /* one cheap pass for the cycle count: the ceiling rule below needs it before the
+      let maxCycleSeen=0;
+        const c=rdmlNum(a,"cyc");if(c!==null&&c>maxCycleSeen)maxCycleSeen=c;})));
+             does not do this (example_3_linregpcr: 0 of 90 at the ceiling, maximum 34), so the
+          let cqCeiling=false;
+          if(cq!==null&&Number.isFinite(maxCycleSeen)&&maxCycleSeen>0
+             &&Math.abs(cq-maxCycleSeen)<1e-9
+             &&rdmlNum(data,"N0")===null&&rdmlNum(data,"ampEff")===null){cqCeiling=true;cq=null;}
+          if(cqCeiling)ceilingRows++;
+            cqAtCycleCeiling:cqCeiling,
+          cqAtCycleCeiling:ceilingRows},
+\end{lstlisting}
+
+
+The guard is deliberately conservative: the conversion happens only when the file offers nothing
+that would contradict it. A re-analysis writes $N_0$ and an efficiency beside every Cq, so both
+tests fail and its values survive unchanged.
+
+\subsection*{Measured, before and after}
+\begin{longtable}{@{}p{54mm}r r r r@{}}
+\toprule
+\textbf{File} & \textbf{cycles} & \textbf{converted} & \textbf{Cq kept} & \textbf{max Cq} \\
+\midrule\endhead
+
+\texttt{CORPUS-RDML-1} & 40 & 158 & 34 & 37.34 \\
+
+\texttt{GeneExpression\_\allowbreak{}ddCt\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10uL} & 40 & 6 & 66 & 30.266 \\
+
+\texttt{example\_3\_linregpcr} & 45 & 0 & 90 & 34.001 \\
+
+\bottomrule\end{longtable}
+Verdict: no value equal to the cycle count survives in any file, and the re-analysis file loses
+nothing. \PASS
+
+\section{The cross-format oracle}\label{sec:oracle}
+
+\subsection*{Why this is the decisive test}
+Every other input in this report was either written for the test or read by the code under test.
+This one is neither. The experiment \texttt{CORPUS-RDML-1} exists as an instrument container
+and as an RDML export of the same run. The page decodes the first through a path written months
+earlier for a different format. If the reader under test is correct, the two must agree reaction by
+reaction --- and if it is wrong, they cannot be made to agree by adjusting a test expectation.
+
+
+\begin{center}\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[node distance=9mm]
+\node[io] (eds) {\texttt{CORPUS-RDML-1.eds}\\ 1\,756\,735 bytes};
+\node[io, below=16mm of eds] (rd) {\texttt{CORPUS-RDML-1.rdml}\\ 69\,062 bytes};
+\node[box, right=12mm of eds] (dec) {page intake\\ \fn{parseEds}\\ (written 2026-09, untouched)};
+\node[box, right=12mm of rd] (par) {\fn{rdmlParse}\\ (under test)};
+\node[box, right=12mm of dec] (k1) {key = position\\ $|$ target};
+\node[box, right=12mm of par] (k2) {key = position\\ $|$ target};
+\node[dec, right=14mm of $(k1)!0.5!(k2)$] (cmp) {\fn{resultCq}\\ equal within\\ 0.0005?};
+\node[ok, right=14mm of cmp] (res) {64 matched\\ 30 both undetermined\\ \textbf{0 differing}};
+\draw[fl] (eds)--(dec); \draw[fl] (dec)--(k1); \draw[fl] (k1)--(cmp);
+\draw[fl] (rd)--(par);  \draw[fl] (par)--(k2); \draw[fl] (k2)--(cmp);
+\draw[fl] (cmp)--(res);
+\end{tikzpicture}}\end{center}
+\begin{center}\small Figure: the oracle. The two paths share no code below the comparison.\normalsize\end{center}
+
+\subsection*{Result}
+\begin{lstlisting}[style=jstiny]
+{
+ "input": {
+  "edsRows": 64,
+  "rdmlRows": 192
+ },
+ "output": {
+  "matched": 64,
+  "bothUndetermined": 30,
+  "differing": 0,
+  "firstDiffs": [],
+  "rdmlOnly": 128
+ }
+}
+\end{lstlisting}
+
+
+Every crossing point the instrument container yields is reproduced exactly by the reader, and every
+reaction the instrument reports as undetermined is also undetermined after the ceiling rule. The 128
+reactions present only in the export are the ones the \texttt{.eds} decoder does not emit; they are
+kept, not silently dropped, which is what makes the superseded-companion comparison of
+section~\ref{sec:priority} possible. \PASS
+
+\section{Raw-file priority}\label{sec:priority}
+
+The laboratory's rule is that the instrument's own file is the record. Three cases were run: the
+reference pair loaded together; the same pair with the export renamed so that only the experiment
+identifier can match; and a set of RDML runs with no vendor container present.
+
+\subsection*{Case: FINDING V-2 — export renamed, only the experiment id matches}
+Input (D (one field changed on a real run object)): the same .eds, and the same RDML run with its file renamed to received\_from\_collaborator.rdml
+\begin{lstlisting}[style=jstiny]
+{
+ "input": {
+  "vendorFile": "CORPUS-RDML-1.eds",
+  "vendorExperiment": "CORPUS-RDML-1",
+  "rdmlFile": "received_from_collaborator.rdml",
+  "rdmlExperiment": "CORPUS-RDML-1",
+  "vendorKeys": [
+   "2026 06 15 CORPUS-RDML-1",
+   "CORPUS-RDML-1"
+  ],
+  "rdmlKeys": [
+   "received from collaborator",
+   "CORPUS-RDML-1"
+  ]
+ },
+ "output": {
+  "superseded": 1
+ }
+}
+\end{lstlisting}
+
+Expected: the export should still be superseded: it is the same experiment \hfill Verdict: \PASS
+\subsection*{Case: vendor container + its RDML export}
+Input (R + R): the .eds decoded by intake, plus the .rdml of the same experiment
+\begin{lstlisting}[style=jstiny]
+{
+ "input": {
+  "runs": [
+   {
+    "file": "CORPUS-RDML-1.eds",
+    "isRdml": false
+   },
+   {
+    "file": "CORPUS-RDML-1.rdml",
+    "isRdml": true
+   }
+  ]
+ },
+ "output": {
+  "kept": 2,
+  "superseded": [
+   {
+    "file": "CORPUS-RDML-1.rdml",
+    "by": "CORPUS-RDML-1.eds",
+    "reason": "the instrument's own file for this experiment is loaded (CORPUS-RDML-1.eds);
+   the exchange export is kept for comparison only"
+   }
+  ]
+ }
+}
+\end{lstlisting}
+
+Expected: the RDML export is superseded by the .eds; nothing is discarded \hfill Verdict: \PASS
+\subsection*{Case: RDML only, no vendor container}
+Input (R): the three runs of example\_3\_linregpcr.rdml
+\begin{lstlisting}[style=jstiny]
+{
+ "input": {
+  "runs": [
+   {
+    "file": "example_3_linregpcr.rdml",
+    "isRdml": true
+   },
+   {
+    "file": "example_3_linregpcr.rdml",
+    "isRdml": true
+   },
+   {
+    "file": "example_3_linregpcr.rdml",
+    "isRdml": true
+   }
+  ]
+ },
+ "output": {
+  "kept": 3,
+  "superseded": 0
+ }
+}
+\end{lstlisting}
+
+Expected: nothing superseded \hfill Verdict: \PASS
+\subsection*{Predicate: \fn{runIsSuperseded} before and after}
+\begin{lstlisting}[style=jstiny]
+{
+ "before": {
+  "before": [
+   false,
+   false
+  ]
+ },
+ "after": {
+  "after": [
+   false,
+   true
+  ]
+ }
+}
+\end{lstlisting}
+
+Verdict: \PASS
+\subsection*{The gate on the superseded run}
+\begin{lstlisting}[style=jstiny]
+{
+ "applicable": false,
+ "state": "superseded",
+ "reason": "superseded — the instrument's own file for this experiment is loaded
+   (CORPUS-RDML-1.eds); the exchange export is kept for comparison only"
+}
+\end{lstlisting}
+
+Verdict: \PASS
+\chapter{Findings raised by this validation}
+
+Two things were raised while the evidence was being collected. Both are recorded here with the test
+that raised them, the test that characterised them, and the conclusion --- including the one that
+was cleared, because a validation that only reports confirmed defects hides half of its own work.
+
+\section{V-1 --- \fn{rdmlText} is called on an element the schema defines as complex}\label{sec:V1}
+
+\subsection*{How it surfaced}
+The expected value for \fn{rdmlText}(\texttt{<run>}, \texttt{"dataCollectionSoftware"}) was written
+as the empty string, on the assumption that the reference file does not carry it. The function
+returned a two-line string instead.
+
+\begin{lstlisting}[style=jstiny]
+{
+ "returned": "QuantStudio 3 and 5 Software\n                1.6.1"
+}
+\end{lstlisting}
+
+
+\subsection*{Characterisation}
+A sweep over every element the reader reads with \fn{rdmlText}, in all seven files, shows the cause:
+\texttt{dataCollectionSoftware} is not a leaf. The schema gives it \texttt{<name>} and
+\texttt{<version>} children, and \texttt{textContent} concatenates them with the file's own
+indentation between.
+
+\begin{lstlisting}[style=jstiny]
+{
+ "affected": 2,
+ "rows": [
+  {
+   "file": "CORPUS-RDML-1.rdml",
+   "element": "dataCollectionSoftware",
+   "occurrences": 1,
+   "complexOccurrences": 1,
+   "children": [
+    "name",
+    "version"
+   ],
+   "textContentAsRead": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+   "correctReading": "name=\"QuantStudio 3 and 5 Software\" version=\"1.6.1\""
+  },
+  {
+   "file": "GeneExpression_ddCt_Fast_Adv_MMx_10uL.rdml",
+   "element": "dataCollectionSoftware",
+   "occurrences": 1,
+   "complexOccurrences": 1,
+   "children": [
+    "name",
+    "version"
+   ],
+   "textContentAsRead": "\"QuantStudio 3 and 5 Software\\n                1.6.1\"",
+   "correctReading": "name=\"QuantStudio 3 and 5 Software\" version=\"1.6.1\""
+  }
+ ]
+}
+\end{lstlisting}
+
+
+\subsection*{Consequence and recommendation}
+The concatenated string becomes \texttt{meta.SWVersion}, which reaches the load table and the
+instrument-record export. It is cosmetic --- no measurement is affected --- but it is wrong, and it
+would be reported to a laboratory as the software version. Two one-line changes remove it:
+
+\begin{lstlisting}[style=js]
+/* 1. collapse inner whitespace, not only the ends */
+function rdmlText(el,name){const k=rdmlKid(el,name);
+  return k?String(k.textContent||"").replace(/\s+/g," ").trim():"";}
+
+/* 2. read the complex element as the schema defines it */
+const dcs=rdmlKid(runEl,"dataCollectionSoftware");
+const software=dcs?[rdmlText(dcs,"name"),rdmlText(dcs,"version")].filter(Boolean).join(" ")
+                  :rdmlText(runEl,"dataCollectionSoftware");
+\end{lstlisting}
+
+Severity: cosmetic, in a reported field. Status: open, recommended for the next build.
+\section{V-2 --- asymmetric normalisation in \fn{rdmlKeyOf}, raised and cleared}\label{sec:V2}
+
+\subsection*{How it surfaced}
+\fn{rdmlKeyOf} was expected to return two keys that agree for the reference pair. They do not: the
+file-name key is stem-normalised while the experiment key is only lower-cased.
+
+\begin{lstlisting}[style=jstiny]
+{
+ "input": {
+  "name": "CORPUS-RDML-1.rdml",
+  "experimentId": "CORPUS-RDML-1"
+ },
+ "returned": [
+  "2026 06 15 CORPUS-RDML-1",
+  "CORPUS-RDML-1"
+ ]
+}
+\end{lstlisting}
+
+
+\subsection*{Why it does not break the priority rule}
+The two keys are never compared with each other. \fn{applyRawFilePriority} builds its key set with
+the same function it later queries, so a file-name key is only ever compared with a file-name key
+and an experiment key with an experiment key. To prove that rather than argue it, the export was
+renamed so that its file-name key could not possibly match, leaving only the experiment identifier
+to carry the match:
+
+\begin{lstlisting}[style=jstiny]
+{
+ "input": {
+  "vendorFile": "CORPUS-RDML-1.eds",
+  "vendorExperiment": "CORPUS-RDML-1",
+  "rdmlFile": "received_from_collaborator.rdml",
+  "rdmlExperiment": "CORPUS-RDML-1",
+  "vendorKeys": [
+   "2026 06 15 CORPUS-RDML-1",
+   "CORPUS-RDML-1"
+  ],
+  "rdmlKeys": [
+   "received from collaborator",
+   "CORPUS-RDML-1"
+  ]
+ },
+ "output": {
+  "superseded": 1
+ }
+}
+\end{lstlisting}
+
+
+The export is still superseded. The finding is therefore an internal inconsistency with no
+observable effect today.
+
+\subsection*{Residual risk and recommendation}
+The inconsistency becomes a defect the moment the two identifiers are spelled differently --- an
+export whose experiment identifier is \texttt{2026 06 15 CORPUS-RDML-1} would not match a container
+whose name is \texttt{CORPUS-RDML-1}. One line closes it:
+
+\begin{lstlisting}[style=js]
+function rdmlKeyOf(item){
+  return [rdmlStem(item.name),rdmlStem(item.experimentId)].filter(Boolean);
+}
+\end{lstlisting}
+
+Severity: latent. Status: cleared for the current corpus, recommended as hardening.
+\chapter{Traceability}
+
+\section{Every record}
+The table lists all 89 records in the order they were executed. It is generated from the same JSON
+the harness writes, so it cannot drift from the evidence above.
+
+\begin{longtable}{@{}p{3mm}p{40mm}p{\dimexpr\linewidth-3mm-40mm-21mm-10mm-48pt\relax}p{21mm}p{10mm}@{}}
+\toprule & \textbf{Function} & \textbf{Case} & \textbf{Class} & \\ \midrule\endhead
+
+\tiny 1 & \small \fn{rdml\allowbreak{}Entries} & \small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 2 & \small \fn{rdml\allowbreak{}Entries} & \small Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 3 & \small \fn{rdml\allowbreak{}Entries} & \small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 4 & \small \fn{rdml\allowbreak{}Entries} & \small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 5 & \small \fn{rdml\allowbreak{}Entries} & \small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 6 & \small \fn{rdml\allowbreak{}Entries} & \small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 7 & \small \fn{rdml\allowbreak{}Entries} & \small example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 8 & \small \fn{rdml\allowbreak{}Is\allowbreak{}Container} & \small positive \allowbreak{}— \allowbreak{}RDML \allowbreak{}entries & \small D & \PASS \\
+
+\tiny 9 & \small \fn{rdml\allowbreak{}Is\allowbreak{}Container} & \small negative \allowbreak{}— \allowbreak{}Quant\allowbreak{}Studio \allowbreak{}entry \allowbreak{}names & \small S & \PASS \\
+
+\tiny 10 & \small \fn{rdml\allowbreak{}Is\allowbreak{}Container} & \small negative \allowbreak{}— \allowbreak{}empty \allowbreak{}list & \small S & \PASS \\
+
+\tiny 11 & \small \fn{rdml\allowbreak{}Kids} & \small <run> \allowbreak{}→ \allowbreak{}<react> & \small D & \PASS \\
+
+\tiny 12 & \small \fn{rdml\allowbreak{}Kids} & \small <run> \allowbreak{}→ \allowbreak{}<pcr\allowbreak{}Format> & \small D & \PASS \\
+
+\tiny 13 & \small \fn{rdml\allowbreak{}Kids} & \small <run> \allowbreak{}→ \allowbreak{}<absent> & \small D & \PASS \\
+
+\tiny 14 & \small \fn{rdml\allowbreak{}Kids} & \small <react> \allowbreak{}→ \allowbreak{}<data> & \small D & \PASS \\
+
+\tiny 15 & \small \fn{rdml\allowbreak{}Kids} & \small <data> \allowbreak{}→ \allowbreak{}<adp> & \small D & \PASS \\
+
+\tiny 16 & \small \fn{rdml\allowbreak{}Kids} & \small null \allowbreak{}host & \small S & \PASS \\
+
+\tiny 17 & \small \fn{rdml\allowbreak{}Kid} & \small present & \small D & \PASS \\
+
+\tiny 18 & \small \fn{rdml\allowbreak{}Kid} & \small absent & \small S & \PASS \\
+
+\tiny 19 & \small \fn{rdml\allowbreak{}Text} & \small cq\allowbreak{}Detection\allowbreak{}Method & \small D & \PASS \\
+
+\tiny 20 & \small \fn{rdml\allowbreak{}Text} & \small instrument & \small D & \PASS \\
+
+\tiny 21 & \small \fn{rdml\allowbreak{}Text} & \small background\allowbreak{}Determination\allowbreak{}Method & \small D & \PASS \\
+
+\tiny 22 & \small \fn{rdml\allowbreak{}Text} & \small data\allowbreak{}Collection\allowbreak{}Software & \small D & \PASS \\
+
+\tiny 23 & \small \fn{rdml\allowbreak{}Text} & \small not\allowbreak{}Present & \small S & \PASS \\
+
+\tiny 24 & \small \fn{rdml\allowbreak{}Text} & \small FINDING \allowbreak{}V-\allowbreak{}1 \allowbreak{}— \allowbreak{}read \allowbreak{}with \allowbreak{}rdml\allowbreak{}Text \allowbreak{}but \allowbreak{}complex \allowbreak{}in \allowbreak{}the \allowbreak{}schema & \small R & \PASS \\
+
+\tiny 25 & \small \fn{rdml\allowbreak{}Num} & \small cyc & \small R (verbatim  & \PASS \\
+
+\tiny 26 & \small \fn{rdml\allowbreak{}Num} & \small fluor & \small R (verbatim  & \PASS \\
+
+\tiny 27 & \small \fn{rdml\allowbreak{}Num} & \small cq & \small R (verbatim  & \PASS \\
+
+\tiny 28 & \small \fn{rdml\allowbreak{}Num} & \small empty & \small S & \PASS \\
+
+\tiny 29 & \small \fn{rdml\allowbreak{}Num} & \small text & \small S & \PASS \\
+
+\tiny 30 & \small \fn{rdml\allowbreak{}Num} & \small negative & \small S & \PASS \\
+
+\tiny 31 & \small \fn{rdml\allowbreak{}Num} & \small exponent & \small R (verbatim  & \PASS \\
+
+\tiny 32 & \small \fn{rdml\allowbreak{}Num} & \small absent \allowbreak{}child & \small S & \PASS \\
+
+\tiny 33 & \small \fn{rdml\allowbreak{}Attr\allowbreak{}Id} & \small react \allowbreak{}→ \allowbreak{}sample & \small D & \PASS \\
+
+\tiny 34 & \small \fn{rdml\allowbreak{}Attr\allowbreak{}Id} & \small data \allowbreak{}→ \allowbreak{}tar & \small D & \PASS \\
+
+\tiny 35 & \small \fn{rdml\allowbreak{}Attr\allowbreak{}Id} & \small absent & \small S & \PASS \\
+
+\tiny 36 & \small \fn{rdml\allowbreak{}Parse} & \small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{} & \small R & \PASS \\
+
+\tiny 37 & \small \fn{rdml\allowbreak{}Parse} & \small Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{} & \small R & \PASS \\
+
+\tiny 38 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 39 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 40 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}1\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 41 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 42 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 43 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}2\_\allowbreak{}tm\_\allowbreak{}annotated.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 44 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 45 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 46 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 47 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 48 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}2/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 49 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}4\_\allowbreak{}interrun.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}3/\allowbreak{}3]\allowbreak{} & \small R & \PASS \\
+
+\tiny 50 & \small \fn{rdml\allowbreak{}Parse} & \small example\_\allowbreak{}LCGreen\_\allowbreak{}raw.\allowbreak{}rdml \allowbreak{}[\allowbreak{}run \allowbreak{}1/\allowbreak{}1]\allowbreak{} & \small R & \PASS \\
+
+\tiny 51 & \small \fn{rdml\allowbreak{}Parse} & \small wrong \allowbreak{}root \allowbreak{}element & \small S & \PASS \\
+
+\tiny 52 & \small \fn{rdml\allowbreak{}Parse} & \small not \allowbreak{}well \allowbreak{}formed & \small S & \PASS \\
+
+\tiny 53 & \small \fn{rdml\allowbreak{}Parse} & \small no \allowbreak{}experiment & \small S & \PASS \\
+
+\tiny 54 & \small \fn{run\allowbreak{}Processing\allowbreak{}State} & \small instrument & \small R/D & \PASS \\
+
+\tiny 55 & \small \fn{run\allowbreak{}Processing\allowbreak{}State} & \small vendor-\allowbreak{}export & \small R/D & \PASS \\
+
+\tiny 56 & \small \fn{run\allowbreak{}Processing\allowbreak{}State} & \small third-\allowbreak{}party & \small R/D & \PASS \\
+
+\tiny 57 & \small \fn{run\allowbreak{}Processing\allowbreak{}State} & \small raw & \small R/D & \PASS \\
+
+\tiny 58 & \small \fn{run\allowbreak{}Processing\allowbreak{}State} & \small no \allowbreak{}run & \small S & \PASS \\
+
+\tiny 59 & \small \fn{run\allowbreak{}Is\allowbreak{}Instrument\allowbreak{}Analysed} & \small instrument & \small D & \PASS \\
+
+\tiny 60 & \small \fn{run\allowbreak{}Is\allowbreak{}Instrument\allowbreak{}Analysed} & \small vendor-\allowbreak{}export & \small D & \PASS \\
+
+\tiny 61 & \small \fn{run\allowbreak{}Is\allowbreak{}Instrument\allowbreak{}Analysed} & \small third-\allowbreak{}party & \small D & \PASS \\
+
+\tiny 62 & \small \fn{run\allowbreak{}Is\allowbreak{}Instrument\allowbreak{}Analysed} & \small raw & \small D & \PASS \\
+
+\tiny 63 & \small \fn{sop\allowbreak{}Processing\allowbreak{}Applicability\allowbreak{}} & \small instrument & \small D & \PASS \\
+
+\tiny 64 & \small \fn{sop\allowbreak{}Processing\allowbreak{}Applicability\allowbreak{}} & \small vendor-\allowbreak{}export & \small D & \PASS \\
+
+\tiny 65 & \small \fn{sop\allowbreak{}Processing\allowbreak{}Applicability\allowbreak{}} & \small third-\allowbreak{}party & \small D & \PASS \\
+
+\tiny 66 & \small \fn{sop\allowbreak{}Processing\allowbreak{}Applicability\allowbreak{}} & \small raw & \small D & \PASS \\
+
+\tiny 67 & \small \fn{rdml\allowbreak{}Stem} & \small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & \small R (file name & \PASS \\
+
+\tiny 68 & \small \fn{rdml\allowbreak{}Stem} & \small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}eds & \small R (file name & \PASS \\
+
+\tiny 69 & \small \fn{rdml\allowbreak{}Stem} & \small Demo \allowbreak{} \allowbreak{}Abs\_\allowbreak{}Quant.\allowbreak{}ixo & \small S & \PASS \\
+
+\tiny 70 & \small \fn{rdml\allowbreak{}Stem} & \small (\allowbreak{}empty)\allowbreak{} & \small S & \PASS \\
+
+\tiny 71 & \small \fn{rdml\allowbreak{}Key\allowbreak{}Of} & \small name \allowbreak{}and \allowbreak{}experiment & \small D & \PASS \\
+
+\tiny 72 & \small \fn{apply\allowbreak{}Raw\allowbreak{}File\allowbreak{}Priority} & \small FINDING \allowbreak{}V-\allowbreak{}2 \allowbreak{}— \allowbreak{}export \allowbreak{}renamed,\allowbreak{} \allowbreak{}only \allowbreak{}the \allowbreak{}experiment \allowbreak{}id \allowbreak{}matches & \small D (one field & \PASS \\
+
+\tiny 73 & \small \fn{rdml\allowbreak{}Key\allowbreak{}Of} & \small no \allowbreak{}experiment \allowbreak{}id & \small S & \PASS \\
+
+\tiny 74 & \small \fn{apply\allowbreak{}Raw\allowbreak{}File\allowbreak{}Priority} & \small vendor \allowbreak{}container \allowbreak{}+\allowbreak{} \allowbreak{}its \allowbreak{}RDML \allowbreak{}export & \small R + R & \PASS \\
+
+\tiny 75 & \small \fn{run\allowbreak{}Is\allowbreak{}Superseded} & \small before \allowbreak{}and \allowbreak{}after \allowbreak{}apply\allowbreak{}Raw\allowbreak{}File\allowbreak{}Priority & \small D & \PASS \\
+
+\tiny 76 & \small \fn{apply\allowbreak{}Raw\allowbreak{}File\allowbreak{}Priority} & \small RDML \allowbreak{}only,\allowbreak{} \allowbreak{}no \allowbreak{}vendor \allowbreak{}container & \small R & \PASS \\
+
+\tiny 77 & \small \fn{sop\allowbreak{}Processing\allowbreak{}Applicability\allowbreak{}} & \small superseded \allowbreak{}vendor \allowbreak{}export & \small D & \PASS \\
+
+\tiny 78 & \small \fn{RDML\_\allowbreak{}SAMPLE\_\allowbreak{}ROLE} & \small the \allowbreak{}six \allowbreak{}RDML \allowbreak{}sample \allowbreak{}types & \small Specificatio & \PASS \\
+
+\tiny 79 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small Lin\allowbreak{}Reg\allowbreak{}PCR & \small R (verbatim) & \PASS \\
+
+\tiny 80 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small Lin\allowbreak{}Reg\allowbreak{}PCR,\allowbreak{} \allowbreak{}constant & \small R (verbatim) & \PASS \\
+
+\tiny 81 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small Background \allowbreak{}Subtraction & \small R (verbatim) & \PASS \\
+
+\tiny 82 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small automated \allowbreak{}threshold \allowbreak{}and \allowbreak{}baseline \allowbreak{}settings & \small R (verbatim) & \PASS \\
+
+\tiny 83 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small (\allowbreak{}empty)\allowbreak{} & \small S & \PASS \\
+
+\tiny 84 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small Cy0 & \small S & \PASS \\
+
+\tiny 85 & \small \fn{RDML\_\allowbreak{}REANALYSIS\_\allowbreak{}TOOLS} & \small MAK2 & \small S & \PASS \\
+
+\tiny 86 & \small \fn{rdml\allowbreak{}Parse \allowbreak{}(\allowbreak{}Cq-\allowbreak{}ceiling \allowbreak{}rule)\allowbreak{}} & \small 2026-\allowbreak{}06-\allowbreak{}15\_\allowbreak{}RAS\_\allowbreak{}FFPE.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 87 & \small \fn{rdml\allowbreak{}Parse \allowbreak{}(\allowbreak{}Cq-\allowbreak{}ceiling \allowbreak{}rule)\allowbreak{}} & \small Gene\allowbreak{}Expression\_\allowbreak{}dd\allowbreak{}Ct\_\allowbreak{}Fast\_\allowbreak{}Adv\_\allowbreak{}MMx\_\allowbreak{}10u\allowbreak{}L.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 88 & \small \fn{rdml\allowbreak{}Parse \allowbreak{}(\allowbreak{}Cq-\allowbreak{}ceiling \allowbreak{}rule)\allowbreak{}} & \small example\_\allowbreak{}3\_\allowbreak{}linregpcr.\allowbreak{}rdml & \small R & \PASS \\
+
+\tiny 89 & \small \fn{rdml\allowbreak{}Parse \allowbreak{}(\allowbreak{}cross-\allowbreak{}format \allowbreak{}oracle)\allowbreak{}} & \small .\allowbreak{}eds \allowbreak{}vs \allowbreak{}.\allowbreak{}rdml \allowbreak{}of \allowbreak{}the \allowbreak{}same \allowbreak{}run & \small R + R & \PASS \\
+
+\bottomrule\end{longtable}
+\section{Coverage by provenance class}
+\begin{longtable}{@{}p{30mm}r p{\dimexpr\linewidth-30mm-20mm-28pt\relax}@{}}
+\toprule\textbf{Class}&\textbf{Records}&\textbf{Reading}\\\midrule\endhead
+
+R & 39 & Real file, unmodified. These carry the weight of the validation. \\
+
+D & 25 & Derived by the code under test from a real file. \\
+
+S & 20 & Constructed for the test; printed verbatim in the input tables. \\
+
+R/D & 4 & A mixture of the two within one record. \\
+
+Spec. & 1 & Taken from the RDML schema rather than from a file. \\
+
+\bottomrule\end{longtable}
+
+Of 89 records, 43 draw on real files that this project did not create, 25 are derived from them by
+the code under test, and 20 are constructed boundary cases. No function rests on constructed input
+alone.

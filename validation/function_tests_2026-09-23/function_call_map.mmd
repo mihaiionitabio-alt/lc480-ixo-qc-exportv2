@@ -1,0 +1,41 @@
+flowchart LR
+  files[(Staged .ixo / .eds / .zip files)]
+  runs[(Decoded RUNS model)]
+  profile[(SOP profile and procedure)]
+  history[(Instrument history)]
+  findings[(Review events and rising-curve evidence)]
+  chartrows[(Control-chart rows)]
+  limits[(Limits, signals and baseline state)]
+  views[[Tabs and console views]]
+  exports[(CSV / ZIP / RDES / RDML / qPCR exports)]
+  intake["readStaged"]
+  decode["decodeIxo"]
+  assign["assignRoles"]
+  sop["sopEvaluateRun"]
+  review["reviewForensicEventsCoreUncached"]
+  ccrows["ccRowsFromRuns"]
+  cccompute["ccCompute"]
+  render["renderTab"]
+  bundle["bundleZip"]
+  files --> intake
+  intake --> decode
+  decode --> runs
+  runs --> assign
+  profile --> sop
+  runs --> sop
+  sop --> views
+  runs --> review
+  review --> findings
+  history --> ccrows
+  runs --> ccrows
+  ccrows --> chartrows
+  chartrows --> cccompute
+  cccompute --> limits
+  limits --> views
+  findings --> views
+  runs --> exports
+  findings --> exports
+  bundle --> exports
+  views --> render
+  classDef data fill:#e0f2fe,stroke:#0369a1;
+  class files,runs,profile,history,findings,chartrows,limits,exports data;

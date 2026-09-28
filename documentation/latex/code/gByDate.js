@@ -1,0 +1,1 @@
+function gByDate(list,getRun){return list.map((x,k)=>({x,k,d:gRunDate(getRun(x))})).sort((a,b)=>a.d-b.d||a.k-b.k).map(o=>o.x);}

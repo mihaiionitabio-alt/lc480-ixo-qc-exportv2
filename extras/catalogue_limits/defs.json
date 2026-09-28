@@ -1,0 +1,1188 @@
+{
+ "cc": [
+  {
+   "id": "heat_rate",
+   "code": "B-H1",
+   "group": "hardware",
+   "title": "Peak heating rate (2-s window)",
+   "unit": "\u00b0C/s",
+   "idea": "How fast the Peltier elements can heat the block: the steepest 2-second slope of every heating transition, median over the run (manual: 4.8 \u00b0C/s). Independent of plateau detection, so short holds do not distort it.",
+   "reading": "A slow fall over months is Peltier or thermal-interface ageing; the fitted line gives a conditional limit-crossing estimate, not a failure date. A single low run points to the plate or a blocked vent that day.",
+   "spec": {
+    "LC": {
+     "lo": 4.3
+    },
+    "QS": {}
+   },
+   "better": "high",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "trend",
+   "source": "LC TemperatureLog \u00b7 QS log sample temperature"
+  },
+  {
+   "id": "cool_rate",
+   "code": "B-H2",
+   "group": "hardware",
+   "title": "Peak cooling rate (2-s window)",
+   "unit": "\u00b0C/s",
+   "idea": "How well the heat sink and fans remove heat: steepest 2-second cooling slope of every transition, median over the run (manual: 2.5 \u00b0C/s).",
+   "reading": "Falling cooling with stable heating = clogged fan filter or failing fan (clean the filters, check fans) before Peltier replacement.",
+   "spec": {
+    "LC": {
+     "lo": 2.1
+    },
+    "QS": {}
+   },
+   "better": "high",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "trend",
+   "source": "as B-H1"
+  },
+  {
+   "id": "overshoot",
+   "code": "B-H3",
+   "group": "hardware",
+   "title": "Overshoot at the denaturation step",
+   "unit": "\u00b0C",
+   "idea": "Block temperature beyond the setpoint before it settles. The LC480 overshoots 4\u20136 \u00b0C by design, identically every cycle.",
+   "reading": "Watch for change, not size: a CUSUM drifting up or down means the controller or the temperature sensor has changed.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "cusum",
+   "source": "as B-H1"
+  },
+  {
+   "id": "settling",
+   "code": "B-H3b",
+   "group": "hardware",
+   "title": "Settling time at the denaturation step",
+   "unit": "s",
+   "idea": "Seconds from the 90 % point until the block stays within \u00b10.5 \u00b0C of the setpoint.",
+   "reading": "Longer settling with a normal ramp rate points to control tuning or sensor lag.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "as B-H1"
+  },
+  {
+   "id": "transition",
+   "code": "B-H3c",
+   "group": "hardware",
+   "title": "Transition time A \u2192 B \u00b0C",
+   "unit": "s",
+   "idea": "Seconds the block needs to go from one programmed temperature to the next (e.g. 95 \u2192 60 \u00b0C): from leaving \u00b10.5 \u00b0C of the start temperature until first within \u00b10.5 \u00b0C of the target, median over all cycles of the run. One chart per transition of the program. Includes ramp and overshoot, so it shows how much of every cycle is spent moving instead of holding.",
+   "reading": "Compare a transition only with itself and the same program. A cooling transition that lengthens while heating transitions stay flat points to heat removal (fans, filters, heat sink); all transitions lengthening together points to the Peltier elements or the room.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "LC TemperatureLog \u00b7 QS log sample temperature \u00b7 run program"
+  },
+  {
+   "id": "hold_temp",
+   "code": "B-H4",
+   "group": "hardware",
+   "title": "Temperature at the moment of reading",
+   "unit": "\u00b0C from setpoint",
+   "idea": "Offset (X\u0304) and stability (S) of the block while the camera reads, one subgroup per run.",
+   "reading": "X\u0304 drifting away from its usual offset = temperature calibration drift (verify with a temperature plate). S rising = unstable control.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "xbars",
+   "source": "LC temperature of every acquisition \u00b7 QS sample temperature of every image"
+  },
+  {
+   "id": "zone_spread",
+   "code": "B-H5",
+   "group": "hardware",
+   "title": "Block zone uniformity (95th percentile)",
+   "unit": "\u00b0C",
+   "idea": "Difference between the warmest and coolest of the six zones, 95th percentile over the run.",
+   "reading": "An EWMA creeping up means one zone is losing its match; look at the Temperature graph to find which.",
+   "spec": {
+    "QS": {
+     "hi": 1.5
+    }
+   },
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "ewma",
+   "source": "QS log, six sample zones"
+  },
+  {
+   "id": "heatsink_max",
+   "code": "B-H6",
+   "group": "hardware",
+   "title": "Heat-sink maximum",
+   "unit": "\u00b0C",
+   "idea": "Highest heat-sink temperature during the run.",
+   "reading": "Rising over time with the same protocol = cooling capacity dropping (fans, dust, room temperature).",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log"
+  },
+  {
+   "id": "cover_temp",
+   "code": "B-H6b",
+   "group": "hardware",
+   "title": "Heated cover temperature",
+   "unit": "\u00b0C",
+   "idea": "Median cover temperature during the run (setpoint 105 \u00b0C).",
+   "reading": "Below the setpoint = cover heater fault; condensation and evaporation follow.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log"
+  },
+  {
+   "id": "lamp_ref",
+   "code": "B-H8",
+   "group": "hardware",
+   "title": "Lamp reference channel (stability)",
+   "unit": "reference counts",
+   "idea": "The instrument measures the Xenon lamp through a reference channel and compensates for it. In 155 runs from 2022\u20132026 the value stayed within \u00b11 %, so it shows regulation, not lamp ageing. Lamp hours and intensity % are only in Tools \u2192 Instruments (manual p. 208).",
+   "reading": "Stable = the lamp is still inside the range the instrument can compensate. A step or a point outside the limits = lamp, light guide or reference-sensor fault; check the lamp intensity % in the instrument software.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC"
+   ],
+   "type": "i",
+   "source": "LC AcquisitionStore RefValue, first reading of the run, per filter pair"
+  },
+  {
+   "id": "lamp_drift",
+   "code": "B-H9",
+   "group": "hardware",
+   "title": "Lamp drift within a run",
+   "unit": "% change in the run",
+   "idea": "How much the lamp intensity changes during one run.",
+   "reading": "Growing drift is typical of a lamp near the end of its life.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC"
+   ],
+   "type": "i",
+   "source": "LC RefValue first vs last reading"
+  },
+  {
+   "id": "led_current",
+   "code": "B-H10",
+   "group": "hardware",
+   "title": "LED drive current",
+   "unit": "current (as logged)",
+   "idea": "Median LED current during the run.",
+   "reading": "The instrument raises current to keep light output: a rising trend is LED ageing; the line predicts when it reaches the limit you set.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "trend",
+   "source": "QS log LEDStatus"
+  },
+  {
+   "id": "led_junction",
+   "code": "B-H10b",
+   "group": "hardware",
+   "title": "LED junction temperature (maximum)",
+   "unit": "\u00b0C",
+   "idea": "Hottest LED junction temperature in the run.",
+   "reading": "Higher than usual = LED cooling problem; LEDs age faster when hot.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log LEDStatus"
+  },
+  {
+   "id": "exposure",
+   "code": "B-H11",
+   "group": "hardware",
+   "title": "Automatic integration time / exposure",
+   "unit": "ms",
+   "idea": "Both instruments lengthen exposure automatically when the signal is weak.",
+   "reading": "A slow rise is compatible with weaker signal; verify matched controls and optical configuration before attributing ageing (compare with B-H8/B-H10); a jump after a reagent change points to the method instead.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "LC IntgrTime per channel \u00b7 QS exposure per filter"
+  },
+  {
+   "id": "saturation",
+   "code": "B-H12",
+   "group": "hardware",
+   "title": "Saturated well images",
+   "unit": "share of well images",
+   "idea": "Share of well images with at least one saturated pixel.",
+   "reading": "A rise = exposure logic or camera fault, or overloaded samples; values above zero make the curve plateau unreliable.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "p",
+   "source": "QS quant files, saturation column"
+  },
+  {
+   "id": "calib_uniformity",
+   "code": "B-H13",
+   "group": "hardware",
+   "title": "Uniformity calibration: edge-to-centre ratio",
+   "unit": "edge / centre",
+   "idea": "Changes only when the instrument is recalibrated.",
+   "reading": "A step at a recalibration shows how much the optics changed; a large step deserves a service question.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS calibrations/uniformity.ini"
+  },
+  {
+   "id": "calib_background",
+   "code": "B-H13b",
+   "group": "hardware",
+   "title": "Background calibration: mean offset",
+   "unit": "counts",
+   "idea": "Mean absolute background offset of the last background calibration.",
+   "reading": "Rising between calibrations = contamination of the block or optics.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS calibrations/background.ini"
+  },
+  {
+   "id": "calib_roi",
+   "code": "B-H13c",
+   "group": "hardware",
+   "title": "Well-position (ROI) calibration: spot diameter",
+   "unit": "pixels",
+   "idea": "Mean spot diameter from the ROI calibration.",
+   "reading": "A change means the optical alignment moved.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS calibrations/roi.ini"
+  },
+  {
+   "id": "wheel_ms",
+   "code": "B-H14",
+   "group": "hardware",
+   "title": "Filter-wheel move time",
+   "unit": "ms",
+   "idea": "Median time of a filter-wheel move.",
+   "reading": "Slower moves = motor or bearing wear.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log Motor start/end"
+  },
+  {
+   "id": "wheel_slow",
+   "code": "B-H14b",
+   "group": "hardware",
+   "title": "Filter-wheel moves slower than 500 ms",
+   "unit": "share of moves",
+   "idea": "Share of moves longer than 500 ms (normal \u2248 300 ms).",
+   "reading": "Occasional stalls come before a failure; any upward trend is worth a service call.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "p",
+   "source": "QS log"
+  },
+  {
+   "id": "encoder",
+   "code": "B-H15",
+   "group": "hardware",
+   "title": "Filter-wheel position offset",
+   "unit": "encoder counts",
+   "idea": "Encoder offset after each move; constant for a healthy wheel.",
+   "reading": "Any step = the wheel slipped, was re-homed or serviced.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log Emission/Excitation Encoder"
+  },
+  {
+   "id": "cam_overhead",
+   "code": "B-H16",
+   "group": "hardware",
+   "title": "Camera readout time beyond the exposure",
+   "unit": "ms",
+   "idea": "About 0.5 s per image; one subgroup = all images of the run.",
+   "reading": "A jump = camera or its interface; a slow rise = controller slowing (compare with software charts).",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "xbars",
+   "source": "QS log CAMera start/end minus requested exposure"
+  },
+  {
+   "id": "chan_switch",
+   "code": "B-H17",
+   "group": "hardware",
+   "title": "Channel switch time",
+   "unit": "ms",
+   "idea": "Time between the channels of one reading, net of integration (\u2248 1.0\u20131.4 s; filter switch < 0.65 s by the manual).",
+   "reading": "Rising = filter wheels or camera readout slowing.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC"
+   ],
+   "type": "i",
+   "source": "LC acquisition times minus integration time"
+  },
+  {
+   "id": "cover_down",
+   "code": "B-H18",
+   "group": "hardware",
+   "title": "Heated cover lowering time",
+   "unit": "s",
+   "idea": "Motorised cover pressing onto the plate (\u2248 10 s).",
+   "reading": "Getting slower = motor or linkage wear, or plates/seals that are too tall.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "trend",
+   "source": "QS log Cover Lowering \u2192 Lowered"
+  },
+  {
+   "id": "cover_up",
+   "code": "B-H18b",
+   "group": "hardware",
+   "title": "Heated cover raising time",
+   "unit": "s",
+   "idea": "Cover lifting off the plate (\u2248 5.4 s).",
+   "reading": "As B-H18.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log Cover Raising \u2192 Raised"
+  },
+  {
+   "id": "bg_median",
+   "code": "A-H3",
+   "group": "hardware",
+   "title": "Background fluorescence per channel",
+   "unit": "fluorescence",
+   "idea": "Median background of all wells, per channel.",
+   "reading": "Slow decline = light source ageing; a raised run = plate, seal or contamination.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "stored curves, cycles 3\u201310"
+  },
+  {
+   "id": "plateau_median",
+   "code": "A-H3b",
+   "group": "hardware",
+   "title": "End-point fluorescence per channel",
+   "unit": "fluorescence",
+   "idea": "Median end-point of all wells, per channel.",
+   "reading": "Moves together with B-H8/B-H10 when optics age; alone it points to the method (probe) \u2014 see M-group.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "stored curves, last cycle"
+  },
+  {
+   "id": "run_minutes",
+   "code": "A-H4",
+   "group": "hardware",
+   "title": "Run duration",
+   "unit": "minutes",
+   "idea": "Only comparable between runs of the same protocol.",
+   "reading": "A much shorter or longer run with the same protocol = aborted, paused or held run.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "run start / end"
+  },
+  {
+   "id": "cmd_rt",
+   "code": "B-S1",
+   "group": "software",
+   "title": "Reply time to the PC software",
+   "unit": "ms (95th pct)",
+   "idea": "How fast the embedded computer answers commands.",
+   "reading": "Rising = controller overloaded or network problem.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log C: \u2192 S: pairs"
+  },
+  {
+   "id": "tick_late",
+   "code": "B-S2",
+   "group": "software",
+   "title": "Once-per-second timer lateness",
+   "unit": "ms (95th pct)",
+   "idea": "How late the 1-s housekeeping timer fires.",
+   "reading": "Rising = the embedded CPU is saturated (mostly while imaging).",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log Time lines"
+  },
+  {
+   "id": "catch_up",
+   "code": "B-S2b",
+   "group": "software",
+   "title": "Scheduler falling behind",
+   "unit": "events per run hour",
+   "idea": "How often the task scheduler had to catch up, per hour of run.",
+   "reading": "A u-chart above its limit = the internal computer is overloaded.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "u",
+   "source": "QS log Scheduler 'Catching up'"
+  },
+  {
+   "id": "img_proc",
+   "code": "B-S3",
+   "group": "software",
+   "title": "Image \u2192 processing delay",
+   "unit": "ms (95th pct)",
+   "idea": "Time from the last image to the start of its processing.",
+   "reading": "Rising = storage or CPU slowing; one long delay is a single stall.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log Image \u2192 Preprocessing"
+  },
+  {
+   "id": "roi_ms",
+   "code": "B-S4",
+   "group": "software",
+   "title": "Image analysis time",
+   "unit": "ms",
+   "idea": "The software's own processing time per image.",
+   "reading": "A step after an update = different firmware behaviour (see version markers).",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log ROI Quantitation"
+  },
+  {
+   "id": "runtime_err",
+   "code": "B-S5",
+   "group": "software",
+   "title": "Run-time prediction error",
+   "unit": "%",
+   "idea": "Actual minus predicted run time.",
+   "reading": "Creeping up = actions take longer than the firmware expects.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log Time elapsed/remaining"
+  },
+  {
+   "id": "handoff_min",
+   "code": "B-S6",
+   "group": "software",
+   "title": "Data hand-off time",
+   "unit": "minutes",
+   "idea": "Minutes from run end until the data were packed for the PC.",
+   "reading": "Long = network or PC problem, or a manual delay.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS log end \u2192 instrumentdata.mf time"
+  },
+  {
+   "id": "log_errors",
+   "code": "B-S8",
+   "group": "software",
+   "title": "Command errors in the instrument log",
+   "unit": "errors",
+   "idea": "Count of command errors per run.",
+   "reading": "New or more errors = firmware or configuration change.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "c",
+   "source": "QS log 'Error in command'"
+  },
+  {
+   "id": "cycle_sd",
+   "code": "B-S9",
+   "group": "software",
+   "title": "Cycle-timing regularity",
+   "unit": "ms",
+   "idea": "Standard deviation of the cycle period within a run.",
+   "reading": "Larger = scheduling problems in the instrument.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "LC acquisition times \u00b7 QS image times"
+  },
+  {
+   "id": "templog_late",
+   "code": "B-S10",
+   "group": "software",
+   "title": "Temperature-log intervals over 500 ms",
+   "unit": "share of intervals",
+   "idea": "Regularity of the control-loop logging.",
+   "reading": "Any rise = controller overload.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC"
+   ],
+   "type": "p",
+   "source": "LC TemperatureLog times (normally 410\u2013420 ms)"
+  },
+  {
+   "id": "invalid_acq",
+   "code": "B-S11",
+   "group": "software",
+   "title": "Invalid fluorescence readings",
+   "unit": "share of readings",
+   "idea": "Readings the instrument marked invalid.",
+   "reading": "Above zero = acquisition fault.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC"
+   ],
+   "type": "p",
+   "source": "LC AcquisitionStore Valid flag"
+  },
+  {
+   "id": "ct_mismatch",
+   "code": "B-S12",
+   "group": "software",
+   "title": "Stored Ct not reproducible (> 0.2)",
+   "unit": "share of wells",
+   "idea": "Wells whose stored Ct differs from the recalculation.",
+   "reading": "Non-zero requires checking algorithm, precision, stored settings and provenance; it does not establish post-analysis editing.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "p",
+   "source": "stored \u0394Rn and threshold"
+  },
+  {
+   "id": "edit_delay",
+   "code": "A-S4",
+   "group": "software",
+   "title": "Run end \u2192 last change",
+   "unit": "log10 hours",
+   "idea": "Processing delay on a log scale (0 = 1 h, 1 = 10 h, 2 = 100 h).",
+   "reading": "Points above the limit are late edits; cross-check with the operator group.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "file dates"
+  },
+  {
+   "id": "findings",
+   "code": "A-S6",
+   "group": "software",
+   "title": "Forensic findings per run",
+   "unit": "findings",
+   "idea": "Count of review and error findings for the run.",
+   "reading": "A run above the limit needs a closer look in the forensic log.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "c",
+   "source": "forensic log (review + error)"
+  },
+  {
+   "id": "pc_cq",
+   "code": "A-M1",
+   "group": "method",
+   "title": "Positive control Cq (Levey-Jennings)",
+   "unit": "Cq",
+   "idea": "Mean Cq of the positive control per run and target, with Westgard rules.",
+   "reading": "Across-run rules flag unexpected control behaviour. R-4s is not applied to run means. Investigate lot, extraction batch, assay and instrument effects.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "SOP positive-control wells"
+  },
+  {
+   "id": "pc_amplitude",
+   "code": "B-M1",
+   "group": "method",
+   "title": "Probe signal strength (positive control)",
+   "unit": "fluorescence",
+   "idea": "Amplitude (plateau above background) of the same control each run.",
+   "reading": "Falling with a stable Cq = probe or dye degradation (storage, freeze-thaw); a step at a lot change = the lot. Compare with B-H8/B-H10 to exclude the optics.",
+   "spec": null,
+   "better": "high",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "ewma",
+   "source": "stored curves of the positive control"
+  },
+  {
+   "id": "rox_level",
+   "code": "B-M2",
+   "group": "method",
+   "title": "Passive reference (ROX) level",
+   "unit": "passive reference",
+   "idea": "Median passive-reference level of named wells.",
+   "reading": "A step = new master-mix lot or ROX concentration.",
+   "spec": null,
+   "better": "target",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS multicomponent data, cycles 1\u20135"
+  },
+  {
+   "id": "efficiency",
+   "code": "B-M3",
+   "group": "method",
+   "title": "PCR efficiency from the standards",
+   "unit": "% efficiency",
+   "idea": "Efficiency of the standard curve per run and target.",
+   "reading": "A slow drop = degrading standard or reagent; outside 90\u2013110 % fails MIQE-style acceptance.",
+   "spec": {
+    "LC": {
+     "lo": 90,
+     "hi": 110
+    },
+    "QS": {
+     "lo": 90,
+     "hi": 110
+    }
+   },
+   "better": "target",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "trend",
+   "source": "standards with a stored quantity"
+  },
+  {
+   "id": "ntc_rate",
+   "code": "B-M5",
+   "group": "method",
+   "title": "Negative controls by process stage",
+   "unit": "share of NTC wells",
+   "idea": "Share of negative-control wells with any Cq.",
+   "reading": "Rising = contamination of reagents or of the working area (ISFG, MIQE).",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "p",
+   "source": "SOP negative controls"
+  },
+  {
+   "id": "ic_shift",
+   "code": "B-M6",
+   "group": "method",
+   "title": "IC shift from fixed reference",
+   "unit": "cycles",
+   "idea": "Mean IC Cq shift from the configured fixed reference. Missing reference means unavailable; endogenous taxon targets are not fixed-input IPCs.",
+   "reading": "Upward drift = extraction method or kit problem.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "ewma",
+   "source": "SOP internal-control target"
+  },
+  {
+   "id": "low_conf",
+   "code": "B-M9",
+   "group": "method",
+   "title": "Low Cq confidence",
+   "unit": "share of wells",
+   "idea": "Share of wells flagged for low Cq confidence.",
+   "reading": "A rise = noisy curves, often probe or baseline problems.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "p",
+   "source": "QS CQCONF flag"
+  },
+  {
+   "id": "late_rate",
+   "code": "B-M10",
+   "group": "method",
+   "title": "Late signal / stochastic-zone results",
+   "unit": "share of results",
+   "idea": "Share of sample results falling in the late-signal or low-quantity zone.",
+   "reading": "A rise = sensitivity drop or poorer samples.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "p",
+   "source": "SOP outcomes"
+  },
+  {
+   "id": "rep_sd",
+   "code": "B-O1",
+   "group": "operator",
+   "title": "Replicate precision (pooled SD, Cq < 30)",
+   "unit": "Cq SD",
+   "idea": "Pipetting precision; replicates above Cq 30 are left out so stochastic noise does not hide skill.",
+   "reading": "One operator's points above the others \u2192 retraining; everyone rising \u2192 pipette calibration.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "replicate groups"
+  },
+  {
+   "id": "rox_cv",
+   "code": "B-O2",
+   "group": "operator",
+   "title": "Dispensed-volume spread (ROX CV)",
+   "unit": "% CV",
+   "idea": "Raw passive-reference level varies with the dispensed volume.",
+   "reading": "High CV = uneven pipetting or bubbles.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "QS"
+   ],
+   "type": "i",
+   "source": "QS passive reference, cycles 1\u20135"
+  },
+  {
+   "id": "rowcol",
+   "code": "B-O3",
+   "group": "operator",
+   "title": "Row / column pattern",
+   "unit": "Cq",
+   "idea": "Largest mean Cq offset of a plate row or column.",
+   "reading": "One row or column off = a faulty multichannel tip or loading-order error.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "i",
+   "source": "replicate residuals by plate row and column"
+  },
+  {
+   "id": "ntc_op",
+   "code": "B-O5",
+   "group": "operator",
+   "title": "Contamination rate by operator (funnel)",
+   "unit": "share of NTC wells",
+   "idea": "NTC positives per operator against the number of NTCs they ran.",
+   "reading": "Outside the 99.8 % line \u2192 investigate; the funnel keeps small workloads from looking unfair.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "funnel",
+   "source": "as B-M5"
+  },
+  {
+   "id": "action_op",
+   "code": "B-O6",
+   "group": "operator",
+   "title": "Repeat / inconclusive / invalid rate by operator (funnel)",
+   "unit": "share of results",
+   "idea": "Analytical robustness per person.",
+   "reading": "As B-O5.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "funnel",
+   "source": "SOP outcomes"
+  },
+  {
+   "id": "manual_rate",
+   "code": "B-O7",
+   "group": "operator",
+   "title": "Manual interventions",
+   "unit": "share of settings",
+   "idea": "Share of settings or wells changed by hand.",
+   "reading": "High or rising \u2192 ask for documented reasons (OIG report lessons); compare operators with the funnel view.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "p",
+   "source": "manual threshold/baseline, omitted wells, manual calls"
+  },
+  {
+   "id": "call_disagree",
+   "code": "B-O9",
+   "group": "operator",
+   "title": "Stored calls that disagree with the SOP",
+   "unit": "share of wells",
+   "idea": "Consistency and fairness: do calls follow the written rules?",
+   "reading": "Disagreement concentrated in one person or case type \u2192 training or bias check.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "p",
+   "source": "stored call vs SOP outcome"
+  },
+  {
+   "id": "copied",
+   "code": "B-O11",
+   "group": "operator",
+   "title": "Copied-data events",
+   "unit": "events",
+   "idea": "Must be zero.",
+   "reading": "Any event is a forensic finding.",
+   "spec": null,
+   "better": "low",
+   "inst": [
+    "LC",
+    "QS"
+   ],
+   "type": "c",
+   "source": "forensic log (identical curves / Cq)"
+  }
+ ],
+ "graphs": [
+  {
+   "id": "timeline",
+   "group": "Run history",
+   "title": "Run timeline \u2014 created, run, analysis, last change",
+   "note": "Every dated event the file carries: experiment creation, run start and end, analysis creation and edits, the last recorded change (for .eds, the newest ZIP entry date is the last save), instrument log and calibrations. Events more than 7 days from the run are listed in the table and marked at the edge.",
+   "scope": "run"
+  },
+  {
+   "id": "curves",
+   "group": "Fluorescence",
+   "title": "Amplification curves coloured by SOP outcome",
+   "note": "Stored curves of the selected target. Colour = outcome under the active SOP; dashed vertical lines = SOP Cq cut-off and late-signal limit; horizontal line = stored threshold (QuantStudio \u0394Rn).",
+   "scope": "run"
+  },
+  {
+   "id": "plate",
+   "group": "Plate",
+   "title": "Plate heat map",
+   "note": "Every physical position. Choose what the colour shows: SOP outcome, stored Cq, end fluorescence, background, amplitude, or analysis status (which also shows wells with signal that are in no analysis, and omitted wells).",
+   "scope": "run"
+  },
+  {
+   "id": "unanalysed",
+   "group": "Plate",
+   "title": "Signal in wells that are not in any analysis",
+   "note": "Rising fluorescence in positions that carry no result (unnamed wells, wells left out of every analysis, or wells without a target). These are the places where a sample may have been run but not reported.",
+   "scope": "run"
+  },
+  {
+   "id": "cqstrip",
+   "group": "Results",
+   "title": "Cq by target with SOP cut-offs",
+   "note": "One point per well. Colour by SOP outcome or by role. Red dashed line: Cq cut-off; orange: late-signal limit (per target).",
+   "scope": "run"
+  },
+  {
+   "id": "repsd",
+   "group": "Results",
+   "title": "Replicate spread \u2014 mean Cq against SD",
+   "note": "One point per sample and target with two or more detected replicates. The dashed line is the SOP maximum SD.",
+   "scope": "run"
+  },
+  {
+   "id": "stdcurve",
+   "group": "Results",
+   "title": "Standard curve with residuals and SOP limits",
+   "note": "Cq against log10 of the stored standard quantity, fitted by least squares on this page. The label shows slope, R\u00b2, efficiency and range against the SOP limits; residuals are in the table.",
+   "scope": "run"
+  },
+  {
+   "id": "ic",
+   "group": "Results",
+   "title": "Internal control / reference Cq per sample (inhibition)",
+   "note": "Cq of the targets the SOP marks as internal control or reference. The band is the run median \u00b1 the SOP maximum IC shift; points above it suggest inhibition or low input.",
+   "scope": "run"
+  },
+  {
+   "id": "endpoint",
+   "group": "Fluorescence",
+   "title": "Fluorescence level against Cq",
+   "note": "End-point fluorescence (or amplitude above background) against the stored Cq. Late, low-plateau curves separate from true amplification; undetected wells are drawn at the right edge.",
+   "scope": "run"
+  },
+  {
+   "id": "levels",
+   "group": "Fluorescence",
+   "title": "Background and plateau fluorescence per channel",
+   "note": "For each detection channel / target: background (mean of cycles 3\u201310) and end-point fluorescence of every well, including wells outside the analyses. A shifted background points to plate, seal or optical problems.",
+   "scope": "run"
+  },
+  {
+   "id": "outcomes",
+   "group": "Results",
+   "title": "SOP outcomes per target",
+   "note": "Number of sample/target results per outcome under the active SOP, controls included.",
+   "scope": "run"
+  },
+  {
+   "id": "temperature",
+   "group": "Run history",
+   "title": "Block, cover and zone temperature (QuantStudio log)",
+   "note": "From the instrument log inside the .eds file: sample block mean, heated cover and the spread between block zones, against minutes from the first record. The dashed line is the SOP maximum zone spread.",
+   "scope": "run"
+  },
+  {
+   "id": "recalc",
+   "group": "Run history",
+   "title": "Stored Ct against the Ct re-derived on this page",
+   "note": "QuantStudio only: difference between the stored Ct and the crossing of the stored \u0394Rn with the stored threshold. Differences beyond \u00b10.2 require an algorithm/settings/provenance review; they do not prove that stored data were edited.",
+   "scope": "run"
+  },
+  {
+   "id": "lc_thermal",
+   "group": "Run history",
+   "title": "Block temperature trace (LightCycler temperature log)",
+   "note": "The block temperature the LightCycler 480 logged about every 0.41 s, decoded from the TemperatureLog inside the .ixo file, with the protocol setpoints. Heating and cooling rates, overshoot, settling and transition times on the control panel are measured on the full trace; the graph keeps the lowest and highest value of every time slice, so overshoots and short holds are not lost when it is thinned for display.",
+   "scope": "run"
+  },
+  {
+   "id": "x_timeline",
+   "group": "Across runs",
+   "title": "Runs on a calendar \u2014 run time and last change",
+   "note": "Each run as a green dot at its start, with the experiment creation (blue, above) and the last recorded change (red, below, joined by a dashed line). Long gaps between run and last change are the first thing an auditor asks about.",
+   "scope": "all"
+  },
+  {
+   "id": "x_delay",
+   "group": "Across runs",
+   "title": "Hours from run end to the last recorded change",
+   "note": "Processing time per run. The dashed line is the SOP maximum; bars above it are flagged in the run acceptance.",
+   "scope": "all"
+  },
+  {
+   "id": "x_accept",
+   "group": "Across runs",
+   "title": "Run acceptance grid",
+   "note": "Runs (rows) against the SOP criteria (columns): green met, amber review, red rejected, grey not applicable.",
+   "scope": "all"
+  },
+  {
+   "id": "x_outcomes",
+   "group": "Across runs",
+   "title": "SOP outcomes per run",
+   "note": "Stacked counts of sample/target outcomes for every loaded run.",
+   "scope": "all"
+  },
+  {
+   "id": "x_control",
+   "group": "Across runs",
+   "title": "Control Cq across runs with SOP range",
+   "note": "Descriptive control overview. Solid band: configured SOP range. No pooled statistical limits; use extraction-batch charts for comparable groups.",
+   "scope": "all"
+  },
+  {
+   "id": "x_signal",
+   "group": "Across runs",
+   "title": "Background and plateau fluorescence across runs",
+   "note": "Median background and median end-point fluorescence of every channel per run: slow drift here is an instrument or reagent trend.",
+   "scope": "all"
+  },
+  {
+   "id": "x_duration",
+   "group": "Across runs",
+   "title": "Run duration and instrument use",
+   "note": "Minutes from run start to run end, coloured by instrument. A run much shorter than its siblings with the same protocol deserves a look at the log.",
+   "scope": "all"
+  },
+  {
+   "id": "x_findings",
+   "group": "Across runs",
+   "title": "Forensic findings by area (Pareto)",
+   "note": "Count of error and review findings in the forensic log, grouped by area, largest first.",
+   "scope": "all"
+  },
+  {
+   "id": "x_control_batches",
+   "group": "Across runs",
+   "title": "Control extraction batches",
+   "note": "Descriptive association only. Separate material, extraction batch, dilution, target, instrument and protocol. Missing/invalid extraction dates are excluded from age plots.",
+   "scope": "all"
+  },
+  {
+   "id": "x_control_age",
+   "group": "Across runs",
+   "title": "Control extract age versus Cq",
+   "note": "Descriptive association only. Separate material, extraction batch, dilution, target, instrument and protocol. Missing/invalid extraction dates are excluded from age plots.",
+   "scope": "all"
+  },
+  {
+   "id": "x_control_thermal",
+   "group": "Across runs",
+   "title": "Control Cq versus cooling rate",
+   "note": "Descriptive association only. Separate material, extraction batch, dilution, target, instrument and protocol. Missing/invalid extraction dates are excluded from age plots.",
+   "scope": "all"
+  }
+ ],
+ "sopCC": null,
+ "sopKeys": [
+  "schema",
+  "name",
+  "version",
+  "author",
+  "assay",
+  "lab",
+  "effective",
+  "notes",
+  "locked",
+  "targets",
+  "controls",
+  "replicates",
+  "ic",
+  "run",
+  "outcomes",
+  "graphs",
+  "reviewOnly",
+  "sourceProposalSchema",
+  "samplePattern",
+  "classificationPrecedence",
+  "blockedAutomaticInterpretations",
+  "profileSchemaVersion",
+  "method",
+  "procedure",
+  "interpretation",
+  "materials",
+  "sample_id"
+ ]
+}

@@ -1,0 +1,102 @@
+entry,title,group,rows,columns,invented,n_real,n_vendor_ixo,n_vendor_eds
+cc:action_op,Repeat / inconclusive / invalid rate by operator (funnel),operator,1,7,False,1,0,0
+cc:bg_median,Background fluorescence per channel,hardware,7,21,False,3,1,3
+cc:calib_background,Background calibration: mean offset,hardware,3,21,False,0,0,3
+cc:calib_roi,Well-position (ROI) calibration: spot diameter,hardware,3,21,False,0,0,3
+cc:calib_uniformity,Uniformity calibration: edge-to-centre ratio,hardware,3,21,False,0,0,3
+cc:call_disagree,Stored calls that disagree with the SOP,operator,2,21,False,2,0,0
+cc:cam_overhead,Camera readout time beyond the exposure,hardware,3,21,False,0,0,3
+cc:catch_up,Scheduler falling behind,software,3,21,False,0,0,3
+cc:chan_switch,Channel switch time,hardware,6,21,False,3,3,0
+cc:cmd_rt,Reply time to the PC software,software,3,21,False,0,0,3
+cc:cool_rate,Peak cooling rate (2-s window),hardware,9,21,False,3,3,3
+cc:copied,Copied-data events,operator,9,21,False,3,3,3
+cc:cover_down,Heated cover lowering time,hardware,3,21,False,0,0,3
+cc:cover_temp,Heated cover temperature,hardware,3,21,False,0,0,3
+cc:cover_up,Heated cover raising time,hardware,3,21,False,0,0,3
+cc:ct_mismatch,Stored Ct not reproducible (> 0.2),software,3,21,False,0,0,3
+cc:cycle_sd,Cycle-timing regularity,software,9,21,False,3,3,3
+cc:edit_delay,Run end → last change,software,8,21,False,3,3,2
+cc:efficiency,PCR efficiency from the standards,method,1,21,False,0,0,1
+cc:encoder,Filter-wheel position offset,hardware,3,21,False,0,0,3
+cc:exposure,Automatic integration time / exposure,hardware,9,21,False,3,3,3
+cc:findings,Forensic findings per run,software,9,21,False,3,3,3
+cc:handoff_min,Data hand-off time,software,3,21,False,0,0,3
+cc:heat_rate,Peak heating rate (2-s window),hardware,9,21,False,3,3,3
+cc:heatsink_max,Heat-sink maximum,hardware,3,21,False,0,0,3
+cc:hold_temp,Temperature at the moment of reading,hardware,6,21,False,3,3,0
+cc:ic_shift,IC shift from fixed reference,method,20,7,True,0,0,0
+cc:img_proc,Image → processing delay,software,3,21,False,0,0,3
+cc:invalid_acq,Invalid fluorescence readings,software,6,21,False,3,3,0
+cc:lamp_drift,Lamp drift within a run,hardware,6,21,False,3,3,0
+cc:lamp_ref,Lamp reference channel (stability),hardware,6,21,False,3,3,0
+cc:late_rate,Late signal / stochastic-zone results,method,2,21,False,2,0,0
+cc:led_current,LED drive current,hardware,3,21,False,0,0,3
+cc:led_junction,LED junction temperature (maximum),hardware,3,21,False,0,0,3
+cc:log_errors,Command errors in the instrument log,software,3,21,False,0,0,3
+cc:low_conf,Low Cq confidence,method,3,21,False,0,0,3
+cc:manual_rate,Manual interventions,operator,7,21,False,3,1,3
+cc:ntc_op,Contamination rate by operator (funnel),operator,1,7,False,1,0,0
+cc:ntc_rate,Negative controls by process stage,method,2,21,False,2,0,0
+cc:overshoot,Overshoot at the denaturation step,hardware,6,21,False,3,2,1
+cc:pc_amplitude,Probe signal strength (positive control),method,1,21,False,1,0,0
+cc:pc_cq,Positive control Cq (Levey-Jennings),method,1,21,False,1,0,0
+cc:plateau_median,End-point fluorescence per channel,hardware,7,21,False,3,1,3
+cc:rep_sd,"Replicate precision (pooled SD, Cq < 30)",operator,2,21,False,2,0,0
+cc:roi_ms,Image analysis time,software,20,7,True,0,0,0
+cc:rowcol,Row / column pattern,operator,2,21,False,2,0,0
+cc:rox_cv,Dispensed-volume spread (ROX CV),operator,3,21,False,0,0,3
+cc:rox_level,Passive reference (ROX) level,method,3,21,False,0,0,3
+cc:run_minutes,Run duration,hardware,8,21,False,3,3,2
+cc:runtime_err,Run-time prediction error,software,3,21,False,0,0,3
+cc:saturation,Saturated well images,hardware,3,21,False,0,0,3
+cc:settling,Settling time at the denaturation step,hardware,6,21,False,3,2,1
+cc:templog_late,Temperature-log intervals over 500 ms,software,6,21,False,3,3,0
+cc:tick_late,Once-per-second timer lateness,software,3,21,False,0,0,3
+cc:transition,Transition time A → B °C,hardware,8,21,False,3,2,3
+cc:wheel_ms,Filter-wheel move time,hardware,3,21,False,0,0,3
+cc:wheel_slow,Filter-wheel moves slower than 500 ms,hardware,3,21,False,0,0,3
+cc:zone_spread,Block zone uniformity (95th percentile),hardware,3,21,False,0,0,3
+data:amplification_curves,,,12000,6,False,4000,4000,4000
+data:control_charts,,,152,10,False,90,39,23
+data:cq_values,,,2589,40,False,279,846,1464
+data:experiment_meta,,,24,31,False,6,10,8
+data:experiment_settings,,,587,3,False,106,177,304
+data:forensic_log,,,224,5,False,38,66,120
+data:melting_peaks,,,200,24,False,0,200,0
+data:multicomponent_raw,,,4000,20,False,0,0,4000
+data:plate_map,,,4320,21,False,576,2400,1344
+data:relative_quantification,,,115,21,False,0,110,5
+data:rising_curves,,,16,33,False,3,13,0
+data:runs_and_qc,,,24,17,False,6,10,8
+data:sample_comparison,,,36,12,False,4,18,14
+data:sop_answers,,,25,9,False,25,0,0
+data:sop_criteria,,,72,9,False,54,10,8
+data:sop_runs,,,24,19,False,6,10,8
+data:statistics,,,62,19,False,17,30,15
+img:cqstrip,Cq by target with SOP cut-offs,Results,556,6,False,20,152,384
+img:curves,Amplification curves coloured by SOP outcome,Fluorescence,8070,6,False,675,3555,3840
+img:endpoint,Fluorescence level against Cq,Fluorescence,590,8,False,48,158,384
+img:ic,Internal control / reference Cq per sample (inhibition),Results,20,7,True,0,0,0
+img:lc_thermal,Block temperature trace (LightCycler temperature log),Run history,6797,2,False,3353,3444,0
+img:levels,Background and plateau fluorescence per channel,Fluorescence,513,7,False,49,80,384
+img:outcomes,SOP outcomes per target,Results,20,7,True,0,0,0
+img:plate,Plate heat map,Plate,576,10,False,96,384,96
+img:recalc,Stored Ct against the Ct re-derived on this page,Run history,384,7,False,0,0,384
+img:repsd,Replicate spread — mean Cq against SD,Results,20,7,True,0,0,0
+img:stdcurve,Standard curve with residuals and SOP limits,Results,70,12,False,0,70,0
+img:temperature,"Block, cover and zone temperature (QuantStudio log)",Run history,1988,6,False,0,0,1988
+img:timeline,"Run timeline — created, run, analysis, last change",Run history,39,5,False,13,11,15
+img:unanalysed,Signal in wells that are not in any analysis,Plate,90,6,False,45,45,0
+img:x_accept,Run acceptance grid,Across runs,54,4,False,36,10,8
+img:x_control,Control Cq across runs with SOP range,Across runs,13,7,False,13,0,0
+img:x_control_age,Control extract age versus Cq,Across runs,20,7,True,0,0,0
+img:x_control_batches,Control extraction batches,Across runs,20,7,True,0,0,0
+img:x_control_thermal,Control Cq versus cooling rate,Across runs,20,7,True,0,0,0
+img:x_delay,Hours from run end to the last recorded change,Across runs,23,4,False,6,10,7
+img:x_duration,Run duration and instrument use,Across runs,23,5,False,6,10,7
+img:x_findings,Forensic findings by area (Pareto),Across runs,20,3,False,5,7,8
+img:x_outcomes,SOP outcomes per run,Across runs,15,3,False,15,0,0
+img:x_signal,Background and plateau fluorescence across runs,Across runs,29,5,False,10,8,11
+img:x_timeline,Runs on a calendar — run time and last change,Across runs,23,7,False,6,10,7
+rec:instrument_records,,,5194,118,False,400,794,4000

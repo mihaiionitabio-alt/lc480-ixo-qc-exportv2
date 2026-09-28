@@ -1,0 +1,11 @@
+{
+  "schema": "qpcr-function-verification/1",
+  "htmlSha256": "dd82ed15bf5433b944df37e9145f4baebbf0bd38b06c6e87a1756d78971e60b7",
+  "indexCount": 571,
+  "counts": {
+    "PASS-executable": 197,
+    "REVIEW-fixture-required": 350,
+    "REVIEW-runtime": 24
+  },
+  "pageErrors": []
+}

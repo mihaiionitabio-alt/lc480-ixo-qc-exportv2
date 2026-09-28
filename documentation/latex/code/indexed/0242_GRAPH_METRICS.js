@@ -1,0 +1,1 @@
+const GRAPH_METRICS={outcome:"SOP outcome",status:"Analysis status (incl. signal outside analyses)",cq:"Stored Cq",end_fluorescence:"End-point fluorescence",background:"Background fluorescence",amplitude:"Amplitude above background"};

@@ -1,0 +1,7 @@
+  ["clear","empty the selection"],
+  ["selection","what is selected now"],
+  ["run <number>","which loaded run the run-level figures use"],
+  ["runs","the loaded runs and their numbers"],
+  ["lab <text>","the laboratory name for the report and the profile"],
+  ["analyst <text>","who is doing the analysis"],
+  ["title <text>","the report title"],

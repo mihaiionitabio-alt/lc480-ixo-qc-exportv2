@@ -1,0 +1,2 @@
+function ccCfg(id){const c=((SOP.controlCharts||{})[id])||{},base=CC_RULES_OFF.has(id)?{r2:false,r3:false,r4:false,r5:false}:{};
+  return Object.assign({},CC_DEFAULT_CFG,c,{rules:Object.assign({},CC_DEFAULT_CFG.rules,base,c.rules||{})});}
