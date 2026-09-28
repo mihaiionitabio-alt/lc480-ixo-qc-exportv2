@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{reviewForensicEvents}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{let}\PYG{+w}{ }\PYG{n+nx}{base}\PYG{o}{=}\PYG{p}{[];}\PYG{k}{try}\PYG{p}{\PYGZob{}}\PYG{n+nx}{base}\PYG{o}{=}\PYG{n+nx}{reviewForensicEventsCore}\PYG{p}{();\PYGZcb{}}\PYG{k}{catch}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{console}\PYG{p}{.}\PYG{n+nx}{error}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{);\PYGZcb{}}
+\PYG{+w}{  }\PYG{k+kd}{let}\PYG{+w}{ }\PYG{n+nx}{extra}\PYG{o}{=}\PYG{p}{[],}\PYG{n+nx}{sop}\PYG{o}{=}\PYG{p}{[];}\PYG{k}{try}\PYG{p}{\PYGZob{}}\PYG{n+nx}{extra}\PYG{o}{=}\PYG{n+nx}{extraForensicEvents}\PYG{p}{();\PYGZcb{}}\PYG{k}{catch}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{console}\PYG{p}{.}\PYG{n+nx}{error}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{);\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{try}\PYG{p}{\PYGZob{}}\PYG{n+nx}{sop}\PYG{o}{=}\PYG{n+nx}{sopEvents}\PYG{p}{();\PYGZcb{}}\PYG{k}{catch}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{console}\PYG{p}{.}\PYG{n+nx}{error}\PYG{p}{(}\PYG{n+nx}{e}\PYG{p}{);\PYGZcb{}}
+\PYG{+w}{  }\PYG{c+c1}{// Control\PYGZhy{}chart alarms are displayed and exported from Tab 2. Keep the forensic log}
+\PYG{+w}{  }\PYG{c+c1}{// focused on file, result, timeline and interpretation evidence.}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{base}\PYG{p}{.}\PYG{n+nx}{concat}\PYG{p}{(}\PYG{n+nx}{extra}\PYG{p}{,}\PYG{n+nx}{sop}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

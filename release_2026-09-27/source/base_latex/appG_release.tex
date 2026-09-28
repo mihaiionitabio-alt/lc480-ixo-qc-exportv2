@@ -1,0 +1,18 @@
+\chapter{Release artifacts and reproducibility}\label{app:release}
+This appendix identifies the files used to reproduce the current documentation build.
+
+\begin{longtable}{@{}p{8cm}p{6cm}@{}}
+\caption{Release artifacts.}\label{tab:release-artifacts}\\
+\toprule Artifact & Role\\\hline\endfirsthead
+\toprule Artifact & Role\\\hline\endhead
+\path{qpcr\_qc\_forensics.html} & current production page\\\hline
+\path{index.html} & byte-identical page copy\\\hline
+\path{DEMO\_control\_charts\_realscale.zip} & chart SVG and CSV source data\\\hline
+\path{qPCR\_control\_charts\_realscale\_A4\_landscape.pdf} & A4 chart pages\\\hline
+\path{qPCR\_control\_charts\_realscale\_A3\_landscape.pdf} & A3 chart pages\\\hline
+\path{appI\_atlas\_data.tex} & complete chart data appendix\\\hline
+\bottomrule
+\end{longtable}
+
+The HTML hash and the generated PDF hash are recorded in the implementation record. The A4 pages and Appendix H and Appendix I are deliberately separate: the pages provide the visual atlas, and Appendix I provides the exact values used to draw them.
+

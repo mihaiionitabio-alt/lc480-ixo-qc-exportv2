@@ -1,0 +1,92 @@
+\chapter{Architecture of the single file}\label{ch:arch}
+
+\section{One file, one script}
+\page\ contains the page layout (HTML and CSS), a JSON-LD block with machine-readable metadata (lines 17--102) and one
+script of about 8\,080 lines (lines 641--8723). There is no external library, no network request and no build step on the user's
+side. The same file is published as \texttt{index.html} for web hosting; the two files are byte-identical.
+
+The script is assembled from source modules by a small build chain; in the delivered file they sit in this order:
+
+\begin{center}\small
+\begin{tabular}{@{}lp{10.8cm}@{}}\toprule
+HTML lines & Content\\\midrule
+643--1568 & \texttt{ZH\_TERMS}: the Chinese interface (term table) and \texttt{zhPhrase()} for composed sentences\\
+1649--2456 & shared utilities: statistics (\texttt{mean}, \texttt{sd}, \texttt{tTest} \dots), \texttt{crc32}, \texttt{sha256Hex}, \texttt{inflate}, ZIP reading and writing, .ixo instrument XML helpers\\
+2457--2799 & \texttt{decodeIxo()}: the .ixo instrument decoder\\
+2800--3365 & the .eds instrument module: \texttt{parseEds()}, instrument log (\texttt{parseLog}), Ct re-derivation (\texttt{recalcCt}), vendor-layout tables\\
+3366--3530 & \texttt{decodeEds()} (adapter to the common run model) and container integrity (\texttt{ixoIntegrity}, \texttt{integrityEvents})\\
+3531--3847 & pseudonymisation, relative quantification rows, XLSX writer, vendor workbook, cached forensic snapshot\\
+3848--4656 & the SOP engine, the control identity of a sample (\texttt{sopControlIdentity}) and the SOP editor (Chapter~\ref{ch:sop})\\
+4657--5166 & SVG plotting (\texttt{svgPlot}) and the graph gallery \texttt{GRAPHS} (Chapter~\ref{ch:graphs})\\
+5167--5183 & lazy tab rendering (\texttt{markDirty}, \texttt{renderTab})\\
+5184--6400 & the control panel: extraction, chart catalogue, statistics, signal classes, limit texts, panel, ZIP (Chapter~\ref{ch:panel})\\
+6401--7262 & efficiency estimators, open-format exports (RDML, RDES, qpcR, scripts, JSON-LD), bundle ZIP\\
+7263--7836 & SOP, Load and Open formats tabs\\
+7837--8291 & quality and forensic review (Chapter~\ref{ch:review})\\
+8292--8493 & file intake, reading, \texttt{refreshAll}, \texttt{showTab}, \texttt{boot}\\\bottomrule
+\end{tabular}
+\end{center}
+
+Appendix~\\ref{app:index} lists every function with its exact line range; Appendix~\\ref{app:design-views} adds the corresponding responsibility and data-flow record.
+
+\section{Data flow}
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[font=\footnotesize,
+  box/.style={draw,rounded corners=2pt,align=center,fill=#1!8,draw=#1!60!black,minimum height=11mm,text width=3.2cm,inner sep=3pt},
+  box/.default=blue, arr/.style={-{Stealth[length=2mm]},thick,gray!70!black}]
+\node[box=gray]   (files)    at (0,0)      {\texttt{.ixo} / \texttt{.eds} / \texttt{.edt} / \texttt{.zip}, pasted Cq};
+\node[box]        (intake)   at (4.3,0)    {\texttt{intake()}\\\texttt{readStaged()}};
+\node[box]        (dec)      at (8.6,0)    {\texttt{decodeIxo()}, \texttt{decodeEds()}\\integrity check};
+\node[box=orange] (cc)       at (12.9,0)   {\texttt{ccExtractOnLoad()}\\temperature log, acquisitions, instrument log};
+\node[box=green]  (runs)     at (8.6,-2.3) {\texttt{RUNS[]}\\common run model};
+\node[box=gray]   (tabs)     at (0,-4.6)   {tabs 1--7: load, SOP, results, charts, graphs, review, exports};
+\node[box=violet] (sop)      at (4.3,-4.6) {SOP profile\\\texttt{sopEvaluateAll()}};
+\node[box=orange] (rows)     at (8.6,-4.6) {history rows\\\texttt{ccRowsFromRuns()}\\+ imported history};
+\node[box=orange] (panel)    at (12.9,-4.6){tab 4: control charts\\\texttt{ccCompute()}};
+\node[box=red,text width=4cm] (forensic) at (6.45,-6.9){forensic log\\\texttt{reviewForensicEvents()}};
+\draw[arr] (files)--(intake); \draw[arr] (intake)--(dec); \draw[arr] (dec)--(cc);
+\draw[arr] (dec)--(runs); \draw[arr] (cc)|-(runs);
+\draw[arr] (runs)-|(sop); \draw[arr] (runs)--(rows); \draw[arr] (sop)--(rows); \draw[arr] (rows)--(panel);
+\draw[arr] (sop)--(tabs); \draw[arr] (runs)-|(tabs);
+\draw[arr] (sop)|-(forensic); \draw[arr] (panel)|-(forensic);
+\end{tikzpicture}
+\caption{Data flow. The raw bytes are read once; the instrument-side numbers are extracted while the bytes are in memory, so
+later steps never need the file again.}\label{fig:flow}
+\end{figure}
+
+Two design rules follow from the size of real data sets (100+ files of 2--11~MB each):
+\begin{itemize}
+\item \textbf{Read once, keep only what is needed.} The decoders keep the decoded values and a thinned copy of the temperature
+      log (1\,800 slices); the raw XML and ZIP bytes are not kept for display.
+\item \textbf{Render lazily.} A tab is drawn only when it is opened and only if its inputs changed (\texttt{markDirty}).
+\end{itemize}
+
+The delivered script also keeps an explicit lifecycle record. File intake, decoding/SOP evaluation and rendering/export are
+separate boundaries even though they share one HTML file. A generation token invalidates a pending read when a newer selection
+arrives; a decoder result is checked for the common run shape before it reaches a chart; and the last 100 failures are retained
+as structured diagnostic events. Intake reports a 512-file and 2~GiB staging limit instead of silently dropping input. These
+checks make a slow or malformed input observable while leaving stored Cq values and calls unchanged.
+
+\input{code/markDirty}
+\input{code/renderTab}
+\input{code/showTab}
+\input{code/refreshAll}
+
+\section{The common run model}
+Both decoders return the same object, so every later step works on either instrument. Its main members are:
+\begin{center}\small
+\begin{tabular}{@{}lp{11.5cm}@{}}\toprule
+Member & Content\\\midrule
+\texttt{meta} & name, creation, run start and end, last change, operator, software and instrument version, instrument ID\\
+\texttt{wells[]} & one entry per well and analysis: sample, target, channel and filter pair, role, stored Cq (\texttt{Cp}), call, curve\\
+\texttt{allCurves} & every acquired curve, analysed or not (\texttt{"channel|position"})\\
+\texttt{plate}, \texttt{subsets}, \texttt{analyses} & plate layout, named subsets, analysis settings and dates\\
+\texttt{protocol} & programs, segments (target, hold, ramp, acquisition), channels, block\\
+\texttt{integrity} & stored and computed container checksum (.ixo instrument) or tamper value (.eds instrument)\\
+\texttt{eds} & .eds instrument only: log, calibrations, per-image data, results tables\\
+\texttt{cc}, \texttt{ccStatic} & control-panel extraction (Chapter~\ref{ch:panel})\\\bottomrule
+\end{tabular}
+\end{center}
+
+
+

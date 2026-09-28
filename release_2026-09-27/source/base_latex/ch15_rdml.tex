@@ -1,0 +1,75 @@
+\chapter{RDML exchange input}\label{ch:rdml}
+
+\readingnote{RDML is accepted as an exchange record when it is the only file for an experiment.}
+
+\section{Scope}
+The page accepts a compressed RDML file containing \texttt{rdml\_data.xml}, or a direct RDML XML file. The reader is namespace-agnostic and accepts RDML versions 1.0--1.4. Stored Cq, amplification points, melt points, target, dye, sample role, method and provenance fields are retained in the common run model.
+
+\begin{itemize}
+\item A vendor export is evaluated when no matching instrument container is loaded.
+\item A raw RDML file is imported as evidence; the SC profile is not applied because no crossing analysis is recorded.
+\item A third-party result is marked with its named analysis method.
+\item When a matching \texttt{.ixo} or \texttt{.eds} file is loaded, the instrument file is the record. The RDML remains available as a comparison companion and is marked \texttt{supersededBy}.
+\end{itemize}
+
+\section{Processing states}
+The state is derived from the RDML contents:
+
+\begin{center}\small
+\begin{tabular}{@{}p{3.0cm}p{7.2cm}p{4.0cm}@{}}\toprule
+State & Evidence in the file & Profile action\\\midrule
+\texttt{instrument} & Vendor container decoded by the page & Evaluate with the selected profile\\
+\texttt{vendor-export} & Instrument named; Cq or vendor method present & Evaluate when no instrument file matches\\
+\texttt{third-party} & \texttt{ampEffMet} or background method names a re-analysis tool & Evaluate as third-party result\\
+\texttt{raw} & Fluorescence is present without Cq or analysis method & Evidence only; report not applicable\\
+\texttt{superseded} & Matching instrument file is loaded & Keep for comparison; instrument file controls\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Cq ceiling rule}
+Some vendor RDML exports encode an undetermined well as Cq equal to the cycle count. The reader converts that value to the common undetermined representation only when the RDML is a vendor export and the row has no \texttt{N0} or efficiency result. Third-party results are not rewritten. This keeps stored values from being mistaken for a crossing at the final cycle.
+
+\section{Implementation points}
+The RDML reader is embedded in the production page. The separate source file used during review is listed in Appendix~\ref{app:source}. The integration points are:
+
+\begin{itemize}
+\item file intake: extension and ZIP-entry detection;
+\item decoding: XML parse, target/dye/sample maps, amplification and melt arrays;
+\item evaluation: processing-state gate before the SC method gate;
+\item precedence: matching instrument container supersedes RDML for evaluation;
+\item review: raw RDML is excluded from rising-curve findings because no quantification analysis is recorded.
+\end{itemize}
+
+\begin{center}\small
+\begin{tabular}{@{}p{4.0cm}p{2.0cm}p{7.8cm}@{}}\toprule
+Code area & HTML lines & Function\\\midrule
+SC applicability gate & 4430--4440 & \texttt{sopEvaluateRun}\\
+Rising-curve scope & 9824--9860 & \texttt{risingCurveRows}\\
+File intake & 9993--10040 & \texttt{intake}\\
+RDML decode branch & 10074--10100 & \texttt{readStagedCore}\\
+RDML reader and precedence & 10497--10778 & \texttt{rdmlParse}, \texttt{runProcessingState}, \texttt{applyRawFilePriority}\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Validation record}
+The validation used the attached RDML XSD, format notes, workshop files and the .eds instrument RDML/EDS pair. XML structure was checked against the supplied schema vocabulary; browser execution and cross-format comparison were the release checks. No laboratory identifiers or measurements were added to the synthetic documentation data.
+
+\begin{center}\small
+\begin{longtable}{@{}p{5.0cm}p{2.3cm}p{2.2cm}p{4.0cm}@{}}\toprule
+Input set & Files / runs & Result & Check\\\midrule\endfirsthead
+\toprule Input set & Files / runs & Result & Check\\\midrule\endhead
+Workshop RDML examples & 6 / 12 & 0 page errors & raw, third-party and melt fields decoded\\
+.eds instrument RAS export & 1 / 3 & vendor-export & 158 ceiling Cq rows normalised; stored run rows retained\\
+RAS RDML alone & 1 / 3 & evaluated & no supersession; SC profile reports method mismatch when applicable\\
+RAS RDML + matching EDS & 2 / 4 & instrument wins & RDML marked \texttt{supersededBy}; no duplicate evaluation\\
+Synthetic fixture oracle & 1 fixture & 27/27 & Cq sentinel, controls, rising curves and stored-value invariants\\
+Stateful function probe & 4 fixtures & 444 passes & 8 mutating functions rerun in isolation\\
+SC screening corpus & 351 files & 8,775 graphs & 0 decode, tab, graph or export errors in the prior regression run\\\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Release result}
+The promoted pair \texttt{qpcr\_qc\_forensics.html} and \texttt{index.html} is identical. SHA-256: \texttt{6E14CC49\allowbreak{}153AD066\allowbreak{}2B94C472\allowbreak{}18F21305\allowbreak{}1C5128FE\allowbreak{}C78CC8A4\allowbreak{}79CE00F1\allowbreak{}7F391F4E}. The file contains 10,788 lines. The RDML reader source has 289 lines and SHA-256 \texttt{F20FDEFA\allowbreak{}D781759F\allowbreak{}14DF7B68\allowbreak{}F16AD881\allowbreak{}11F9CAAA\allowbreak{}3356BA0D\allowbreak{}72A50679\allowbreak{}E2F63FB1}.
+
+
+

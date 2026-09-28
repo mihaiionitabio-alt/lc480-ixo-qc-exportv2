@@ -1,0 +1,94 @@
+\chapter{Tab 1 · Load files: reading and decoding}\label{ch:load}
+
+\figui{ui_start.png}{The page before any file is read.}{ui_start}
+
+\section{File intake}
+Files arrive by drag and drop or the file dialog. \texttt{intake()} sorts them by extension (a \texttt{.zip} is opened and searched
+for \texttt{.ixo}, \texttt{.eds} and \texttt{.edt} entries), decodes .ixo instrument XML text once, and lists what will be read.
+\texttt{readStaged()} then decodes each file, runs the control-panel extraction while the bytes are still in memory and
+opens the Control panel.
+
+\input{code/intake}
+\input{code/readStaged}
+
+\figui[0.9]{ui_load.png}{Load tab after reading: the synthetic data set notice and the \emph{What was read} table (one row per run).}{ui_load}
+
+\section{.ixo instrument (\texttt{.ixo})}
+An \texttt{.ixo} file is XML. Objects (\texttt{<obj>}) carry properties (\texttt{<prop name="\dots">}); binary members are base64.
+The decoder reads the plate model, subsets, protocol, analyses, results and the raw acquisitions.
+
+\input{code/decodeIxo}
+
+\subsection*{Container integrity}
+The file stores a checksum of its content. \texttt{ixoIntegrity()} recomputes it; a mismatch means the XML was edited
+outside the instrument software and is reported as an error in the forensic log.
+
+\input{code/ixoIntegrity}
+
+\subsection*{Block temperature log (\texttt{TemperatureLog})}
+The block temperature is logged about every 0.41\,s for the whole run. Two arrays are stored: \texttt{Times} with the magic
+\texttt{LARZ} (uint32 milliseconds) and \texttt{Temps} with \texttt{DARZ} (float64 °C). After a short header the values are
+either raw or compressed with LZSS (4\,096-byte ring buffer, matches of 3--18 bytes, one flag bit per item).
+
+\begin{infobox}
+The header length varies between files (12 or 13 bytes were found). Reading from the wrong offset produced temperatures such as
+$10^{102}$\,°C for one interrupted run, which distorted every thermal metric of that run. \texttt{ccDecodeArz()} therefore
+tries every plausible start and keeps the one whose \emph{whole} array is physically plausible (temperatures $-50$\dots$200$\,°C,
+times never decreasing); \texttt{ccIxoTemperatureLog()} drops any point that is still implausible.
+\end{infobox}
+
+\input{code/ccLzss}
+\input{code/ccDecodeArz}
+\input{code/ccIxoTemperatureLog}
+
+\subsection*{Fluorescence acquisitions (\texttt{AcquisitionStore})}
+Every fluorescence reading is a record with its time, the block temperature at that moment (hexadecimal big-endian double),
+the channel, the automatic integration time, a validity flag and the lamp reference value. The store is deflate-compressed XML.
+
+\input{code/ccIxoAcquisitions}
+
+\section{.eds/.edt instrument (\texttt{.eds}, \texttt{.edt})}
+An \texttt{.eds} file is a ZIP container. \texttt{parseEds()} checks the CRC of every entry and the tamper value written by the
+instrument software, then reads the experiment description, plate, protocol, analysis results, multicomponent and raw data,
+calibrations, the per-image \texttt{quant} files and the instrument's \texttt{messages.log}. \texttt{decodeEds()} maps the result
+onto the common run model.
+
+\input{code/parseEds}
+\input{code/decodeEds}
+
+\subsection*{Instrument log and Ct re-derivation}
+\texttt{parseLog()} reads the once-per-second \texttt{Temperature} and \texttt{LEDStatus} lines. \texttt{recalcCt()} re-derives
+every Ct from the stored $\Delta$Rn and threshold, so a stored Ct that does not match its own curve can be flagged.
+
+\input{code/parseLog}
+\input{code/recalcCt}
+
+\texttt{ccQsLog()} makes one more pass over the log for the timing and mechanics used by the control panel: command reply times,
+camera and filter-wheel moves, encoder offsets, heated-cover drive, scheduler lateness, image processing, predicted and actual
+run time, errors and the lifetime counters of the block.
+
+\input{code/ccQsLog}
+
+\section{What each file type carries}
+\begin{center}\small
+\begin{tabular}{@{}p{4.6cm}p{4.9cm}p{5.6cm}@{}}\toprule
+Information & .ixo instrument (\texttt{.ixo}) & .eds/.edt instrument (\texttt{.eds})\\\midrule
+Block temperature & \texttt{TemperatureLog}, 0.41\,s, block & \texttt{messages.log}, 1\,s, modelled sample temperature, 6 zones, cover, heat sink\\
+Temperature at each reading & every acquisition record & every image (6 zones)\\
+Light source & lamp reference channel per reading & LED temperature, current, voltage, junction\\
+Exposure & automatic integration time per reading & requested exposure per image\\
+Mechanics & channel switch timing & filter wheel, encoder, heated cover\\
+Embedded computer & -- & command replies, 1-s timer, scheduler, image processing\\
+Calibrations & -- & uniformity, background, ROI files\\
+Lifetime counters & -- & block cycles, degrees climbed\\
+Not in the file & lamp hours, plate loading, error log (Instrument Problem Report) & drawer and plate insertion, LED hours\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Extraction for the control panel}
+\texttt{ccExtractOnLoad()} runs once per file during reading and stores the extracted instrument numbers on the run, together
+with a thinned copy of the temperature log for display.
+
+\input{code/ccExtractOnLoad}
+
+

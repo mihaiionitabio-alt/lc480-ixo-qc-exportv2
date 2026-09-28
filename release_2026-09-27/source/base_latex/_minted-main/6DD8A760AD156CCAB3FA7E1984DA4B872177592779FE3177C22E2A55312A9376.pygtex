@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{refreshAll}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nx}{SOP\PYGZus{}CACHE}\PYG{o}{=}\PYG{k+kc}{null}\PYG{p}{;}\PYG{n+nx}{invalidateAnalysisCaches}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n+nx}{markDirty}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}load\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}export\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}review\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}sop\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}results\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}graphs\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}panel\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}integrity\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n+nx}{renderTab}\PYG{p}{(}\PYG{n+nx}{currentTab}\PYG{p}{());}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{currentTab}\PYG{p}{()}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}integrity\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderIntegrity}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n+nx}{renderMachineMetadata}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n+nx}{localizeDOM}\PYG{p}{(}\PYG{n+nb}{document}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

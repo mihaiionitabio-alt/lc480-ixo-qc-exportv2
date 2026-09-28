@@ -1,0 +1,79 @@
+\chapter{The original synthetic teaching gallery}\label{ch:data}
+
+\begin{notebox}
+This chapter describes the retained 57-run gallery and its 325-row invented history, separate from the new .ixo-calibrated demo in Chapter~\ref{ch:roche}. Everything in this chapter is \textbf{made-up data for demonstrative purposes}.
+\end{notebox}
+
+\section{Why synthetic data, and how it resembles the real files}
+Real experiment files carry sample names, laboratory identities, instrument serial numbers and results that must not be
+published. The documentation uses synthetic raw runs calibrated to the measured scale, moving-range noise and resolution
+of two supplied .ixo instrument summaries. No real values or dates are copied. No .eds instrument history was supplied, so
+.eds instrument keeps the former demonstration scale. All values, dates, identifiers, curves and events shown here are invented.
+The data are built in three steps:
+
+\begin{enumerate}
+\item \textbf{Structure templates.} Five experiment files (two .ixo instrument, three .eds/.edt instrument) were decoded by the page
+      once to obtain the \emph{shape} of a run: plate format (8$\times$12), thermal program, detection channels
+      (e.g.\ 465-510 / 533-580 on the .ixo instrument, x1-m1 \dots\ x5-m5 on the .eds instrument), the analyses and the fields each file type
+      carries. Seeded rules, the .ixo instrument calibration and logistic curves generate the displayed measurements.
+      .eds instrument Cq centres are independently defined by synthetic rules. Missing template programs receive an explicitly synthetic 40-cycle program. Thus these are synthetic demonstrations, not
+      independent experimental evidence or a claim of statistical anonymisation.
+\item \textbf{Regeneration.} Each synthetic run is a copy of one template in which \emph{every} value that appears in this document
+      is replaced (Listings below):
+      \begin{itemize}
+      \item names: samples become \texttt{DEMO-L1-001} \dots, controls become \texttt{NTC}, \texttt{Blank extraction},
+            \texttt{DEMO LOD 01.03.2026} or \texttt{Positive control}; operators become \emph{Analyst A/B/C};
+            instruments become \texttt{LC-DEMO-01}, \texttt{LC-DEMO-02}, \texttt{QS-DEMO-A}, \texttt{QS-DEMO-B}, \texttt{QS-DEMO-C};
+            all UIDs, plate IDs, hashes, paths and host names are random;
+      \item dates: all timestamps are moved to the synthetic run date, keeping their order and spacing;
+      \item amplification curves: logistic curves with the chosen Cq at the second-derivative maximum, baseline, amplitude and noise
+            drawn at random; the stored Cq is set to the generated Cq, and for .eds instrument the stored Ct is the threshold crossing
+            of the generated $\Delta$Rn;
+      \item .ixo instrument background, plateau and exposure use calibrated channel scales and a shared synthetic plate-load
+            factor. The thermal model uses calibrated heat and cooling rates, overshoot, settling, hold offset and transitions;
+            it produces new temperature traces and optics measurements. .eds instrument retains its earlier scale;
+      \item instrument logs, lamp reference, exposure, LED, filter wheel, cover, timing: regenerated around typical values;
+      \item stored relative quantification: recomputed from the synthetic Cts ($2^{-\Delta\Delta C_q}$).
+      \end{itemize}
+      A leak check then searches every synthetic run for the identifiers of the templates; the data set is used only when
+      nothing is found.
+\item \textbf{History.} A multi-year instrument history (325 rows) is generated in Python with the same .ixo instrument
+      calibration and the former .eds instrument model, then given deliberate trends, a service step, seasonality and operator differences
+      (Listing \texttt{lc1()} below). It is imported into the page exactly as a laboratory would import its own history file.
+\end{enumerate}
+
+\input{tables/dataset}
+
+\section{Planted events}
+So that the charts and the forensic checks have something to find, the following events were written into the synthetic data:
+
+\begin{center}\footnotesize
+\begin{tabular}{@{}p{3.3cm}p{5.6cm}p{6.6cm}@{}}\toprule
+Where & Event & Where it shows\\\midrule
+LC-DEMO-01, 2025-05-12 & synthetic service step: settling $4.95\to4.54$\,s, heating rate $4.89\to4.77$\,°C/s, hold offset $-0.50\to-0.40$\,°C & B-H1, B-H2, B-H3b, B-H4 (Figs.~\ref{fig:cool_before}, \ref{fig:cool_rebase}, \ref{fig:hold})\\
+LC-DEMO-01, whole period & calibrated cooling rate declines from about 2.47 to 2.22\,°C/s; 95-to-60\,°C transition is about 15.4\,s & B-H2 trend and forecast, B-H3c transition times\\
+LC-DEMO-01, loaded runs & two extraction batches with simulated age-related Cq drift & Control batch and extract-age graphs\\
+Analyst C & NTC positive rate 7\,\% (others 0.8\,\%) & B-O5 funnel, B-M5 p-chart\\
+Analyst B & replicate SD varied around the calibrated 0.18--0.20 scale & B-O1\\
+\texttt{DEMO\_LC1\_SCREEN\_013} & well A03 carries a copy of the curve of A01 & forensic log: \emph{Copied data} (error), B-O11\\
+\texttt{DEMO\_LC1\_SCREEN\_018} & last change 410 h after the run & forensic log (timeline), A-S4\\
+\texttt{DEMO\_LC1\_SCREEN\_022} & extraction blank amplifies at Cq 35.6 & SOP: review required; forensic finding\\
+QS-DEMO-A & LED current rising, cover drive slowing, filter wheel +14\,ms from 2025-09 & B-H10, B-H18, B-H14\\
+QS-DEMO-A, run 8 & three command errors in the instrument log & B-S8\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Generator code}
+The core functions of the generator follow; the complete files are in Appendix~\ref{app:generator}.
+
+\input{code/demo_curve}
+The logistic curve $F(c)=B+\dfrac{A}{1+e^{-(c-x_0)/s}}$ has its second-derivative maximum at $c=x_0-1.317\,s$, so
+$x_0=C_q+1.317\,s$ places the .ixo instrument ``2nd derivative maximum'' crossing point exactly at the chosen $C_q$.
+
+\input{code/demo_thermalTrace}
+\input{code/demo_lcRun}
+\input{code/hist_lc1}
+
+\fig{g_all_x_duration.png}{Run duration and instrument use of the 57 synthetic runs, coloured by instrument (Graphs tab, \texttt{x\_duration}).}{dataset_duration}
+
+

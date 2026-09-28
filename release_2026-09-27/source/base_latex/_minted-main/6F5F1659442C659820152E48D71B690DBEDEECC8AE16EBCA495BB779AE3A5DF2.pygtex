@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{ccAlarmDir}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{,}\PYG{n+nx}{res}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{f}\PYG{o}{=}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{flags}\PYG{o}{||}\PYG{p}{[]).}\PYG{n+nx}{join}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{res}\PYG{p}{.}\PYG{n+nx}{type}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}funnel\PYGZdq{}}\PYG{o}{||}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}p\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}u\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}c\PYGZdq{}}\PYG{p}{].}\PYG{n+nx}{includes}\PYG{p}{(}\PYG{n+nx}{res}\PYG{p}{.}\PYG{n+nx}{type}\PYG{p}{))}\PYG{k}{return}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}hi\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{l+s+sr}{/below specification|downward/}\PYG{p}{.}\PYG{n+nx}{test}\PYG{p}{(}\PYG{n+nx}{f}\PYG{p}{))}\PYG{k}{return}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}lo\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{l+s+sr}{/above specification|upward|spread/}\PYG{p}{.}\PYG{n+nx}{test}\PYG{p}{(}\PYG{n+nx}{f}\PYG{p}{))}\PYG{k}{return}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}hi\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{o}{=}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{raw}\PYG{o}{!==}\PYG{k+kc}{undefined}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{n+nx}{res}\PYG{p}{.}\PYG{n+nx}{type}\PYG{o}{!==}\PYG{l+s+s2}{\PYGZdq{}ewma\PYGZdq{}}\PYG{o}{?}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{raw}\PYG{o}{:}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{y}\PYG{p}{;}\PYG{k}{return}\PYG{+w}{ }\PYG{n+nb}{Number}\PYG{p}{.}\PYG{n+nb}{isFinite}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{cl}\PYG{p}{)}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{n+nx}{v}\PYG{o}{\PYGZlt{}}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{cl}\PYG{o}{?}\PYG{l+s+s2}{\PYGZdq{}lo\PYGZdq{}}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}hi\PYGZdq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

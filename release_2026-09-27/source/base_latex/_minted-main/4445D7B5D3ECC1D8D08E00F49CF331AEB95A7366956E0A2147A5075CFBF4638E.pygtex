@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{renderTab}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n+nx}{DIRTY}\PYG{p}{.}\PYG{n+nx}{has}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{))}\PYG{k}{return}\PYG{p}{;}\PYG{n+nx}{DIRTY}\PYG{p}{.}\PYG{o+ow}{delete}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{);}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}load\PYGZdq{}}\PYG{p}{)\PYGZob{}}\PYG{n+nx}{renderLoaded}\PYG{p}{();}\PYG{n+nx}{renderDerived}\PYG{p}{();\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}values\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderValues}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}export\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderExports}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}sop\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderSop}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}graphs\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderGraphs}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}panel\PYGZdq{}}\PYG{p}{)}\PYG{n+nx}{renderPanel}\PYG{p}{();}
+\PYG{+w}{  }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{name}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}review\PYGZdq{}}\PYG{p}{)\PYGZob{}[}\PYG{l+s+s2}{\PYGZdq{}overview\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}plate\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}compare\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}statistics\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}controls\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}runs\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}curves\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}instrument\PYGZdq{}}\PYG{p}{].}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{s}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{DIRTY}\PYG{p}{.}\PYG{n+nx}{add}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}review:\PYGZdq{}}\PYG{o}{+}\PYG{n+nx}{s}\PYG{p}{));}\PYG{n+nx}{renderReviewSheetLazy}\PYG{p}{(}\PYG{n+nx}{currentReviewSheet}\PYG{p}{());\PYGZcb{}}
+\PYG{+w}{  }\PYG{n+nx}{localizeDOM}\PYG{p}{(}\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{querySelector}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}tab\PYGZhy{}\PYGZdq{}}\PYG{o}{+}\PYG{n+nx}{name}\PYG{p}{)}\PYG{o}{||}\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{body}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

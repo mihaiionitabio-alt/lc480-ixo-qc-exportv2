@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{ccCUSUM}\PYG{p}{(}\PYG{n+nx}{y}\PYG{p}{,}\PYG{n+nx}{cfg}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{c+cm}{/* Page\PYGZsq{}s procedure. Two one\PYGZhy{}sided sums; each one signals when it passes h and is then}
+\PYG{c+cm}{     restarted, so an excursion is reported once instead of marking every later run. The}
+\PYG{c+cm}{     signal belongs to the sum that raised it (sigHi / sigLo), so the chart can colour the}
+\PYG{c+cm}{     series that is actually outside and leave the other one alone. */}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{I}\PYG{o}{=}\PYG{n+nx}{ccI}\PYG{p}{(}\PYG{n+nx}{y}\PYG{p}{,}\PYG{n+nx}{cfg}\PYG{p}{),}\PYG{n+nx}{k}\PYG{o}{=+}\PYG{n+nx}{cfg}\PYG{p}{.}\PYG{n+nx}{k}\PYG{p}{,}\PYG{n+nx}{h}\PYG{o}{=+}\PYG{n+nx}{cfg}\PYG{p}{.}\PYG{n+nx}{h}\PYG{p}{;}\PYG{k+kd}{let}\PYG{+w}{ }\PYG{n+nx}{hi}\PYG{o}{=}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{lo}\PYG{o}{=}\PYG{l+m+mf}{0}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nx}{cl}\PYG{o}{:}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{pts}\PYG{o}{:}\PYG{n+nx}{y}\PYG{p}{.}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{=\PYGZgt{}\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kd}{let}\PYG{+w}{ }\PYG{n+nx}{sigHi}\PYG{o}{=}\PYG{k+kc}{false}\PYG{p}{,}\PYG{n+nx}{sigLo}\PYG{o}{=}\PYG{k+kc}{false}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n+nb}{Number}\PYG{p}{.}\PYG{n+nb}{isFinite}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{))\PYGZob{}}\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{z}\PYG{o}{=}\PYG{p}{(}\PYG{n+nx}{v}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{I}\PYG{p}{.}\PYG{n+nx}{cl}\PYG{p}{)}\PYG{o}{/}\PYG{n+nx}{I}\PYG{p}{.}\PYG{n+nx}{sigma}\PYG{p}{;}
+\PYG{+w}{      }\PYG{n+nx}{hi}\PYG{o}{=}\PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{max}\PYG{p}{(}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{hi}\PYG{o}{+}\PYG{n+nx}{z}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{k}\PYG{p}{);}\PYG{n+nx}{lo}\PYG{o}{=}\PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{max}\PYG{p}{(}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{lo}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{z}\PYG{o}{\PYGZhy{}}\PYG{n+nx}{k}\PYG{p}{);}
+\PYG{+w}{      }\PYG{n+nx}{sigHi}\PYG{o}{=}\PYG{n+nx}{hi}\PYG{o}{\PYGZgt{}}\PYG{n+nx}{h}\PYG{p}{;}\PYG{n+nx}{sigLo}\PYG{o}{=}\PYG{n+nx}{lo}\PYG{o}{\PYGZgt{}}\PYG{n+nx}{h}\PYG{p}{;\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{n+nx}{y}\PYG{o}{:}\PYG{n+nx}{hi}\PYG{p}{,}\PYG{n+nx}{y2}\PYG{o}{:\PYGZhy{}}\PYG{n+nx}{lo}\PYG{p}{,}\PYG{n+nx}{raw}\PYG{o}{:}\PYG{n+nx}{v}\PYG{p}{,}\PYG{n+nx}{cl}\PYG{o}{:}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{ucl}\PYG{o}{:}\PYG{n+nx}{h}\PYG{p}{,}\PYG{n+nx}{lcl}\PYG{o}{:\PYGZhy{}}\PYG{n+nx}{h}\PYG{p}{,}\PYG{n+nx}{sigHi}\PYG{p}{,}\PYG{n+nx}{sigLo}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nx}{flags}\PYG{o}{:}\PYG{n+nx}{sigHi}\PYG{o}{?}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}upward shift (CUSUM)\PYGZdq{}}\PYG{p}{]}\PYG{o}{:}\PYG{n+nx}{sigLo}\PYG{o}{?}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}downward shift (CUSUM)\PYGZdq{}}\PYG{p}{]}\PYG{o}{:}\PYG{p}{[]\PYGZcb{};}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{sigHi}\PYG{p}{)}\PYG{n+nx}{hi}\PYG{o}{=}\PYG{l+m+mf}{0}\PYG{p}{;}\PYG{k}{if}\PYG{p}{(}\PYG{n+nx}{sigLo}\PYG{p}{)}\PYG{n+nx}{lo}\PYG{o}{=}\PYG{l+m+mf}{0}\PYG{p}{;}\PYG{+w}{                 }\PYG{c+cm}{/* restart the sum that signalled */}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{;\PYGZcb{})\PYGZcb{};}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

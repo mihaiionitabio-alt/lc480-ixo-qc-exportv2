@@ -1,0 +1,20 @@
+\chapter{Complete production source}\label{app:source}
+
+\readingnote{This appendix is the exact production HTML snapshot used for the release hash in Chapter~\ref{ch:rdml}.}
+
+\begin{itemize}
+\item File: \texttt{qpcr\_qc\_forensics.html}.
+\item Length: 11,774 lines; 918,067 bytes.
+\item Companion \texttt{index.html}: byte-identical.
+\item The listing includes markup, styles, embedded data, JavaScript, exchange-file input, exports and event handlers.
+\item The interface translations are stored as single long lines of ideographs, which the listing
+engine cannot break. Fourteen pages of this appendix therefore carry a line that reaches one to three
+millimetres past the right margin. Nothing is lost and nothing overlaps; the text is the text of the file.
+\end{itemize}
+
+\lstinputlisting[style=vstyle,language=html,breaklines,numbersep=3pt,frame=lines]{code/qpcr_qc_forensics_current.html}
+
+\chapter{RDML reader source}\label{app:rdml-source}
+\readingnote{The standalone reader used during integration is reproduced here; the production page contains the same code in its embedded script.}
+\lstinputlisting[style=vstyle,language=JavaScript,breaklines,numbersep=3pt,frame=lines]{code/rdml_support.js}
+

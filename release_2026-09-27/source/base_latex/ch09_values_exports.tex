@@ -1,0 +1,45 @@
+\chapter{Tab 7 · Open formats}\label{ch:values}
+
+Tab 6 writes the stored values and other data in formats that other tools read. It does not recalculate the instrument's Cq,
+Ct, calls or fluorescence. Each download names the tool that consumes it and what was checked.
+
+\begin{center}\small
+\begin{tabular}{@{}p{4.3cm}p{10.9cm}@{}}\toprule
+Download & Content and consumer\\\midrule
+Cq values (CSV) & every stored crossing point with well, sample, target, role and call — the plain table for any downstream work\\
+Container integrity and forensic log (CSV) & one row per run (checksums, counts, state) and one per finding\\
+.eds instrument export layout (TXT) & header plus Sample Setup, Raw Data, Amplification Data, Multicomponent, Results in the vendor's layout, for LIS/LIMS parsers\\
+.eds instrument export workbook (XLSX) & the same sheets as the vendor's Excel export, rebuilt from the \texttt{.eds}; checked cell by cell against vendor exports\\
+RDES table (TSV) & stored Cq with the full amplification curve, one row per cycle\\
+RDML 1.4 & for LinRegPCR and rdmlpython; every dye declared, so the file validates\\
+qpcR curve table (CSV, wide) & one fluorescence column per well for the R package qpcR\\
+Experiment settings, relative quantification, multicomponent and raw filter data (CSV) & settings read from the container; stored $\Delta\Delta$Cq summaries; per-dye and per-filter signal\\
+Everything as one ZIP & all tables plus R and Python scripts that read them\\
+Dataset metadata (JSON-LD) & machine-readable description of the data set\\\bottomrule
+\end{tabular}
+\end{center}
+\readingnote{The SC review ZIP also carries the profile name, version and SHA-256 in its README and metadata. This identifies
+the rule set used for interpretation without changing the stored Cq or call.}
+
+\figui[0.85]{ui_export.png}{Open formats tab with the pseudonymisation switch.}{ui_export}
+
+\subsection*{Pseudonymisation}
+When the switch is on, sample names in every download are replaced by stable pseudonyms (controls keep their names), operator
+names become \texttt{operator-<hash>} and the original path of an \texttt{.eds} is withheld. The mapping stays on the page unless
+it is downloaded.
+
+\input{code/pseudoOn}
+\input{code/pseudonymMap}
+
+\subsection*{Writers}
+All containers are written without libraries: ZIP (stored entries with CRC-32), XLSX (SpreadsheetML in a ZIP) and RDML (XML in a ZIP).
+
+\input{code/crc32}
+\input{code/makeStoredZip}
+\input{code/makeXlsx}
+\input{code/toCSV}
+\input{code/makeRDMLXML}
+\input{code/exportCatalogueCore}
+\input{code/bundleZip}
+
+

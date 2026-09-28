@@ -1,0 +1,69 @@
+code, chart, group, variant, runs, status, detail, latest, unit, alarms, chart_type, file
+B-H11, Automatic integration time / exposure, hardware, x2-m3, 30, alarm, outside the limits: beyond 3σ, 293.29562721088536, ms, 2, i, B-H11_exposure_x2-m3.svg
+B-O1, "Replicate precision (pooled SD,  Cq < 30)", operator, , 30, alarm, outside the limits: beyond 3σ, 0.09928761670542025, Cq SD, 5, i, B-O1_rep_sd.svg
+B-H14, Filter-wheel move time, hardware, , 30, watch, signal in the last 5 runs, 309.45072208008537, ms, 1, i, B-H14_wheel_ms.svg
+B-S12, Stored Ct not reproducible (> 0.2), software, , 30, watch, signal in the last 5 runs, 0.0026041666666666665, share of wells, 4, p, B-S12_ct_mismatch.svg
+B-S2, Once-per-second timer lateness, software, , 30, watch, signal in the last 5 runs, 5.439070145798603, ms (95th pct), 1, i, B-S2_tick_late.svg
+B-S6, Data hand-off time, software, , 30, watch, pattern inside the limits: 4 of 5 beyond 1σ, 4027.3788852879147, minutes, 1, i, B-S6_handoff_min.svg
+A-H3, Background fluorescence per channel, hardware, x4-m4, 30, in control, in control, 1.006332193821288, fluorescence, 0, i, A-H3_bg_median_x4-m4.svg
+A-H3, Background fluorescence per channel, hardware, x1-m1, 30, in control, in control, 0.9791972373996718, fluorescence, 0, i, A-H3_bg_median_x1-m1.svg
+A-H3, Background fluorescence per channel, hardware, x2-m2, 30, in control, in control, 0.9934121926815326, fluorescence, 0, i, A-H3_bg_median_x2-m2.svg
+A-H3, Background fluorescence per channel, hardware, x3-m3, 30, in control, in control, 0.9889489138865745, fluorescence, 0, i, A-H3_bg_median_x3-m3.svg
+A-H3b, End-point fluorescence per channel, hardware, x4-m4, 30, in control, in control, 3.7530814973263724, fluorescence, 0, i, A-H3b_plateau_median_x4-m4.svg
+A-H3b, End-point fluorescence per channel, hardware, x1-m1, 30, in control, in control, 19.208060505078965, fluorescence, 0, i, A-H3b_plateau_median_x1-m1.svg
+A-H3b, End-point fluorescence per channel, hardware, x2-m2, 30, in control, in control, 5.59833710586708, fluorescence, 0, i, A-H3b_plateau_median_x2-m2.svg
+A-H3b, End-point fluorescence per channel, hardware, x3-m3, 30, in control, in control, 5.827421466290757, fluorescence, 0, i, A-H3b_plateau_median_x3-m3.svg
+A-H4, Run duration, hardware, , 30, in control, in control, 90.25335739247737, minutes, 0, i, A-H4_run_minutes.svg
+A-S4, Run end → last change, software, , 30, in control, in control, -2.0077739939743133, log10 hours, 0, i, A-S4_edit_delay.svg
+A-S6, Forensic findings per run, software, , 30, in control, in control, 3, findings, 0, c, A-S6_findings.svg
+B-H1, Peak heating rate (2-s window), hardware, , 30, in control, in control, 3.295171543870513, °C/s, 0, trend, B-H1_heat_rate.svg
+B-H10, LED drive current, hardware, , 30, in control, in control, 0.5492607427421481, current (as logged), 0, trend, B-H10_led_current.svg
+B-H10b, LED junction temperature (maximum), hardware, , 30, in control, in control, 77.23642278376816, °C, 0, i, B-H10b_led_junction.svg
+B-H11, Automatic integration time / exposure, hardware, x5-m5, 30, in control, in control, 660.4153001177423, ms, 0, i, B-H11_exposure_x5-m5.svg
+B-H11, Automatic integration time / exposure, hardware, x3-m3, 30, in control, in control, 298.6623698122401, ms, 0, i, B-H11_exposure_x3-m3.svg
+B-H11, Automatic integration time / exposure, hardware, x3-m4, 30, in control, in control, 397.4944256353469, ms, 0, i, B-H11_exposure_x3-m4.svg
+B-H11, Automatic integration time / exposure, hardware, x4-m4, 30, in control, in control, 398.04773712380904, ms, 0, i, B-H11_exposure_x4-m4.svg
+B-H11, Automatic integration time / exposure, hardware, x2-m2, 30, in control, in control, 300.4575331026566, ms, 0, i, B-H11_exposure_x2-m2.svg
+B-H11, Automatic integration time / exposure, hardware, x1-m2, 30, in control, in control, 299.89825648774433, ms, 0, i, B-H11_exposure_x1-m2.svg
+B-H11, Automatic integration time / exposure, hardware, x1-m1, 30, in control, in control, 452.12675084180285, ms, 0, i, B-H11_exposure_x1-m1.svg
+B-H12, Saturated well images, hardware, , 30, in control, in control, 0.005338541666666667, share of well images, 0, p, B-H12_saturation.svg
+B-H13, Uniformity calibration: edge-to-centre ratio, hardware, , 30, in control, in control, 1.1803255458711979, edge / centre, 0, i, B-H13_calib_uniformity.svg
+B-H13b, Background calibration: mean offset, hardware, , 30, in control, in control, 2640.747545143983, counts, 0, i, B-H13b_calib_background.svg
+B-H13c, Well-position (ROI) calibration: spot diameter, hardware, , 30, in control, in control, 35.45453642539715, pixels, 2, i, B-H13c_calib_roi.svg
+B-H14b, Filter-wheel moves slower than 500 ms, hardware, , 30, in control, in control, 0, share of moves, 0, p, B-H14b_wheel_slow.svg
+B-H15, Filter-wheel position offset, hardware, emission, 30, in control, in control, 0, encoder counts, 0, i, B-H15_encoder_emission.svg
+B-H15, Filter-wheel position offset, hardware, excitation, 30, in control, in control, 0, encoder counts, 0, i, B-H15_encoder_excitation.svg
+B-H16, Camera readout time beyond the exposure, hardware, , 30, in control, in control, 462.96293981414266, ms, 0, xbars, B-H16_cam_overhead.svg
+B-H18, Heated cover lowering time, hardware, , 30, in control, in control, 10.298163229959231, s, 0, trend, B-H18_cover_down.svg
+B-H18b, Heated cover raising time, hardware, , 30, in control, in control, 5.241118194384593, s, 0, i, B-H18b_cover_up.svg
+B-H2, Peak cooling rate (2-s window), hardware, , 30, in control, in control, 3.328693296886562, °C/s, 0, trend, B-H2_cool_rate.svg
+B-H3c, Transition time A → B °C, hardware, 60→95 °C, 30, in control, in control, 10.569993542551964, s, 0, i, B-H3c_transition_60-to-95.svg
+B-H3c, Transition time A → B °C, hardware, 95→60 °C, 30, in control, in control, 10.156760888158393, s, 0, i, B-H3c_transition_95-to-60.svg
+B-H5, Block zone uniformity (95th percentile), hardware, , 30, in control, in control, 0.5984316165921402, °C, 0, ewma, B-H5_zone_spread.svg
+B-H6, Heat-sink maximum, hardware, , 30, in control, in control, 40.21554494769756, °C, 1, i, B-H6_heatsink_max.svg
+B-H6b, Heated cover temperature, hardware, , 30, in control, in control, 104.4455947833242, °C, 0, i, B-H6b_cover_temp.svg
+B-M10, Late signal / stochastic-zone results, method, , 30, in control, in control, 0, share of results, 1, p, B-M10_late_rate.svg
+B-M2, Passive reference (ROX) level, method, , 30, in control, in control, 152180.65766505187, passive reference, 0, i, B-M2_rox_level.svg
+B-M9, Low Cq confidence, method, , 30, in control, in control, 0, share of wells, 1, p, B-M9_low_conf.svg
+B-O11, Copied-data events, operator, , 30, in control, in control, 0, events, 0, c, B-O11_copied.svg
+B-O2, Dispensed-volume spread (ROX CV), operator, , 30, in control, in control, 8.535593795125152, % CV, 5, i, B-O2_rox_cv.svg
+B-O3, Row / column pattern, operator, , 30, in control, in control, 0.039846439217385794, Cq, 0, i, B-O3_rowcol.svg
+B-O6, Repeat / inconclusive / invalid rate by operator (funnel), operator, , 30, in control, all operators within limits, , share of results, 0, funnel, B-O6_action_op.svg
+B-O7, Manual interventions, operator, , 30, in control, in control, 0, share of settings, 0, p, B-O7_manual_rate.svg
+B-S1, Reply time to the PC software, software, , 30, in control, in control, 173.8454144622955, ms (95th pct), 0, i, B-S1_cmd_rt.svg
+B-S2b, Scheduler falling behind, software, , 30, in control, in control, 130.97697439981442, events per run hour, 0, u, B-S2b_catch_up.svg
+B-S3, Image → processing delay, software, , 30, in control, in control, 4956.131492023259, ms (95th pct), 0, i, B-S3_img_proc.svg
+B-S5, Run-time prediction error, software, , 30, in control, in control, 8.233403401986383, %, 0, i, B-S5_runtime_err.svg
+B-S8, Command errors in the instrument log, software, , 30, in control, in control, 0, errors, 0, c, B-S8_log_errors.svg
+B-S9, Cycle-timing regularity, software, , 30, in control, in control, 88.89618711197477, ms, 0, i, B-S9_cycle_sd.svg
+A-M1, Positive control Cq (Levey-Jennings), method, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , Cq, 0, i, A-M1_pc_cq.svg
+B-H3, Overshoot at the denaturation step, hardware, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , °C, 0, cusum, B-H3_overshoot.svg
+B-H3b, Settling time at the denaturation step, hardware, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , s, 0, i, B-H3b_settling.svg
+B-H4, Temperature at the moment of reading, hardware, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , °C from setpoint, 0, xbars, B-H4_hold_temp.svg
+B-M1, Probe signal strength (positive control), method, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , fluorescence, 0, ewma, B-M1_pc_amplitude.svg
+B-M3, PCR efficiency from the standards, method, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , % efficiency, 0, trend, B-M3_efficiency.svg
+B-M5, Negative controls by process stage, method, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , share of NTC wells, 0, p, B-M5_ntc_rate.svg
+B-M6, IC shift from fixed reference, method, , 0, not enough data, requires a fixed IC reference Cq and matching IC target, , cycles, 0, ewma, B-M6_ic_shift.svg
+B-O5, Contamination rate by operator (funnel), operator, , 0, not enough data, needs two or more operators, , share of NTC wells, 0, funnel, B-O5_ntc_op.svg
+B-O9, Stored calls that disagree with the SOP, operator, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , share of wells, 0, p, B-O9_call_disagree.svg
+B-S4, Image analysis time, software, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , ms, 0, i, B-S4_roi_ms.svg

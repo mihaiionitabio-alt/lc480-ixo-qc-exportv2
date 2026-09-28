@@ -1,0 +1,164 @@
+% MISSY technical documentation for .ixo, .eds/.edt and .rdml
+% Compile with XeLaTeX or Tectonic; listings are embedded and require no shell escape.
+\documentclass[11pt,a4paper,oneside]{report}
+\usepackage[margin=2.2cm,headheight=26pt,headsep=11pt,footskip=18pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{msyh.ttc}[Path=fonts/,Scale=0.92]
+\setsansfont{msyh.ttc}[Path=fonts/,Scale=0.92]
+% The source appendix contains Unicode text from the page.  A CJK-capable
+% mono-family keeps those literals visible in numbered listings.
+\setmonofont{msyh.ttc}[Path=fonts/,Scale=0.76]
+\usepackage{ucharclasses}
+
+\newfontfamily\CJKfallback[Path=fonts/]{msyh.ttc}
+\setTransitionsForCJK{\CJKfallback}{\rmfamily}
+\setTransitionsForPunctuation{\CJKfallback}{\rmfamily}
+\usepackage{graphicx,xcolor,booktabs,longtable,array,tabularx,multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{caption,subcaption}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{etoolbox}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+\input{val_preamble}
+
+\setlist{itemsep=2pt,topsep=4pt}
+\captionsetup{font=small,labelfont=bf}
+% a little slack on the right lets the line breaker place a wide ideograph inside the
+% text block instead of one glyph past it
+% Listings keeps code rendering offline and gives every source listing the same black style.
+
+\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{4pt}\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{4pt}
+\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}
+\AtBeginEnvironment{tabular}{\small\sloppy}
+\AtBeginEnvironment{tabularx}{\small\sloppy}
+\AtBeginEnvironment{longtable}{\small\sloppy}
+
+\definecolor{synth}{HTML}{B45309}
+\definecolor{accent}{HTML}{1F6FEB}
+
+\newcommand{\synthtag}{\textcolor{synth}{\textbf{[synthetic data]}}~}
+
+\newcommand{\page}{\texttt{qpcr\_qc\_forensics.html}}
+
+\newcommand{\fig}[4][0.98]{\begin{figure}[htbp]\centering\includegraphics[width=#1\linewidth]{fig/#2}\caption{\synthtag #3}\label{fig:#4}\end{figure}}
+
+\newcommand{\figui}[4][0.98]{\begin{figure}[htbp]\centering\fbox{\includegraphics[width=#1\linewidth]{fig/#2}}\caption{\synthtag #3}\label{fig:#4}\end{figure}}
+
+\newenvironment{codelisting}[2]{\par\medskip
+\noindent{\small\textbf{Listing}~\texttt{#1}\hfill\textcolor{gray}{#2}}\par
+\nopagebreak\vspace{-2pt}}{\par\medskip}
+
+\newtcolorbox{notebox}[1][]{colback=orange!6,colframe=synth,boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,#1}
+
+\newtcolorbox{infobox}[1][]{colback=blue!4,colframe=accent!70!black,boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,#1}
+
+\newcommand{\readingnote}[1]{\par\small\textit{Reading note:}~#1\par}
+
+\newcommand{\dnasep}{\par\medskip\begin{center}\includegraphics[width=0.82\textwidth]{fig/dna_separator.png}\end{center}\medskip}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\raisebox{-0.12cm}{\includegraphics[height=0.42cm]{fig/missy_option3_full.png}}\quad\small MISSY TECHNICAL DOCUMENTATION\quad v2026-09-21 r2\quad 25 September 2026}
+\fancyhead[R]{\small RUO / NOT VALIDATED}
+
+\newcommand{\documentpages}{1072}
+\fancyfoot[C]{\small Page \thepage\ of \documentpages}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}
+  \fancyhead[L]{\raisebox{-0.12cm}{\includegraphics[height=0.42cm]{fig/missy_option3_full.png}}\quad\small MISSY TECHNICAL DOCUMENTATION\quad v2026-09-21 r2\quad 25 September 2026}
+  \fancyhead[R]{\small RUO / NOT VALIDATED}
+  \fancyfoot[C]{\small Page \thepage\ of \documentpages}
+  \renewcommand{\headrulewidth}{0.4pt}\renewcommand{\footrulewidth}{0pt}}
+
+\title{\textbf{qPCR raw values, open formats, quality control and forensics}\\[4pt]
+\Large MISSY TECHNICAL DOCUMENTATION\\[4pt]
+\normalsize A single-file web page for \texttt{.ixo}, \texttt{.eds/.edt} and \texttt{.rdml} experiment runs\\[10pt]
+\large Technical documentation with complete source, release 2026-09-21 r2, final RDML-enabled build}
+\author{Documentation of \page\ (identical copy: \texttt{index.html})}
+\date{25 September 2026 -- RDML input and per-function validation}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\begin{center}\includegraphics[height=3.5cm]{fig/missy_option3_full.png}\end{center}
+\begin{center}\includegraphics[width=0.96\textwidth]{fig/dna_separator.png}\end{center}
+\begin{notebox}[title={\textbf{Statement on the data shown in this document}}]
+\textbf{All demonstration run data and plotted measurements in this document are synthetic.}
+The current reconstruction (Chapter~\ref{ch:roche}) contains 351 synthetic equipment-history rows calibrated only to
+aggregate measurement scales and qualitative relationships from the supplied .ixo chart exports. Its dates, identifiers
+and values are invented; it does not recover the original runs or establish equipment condition. The SC review export uses
+a review-only synthetic control profile and keeps unresolved or date-ineligible series visibly unresolved.
+
+The teaching gallery (Chapter~\ref{ch:data}) contains 57 synthetic raw-run examples and 325 invented history rows
+across five demonstration instruments (four with histories). The .ixo instrument fluorescence and thermal measurements use the supplied
+real-scale calibration; .eds instrument remains on the former scale because no .eds instrument history was supplied. Curves,
+dates, identities and planted faults are simulated; no source experiment's values or dates are copied.
+
+Figures in the new .ixo reconstruction chapter were generated by the reconstruction script using Matplotlib; the accompanying equipment
+SVG exports use the page's chart engine. The older gallery figures were drawn by the page itself. Synthetic plots are
+labelled throughout. None constitutes a validated laboratory acceptance limit or evidence of an observed fault.
+The A4 and A3 landscape chart atlases are delivered as separate PDF files; they contain every chart exported by the page,
+one chart per page, with a short reading and an explanation of values below and above the displayed limits.
+\end{notebox}
+
+\begin{infobox}
+The page is an independent, offline tool. It is \textbf{not} software of the instrument manufacturers and is not endorsed by them.
+It reads what the instrument software stored; it does not replace the vendor software, a validated LIMS or method validation.
+Instrument and software names are used only to identify the file formats.
+\end{infobox}
+
+\tableofcontents
+\listoffigures
+
+\input{ch01_intro}
+\input{ch02_data}
+\input{ch03_arch}
+\dnasep
+\input{ch04_load}
+\input{ch06_sop}
+\input{ch12_controls_correlations}
+\input{ch05_panel}
+\input{ch07_graphs}
+\input{ch08_review}
+\input{ch09_values_exports}
+\dnasep
+\input{ch13_roche_reconstruction}
+\input{ch14_chart_atlases}
+\input{ch15_rdml}
+\dnasep
+\input{ch16_console}
+\input{ch18_structure}
+\input{ch19_missy}
+\input{chV1_method}
+\input{chV2_functions}
+\input{chV3_oracles}
+\input{chV4_rdml}
+\input{chV5_findings}
+\dnasep
+
+\appendix
+\input{appA_new}
+\input{appB_index}
+\input{appC_generator}
+\input{appD_design_views}
+\input{appE_source}
+\input{appF_validation}
+\input{appG_release}
+\input{appH_figure_index}
+\input{appI_atlas_data}
+\end{document}
+
+
+
+
+

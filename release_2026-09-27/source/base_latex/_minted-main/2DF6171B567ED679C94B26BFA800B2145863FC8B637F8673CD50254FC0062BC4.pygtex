@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{toCSV}\PYG{p}{(}\PYG{n+nx}{cols}\PYG{p}{,}\PYG{n+nx}{rows}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{[}\PYG{n+nx}{cols}\PYG{p}{.}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{c}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{csvq}\PYG{p}{(}\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{label}\PYG{p}{)).}\PYG{n+nx}{join}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{},\PYGZdq{}}\PYG{p}{),}
+\PYG{+w}{    }\PYG{p}{...}\PYG{n+nx}{rows}\PYG{p}{.}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{cols}\PYG{p}{.}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{c}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{csvq}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{[}\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{key}\PYG{p}{])).}\PYG{n+nx}{join}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{},\PYGZdq{}}\PYG{p}{))].}\PYG{n+nx}{join}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{)}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

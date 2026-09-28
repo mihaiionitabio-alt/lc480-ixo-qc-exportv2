@@ -1,0 +1,44 @@
+code, chart, group, variant, runs, status, detail, latest, unit, alarms, chart_type, file
+B-H3, Overshoot at the denaturation step, hardware, , 55, watch, signal in the last 5 runs, 5.34, °C, 29, cusum, B-H3_overshoot.svg
+B-H3c, Transition time A → B °C, hardware, 95→60 °C, 55, watch, signal in the last 5 runs, 15.349613372611445, s, 26, i, B-H3c_transition_95-to-60.svg
+B-H3c, Transition time A → B °C, hardware, 72→95 °C, 55, watch, signal in the last 5 runs, 4.872771470465345, s, 6, i, B-H3c_transition_72-to-95.svg
+B-H3c, Transition time A → B °C, hardware, 72→40 °C, 55, watch, signal in the last 5 runs, 16.51720058635359, s, 17, i, B-H3c_transition_72-to-40.svg
+B-H4, Temperature at the moment of reading, hardware, , 55, watch, signal in the last 5 runs, -0.4397761352433427, °C from setpoint, 1, xbars, B-H4_hold_temp.svg
+B-M10, Late signal / stochastic-zone results, method, , 55, watch, signal in the last 5 runs, 0, share of results, 3, p, B-M10_late_rate.svg
+B-O1, "Replicate precision (pooled SD,  Cq < 30)", operator, , 55, watch, signal in the last 5 runs, 0.2268056614323291, Cq SD, 5, i, B-O1_rep_sd.svg
+B-O5, Contamination rate by operator (funnel), operator, legacy pooled (stage unknown), 55, watch, 1 outside 95 %, , share of NTC wells, 1, funnel, B-O5_ntc_op_legacy_pooled_stage_unknown.svg
+B-S11, Invalid fluorescence readings, software, , 55, watch, signal in the last 5 runs, 0, share of readings, 3, p, B-S11_invalid_acq.svg
+A-H3, Background fluorescence per channel, hardware, 465-510, 55, in control, in control, 1552.0849105985212, fluorescence, 0, i, A-H3_bg_median_465-510.svg
+A-H3, Background fluorescence per channel, hardware, 533-580, 55, in control, in control, 1515.626801875834, fluorescence, 0, i, A-H3_bg_median_533-580.svg
+A-H3b, End-point fluorescence per channel, hardware, 465-510, 55, in control, in control, 2723.394647708076, fluorescence, 0, i, A-H3b_plateau_median_465-510.svg
+A-H3b, End-point fluorescence per channel, hardware, 533-580, 55, in control, in control, 1486.5454766476792, fluorescence, 0, i, A-H3b_plateau_median_533-580.svg
+A-H4, Run duration, hardware, , 55, in control, in control, 70.31091082142378, minutes, 0, i, A-H4_run_minutes.svg
+A-M1, Positive control Cq (Levey-Jennings), method, 35S | DEMO-CRM, 55, in control, in control, 32.53755064177931, Cq, 0, i, A-M1_pc_cq_35S_DEMO-CRM.svg
+A-M1, Positive control Cq (Levey-Jennings), method, T-NOS | DEMO-CRM, 55, in control, in control, 31.11817376810499, Cq, 2, i, A-M1_pc_cq_T-NOS_DEMO-CRM.svg
+A-M1, Positive control Cq (Levey-Jennings), method, HMG | DEMO-CRM, 55, in control, in control, 22.929532762152633, Cq, 0, i, A-M1_pc_cq_HMG_DEMO-CRM.svg
+A-S4, Run end → last change, software, , 55, in control, in control, -0.47561828215216867, log10 hours, 0, i, A-S4_edit_delay.svg
+A-S6, Forensic findings per run, software, , 55, in control, in control, 115, findings, 0, c, A-S6_findings.svg
+B-H1, Peak heating rate (2-s window), hardware, , 55, in control, in control, 4.78134, °C/s, 0, trend, B-H1_heat_rate.svg
+B-H11, Automatic integration time / exposure, hardware, 465-510, 55, in control, in control, 225, ms, 0, i, B-H11_exposure_465-510.svg
+B-H11, Automatic integration time / exposure, hardware, 533-580, 55, in control, in control, 280, ms, 0, i, B-H11_exposure_533-580.svg
+B-H17, Channel switch time, hardware, , 55, in control, in control, 1038, ms, 2, i, B-H17_chan_switch.svg
+B-H2, Peak cooling rate (2-s window), hardware, , 55, in control, in control, 2.41794, °C/s, 0, trend, B-H2_cool_rate.svg
+B-H3b, Settling time at the denaturation step, hardware, , 55, in control, in control, 4.54, s, 0, i, B-H3b_settling.svg
+B-H3c, Transition time A → B °C, hardware, 60→72 °C, 55, in control, in control, 2.4290859381193, s, 0, i, B-H3c_transition_60-to-72.svg
+B-H8, Lamp reference channel (stability), hardware, 465-510, 55, in control, in control, 6881, reference counts, 2, i, B-H8_lamp_ref_465-510.svg
+B-H8, Lamp reference channel (stability), hardware, 533-580, 55, in control, in control, 11909, reference counts, 3, i, B-H8_lamp_ref_533-580.svg
+B-H9, Lamp drift within a run, hardware, 465-510, 55, in control, in control, -1.505597332428095, % change in the run, 0, i, B-H9_lamp_drift_465-510.svg
+B-H9, Lamp drift within a run, hardware, 533-580, 55, in control, in control, -1.2558580771510894, % change in the run, 0, i, B-H9_lamp_drift_533-580.svg
+B-M1, Probe signal strength (positive control), method, 35S | DEMO-CRM, 55, in control, in control, 1436.9552488199959, fluorescence, 0, ewma, B-M1_pc_amplitude_35S_DEMO-CRM.svg
+B-M1, Probe signal strength (positive control), method, T-NOS | DEMO-CRM, 55, in control, in control, 1502.2256968982094, fluorescence, 0, ewma, B-M1_pc_amplitude_T-NOS_DEMO-CRM.svg
+B-M1, Probe signal strength (positive control), method, HMG | DEMO-CRM, 55, in control, in control, 1777.542100699171, fluorescence, 1, ewma, B-M1_pc_amplitude_HMG_DEMO-CRM.svg
+B-M5, Negative controls by process stage, method, legacy pooled (stage unknown), 55, in control, in control, 0, share of NTC wells, 1, p, B-M5_ntc_rate_legacy_pooled_stage_unknown.svg
+B-O11, Copied-data events, operator, , 55, in control, in control, 0, events, 0, c, B-O11_copied.svg
+B-O3, Row / column pattern, operator, , 55, in control, in control, 0.4656002728828473, Cq, 1, i, B-O3_rowcol.svg
+B-O6, Repeat / inconclusive / invalid rate by operator (funnel), operator, , 55, in control, all operators within limits, , share of results, 0, funnel, B-O6_action_op.svg
+B-O7, Manual interventions, operator, , 55, in control, in control, 0, share of settings, 2, p, B-O7_manual_rate.svg
+B-O9, Stored calls that disagree with the SOP, operator, , 47, in control, in control, 0, share of wells, 0, p, B-O9_call_disagree.svg
+B-S10, Temperature-log intervals over 500 ms, software, , 55, in control, in control, 0.0024676125848241827, share of intervals, 0, p, B-S10_templog_late.svg
+B-S9, Cycle-timing regularity, software, , 55, in control, in control, 35.81089432339244, ms, 1, i, B-S9_cycle_sd.svg
+B-M3, PCR efficiency from the standards, method, , 0, not enough data, no eligible measurements — check role mapping and assay applicability, , % efficiency, 0, trend, B-M3_efficiency.svg
+B-M6, IC shift from fixed reference, method, , 0, not enough data, requires a fixed IC reference Cq and matching IC target, , cycles, 0, ewma, B-M6_ic_shift.svg

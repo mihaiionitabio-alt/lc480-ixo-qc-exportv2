@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{exportCatalogueCore}\PYG{p}{()\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{one}\PYG{o}{=}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{length}\PYG{o}{===}\PYG{l+m+mf}{1}\PYG{o}{?}\PYG{n+nx}{RUNS}\PYG{p}{[}\PYG{l+m+mf}{0}\PYG{p}{]}\PYG{o}{:}\PYG{k+kc}{null}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{items}\PYG{o}{=}\PYG{p}{[];}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Cq values (CSV)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Every stored crossing point with its well, sample, target, role and call. The plain table most downstream work starts from.\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{length}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}\PYGZob{}}
+\PYG{+w}{      }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{rows}\PYG{o}{=}\PYG{n+nx}{allWellRows}\PYG{p}{();}
+\PYG{+w}{      }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{cols}\PYG{o}{=}\PYG{n+nb}{Object}\PYG{p}{.}\PYG{n+nx}{keys}\PYG{p}{(}\PYG{n+nx}{rows}\PYG{p}{[}\PYG{l+m+mf}{0}\PYG{p}{]}\PYG{o}{||}\PYG{p}{\PYGZob{}}\PYG{n+nx}{cq}\PYG{o}{:}\PYG{l+m+mf}{1}\PYG{p}{\PYGZcb{}).}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{k}\PYG{p}{=\PYGZgt{}(\PYGZob{}}\PYG{n+nx}{key}\PYG{o}{:}\PYG{n+nx}{k}\PYG{p}{,}\PYG{n+nx}{label}\PYG{o}{:}\PYG{n+nx}{k}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{      }\PYG{n+nx}{download}\PYG{p}{(}\PYG{n+nx}{baseName}\PYG{p}{()}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}cq\PYGZus{}values.csv\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{toCSV}\PYG{p}{(}\PYG{n+nx}{cols}\PYG{p}{,}\PYG{n+nx}{rows}\PYG{p}{),}\PYG{l+s+s2}{\PYGZdq{}text/csv\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}RDES table (TSV)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Stored Cq beside the full amplification curve, one row per cycle and one file per analysis. The long\PYGZhy{}format table for scripts that expect tidy data.\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{some}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{wells}\PYG{p}{.}\PYG{n+nx}{some}\PYG{p}{(}\PYG{n+nx}{w}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{w}\PYG{p}{.}\PYG{n+nx}{curve}\PYG{p}{)),}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{makeRDESTables}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{).}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{t}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{download}\PYG{p}{(}\PYG{n+nx}{t}\PYG{p}{.}\PYG{n+nx}{file}\PYG{p}{,}\PYG{n+nx}{t}\PYG{p}{.}\PYG{n+nx}{data}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}text/tab\PYGZhy{}separated\PYGZhy{}values\PYGZdq{}}\PYG{p}{)))}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}RDML 1.4 — for LinRegPCR\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Version 1.4 with every dye declared. rdmlpython refuses LinRegPCR below 1.4, and raises KeyError on a target whose dye was never declared; both were checked by running it.\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{some}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{wells}\PYG{p}{.}\PYG{n+nx}{some}\PYG{p}{(}\PYG{n+nx}{w}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{w}\PYG{p}{.}\PYG{n+nx}{curve}\PYG{p}{)),}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{download}\PYG{p}{(}\PYG{n+nx}{safeName}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{meta}\PYG{p}{.}\PYG{n+nx}{name}\PYG{o}{||}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{file}\PYG{p}{)}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{}.rdml\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{makeRDML}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{),}\PYG{l+s+s2}{\PYGZdq{}application/zip\PYGZdq{}}\PYG{p}{))}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}qpcR curve table (CSV, wide)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}One file per analysis and one column per well, with the first column named Cycles exactly as pcrbatch() demands. Column names carry target and sample so replicate groups form with one sub().\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{some}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{r}\PYG{p}{.}\PYG{n+nx}{wells}\PYG{p}{.}\PYG{n+nx}{some}\PYG{p}{(}\PYG{n+nx}{w}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{w}\PYG{p}{.}\PYG{n+nx}{curve}\PYG{p}{)),}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{makeQpcrWideTables}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{).}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{t}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{download}\PYG{p}{(}\PYG{n+nx}{t}\PYG{p}{.}\PYG{n+nx}{file}\PYG{p}{,}\PYG{n+nx}{t}\PYG{p}{.}\PYG{n+nx}{data}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}text/csv\PYGZdq{}}\PYG{p}{)))}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Melting peaks (CSV)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}One row per stored peak with temperature, area, width, height, shoulder, raw call code and manual\PYGZhy{}edit flag. Wells without a peak remain as one blank row.\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{tmRows}\PYG{p}{().}\PYG{n+nx}{length}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}\PYGZob{}}\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{rows}\PYG{o}{=}\PYG{n+nx}{tmRows}\PYG{p}{();}\PYG{n+nx}{download}\PYG{p}{(}\PYG{n+nx}{baseName}\PYG{p}{()}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}melting\PYGZus{}peaks.csv\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nx}{toCSV}\PYG{p}{(}\PYG{n+nb}{Object}\PYG{p}{.}\PYG{n+nx}{keys}\PYG{p}{(}\PYG{n+nx}{rows}\PYG{p}{[}\PYG{l+m+mf}{0}\PYG{p}{]).}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{k}\PYG{p}{=\PYGZgt{}(\PYGZob{}}\PYG{n+nx}{key}\PYG{o}{:}\PYG{n+nx}{k}\PYG{p}{,}\PYG{n+nx}{label}\PYG{o}{:}\PYG{n+nx}{k}\PYG{p}{\PYGZcb{})),}\PYG{n+nx}{rows}\PYG{p}{),}\PYG{l+s+s2}{\PYGZdq{}text/csv\PYGZdq{}}\PYG{p}{);\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Experiment settings (CSV)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Every setting the page could read out of the container, each with the property it came from. The same table shown on the Load tab.\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{length}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}\PYGZob{}}\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{n}\PYG{o}{=}\PYG{n+nx}{derivedSettings}\PYG{p}{();}\PYG{n+nx}{download}\PYG{p}{(}\PYG{n+nx}{baseName}\PYG{p}{()}\PYG{o}{+}\PYG{l+s+s2}{\PYGZdq{}\PYGZus{}experiment\PYGZus{}settings.csv\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nx}{toCSV}\PYG{p}{([\PYGZob{}}\PYG{n+nx}{key}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}setting\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{label}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}setting\PYGZdq{}}\PYG{p}{\PYGZcb{},\PYGZob{}}\PYG{n+nx}{key}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{label}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{\PYGZcb{},\PYGZob{}}\PYG{n+nx}{key}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}source\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{label}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}read\PYGZus{}from\PYGZdq{}}\PYG{p}{\PYGZcb{}],}\PYG{n+nx}{n}\PYG{p}{),}\PYG{l+s+s2}{\PYGZdq{}text/csv\PYGZdq{}}\PYG{p}{);\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{});}
+\PYG{+w}{  }\PYG{n+nx}{items}\PYG{p}{.}\PYG{n+nx}{push}\PYG{p}{(\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{title}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Everything, as one ZIP\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{note}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}Every table above plus both scripts, so a whole experiment can be handed over in a single file.\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{ready}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{RUNS}\PYG{p}{.}\PYG{n+nx}{length}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nx}{run}\PYG{o}{:}\PYG{p}{()=\PYGZgt{}}\PYG{n+nx}{bundleZip}\PYG{p}{()}
+\PYG{c+c1}{// … 3 more line(s): the complete code is at lines 8557–8559 of the HTML file}
+\end{Verbatim}

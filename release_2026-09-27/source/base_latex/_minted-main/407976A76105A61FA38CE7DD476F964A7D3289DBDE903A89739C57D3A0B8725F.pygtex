@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+control\PYGZus{}charts\PYGZus{}all\PYGZus{}instruments\PYGZus{}\PYGZlt{}date\PYGZgt{}.zip
+├── README.txt            profile, SHA\PYGZhy{}256, protocol filter, one line per instrument
+├── sop\PYGZus{}profile.json
+├── LC\PYGZus{}LC\PYGZhy{}DEMO\PYGZhy{}01/        86 files
+│   ├── 00\PYGZus{}summary.csv    status of every chart on the latest run
+│   ├── B\PYGZhy{}H2\PYGZus{}cool\PYGZus{}rate.svg / .csv
+│   ├── B\PYGZhy{}H3c\PYGZus{}transition\PYGZus{}95\PYGZhy{}to\PYGZhy{}60.svg / .csv
+│   ├── B\PYGZhy{}H4\PYGZus{}hold\PYGZus{}temp.svg, B\PYGZhy{}H4\PYGZus{}hold\PYGZus{}temp\PYGZus{}S\PYGZhy{}chart.svg, .csv
+│   ├── … one file pair per chart and variant
+│   └── history.json / history.csv
+├── LC\PYGZus{}LC\PYGZhy{}DEMO\PYGZhy{}02/  QS\PYGZus{}QS\PYGZhy{}DEMO\PYGZhy{}A/  QS\PYGZus{}QS\PYGZhy{}DEMO\PYGZhy{}B/
+\end{Verbatim}

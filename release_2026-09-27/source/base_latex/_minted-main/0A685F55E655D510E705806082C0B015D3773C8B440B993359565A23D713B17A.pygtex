@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+sudo\PYG{+w}{ }apt\PYG{+w}{ }install\PYG{+w}{ }nodejs\PYG{+w}{ }npm\PYG{+w}{ }python3\PYGZhy{}pil\PYG{+w}{ }unzip
+npm\PYG{+w}{ }install\PYG{+w}{ }playwright\PYG{+w}{ }acorn
+npx\PYG{+w}{ }playwright\PYG{+w}{ }install\PYG{+w}{ }\PYGZhy{}\PYGZhy{}with\PYGZhy{}deps\PYG{+w}{ }chromium
+\PYG{n+nb}{export}\PYG{+w}{ }\PYG{n+nv}{QPCR\PYGZus{}DIR}\PYG{o}{=}/path/to/app
+\PYG{n+nb}{export}\PYG{+w}{ }\PYG{n+nv}{QPCR\PYGZus{}TEMPLATE\PYGZus{}DIR}\PYG{o}{=}/path/to/private\PYGZhy{}templates
+python3\PYG{+w}{ }build\PYGZus{}demo.py\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} synthetic runs, history, figures, code extracts, tables}
+\end{Verbatim}

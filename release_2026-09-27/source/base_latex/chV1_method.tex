@@ -1,0 +1,119 @@
+\chapter{How every function in the page was validated}\label{ch:val-method}
+
+An earlier validation record was questioned on one point, and the objection was
+fair: the inputs were supplied by the same work that wrote the code, so a table of
+passes proved only that the code agreed with its own fixtures. This chapter and
+the two that follow answer that objection in the only way it can be answered ---
+by printing, for every function and constant in the page, the input, where that
+input came from, the code as it stands, and the output. A reader who doubts a
+verdict can re-derive it without trusting the harness.
+
+\section{What was under test}
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Item} & \textbf{Value} \\\midrule\endfirsthead
+\toprule \textbf{Item} & \textbf{Value} \\\midrule\endhead
+\texttt{page} & \texttt{qpcr\_qc\_forensics.html (identical copy index.html)} \\
+\texttt{SHA-256} & \texttt{5685e516afeee0b7f3af4d13f15ac25131b3d89d18ee508a3ec006105a14…} \\
+\texttt{size} & \texttt{893,995 bytes} \\
+\texttt{captured} & \texttt{2026-09-24 12:06:13 UTC} \\
+\texttt{symbols indexed} & \texttt{676} \\
+\bottomrule
+\end{longtable}}
+
+
+\section{The corpus}
+Every file below was loaded through the page's own intake --- the same path an
+operator uses. Nothing was edited and no value was placed into the model by hand.
+The files are instrument and exchange files produced by ordinary demonstration
+experiments; they are identified here by what they contain and by their checksum,
+not by their origin.
+
+{\small
+\begin{longtable}{@{}lrl@{}}
+\caption{The corpus the whole of this part was measured on.}\label{tab:val-corpus} \\
+\toprule \textbf{File} & \textbf{Bytes} & \textbf{SHA-256 (first 24)} \\\midrule\endfirsthead
+\toprule \textbf{File} & \textbf{Bytes} & \textbf{SHA-256 (first 24)} \\\midrule\endhead
+\texttt{MULTIPLEX-4CH.eds} & 2,376,494 & \texttt{8e65cbd6585d5caf70d14778} \\
+\texttt{ABSQUANT-DEMO.ixo} & 4,636,210 & \texttt{e820f46933485d5a4a1c94b9} \\
+\texttt{PLATE-384.eds} & 2,869,499 & \texttt{b2da31fbc0c0cda4d175529a} \\
+\texttt{example\_2\_tm\_annotated.rdml} & 252,547 & \texttt{e018dbad7ec4071af8825439} \\
+\bottomrule
+\end{longtable}}
+
+
+Reading them produced 0 runs and 0 stored results, with no page error.
+
+\section{Provenance classes}
+Every argument carries one of four classes. The class says where the value came
+from, so a verdict can be weighed: a function exercised only on class~S input has
+been shown to run, not to be right on laboratory data.
+
+{\small
+\begin{longtable}{@{}llr@{}}
+\toprule \textbf{Class} & \textbf{Meaning} & \textbf{Arguments} \\\midrule\endfirsthead
+\toprule \textbf{Class} & \textbf{Meaning} & \textbf{Arguments} \\\midrule\endhead
+\texttt{R} & a real instrument or exchange file, unmodified, decoded by the page i… & 140 \\
+\texttt{D} & derived by the code under test from a real file & 76 \\
+\texttt{S} & synthetic, written for this probe & 336 \\
+\texttt{E} & the live interface of the page after the corpus was loaded & 23 \\
+\bottomrule
+\end{longtable}}
+
+
+\section{The three passes}
+A probe that changes application state poisons every probe after it, so the
+capture runs three times.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Pass} & \textbf{What it does} \\\midrule\endfirsthead
+\toprule \textbf{Pass} & \textbf{What it does} \\\midrule\endhead
+A, discovery & probe every symbol once; record which probes changed global state \\
+B, clean & probe again in a new page with those names held back \\
+C, isolation & probe each state-changing name in a page of its own \\
+\bottomrule
+\end{longtable}}
+
+
+The delivered records are B plus C. One name, \vfn{renderPanel}, is state-changing
+in pass~A and clean in pass~C: it had been disturbed by an earlier probe, not by
+itself. That is the whole reason the three passes exist.
+
+\section{What a verdict means}
+
+{\small
+\begin{longtable}{@{}llr@{}}
+\toprule \textbf{Verdict} & \textbf{Meaning} & \textbf{Symbols} \\\midrule\endfirsthead
+\toprule \textbf{Verdict} & \textbf{Meaning} & \textbf{Symbols} \\\midrule\endhead
+\texttt{pass} & called with the stated input; returned the value shown; global state … & 527 \\
+\texttt{const} & a declared value; its content at run time is shown & 113 \\
+\texttt{priv} & declared inside a module closure; exercised through its module & 25 \\
+\texttt{state} & changes application state; probed in a page of its own & 7 \\
+\texttt{excl} & deliberately not called & 4 \\
+\bottomrule
+\end{longtable}}
+
+
+\begin{notebox}[title={\textbf{What this part does not claim}}]
+A pass means the function was called with the stated input and returned the stated
+value without disturbing the application. It is a recorded behaviour, not a proof
+of correctness. Correctness is argued in Chapter~\ref{ch:val-oracles}, by
+properties that must hold of the values whatever produced them, and by inputs
+whose right answer was fixed before the page saw them.
+\end{notebox}
+
+\section{Coverage}
+The index is built from the page's own script: every top-level declaration is
+probed, and the members of the one module that hides its helpers are probed
+through the module. It contains 676 symbols. The index that shipped with the
+previous release of this document was built by a parser that walked only the
+outermost level and recorded 579; the difference is 97 symbols, most of them
+module-level bindings and the helpers inside that module.
+
+Of the 676, 527 functions executed and 113 constants were read --- 640 symbols with a
+recorded input and output. 25 are declared inside a module closure. 4 are
+deliberately not called, each with its reason. 7 change application state by
+design and were probed in isolation. 0 raised an error.
+

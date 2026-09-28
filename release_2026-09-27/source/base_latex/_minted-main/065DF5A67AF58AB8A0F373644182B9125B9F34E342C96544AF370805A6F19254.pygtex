@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{ccProtocolKey}\PYG{p}{(}\PYG{n+nx}{run}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{const}\PYG{+w}{ }\PYG{n+nx}{segs}\PYG{o}{=}\PYG{p}{((}\PYG{n+nx}{run}\PYG{p}{.}\PYG{n+nx}{protocol}\PYG{o}{||}\PYG{p}{\PYGZob{}\PYGZcb{}).}\PYG{n+nx}{programs}\PYG{o}{||}\PYG{p}{[]).}\PYG{n+nx}{flatMap}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{=\PYGZgt{}(}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{segments}\PYG{o}{||}\PYG{p}{[]).}\PYG{n+nx}{map}\PYG{p}{(}\PYG{n+nx}{s}\PYG{p}{=\PYGZgt{}}\PYG{l+s+sb}{`}\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{o}{+}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{target}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+sb}{/}\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{o}{+}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{hold}\PYG{o}{||}\PYG{l+m+mf}{0}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+sb}{s}\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{slope}\PYG{o}{?}\PYG{l+s+s2}{\PYGZdq{}@\PYGZdq{}}\PYG{o}{+}\PYG{p}{(}\PYG{o}{+}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{slope}\PYG{p}{)}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+sb}{`}\PYG{p}{));}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{segs}\PYG{p}{.}\PYG{n+nx}{join}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{)}\PYG{o}{||}\PYG{l+s+s2}{\PYGZdq{}(protocol not decoded)\PYGZdq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,324 @@
+\chapter{The exchange-file reader, case by case}\label{ch:val-rdml}
+
+The reader of Chapter~\ref{ch:rdml} was validated before it was merged, with a
+named case for every function and an expectation written before the call. Those
+cases are reproduced here; the code they exercise is printed in
+Chapter~\ref{ch:val-functions}, so it is not repeated.
+
+\section{The corpus for these cases}
+
+{\small
+\begin{longtable}{@{}lrl@{}}
+\toprule \textbf{File} & \textbf{Bytes} & \textbf{SHA-256 (first 24)} \\\midrule\endfirsthead
+\toprule \textbf{File} & \textbf{Bytes} & \textbf{SHA-256 (first 24)} \\\midrule\endhead
+\texttt{PAIRED-EXPERIMENT.eds} & 1,756,735 & \texttt{d2750711198559b16cc963d9} \\
+\texttt{PAIRED-EXPERIMENT.rdml} & 69,062 & \texttt{688ef2eeec2e0fd350e8d2e5} \\
+\texttt{RELQUANT-PAIR.rdml} & 23,248 & \texttt{a26b7c8a7a596d3376d776ff} \\
+\texttt{example\_1\_raw.rdml} & 252,382 & \texttt{a29e4918383b5199a5757047} \\
+\texttt{example\_2\_tm\_annotated.rdml} & 252,547 & \texttt{e018dbad7ec4071af8825439} \\
+\texttt{example\_3\_linregpcr.rdml} & 260,964 & \texttt{4806d1466a741c7f31141ce2} \\
+\texttt{example\_4\_interrun.rdml} & 262,745 & \texttt{7545883ce03d305207f8b73d} \\
+\texttt{example\_LCGreen\_raw.rdml} & 52,635 & \texttt{73f238867ae4dcdd12511b9f} \\
+\bottomrule
+\end{longtable}}
+
+
+\section{Case by case}
+Each row is one call. \textbf{Cls} is the provenance class of
+Chapter~\ref{ch:val-method}.
+
+\subsection*{\vfn{rdmlEntries}}
+{\small 7 cases, 7 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{PAIRED-EXPERIME…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\texttt{RELQUANT-PAIR.r…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\texttt{example\_1\_raw.r…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\texttt{example\_2\_tm\_an…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\texttt{example\_3\_linre…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\texttt{example\_4\_inter…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\texttt{example\_LCGreen…} & \texttt{R} & ArrayBuffer of … & \texttt{\{"count": 1, "n…} & exactly one ent… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlIsContainer}}
+{\small 3 cases, 3 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{positive — RDML entries} & \texttt{D} & entries from rdmlEntries(… & \texttt{true} & true & pass \\
+\texttt{negative — the instrument…} & \texttt{S} & literal entry list with t… & \texttt{false} & false & pass \\
+\texttt{negative — empty list} & \texttt{S} & [] & \texttt{false} & false & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlKids}}
+{\small 6 cases, 6 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{<run> → <react>} & \texttt{D} & the first <run>… & \texttt{\{"count": 96, "…} & 96 element(s) & pass \\
+\texttt{<run> → <pcrFor…} & \texttt{D} & the first <run>… & \texttt{\{"count": 1, "f…} & 1 element(s) & pass \\
+\texttt{<run> → <absent>} & \texttt{D} & the first <run>… & \texttt{\{"count": 0, "f…} & 0 element(s) & pass \\
+\texttt{<react> → <data>} & \texttt{D} & the first <reac… & \texttt{\{"count": 2, "f…} & 2 element(s) & pass \\
+\texttt{<data> → <adp>} & \texttt{D} & the first <data… & \texttt{\{"count": 40, "…} & 40 element(s) & pass \\
+\texttt{null host} & \texttt{S} & rdmlKids(null,"… & \texttt{\{"count": 0\}} & empty array, no… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlKid}}
+{\small 2 cases, 2 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{present} & \texttt{D} & <run> of PAIRED-EXP… & \texttt{\{"localName": "pcrF…} & the <pcrFormat> ele… & pass \\
+\texttt{absent} & \texttt{S} & <run>, name "noSuch… & \texttt{null} & null & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlText}}
+{\small 6 cases, 6 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{cqDetectionMeth…} & \texttt{D} & <run> of PAIRED… & \texttt{"other"} & "other" & pass \\
+\texttt{instrument} & \texttt{D} & <run> of PAIRED… & \texttt{"the instrument…} & "the instrument… & pass \\
+\texttt{backgroundDeter…} & \texttt{D} & <run> of PAIRED… & \texttt{"Background Sub…} & "Background Sub… & pass \\
+\texttt{dataCollectionS…} & \texttt{D} & <run> of PAIRED… & \texttt{"the instrument…} & "the instrument… & pass \\
+\texttt{notPresent} & \texttt{S} & <run> of PAIRED… & \texttt{""} & "" & pass \\
+\texttt{FINDING V-1 — r…} & \texttt{R} & every element t… & \texttt{\{"affected": 2,…} & characterisatio… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlNum}}
+{\small 8 cases, 8 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{cyc} & \texttt{R} & the literal text as it appears in the… & \texttt{1} & 1 & pass \\
+\texttt{fluor} & \texttt{R} & the literal text as it appears in the… & \texttt{263682.75} & 263682.75 & pass \\
+\texttt{cq} & \texttt{R} & the literal text as it appears in the… & \texttt{30.3979} & 30.3979 & pass \\
+\texttt{empty} & \texttt{S} & literal text, constructed for this te… & \texttt{null} & null & pass \\
+\texttt{text} & \texttt{S} & literal text, constructed for this te… & \texttt{null} & null & pass \\
+\texttt{negative} & \texttt{S} & the literal text as it appears in the… & \texttt{-2.5} & -2.5 & pass \\
+\texttt{exponent} & \texttt{R} & the literal text as it appears in the… & \texttt{6.36e-10} & 6.36e-10 & pass \\
+\texttt{absent child} & \texttt{S} & <host/> with no <v> & \texttt{null} & null & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlAttrId}}
+{\small 3 cases, 3 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{react → sample} & \texttt{D} & the first <react> of PAIR… & \texttt{"PC\_RAS"} & the sample id string & pass \\
+\texttt{data → tar} & \texttt{D} & the first <data> of that … & \texttt{"RAS"} & the target id string & pass \\
+\texttt{absent} & \texttt{S} & <data>, name "noSuch" & \texttt{""} & "" & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlParse}}
+{\small 18 cases, 18 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{PAIRED-EXPERIME…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "PAIRED…} & every react ins… & pass \\
+\texttt{RELQUANT-PAIR.r…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "RELQUA…} & every react ins… & pass \\
+\texttt{example\_1\_raw.r…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_1\_raw.r…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_1\_raw.r…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_2\_tm\_an…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_2\_tm\_an…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_2\_tm\_an…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_3\_linre…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_3\_linre…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_3\_linre…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_4\_inter…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_4\_inter…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_4\_inter…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "Experi…} & every react ins… & pass \\
+\texttt{example\_LCGreen…} & \texttt{R} & rdml\_data.xml o… & \texttt{\{"run": "LCGree…} & every react ins… & pass \\
+\texttt{wrong root elem…} & \texttt{S} & "<notrdml/>" & \texttt{"throws: not an…} & throws, names t… & pass \\
+\texttt{not well formed} & \texttt{S} & "<rdml version=… & \texttt{"throws: RDML X…} & throws, reports… & pass \\
+\texttt{no experiment} & \texttt{S} & a valid but emp… & \texttt{"throws: RDML f…} & throws, says th… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{runProcessingState}}
+{\small 5 cases, 5 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{instrument} & \texttt{R} & the .eds decoded… & \texttt{\{"state": "instr…} & state "instrumen… & pass \\
+\texttt{vendor-export} & \texttt{R} & PAIRED-EXPERIMEN… & \texttt{\{"state": "vendo…} & state "vendor-ex… & pass \\
+\texttt{third-party} & \texttt{R} & example\_3 — ampE… & \texttt{\{"state": "third…} & state "third-par… & pass \\
+\texttt{raw} & \texttt{R} & example\_1 — no c… & \texttt{\{"state": "raw",…} & state "raw" & pass \\
+\texttt{no run} & \texttt{S} & runProcessingSta… & \texttt{\{"state": "unkno…} & state "unknown",… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{runIsInstrumentAnalysed}}
+{\small 4 cases, 4 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{instrument} & \texttt{D} & the instrument run above & \texttt{true} & true & pass \\
+\texttt{vendor-export} & \texttt{D} & the vendor-export run above & \texttt{true} & true & pass \\
+\texttt{third-party} & \texttt{D} & the third-party run above & \texttt{false} & false & pass \\
+\texttt{raw} & \texttt{D} & the raw run above & \texttt{false} & false & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{sopProcessingApplicability}}
+{\small 5 cases, 5 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{instrument} & \texttt{D} & the instrument … & \texttt{\{"applicable": …} & applicable = tr… & pass \\
+\texttt{vendor-export} & \texttt{D} & the vendor-expo… & \texttt{\{"applicable": …} & applicable = tr… & pass \\
+\texttt{third-party} & \texttt{D} & the third-party… & \texttt{\{"applicable": …} & applicable = fa… & pass \\
+\texttt{raw} & \texttt{D} & the raw run abo… & \texttt{\{"applicable": …} & applicable = fa… & pass \\
+\texttt{superseded vend…} & \texttt{D} & the RDML run af… & \texttt{\{"applicable": …} & applicable = fa… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlStem}}
+{\small 4 cases, 4 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{PAIRED-EXPERIME…} & \texttt{R} & a corpus file n… & \texttt{"2026 06 15 PAI…} & "2026 06 15 PAI… & pass \\
+\texttt{PAIRED-EXPERIME…} & \texttt{R} & a corpus file n… & \texttt{"2026 06 15 PAI…} & "2026 06 15 PAI… & pass \\
+\texttt{Demo  Abs\_Quant…} & \texttt{S} & a corpus file n… & \texttt{"demo abs quant"} & "demo abs quant" & pass \\
+\texttt{(empty)} & \texttt{S} & the empty string & \texttt{""} & "" & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{rdmlKeyOf}}
+{\small 2 cases, 2 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{name and experiment} & \texttt{D} & the RDML run of th… & \texttt{["2026 06 15 PAIRE…} & two keys & pass \\
+\texttt{no experiment id} & \texttt{S} & an item with only … & \texttt{["x"]} & one key & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{applyRawFilePriority}}
+{\small 3 cases, 3 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{FINDING V-2 — e…} & \texttt{D} & the same .eds, … & \texttt{\{"superseded": …} & the export shou… & pass \\
+\texttt{vendor containe…} & \texttt{R} & the .eds decode… & \texttt{\{"kept": 2, "su…} & the RDML export… & pass \\
+\texttt{RDML only, no v…} & \texttt{R} & the three runs … & \texttt{\{"kept": 3, "su…} & nothing superse… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{runIsSuperseded}}
+{\small 1 case, 1 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{before and afte…} & \texttt{D} & the same run ob… & \texttt{\{"after": [fals…} & false for every… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{RDML\_SAMPLE\_ROLE}}
+{\small 1 case, 1 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{the six RDML sa…} & \texttt{S} & the RDML 1.3 sa… & \texttt{\{"ntc": "NTC", …} & every type maps… & pass \\
+\bottomrule
+\end{longtable}}
+
+\subsection*{\vfn{RDML\_REANALYSIS\_TOOLS}}
+{\small 7 cases, 7 passed.}\par
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Case} & \textbf{Cls} & \textbf{Input} & \textbf{Output} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+\texttt{LinRegPCR} & \texttt{R} & the verbatim string found… & \texttt{true} & true & pass \\
+\texttt{LinRegPCR, constant} & \texttt{R} & the verbatim string found… & \texttt{true} & true & pass \\
+\texttt{Background Subtraction} & \texttt{R} & the verbatim string found… & \texttt{false} & false & pass \\
+\texttt{automated threshold and b…} & \texttt{R} & the verbatim string found… & \texttt{false} & false & pass \\
+\texttt{(empty)} & \texttt{S} & a tool name from the RDML… & \texttt{false} & false & pass \\
+\texttt{Cy0} & \texttt{S} & a tool name from the RDML… & \texttt{true} & true & pass \\
+\texttt{MAK2} & \texttt{S} & a tool name from the RDML… & \texttt{true} & true & pass \\
+\bottomrule
+\end{longtable}}
+
+
+\section{Integration validations}\label{sec:val-oracle}
+\subsection*{A value equal to the cycle count}
+An exchange file written by instrument software records ``no crossing'' as a value
+equal to the run's cycle count. Read literally, most of a plate becomes a very late
+detection. A re-analysis file does not do this, so the rule is applied only where
+the file offers no starting concentration and no efficiency to contradict it.
+
+{\small
+\begin{longtable}{@{}lrrrrr@{}}
+\toprule \textbf{File} & \textbf{Cycles} & \textbf{Rows} & \textbf{Converted} & \textbf{Kept} & \textbf{Maximum} \\\midrule\endfirsthead
+\toprule \textbf{File} & \textbf{Cycles} & \textbf{Rows} & \textbf{Converted} & \textbf{Kept} & \textbf{Maximum} \\\midrule\endhead
+\texttt{PAIRED-EXPERIMENT.rdml} & 40 & 192 & 158 & 34 & 37.34 \\
+\texttt{RELQUANT-PAIR.rdml} & 40 & 72 & 6 & 66 & 30.266 \\
+\texttt{example\_3\_linregpcr.rdml} & 45 & 95 & 0 & 90 & 34.001 \\
+\bottomrule
+\end{longtable}}
+
+
+\subsection*{The same experiment, read twice}
+One experiment is present both as an instrument container and as an exchange file
+written from it. The container is decoded by the intake, the exchange file by the
+reader. For the reactions the two have in common the calls must agree.
+
+{\small
+\begin{longtable}{@{}lr@{}}
+\toprule \textbf{Measure} & \textbf{Count} \\\midrule\endfirsthead
+\toprule \textbf{Measure} & \textbf{Count} \\\midrule\endhead
+\texttt{matched} & 64 \\
+\texttt{bothUndetermined} & 30 \\
+\texttt{differing} & 0 \\
+\texttt{firstDiffs} & [] \\
+\texttt{rdmlOnly} & 128 \\
+\bottomrule
+\end{longtable}}
+
+\par Expected: every Cq the instrument container yields is reproduced exactly; zero differing --- pass.
+
+
+\subsection*{Which file wins when both are present}
+The tool is for experiments the instrument software has already analysed. Where a
+container and an exchange file describe the same experiment, the container is
+authoritative and the exchange file is kept as comparison evidence.
+
+{\small
+\begin{longtable}{@{}p{3.0cm}p{2.1cm}p{6.8cm}p{3.8cm}@{}}
+\toprule \textbf{Function} & \textbf{Case} & \textbf{Result} & \textbf{Verdict} \\\midrule\endfirsthead
+\toprule \textbf{Function} & \textbf{Case} & \textbf{Result} & \textbf{Verdict} \\\midrule\endhead
+\texttt{applyRawFilePriority} & FINDING V-2 — export ren… & \texttt{\{"superseded": 1\}} & pass \\
+\texttt{applyRawFilePriority} & vendor container + its R… & \texttt{\{"kept": 2, "superseded"…} & pass \\
+\texttt{runIsSuperseded} & before and after applyRa… & \texttt{\{"after": [false, true]\}} & pass \\
+\texttt{applyRawFilePriority} & RDML only, no vendor con… & \texttt{\{"kept": 3, "superseded"…} & pass \\
+\bottomrule
+\end{longtable}}
+
+\par All 89 recorded cases pass.
+

@@ -1,0 +1,273 @@
+\chapter{What the validation found}\label{ch:val-findings}
+
+Everything here was produced by the checks of the three preceding chapters on the
+build under test, and every number can be re-derived from the evidence files of
+Appendix~\ref{app:val-trace}. Findings are numbered D-1 upwards. Only the first has
+been corrected in the page: three of the others would change stored values, and
+stored values are not changed without agreement.
+
+\section{D-1 --- a console view failed to build (corrected)}
+\vhead{What happened}
+The builder of the load view referred to a name that was not defined in its scope.
+The reference is on the path taken whenever at least one file has been read, so the
+function raised on every session that had data --- which is every real session. The
+other seven views built normally, so the failure was silent: the first view of the
+console simply produced nothing.
+
+\vhead{Evidence, before the correction}
+
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+the console views, with the corpus loaded:
+  load        raised: bad is not defined
+  sop         20 items
+  results     4 items
+  panel       54 items
+  graphs      26 items
+  review      13 items
+  export      12 items
+  integrity   1 item
+\end{lstlisting}
+
+\vhead{The correction}
+The condition the line was written for is now computed immediately above it:
+
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+const bad=RUNS.some(r=>r.acqError||(r.integrity&&r.integrity.ok===false));
+\end{lstlisting}
+
+It raises the view when a file could not be read or its checksum does not match,
+and leaves it quiet otherwise. It changes no stored value and no export. All eight
+views now build; the counts are in Chapter~\ref{ch:val-oracles}.
+
+\section{Findings against the exchange-file specification}
+The reader was re-checked against the published schema and format notes of the
+exchange format. Each finding was measured, either on the corpus or on a file
+written to isolate one clause.
+
+\subsection*{D-2 --- three control types are not recognised}
+The specification defines eight sample types. The page maps six, one of which the
+specification does not define.
+
+{\small
+\begin{longtable}{@{}lll@{}}
+\caption{The declared sample types and what the page makes of them.}\label{tab:d2-vocabulary} \\
+\toprule \textbf{Type} & \textbf{Meaning in the specification} & \textbf{What the page reports} \\\midrule\endfirsthead
+\toprule \textbf{Type} & \textbf{Meaning in the specification} & \textbf{What the page reports} \\\midrule\endhead
+\texttt{unkn} & unknown sample & Unknown \\
+\texttt{ntc} & non-template control & NTC \\
+\texttt{nac} & no amplification control & not recognised: Unknown \\
+\texttt{std} & standard sample & Standard \\
+\texttt{ntp} & no target present & not recognised: Unknown \\
+\texttt{nrt} & minus-RT control & not recognised: Unknown \\
+\texttt{pos} & positive control & Positive control \\
+\texttt{opt} & optical calibrator sample & reported as Unknown \\
+\texttt{neg} & not defined by the specification & Negative control (unreachable) \\
+\bottomrule
+\end{longtable}}
+
+
+A minus-RT control and a no-target-present control are blanks: nothing should
+amplify in them. Reported as unknown samples they are not blanks to the review, so
+a rising curve in one raises nothing --- which is the class of event this tool
+exists to catch.
+
+\vhead{Evidence}
+A file carrying one reaction of each declared type, read by the page:
+
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Well} & \textbf{Sample} & \textbf{Declared} & \textbf{Role assigned} & \textbf{Value} & \textbf{Call} \\\midrule\endfirsthead
+\toprule \textbf{Well} & \textbf{Sample} & \textbf{Declared} & \textbf{Role assigned} & \textbf{Value} & \textbf{Call} \\\midrule\endhead
+\texttt{A01} & \texttt{S\_unkn} & \texttt{unkn} & Unknown & 20.5 & Analysed \\
+\texttt{A02} & \texttt{S\_nac} & \texttt{nac} & Unknown & -1 & Analysed \\
+\texttt{A03} & \texttt{S\_ntp} & \texttt{ntp} & Unknown & 33.2 & Analysed \\
+\texttt{A04} & \texttt{S\_nrt} & \texttt{nrt} & Unknown & 31 & Analysed \\
+\texttt{A05} & \texttt{S\_opt} & \texttt{opt} & Unknown & 18 & Analysed \\
+\texttt{A06} & \texttt{S\_ntc} & \texttt{ntc} & NTC & 35.5 & Analysed \\
+\bottomrule
+\end{longtable}}
+
+\vhead{Proposed correction}
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+const RDML_SAMPLE_ROLE={unkn:"Unknown",ntc:"NTC",nac:"No-amplification control",
+  std:"Standard",ntp:"No target present",nrt:"Minus-RT control",
+  pos:"Positive control",opt:"Optical calibrator"};
+\end{lstlisting}
+
+
+\vhead{A correction to the earlier record}
+The record delivered earlier stated that this mapping was complete against the
+schema. It was checked against the corpus, which carries only two of the eight
+types, and not against the schema. It is not complete.
+
+\subsection*{D-3 --- the ``not available'' value is read as a measurement}
+The specification records an absent result as $-1.0$. The reader converts the text
+to a number and keeps it, so a reaction the file declares to have no result is
+stored with a value of $-1$ and called analysed.
+
+{\small
+\begin{longtable}{@{}lrrrrrr@{}}
+\caption{The not-available sentinel on the corpus.}\label{tab:d3-sentinel} \\
+\toprule \textbf{File} & \textbf{Reactions} & \textbf{Below zero} & \textbf{Called analysed} & \textbf{Undetermined} & \textbf{N0 at -1} & \textbf{Efficiency at -1} \\\midrule\endfirsthead
+\toprule \textbf{File} & \textbf{Reactions} & \textbf{Below zero} & \textbf{Called analysed} & \textbf{Undetermined} & \textbf{N0 at -1} & \textbf{Efficiency at -1} \\\midrule\endhead
+\texttt{PAIRED-EXPE…} & 192 & 0 & 0 & 158 & 0 & 0 \\
+\texttt{RELQUANT-PA…} & 72 & 0 & 0 & 6 & 0 & 0 \\
+\texttt{example\_1\_r…} & 285 & 0 & 0 & 285 & 0 & 0 \\
+\texttt{example\_2\_t…} & 285 & 0 & 0 & 285 & 0 & 0 \\
+\texttt{example\_3\_l…} & 285 & 19 & 19 & 0 & 19 & 3 \\
+\texttt{example\_4\_i…} & 285 & 19 & 19 & 0 & 19 & 3 \\
+\texttt{example\_LCG…} & 50 & 0 & 0 & 50 & 0 & 0 \\
+\bottomrule
+\end{longtable}}
+
+
+Two files are affected, 19 of 285 reactions in each. A value of $-1$ sorts below
+every real one, so on a chart or in a trend it reads as the earliest crossing on
+the plate. This is the same class of defect as the sentinel read as a crossing at
+cycle zero, corrected on 23~September, and the property check that catches that one
+does not catch this one. A further consequence: an efficiency of $-1$ is present in
+three reactions of each file, and the cycle-ceiling rule is guarded by the absence
+of an efficiency, so the guard is satisfied by a value that means ``not available''.
+
+\vhead{Proposed correction}
+
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+function rdmlNum(el,name){
+  const t=rdmlText(el,name);if(t==="")return null;
+  const n=Number(t);if(!Number.isFinite(n))return null;
+  return n===-1?null:n;        /* -1.0 is the file saying "not available" */
+}
+\end{lstlisting}
+
+
+This changes stored values --- 19 reactions per affected file move from analysed to
+undetermined --- and therefore waits for agreement.
+
+\subsection*{D-4 --- a sample declared per target keeps only its first declaration}
+A sample may declare a different type for each target. The reader reads the first
+declaration and applies it to every target of that sample.
+
+{\small
+\begin{longtable}{@{}llllll@{}}
+\toprule \textbf{Well} & \textbf{Sample} & \textbf{Target} & \textbf{Declared for it} & \textbf{Role assigned} & \textbf{Value} \\\midrule\endfirsthead
+\toprule \textbf{Well} & \textbf{Sample} & \textbf{Target} & \textbf{Declared for it} & \textbf{Role assigned} & \textbf{Value} \\\midrule\endhead
+\texttt{A01} & \texttt{S\_dual} & \texttt{T1} & \texttt{std} & Standard & 22 \\
+\texttt{A01} & \texttt{S\_dual} & \texttt{T2} & \texttt{ntp} & Standard & 34 \\
+\bottomrule
+\end{longtable}}
+
+
+The no-target-present reaction is reported as a standard carrying a value of 34,
+which would place it on a standard curve.
+
+\subsection*{D-5 --- a free-format run loses every reaction}
+The specification defines a row count of $-1$ to mean ``do not reconstruct a plate,
+show the reactions as a list''. The reader multiplies rows by columns to bound the
+plate, so the bound becomes negative and every reaction is discarded.
+
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+declared rows -1, columns 1  ->  rows -1  columns 1  highest position -2  reactions kept 0
+\end{lstlisting}
+
+
+A run that declares no rows at all is silently given eight by the same expression.
+
+\subsection*{D-6 --- rotor positions are labelled as plate wells}
+A rotor declares one column and a numeric row label. The reader labels the
+positions as if they were plate wells; the specification asks for plain numbers and
+for no column label at all.
+
+\subsection*{D-7 --- two accepted spellings of the format are rejected}
+The format notes state that the archive may carry either of two extensions, and
+that software should also read the uncompressed XML. The intake accepts one
+extension and an archive that contains the expected entry; the other extension and
+a bare XML file are rejected as unreadable. Both are one clause in the intake.
+
+\subsection*{D-8 --- the file's own checksum is not used}
+The format defines an identifier block carrying a publisher, a serial number and a
+hash over the file. The reader reports, for every exchange file including one that
+carries such a block:
+
+\begin{lstlisting}[language=,numbers=left,firstnumber=1,basicstyle=\ttfamily\scriptsize\color{white}]
+RDML carries no container checksum; the ZIP entry CRC-32 was verified on reading
+\end{lstlisting}
+
+
+That statement is wrong for a file that carries the block, and the page already
+contains the hash implementation it would need. For a tool whose purpose is file
+forensics this is the most valuable of the conformance findings.
+
+\subsection*{D-9 --- the collection software is a structured element}
+The element is defined as a name followed by a version. The reader takes the
+element's text content, which concatenates both with the file's own indentation.
+Two corpus files are affected. The correction is to read the two children and join
+them with a space; it changes a displayed string only.
+
+\subsection*{D-10 --- partitioned reactions are not read}
+Partitioned reactions are recorded as counts, with the per-partition table stored
+in a separate file inside the archive. The reader ignores the element, so such a
+reaction contributes no result and nothing says why.
+
+\subsection*{D-11 --- a latent key mismatch}
+When a container and an exchange file are matched, the file-name key is normalised
+but the experiment key is only lower-cased. No corpus file is affected --- the case
+was tested by renaming an export so that only the experiment identifier could match,
+and the match still held --- so this is recorded as a hardening, not a defect.
+
+\section{D-12 --- the function index was short}
+The index built by parsing the script recorded fewer symbols than the page exposes
+at run time. The index in Appendix~\ref{app:index} is now built from the same walk
+used for this part and records 676, including the members of the one module that
+hides its helpers.
+
+\section{Behaviour that is by design}
+\vhead{Functions that change application state}
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Function} & \textbf{What it changes} \\\midrule\endfirsthead
+\toprule \textbf{Function} & \textbf{What it changes} \\\midrule\endhead
+\texttt{appReadSuperseded} & global state changed during a read-only probe \\
+\texttt{ccSetCfg} & global state changed during a read-only probe \\
+\texttt{intake} & global state changed during a read-only probe \\
+\texttt{mgReadFiles} & global state changed during a read-only probe \\
+\texttt{readStaged} & global state changed during a read-only probe \\
+\texttt{readStagedCore} & global state changed during a read-only probe \\
+\texttt{sopSetPath} & global state changed during a read-only probe \\
+\bottomrule
+\end{longtable}}
+
+\vhead{Entry points that are not called}
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Symbol} & \textbf{Reason} \\\midrule\endfirsthead
+\toprule \textbf{Symbol} & \textbf{Reason} \\\midrule\endhead
+\texttt{boot} & entry point; re-runs the whole page \\
+\texttt{ccImport} & replaces the instrument history by design \\
+\texttt{invalidateAnalysisCaches} & clears caches by design \\
+\texttt{setPhase} & mutates the lifecycle phase by design \\
+\bottomrule
+\end{longtable}}
+
+
+\vhead{Helpers private to a module}
+25 names are declared inside the decoder module's closure. They cannot be called by
+name from the page; the module exports ten of its members, which are probed through
+it, and all of them are printed in full with the module in
+Chapter~\ref{ch:val-functions}.
+
+\par{\small \texttt{CRC\_T}, \texttt{P}, \texttt{QS\_DEFAULT\_COLS}, \texttt{ROWS}, \texttt{argb}, \texttt{bracketList}, \texttt{fmt}, \texttt{hex}, \texttt{inflateRaw}, \texttt{ini}, \texttt{javaHashOrder}, \texttt{kid}, \texttt{kids}, \texttt{makeZip}, \texttt{pad2}, \texttt{parseLog}, \texttt{pill}, \texttt{qsCalDate}, \texttt{qsCols}, \texttt{qsHeader}, \texttt{qsRGB}, \texttt{qsStamp}, \texttt{txt}, \texttt{wellPos}, \texttt{xml}.}\par
+
+
+\section{What was checked and found sound}
+\begin{itemize}
+\item Every property check holds, including the three that guard the defects
+  corrected on 23~September.
+\item Every check against the run whose answers were fixed first holds.
+\item Every tab, review view, graph, console view and export builder runs without a
+  page error, and the exports reproduce stored values unchanged.
+\item The two readings of the one experiment present in both formats agree on every
+  reaction they share, with no differing call.
+\item Of 676 symbols, none raises an error on a stated input.
+\end{itemize}
+

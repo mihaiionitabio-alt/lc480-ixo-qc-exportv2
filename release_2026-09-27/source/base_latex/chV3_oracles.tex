@@ -1,0 +1,214 @@
+\chapter{Independent checks}\label{ch:val-oracles}
+
+Chapter~\ref{ch:val-functions} records what each function did. It cannot say
+whether what it did was right, because the expectation and the input came from the
+same place. This chapter holds the checks that can: properties that must be true
+of the values whatever produced them, inputs whose right answer was fixed before
+the page saw them, and two readings of one experiment that must agree.
+
+\section{Properties that must hold}
+None of the defects found during this work were contract violations. Every one was
+a wrong value returned by a function that did not throw. A property check states
+something that must be true of the values and fails loudly when it is not, without
+naming the function that has to keep it true.
+
+{\small
+\begin{longtable}{@{}lll@{}}
+\caption{The property checks and their results.}\label{tab:val-invariants} \\
+\toprule \textbf{Property} & \textbf{Why it must hold} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Property} & \textbf{Why it must hold} & \textbf{Result} \\\midrule\endhead
+forensic scan is pure & two identical calls must give identica… & pass \\
+chart computation is idempotent & ccCompute must not depend on how often… & pass \\
+profile canonical form is stable & the profile hash is exported with ever… & pass \\
+every flagged control point is outside… & a red point inside the interval is the… & pass \\
+no rising-curve finding has an answer … & the 23 September linkage rule & pass \\
+no stored Cq is read as a crossing at … & Number(null) === 0, the round-2 defect & pass \\
+cycle count never exceeds the largest … & melt acquisitions counted as cycles & pass \\
+no stored Cq exceeds the cycles it cou… & a "Cq" of 84.6 in a melt-only run is a… & pass \\
+a melt-only run stores no amplificatio… & melt results must not be written into … & pass \\
+a module without crossings raises no m… & endpoint genotyping, gene scanning, me… & pass \\
+no analysis reports a raw numeric state & calcState must be a word, not a code & pass \\
+outcome counts conserve the interprete… & a summary that does not add up is not … & pass \\
+distinct findings never exceed raw eve… & aggregation can only reduce & pass \\
+every distinct finding accounts for al… & no occurrence may be lost in grouping & pass \\
+integrity findings stay out of the rev… & they belong to tab 8 only & pass \\
+exports do not change stored values & building a report must never touch the… & pass \\
+\bottomrule
+\end{longtable}}
+
+\par 16 of 16 hold on this build.
+
+
+\section{A run whose answers were known first}
+The second check removes laboratory data from the question. A run is generated
+from a fixed seed: its plate, its controls, its values and its intended outcome for
+every sample are written down first, and the page is then asked for its reading.
+Because the fixture was built to a stated answer and not from the page's output, an
+agreement is evidence and a disagreement is a defect. It is the input that found
+the sentinel defect of 23~September, which no real file had exposed.
+
+{\small
+\begin{longtable}{@{}lll@{}}
+\caption{Checks against a run whose answers were fixed first.}\label{tab:val-synthetic} \\
+\toprule \textbf{Check} & \textbf{Expected} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Check} & \textbf{Expected} & \textbf{Result} \\\midrule\endhead
+runs decoded & \texttt{1} & pass \\
+result rows & \texttt{92} & pass \\
+curve entries & \texttt{174} & pass \\
+integrity mismatches (clean) & \texttt{0} & pass \\
+rising-curve findings & \texttt{2} & pass \\
+of which error level & \texttt{1} & pass \\
+flagged positions & \texttt{['D05', 'D11']} & pass \\
+empty noise wells flagged & \texttt{0} & pass \\
+undetermined rows & \texttt{31} & pass \\
+undetermined read as Cq 0 & \texttt{0} & pass \\
+undetermined counts as answered & \texttt{True} & pass \\
+run accepted (clean) & \texttt{True} & pass \\
+sample groups of the target & \texttt{21} & pass \\
+positive samples & \texttt{5} & pass \\
+negative samples & \texttt{13} & pass \\
+repeated samples & \texttt{3} & pass \\
+mean Cq of a positive group & \texttt{30} & pass \\
+reference Cq & \texttt{24} & pass \\
+replicate spread is repeated & \texttt{Repeat} & pass \\
+late signal is repeated & \texttt{Repeat} & pass \\
+integrity stays out of the review list & \texttt{0} & pass \\
+distinct never exceeds raw & \texttt{True} & pass \\
+exports build from the fixture & \texttt{True} & pass \\
+integrity mismatches (mismatch variant) & \texttt{1} & pass \\
+the run is rejected & \texttt{Rejected} & pass \\
+every sample becomes invalid & \texttt{True} & pass \\
+stored Cq is unchanged by rejection & \texttt{[30, 30]} & pass \\
+\bottomrule
+\end{longtable}}
+
+\par 27 of 27 hold. The outcome tally the page produced from the fixture: Positive 26, Negative 13, Repeat 3, Inconclusive 0, Invalid run 0, Control pass 5, Control fail 0.
+
+
+\section{The same experiment read twice}
+One experiment in the corpus exists both as an instrument container and as an
+exchange file written from it. The two are read by different code and must produce
+the same calls for the reactions they share. The comparison is in
+Section~\ref{sec:val-oracle}.
+
+\section{Everything the operator can reach, exercised once}
+With the corpus loaded, every tab was opened, every review view rendered, every
+graph drawn, every console view built and every export button pressed with the
+download path stubbed and counted.
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Tab} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Tab} & \textbf{Result} \\\midrule\endhead
+\texttt{load} & rendered \\
+\texttt{sop} & rendered \\
+\texttt{results} & rendered \\
+\texttt{panel} & rendered \\
+\texttt{graphs} & rendered \\
+\texttt{review} & rendered \\
+\texttt{export} & rendered \\
+\texttt{integrity} & rendered \\
+\bottomrule
+\end{longtable}}
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Review view} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Review view} & \textbf{Result} \\\midrule\endhead
+\texttt{overview} & rendered \\
+\texttt{plate} & rendered \\
+\texttt{compare} & rendered \\
+\texttt{statistics} & rendered \\
+\texttt{controls} & rendered \\
+\texttt{runs} & rendered \\
+\texttt{curves} & rendered \\
+\texttt{instrument} & rendered \\
+\bottomrule
+\end{longtable}}
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Console view} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Console view} & \textbf{Result} \\\midrule\endhead
+\texttt{load} & 4 items \\
+\texttt{sop} & 20 items \\
+\texttt{results} & 4 items \\
+\texttt{panel} & 54 items \\
+\texttt{graphs} & 26 items \\
+\texttt{review} & 13 items \\
+\texttt{export} & 12 items \\
+\texttt{integrity} & 1 items \\
+\bottomrule
+\end{longtable}}
+
+\vhead{Graphs}25 graphs were drawn; none failed.\par
+
+{\small
+\begin{longtable}{@{}ll@{}}
+\toprule \textbf{Export button} & \textbf{Result} \\\midrule\endfirsthead
+\toprule \textbf{Export button} & \textbf{Result} \\\midrule\endhead
+\texttt{Download pseudonym mapping (CSV)} & 1 file(s) \\
+\texttt{Download} & 1 file(s) \\
+\texttt{Dataset metadata (JSON-LD)} & 1 file(s) \\
+\texttt{Refresh diagnostics} & 0 file(s) \\
+\texttt{Save diagnostics (JSON)} & 1 file(s) \\
+\texttt{Download R script} & 1 file(s) \\
+\texttt{Download Python script} & 1 file(s) \\
+\bottomrule
+\end{longtable}}
+
+{\small
+\begin{longtable}{@{}lr@{}}
+\caption{Every file the export buttons produced.}\label{tab:val-exports} \\
+\toprule \textbf{File written} & \textbf{Bytes} \\\midrule\endfirsthead
+\toprule \textbf{File written} & \textbf{Bytes} \\\midrule\endhead
+\texttt{3\_runs\_2026-09-24-12-05-04\_pseudonym\_map.csv} & 4,888 \\
+\texttt{3\_runs\_2026-09-24-12-05-04\_cq\_values.csv} & 183,649 \\
+\texttt{3\_runs\_2026-09-24-12-05-04\_runs\_qc\_forensic\_log.csv} & 7,790 \\
+\texttt{MULTIPLEX-4CH\_the instrument software\_export.txt} & 1,195,442 \\
+\texttt{PLATE-384\_the instrument software\_export.txt} & 1,423,438 \\
+\texttt{MULTIPLEX-4CH\_the instrument software\_export.xlsx} & 8,097,639 \\
+\texttt{PLATE-384\_the instrument software\_export.xlsx} & 9,529,573 \\
+\texttt{MULTIPLEX-4CH\_01\_Standard\_curve\_GAPDH.rdes.tsv} & 513,796 \\
+\texttt{MULTIPLEX-4CH\_02\_Standard\_curve\_FZD1.rdes.tsv} & 505,575 \\
+\texttt{MULTIPLEX-4CH\_03\_Standard\_curve\_APOE.rdes.tsv} & 505,626 \\
+\texttt{MULTIPLEX-4CH\_04\_Standard\_curve\_CD44.rdes.tsv} & 504,249 \\
+\texttt{ABSQUANT-DEMO\_01\_Abs\_Quant\_2nd\_Derivative\_Max.rdes.tsv} & 726,222 \\
+\texttt{ABSQUANT-DEMO\_02\_Abs\_Quant\_Fit\_Points.rdes.tsv} & 697,737 \\
+\texttt{PLATE-384.rdes.tsv} & 1,604,310 \\
+\texttt{MULTIPLEX-4CH.rdml} & 773,381 \\
+\texttt{ABSQUANT-DEMO.rdml} & 903,424 \\
+\texttt{PLATE-384.rdml} & 563,338 \\
+\texttt{MULTIPLEX-4CH\_01\_Standard\_curve\_GAPDH\_qpcR\_curves.csv} & 40,573 \\
+\texttt{MULTIPLEX-4CH\_02\_Standard\_curve\_FZD1\_qpcR\_curves.csv} & 39,896 \\
+\texttt{MULTIPLEX-4CH\_03\_Standard\_curve\_APOE\_qpcR\_curves.csv} & 40,027 \\
+\texttt{MULTIPLEX-4CH\_04\_Standard\_curve\_CD44\_qpcR\_curves.csv} & 39,050 \\
+\texttt{ABSQUANT-DEMO\_01\_Abs\_Quant\_2nd\_Derivative\_Max\_qpcR\_curves.csv} & 19,980 \\
+\texttt{ABSQUANT-DEMO\_02\_Abs\_Quant\_Fit\_Points\_qpcR\_curves.csv} & 19,980 \\
+\texttt{PLATE-384\_qpcR\_curves.csv} & 103,439 \\
+\texttt{3\_runs\_2026-09-24-12-05-05\_melting\_peaks.csv} & 17,731 \\
+\texttt{3\_runs\_2026-09-24-12-05-05\_experiment\_settings.csv} & 12,845 \\
+\texttt{3\_runs\_2026-09-24-12-05-05\_multicomponent\_raw.csv} & 1,549,824 \\
+\texttt{3\_runs\_2026-09-24-12-05-07\_open\_formats.zip} & 30,206,808 \\
+\texttt{3\_runs\_2026-09-24-12-05-07\_metadata.jsonld} & 40,472 \\
+\texttt{qpcr\_diagnostics.json} & 1,335 \\
+\texttt{analyse\_with\_qpcR.R} & 1,661 \\
+\texttt{analyse\_with\_linregpcr.py} & 1,486 \\
+\bottomrule
+\end{longtable}}
+
+
+The exercise raised 0 page errors.
+
+\section{What none of this covers}
+\begin{itemize}
+\item A property check can only fail on the corpus it is given. It says nothing
+  about a file shape no corpus file has.
+\item The generated run is a model of a plate, not a plate. It cannot show that a
+  threshold is the right threshold, only that the page applies the rule it states.
+\item An agreement between two readings of one experiment is evidence that neither
+  is arbitrary. It is not evidence that both are right.
+\item Nothing here establishes a laboratory acceptance limit, and none of it
+  replaces method validation.
+\end{itemize}
+

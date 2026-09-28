@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} once: TeX Live with XeLaTeX, the extra LaTeX packages, fonts, Pygments and latexmk}
+sudo\PYG{+w}{ }apt\PYG{+w}{ }update
+sudo\PYG{+w}{ }apt\PYG{+w}{ }install\PYG{+w}{ }texlive\PYGZhy{}xetex\PYG{+w}{ }texlive\PYGZhy{}latex\PYGZhy{}extra\PYG{+w}{ }texlive\PYGZhy{}fonts\PYGZhy{}extra\PYG{+w}{ }texlive\PYGZhy{}science\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{                 }fonts\PYGZhy{}dejavu\PYG{+w}{ }python3\PYGZhy{}pygments\PYG{+w}{ }latexmk
+
+\PYG{c+c1}{\PYGZsh{} in the folder that contains main.tex, fig/, code/ and tables/}
+latexmk\PYG{+w}{ }\PYGZhy{}xelatex\PYG{+w}{ }\PYGZhy{}shell\PYGZhy{}escape\PYG{+w}{ }main.tex\PYG{+w}{      }\PYG{c+c1}{\PYGZsh{} or simply: make}
+latexmk\PYG{+w}{ }\PYGZhy{}c\PYG{+w}{                                    }\PYG{c+c1}{\PYGZsh{} remove auxiliary files (keeps main.pdf)}
+\end{Verbatim}

@@ -1,0 +1,84 @@
+\chapter{Tab 5 · Graphs}\label{ch:graphs}
+
+\section{How graphs are drawn}
+All graphs are SVG drawn by one function, \texttt{svgPlot()}, without any plotting library. The SOP profile supplies the
+limits (Cq cut-off, late-signal limit, maximum replicate SD, zone spread), the outcome colours and the labels, so every graph
+changes when the profile changes and carries the profile's name, version and SHA-256. Each graph can be saved as SVG or PNG
+together with the numbers behind it (CSV); one button saves all graphs of a run and all cross-run graphs as a ZIP.
+
+\input{code/svgPlot}
+\input{code/niceTicks}
+
+A graph is one entry of the array \texttt{GRAPHS}: an id, a group, a title, a note and a \texttt{render(c)} function that
+returns the SVG and the rows of its CSV.
+
+\input{code/graph_curves}
+\input{code/graphContext}
+\input{code/graphAllZip}
+
+\input{tables/graphs}
+
+\figui[0.9]{ui_graphs.png}{The Graphs tab: choice of graph and experiment, the graph with the SOP profile it was drawn with, and the download buttons.}{ui_graphs}
+
+\section{Graphs of one run}
+
+\subsection*{Run history}
+\fig[0.85]{g_LC_timeline.png}{\texttt{timeline} — every dated event of \texttt{DEMO\_LC1\_SCREEN\_006}: experiment and run created, run started and ended, analyses created and modified, last change.}{g_LC_timeline}
+
+\input{code/graph_lc_thermal}
+\fig[0.9]{g_LC_lc_thermal.png}{\texttt{lc\_thermal} — synthetic .ixo instrument block temperature log: 10 min hot start, 45 cycles 95 / 60 / 72\,°C, overshoot at 95\,°C and undershoot at 60\,°C. The display keeps the minimum and maximum of every time slice.}{g_LC_lc_thermal}
+\fig[0.9]{g_QS_temperature.png}{\texttt{temperature} — synthetic .eds instrument log: modelled sample temperature, heated cover and the spread of the six block zones ($\times10$) against the SOP limit.}{g_QS_temperature}
+
+\subsection*{Fluorescence}
+\begin{figure}[htbp]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LC_curves.png}\caption{.ixo instrument, 35S, accepted run}\label{fig:g_LC_curves}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_QS_curves.png}\caption{.eds instrument, RAS}\label{fig:g_QS_curves}\end{subfigure}
+\caption{\synthtag \texttt{curves} — amplification curves coloured by SOP outcome, with the SOP Cq cut-off and late-signal limit.}\label{fig:curves}
+\end{figure}
+\begin{figure}[htbp]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LCX_curves.png}\caption{run 022: blank amplifies, run rejected}\label{fig:g_LCX_curves}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LCC_curves.png}\caption{run 013: A03 is a copy of A01}\label{fig:g_LCC_curves}\end{subfigure}
+\caption{\synthtag The planted events as the curves show them. In (a) the contaminated extraction blank (red, Cq 35.6) turns every result of the run into \emph{Invalid run}; in (b) two curves are identical point for point.}\label{fig:planted_curves}
+\end{figure}
+\fig[0.85]{g_QC_curves.png}{\texttt{curves} for a 10-point dilution series (\texttt{DEMO\_QS-C\_STDCURVE\_002}).}{g_QC_curves}
+\fig[0.85]{g_LC_unanalysed.png}{\texttt{unanalysed} — curves of wells that are in no analysis. A signal here is a result nobody looked at.}{g_LC_unanalysed}
+\begin{figure}[htbp]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LC_endpoint.png}\caption{\texttt{endpoint}: fluorescence against Cq}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_QB_levels.png}\caption{\texttt{levels}: background and plateau per channel}\end{subfigure}
+\caption{\synthtag Signal level graphs.}\label{fig:levels}
+\end{figure}
+
+\subsection*{Plate and results}
+\begin{figure}[htbp]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LC_plate.png}\caption{.ixo instrument, 35S}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_QS_plate.png}\caption{.eds instrument, RAS}\end{subfigure}
+\caption{\synthtag \texttt{plate} — heat map of the SOP outcome per well, with the stored Cq. Wells with a signal that is not analysed are outlined.}\label{fig:plate}
+\end{figure}
+\begin{figure}[htbp]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LC_cqstrip.png}\caption{\texttt{cqstrip}}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LC_outcomes.png}\caption{\texttt{outcomes}}\end{subfigure}
+\caption{\synthtag Cq by target with the SOP cut-offs, and SOP outcomes per target (\texttt{DEMO\_LC1\_SCREEN\_006}).}\label{fig:cqstrip}
+\end{figure}
+\begin{figure}[htbp]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_QS_repsd.png}\caption{\texttt{repsd}: replicate SD against mean Cq}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig/g_LC_ic.png}\caption{\texttt{ic}: reference / IC Cq per sample}\end{subfigure}
+\caption{\synthtag Replicate precision and reference-gene / internal-control graphs.}\label{fig:repsd_graphs}
+\end{figure}
+\fig[0.85]{g_QC_stdcurve.png}{\texttt{stdcurve} — standard curve of the synthetic dilution series with slope, R$^2$ and efficiency judged against the SOP (90--110\,\%, R$^2\ge0.98$, $\ge3$ logs).}{g_QC_stdcurve}
+\fig[0.85]{g_QS_recalc.png}{\texttt{recalc} — stored Ct minus the Ct re-derived on the page from the stored $\Delta$Rn and threshold (.eds instrument). Points outside $\pm0.2$ would be flagged.}{g_QS_recalc}
+
+\section{Graphs across all runs}
+Cross-run graphs place the runs in date order; with more than 40 runs the axis shows dates instead of run names.
+
+\input{code/gRunDate}
+\input{code/gByDate}
+\input{code/gRunTicks}
+
+\fig[0.85]{g_all_x_timeline.png}{\texttt{x\_timeline} — runs on a calendar (upper part): run (green), experiment created (blue), last change (red, joined by a dashed line).}{g_all_x_timeline}
+\fig[0.9]{g_all_x_delay.png}{\texttt{x\_delay} — hours from run end to the last recorded change, log scale, SOP limit 72\,h. The planted 410\,h change of run 018 is red.}{g_all_x_delay}
+\fig[0.8]{g_all_x_accept.png}{\texttt{x\_accept} — run acceptance grid: runs (rows) against the SOP criteria (columns), upper part.}{g_all_x_accept}
+\fig[0.9]{g_all_x_outcomes.png}{\texttt{x\_outcomes} — stacked SOP outcomes per run.}{g_all_x_outcomes}
+\fig[0.9]{g_all_x_control.png}{\texttt{x\_control} — descriptive control Cq across runs with the configured SOP range; pooled mean/SD lines were removed.}{g_all_x_control}
+\fig[0.9]{g_all_x_signal.png}{\texttt{x\_signal} — median background (dashed) and end-point fluorescence (solid) per channel and run.}{g_all_x_signal}
+
+

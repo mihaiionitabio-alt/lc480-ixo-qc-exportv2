@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function}\PYG{+w}{ }\PYG{n+nx}{showTab}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nx}{APP\PYGZus{}STATE}\PYG{p}{.}\PYG{n+nx}{activeTab}\PYG{o}{=}\PYG{n+nx}{name}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n+nx}{\PYGZdl{}\PYGZdl{}}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}nav button\PYGZdq{}}\PYG{p}{).}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{b}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{b}\PYG{p}{.}\PYG{n+nx}{classList}\PYG{p}{.}\PYG{n+nx}{toggle}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}on\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{b}\PYG{p}{.}\PYG{n+nx}{dataset}\PYG{p}{.}\PYG{n+nx}{tab}\PYG{o}{===}\PYG{n+nx}{name}\PYG{p}{));}
+\PYG{+w}{  }\PYG{n+nx}{\PYGZdl{}\PYGZdl{}}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}main section\PYGZdq{}}\PYG{p}{).}\PYG{n+nx}{forEach}\PYG{p}{(}\PYG{n+nx}{s}\PYG{p}{=\PYGZgt{}}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{classList}\PYG{p}{.}\PYG{n+nx}{toggle}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}on\PYGZdq{}}\PYG{p}{,}\PYG{n+nx}{s}\PYG{p}{.}\PYG{n+nx}{id}\PYG{o}{===}\PYG{l+s+s2}{\PYGZdq{}tab\PYGZhy{}\PYGZdq{}}\PYG{o}{+}\PYG{n+nx}{name}\PYG{p}{));}
+\PYG{+w}{  }\PYG{n+nx}{renderTab}\PYG{p}{(}\PYG{n+nx}{name}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n+nb}{window}\PYG{p}{.}\PYG{n+nx}{scrollTo}\PYG{p}{(\PYGZob{}}\PYG{n+nx}{top}\PYG{o}{:}\PYG{l+m+mf}{0}\PYG{p}{,}\PYG{n+nx}{behavior}\PYG{o}{:}\PYG{l+s+s2}{\PYGZdq{}smooth\PYGZdq{}}\PYG{p}{\PYGZcb{});}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
