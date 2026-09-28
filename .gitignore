@@ -4,7 +4,9 @@
 
 # --- never publish -----------------------------------------------------------
 leak_identifiers.txt
-2025_2/
+# not just a folder called 2025_2: an SOP-v2 workstream on this machine keeps real
+# laboratory material under examples/real-2025_2/ and in files named after it
+*2025_2*
 **/msyh.ttc
 *pseudonym*map*.csv
 *pseudonym*map*.json
