@@ -92,45 +92,81 @@ single file with no image to load.
 
 
 \section{Working without a mouse}
-Everything in the console can be reached by typing. The recogniser list below is
-the one the code carries; a button in the interface sends exactly the same text,
-so the two paths cannot drift apart.
+The console is driven by its buttons, its menu sheets and the keyboard. Every
+action card carries a key in its corner, and pressing that key presses the
+button. While a menu sheet is open, the digits \texttt{1}--\texttt{9} pick an
+option and \texttt{Esc} or \texttt{0} closes it. There is no command box: the
+console accepts no typed text, and the page contains no speech recognition and
+no speech synthesis of any kind. Command mode (Chapter~\ref{ch:modes}) is the
+script interface.
+
+The action buttons and their keys share one dispatcher, so a button and its key
+cannot drift apart. The scope tabs and the menu options do not: they call
+\texttt{mgScope()} and \texttt{mgSheetPick()} directly, which is why six rows of
+the table below have no button at all. The table is the dispatcher as the code
+carries it, and the third column says how each row is actually reached.
+
+\begin{notebox}
+Earlier releases of this document said that everything in the console could be
+reached by typing, and presented this table as the commands the console
+recognises. That was wrong in both parts. The phrases below are what the buttons
+and the keys send to one another internally; none of them can be typed anywhere
+in the interface.
+\end{notebox}
 
 {\small
-\begin{xltabular}{\linewidth}{|X|l|}
-\caption{Every command the console recognises.}\label{tab:console-commands} \\
-\toprule \textbf{Command} & \textbf{Pattern} \\\midrule\endfirsthead
-\toprule \textbf{Command} & \textbf{Pattern} \\\midrule\endhead
-next & \texttt{\textasciicircum{}next\$} \\
-previous & \texttt{\textasciicircum{}previous\$} \\
-chart previous & \texttt{\textasciicircum{}chart previous\$} \\
-chart next & \texttt{\textasciicircum{}chart next\$} \\
-chart close & \texttt{\textasciicircum{}chart close\$} \\
-zoom & \texttt{\textasciicircum{}zoom (in|out|reset)\$} \\
-pan & \texttt{\textasciicircum{}pan (left|right|up|down)\$} \\
-chart type menu & \texttt{\textasciicircum{}(chart type|type menu|change chart type)\$} \\
-x axis menu & \texttt{\textasciicircum{}(x axis|axis menu|change x axis)\$} \\
-close menu & \texttt{\textasciicircum{}(close|close menu|dismiss)\$} \\
-read staged files & \texttt{\textasciicircum{}read files\$} \\
-choose experiment files & \texttt{\textasciicircum{}choose files\$} \\
-leave for a page & \texttt{\textasciicircum{}open page (load|sop|results|panel|graphs|review|export…} \\
-console view & \texttt{\textasciicircum{}(view )?(load files|load view|sop view|results view|pa…} \\
-chart type & \texttt{\textasciicircum{}type (i|ewma|cusum|trend|xbars|p|u|c|funnel)\$} \\
-x axis & \texttt{\textasciicircum{}x (order|date|hours|cycles)\$} \\
-theme light & \texttt{\textasciicircum{}theme light\$} \\
-theme dark & \texttt{\textasciicircum{}theme dark\$} \\
-chart & \texttt{\textasciicircum{}chart\$} \\
-panel & \texttt{\textasciicircum{}panel\$} \\
-results & \texttt{\textasciicircum{}results\$} \\
-review & \texttt{\textasciicircum{}review\$} \\
-load & \texttt{\textasciicircum{}load\$} \\
-sop & \texttt{\textasciicircum{}sop\$} \\
-next run & \texttt{\textasciicircum{}next run\$} \\
-download a file & \texttt{\textasciicircum{}export (\textbackslash\{\}d+)\$} \\
-exit & \texttt{\textasciicircum{}exit\$} \\
+\begin{xltabular}{\linewidth}{|X|l|l|}
+\caption{The console's internal dispatcher, and how each row is reached. The
+phrases are what the buttons and keys send; none of them can be
+typed.}\label{tab:console-commands} \\
+\toprule \textbf{Entry} & \textbf{Pattern} & \textbf{Reached from} \\\midrule\endfirsthead
+\toprule \textbf{Entry} & \textbf{Pattern} & \textbf{Reached from} \\\midrule\endhead
+next & \texttt{\textasciicircum\{\}next\$} & button or key \\
+previous & \texttt{\textasciicircum\{\}previous\$} & button or key \\
+chart previous & \texttt{\textasciicircum\{\}chart previous\$} & button or key \\
+chart next & \texttt{\textasciicircum\{\}chart next\$} & button or key \\
+chart close & \texttt{\textasciicircum\{\}chart close\$} & button or key \\
+zoom & \texttt{\textasciicircum\{\}zoom (in|out|reset)\$} & button or key \\
+pan & \texttt{\textasciicircum\{\}pan (left|right|up|down)\$} & button or key \\
+chart type menu & \texttt{\textasciicircum\{\}(chart type|type menu|change chart type)\$} & button or key \\
+x axis menu & \texttt{\textasciicircum\{\}(x axis|axis menu|change x axis)\$} & button or key \\
+close menu & \texttt{\textasciicircum\{\}(close|close menu|dismiss)\$} & shadowed\,$^{a}$ \\
+read staged files & \texttt{\textasciicircum\{\}read files\$} & button or key \\
+choose experiment files & \texttt{\textasciicircum\{\}choose files\$} & button or key \\
+leave for a page & \texttt{\textasciicircum\{\}open page (load|sop|results|panel|graphs|review|export\ldots{}} & button or key \\
+console view & \texttt{\textasciicircum\{\}(view )?(load files|load view|sop view|results view|pa\ldots{}} & no button or key\,$^{b}$ \\
+chart type & \texttt{\textasciicircum\{\}type (i|ewma|cusum|trend|xbars|p|u|c|funnel)\$} & no button or key\,$^{b}$ \\
+x axis & \texttt{\textasciicircum\{\}x (order|date|hours|cycles)\$} & no button or key\,$^{b}$ \\
+theme light & \texttt{\textasciicircum\{\}theme light\$} & button or key \\
+theme dark & \texttt{\textasciicircum\{\}theme dark\$} & button or key \\
+chart & \texttt{\textasciicircum\{\}chart\$} & button or key \\
+panel & \texttt{\textasciicircum\{\}panel\$} & no button or key\,$^{b}$ \\
+results & \texttt{\textasciicircum\{\}results\$} & button or key \\
+review & \texttt{\textasciicircum\{\}review\$} & button or key \\
+load & \texttt{\textasciicircum\{\}load\$} & no button or key\,$^{b}$ \\
+sop & \texttt{\textasciicircum\{\}sop\$} & no button or key\,$^{b}$ \\
+next run & \texttt{\textasciicircum\{\}next run\$} & button or key \\
+download a file & \texttt{\textasciicircum\{\}export (\textbackslash\{\}d+)\$} & button or key \\
+exit & \texttt{\textasciicircum\{\}exit\$} & button or key \\
 \bottomrule
 \end{xltabular}}
 
+\begin{description}[leftmargin=2.2em,style=nextline]
+\item[$^{a}$] Reachable, but never through this row. \texttt{Esc} and \texttt{0} are
+  handled in \texttt{mgInit} before the dispatcher is consulted, and the menu
+  sheet carries no close button of its own, so the row is shadowed.
+\item[$^{b}$] No button and no key sends this text in any scope. The scope tabs call
+  \texttt{mgScope()} and the menu options call \texttt{mgSetChartType()} or
+  \texttt{mgSetChartAxis()} directly, so these entries exist only as a code
+  path. They are listed because they are part of the dispatcher, not because the
+  operator can perform them.
+\end{description}
+
+\readingnote{Two row names invite a mistake. The button labelled ``Chart type''
+sends the text \texttt{chart type}, which matches the \emph{chart type menu}
+row; the row named \emph{chart type} is the setter \texttt{type i|ewma|\ldots}
+and has no button. \emph{x axis} is the same pair. Reachability has to be read
+from the pattern, not from the name.}
 
 \section{The actions offered on the items}
 An item that can be acted on carries its action with it, so the operator never has

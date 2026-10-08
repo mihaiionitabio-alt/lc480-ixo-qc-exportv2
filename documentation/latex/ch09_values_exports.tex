@@ -31,6 +31,15 @@ it is downloaded.
 \input{code/pseudoOn}
 \input{code/pseudonymMap}
 
+\subsection*{How the files leave the page}
+A browser applies its own rate limit to downloads a page starts in a loop, and
+drops the ones beyond it without raising an error. An earlier build wrote one
+file per download and lost most of a large export that way. \texttt{downloadExportFiles()}
+removes the loop: an export is built as a single archive with a manifest inside
+it, and one download leaves the page. The manifest is what makes completeness
+checkable --- the count in it is the count that should be on disk, so a short
+archive is visible rather than silent.
+
 \subsection*{Writers}
 All containers are written without libraries: ZIP (stored entries with CRC-32), XLSX (SpreadsheetML in a ZIP) and RDML (XML in a ZIP).
 
