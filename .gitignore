@@ -67,7 +67,7 @@ __pycache__/
 documentation/latex/fig/atlas/
 documentation/latex/volume_offsets.tsv
 # The 7 October document is the complete one: 6,437 pages, 262 MB.  GitHub
-# rejects any file over 100 MB, so it cannot be committed and travels as a
-# release asset.  The sources and build_complete.sh are committed; the 28
-# September PDF stays in the tree until its replacement is released.
-documentation/qPCR_QC_forensics_documentation_2026-10-07.pdf
+# rejects regular Git files over 100 MB. This PDF is now tracked through Git LFS
+# so it remains available in documentation/. The sources and build_complete.sh
+# are committed; the older PDF remains until explicitly replaced.
+!documentation/qPCR_QC_forensics_documentation_2026-10-07.pdf
