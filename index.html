@@ -376,6 +376,8 @@ canvas{max-width:100%;border:1px solid var(--line);border-radius:7px;background:
 .metric b{display:block;font-size:20px;line-height:1.15;font-variant-numeric:tabular-nums}
 .metric span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
 .metric.bad{border-left:4px solid var(--bad)}.metric.warn{border-left:4px solid var(--warn)}
+.graph-analysis{margin-top:14px}.graph-analysis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 0}.graph-finding{border:1px solid var(--line);border-left:4px solid var(--info);border-radius:7px;padding:10px;background:#fbfcfd}.graph-finding.error{border-left-color:var(--bad);background:#fff7f7}.graph-finding.review{border-left-color:var(--warn);background:#fffaf0}.graph-finding b{display:block;margin-bottom:4px}.graph-analysis details{margin-top:10px}.graph-analysis li{margin:5px 0}
+.issue-overview{margin-top:14px}.issue-overview h3{margin-top:0}.issue-run-picker{display:flex;flex-wrap:wrap;gap:6px 12px;max-height:150px;overflow:auto;padding:8px;border:1px solid var(--line);border-radius:7px;background:#fbfcfd}.issue-run-picker label{font-size:12.5px;display:flex;gap:5px;align-items:center}.issue-category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:10px 0}.issue-category{border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:7px;padding:9px;background:#fffaf0}.issue-category.bad{border-left-color:var(--bad);background:#fff7f7}.issue-category b{font-size:18px;margin-right:5px}.issue-category small{display:block;color:var(--muted);margin-top:3px}.issue-chart-wrap{margin-top:12px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:8px}.issue-chart-wrap canvas{width:100%;height:auto;border:0}.issue-legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--muted);margin:6px 0}.issue-legend span{display:inline-flex;align-items:center;gap:5px}.issue-legend i{width:11px;height:3px;display:inline-block;border-radius:2px}
 .metric.ok{border-left:4px solid var(--ok)}
 .plate-scroll{overflow:auto;padding:2px 0 8px}
 .plate-grid{display:grid;gap:3px;min-width:max-content;align-items:stretch}
@@ -390,7 +392,7 @@ canvas{max-width:100%;border:1px solid var(--line);border-radius:7px;background:
 .plate-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:7px}
 .plate-legend i{display:inline-block;width:11px;height:11px;border:1px solid #cbd5e1;border-radius:3px;
   vertical-align:-1px;margin-right:4px}
-.chart-wrap{overflow:auto;margin-top:10px}.chart-wrap canvas{min-width:620px}
+.chart-wrap{overflow:auto;margin-top:10px}.chart-wrap canvas{min-width:620px}.curve-plot-host{width:100%;min-height:320px}.curve-canvas-tools{display:flex;align-items:center;gap:10px;min-height:28px;margin:2px 0 6px;color:var(--muted);font-size:12px}.curve-canvas-frame{position:relative;overflow:hidden;background:#fff;border-radius:4px}.curve-canvas-frame canvas{display:block;width:100%;height:auto;min-width:0;cursor:crosshair;touch-action:none}.curve-canvas-tip{z-index:3;white-space:nowrap}
 .ix-plot{width:100%;min-width:560px;margin-top:4px}.ix-plot .modebar{opacity:.35}.ix-plot:hover .modebar{opacity:1}
 /* the two rules above style the drawn SVG of a chart; an interactive figure is
    a stack of layered SVGs and must keep its own geometry and transparency */
@@ -602,7 +604,7 @@ body.lang-zh .cute-toast.show{opacity:1;transform:translateY(0) scale(1)}
     <h2>Laboratory SOP profile</h2>
     
     <div class="toolbar">
-      <label>Start from<select id="sop-preset"><option value="sc">SC screening — SOP-06 laboratory default</option></select></label>
+      <label>Start from<select id="sop-preset"><option value="sc">SC screening — SOP-06 laboratory default</option><option value="demo">SC screening — SOP-06-DEMO (synthetic demonstration only)</option></select></label>
       <button class="ghost" id="sop-apply-preset" type="button">Use this starting point</button>
       <button class="ghost" id="sop-open" type="button">Open profile (JSON)</button><input type="file" id="sop-file" accept=".json" hidden>
       <button class="act" id="sop-save" type="button">Save profile (JSON)</button>
@@ -729,6 +731,11 @@ body.lang-zh .cute-toast.show{opacity:1;transform:translateY(0) scale(1)}
       <h2>Review overview</h2>
       
       <div id="review-overview"></div>
+      <div class="issue-overview card" id="issue-overview-card">
+        <h3>Problems across selected experiments</h3>
+        <p class="sub">Choose loaded experiments to group their findings by category. The curve view reconstructs the stored cycle-by-cycle fluorescence so late rises, missing results and abnormal shapes are visible together.</p>
+        <div id="issue-overview"></div>
+      </div>
     </div>
 
     <div class="review-sheet" data-review-sheet="plate">
@@ -823,6 +830,11 @@ body.lang-zh .cute-toast.show{opacity:1;transform:translateY(0) scale(1)}
         <button class="ghost" id="dl-curves-png">Save chart as PNG</button>
       </div>
       <div id="review-curves"></div>
+      <div class="card graph-analysis" id="curve-analysis-card">
+        <h3>Graph analysis and review</h3>
+        <p class="sub">Numeric review findings for the selected amplification-curve context. These findings preserve the stored instrument values and support review under the active SOP.</p>
+        <div id="curve-analysis"></div>
+      </div>
     </div>
 
     <div class="review-sheet" data-review-sheet="rising">
@@ -1225,6 +1237,7 @@ zip handover_2026_09</textarea>
       <div id="ast-buttons">
         <button type="button" id="ast-build" class="primary">Build</button>
         <button type="button" id="ast-template">Download the selection as CSV</button>
+        <button type="button" id="ast-issues">Open grouped problem overview</button>
         <label id="ast-upload">Load a selection CSV<input type="file" id="ast-file" accept=".csv,text/csv"></label>
       </div>
       <div id="ast-msg" class="ast-msg"></div>
@@ -1853,6 +1866,7 @@ const ZH_TERMS={
   "Show":"显示",
   "Everything":"全部",
   "Only what needs action":"仅需处理的项目",
+  "Worst outcome":"最严重结果",
   "Positive":"阳性",
   "Negative":"阴性",
   "Inconclusive":"不确定",
@@ -2200,9 +2214,9 @@ const ZH_TERMS={
   "RDML 1.4 — for LinRegPCR":"RDML 1.4 - 用于 LinRegPCR","qpcR curve table (CSV, wide)":"qpcR 曲线表（CSV，宽格式）",
   "Experiment settings (CSV)":"实验设置（CSV）","Everything, as one ZIP":"全部内容打包为 ZIP",
   "Every stored crossing point with its well, sample, target, role and call. The plain table most downstream work starts from.":"包含每个保存的交叉点及其孔位、样品、目标、角色和判定结果，是大多数后续分析的基础表格。",
-  "Stored Cq beside the full amplification curve, one row per cycle. The long-format table for scripts that expect tidy data.":"将保存的 Cq 与完整扩增曲线并列，每个循环一行，适用于长格式数据脚本。",
+  "Stored Cq beside the full amplification curve, one row per cycle. The long-format table for scripts that expect tidy data. Multiple files are downloaded together as one ZIP with a checksum manifest.":"将保存的 Cq 与完整扩增曲线并列，每个循环一行，适用于长格式数据脚本。",
   "Version 1.4 with every dye declared. rdmlpython refuses LinRegPCR below 1.4, and raises KeyError on a target whose dye was never declared; both were checked by running it.":"采用 RDML 1.4 并声明所有染料；已通过实际运行验证 rdmlpython / LinRegPCR 的兼容性。",
-  "One column per well, first column named Cycles exactly as pcrbatch() demands. Column names carry target and sample so replicate groups form with one sub().":"每个孔位一列，首列按 pcrbatch() 要求命名为 Cycles；列名包含目标和样品，便于构建重复孔组。",
+  "One column per well, first column named Cycles exactly as pcrbatch() demands. Column names carry target and sample so replicate groups form with one sub(). Multiple files are downloaded together as one ZIP with a checksum manifest.":"每个孔位一列，首列按 pcrbatch() 要求命名为 Cycles；列名包含目标和样品，便于构建重复孔组。",
   "Melting temperature, peak area and peak height for every well, as the Tm Calling analysis stored them. Only runs that carry such an analysis produce this.":"包含 Tm Calling 分析保存的每孔熔解温度、峰面积和峰高，仅对含此类分析的运行提供。",
   "Every setting the page could read out of the container, each with the property it came from. The same table shown on the Load tab.":"列出页面从容器读取的全部设置及其来源属性，与“加载”页显示的表格相同。",
   "Every table above plus both scripts, so a whole experiment can be handed over in a single file.":"包含上述所有表格和两个脚本，可用单个文件交付完整实验。",
@@ -4525,13 +4539,17 @@ function sopBase(){
     ],
     replicates:{min:1,positiveMin:1,partialOutcome:"Inconclusive",maxSd:0.5,sdOutcome:"Repeat"},
     ic:{referenceCq:"",maxShift:2,shiftOutcome:"Inconclusive",missingOutcome:"Invalid"},
-    run:{integrity:"reject",controlsMissing:"reject",controlsFail:"reject",stdCurve:"review",minR2:0.98,effMin:90,effMax:110,
+    run:{integrity:"reject",controlsMissing:"reject",controlsFail:"reject",colourCompensation:"review",referencePolicy:"all-declared",stdCurve:"review",minR2:0.98,effMin:90,effMax:110,
       minLogs:3,ntcGap:3,ntcGapAction:"review",editDelayHours:72,editAction:"review",calibration:"review",
       maxZoneSpread:1.5,zoneAction:"review",runState:"reject",invalidRunOverrides:true},
     outcomes:JSON.parse(JSON.stringify(SOP_OUTCOME_DEFAULTS)),
     graphs:{showCutoffs:true,showLate:true,showSdLimit:true}
   };
 }
+const SC_REFERENCE_GENES=()=>[
+  {target:"HMG",gene:"hmgA",taxon:"Zea mays",primers:"hmgA F + hmgA R",probe:"hmgA",purpose:"taxon-specific DNA / extraction verification"},
+  {target:"LEC",gene:"Le1",taxon:"Glycine max",primers:"Le1 F + Le1 R",probe:"Le1",purpose:"taxon-specific DNA / extraction verification"}
+];
 const SOP_PRESETS={
   generic:()=>sopBase(),
   gmo:()=>Object.assign(sopBase(),{
@@ -4563,9 +4581,9 @@ const SOP_PRESETS={
 SOP_PRESETS.lab=sopLabScreening;
 SOP_PRESETS.sc=()=>{
   const p=sopBase();
-  p.name="SC screening — SOP-06 laboratory default";p.version="1.0";
+  p.name="SC screening — SOP-06 laboratory default";p.version="1.4";
   p.assay="GMO screening SOP-06 (35S / T-NOS with HMG or LEC reference)";
-  p.notes="Laboratory default for SC_ experiments. Review-only until the approved SOP owner confirms acceptance decisions and the comparison direction in section 6.2 c5.";
+  p.notes="Laboratory default for SC_ experiments. Runs are simplex, so colour compensation is not required. Review-only until the approved SOP owner confirms acceptance decisions and the comparison direction in section 6.2 c5.";
   p.reviewOnly=true;
   p.sourceProposalSchema="qpcr-control-mapping-proposal/v1";
   p.samplePattern="^\\d+\\s*GM\\d{2}(?:\\b|_)";
@@ -4596,8 +4614,9 @@ SOP_PRESETS.sc=()=>{
      are editable laboratory statements; they do not replace stored Cq values
      or vendor calls. */
   p.profileSchemaVersion=2;
-  p.method={id:"SOP-06-SC-screening",revision:"2025-II",scope:"SC_ GMO screening experiments",
-    applies_when:{run_name_pattern:"^SC(?:[_\s-]|$)",platforms:["LightCycler","QuantStudio"],
+  p.method={id:"SOP-06-SC-screening",revision:"2025-II",scope:"SC_ GMO screening experiments",reference_genes:SC_REFERENCE_GENES(),
+    reference_correlation:{mode:"any-valid",target_patterns:["35S|P35S|CaMV P-35S","T-NOS|T-nos|TNOS"],description:"A target result is correlated with the valid taxon reference detected for the sample; an alternate undeclared species reference is not treated as a failed sample control."},
+    applies_when:{run_name_pattern:"^SC(?:[_\\s-]|$)",platforms:["LightCycler","QuantStudio"],
       target_patterns:["35S|P35S|CaMV P-35S","T-NOS|T-nos|TNOS","HMG|hmgA","LEC|Le1"]},
     on_not_applicable:"unresolved"};
   p.procedure={id:"SOP-06",title:"Qualitative GMO screening of SC_ experiments",revision:"2025-II",
@@ -4606,11 +4625,12 @@ SOP_PRESETS.sc=()=>{
       {id:"P01",title:"Sample identity and extraction linkage",instruction:"Keep the SC_ sample identifier, material code, aliquot or dilution suffix, and extraction date together. Parse DD.MM.YYYY strictly and flag a date later than the run date.",acceptance:"No silent renaming; unresolved dates remain unresolved."},
       {id:"P02",title:"Plate and control placement",instruction:"Use two technical replicates for samples and LOD controls. Use one well for NTC, matrix negatives and process blanks unless the approved procedure specifies a periodic environmental blank.",acceptance:"Required controls are present before sample calls are issued."},
       {id:"P03",title:"Amplification and analysis",instruction:"Use the instrument's declared amplification analysis and preserve the original Cq, call, curve and analysis status. A curve without a same-channel result is evidence for review, not a replacement Cq.",acceptance:"Amplification cycles are evaluated separately from melt acquisitions."},
-      {id:"P04",title:"Control review",instruction:"Check LOD controls against their target-specific Cq windows, reference targets for the matrix, and negative controls for absence of target amplification.",acceptance:"A failed control changes the run status according to the rule action."},
+      {id:"P04",title:"Control review",instruction:"Check LOD controls against their target-specific Cq windows, use hmgA (HMG) for Zea mays and Le1 (LEC) for Glycine max as taxon-specific DNA / extraction references, and check negative controls for absence of target amplification.",acceptance:"A failed control changes the run status according to the rule action."},
       {id:"P05",title:"Sample interpretation",instruction:"Interpret a marker only when the target result and its required reference/control evidence meet this profile. Retain inconclusive or repeat outcomes when replicate or reference evidence is incomplete.",acceptance:"Every outcome names the rule and retains the stored call."},
       {id:"P06",title:"Reporting and traceability",instruction:"Review the generated sample report against the loaded experiment, record the profile name, version and SHA-256, and release only the report belonging to that analysis.",acceptance:"No result is reported without an experiment and profile identity."}
     ]};
   p.interpretation={principles:[
+      "HMG/hmgA (hmgA F + hmgA R with hmgA probe) verifies Zea mays DNA; Le1/LEC (Le1 F + Le1 R with Le1 probe) verifies Glycine max DNA. These are taxon/extraction references, not GMO targets.",
       "A detected 35S or T-NOS marker is reportable only when the required taxon reference is detected and the run controls pass.",
       "A negative marker with a failed or shifted reference is not reported as negative; it is invalid or inconclusive according to the applicable rule.",
       "A late signal, discordant replicate or Cq outside a control window is retained and reported with its reason.",
@@ -4625,12 +4645,73 @@ SOP_PRESETS.sc=()=>{
   p.materials=[{code:"ERM-BF415b",purpose:"LOD positive control",matrix:"maize",shelf_life_days:1095},
     {code:"ERM-BF410cp",purpose:"LOD positive control",matrix:"soy",shelf_life_days:1095}];
   p.replicates={min:2,positiveMin:2,by_role:{sample:2,"positive control":2,"calibrator":2,"negative control":1,NTC:1,blank:1},partialOutcome:"Repeat",maxSd:0.5,sdOutcome:"Repeat"};
-  p.sample_id={pattern:"^\d+\s*GM\d{2}(?:\b|_)",flags:"i",description:"SC_ sample identifier: market number followed by GM code."};
-  p.run.controlsMissing="review";p.run.controlsFail="review";p.run.invalidRunOverrides=false;
+  p.sample_id={pattern:"^\\d+\\s*GM\\d{2}(?:\\b|_)",flags:"i",description:"SC_ sample identifier: market number followed by GM code."};
+  /* SOP-06 is a review profile for assay interpretation.  An .ixo checksum
+     discrepancy remains auditable in File integrity, but it is not an assay
+     acceptance failure and must not turn every sample into a rejected run. */
+  p.run.integrity="review";p.run.controlsMissing="review";p.run.controlsFail="review";p.run.colourCompensation="off";p.run.referencePolicy="any-valid";p.run.invalidRunOverrides=false;
+  return p;
+};
+/* ---------------------------------------------------------------------------
+   SOP-06-DEMO — a demonstration profile for the synthetic demonstration runs.
+
+   It exists so that a demonstration set of a few files populates every graph
+   and draws real control limits instead of "collecting baseline" everywhere.
+
+   What it changes, and nothing else:
+     - the sample-identifier pattern also accepts the SYNTH demonstration
+       identifiers, so a demonstration run is not flagged for review over a
+       name that was never meant to match the laboratory pattern.  Acceptance
+       then reflects the faults the demonstration data actually carries.
+     - phase1 drops from 20 runs to 5 on every control chart, so a short
+       demonstration shows limits, run rules and alarms.
+
+   Everything else — every Cq cut-off, target kind, control definition and
+   window, replicate rule, run rule, acceptance action, procedure and
+   interpretation text — is inherited from SOP_PRESETS.sc() unchanged.
+
+   One chart is deliberately NOT reached from here.  B-M6 "IC shift from fixed
+   reference" needs a target of kind "ic" and a numeric ic.referenceCq, and an
+   earlier version of this profile declared LEC / Le1 as that internal control
+   to make the chart compute.  It was withdrawn: sopSampleRows() excludes only
+   kind "reference" from the sample screening decision, so an ic row counts as
+   an assay target, and a GMO-negative soy sample whose internal control
+   amplified was reported Positive — "35S: Not detected; T-NOS: Not detected;
+   LEC: Detected" gave sample_outcome Positive.  A false positive screening
+   call is not an acceptable price for one populated chart, so B-M6 stays empty
+   under this profile too.  (The same applies to any profile declaring an ic
+   target, including the shipped SOP_PRESETS.lab, whose "IPC|IC" rule has this
+   behaviour today.)
+
+   This is NOT a laboratory profile: limits computed from five runs are
+   indicative only, and the identifier pattern is widened for synthetic names.
+   It is deliberately treated as a template, so a reload returns to the
+   laboratory default and a browser used for a demonstration cannot quietly
+   stay on it.
+   --------------------------------------------------------------------------- */
+SOP_PRESETS.demo=()=>{
+  const p=SOP_PRESETS.sc();
+  p.name="SC screening — SOP-06-DEMO (synthetic demonstration only)";
+  p.version="1.4-demo";
+  p.assay="GMO screening SOP-06 — demonstration variant for synthetic runs";
+  p.notes="Demonstration profile for synthetic demonstration data. Inherits every numeric rule, target kind and control definition from the SOP-06 laboratory default and changes two things so that a short demonstration populates all graphs and draws real control limits: the sample-identifier pattern also accepts SYNTH demonstration identifiers, and the control-chart baseline drops from 20 runs to 5. Limits from five runs are indicative only and the widened identifier pattern is not a laboratory rule, so this profile must not be used to interpret laboratory runs. Chart B-M6 (IC shift) stays empty: reaching it needs a target of kind ic, and an ic target is currently counted as an assay target in the sample screening decision, which would report a GMO-negative sample as positive. It is treated as a template and is not restored after a reload.";
+  p.reviewOnly=true;
+  p.sample_id={pattern:"^(?:\\d+\\s*GM\\d{2}(?:\\b|_)|SYNTH\\s+(?:MZE|SOY|ORPHAN)\\s+\\d{3,5}\\b)",flags:"i",
+    description:"SC_ sample identifier (market number followed by GM code), or a SYNTH demonstration identifier."};
+  p.samplePattern=p.sample_id.pattern;
+  /* Five runs is the floor the statistics allow, so even a short demonstration
+     shows limits, run rules and alarms instead of "collecting baseline". */
+  if(typeof CC_CHARTS!=="undefined"){
+    p.controlCharts=Object.assign({},p.controlCharts);
+    CC_CHARTS.forEach(d=>{p.controlCharts[d.id]=Object.assign({},p.controlCharts[d.id],{phase1:5});});
+  }
+  p.method=Object.assign({},p.method,{id:"SOP-06-DEMO",scope:"synthetic demonstration runs (SC_SYNTH_*)"});
+  p.procedure=Object.assign({},p.procedure,{id:"SOP-06-DEMO",
+    title:"Demonstration variant of SOP-06 for synthetic runs"});
   return p;
 };
 const STORED_SOP=sopLoadStored();
-const STORED_SOP_IS_TEMPLATE=!!(STORED_SOP&&/^(Generic qPCR|GMO laboratory control mapping|GMO screening — qualitative|Forensic DNA quantification triage)/i.test(String(STORED_SOP.name||"")));
+const STORED_SOP_IS_TEMPLATE=!!(STORED_SOP&&/^(Generic qPCR|GMO laboratory control mapping|GMO screening — qualitative|Forensic DNA quantification triage|SC screening — SOP-06-DEMO)/i.test(String(STORED_SOP.name||"")));
 let SOP=STORED_SOP&&!STORED_SOP_IS_TEMPLATE?STORED_SOP:SOP_PRESETS.sc();
 let SOP_AUTO_DEFAULT=!STORED_SOP||STORED_SOP_IS_TEMPLATE;
 let SOP_CACHE=null;
@@ -4642,6 +4723,30 @@ function sopMaybeSelectScDefault(){
   const old=String(SOP&&SOP.name||"");
   if(sc&&/^(Generic qPCR|GMO screening — qualitative|Forensic DNA quantification)/i.test(old)){
     SOP=SOP_PRESETS.sc();sopStore();invalidateAnalysisCaches();
+  }
+  /* Migrate the previously stored SC-06 default so an existing browser
+     profile receives the same review-only integrity rule as a fresh profile. */
+  if(sc&&SOP&&SOP.name==="SC screening — SOP-06 laboratory default"&&String(SOP.version)==="1.0"&&SOP.run&&SOP.run.integrity==="reject"){
+    SOP.run.integrity="review";SOP.version="1.1";sopStore();invalidateAnalysisCaches();
+  }
+  /* SC-06 runs are simplex.  An older saved profile may have inherited the
+     generic multi-channel compensation review; migrate it to the laboratory
+     setting without changing stored curves or calls. */
+  const scVersion=parseFloat(SOP&&SOP.version||"0")||0;
+  if(sc&&SOP&&SOP.name==="SC screening — SOP-06 laboratory default"&&scVersion<1.2&&SOP.run&&SOP.run.colourCompensation!=="off"){
+    SOP.run.colourCompensation="off";SOP.version="1.2";sopStore();invalidateAnalysisCaches();
+  }
+  /* Make the validated taxon-reference mapping explicit in profiles saved
+     before SC-06 profile version 1.3. */
+  if(sc&&SOP&&SOP.name==="SC screening — SOP-06 laboratory default"&&parseFloat(SOP.version||"0")<1.3&&(!SOP.method||!Array.isArray(SOP.method.reference_genes)||!SOP.method.reference_correlation)){
+    SOP.method=Object.assign({},SOP.method||{}, {reference_genes:SC_REFERENCE_GENES(),reference_correlation:{mode:"any-valid",target_patterns:["35S|P35S|CaMV P-35S","T-NOS|T-nos|TNOS"],description:"A target result is correlated with the valid taxon reference detected for the sample; an alternate undeclared species reference is not treated as a failed sample control."}});SOP.version="1.3";sopStore();invalidateAnalysisCaches();
+  }
+  /* Correlate a marker with the valid taxon reference present in simplex
+     samples; an alternate species reference is not a failed control. */
+  if(sc&&SOP&&SOP.name==="SC screening — SOP-06 laboratory default"&&parseFloat(SOP.version||"0")<1.4){
+    SOP.run=SOP.run||{};
+    if(SOP.run.referencePolicy==null)SOP.run.referencePolicy="any-valid";
+    SOP.version="1.4";sopStore();invalidateAnalysisCaches();
   }
 }
 function sopNormalise(p){
@@ -4657,6 +4762,13 @@ function sopNormalise(p){
   o.outcomes={};SOP_OUTCOMES.forEach(k=>o.outcomes[k]=Object.assign({},SOP_OUTCOME_DEFAULTS[k],(p.outcomes||{})[k]||{}));
   o.targets=Array.isArray(p.targets)&&p.targets.length?p.targets.map(t=>Object.assign({match:"*",kind:"auto",cqMax:40,cqLate:"",quantMin:"",lateOutcome:"Inconclusive"},t)):b.targets;
   o.controls=Array.isArray(p.controls)?p.controls.map(c=>Object.assign({name:"",matchBy:"name",match:"",expect:"negative",cqLo:"",cqHi:"",targets:"*",minPerRun:0,onFail:"reject"},c)):b.controls;
+  // Repair only the two known escaped-string defects in saved SC-06 profiles.
+  // Custom patterns and every acceptance limit remain unchanged.
+  if(o.method&&o.method.id==="SOP-06-SC-screening"){
+    const applies=o.method.applies_when||{};
+    if(applies.run_name_pattern==="^SC(?:[_s-]|$)")o.method=Object.assign({},o.method,{applies_when:Object.assign({},applies,{run_name_pattern:"^SC(?:[_\\s-]|$)"})});
+    if(o.sample_id&&o.sample_id.pattern==="^d+s*GMd{2}(?:\b|_)")o.sample_id=Object.assign({},o.sample_id,{pattern:"^\\d+\\s*GM\\d{2}(?:\\b|_)"});
+  }
   o.schema=SOP_SCHEMA;delete o.sha256;return o;
 }
 function sopCanonical(p){
@@ -4684,6 +4796,13 @@ function sopTargetSpec(w){
   let kind=spec.kind||"auto";
   if(kind==="auto")kind=(w.targetType==="dtReference"||w.role==="Reference"||/^(hmg|ic|ipc|ref)/i.test(t))?"reference":"target";
   return Object.assign({},spec,{kind});
+}
+function sopTargetLabel(row){
+  const target=String(row&&row.target||"");
+  if(!row||!row.spec||row.spec.kind!=="reference")return target;
+  const refs=Array.isArray(SOP&&SOP.method&&SOP.method.reference_genes)?SOP.method.reference_genes:[];
+  const ref=refs.find(x=>String(x.target||"").toLowerCase()===target.toLowerCase()||String(x.gene||"").toLowerCase()===target.toLowerCase());
+  return ref?`${target} taxon reference (${ref.taxon})`:target+" taxon reference";
 }
 function sopRunApplicability(run){
   const m=SOP&&SOP.method||{},a=m.applies_when||{};
@@ -4762,7 +4881,7 @@ function controlBatchRecords(){
       instrument:ccInstrumentKey(e.run),protocol:ccProtocolKey(e.run),target:r.target,controlId:r.ctrl.id||r.ctrl.name||r.ctrl.match,control:r.ctrl.name,
       raw_name:id.raw,material:id.material,batch:id.batch,extraction_date:id.extractionDate,date_state:id.dateState,
       age_days:id.dateState==="parsed from label"?id.ageDays:NaN,date:e.times.start,
-      cq:r.cqMean,detected:r.det,replicates:r.n,amplitude:ccMedian(r.used.filter(w=>w.curve).map(w=>wellSignal(w.curve).amplitude)),
+      sample:r.sample,well:r.wells&&r.wells[0]&&r.wells[0].well,cq:r.cqMean,detected:r.det,replicates:r.n,amplitude:ccMedian(r.used.filter(w=>w.curve).map(w=>wellSignal(w.curve).amplitude)),
       cooling:m.cool_rate,setting:r.ctrl};}));
 }
 function controlBatchGraph(c,mode){
@@ -4775,7 +4894,7 @@ function controlBatchGraph(c,mode){
   const rows=rs.filter(r=>Number.isFinite(xval(r))&&Number.isFinite(r.cq));
   if(!rows.length)return {svg:svgMessage("No eligible controls: configure positive-control names, target and valid extraction dates."),rows:[]};
   const cm=new Map(),groups=byKey(rows,r=>`${r.instrument} | ${r.target} | ${r.batch} | ${r.protocol}`);
-  const series=[...groups].map(([k,v])=>({type:"points",r:4,colour:catColour(cm,k),data:v.map(r=>[xval(r),r.cq,`${r.experiment} · ${r.raw_name} · ${r.target} · ${r.detected}/${r.replicates} detected · ${r.date_state}`])}));
+  const series=[...groups].map(([k,v])=>({type:"points",r:4,colour:catColour(cm,k),data:v.map(r=>[xval(r),r.cq,graphHoverLabel(r.experiment,r,`${r.raw_name} · ${r.target} · ${r.detected}/${r.replicates} detected · ${r.date_state}`)])}));
   const x=extent(rows.map(xval));
   const xticks=mode==="batch"?niceTicks(x[0],x[1],6).map(v=>({v,label:new Date(v*864e5).toISOString().slice(0,10)})):undefined;
   return {svg:svgPlot({title:`Control ${mode==="age"?"extract age":mode==="thermal"?"cooling association":"batches over time"} — descriptive, ${rows.length}/${rs.length} eligible groups`,
@@ -4883,6 +5002,7 @@ function sopEvaluateRun(run,ri){
     return g;
   });
   const icMedian=icCqs.length?icCqs.slice().sort((a,b)=>a-b)[Math.floor(icCqs.length/2)]:NaN;
+  const referencePolicy=String((SOP.run||{}).referencePolicy||"all-declared");
   const out=(g,outcome,reason,rule)=>{g.outcome=outcome;g.reason=reason||"";g.rule=rule||"";rows.push(g);};
   pre.forEach(g=>{
     const cut=g.cqMax,late=sopNum(g.spec.cqLate),lo=sopNum(g.ctrl&&g.ctrl.cqLo),hi=sopNum(g.ctrl&&g.ctrl.cqHi);
@@ -4909,10 +5029,19 @@ function sopEvaluateRun(run,ri){
     if(g.n<roleNeed)reasons.push(`${g.n} replicate(s), SOP requires ${roleNeed}`);
     if(g.det===0){
       outcome="Negative";
-      if(g.spec.kind==="ic"||g.spec.kind==="reference"){outcome=SOP.ic.missingOutcome||"Invalid";reasons.push(`${g.spec.kind==="ic"?"internal control":"reference"} not detected`);}
+      if(g.spec.kind==="ic"||g.spec.kind==="reference"){
+        const alternate=(sampleRef.get(g.sample)||[]).filter(r=>r!==g&&r.spec.kind==="reference"&&r.det>0);
+        if(g.spec.kind==="reference"&&referencePolicy==="any-valid"&&alternate.length){
+          outcome="Not interpreted";
+          reasons.push(`alternate taxon reference ${alternate.map(r=>r.target).join(", ")} detected; ${g.target} is not required for this sample`);
+        }else{
+          outcome=SOP.ic.missingOutcome||"Invalid";reasons.push(`${g.spec.kind==="ic"?"internal control":"reference"} not detected`);
+        }
+      }
       else{
         const refs=(sampleRef.get(g.sample)||[]).filter(r=>r!==g);
-        const failed=refs.filter(r=>r.det===0);
+        const validReference=refs.some(r=>r.spec.kind==="reference"&&r.det>0);
+        const failed=referencePolicy==="any-valid"&&validReference?[]:refs.filter(r=>r.det===0);
         const shifted=refs.filter(r=>r.spec.kind==="ic"&&Number.isFinite(icMedian)&&Number.isFinite(r.cqMean)&&r.cqMean-icMedian>sopNum(SOP.ic.maxShift));
         if(failed.length){outcome=SOP.ic.missingOutcome||"Invalid";reasons.push(`${failed.map(r=>r.target).join(", ")} not detected — a negative cannot be reported`);}
         else if(shifted.length){outcome=SOP.ic.shiftOutcome||"Inconclusive";reasons.push(`IC shifted +${num(shifted[0].cqMean-icMedian,2)} cycles from the run median (limit ${SOP.ic.maxShift}) — possible inhibition`);}
@@ -4987,7 +5116,7 @@ function sopEvaluateRun(run,ri){
   rows.forEach(r=>{
     const o=SOP.outcomes[r.outcome]||SOP_OUTCOME_DEFAULTS[r.outcome]||{};
     r.label=o.label||r.outcome;r.colour=o.colour||"#94a3b8";
-    r.report=sopFmt(o.text,{sample:r.sample,target:r.target,cq:num(r.cqMean,2),sd:num(r.cqSd,2),det:r.det,n:r.n,cutoff:r.cqMax,reason:r.reason,outcome:r.label,run:runName(run)});
+    r.report=sopFmt(o.text,{sample:r.sample,target:sopTargetLabel(r),cq:num(r.cqMean,2),sd:num(r.cqSd,2),det:r.det,n:r.n,cutoff:r.cqMax,reason:r.reason,outcome:r.label,run:runName(run)});
   });
   return {run,ri,rows,criteria:crit,status,rejected,reviewed,icMedian,times:T};
 }
@@ -5009,7 +5138,7 @@ function sopInterpretationRows(filterRun,forExport){
     replicates:r.n,detected:r.det,omitted:r.omitted||"",above_cutoff:r.above||"",
     cq_mean:Number.isFinite(r.cqMean)?+r.cqMean.toFixed(3):"",cq_sd:Number.isFinite(r.cqSd)?+r.cqSd.toFixed(3):"",
     cq_cutoff:Number.isFinite(r.cqMax)?r.cqMax:"",quantity:Number.isFinite(r.conc)?r.conc:"",
-    outcome:r.outcome,label:r.label,reason:r.reason,report:sopFmt((SOP.outcomes[r.outcome]||{}).text,{sample:P(r.sample),target:r.target,cq:num(r.cqMean,2),sd:num(r.cqSd,2),det:r.det,n:r.n,cutoff:r.cqMax,reason:r.reason,outcome:r.label,run:runName(e.run)}),
+    outcome:r.outcome,label:r.label,reason:r.reason,report:sopFmt((SOP.outcomes[r.outcome]||{}).text,{sample:P(r.sample),target:sopTargetLabel(r),cq:num(r.cqMean,2),sd:num(r.cqSd,2),det:r.det,n:r.n,cutoff:r.cqMax,reason:r.reason,outcome:r.label,run:runName(e.run)}),
     rule:r.rule,stored_calls:uniq(r.wells.map(w=>w.call)).join(" | "),
     ...sopMeta()})));
 }
@@ -5019,10 +5148,17 @@ function sopSampleRows(filterRun,forExport){
     const by=byKey(e.rows.filter(r=>!r.ctrl&&r.outcome!=="Standard"),r=>r.sample);
     return [...by].map(([s,rs])=>{
       const order=["Invalid run","Invalid","Repeat","Inconclusive","Positive","Negative","Not interpreted"];
-      const worst=rs.map(r=>r.outcome).sort((a,b)=>order.indexOf(a)-order.indexOf(b))[0];
+      /* A taxon reference is a validity check, not a GMO target.  Decide the
+         sample-level screening outcome from 35S/T-NOS (or other non-reference
+         targets); keep reference failures in needs_action for review. */
+      const assay=rs.filter(r=>!r.spec||r.spec.kind!=="reference");
+      const decisionRows=assay.length?assay:rs;
+      const worst=decisionRows.map(r=>r.outcome).sort((a,b)=>order.indexOf(a)-order.indexOf(b))[0];
+      const actionRows=rs.filter(r=>/Invalid|Repeat|Inconclusive|Control fail/.test(r.outcome));
+      const referenceOutcomes=uniq(rs.filter(r=>r.spec&&r.spec.kind==="reference").map(r=>r.outcome));
       return {experiment:runName(e.run),run_status:e.status,sample:P(s),
-        summary:rs.map(r=>`${r.target}: ${r.label}`).join("; "),needs_action:/Invalid|Repeat|Inconclusive/.test(worst)?"yes":"",
-        report:rs.map(r=>sopFmt((SOP.outcomes[r.outcome]||{}).text,{sample:P(s),target:r.target,cq:num(r.cqMean,2),sd:num(r.cqSd,2),det:r.det,n:r.n,cutoff:r.cqMax,reason:r.reason,outcome:r.label,run:runName(e.run)})).join(" "),
+        summary:rs.map(r=>`${sopTargetLabel(r)}: ${r.label}`).join("; "),sample_outcome:worst,action:actionRows.map(r=>`${sopTargetLabel(r)}: ${r.label}`).join("; "),reference_outcomes:referenceOutcomes.join(" | "),needs_action:actionRows.length?"yes":"",
+        report:rs.map(r=>sopFmt((SOP.outcomes[r.outcome]||{}).text,{sample:P(s),target:sopTargetLabel(r),cq:num(r.cqMean,2),sd:num(r.cqSd,2),det:r.det,n:r.n,cutoff:r.cqMax,reason:r.reason,outcome:r.label,run:runName(e.run)})).join(" "),
         ...sopMeta()};
     });
   });
@@ -5047,7 +5183,7 @@ function sopEvents(){
   const out=[];
   sopEvaluateAll().forEach(e=>{
     const exp=runName(e.run);
-    e.criteria.filter(c=>c.status==="fail"||c.status==="review").forEach(c=>out.push({experiment:exp,severity:c.status==="fail"?"error":"review",
+    e.criteria.filter(c=>c.criterion!=="Container integrity"&&(c.status==="fail"||c.status==="review")).forEach(c=>out.push({experiment:exp,severity:c.status==="fail"?"error":"review",
       area:"SOP: "+SOP.name,finding:`${c.criterion} — ${c.status==="fail"?"not met (run rejected)":"not met (review)"}`,evidence:c.evidence}));
     const act=e.rows.filter(r=>/Invalid$|Repeat|Inconclusive/.test(r.outcome));
     if(act.length)out.push({experiment:exp,severity:"review",area:"SOP: "+SOP.name,
@@ -5144,6 +5280,7 @@ function sopField(label,path,type,opts,hint){
 }
 const SOP_ACTION_LABEL={reject:"Reject the run",review:"Flag for review",off:"Do not check",flag:"Flag only (keep outcome)",
   auto:"Automatic",target:"Target",reference:"Reference gene",ic:"Internal / inhibition control",
+  "any-valid":"Any valid taxon reference", "all-declared":"Every declared reference",
   negative:"Must be negative",positive:"Must be positive",standard:"Standard (no pass/fail)",name:"Sample name",role:"Resolved role"};
 function sopSetPath(path,value){
   /* A profile written before a field existed has no branch for it; create the branch
@@ -5186,6 +5323,7 @@ function renderSopHeader(){
 function sopProcedureHTML(){
   const m=SOP.method||{},a=m.applies_when||{},p=SOP.procedure||{},i=SOP.interpretation||{};
   const arr=v=>Array.isArray(v)?v:[];
+  const refs=arr(m.reference_genes).map(x=>`<li><b>${esc(x.gene||x.target||"")}</b> — ${esc(x.taxon||"")}; primers ${esc(x.primers||"not stated")}; probe ${esc(x.probe||"not stated")}; ${esc(x.purpose||"taxon reference")}</li>`).join("");
   const steps=arr(p.steps).map(x=>`<li><b>${esc(x.id||"")} ${esc(x.title||"")}</b><br>${esc(x.instruction||"")}<br><span class="hint">Acceptance: ${esc(x.acceptance||"")}</span></li>`).join("");
   const rules=arr(i.rules).map(x=>`<li><b>${esc(x.id||"")}</b> — when ${esc(x.when||"")}; <b>action:</b> ${esc(x.action||"")}; <b>outcome:</b> ${esc(x.outcome||"")}</li>`).join("");
   const principles=arr(i.principles).map(x=>`<li>${esc(x)}</li>`).join("");
@@ -5195,6 +5333,7 @@ function sopProcedureHTML(){
     <div><b>Scope</b><br>${esc(m.scope||"laboratory profile")}</div>
     <div><b>Applicable platforms</b><br>${esc(platforms)}</div>
     <div><b>Run-name rule</b><br><code>${esc(a.run_name_pattern||"none")}</code></div></div>
+    ${refs?`<h4>Taxon-specific DNA / extraction references</h4><ul>${refs}</ul>${m.reference_correlation&&m.reference_correlation.description?`<p class="hint"><b>Correlation:</b> ${esc(m.reference_correlation.description)}</p>`:""}`:""}
     <p class="hint">The method block controls applicability. A run outside this scope is reported as <b>Profile not applicable</b>; its stored Cq values, calls and curves remain available.</p>
     ${p.purpose?`<p><b>Purpose:</b> ${esc(p.purpose)}</p>`:""}
     ${steps?`<h4>Procedure</h4><ol>${steps}</ol>`:""}
@@ -5233,6 +5372,8 @@ function renderSopEditor(){
   </div></details>
   <details class="sop-sec"><summary>5 · Run acceptance</summary><div class="sop-grid">
     ${sopField("Container checksum fails",R+"integrity","select",A)}
+    ${sopField("Colour compensation when multiple channels are active",R+"colourCompensation","select",A,"Set to Do not check for simplex assays; use Flag for review only when a validated multiplex method requires it.")}
+    ${sopField("Taxon reference correlation for target calls",R+"referencePolicy","select",["any-valid","all-declared"],"Use Any valid taxon reference when each sample is run with its species-specific reference gene; an alternate absent species reference is not an invalid result.")}
     ${sopField("Run not completed",R+"runState","select",A)}
     ${sopField("Required control missing",R+"controlsMissing","select",A)}
     ${sopField("Standard curve outside limits",R+"stdCurve","select",A)}
@@ -5302,9 +5443,14 @@ function renderSopResults(){
   const runSel=$("#sop-run");setSelectItems(runSel,[{value:"",label:"All runs"},...RUNS.map((r,i)=>({value:i,label:runName(r)}))]);
   const nAcc=all.filter(e=>e.status==="Accepted").length,nRev=all.filter(e=>e.status==="Accepted with review").length,nRej=all.filter(e=>e.status==="Rejected").length,
     nNA=all.filter(e=>/^Profile not applicable/.test(e.status)).length;
-  const act=all.reduce((n,e)=>n+e.rows.filter(r=>/Invalid|Repeat|Inconclusive|Control fail/.test(r.outcome)).length,0);
+  const actionRows=all.flatMap(e=>e.rows.filter(r=>/Invalid|Repeat|Inconclusive|Control fail/.test(r.outcome)));
+  const actionCounts=actionRows.reduce((m,r)=>(m[r.outcome]=(m[r.outcome]||0)+1,m),{}),act=actionRows.length,
+    actionBreakdown=Object.entries(actionCounts).map(([k,v])=>`${v} ${(SOP.outcomes[k]||{}).label||k}`).join(", "),
+    referenceActions=actionRows.filter(r=>r.spec&&r.spec.kind==="reference").length;
+  const actionNote=act?`<p class="hint">${act} result(s) need action: ${esc(actionBreakdown)}.${referenceActions?` ${referenceActions} are taxon-reference checks; they are shown for review and do not by themselves change the GMO target outcome.`:""}</p>`:"";
   $("#sop-metrics").innerHTML=`<div class="metric-grid">${metricCard(nAcc,"runs accepted","ok")}${metricCard(nRev,"runs accepted with review",nRev?"warn":"ok")}
-    ${metricCard(nRej,"runs rejected",nRej?"bad":"ok")}${metricCard(nNA,"profile not applicable",nNA?"warn":"ok")}${metricCard(act,"results needing action",act?"warn":"ok")}</div>`;
+    ${metricCard(nRej,"runs rejected",nRej?"bad":"ok")}${metricCard(nNA,"profile not applicable",nNA?"warn":"ok")}${metricCard(act,"results needing action",act?"warn":"ok")}</div>
+    ${actionNote}${SOP.name==="SC screening — SOP-06 laboratory default"?'<p class="hint">SC-06 container checksum differences stay in <b>8 · File integrity</b> and are review-only; they do not reject the assay run.</p>':""}`;
   const view=$("#sop-view").value,ri=runSel.value,filt=$("#sop-outcome").value,q=($("#sop-search").value||"").toLowerCase();
   let rows,cols;
   if(view==="runs"){
@@ -5322,7 +5468,9 @@ function renderSopResults(){
   }else if(view==="samples"){
     rows=sopSampleRows(ri);
     if(filt==="attention")rows=rows.filter(r=>r.needs_action||/Invalid run/.test(r.summary));
-    cols=[{key:"experiment",label:"Experiment"},{key:"sample",label:"Sample"},{key:"summary",label:"Interpretation"},{key:"report",label:"Report text"}];
+    else if(filt)rows=rows.filter(r=>r.sample_outcome===filt||(/Invalid|Repeat|Inconclusive/.test(filt)&&String(r.reference_outcomes||"").split(" | ").includes(filt)));
+    cols=[{key:"experiment",label:"Experiment"},{key:"sample",label:"Sample"},{key:"sample_outcome",label:"Worst outcome (when action is needed)",html:1},{key:"action",label:"Action needed"},{key:"summary",label:"Interpretation"},{key:"report",label:"Report text"}];
+    rows=rows.map(r=>{const o=SOP.outcomes[r.sample_outcome]||SOP_OUTCOME_DEFAULTS[r.sample_outcome]||{},hideInformational=r.sample_outcome==="Negative"&&!r.action;return Object.assign({},r,{sample_outcome:hideInformational?"":`<span class="sop-pill" style="background:${esc(o.colour||"#94a3b8")}">${esc(o.label||r.sample_outcome)}</span>`});});
   }else{
     rows=sopInterpretationRows(ri);
     if(filt==="attention")rows=rows.filter(r=>/Invalid|Repeat|Inconclusive|Control fail/.test(r.outcome));
@@ -5590,6 +5738,16 @@ function sopColour(o){return (SOP.outcomes[o]||SOP_OUTCOME_DEFAULTS[o]||{}).colo
 function sopLabel(o){return (SOP.outcomes[o]||SOP_OUTCOME_DEFAULTS[o]||{}).label||o;}
 
 /* ---------- the graphs ---------- */
+function graphHoverLabel(experiment,w,detail){
+  const run=experiment&&typeof experiment==="object"?experiment:null;
+  const exp=run?runName(run):String(experiment||w&&w.experiment||"");
+  const cols=run&&run.cols||12;
+  const location=w&&(w.well||((Number.isFinite(Number(w.pos))&&Number.isFinite(Number(cols)))?posToWell(Number(w.pos),Number(cols)):""));
+  /* Keep replicate-aware sample IDs visible in hover labels while the base
+     sample name remains the grouping key used by Cq/SD calculations. */
+  const displaySample=w&&(w.sampleId||w.sample)||"";
+  return [exp,displaySample,location,detail||""].filter(Boolean).join(" · ");
+}
 function gRunWells(run,target){return (run.wells||[]).filter(w=>!target||(w.target||w.analysis)===target);}
 function gTargets(run){return uniq((run.wells||[]).map(w=>w.target||w.analysis).filter(Boolean));}
 function gCutLines(target,axis){
@@ -5638,7 +5796,7 @@ const GRAPHS=[
       const r=sopOutcomeFor(c.run,w),o=r?r.outcome:"Not interpreted",col=sopColour(o);used.set(sopLabel(o),col);
       const cur=c.signal==="drn"?w.eds.drn:w.curve;
       cur.forEach((v,i)=>rows.push({well:w.well,sample:w.sample,target:w.target,outcome:o,cycle:i+1,fluorescence:v}));
-      return {type:"line",colour:col,data:cur.map((v,i)=>[i+1,c.log?Math.max(v,1e-6):v]),tip:`${w.well} ${w.sample} · ${w.target} · Cq ${num(sopCq(w),2)} · ${sopLabel(o)}`,
+      return {type:"line",colour:col,data:cur.map((v,i)=>[i+1,c.log?Math.max(v,1e-6):v]),tip:graphHoverLabel(c.run,w,`${w.target} · Cq ${num(sopCq(w),2)} · ${sopLabel(o)}`),
         width:o==="Negative"||o==="Not interpreted"?1:1.6};});
     series.sort((a,b)=>(a.width-b.width));
     const all=series.flatMap(s=>s.data.map(p=>p[1])),n=Math.max(...series.map(s=>s.data.length));
@@ -5682,7 +5840,7 @@ const GRAPHS=[
       else if(c.metric==="status"){fill=statusCol[r.status];used.set(r.status,fill);lab=r.cq===""?"":num(r.cq,1);}
       else{const v=Number(r[c.metric]);fill=r[c.metric]===""?"#f8fafc":heatColour(v,lo,hi);lab=r[c.metric]===""?"":fmtTick(+v.toPrecision(3));}
       const dark=/^#(1|0|9f|e11|dc|7c|64)/.test(fill);
-      s+=`<rect x="${x+1}" y="${y+1}" width="${cell-2}" height="${cell-2}" rx="4" fill="${fill}" stroke="${r.status==="Signal, not analysed"?"#b45309":"#cbd5e1"}" stroke-width="${r.status==="Signal, not analysed"?2:1}"><title>${svgEsc(`${r.well} ${r.sample}\n${r.target}\nCq ${r.cq}\n${r.outcome||r.status}`)}</title></rect>`;
+      s+=`<rect x="${x+1}" y="${y+1}" width="${cell-2}" height="${cell-2}" rx="4" fill="${fill}" stroke="${r.status==="Signal, not analysed"?"#b45309":"#cbd5e1"}" stroke-width="${r.status==="Signal, not analysed"?2:1}"><title>${svgEsc(graphHoverLabel(run,r,`${r.target}\nCq ${r.cq}\n${r.outcome||r.status}`))}</title></rect>`;
       if(cell>=34)s+=`<text x="${x+cell/2}" y="${y+cell/2+3}" text-anchor="middle" fill="${dark?"#fff":"#111827"}">${svgEsc(lab)}</text>`;
     });
     let ly=46;const lx=40+C*cell+16;
@@ -5698,7 +5856,7 @@ const GRAPHS=[
     const cm=new Map(),rows=[];
     const series=orph.map(o=>{const col=catColour(cm,`${o.well}${o.filterComb?" · "+o.filterComb:""}`);
       o.curve.forEach((v,i)=>rows.push({well:o.well,sample:o.sample,channel:o.filterComb||o.filterName||o.channel,cycle:i+1,fluorescence:v,finding:o.finding}));
-      return {type:"line",colour:col,data:o.curve.map((v,i)=>[i+1,v]),tip:`${o.well} ${o.sample||""} · ${o.finding}`};});
+      return {type:"line",colour:col,data:o.curve.map((v,i)=>[i+1,v]),tip:graphHoverLabel(c.run,o,o.finding)};});
     const all=series.flatMap(s=>s.data.map(p=>p[1]));
     return {svg:svgPlot({title:`${runName(c.run)} — ${orph.length} curve(s) outside the analyses`,x:[1,Math.max(...series.map(s=>s.data.length))],y:extent(all),
       xlab:"Cycle",ylab:"Fluorescence (stored)",series,legend:legendFromMap(cm)}),rows};
@@ -5713,7 +5871,7 @@ const GRAPHS=[
         const r=sopOutcomeFor(c.run,w),key=c.colourby==="role"?(w.role||"Unknown"):sopLabel(r?r.outcome:"Not interpreted");
         const col=c.colourby==="role"?catColour(cm,key):(cm.set(key,sopColour(r?r.outcome:"Not interpreted")),sopColour(r?r.outcome:"Not interpreted"));
         const jit=((k*37)%21-10)/40;
-        series.push({type:"points",data:[[ti+jit,q,`${w.well} ${w.sample} · ${t} · Cq ${num(q,2)} · ${key}`,col]]});
+        series.push({type:"points",data:[[ti+jit,q,graphHoverLabel(c.run,w,`${t} · Cq ${num(q,2)} · ${key}`),col]]});
         rows.push({target:t,well:w.well,sample:w.sample,role:w.role,cq:q,outcome:r?r.outcome:""});});
       gCutLines(t,"y").forEach(l=>series.push({type:"line",colour:l.colour,dash:"5 4",width:1.2,data:[[ti-0.4,l.y],[ti+0.4,l.y]],tip:l.label}));
     });
@@ -5726,7 +5884,7 @@ const GRAPHS=[
   render(c){
     const ev=sopEvaluateAll()[c.ri];const pts=ev.rows.filter(r=>r.det>=2&&Number.isFinite(r.cqSd));
     if(!pts.length)return {svg:svgMessage("No replicate groups with two or more detected wells."),rows:[]};
-    const cm=new Map();const series=[{type:"points",data:pts.map(r=>[r.cqMean,r.cqSd,`${r.sample} · ${r.target} · SD ${num(r.cqSd,3)} · ${r.label}`,(cm.set(r.label,r.colour),r.colour)])}];
+    const cm=new Map();const series=[{type:"points",data:pts.map(r=>[r.cqMean,r.cqSd,graphHoverLabel(c.run,{well:r.wells&&r.wells[0]&&r.wells[0].well,sample:r.sample},`${r.target} · SD ${num(r.cqSd,3)} · ${r.label}`),(cm.set(r.label,r.colour),r.colour)])}];
     return {svg:svgPlot({title:runName(c.run),x:extent(pts.map(r=>r.cqMean)),y:[0,Math.max(sopNum(SOP.replicates.maxSd)*1.3||0,...pts.map(r=>r.cqSd))*1.1],
       xlab:"Mean Cq",ylab:"SD of Cq",series,legend:legendFromMap(cm),
       hlines:SOP.graphs.showSdLimit?[{y:sopNum(SOP.replicates.maxSd),label:`SOP max SD ${SOP.replicates.maxSd}`,colour:"#b91c1c"}]:[]}),
@@ -5739,7 +5897,7 @@ const GRAPHS=[
     if(!scs.length)return {svg:svgMessage("No standards with a stored quantity in this run / target."),rows:[]};
     const cm=new Map(),series=[],texts=[];let ty=46;
     scs.forEach(sc=>{const col=catColour(cm,sc.target);
-      series.push({type:"points",colour:col,data:sc.points.map(p=>[p.x,p.y,`${p.well} ${p.sample} · ${p.conc} · Cq ${num(p.y,2)} · residual ${num(p.residual,3)}`])});
+      series.push({type:"points",colour:col,data:sc.points.map(p=>[p.x,p.y,graphHoverLabel(c.run,{well:p.well,sample:p.sample},`${sc.target} · ${p.conc} · Cq ${num(p.y,2)} · residual ${num(p.residual,3)}`)])});
       const xs=sc.points.map(p=>p.x),a=Math.min(...xs),b=Math.max(...xs);
       series.push({type:"line",colour:col,data:[[a,sc.intercept+sc.slope*a],[b,sc.intercept+sc.slope*b]]});
       const R=SOP.run,ok=sc.r2>=R.minR2&&sc.efficiency>=R.effMin&&sc.efficiency<=R.effMax&&sc.logs>=R.minLogs&&sc.monotonic;
@@ -5755,7 +5913,7 @@ const GRAPHS=[
     const ev=sopEvaluateAll()[c.ri];const rs=ev.rows.filter(r=>(r.spec.kind==="ic"||r.spec.kind==="reference")&&!r.ctrl&&r.role!=="Standard");
     if(!rs.length)return {svg:svgMessage("No target is marked as internal control or reference in the SOP (section 2)."),rows:[]};
     const cm=new Map(),samples=uniq(rs.map(r=>r.sample)),targets=uniq(rs.map(r=>r.target));
-    const series=targets.map(t=>({type:"points",colour:catColour(cm,t),r:4.5,data:rs.filter(r=>r.target===t).map(r=>[samples.indexOf(r.sample),Number.isFinite(r.cqMean)?r.cqMean:NaN,`${r.sample} · ${t} · ${num(r.cqMean,2)} · ${r.label}`])}));
+    const series=targets.map(t=>({type:"points",colour:catColour(cm,t),r:4.5,data:rs.filter(r=>r.target===t).map(r=>[samples.indexOf(r.sample),Number.isFinite(r.cqMean)?r.cqMean:NaN,graphHoverLabel(c.run,{well:r.wells&&r.wells[0]&&r.wells[0].well,sample:r.sample},`${t} · ${num(r.cqMean,2)} · ${r.label}`)])}));
     const med=byKey(rs,r=>r.target),bands=[],hl=[];
     med.forEach((list,t)=>{const v=list.map(r=>r.cqMean).filter(Number.isFinite).sort((a,b)=>a-b);if(!v.length)return;const m=v[Math.floor(v.length/2)];
       hl.push({y:m,label:`${t} median ${num(m,2)}`,colour:cm.get(t)});
@@ -5774,7 +5932,7 @@ const GRAPHS=[
     const n=Math.max(...ws.map(w=>w.curve.length)),cm=new Map(),rows=[];
     const pts=ws.map(w=>{const s=wellSignal(w.curve),r=sopOutcomeFor(c.run,w),o=r?r.outcome:"Not interpreted",q=sopCq(w);cm.set(sopLabel(o),sopColour(o));
       const y=c.level==="amplitude"?s.amplitude:s.end;rows.push({well:w.well,sample:w.sample,target:w.target,cq:Number.isFinite(q)?q:"",end_fluorescence:s.end,background:s.background,amplitude:s.amplitude,outcome:o});
-      return [Number.isFinite(q)?q:n+1,y,`${w.well} ${w.sample} · Cq ${num(q,2)} · ${num(y,1)} · ${sopLabel(o)}`,sopColour(o)];});
+      return [Number.isFinite(q)?q:n+1,y,graphHoverLabel(c.run,w,`Cq ${num(q,2)} · ${num(y,1)} · ${sopLabel(o)}`),sopColour(o)];});
     return {svg:svgPlot({title:`${runName(c.run)} — ${c.target||"all targets"}`,x:[Math.min(...pts.map(p=>p[0]))-1,n+2],y:extent(pts.map(p=>p[1])),
       xlab:`Stored Cq (undetected at ${n+1})`,ylab:c.level==="amplitude"?"Amplitude above background":"End-point fluorescence",
       series:[{type:"points",data:pts}],vlines:gCutLines(c.target,"x"),legend:legendFromMap(cm)}),rows};
@@ -5789,8 +5947,8 @@ const GRAPHS=[
     const keys=uniq(uniqItems.map(i=>i.key)),rows=[];
     const bg=[],end=[];
     uniqItems.forEach((i,k)=>{const s=wellSignal(i.w.curve),x=keys.indexOf(i.key),j=((k*29)%19-9)/60;
-      bg.push([x-0.18+j,s.background,`${i.w.well} background ${num(s.background,1)}${i.outside?" (outside analyses)":""}`,i.outside?"#f59e0b":"#60a5fa"]);
-      end.push([x+0.18+j,s.end,`${i.w.well} end ${num(s.end,1)}${i.outside?" (outside analyses)":""}`,i.outside?"#b45309":"#1d4ed8"]);
+      bg.push([x-0.18+j,s.background,graphHoverLabel(c.run,i.w,`background ${num(s.background,1)}${i.outside?" (outside analyses)":""}`),i.outside?"#f59e0b":"#60a5fa"]);
+      end.push([x+0.18+j,s.end,graphHoverLabel(c.run,i.w,`end ${num(s.end,1)}${i.outside?" (outside analyses)":""}`),i.outside?"#b45309":"#1d4ed8"]);
       rows.push({channel:i.key,well:i.w.well,sample:i.w.sample||"",outside_analyses:i.outside?"yes":"",background:s.background,end_fluorescence:s.end,amplitude:s.amplitude});});
     const all=bg.concat(end).map(p=>p[1]).filter(v=>v>0);
     return {svg:svgPlot({title:runName(c.run),x:[-0.6,keys.length-0.4],y:[Math.max(1e-3,Math.min(...all)*0.8),Math.max(...all)*1.3],ylog:true,
@@ -5829,7 +5987,7 @@ const GRAPHS=[
     const ws=(c.run.wells||[]).filter(w=>w.eds&&Number.isFinite(w.eds.ctRecalc)&&Number.isFinite(sopCq(w)));
     if(!ws.length)return {svg:svgMessage("No re-derived Ct (QuantStudio files only)."),rows:[]};
     const cm=new Map();
-    const series=[{type:"points",data:ws.map(w=>[sopCq(w),sopCq(w)-w.eds.ctRecalc,`${w.well} ${w.sample} · ${w.target} · stored ${num(sopCq(w),3)} · re-derived ${num(w.eds.ctRecalc,3)}`,catColour(cm,w.target)])}];
+    const series=[{type:"points",data:ws.map(w=>[sopCq(w),sopCq(w)-w.eds.ctRecalc,graphHoverLabel(c.run,w,`${w.target} · stored ${num(sopCq(w),3)} · re-derived ${num(w.eds.ctRecalc,3)}`),catColour(cm,w.target)])}];
     return {svg:svgPlot({title:runName(c.run),x:extent(ws.map(sopCq)),y:extent(ws.map(w=>sopCq(w)-w.eds.ctRecalc).concat([-0.3,0.3])),xlab:"Stored Ct",ylab:"Stored − re-derived Ct",series,
       hlines:[{y:0.2,label:"+0.2",colour:"#b91c1c"},{y:-0.2,label:"−0.2",colour:"#b91c1c"},{y:0,label:"",colour:"#9ca3af",dash:"2 3"}],legend:legendFromMap(cm)}),
       rows:ws.map(w=>({well:w.well,sample:w.sample,target:w.target,stored_ct:sopCq(w),rederived_ct:w.eds.ctRecalc,difference:sopCq(w)-w.eds.ctRecalc,threshold:w.eds.threshold}))};
@@ -5904,7 +6062,7 @@ const GRAPHS=[
     if(!pts.some(p=>Number.isFinite(p.r.cqMean)))return {svg:svgMessage(`${ctrl.name}${c.target?" · "+c.target:""}: no Cq in any of the ${pts.length} control result(s) in ${uniq(pts.map(p=>p.i)).length} run(s)${ctrl.expect==="negative"?" — as expected for a negative control":""}. Choose a positive control to see a Levey-Jennings chart.`),
       rows:pts.map(p=>({experiment:runName(p.e.run),sample:p.r.sample,target:p.r.target,cq_mean:p.r.cqMean,detected:p.r.det,n:p.r.n,outcome:p.r.outcome}))};
     const cm=new Map(),series=[],det=pts.filter(p=>Number.isFinite(p.r.cqMean));
-    byKey(pts,p=>p.r.target).forEach((ps,t)=>series.push({type:"points",colour:catColour(cm,t),r:4.5,data:ps.map(p=>[p.i,Number.isFinite(p.r.cqMean)?p.r.cqMean:NaN,`${runName(p.e.run)} · ${p.r.sample} · ${t} · ${num(p.r.cqMean,2)} · ${p.r.label}`])}));
+    byKey(pts,p=>p.r.target).forEach((ps,t)=>series.push({type:"points",colour:catColour(cm,t),r:4.5,data:ps.map(p=>[p.i,Number.isFinite(p.r.cqMean)?p.r.cqMean:NaN,graphHoverLabel(p.e.run,{well:p.r.wells&&p.r.wells[0]&&p.r.wells[0].well,sample:p.r.sample},`${t} · ${num(p.r.cqMean,2)} · ${p.r.label}`)])}));
     byKey(det,p=>`${p.r.target}|${p.r.sample}|${ccInstrumentKey(p.e.run)}|${ccProtocolKey(p.e.run)}`).forEach((ps,t)=>series.push({type:"line",colour:cm.get(t),width:1,opacity:0.5,data:ps.map(p=>[p.i,p.r.cqMean])}));
     const v=det.map(p=>p.r.cqMean),m=mean(v),s=sd(v),hl=[];
     const lo=sopNum(ctrl.cqLo),hi=sopNum(ctrl.cqHi),bands=[];
@@ -5969,6 +6127,86 @@ function graphContext(){
   return {g,ri,run:RUNS[ri],target:$("#g-target").value,metric:$("#g-metric").value,signal:$("#g-signal").value,
     log:$("#g-log").checked,colourby:$("#g-colourby").value,level:$("#g-level").value,control:$("#g-control").value};
 }
+function graphAnalysisControl(w){
+  const name=String(w&&w.sample||"");
+  const role=String(w&&w.role||"");
+  const byRole=/^(NTC|Blank|Negative control)$/i.test(role);
+  const byName=/\b(NTC|no\s*template|blank|H2O|water)\b/i.test(name);
+  return byRole||byName;
+}
+function graphAnalysisStats(curve){
+  const v=(curve||[]).map(Number).filter(Number.isFinite);
+  if(v.length<5)return null;
+  const k=Math.max(3,Math.floor(v.length*.2));
+  const baseValues=v.slice(0,k);
+  const first=mean(baseValues),last=mean(v.slice(-k));
+  const baselineSd=sd(baseValues);
+  const diffs=v.slice(1).map((x,i)=>x-v[i]).filter(Number.isFinite);
+  const maxSlope=diffs.length?Math.max(...diffs):NaN;
+  const maxSlopeCycle=diffs.length?diffs.indexOf(maxSlope)+2:NaN;
+  const curvature=diffs.slice(1).map((x,i)=>x-diffs[i]).filter(Number.isFinite);
+  const maxCurvature=curvature.length?Math.max(...curvature):NaN;
+  const maxCurvatureCycle=curvature.length?curvature.indexOf(maxCurvature)+3:NaN;
+  const tailK=Math.max(5,Math.floor(v.length*.25));
+  const tailBase=mean(v.slice(Math.max(0,v.length-2*tailK),Math.max(0,v.length-tailK)));
+  const tailDiffs=v.slice(Math.max(1,v.length-tailK)).map((x,i)=>x-v[Math.max(0,v.length-tailK)-1+i]).filter(Number.isFinite);
+  return {n:v.length,baseline:first,baselineSd,late:last,lateDelta:last-first,amplitude:Math.max(...v)-Math.min(...v),
+    risingFraction:diffs.length?diffs.filter(x=>x>0).length/diffs.length:0,
+    maxSlope,maxSlopeCycle,maxCurvature,maxCurvatureCycle,
+    terminalDelta:last-tailBase,terminalRisingFraction:tailDiffs.length?tailDiffs.filter(x=>x>0).length/tailDiffs.length:0};
+}
+function graphAnalysisRows(run,targetKey,sampleName){
+  if(!run)return [];
+  const selectedKey=String(targetKey||"");
+  const wells=(run.wells||[]).filter(w=>{
+    if(!w||!Array.isArray(w.curve)||!Number.isFinite(Number(w.channel)))return false;
+    if(sampleName&&String(w.sample||"")!==String(sampleName))return false;
+    if(!selectedKey||selectedKey===ORPHAN_CURVE_KEY)return true;
+    return [w.analysisUid,w.analysis,w.target].some(v=>String(v||"")===selectedKey);
+  });
+  const byChannel=new Map();
+  wells.forEach(w=>{const k=String(Number(w.channel));if(!byChannel.has(k))byChannel.set(k,[]);byChannel.get(k).push({w,s:graphAnalysisStats(w.curve)});});
+  const out=[];
+  byChannel.forEach((items,k)=>{
+    const baselines=items.map(x=>x.s&&x.s.baseline).filter(Number.isFinite).sort((a,b)=>a-b);
+    const baselineMedian=baselines.length?median(baselines):NaN;
+    const deviations=baselines.map(x=>Math.abs(x-baselineMedian)).sort((a,b)=>a-b);
+    const baselineMad=deviations.length?median(deviations):0;
+    const baselineLimit=baselineMedian+Math.max(10,3*1.4826*baselineMad);
+    const posAmps=items.filter(x=>x.s&&((/positive/i.test(String(x.w.call||"")))||Number(x.w.CpRaw)>0)).map(x=>x.s.amplitude).filter(Number.isFinite).sort((a,b)=>a-b);
+    const referenceAmplitude=posAmps.length?median(posAmps):NaN;
+    items.filter(x=>graphAnalysisControl(x.w)).forEach(({w,s})=>{
+      if(!s)return;
+      const signalFloor=Math.max(3,Number.isFinite(referenceAmplitude)?referenceAmplitude*.05:0);
+      /* Match the forensic rising-curve rule and also catch a monotone terminal rise:
+         a late segment can be meaningful even when early baseline noise lowers the whole-run fraction. */
+      const wholeRunRise=s.lateDelta>=.45*s.amplitude&&s.risingFraction>=.55;
+      const terminalRise=s.terminalDelta>=Math.max(10,.25*s.amplitude)&&s.terminalRisingFraction>=.8;
+      const lateRise=s.amplitude>=signalFloor&&(wholeRunRise||terminalRise);
+      const highBaseline=Number.isFinite(baselineMedian)&&s.baseline>baselineLimit&&s.baseline-baselineMedian>=10;
+      if(!lateRise&&!highBaseline)return;
+      const hasAnswer=resultAnswers(w);
+      const assessment=lateRise
+        ? `Late rising trace${hasAnswer?" with a stored answer":" without a same-channel Cq/no-crossing answer"}`
+        : "High raw baseline relative to wells on the same channel";
+      out.push({well:w.well||"",sample:w.sample||"",target:w.target||w.analysis||"",channel:w.channel,
+        baseline:s.baseline,baseline_sd:s.baselineSd,reference_baseline:baselineMedian,late_delta:s.lateDelta,terminal_delta:s.terminalDelta,amplitude:s.amplitude,curve:w.curve,
+        max_slope:s.maxSlope,max_slope_cycle:s.maxSlopeCycle,max_curvature:s.maxCurvature,max_curvature_cycle:s.maxCurvatureCycle,
+        rising_fraction:s.risingFraction,terminal_rising_fraction:s.terminalRisingFraction,stored_call:w.call||"",assessment,
+        severity:lateRise?"error":"review",lateRise,highBaseline});
+    });
+  });
+  return out;
+}
+function graphAnalysisMarkup(run,c,targetKey,sampleName,signalName){
+  if(!run)return '<p class="hint">Load an experiment to analyse its stored curves.</p>';
+  const rows=graphAnalysisRows(run,targetKey,sampleName);
+  const title=`${runName(run)} · ${c&&c.g?c.g.title:"selected graph"}${c&&c.target?` · ${c.target}`:""}${sampleName?` · ${sampleName}`:""}${signalName?` · ${signalName}`:""}`;
+  const findings=rows.map(r=>`<div class="graph-finding ${r.severity}"><b>${esc(r.severity==="error"?"Error — review required":"Review — baseline comparison")}: ${esc(r.well)} ${esc(r.sample)}</b><div>${esc(r.assessment)} for ${esc(r.target||"unnamed target")} (channel ${esc(String(r.channel))}). Baseline ${esc(num(r.baseline,1))}; ground-noise SD ${esc(num(r.baseline_sd,1))}; peak slope ${esc(num(r.max_slope,1))} at cycle ${esc(num(r.max_slope_cycle,0))}; peak curvature ${esc(num(r.max_curvature,1))} at cycle ${esc(num(r.max_curvature_cycle,0))}; same-channel median ${esc(num(r.reference_baseline,1))}; late change ${esc(num(r.late_delta,1))}; terminal change ${esc(num(r.terminal_delta,1))}; amplitude ${esc(num(r.amplitude,1))}; rising fraction ${esc(num(r.rising_fraction*100,0))}%.</div><div class="hint">Raw fluorescence height alone is not an amplification call. Compare the stored curve with ΔRn/threshold, neighbouring wells, melt or endpoint evidence, and the laboratory control rule.</div></div>`).join("");
+  const tableRows=rows.map(r=>({well:r.well,sample:r.sample,target:r.target,channel:r.channel,baseline:+r.baseline.toPrecision(6),ground_noise_sd:+r.baseline_sd.toPrecision(6),peak_slope:+r.max_slope.toPrecision(6),peak_slope_cycle:r.max_slope_cycle,peak_curvature:+r.max_curvature.toPrecision(6),peak_curvature_cycle:r.max_curvature_cycle,same_channel_median:+r.reference_baseline.toPrecision(6),late_change:+r.late_delta.toPrecision(6),terminal_change:+r.terminal_delta.toPrecision(6),amplitude:+r.amplitude.toPrecision(6),rising_fraction:+(r.rising_fraction*100).toPrecision(5),terminal_rising_fraction:+(r.terminal_rising_fraction*100).toPrecision(5),stored_call:r.stored_call,assessment:r.assessment}));
+  const tableHtml=tableRows.length?`<details><summary>Numbers behind these findings (${tableRows.length})</summary><div class="scroll" style="max-height:280px">${table(Object.keys(tableRows[0]).map(k=>({key:k,label:k,n:typeof tableRows[0][k]==="number"})),tableRows)}</div></details>`:'<p class="hint">No NTC/blank baseline or late-rise finding was triggered for this selection.</p>';
+  return `<p><b>Selected context:</b> ${esc(title)}</p>${findings?`<div class="graph-analysis-grid">${findings}</div>`:""}${tableHtml}`;
+}
 function renderGraphs(){
   const box=$("#g-chart");if(!box)return;
   ixPurge();   /* release the previous figures before their nodes are replaced */
@@ -5983,7 +6221,7 @@ function renderGraphs(){
   $("#g-run-wrap").style.display=g.scope==="run"?"":"none";
   const tgt=g.scope==="all"?uniq(RUNS.flatMap(r=>(r.wells||[]).map(w=>w.target||w.analysis)).filter(Boolean)):gTargets(c0.run||{});
   setSelectItems($("#g-target"),[{value:"",label:g.id==="x_control"||g.id==="plate"||g.id==="stdcurve"||g.id==="endpoint"?"All targets":"All targets"},...tgt.map(t=>({value:t,label:t}))]);
-  if(g.id==="curves"&&!$("#g-target").value&&tgt.length&&!GRAPH_STATE.userTarget)$("#g-target").value=tgt[0];
+  /* Do not silently choose the first target: an empty target means all targets. */
   setSelectItems($("#g-control"),SOP.controls.map((x,i)=>({value:i,label:x.name||x.match})));
   const show=(id,on)=>{$(id).style.display=on?"":"none";};
   show("#g-target-wrap",opts.includes("target"));show("#g-metric-wrap",opts.includes("metric"));
@@ -6023,7 +6261,7 @@ function graphAllZip(){
       ?SOP.controls.map((x,i)=>({i,x})).filter(({x})=>x.expect==="positive")
       :[{i:0,x:null}];
     targets.forEach(t=>controls.forEach(({i,x})=>{try{
-      const c={g,ri,run:RUNS[ri],target:g.id==="curves"?(gTargets(RUNS[ri])[0]||""):t,metric:"outcome",signal:"stored",log:false,colourby:"outcome",level:"end",control:String(i)};
+      const c={g,ri,run:RUNS[ri],target:t,metric:"outcome",signal:"stored",log:false,colourby:"outcome",level:"end",control:String(i)};
       const suffix=x?"_"+safeName(x.name||x.match||String(i)):"";
       const res=g.render(c);const base=(g.scope==="run"?"run_":"all_runs_")+g.id+suffix;
       entries.push({name:base+".svg",data:res.svg});
@@ -6054,7 +6292,7 @@ const DIRTY=new Set();
 function markDirty(...names){names.forEach(n=>DIRTY.add(n));}
 function currentTab(){const b=document.querySelector("nav button.on");return b?b.dataset.tab:"load";}
 function currentReviewSheet(){const b=document.querySelector("#review-tabs button.on");return b?b.dataset.review:"overview";}
-const REVIEW_RENDERERS={overview:()=>renderReviewOverview(),plate:()=>renderReviewPlate(),compare:()=>renderReviewComparison(),
+const REVIEW_RENDERERS={overview:()=>{renderReviewOverview();renderIssueOverview();},plate:()=>renderReviewPlate(),compare:()=>renderReviewComparison(),
   statistics:()=>renderReviewStatistics(),controls:()=>renderReviewControls(),runs:()=>renderReviewRuns(),
   curves:()=>renderReviewCurves(),rising:()=>renderReviewRising(),instrument:()=>renderReviewInstrument()};
 function renderTab(name){
@@ -8194,6 +8432,8 @@ function mgViewReview(){
     actions:[{key:"3",label:"Open the review view on the page",cmd:"open page review"}]})];
   const err=events.filter(e=>e.severity==="error").length,rev=events.filter(e=>e.severity==="review").length;
   const by=new Map();events.forEach(e=>{const k=e.area||"other";const l=by.get(k)||[];l.push(e);by.set(k,l);});
+  const issueRows=mgSafe(()=>issueOverviewRows(issueSelectedRunIndexes()),[]),issueBy=new Map();
+  issueRows.forEach(e=>{const k=e.category||"Other";const l=issueBy.get(k)||[];l.push(e);issueBy.set(k,l);});
   const out=[mgIt({kind:"summary",sev:err?"alarm":rev?"watch":"ok",pict:MG_PICT.summary,kindWord:"review",code:"QC",
     title:"Quality and forensic review",value:String(events.length),unit:"findings",
     limits:`${err} error · ${rev} review · ${by.size} area(s)`,
@@ -8202,6 +8442,11 @@ function mgViewReview(){
     evidence:[...by.keys()].slice(0,5).join(" · "),
     rows:[...by].map(([a,l])=>[a,`${l.filter(e=>e.severity==="error").length} error · ${l.filter(e=>e.severity==="review").length} review`]),
     actions:[{key:"3",label:"Open the review view on the page",cmd:"open page review"}]})];
+  if(issueBy.size)out.push(mgIt({kind:"summary",sev:issueRows.some(e=>e.severity==="error")?"alarm":"watch",pict:MG_PICT.finding,kindWord:"grouped problems",code:"CAT",
+    title:"Problems grouped by category",value:String(issueRows.length),unit:"finding(s)",limits:`${issueBy.size} category(ies) · ${issueSelectedRunIndexes().length} experiment(s)`,
+    state:"The page can reconstruct the stored fluorescence curves for the amplification-related rows.",
+    rows:[...issueBy].sort((a,b)=>b[1].length-a[1].length).map(([k,l])=>[k,`${l.length} finding(s) · ${l.filter(e=>e.severity==="error").length} error · ${new Set(l.map(e=>e.experiment)).size} experiment(s)`]),
+    actions:[{key:"3",label:"Open grouped problem curves",cmd:"open page review"}]}));
   const rank=l=>l.some(e=>e.severity==="error")?0:1;
   [...by].sort((a,b)=>rank(a[1])-rank(b[1])).forEach(([area,list])=>{
     const e0=list.find(e=>e.severity==="error")||list[0];
@@ -9077,6 +9322,24 @@ function exportCatalogue(){
   if(bundle){items.splice(items.indexOf(bundle),1);items.push(bundle);}
   return items.map(it=>Object.assign({},it,{run:()=>withExportNames(it.run)}));
 }
+/* One browser download for a multi-file export prevents silent download throttling.
+   Keep one-file exports unchanged and retain duplicate names with numbered suffixes. */
+function downloadExportFiles(kind,files){
+  if(!files.length)throw new Error("No files were generated for "+kind);
+  if(files.length===1){const f=files[0];download(f.name,f.data,f.mime);return;}
+  const used=new Set(),entries=[];
+  files.forEach(f=>{
+    const original=String(f.name),dot=original.lastIndexOf("."),stem=dot>0?original.slice(0,dot):original,ext=dot>0?original.slice(dot):"";
+    let name=original,n=2;while(used.has(name))name=stem+"_"+(n++)+ext;
+    used.add(name);entries.push({name,data:f.data});
+  });
+  const manifest=entries.map(e=>{const bytes=bytesFrom(e.data);return {name:e.name,bytes:bytes.length,sha256:sha256Hex(bytes)};});
+  // Reserve metadata names so they cannot collide with exported data filenames.
+  let manifestName="export_manifest.json";while(used.has(manifestName))manifestName="_"+manifestName;
+  entries.push({name:manifestName,data:JSON.stringify({format:kind,fileCount:manifest.length,files:manifest},null,2)+"\n"});
+  download(baseName()+"_"+kind+".zip",makeStoredZip(entries),"application/zip");
+}
+
 function exportCatalogueCore(){
   const one=RUNS.length===1?RUNS[0]:null;
   const items=[];
@@ -9092,21 +9355,21 @@ function exportCatalogueCore(){
   });
   items.push({
     title:"RDES table (TSV)",
-    note:"Stored Cq beside the full amplification curve, one row per cycle and one file per analysis. The long-format table for scripts that expect tidy data.",
+    note:"Stored Cq beside the full amplification curve, one row per cycle and one file per analysis. The long-format table for scripts that expect tidy data. Multiple files are downloaded together as one ZIP with a checksum manifest.",
     ready:()=>RUNS.some(r=>r.wells.some(w=>w.curve)),
-    run:()=>RUNS.forEach(r=>makeRDESTables(r).forEach(t=>download(t.file,t.data,"text/tab-separated-values")))
+    run:()=>downloadExportFiles("rdes",RUNS.flatMap(r=>makeRDESTables(r).map(t=>({name:t.file,data:t.data,mime:"text/tab-separated-values"}))))
   });
   items.push({
     title:"RDML 1.4 — for LinRegPCR",
-    note:"Version 1.4 with every dye declared. rdmlpython refuses LinRegPCR below 1.4, and raises KeyError on a target whose dye was never declared; both were checked by running it.",
+    note:"Version 1.4 with every dye declared. rdmlpython refuses LinRegPCR below 1.4, and raises KeyError on a target whose dye was never declared; both were checked by running it. Multiple runs are downloaded together as one ZIP with a checksum manifest.",
     ready:()=>RUNS.some(r=>r.wells.some(w=>w.curve)),
-    run:()=>RUNS.forEach(r=>download(safeName(r.meta.name||r.file)+".rdml",makeRDML(r),"application/zip"))
+    run:()=>downloadExportFiles("rdml",RUNS.map(r=>({name:safeName(r.meta.name||r.file)+".rdml",data:makeRDML(r),mime:"application/zip"})))
   });
   items.push({
     title:"qpcR curve table (CSV, wide)",
-    note:"One file per analysis and one column per well, with the first column named Cycles exactly as pcrbatch() demands. Column names carry target and sample so replicate groups form with one sub().",
+    note:"One file per analysis and one column per well, with the first column named Cycles exactly as pcrbatch() demands. Column names carry target and sample so replicate groups form with one sub(). Multiple files are downloaded together as one ZIP with a checksum manifest.",
     ready:()=>RUNS.some(r=>r.wells.some(w=>w.curve)),
-    run:()=>RUNS.forEach(r=>makeQpcrWideTables(r).forEach(t=>download(t.file,t.data,"text/csv")))
+    run:()=>downloadExportFiles("qpcr",RUNS.flatMap(r=>makeQpcrWideTables(r).map(t=>({name:t.file,data:t.data,mime:"text/csv"}))))
   });
   items.push({
     title:"Melting peaks (CSV)",
@@ -9330,7 +9593,8 @@ const CONTROL_CATEGORY_OPTIONS=["LOD control","Positive control","Calibrator","S
   "Negative calibrator","No-template control","Extraction blank","Blank","Internal control",
   "Inhibition control","Spike","External reference","Other control"];
 const REVIEW_STATE={plateRun:0,plateTarget:"",curveRun:0,curveTarget:"",instrumentRun:0,
-  comparison:[],statistics:[],forensic:[],controlSeries:[],controlCategoryOverrides:{}};
+  comparison:[],statistics:[],forensic:[],controlSeries:[],controlCategoryOverrides:{},
+  issueRuns:null,issueCategory:"all"};
 
 function runName(run){return (run&&run.meta&&run.meta.name)||run.file||"Experiment";}
 function shortDate(value){
@@ -9587,7 +9851,13 @@ function orphanCurveCandidates(run){
     const first=mean(e.curve.slice(0,k)),last=mean(e.curve.slice(-k));
     const diffs=e.curve.slice(1).map((v,i)=>Number(v)-Number(e.curve[i])).filter(Number.isFinite);
     const risingFraction=diffs.length?diffs.filter(d=>d>0).length/diffs.length:0;
-    if(!(last-first>=.45*e.amplitude&&risingFraction>=.55))return;
+    const tailK=Math.max(5,Math.floor(e.curve.length*.25));
+    const tailBase=mean(e.curve.slice(Math.max(0,e.curve.length-2*tailK),Math.max(0,e.curve.length-tailK)));
+    const tailDiffs=e.curve.slice(Math.max(1,e.curve.length-tailK)).map((v,i)=>Number(v)-Number(e.curve[Math.max(0,e.curve.length-tailK)-1+i])).filter(Number.isFinite);
+    const terminalDelta=last-tailBase,terminalRisingFraction=tailDiffs.length?tailDiffs.filter(d=>d>0).length/tailDiffs.length:0;
+    const wholeRunRise=last-first>=.45*e.amplitude&&risingFraction>=.55;
+    const terminalRise=terminalDelta>=Math.max(10,.25*e.amplitude)&&terminalRisingFraction>=.8;
+    if(!(wholeRunRise||terminalRise))return;
     const rec=(run.plate||{})[pos]||{},chRec=(rec.channels||{})[channel]||{};
     const instrRole=TYPE_TO_ROLE[chRec.sampleType]||"",nameRole=roleFromName(rec.name||"");
     const refine=instrRole&&nameRole!=="Unknown"&&NEGATIVE_FAMILY.includes(instrRole)
@@ -9614,7 +9884,7 @@ function orphanCurveCandidates(run){
       filterComb:Number.isFinite(chDef.ex)?`${chDef.ex}-${chDef.em??""}`:"",
       instrType:chRec.sampleType||"",instrRole,role:role||"Unknown",call:"Not analysed",
       curve:e.curve,amplitude:e.amplitude,relative:Number.isFinite(ref)&&ref>0?e.amplitude/ref:null,
-      referenceAmplitude:Number.isFinite(ref)?ref:null,noiseFloor,riseFraction:risingFraction,
+      referenceAmplitude:Number.isFinite(ref)?ref:null,noiseFloor,riseFraction:risingFraction,terminalDelta,terminalRiseFraction:terminalRisingFraction,
       cls,severity:blank?"error":"review",blankRole:blank,
       sameChannelCq:null,otherCq:withCq.length?withCq[0].cq:null,
       otherCqs:withCq.map(o=>o.cq),
@@ -9640,6 +9910,7 @@ function reviewOrphanWells(){
 }
 function reviewForensicEventsCoreUncached(){
   const all=[];
+  const colourAction=()=>String((SOP&&SOP.run&&SOP.run.colourCompensation)||"review");
   RUNS.forEach(run=>{
     const exp=runName(run),events=[],push=(severity,area,finding,evidence)=>
       events.push({experiment:exp,severity,area,finding,evidence:evidence||""});
@@ -9678,10 +9949,12 @@ function reviewForensicEventsCoreUncached(){
     if(ambiguousMelt.length)push("review","Melting curve",
       `${ambiguousMelt.length} Tm result(s) have an ambiguous raw melting program`,
       "Stored Tm peaks are preserved; the raw melt trace is omitted rather than merging programs");
-    if(active.length>1&&!(run.analyses||[]).some(a=>a.cccEnabled))
+    if(active.length>1&&colourAction()!=="off"&&!(run.analyses||[]).some(a=>a.cccEnabled))
       push("review","Detection format",`${active.length} active channels and colour compensation is not recorded as applied`,
         active.map(c=>`${c.name||"channel"} ${c.ex}-${c.em}`).join(", "));
-    integrityEvents(run,push);
+    /* File-integrity mismatches belong to the dedicated File integrity tab.
+       They must not be duplicated as assay/QC findings in the general review
+       count or used to make every sample look like an assay error. */
     if(run.eds)edsEvents(run,push);
     /* Inspect this run directly. Filtering the global orphan table by experiment
        name duplicated findings when two imported files shared the same title. */
@@ -10025,6 +10298,64 @@ function renderIntegrity(){
   };
 }
 
+const ISSUE_CATEGORY_ORDER=["Controls / contamination","Amplification / curve shape","SOP / result interpretation","Timing / traceability","File / structure","Other"];
+function issueCategoryOf(e){
+  const text=(`${e&&e.area||""} ${e&&e.finding||""} ${e&&e.evidence||""}`).toLowerCase();
+  if(/contaminat|assay control|no-template|ntc|blank|positive control|calibrator/.test(text))return "Controls / contamination";
+  if(/amplif|curve|rising|channel assignment|detection format|stored result|analysis membership|signal/.test(text))return "Amplification / curve shape";
+  if(/integrity|acquisition|sample role|file|archive|checksum|container/.test(text))return "File / structure";
+  if(/sop|stored call|uncertain|replicate|interpret/.test(text))return "SOP / result interpretation";
+  if(/timeline|traceability|batch|copied data|duplicate name/.test(text))return "Timing / traceability";
+  return "Other";
+}
+function issueSelectedRunIndexes(){
+  if(!Array.isArray(REVIEW_STATE.issueRuns))return RUNS.map((r,i)=>i);
+  return REVIEW_STATE.issueRuns.filter(i=>Number.isInteger(i)&&RUNS[i]);
+}
+function issueOverviewRows(indexes){
+  const selected=new Set(indexes),out=[];
+  const events=reviewEventsWithoutIntegrity();
+  events.forEach(e=>{
+    if(e.severity==="info")return;
+    const ri=RUNS.findIndex(r=>runName(r)===e.experiment);
+    if(ri<0||!selected.has(ri))return;
+    out.push({category:issueCategoryOf(e),severity:e.severity||"review",experiment:e.experiment,well:"",finding:e.finding||"",evidence:e.evidence||"",source:"forensic"});
+  });
+  indexes.forEach(ri=>{
+    const run=RUNS[ri];if(!run)return;
+    graphAnalysisRows(run).forEach(r=>out.push({category:"Amplification / curve shape",severity:r.severity||"review",experiment:runName(run),well:r.well||"",finding:`${r.assessment} for ${r.target||"unnamed target"}`,evidence:`baseline ${num(r.baseline,1)}; ground-noise SD ${num(r.baseline_sd,1)}; late change ${num(r.late_delta,1)}; terminal change ${num(r.terminal_delta,1)}; peak slope ${num(r.max_slope,1)} at cycle ${num(r.max_slope_cycle,0)}`,source:"curve",curve:r.curve,sample:r.sample||"",target:r.target||"",channel:r.channel,issueColour:r.severity==="error"?"#c0392b":"#d97706",storedCall:r.stored_call||""}));
+    orphanCurveCandidates(run).forEach(r=>out.push({category:"Amplification / curve shape",severity:r.severity||"review",experiment:runName(run),well:r.well||"",finding:r.finding||"Rising curve without a stored result",evidence:`${r.filterName||r.filterComb||"channel "+r.channel}; amplitude ${num(r.amplitude,1)}; terminal change ${num(r.terminalDelta,1)}`,source:"curve",curve:r.curve,sample:r.sample||"",target:r.target||"",channel:r.channel,issueColour:r.severity==="error"?"#c0392b":"#d97706",storedCall:r.call||""}));
+  });
+  const seen=new Set();return out.filter(r=>{const k=[r.category,r.severity,r.experiment,r.well,r.finding,r.source].join("|");if(seen.has(k))return false;seen.add(k);return true;});
+}
+function issueCurveRows(rows){
+  const seen=new Set();return rows.filter(r=>r.source==="curve"&&Array.isArray(r.curve)&&r.curve.length>4).sort((a,b)=>{
+    const sa=a.severity==="error"?0:1,sb=b.severity==="error"?0:1;return sa-sb||String(a.experiment).localeCompare(String(b.experiment))||String(a.well).localeCompare(String(b.well));
+  }).filter(r=>{const k=`${r.experiment}|${r.well}|${r.channel}|${r.target}`;if(seen.has(k))return false;seen.add(k);return true;}).slice(0,120).map(r=>({curve:r.curve,experiment:r.experiment,well:r.well,sample:r.sample,target:r.target,role:"Issue",call:r.storedCall,issueColour:r.issueColour}));
+}
+function renderIssueOverview(){
+  const box=$("#issue-overview");if(!box)return;
+  purgeCurvePlots();
+  if(!RUNS.length){box.innerHTML=emptyReview("Load two or more experiments to compare grouped problems.");return;}
+  const indexes=issueSelectedRunIndexes(),rows=issueOverviewRows(indexes),cat=REVIEW_STATE.issueCategory||"all",shown=cat==="all"?rows:rows.filter(r=>r.category===cat);
+  const counts=new Map();rows.forEach(r=>{const c=counts.get(r.category)||{n:0,error:0,review:0,runs:new Set()};c.n++;if(r.severity==="error")c.error++;else if(r.severity==="review")c.review++;c.runs.add(r.experiment);counts.set(r.category,c);});
+  const runPicker=RUNS.map((r,i)=>`<label><input type="checkbox" data-issue-run="${i}"${indexes.includes(i)?" checked":""}>${esc(runName(r))}</label>`).join("");
+  const groups=[...counts.entries()].sort((a,b)=>ISSUE_CATEGORY_ORDER.indexOf(a[0])-ISSUE_CATEGORY_ORDER.indexOf(b[0]));
+  const tableRows=shown.slice(0,500).map(r=>({category:r.category,severity:r.severity,experiment:r.experiment,well:r.well||"",finding:r.finding,evidence:r.evidence}));
+  box.innerHTML=`<div class="toolbar"><label>Problem category<select id="issue-category"><option value="all">All categories</option>${ISSUE_CATEGORY_ORDER.filter(c=>counts.has(c)).map(c=>`<option value="${esc(c)}"${cat===c?" selected":""}>${esc(c)}</option>`).join("")}</select></label><button class="ghost" id="issue-all-runs">Select all experiments</button><button class="ghost" id="issue-clear-runs">Clear experiments</button><button class="ghost" id="dl-issue-overview">Download grouped problems (CSV)</button></div><div class="issue-run-picker" aria-label="Experiments included">${runPicker}</div><div class="issue-category-grid">${groups.map(([name,c])=>`<div class="issue-category ${c.error?"bad":""}"><b>${c.n}</b> ${esc(name)}<small>${c.error} error · ${c.review} review · ${c.runs.size} experiment(s)</small></div>`).join("")||'<p class="hint">No review or error finding was raised for the selected experiments.</p>'}</div><p class="hint">${shown.length} finding(s) shown for ${indexes.length} selected experiment(s). The chart below uses the stored cycle-by-cycle fluorescence for curve findings; red marks errors and amber marks review items.</p>${shown.length?`<div class="scroll">${table([{key:"category",label:"Category"},{key:"severity",label:"Level"},{key:"experiment",label:"Experiment"},{key:"well",label:"Well"},{key:"finding",label:"Problem"},{key:"evidence",label:"Evidence"}],tableRows)}</div>`:""}<div class="issue-chart-wrap"><h4>Reconstructed problem curves</h4><div class="issue-legend"><span><i style="background:#c0392b"></i>error-level curve</span><span><i style="background:#d97706"></i>review-level curve</span><span>stored fluorescence by cycle; endpoint marker shows the final cycle</span></div><div id="issue-overview-chart" class="curve-plot-host"></div><div class="tip" id="issue-chart-tip"></div><p class="hint" id="issue-chart-note"></p></div>`;
+  $$("#issue-overview input[data-issue-run]").forEach(cb=>cb.onchange=()=>{REVIEW_STATE.issueRuns=$$("#issue-overview input[data-issue-run]:checked").map(x=>Number(x.dataset.issueRun));renderIssueOverview();});
+  const select=$("#issue-category");if(select)select.onchange=()=>{REVIEW_STATE.issueCategory=select.value;renderIssueOverview();};
+  $("#issue-all-runs").onclick=()=>{REVIEW_STATE.issueRuns=null;renderIssueOverview();};
+  $("#issue-clear-runs").onclick=()=>{REVIEW_STATE.issueRuns=[];REVIEW_STATE.issueCategory="all";renderIssueOverview();};
+  const csvButton=$("#dl-issue-overview");if(csvButton)csvButton.onclick=()=>{if(tableRows.length)download(baseName()+"_grouped_problem_overview.csv",toCSV(Object.keys(tableRows[0]).map(k=>({key:k,label:k})),tableRows),"text/csv");};
+  const curves=issueCurveRows(shown),chart=$("#issue-overview-chart");
+  if(curves.length){
+    const interactive=mountInteractiveCurvePlot(chart,curves,{height:420,label:w=>graphHoverLabel(w.experiment,w,w.target||""),colour:w=>w.issueColour||"#64748b",ylabel:"Stored fluorescence"});
+    if(!interactive){chart.innerHTML='<canvas width="1000" height="420"></canvas>';drawAmplificationCurves(chart.firstElementChild,curves,"well",false,{ylabel:"Stored fluorescence"});bindCurveTip(chart.firstElementChild,$("#issue-chart-tip"));}
+    $("#issue-chart-note").textContent=`${curves.length} problem curve(s) drawn (up to 120 shown); hover for cycle values, use the mouse wheel to zoom, drag to pan, and Reset view to restore the axes. All finding rows remain in the table and CSV.`;
+  } else{$("#issue-chart-note").textContent="No reconstructable stored curve is attached to the selected findings.";}
+}
+
 function renderReviewOverview(){
   const box=$("#review-overview");if(!box)return;
   if(!RUNS.length){box.innerHTML=emptyReview();return;}
@@ -10304,6 +10635,7 @@ let CURVE_KEY_COLOURS=new Map();
 const CALL_LINE={Positive:"#c0392b",Negative:"#1f6feb",Uncertain:"#d97706",NotCalculated:"#5b6672","Not analysed":"#6f42c1"};
 function curveKey(w,mode){if(mode==="sop"){const r=sopOutcomeFor(runAt("#curve-run",0),w);return r?r.label:"Not interpreted";}return mode==="call"?w.call:mode==="sample"?w.sample:mode==="target"?w.target:mode==="well"?w.well:w.role;}
 function curveColour(w,mode){
+  if(w&&w.issueColour)return w.issueColour;
   const key=curveKey(w,mode);
   if(mode==="sop"){const r=sopOutcomeFor(runAt("#curve-run",0),w);return r?r.colour:"#94a3b8";}
   if(mode==="target"||mode==="well"||mode==="sample"){
@@ -10317,17 +10649,33 @@ function curveColour(w,mode){
   if(mode==="call")return CALL_LINE[key]||hashColour(key||w.well);
   return REVIEW_COLOURS[key]||hashColour(key||w.well);
 }
+function renderCurveGraphAnalysis(run,targetKey){
+  const el=$("#curve-analysis");if(!el)return;
+  if(!run){el.innerHTML=graphAnalysisMarkup(null,null,"","");return;}
+  const targetSel=$("#curve-target"),sampleSel=$("#curve-sample"),signalSel=$("#curve-signal");
+  const targetLabel=targetSel&&targetSel.selectedIndex>=0?targetSel.options[targetSel.selectedIndex].textContent:"All analyses";
+  const signalLabel=signalSel&&signalSel.selectedIndex>=0?signalSel.options[signalSel.selectedIndex].textContent:"Stored curve (raw / Rn)";
+  el.innerHTML=graphAnalysisMarkup(run,{g:{title:"Amplification curves"},target:targetLabel},targetKey,sampleSel&&sampleSel.value,signalLabel);
+}
 function renderReviewCurves(){
   const box=$("#review-curves"),runSel=$("#curve-run"),targetSel=$("#curve-target");if(!box)return;
-  if(!RUNS.length){setSelectItems(runSel,[],null);setSelectItems(targetSel,[],null);box.innerHTML=emptyReview();return;}
+  purgeCurvePlots();
+  if(!RUNS.length){setSelectItems(runSel,[],null);setSelectItems(targetSel,[],null);box.innerHTML=emptyReview();renderCurveGraphAnalysis(null,"");return;}
   setSelectItems(runSel,RUNS.map((r,i)=>({value:i,label:runName(r)})),runSel.value);
   const run=runAt("#curve-run",0);
   setSelectItems(targetSel,analysisChoices(run),targetSel.value);
   setSelectItems($("#curve-sample"),[{value:"",label:"All samples"},...uniq((run.wells||[]).map(w=>w.sample).filter(Boolean)).map(x=>({value:x,label:x}))],$("#curve-sample").value);
   $("#curve-signal-wrap").style.display=run.eds?"":"none";
   $("#curve-thr").parentElement.parentElement.style.display=run.eds&&curveSignal(run)==="drn"?"":"none";
-  const rows=curveRowsSelected();
-  if(!rows.length){box.innerHTML=emptyReview("No decoded amplification curves match this selection.");return;}
+  const rows=curveRowsSelected().map(w=>Object.assign({experiment:runName(run)},w));
+  renderCurveGraphAnalysis(run,targetSel.value);
+  if(!rows.length){
+    const selected=selectedWells(run,targetSel.value),label=targetSel.options[targetSel.selectedIndex]?.textContent||"the selected analysis";
+    const message=selected.length
+      ? `${label} is present in the file, but no linked amplification curve was decoded for this selection. Stored results remain available in Results and the analysis data table.`
+      : "No decoded amplification curves match this selection.";
+    box.innerHTML=emptyReview(message);return;
+  }
   const mode=$("#curve-colour").value,legend=new Map();CURVE_KEY_COLOURS=new Map();
   rows.forEach(w=>{const key=curveKey(w,mode);
     if(!legend.has(key||"Unassigned"))legend.set(key||"Unassigned",curveColour(w,mode));});
@@ -10337,15 +10685,18 @@ function renderReviewCurves(){
       ${metricCard(rows.filter(w=>w.role&&w.role!=="Unknown").length,"control-role curves","")}
     </div><div class="legend">${[...legend].slice(0,24).map(([k,c])=>
       `<span><i style="background:${c}"></i>${esc(k)}</span>`).join("")}</div>
-    <div class="chart-wrap" style="position:relative"><canvas id="curve-chart" width="1000" height="420"></canvas><div class="tip" id="curve-tip"></div></div>
-    <p class="hint">The CSV contains every cycle of every selected curve, including curves hidden by overlap in the chart. Hover a line to identify it.</p>`;
+    <div class="chart-wrap" style="position:relative"><div id="curve-chart" class="curve-plot-host"></div><div class="tip" id="curve-tip"></div></div>
+    <p class="hint">Hover a line for its stored cycle value. Use the mouse wheel to zoom, drag to pan, and Reset view to restore the axes. The CSV contains every cycle of every selected curve.</p>`;
   const sig=curveSignal(run),hl=[];
   if(sig==="drn"&&$("#curve-thr").checked)uniq(rows.map(w=>w.target)).forEach(t=>{
     const d=run.eds.analysis.detectors[t];if(d&&Number.isFinite(d.threshold))hl.push({y:d.threshold,label:`${t} threshold`,
       colour:(run.eds.exp.detectors.find(x=>x.name===t)||{}).color||"#475569"});});
-  drawAmplificationCurves($("#curve-chart"),rows,mode,$("#curve-log").checked,{hlines:hl,
-    ylabel:{drn:"ΔRn (stored)",mc:"Multicomponent signal",raw:"Raw filter-set fluorescence",stored:run.eds?"Rn (stored)":""}[sig]});
-  bindCurveTip($("#curve-chart"),$("#curve-tip"));
+  const chart=$("#curve-chart"),ylabel={drn:"ΔRn (stored)",mc:"Multicomponent signal",raw:"Raw filter-set fluorescence",stored:run.eds?"Rn (stored)":""}[sig];
+  if(!mountInteractiveCurvePlot(chart,rows,{mode,normalize:false,log:$("#curve-log").checked,hlines:hl,ylabel,height:420,label:w=>graphHoverLabel(run,w,w.target||w.analysis||"")})){
+    chart.innerHTML='<canvas width="1000" height="420"></canvas>';
+    drawAmplificationCurves(chart.firstElementChild,rows,mode,$("#curve-log").checked,{hlines:hl,ylabel});
+    bindCurveTip(chart.firstElementChild,$("#curve-tip"));
+  }
 }
 function drawAmplificationCurves(canvas,rows,mode,logScale,opts){
   if(!canvas||!rows.length)return;
@@ -10366,6 +10717,7 @@ function drawAmplificationCurves(canvas,rows,mode,logScale,opts){
     ctx.strokeStyle=curveColour(w,mode);ctx.globalAlpha=controls.includes(w)?.95:.38;
     ctx.lineWidth=controls.includes(w)?1.8:1;ctx.beginPath();
     w.curve.forEach((v,i)=>{const x=X(i),y=Y(v);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});ctx.stroke();
+    if(w.issueColour){const v=w.curve[w.curve.length-1],x=X(w.curve.length-1),y=Y(v);ctx.fillStyle=w.issueColour;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();}
   });ctx.globalAlpha=1;
   ctx.textAlign="center";ctx.fillStyle="#334155";
   for(let i=0;i<=5;i++){const c=Math.round(1+(cycles-1)*i/5);ctx.fillText(String(c),X(c-1),H-B+17);}
@@ -10386,13 +10738,58 @@ function bindCurveTip(canvas,tip){
     h.rows.forEach(w=>w.curve.forEach((v,i)=>{const y=h.Y(v);if(!Number.isFinite(y))return;
       const d=(h.X(i)-mx)**2+(y-my)**2;if(d<bd){bd=d;best={w,i,v};}}));
     if(!best){tip.style.display="none";return;}
-    tip.innerHTML=`<b>${esc(best.w.well)} ${esc(best.w.sample||"")}</b> · ${esc(best.w.target||"")}<br>${esc(ui("Cycle"))} ${best.i+1} · ${esc(Number(best.v).toPrecision(6))}`
+    tip.innerHTML=`<b>${esc(graphHoverLabel(best.w.experiment||"",best.w,best.w.target||best.w.analysis||""))}</b><br>${esc(ui("Cycle"))} ${best.i+1} · ${esc(Number(best.v).toPrecision(6))}`
       +(Number.isFinite(best.w.CpRaw)?` · Cq ${num(best.w.CpRaw,2)}`:"");
     tip.style.display="block";
     const wrap=tip.parentElement,wr=wrap.getBoundingClientRect(),cx=e.clientX-wr.left+wrap.scrollLeft,cy=e.clientY-wr.top;
     tip.style.left=Math.min(cx+14,wrap.scrollWidth-tip.offsetWidth-4)+"px";tip.style.top=(cy+14)+"px";
   };
   canvas.onmouseleave=()=>{tip.style.display="none";};
+}
+/* Review charts use a self-contained canvas interaction layer so they remain
+   interactive when the single-file page is opened offline. Operators get
+   hover values, wheel zoom, drag-to-pan, and a reset-view button without an
+   external chart library. */
+const CURVE_PLOTS=[];
+function purgeCurvePlots(){while(CURVE_PLOTS.length){const el=CURVE_PLOTS.pop();try{if(el&&el._curveDispose)el._curveDispose();}catch(e){}}}
+function mountInteractiveCurvePlot(host,rows,opts){
+  if(!host||!rows.length)return false;
+  opts=opts||{};
+  const normalize=!!opts.normalize, colour=opts.colour||((w)=>curveColour(w,opts.mode||"outcome"));
+  const label=opts.label||((w)=>graphHoverLabel(w.experiment||w.run||"",w,w.target||w.analysis||""));
+  const list=rows.slice(0,120),W=1100,H=470,L=72,R=24,T=30,B=54;
+  const transformed=[];
+  list.forEach(w=>{
+    const source=w.curve.map(v=>Number.isFinite(v)?(!normalize&&opts.log&&v>0?Math.log10(v):v):null),finite=source.filter(Number.isFinite),mn=finite.length?Math.min(...finite):0,mx=finite.length?Math.max(...finite):1,span=mx-mn||1;
+    transformed.push({w,values:source.map(v=>Number.isFinite(v)?(normalize?(v-mn)/span:v):null)});
+  });
+  const all=transformed.flatMap(x=>x.values).filter(Number.isFinite),cycles=Math.max(...list.map(w=>w.curve.length),2);
+  if(!all.length)return false;
+  const baseLo=normalize?0:Math.min(...all),baseHi=normalize?1:Math.max(...all),pad=(baseHi-baseLo||1)*.06;
+  const initial={x0:1,x1:cycles,y0:normalize?0:baseLo-pad,y1:normalize?1:baseHi+pad},view=Object.assign({},initial);
+  host.innerHTML=`<div class="curve-canvas-tools"><button type="button" class="ghost curve-reset">Reset view</button><span>Hover for values · wheel zooms · drag pans</span></div><div class="curve-canvas-frame"><canvas width="${W}" height="${H}"></canvas><div class="tip curve-canvas-tip"></div></div>`;
+  const canvas=host.querySelector("canvas"),tip=host.querySelector(".curve-canvas-tip"),ctx=canvas.getContext("2d");
+  const xPix=x=>L+(x-view.x0)/Math.max(1e-9,view.x1-view.x0)*(W-L-R),yPix=y=>T+(view.y1-y)/Math.max(1e-9,view.y1-view.y0)*(H-T-B),xVal=p=>view.x0+(p-L)/(W-L-R)*(view.x1-view.x0),yVal=p=>view.y1-(p-T)/(H-T-B)*(view.y1-view.y0);
+  const fmt=v=>Number(v).toPrecision(Math.abs(v)>=100?6:5);
+  function draw(){
+    ctx.clearRect(0,0,W,H);ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);ctx.font="11px sans-serif";ctx.strokeStyle="#e5e7eb";ctx.fillStyle="#64748b";ctx.textAlign="right";
+    for(let i=0;i<=5;i++){const y=T+i*(H-T-B)/5,v=view.y1-(view.y1-view.y0)*i/5;ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(W-R,y);ctx.stroke();ctx.fillText(fmt(v),L-8,y+3);}
+    ctx.textAlign="center";for(let i=0;i<=5;i++){const x=L+i*(W-L-R)/5,v=view.x0+(view.x1-view.x0)*i/5;ctx.strokeStyle="#f1f5f9";ctx.beginPath();ctx.moveTo(x,T);ctx.lineTo(x,H-B);ctx.stroke();ctx.fillStyle="#64748b";ctx.fillText(String(Math.max(1,Math.round(v))),x,H-B+18);}
+    (opts.hlines||[]).forEach(h=>{const hv=Number.isFinite(h.y)?(!normalize&&opts.log&&h.y>0?Math.log10(h.y):h.y):NaN;if(!Number.isFinite(hv)||hv<view.y0||hv>view.y1)return;const y=yPix(hv);ctx.save();ctx.strokeStyle=h.colour||"#475569";ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(W-R,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=h.colour||"#475569";ctx.textAlign="left";ctx.fillText(h.label||"",L+5,y-4);ctx.restore();});
+    transformed.forEach(({w,values})=>{ctx.strokeStyle=colour(w);ctx.globalAlpha=w.issueColour?.95:.78;ctx.lineWidth=w.issueColour?2.5:(w.role&&w.role!=="Unknown"?1.8:1.25);ctx.beginPath();let started=false;values.forEach((v,i)=>{if(!Number.isFinite(v))return;const x=xPix(i+1),y=yPix(v);if(!started){ctx.moveTo(x,y);started=true;}else ctx.lineTo(x,y);});ctx.stroke();});ctx.globalAlpha=1;
+    ctx.fillStyle="#334155";ctx.textAlign="center";ctx.fillText("Cycle",(L+W-R)/2,H-10);ctx.save();ctx.translate(17,(T+H-B)/2);ctx.rotate(-Math.PI/2);ctx.fillText(opts.ylabel||"Stored fluorescence",0,0);ctx.restore();
+  }
+  function nearest(mx,my){let best=null,bd=12*12;transformed.forEach(({w,values})=>values.forEach((v,i)=>{if(!Number.isFinite(v))return;const d=(xPix(i+1)-mx)**2+(yPix(v)-my)**2;if(d<bd){bd=d;best={w,v,i};}}));return best;}
+  function move(e){const rc=canvas.getBoundingClientRect(),sx=W/rc.width,sy=H/rc.height,mx=(e.clientX-rc.left)*sx,my=(e.clientY-rc.top)*sy,best=nearest(mx,my);if(!best){tip.style.display="none";return;}tip.innerHTML=`<b>${esc(label(best.w))}</b><br>Cycle ${best.i+1} · ${esc(fmt(best.v))}`;tip.style.display="block";tip.style.left=Math.min((mx/sx)+14,rc.width-tip.offsetWidth-6)+"px";tip.style.top=((my/sy)+14)+"px";}
+  let drag=null;
+  const onMove=e=>{if(drag){const rc=canvas.getBoundingClientRect(),sx=W/rc.width,sy=H/rc.height,mx=(e.clientX-rc.left)*sx,my=(e.clientY-rc.top)*sy,dx=(mx-drag.x)/(W-L-R)*(view.x1-view.x0),dy=(my-drag.y)/(H-T-B)*(view.y1-view.y0);view.x0=drag.v.x0-dx;view.x1=drag.v.x1-dx;view.y0=drag.v.y0+dy;view.y1=drag.v.y1+dy;draw();}else move(e);};
+  const onLeave=()=>{if(!drag)tip.style.display="none";};
+  const onDown=e=>{drag={x:e.offsetX,y:e.offsetY,v:Object.assign({},view)};canvas.setPointerCapture(e.pointerId);};
+  const onUp=e=>{drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);};
+  const onWheel=e=>{e.preventDefault();const rc=canvas.getBoundingClientRect(),sx=W/rc.width,sy=H/rc.height,mx=(e.clientX-rc.left)*sx,my=(e.clientY-rc.top)*sy,fac=e.deltaY<0?.85:1.18,cx=xVal(mx),cy=yVal(my);view.x0=cx+(view.x0-cx)*fac;view.x1=cx+(view.x1-cx)*fac;view.y0=cy+(view.y0-cy)*fac;view.y1=cy+(view.y1-cy)*fac;draw();};
+  canvas.addEventListener("mousemove",onMove);canvas.addEventListener("mouseleave",onLeave);canvas.addEventListener("pointerdown",onDown);canvas.addEventListener("pointerup",onUp);canvas.addEventListener("wheel",onWheel,{passive:false});canvas.dataset.interactive="true";
+  host.querySelector(".curve-reset").onclick=()=>{Object.assign(view,initial);draw();};
+  draw();host._curveDispose=()=>{canvas.removeEventListener("mousemove",onMove);canvas.removeEventListener("mouseleave",onLeave);canvas.removeEventListener("pointerdown",onDown);canvas.removeEventListener("pointerup",onUp);canvas.removeEventListener("wheel",onWheel);};CURVE_PLOTS.push(host);return true;
 }
 function risingCurveRows(){
   return RUNS.flatMap((run,ri)=>orphanCurveCandidates(run).map(o=>Object.assign({runIndex:ri},o)));
@@ -10432,6 +10829,7 @@ function drawRisingCurveBundle(canvas,rows){
 }
 function renderReviewRising(){
   const box=$("#review-rising"),sel=$("#rising-run"),level=$("#rising-level");if(!box)return;
+  purgeCurvePlots();
   const all=risingCurveRows();
   if(!RUNS.length||!all.length){setSelectItems(sel,[],null);box.innerHTML=emptyReview("No rising curve without an own-channel result was detected.");return;}
   setSelectItems(sel,[{value:"",label:"All loaded experiments"},...RUNS.map((r,i)=>({value:i,label:runName(r)}))],sel.value);
@@ -10442,8 +10840,8 @@ function renderReviewRising(){
   const legend=new Map();rows.forEach(o=>{const k=`${o.experiment} · ${o.filterName||"channel "+o.channel}`;if(!legend.has(k))legend.set(k,hashColour(k));});
   box.innerHTML=`<div class="metric-grid">${metricCard(rows.length,"rising curves",errors?"warn":"ok")}${metricCard(uniq(rows.map(o=>o.experiment)).length,"experiments","")}${metricCard(uniq(rows.map(o=>o.well)).length,"plate positions","")}${metricCard(errors,"error-level curves",errors?"bad":"ok")}</div>
     <div class="legend">${[...legend].slice(0,32).map(([k,c])=>`<span><i style="background:${c}"></i>${esc(k)}</span>`).join("")}${legend.size>32?`<span>+${legend.size-32} more series</span>`:""}</div>
-    <div class="chart-wrap"><canvas id="rising-chart" width="1100" height="470"></canvas></div>
-    <p class="hint">The combined plot is per-curve normalised for visibility. Use the amplitude and Cq/Ct evidence columns for the stored scale and same-position result context. No Cq/Ct is invented for the missing channel.</p>
+    <div class="chart-wrap"><div id="rising-chart" class="curve-plot-host"></div></div>
+    <p class="hint">The combined plot is per-curve normalised for visibility. Hover a curve for its experiment, well and cycle; use the mouse wheel to zoom, drag to pan, and Reset view to restore the axes. Use the amplitude and Cq/Ct evidence columns for the stored scale and same-position result context. No Cq/Ct is invented for the missing channel.</p>
     <div class="scroll">${table([
       {key:"experiment",label:"Experiment"},{key:"well",label:"Plate position"},{key:"sample",label:"Sample"},
       {key:"role",label:"Role"},{key:"channel",label:"Channel / filter"},{key:"target",label:"Missing analysis"},
@@ -10452,7 +10850,10 @@ function renderReviewRising(){
       {key:"relative",label:"Vs reference",n:1},{key:"classification",label:"Classification"},
       {key:"severity",label:"Level"},{key:"finding",label:"Finding"}
     ],display.map(r=>({...r,severity:r.severity==="error"?tag("bad","error"):tag("warn","review")})))}</div>`;
-  drawRisingCurveBundle($("#rising-chart"),rows);
+  const chart=$("#rising-chart");
+  if(!mountInteractiveCurvePlot(chart,rows,{normalize:true,height:470,colour:o=>o.severity==="error"?"#c0392b":hashColour(`${o.experiment}|${o.channel}`),label:o=>`${o.experiment} · ${o.well}${o.sample?" · "+o.sample:""} · ${o.filterName||"channel "+o.channel}`,ylabel:"Normalised signal"})){
+    chart.innerHTML='<canvas width="1100" height="470"></canvas>';drawRisingCurveBundle(chart.firstElementChild,rows);
+  }
 }
 function renderReviewInstrument(){
   const box=$("#review-instrument"),sel=$("#instrument-run");if(!box)return;
@@ -10517,7 +10918,7 @@ function downloadForensicCSV(){
   download(baseName()+"_runs_qc_forensic_log.csv",toCSV(keys.map(k=>({key:k,label:k})),rows),"text/csv");
 }
 function renderQualityReview(){
-  renderReviewOverview();renderReviewPlate();renderReviewComparison();renderReviewStatistics();
+  renderReviewOverview();renderIssueOverview();renderReviewPlate();renderReviewComparison();renderReviewStatistics();
   renderReviewControls();renderReviewRuns();renderReviewCurves();renderReviewRising();renderReviewInstrument();
 }
 function renderQualityReviewLazy(){markDirty("review");renderTab("review");}
@@ -11580,7 +11981,8 @@ function selGraphContext(g){
   const o=SEL_STATE.options["img:"+g.id]||{};
   /* target=all (any case) is the documented way to ask for every target; it must not be read as a target called "all" */
   const allTargets=/^all$/i.test(o.target||"");
-  return {g,ri,run:RUNS[ri],target:allTargets?"":o.target||(g.id==="curves"?((typeof gTargets==="function"&&RUNS[ri]?gTargets(RUNS[ri])[0]:"")||""):""),
+  /* An omitted target is intentionally the all-target view. Never infer one from well order. */
+  return {g,ri,run:RUNS[ri],target:allTargets?"":String(o.target||"").trim(),
     metric:o.metric||"outcome",signal:o.signal||"stored",log:o.log==="yes",colourby:o.colourby||"outcome",level:o.level||"end",control:o.control||"0"};
 }
 function selImageItems(){
@@ -11954,6 +12356,8 @@ const CMD_HELP=[
   ["zip [name]","build the archive and download it"],
   ["template","download the selection as a CSV"],
   ["status","files read, results, selection, profile"],
+  ["issues [category]","group loaded-experiment problems by category"],
+  ["curves [category]","open reconstructed problem curves in the review overview"],
   ["script","open the box for a pasted procedure"],
   ["close","leave command mode"]
 ];
@@ -12038,6 +12442,16 @@ async function cmdExec(raw){
       cmdTable([["name",SOP.name],["version",SOP.version],["laboratory",sopLabName()||"not stated"],
         ["analyst",sopAnalystName()||"not stated"],["checksum","sha256:"+sopHash()]]);break;
     case "status":cmdPrint(cmdStatusLine());break;
+    case "issues":{
+      const want=arg?arg.toLowerCase():"",rows=issueOverviewRows(issueSelectedRunIndexes()),groups=new Map();
+      rows.forEach(r=>{if(want&&!(r.category.toLowerCase().includes(want)||r.finding.toLowerCase().includes(want)))return;const g=groups.get(r.category)||{n:0,e:0,r:0,runs:new Set()};g.n++;if(r.severity==="error")g.e++;else if(r.severity==="review")g.r++;g.runs.add(r.experiment);groups.set(r.category,g);});
+      if(!groups.size){cmdPrint("no grouped problem was found for the selected experiments","ok");break;}
+      cmdPrint(`grouped problems across ${issueSelectedRunIndexes().length} experiment(s):`);cmdTable([...groups].sort((a,b)=>b[1].n-a[1].n).map(([k,v])=>[k,`${v.n} finding(s) · ${v.e} error · ${v.r} review · ${v.runs.size} experiment(s)` ]));break;
+    }
+    case "curves":{
+      REVIEW_STATE.issueCategory=arg?ISSUE_CATEGORY_ORDER.find(c=>c.toLowerCase().includes(arg.toLowerCase()))||arg:"Amplification / curve shape";
+      cmdPrint("opening the grouped problem-curve overview","ok");cmdClose();showTab("review");showReviewSheet("overview");break;
+    }
     case "template":cmdPrint("writing selection.csv…");download("selection_template.csv",selCsvTemplate(),"text/csv");cmdPrint("selection_template.csv written","ok");break;
     case "pdf":{
       if(!SEL_STATE.ids.size){cmdPrint("nothing is selected — try: select images","warn");break;}
@@ -12178,6 +12592,7 @@ function astToggle(){AST.open?astClose():astOpen();}
 function astInit(){
   const c=astEl("ast-close");if(c)c.onclick=astClose;
   const t=astEl("ast-template");if(t)t.onclick=()=>download("selection_template.csv",selCsvTemplate(),"text/csv");
+  const issues=astEl("ast-issues");if(issues)issues.onclick=()=>{astClose();showTab("review");showReviewSheet("overview");};
   const f=astEl("ast-file");
   if(f)f.onchange=()=>{
     const file=f.files&&f.files[0];if(!file)return;

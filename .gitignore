@@ -57,3 +57,17 @@ documentation/latex/main.pdf
 Thumbs.db
 node_modules/
 __pycache__/
+
+# --- the combined build ------------------------------------------------------
+# Appendices K, L and M bind ~5,300 pages of atlas, supplement, guide and annex
+# into the document.  Those inputs are 208 MB and the combined PDF is larger
+# still, well past GitHub's 100 MB per-file limit, so both stay out of the
+# repository and travel as a release asset instead.  The narrative volume builds
+# from the committed sources with \atlasvolumesfalse.
+documentation/latex/fig/atlas/
+documentation/latex/volume_offsets.tsv
+# The 7 October document is the complete one: 6,437 pages, 262 MB.  GitHub
+# rejects any file over 100 MB, so it cannot be committed and travels as a
+# release asset.  The sources and build_complete.sh are committed; the 28
+# September PDF stays in the tree until its replacement is released.
+documentation/qPCR_QC_forensics_documentation_2026-10-07.pdf
