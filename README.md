@@ -2,8 +2,7 @@
 
 - Live page: https://mihaiionitabio-alt.github.io/lc480-ixo-qc-exportv2/
 - Single-file web application: [`index.html`](index.html) — build of 7 October 2026, SHA-256 `8754c224ba77162d3c3b5647f81ee81dde703b9a368913243d30fd9d9eb29481`
-- **Last published documentation (28 September 2026, 1,401 pages): [`qPCR_QC_forensics_documentation_2026-09-28.pdf`](documentation/qPCR_QC_forensics_documentation_2026-09-28.pdf)** — it predates the page features listed under "Added since the documentation" below
-  - Every function of the page with its software diagram: Chapter 19, "Function by function" (pages 151–860, 705 diagrams)
+- **Last published documentation: [`qPCR_QC_forensics_documentation.pdf`](documentation/qPCR_QC_forensics_documentation_2026-10-07.pdf)** 
   - LaTeX source that builds it: [`documentation/latex/main.tex`](documentation/latex/main.tex); the font it needs is not included, see [`tools/fonts_README.md`](tools/fonts_README.md)
   - Build it with latexmk and XeLaTeX: [`documentation/latex/build_complete.sh`](documentation/latex/build_complete.sh) and [`documentation/latex/.latexmkrc`](documentation/latex/.latexmkrc)
   - What changed in the 28 September rebuild: [`DOCUMENTATION_REBUILD_2026-09-28.md`](documentation/DOCUMENTATION_REBUILD_2026-09-28.md)
