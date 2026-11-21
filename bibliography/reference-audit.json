@@ -149,5 +149,12 @@
       "evidence": "missy/index.html",
       "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
     }
-  ]
+  ],
+  "final_scope": "Direct-use articles plus all GitHub resources and agency documents identified in the reviewed project records, as requested",
+  "final_counts": {
+    "main_entries": 99,
+    "direct_articles": 19,
+    "github_resources": 31,
+    "agency_documents": 49
+  }
 }

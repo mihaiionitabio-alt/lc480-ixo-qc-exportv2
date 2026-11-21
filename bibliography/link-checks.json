@@ -131,5 +131,215 @@
     "metadata_provider": "Crossref",
     "metadata_accessed": "2026-11-21",
     "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
+  },
+  {
+    "url": "https://github.com/Mahmood-M-Ali/qPCR-plate-planner",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/PCRuniversum/RDML",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/RByers/zpcrweb",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/RDML-consortium/rdmlpython",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/WebAudio/web-speech-api",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/andreww/fox",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/chaibio/chaipcr",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/d3/d3-format",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/d3/d3-time-format",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/fortran-lang/minpack",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/fortran-lang/stdlib",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/fortran-lang/test-drive",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/fprime-community/fprime-python-model",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/jacobwilliams/dop853",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/jacobwilliams/json-fortran",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/kubo-azu/Click-qPCR",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/LIMS",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/RDMLT",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/VIRTUALPCR-MISSYR2",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-export",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-exportv2",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-kit",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mihaiionitabio-alt/zpcrweb",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mirzaghaderi/rtpcr",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/mirzaghaderi/shiny_rtpcr",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/nasa/fprime",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/neuroeddu/Auto-qPCR",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/notofonts/noto-cjk",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/plotly/plotly.js",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/rkalendar/PCRtools",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://github.com/ShellyGil/PCR-Calculator",
+    "status": 200,
+    "source": "GitHub API"
+  },
+  {
+    "url": "https://sma.jaxa.jp/TechDoc/Docs/E_JAXA-JERG-2-610B.pdf",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://sma.jaxa.jp/TechDoc/Docs/E_JAXA-JERG-2-310.pdf",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://s3vi.ndc.nasa.gov/ssri-kb/static/resources/636372main_NASA-HDBK-1002_Draft.pdf",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/Tutorials/pdf/individual_docs/41_program_fortran.pdf",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://cdf.gsfc.nasa.gov/html/cdf26frm.pdf",
+    "status": 404,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://www.nasa.gov/wp-content/uploads/2025/05/nasa-std-3001-vol-2.pdf",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://nodis3.gsfc.nasa.gov/npg_img/N_PR_8705_002C_/N_PR_8705_002C_.pdf",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://ecss.nl/standard/ecss-e-st-10-11c-human-factors-engineering-31-july-2008/",
+    "status": 404,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://ntrs.nasa.gov/citations/20240013667",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://ntrs.nasa.gov/citations/20230000983",
+    "status": 200,
+    "source": "Public source URL"
+  },
+  {
+    "url": "https://ecss.nl/standard/ecss-e-st-10-11c-human-factors-engineering/",
+    "status": 200,
+    "source": "Official ECSS publication page"
   }
 ]

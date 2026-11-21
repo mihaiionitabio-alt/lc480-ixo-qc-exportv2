@@ -1,9 +1,13 @@
 {
-  "main_entries": 19,
+  "main_entries": 99,
   "review_required_entries": 0,
   "previous_main_entries": 318,
-  "removed_previous_entries": 308,
   "new_direct_articles": 9,
   "title_doi_corrections": 1,
-  "scope": "Directly used articles only"
+  "scope": "Direct-use articles plus all GitHub resources and agency documents identified in the reviewed project records, as requested",
+  "direct_articles": 19,
+  "github_resources": 31,
+  "agency_documents": 49,
+  "removed_from_previous_article_subset": 308,
+  "previous_entries_not_retained_by_doi_or_url": 255
 }
