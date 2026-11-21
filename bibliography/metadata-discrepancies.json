@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "incorrect_doi": "10.3390/ijms24119175",
+    "intended_title": "Disclosing quantitative RT-PCR raw data during manuscript submission: a call for action",
+    "correct_doi": "10.1002/1878-0261.13418",
+    "action": "Removed the unrelated article; retained the already-correct Untergasser record. Original citation also assigned the wrong journal, volume and pages; now Molecular Oncology 17(5), 713-717."
+  }
+]

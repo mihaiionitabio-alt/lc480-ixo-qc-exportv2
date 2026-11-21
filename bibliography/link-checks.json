@@ -1,297 +1,135 @@
 [
   {
-    "url": "https://github.com/fortran-lang/stdlib",
-    "status": 200,
-    "final_url": "https://github.com/fortran-lang/stdlib"
+    "doi": "10.1007/s12161-014-9837-3",
+    "url": "https://doi.org/10.1007/s12161-014-9837-3",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://fortran-lang.org/categories/scientific/",
-    "status": 200,
-    "final_url": "https://fortran-lang.org/categories/scientific/"
+    "doi": "10.1373/clinchem.2008.112797",
+    "url": "https://doi.org/10.1373/clinchem.2008.112797",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://fortran-lang.org/packages/",
-    "status": 200,
-    "final_url": "https://fortran-lang.org/packages/"
+    "doi": "10.1093/clinchem/hvaf043",
+    "url": "https://doi.org/10.1093/clinchem/hvaf043",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/jacobwilliams/json-fortran",
-    "status": 200,
-    "final_url": "https://github.com/jacobwilliams/json-fortran"
+    "doi": "10.5334/dsj-2020-043",
+    "url": "https://doi.org/10.5334/dsj-2020-043",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/andreww/fox",
-    "status": 200,
-    "final_url": "https://github.com/andreww/fox"
+    "doi": "10.1016/j.foodcont.2016.08.037",
+    "url": "https://doi.org/10.1016/j.foodcont.2016.08.037",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/fortran-lang/minpack",
-    "status": 200,
-    "final_url": "https://github.com/fortran-lang/minpack"
+    "doi": "10.1021/jf901598r",
+    "url": "https://doi.org/10.1021/jf901598r",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/jacobwilliams/dop853",
-    "status": 200,
-    "final_url": "https://github.com/jacobwilliams/dop853"
+    "doi": "10.1016/j.omtn.2025.102716",
+    "url": "https://doi.org/10.1016/j.omtn.2025.102716",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/fortran-lang/test-drive",
-    "status": 200,
-    "final_url": "https://github.com/fortran-lang/test-drive"
+    "doi": "10.21769/bioprotoc.5513",
+    "url": "https://doi.org/10.21769/bioprotoc.5513",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://lfortran.org/blog/2024/05/fortran-on-web-using-lfortran/",
-    "status": 200,
-    "final_url": "https://lfortran.org/blog/2024/05/fortran-on-web-using-lfortran/"
+    "doi": "10.1093/nar/gkp056",
+    "url": "https://doi.org/10.1093/nar/gkp056",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/nasa/fprime",
-    "status": 200,
-    "final_url": "https://github.com/nasa/fprime"
+    "doi": "10.1038/s41597-020-0486-7",
+    "url": "https://doi.org/10.1038/s41597-020-0486-7",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://nasa.github.io/fpp/fpp-users-guide.html",
-    "status": 200,
-    "final_url": "https://nasa.github.io/fpp/fpp-users-guide.html"
+    "doi": "10.1006/meth.2001.1262",
+    "url": "https://doi.org/10.1006/meth.2001.1262",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://fprime.jpl.nasa.gov/latest/docs/user-manual/gds/gds-cli/",
-    "status": 200,
-    "final_url": "https://fprime.jpl.nasa.gov/latest/docs/user-manual/gds/gds-cli/"
+    "doi": "10.1038/s41598-021-99727-6",
+    "url": "https://doi.org/10.1038/s41598-021-99727-6",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://fprime.jpl.nasa.gov/latest/docs/user-manual/gds/gds-test-api-guide/",
-    "status": 200,
-    "final_url": "https://fprime.jpl.nasa.gov/latest/docs/user-manual/gds/gds-test-api-guide/"
+    "doi": "10.1093/nar/29.9.e45",
+    "url": "https://doi.org/10.1093/nar/29.9.e45",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://fprime.jpl.nasa.gov/latest/docs/user-manual/overview/development-practice/",
-    "status": 200,
-    "final_url": "https://fprime.jpl.nasa.gov/latest/docs/user-manual/overview/development-practice/"
+    "doi": "10.1002/1878-0261.13418",
+    "url": "https://doi.org/10.1002/1878-0261.13418",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://fprime.jpl.nasa.gov/latest/docs/how-to/develop/data-products/",
-    "status": 200,
-    "final_url": "https://fprime.jpl.nasa.gov/latest/docs/how-to/develop/data-products/"
+    "doi": "10.1186/gb-2002-3-7-research0034",
+    "url": "https://doi.org/10.1186/gb-2002-3-7-research0034",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/fprime-community/fprime-python-model",
-    "status": 200,
-    "final_url": "https://github.com/fprime-community/fprime-python-model"
+    "doi": "10.1007/s00217-007-0748-z",
+    "url": "https://doi.org/10.1007/s00217-007-0748-z",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/PCRuniversum/RDML",
-    "status": 200,
-    "final_url": "https://github.com/PCRuniversum/RDML"
+    "doi": "10.1093/jaoac/87.6.1342",
+    "url": "https://doi.org/10.1093/jaoac/87.6.1342",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://rdml.org/",
-    "status": 200,
-    "final_url": "https://rdml.org/"
+    "doi": "10.1186/1471-2105-11-405",
+    "url": "https://doi.org/10.1186/1471-2105-11-405",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   },
   {
-    "url": "https://github.com/RDML-consortium/rdmlpython",
-    "status": 200,
-    "final_url": "https://github.com/RDML-consortium/rdmlpython"
-  },
-  {
-    "url": "https://reach.cdc.gov/jobaid/basic-molecular-biology-pcr-and-real-time-pcr-principle-pcr",
-    "status": 200,
-    "final_url": "https://reach.cdc.gov/jobaid/basic-molecular-biology-pcr-and-real-time-pcr-principle-pcr"
-  },
-  {
-    "url": "https://dnalc.cshl.edu/resources/3d/19-polymerase-chain-reaction.html",
-    "status": 200,
-    "final_url": "https://dnalc.cshl.edu/resources/3d/19-polymerase-chain-reaction.html"
-  },
-  {
-    "url": "https://www.biointeractive.org/classroom-resources/polymerase-chain-reaction-pcr",
-    "status": 403,
-    "final_url": "https://www.biointeractive.org/classroom-resources/polymerase-chain-reaction-pcr"
-  },
-  {
-    "url": "https://www.labxchange.org/library/items/lb:LabXchange:4fdc8a5c:video:1",
-    "status": 200,
-    "final_url": "https://www.labxchange.org/library/items/lb:LabXchange:4fdc8a5c:video:1"
-  },
-  {
-    "url": "https://sma.jaxa.jp/TechDoc/Docs/E_JAXA-JERG-2-610B.pdf",
-    "status": 200,
-    "final_url": "https://sma.jaxa.jp/TechDoc/Docs/E_JAXA-JERG-2-610B.pdf"
-  },
-  {
-    "url": "https://www.bio-rad.com/webroot/web/pdf/lsr/literature/10000068703.pdf",
-    "status": 200,
-    "final_url": "https://www.bio-rad.com/webroot/web/pdf/lsr/literature/10000068703.pdf"
-  },
-  {
-    "url": "https://www.img.cas.cz/files/2024/03/Light_Cycler_480_manual_en.pdf",
-    "status": 200,
-    "final_url": "https://www.img.cas.cz/files/2024/03/Light_Cycler_480_manual_en.pdf"
-  },
-  {
-    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/Tutorials/pdf/individual_docs/41_program_fortran.pdf",
-    "status": 200,
-    "final_url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/Tutorials/pdf/individual_docs/41_program_fortran.pdf"
-  },
-  {
-    "url": "https://www.nasa.gov/wp-content/uploads/2015/01/636372main_NASA-HDBK-1002_Draft.pdf",
-    "status": 404,
-    "final_url": "https://www.nasa.gov/wp-content/uploads/2015/01/636372main_NASA-HDBK-1002_Draft.pdf"
-  },
-  {
-    "url": "https://github.com/mihaiionitabio-alt/VIRTUALPCR-MISSYR2",
-    "status": 200,
-    "final_url": "https://github.com/mihaiionitabio-alt/VIRTUALPCR-MISSYR2"
-  },
-  {
-    "url": "https://mihaiionitabio-alt.github.io/VIRTUALPCR-MISSYR2/",
-    "status": 200,
-    "final_url": "https://mihaiionitabio-alt.github.io/VIRTUALPCR-MISSYR2/"
-  },
-  {
-    "url": "https://sourceforge.net/projects/missy-r2/",
-    "status": 200,
-    "final_url": "https://sourceforge.net/projects/missy-r2/"
-  },
-  {
-    "url": "https://github.com/mihaiionitabio-alt/RDMLT",
-    "status": 200,
-    "final_url": "https://github.com/mihaiionitabio-alt/RDMLT"
-  },
-  {
-    "url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-exportv2",
-    "status": 200,
-    "final_url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-exportv2"
-  },
-  {
-    "url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-export",
-    "status": 200,
-    "final_url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-export"
-  },
-  {
-    "url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-kit",
-    "status": 200,
-    "final_url": "https://github.com/mihaiionitabio-alt/lc480-ixo-qc-kit"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/505x0b3e2.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/505x0b3e2.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/524x3b1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/524x3b1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/647x3b1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/647x3b1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/647x4o1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/647x4o1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/660x0b2.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/660x0b2.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/660x1g2.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/660x1g2.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/660x2g2.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/660x2g2.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/661x0b1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/661x0b1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/811.1o1e1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/811.1o1e1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/850x0g2.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/850x0g2.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/851x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/851x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/852x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/852x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/853x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/853x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/854x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/854x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/855x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/855x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/870x0g1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/870x0g1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/870x10y1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/870x10y1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/876x0b1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/876x0b1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/876x1m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/876x1m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/880x0g3.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/880x0g3.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/881x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/881x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/881x1b1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/881x1b1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/882x0m1.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/882x0m1.pdf"
-  },
-  {
-    "url": "https://public.ccsds.org/Pubs/883x0b2.pdf",
-    "status": 200,
-    "final_url": "https://ccsds.org/Pubs/883x0b2.pdf"
+    "doi": "10.1038/sdata.2016.18",
+    "url": "https://doi.org/10.1038/sdata.2016.18",
+    "metadata_provider": "Crossref",
+    "metadata_accessed": "2026-11-21",
+    "note": "Registry identity checked; no claim that every publisher landing page was retrieved."
   }
 ]

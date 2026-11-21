@@ -1,0 +1,153 @@
+{
+  "date": "2026-11-21",
+  "previous_main_references": 318,
+  "retained_direct_articles": 19,
+  "removed_previous_entries": 308,
+  "newly_recovered_direct_articles": 9,
+  "review_method": "Checked former catalogue metadata and source context evidence; screened every entry for direct use. Only retained direct-use article identities are certified below. A downloaded paper or a secondary reference alone does not establish use.",
+  "source_contexts_inspected": 824,
+  "source_dois_with_context": 249,
+  "corrections": [
+    {
+      "incorrect_doi": "10.3390/ijms24119175",
+      "intended_title": "Disclosing quantitative RT-PCR raw data during manuscript submission: a call for action",
+      "correct_doi": "10.1002/1878-0261.13418",
+      "action": "Removed the unrelated article; retained the already-correct Untergasser record. Original citation also assigned the wrong journal, volume and pages; now Molecular Oncology 17(5), 713-717."
+    }
+  ],
+  "retained_articles": [
+    {
+      "doi": "10.1007/s12161-014-9837-3",
+      "title": "Inter-laboratory Testing of GMO Detection by Combinatory SYBR®Green PCR Screening (CoSYPS)",
+      "use": "CoSYPS SYBR Green screening definitions used in the method catalogue.",
+      "evidence": "data/gmo_methods.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1373/clinchem.2008.112797",
+      "title": "The MIQE Guidelines: Minimum Information for Publication of Quantitative Real-Time PCR Experiments",
+      "use": "Explicit source for qPCR terminology and reporting in project technical documentation.",
+      "evidence": "project technical references",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1093/clinchem/hvaf043",
+      "title": "MIQE 2.0: Revision of the Minimum Information for Publication of Quantitative Real-Time PCR Experiments Guidelines",
+      "use": "MIQE 2.0 reporting guidance directly cited in the retained MISSY documentation.",
+      "evidence": "project documentation; local source audit",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.5334/dsj-2020-043",
+      "title": "The CARE Principles for Indigenous Data Governance",
+      "use": "CARE citation explicitly included in the implemented metadata-export profile; no compliance claim.",
+      "evidence": "missy/index.html",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1016/j.foodcont.2016.08.037",
+      "title": "Inter-laboratory studies for the validation of two singleplex (tE9 and pea lectin) and one duplex (pat/bar) real-time PCR methods for GMO detection",
+      "use": "tE9, pea lectin and pat/bar method validation source used in the method catalogue.",
+      "evidence": "data/gmo_methods.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1021/jf901598r",
+      "title": "Collaborative Trial Validation Studies of Real-Time PCR-Based GMO Screening Methods for Detection of the bar Gene and the ctp2-cp4epsps Construct",
+      "use": "bar and ctp2-cp4epsps assay definition source used in the method catalogue.",
+      "evidence": "data/gmo_methods.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1016/j.omtn.2025.102716",
+      "title": "Comprehensive web-based platform for advanced PCR design, genotyping, synthetic biology, molecular diagnostics, and sequence analysis",
+      "use": "PCRtools/virtualPCR Tm and reaction-condition concepts independently implemented; associated article explicitly credited.",
+      "evidence": "THIRD_PARTY_NOTICES.txt; data/credits.json",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.21769/bioprotoc.5513",
+      "title": "Click-qPCR: A Simple Tool for Interactive qPCR Data Analysis",
+      "use": "Click-qPCR template example and DeltaCq/DeltaDeltaCq analysis with Welch t-test reproduced.",
+      "evidence": "data/examples.js; js/analysis/external.js; THIRD_PARTY_NOTICES.txt",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1093/nar/gkp056",
+      "title": "RDML: structured language and reporting guidelines for real-time quantitative PCR data",
+      "use": "RDML exchange and reporting model used by import/export development.",
+      "evidence": "js/export/rdmlt.js; project technical references",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1038/s41597-020-0486-7",
+      "title": "The TRUST Principles for digital repositories",
+      "use": "TRUST citation explicitly included in the implemented metadata-export profile.",
+      "evidence": "missy/index.html",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1006/meth.2001.1262",
+      "title": "Analysis of Relative Gene Expression Data Using Real-Time Quantitative PCR and the 2−ΔΔCT Method",
+      "use": "Relative-quantification calculation: 2^(-DeltaDeltaCq).",
+      "evidence": "js/analysis/external.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1038/s41598-021-99727-6",
+      "title": "Auto-qPCR; a python-based web app for automated and reproducible analysis of qPCR data",
+      "use": "Auto-qPCR example files and replicate cut-off/default-setting behaviour adapted in the workbench.",
+      "evidence": "data/examples.js; THIRD_PARTY_NOTICES.txt",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1093/nar/29.9.e45",
+      "title": "A new mathematical model for relative quantification in real-time RT-PCR",
+      "use": "Efficiency-weighted relative quantification, explicitly identified as Pfaffl weighting.",
+      "evidence": "js/analysis/external.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1002/1878-0261.13418",
+      "title": "Disclosing quantitative RT‐PCR raw data during manuscript submission: a call for action",
+      "use": "Correct source for the raw-data-disclosure recommendation cited in IXO manuscripts; replaces an erroneous DOI.",
+      "evidence": "project manuscript citation; local source audit",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1186/gb-2002-3-7-research0034",
+      "title": "Accurate normalization of real-time quantitative RT-PCR data by geometric averaging of multiple internal control genes",
+      "use": "geNorm M reference-gene stability calculation, explicitly acknowledged in source notices.",
+      "evidence": "js/analysis/external.js; THIRD_PARTY_NOTICES.txt",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1007/s00217-007-0748-z",
+      "title": "Validation and collaborative study of a P35S and T-nos duplex real-time PCR screening method to detect genetically modified organisms in food products",
+      "use": "P-35S/T-nos duplex assay definitions used in the method catalogue.",
+      "evidence": "data/gmo_methods.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1093/jaoac/87.6.1342",
+      "title": "Real-Time Polymerase Chain Reaction-Based Approach for Quantification of the pat Gene in the T25 Zea mays Event",
+      "use": "pat/T25 assay definition source used in the method catalogue.",
+      "evidence": "data/gmo_methods.js",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1186/1471-2105-11-405",
+      "title": "OpenChrom: a cross-platform open source software for the mass spectrometric analysis of chromatographic data",
+      "use": "Explicit methodological citation for the OpenChrom/ChemClipse independent-reader route in decoder verification.",
+      "evidence": "project verification manuscripts; local source audit",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    },
+    {
+      "doi": "10.1038/sdata.2016.18",
+      "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+      "use": "FAIR citation explicitly included in the implemented metadata-export profile.",
+      "evidence": "missy/index.html",
+      "title_doi_status": "Registry identity checked; direct-use evidence reviewed"
+    }
+  ]
+}

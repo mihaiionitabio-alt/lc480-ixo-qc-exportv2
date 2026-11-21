@@ -1,11 +1,9 @@
 {
-  "inventory_files": 110146,
-  "unique_extracted_sources": 10524,
-  "unique_pdfs": 1522,
-  "source_file_copies": 14221,
-  "registry_verified_references": 259,
-  "main_entries": 318,
-  "review_required_entries": 63,
-  "title_doi_discrepancies": 0,
-  "extraction_errors": 3
+  "main_entries": 19,
+  "review_required_entries": 0,
+  "previous_main_entries": 318,
+  "removed_previous_entries": 308,
+  "new_direct_articles": 9,
+  "title_doi_corrections": 1,
+  "scope": "Directly used articles only"
 }

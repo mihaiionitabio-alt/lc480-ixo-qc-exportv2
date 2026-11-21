@@ -1,33 +1,15 @@
-# IXO bibliography — coverage and limitations
+# Direct-use article bibliography
 
-Updated 21 November 2026. Main catalogue: **318 references**. Separate source-provided records needing review: **63**.
+Updated 21 November 2026. The list contains 19 journal articles with documented direct use in calculations, method definitions, adapted examples, implemented metadata profiles, technical reporting or manuscript methodology. Evidence for each inclusion is in `direct-use-evidence.json`.
 
-## Scope
+The former 318-entry broad harvest is superseded. Manuals, books, software repository links, standards, general development reading, downloaded application papers, and references found only in other works are excluded. Existing software licences and third-party acknowledgements remain intact outside this article-only bibliography.
 
-- Inventory of 110,146 files in the IXO project, excluding dependency caches such as node_modules and .git. Extracted 10,524 unique content sources, including 1,522 PDF documents; duplicate file copies are deduplicated by SHA-256.
-- PDF text, document metadata, DOCX/PPTX XML, project BibTeX files, Markdown, text, TeX, wiki sources and selected reference JSON/homepages were searched. Attached public NASA/Fortran material was included where available.
-- DOI candidates from both source documents and their reference lists were checked against Crossref and, where applicable, DataCite. NASA reports were checked against NTRS. Metadata verification confirms the registered work, not the correctness of a claim in that work or its use by IXO.
-- Accessible active and archived ChatGPT/Codex history lists were searched; project-related message pages were inspected. The search does not include deleted, inaccessible or unreturned messages. Some large Codex threads and oversized message bodies were only partially available.
-- Two requested private Claude conversations could not be read through the public web tool; computer access was blocked because the browser URL could not be verified safely. Their contents are **not claimed as reviewed**. Private conversation URLs are omitted from public files.
+The title/DOI audit inspected 824 source contexts covering 249 distinct DOIs, checked the former catalogue's registered identities, and screened all 318 entries for direct use. Context matching was a review aid, not an automatic finding of error. Three former DOI entries lacked usable source-context evidence and were not retained on metadata alone. Non-DOI materials were removed from this article-only scope. Bibliographic identity checks cannot establish whether every scientific claim is correct.
 
-## Citation format
+One confirmed wrong-work citation was found: a manuscript linked the title of Untergasser et al.'s raw-data-disclosure article to 10.3390/ijms24119175. The unrelated article is removed. The intended article is Molecular Oncology 17(5), pp. 713-717, DOI 10.1002/1878-0261.13418. The retained record already carried this correct DOI; it is not duplicated. No additional wrong-work title/DOI mismatch was confirmed among the retained articles.
 
-`ixo-bibliography.bib` is the principal reusable file. Use `biblatex` with `style=authoryear` and Biber, or a Harvard-compatible BibTeX style. `urldate` stores the actual access date; `year` is the publication year, never inferred from file modification dates. Undated web resources omit `year` and appear as n.d. in the reading list. Author-year disambiguation is handled automatically by your citation processor; the supplied plain-text list includes display suffixes.
+Every retained article has registry-sourced bibliographic metadata and an explicit use record. Newly recovered direct citations include adopted examples and assay papers that were missing from the broad registry harvest. Source titles such as short method labels are not mistaken for publication titles.
 
-Web pages use Available at and Accessed: 21 November 2026 where retrieved successfully. For DOI records, this date records registry metadata retrieval; publisher landing pages were not each independently tested. Failed web retrieval attempts are described in the record and link-check report without a false successful access date. The Harvard text is an author-date reading aid; a university or journal's required Harvard variant may differ.
+Use `ixo-bibliography.bib` for BibTeX/biblatex; `urldate` records access separately from publication year. The Harvard reading list uses author initials and article titles. Access dates refer to DOI-registry metadata retrieval; individual publisher landing pages may block automated access. No date is inferred from local file modification times.
 
-`review-required.bib` retains bibliographic records from project reference lists that could not be independently resolved. Do not treat them as verified. `metadata-discrepancies.json` lists title/DOI conflicts detected in imported citations; registry metadata takes precedence in the main catalogue, but a mismatched DOI may belong to a different work than originally intended.
-
-## Boundaries
-
-No claim that every project file was scholarly literature. Generated plots, test outputs, private SOPs, laboratory records, internal drafts and template examples are not automatically published as independent references. Bundled R-library references may be discovered indirectly and are not proof of runtime dependency. References found only inside another work's bibliography are secondary discoveries: consult the originals before citing substantive claims.
-
-Scanned PDFs without extractable text, unreadable files, archives not expanded in the project tree, embedded binary assets and external webpages not explicitly retrieved can contain additional sources. No OCR was performed. There are 3 extraction errors recorded in the local audit. This is a documented bibliography harvest, not a guarantee of exhaustive retrieval or peer review.
-
-## Privacy and copyright
-
-Only bibliographic metadata and public-source links are published. Manuals, articles, private paths, chat transcripts and sensitive project data are not redistributed. Local provenance retains source-file mappings separately. NASA/JAXA/CCSDS titles are reproduced accurately as references; citing these does not characterize MISSY as a flight system or imply agency endorsement.
-
-Private PCR SOPs, laboratory experiment reports and references to the private laboratory organisation are excluded from all public catalogue files, including review candidates.
-
-Private PCR SOPs, laboratory experiment reports and references to the private laboratory organisation are excluded from all public catalogue files, including review candidates.
+Private SOPs, laboratory identifiers, private paths and chat transcripts are excluded. The requested private Claude chats remain inaccessible and are not claimed as reviewed. The catalogue does not assert that listing a cited method means its entire implementation was copied. Claims about reproduction or biological validity require separate verification.
